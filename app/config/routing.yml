@@ -1,0 +1,5 @@
+player_manager_welcome:
+    resource: "@playerManagerWelcomeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
