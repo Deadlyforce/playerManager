@@ -1,0 +1,59 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Prospects list</h1>
+
+    <table class="records_list">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Pseudo</th>
+                <th>Prenom</th>
+                <th>Nom</th>
+                <th>Age</th>
+                <th>Ville</th>
+                <th>Pays</th>
+                <th>Numero</th>
+                <th>Numeroetranger</th>
+                <th>Site</th>
+                <th>Photoprincipale</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for entity in entities %}
+            <tr>
+                <td><a href="{{ path('prospects_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                <td>{{ entity.pseudo }}</td>
+                <td>{{ entity.prenom }}</td>
+                <td>{{ entity.nom }}</td>
+                <td>{{ entity.age }}</td>
+                <td>{{ entity.ville }}</td>
+                <td>{{ entity.pays }}</td>
+                <td>{{ entity.numero }}</td>
+                <td>{{ entity.numeroEtranger }}</td>
+                <td>{{ entity.site }}</td>
+                <td>{{ entity.photoPrincipale }}</td>
+                <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('prospects_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('prospects_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+        <ul>
+        <li>
+            <a href="{{ path('prospects_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>
+    {% endblock %}

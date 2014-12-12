@@ -1,0 +1,72 @@
+{% extends '::base.html.twig' %}
+
+{% block body -%}
+    <h1>Relations</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{{ entity.statut }}</td>
+            </tr>
+            <tr>
+                <th>Rencontre</th>
+                <td>{{ entity.rencontre }}</td>
+            </tr>
+            <tr>
+                <th>Rencontredate</th>
+                <td>{{ entity.rencontreDate|date('Y-m-d H:i:s') }}</td>
+            </tr>
+            <tr>
+                <th>Rencontrecount</th>
+                <td>{{ entity.rencontreCount }}</td>
+            </tr>
+            <tr>
+                <th>Numero</th>
+                <td>{{ entity.numero }}</td>
+            </tr>
+            <tr>
+                <th>Kc</th>
+                <td>{{ entity.kc }}</td>
+            </tr>
+            <tr>
+                <th>Fc</th>
+                <td>{{ entity.fc }}</td>
+            </tr>
+            <tr>
+                <th>Reltype</th>
+                <td>{{ entity.relType }}</td>
+            </tr>
+            <tr>
+                <th>Distance</th>
+                <td>{{ entity.distance }}</td>
+            </tr>
+            <tr>
+                <th>Flake</th>
+                <td>{{ entity.flake }}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ entity.commentaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('relations') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('relations_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}
