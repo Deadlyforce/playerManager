@@ -24,7 +24,7 @@ class ProspectsType extends AbstractType
             ->add('numero')
             ->add('numeroEtranger')
             ->add('site')
-            ->add('photoPrincipale')
+            ->add('file')
             ->add('relations')
         ;
     }

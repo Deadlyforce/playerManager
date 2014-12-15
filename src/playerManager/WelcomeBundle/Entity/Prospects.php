@@ -4,6 +4,8 @@ namespace playerManager\WelcomeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * Prospects
@@ -51,14 +53,14 @@ class Prospects
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
      */
     private $prenom;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255)
+     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
      */
     private $nom;
 
@@ -86,14 +88,14 @@ class Prospects
     /**
      * @var string
      *
-     * @ORM\Column(name="numero", type="string", length=10)
+     * @ORM\Column(name="numero", type="string", length=10, nullable=true)
      */
     private $numero;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="numero_etranger", type="string", length=50)
+     * @ORM\Column(name="numero_etranger", type="string", length=50, nullable=true)
      */
     private $numeroEtranger;
 
@@ -107,7 +109,7 @@ class Prospects
     /**
      * @var string
      *
-     * @ORM\Column(name="photo_principale", type="string", length=255)
+     * @ORM\Column(name="photo_principale", type="string", length=255, nullable=true)
      */
     private $photoPrincipale;
 
@@ -416,5 +418,100 @@ class Prospects
     public function __toString() 
     {
         return $this->getPseudo();
+    }
+    
+    /**
+     * Get web path to upload directory
+     * 
+     * @return string
+     *  Relative path.
+     */
+    protected function getUploadPath()
+    {
+        return 'uploads/photoPrincipale';
+    }
+    
+    /**
+     * Get absolute path to upload directory
+     * 
+     * @return string
+     *  Absolute path.
+     */
+    protected function getUploadAbsolutePath()
+    {
+        return __DIR__ . '/../../../../web/' . $this->getUploadPath();
+    }
+    
+    /**
+     * Get web path to a photo principale.
+     * 
+     * @return null|string
+     *  Relative path.
+     */
+    public function getPhotoPrincipaleWeb()
+    {
+        return NULL === $this->getPhotoPrincipale()
+                ? NULL
+                : $this->getUploadPath() . '/' . $this->getPhotoPrincipale();
+    }
+    
+    /**
+     * Get path on disk to a photo principale.
+     * 
+     * @return null|string
+     *  Absolute path.
+     */
+    public function getPhotoPrincipaleAbsolute()
+    {
+        return NULL === $this->getPhotoPrincipale()
+                ? NULL
+                : $this->getUploadAbsolutePath() . '/' . $this->getPhotoPrincipale();
+    }
+    
+    /**
+     *
+     * @Assert\File(maxSize="1000000")
+     */
+    private $file;
+    
+    /**
+     * Sets file
+     * 
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = NULL){
+        $this->file = $file;
+    }
+    
+    /**
+     * Get file.
+     * 
+     * @return UploadedFile
+     */
+    public function getFile(){
+        return $this->file;
+    }
+    
+    /**
+     * Upload une photo principale
+     */
+    public function upload(){
+        // File property can be empty.
+        if(NULL === $this->getFile()){
+            return;
+        }
+        
+        $filename = $this->getFile()->getClientOriginalName();
+        
+        // Move the uploaded file to the target directory using original name.
+        $this->getFile()->move(
+                $this->getUploadAbsolutePath(),
+                $filename);
+        
+        // Set the photo principale.
+        $this->setPhotoPrincipale($filename);
+        
+        // Cleanup.
+        $this->setFile();
     }
 }

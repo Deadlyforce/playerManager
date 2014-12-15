@@ -16,9 +16,12 @@ class EchangesType extends AbstractType
     {
         $builder
             ->add('prospects_id')
-            ->add('date')
+            ->add('date', 'date', array('required' => TRUE))
             ->add('contenu')
-            ->add('prospects')
+            ->add('prospects', 'entity', array(
+                'required' => TRUE,
+                'class' => 'playerManagerWelcomeBundle:Prospects'
+                ))
         ;
     }
     
