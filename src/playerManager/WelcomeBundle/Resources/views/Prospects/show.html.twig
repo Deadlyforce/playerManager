@@ -1,7 +1,8 @@
 {% extends '::base.html.twig' %}
+{% block title %}Contact : {{ entity.pseudo }}{% endblock %}
 
 {% block body -%}
-    <h1>Prospects</h1>
+    <h1>{{ entity.pseudo }}</h1>
 
     <table class="record_properties">
         <tbody>
@@ -47,22 +48,26 @@
             </tr>
             <tr>
                 <th>Photoprincipale</th>
-                <td>{{ entity.photoPrincipale }}</td>
+                <td>
+                    {% if entity.photoPrincipale %}
+                        <img class="img-responsive" src="{{ asset(entity.getPhotoPrincipaleWeb) }}" alt="{{ entity.photoPrincipale }}"/>
+                    {% endif %}
+                </td>
             </tr>
         </tbody>
     </table>
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('prospects') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('prospects_edit', { 'id': entity.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('prospects') }}">
+                Back to the list
+            </a>
+        </li>
+        <li>
+            <a href="{{ path('prospects_edit', { 'id': entity.id }) }}">
+                Edit
+            </a>
+        </li>
+        <li>{{ form(delete_form) }}</li>
+    </ul>
 {% endblock %}

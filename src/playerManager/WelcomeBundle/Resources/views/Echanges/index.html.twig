@@ -1,13 +1,14 @@
 {% extends '::base.html.twig' %}
+{% block title %}Liste des échanges{% endblock %}
 
 {% block body -%}
     <h1>Echanges list</h1>
 
-    <table class="records_list">
+    <table class="records_list table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Prospects_id</th>
+                <th>Contact</th> <!-- En réalité l'entité "Prospect" -->
+{#                <th>Prospects_id</th>#}
                 <th>Date</th>
                 <th>Contenu</th>
                 <th>Actions</th>
@@ -16,30 +17,21 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('echanges_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.prospectsid }}</td>
+                <td>{{ entity.prospects.pseudo }}</td>
+{#                <td>{{ entity.prospectsid }}</td>#}
                 <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.contenu }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('echanges_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('echanges_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                <td>                
+                    <a class="btn btn-default btn-xs" href="{{ path('echanges_show', { 'id': entity.id }) }}">show</a>                  
+                    <a class="btn btn-default btn-xs" href="{{ path('echanges_edit', { 'id': entity.id }) }}">edit</a>                    
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-
-        <ul>
-        <li>
-            <a href="{{ path('echanges_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
+        
+    <a class="btn btn-default" href="{{ path('echanges_new') }}">
+        Ajouter un nouvel échange
+    </a>
+        
     {% endblock %}

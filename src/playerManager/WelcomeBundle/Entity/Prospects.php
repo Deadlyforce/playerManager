@@ -77,6 +77,13 @@ class Prospects
      * @ORM\Column(name="ville", type="string", length=255)
      */
     private $ville;
+    
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="arrondissement", type="integer", nullable=true)
+     */
+    private $arrondissement;
 
     /**
      * @var string
@@ -237,6 +244,29 @@ class Prospects
     public function getVille()
     {
         return $this->ville;
+    }
+    
+    /**
+     * Set arrondissement
+     *
+     * @param integer $arrondissement
+     * @return Prospects
+     */
+    public function setArrondissement($arrondissement)
+    {
+        $this->arrondissement = $arrondissement;
+
+        return $this;
+    }
+    
+    /**
+     * Get arrondissement
+     *
+     * @return integer 
+     */
+    public function getArrondissement()
+    {
+        return $this->arrondissement;
     }
 
     /**

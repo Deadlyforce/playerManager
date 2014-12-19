@@ -35,6 +35,7 @@ class ProspectsController extends Controller
             'entities' => $entities,
         );
     }
+    
     /**
      * Creates a new Prospects entity.
      *
@@ -77,7 +78,12 @@ class ProspectsController extends Controller
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Créer ce contact',
+            'attr' => array(
+                'class' => 'btn btn-default'
+                )
+            ));
 
         return $form;
     }

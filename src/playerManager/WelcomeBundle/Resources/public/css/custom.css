@@ -1,0 +1,47 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16 déc. 2014, 17:15:18
+    Author     : Norman
+*/
+
+body{
+    padding-top: 50px;
+}
+
+label{
+    width: 150px;
+}
+
+#form-new-prospect div{
+    margin-bottom: 5px;
+}
+
+.form-input, .form-input-ville{
+    width: 250px;
+    display: inline-block;
+    border-radius: 2px;
+}
+.form-input-age{
+    width: 65px;
+    display: inline-block;
+    border-radius: 2px;
+}
+.form-input-site{
+    width: 150px;
+    display: inline-block;
+    border-radius: 2px;
+}
+.form-input-photoPrincipale{
+    width: 300px;
+    display: inline-block;
+    border-radius: 2px;
+}
+
+ul.record_actions{
+    list-style-type: none;
+    padding: 0;
+}
