@@ -91,6 +91,7 @@ class ProspectsType extends AbstractType
                     )
                 ))
             ->add('numero', 'text', array(
+                'required' => FALSE,
                 'label' => 'Numéro',
                 'attr' => array(
                     'class' => 'form-control form-input'

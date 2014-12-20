@@ -13,6 +13,7 @@
                 <th>Nom</th>
                 <th>Age</th>
                 <th>Ville</th>
+                <th>Arrondissement</th>
                 <th>Pays</th>
                 <th>Numéro</th>
                 <th>Numéro étranger</th>
@@ -30,11 +31,12 @@
                 <td>{{ entity.nom }}</td>
                 <td>{{ entity.age }}</td>
                 <td>{{ entity.ville }}</td>
+                <td>{{ entity.arrondissement }}</td>
                 <td>{{ entity.pays }}</td>
                 <td>{{ entity.numero }}</td>
                 <td>{{ entity.numeroEtranger }}</td>
                 <td>{{ entity.site }}</td>
-                <td>
+                <td class="photoPrincipale">
                     {% if entity.photoPrincipale %}
                         <img class="img-responsive" src="{{ asset(entity.getPhotoPrincipaleWeb) }}" alt="{{ asset(entity.getPhotoPrincipaleWeb) }}" />
                     {% endif %}
