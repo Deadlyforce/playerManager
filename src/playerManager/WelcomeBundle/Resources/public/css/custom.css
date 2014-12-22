@@ -12,8 +12,16 @@ body{
     padding-top: 50px;
 }
 
+/************************ BOOTSTRAP OVERRIDES ****************************/
+
+.form-control{
+    border-radius: 0px;
+}
+
+/************************* FORM NEW PROSPECT *****************************/
+
 label{
-    width: 150px;
+    width: 165px;
 }
 
 #form-new-prospect div{
@@ -23,22 +31,18 @@ label{
 .form-input, .form-input-ville{
     width: 250px;
     display: inline-block;
-    border-radius: 2px;
 }
 .form-input-age{
     width: 65px;
     display: inline-block;
-    border-radius: 2px;
 }
 .form-input-site{
     width: 150px;
     display: inline-block;
-    border-radius: 2px;
 }
 .form-input-photoPrincipale{
     width: 300px;
     display: inline-block;
-    border-radius: 2px;
 }
 
 ul.record_actions{
@@ -48,4 +52,26 @@ ul.record_actions{
 
 td.photoPrincipale img{
     height: 100px;
+}
+
+/************************* FORM NEW RELATION *****************************/
+
+#playermanager_welcomebundle_relations_statut{
+    display: inline-block;
+}
+#playermanager_welcomebundle_relations_rencontre{
+    display: inline-block;
+}
+#playermanager_welcomebundle_relations_rencontreDate{
+   display: inline-block;
+}
+#playermanager_welcomebundle_relations_rencontreDate_date, #playermanager_welcomebundle_relations_rencontreDate_time{
+   display: inline-block;
+}
+
+#playermanager_welcomebundle_relations_statut label{
+    width: 75px;
+}
+#playermanager_welcomebundle_relations_rencontre label{
+    width: 75px;
 }

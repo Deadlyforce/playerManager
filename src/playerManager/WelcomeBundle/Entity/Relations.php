@@ -32,7 +32,7 @@ class Relations
     /**
      * @var string
      *
-     * @ORM\Column(name="statut", type="string", columnDefinition="enum('on','off')")
+     * @ORM\Column(name="statut", type="boolean")
      */
     private $statut;
 
