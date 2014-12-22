@@ -75,3 +75,7 @@ td.photoPrincipale img{
 #playermanager_welcomebundle_relations_rencontre label{
     width: 75px;
 }
+
+.playermanager_welcomebundle_relations_commentaire{
+    vertical-align: top;
+}

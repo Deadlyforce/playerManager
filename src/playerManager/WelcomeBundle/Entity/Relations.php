@@ -53,49 +53,49 @@ class Relations
     /**
      * @var integer
      *
-     * @ORM\Column(name="rencontre_count", type="integer")
+     * @ORM\Column(name="rencontre_count", type="integer", nullable=true)
      */
     private $rencontreCount;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="numero", type="integer")
+     * @ORM\Column(name="numero", type="boolean")
      */
     private $numero;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="kc", type="integer")
+     * @ORM\Column(name="kc", type="boolean")
      */
     private $kc;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="fc", type="integer")
+     * @ORM\Column(name="fc", type="boolean")
      */
     private $fc;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="rel_type", type="string", columnDefinition="enum('ons','fb','gf','or')")
+     * @ORM\Column(name="rel_type", type="string", columnDefinition="enum('discussion','dating','ons','fb','gf','or')")
      */
     private $relType;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="distance", type="integer")
+     * @ORM\Column(name="distance", type="boolean")
      */
     private $distance;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="flake", type="integer")
+     * @ORM\Column(name="flake", type="boolean")
      */
     private $flake;
 

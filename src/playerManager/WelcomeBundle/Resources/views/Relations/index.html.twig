@@ -1,12 +1,13 @@
 {% extends '::base.html.twig' %}
+{% block title %}Liste des relations{% endblock %}
 
 {% block body -%}
-    <h1>Relations list</h1>
+    <h1>Liste des relations</h1>
 
-    <table class="records_list">
+    <table class="records_list table">
         <thead>
             <tr>
-                <th>Id</th>
+{#                <th>Id</th>#}
                 <th>Statut</th>
                 <th>Rencontre</th>
                 <th>Rencontredate</th>
@@ -24,7 +25,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td><a href="{{ path('relations_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+{#                <td><a href="{{ path('relations_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
                 <td>{{ entity.statut }}</td>
                 <td>{{ entity.rencontre }}</td>
                 <td>{% if entity.rencontreDate %}{{ entity.rencontreDate|date('Y-m-d H:i:s') }}{% endif %}</td>

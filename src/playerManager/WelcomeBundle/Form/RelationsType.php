@@ -46,14 +46,46 @@ class RelationsType extends AbstractType
                 'date_format' => 'dd MM yyyy',
                 'data' => new \DateTime('', new \DateTimeZone('Europe/Paris'))
             ))
-            ->add('rencontreCount')
-            ->add('numero')
-            ->add('kc')
-            ->add('fc')
-            ->add('relType')
-            ->add('distance')
-            ->add('flake')
-            ->add('commentaire')
+            ->add('rencontreCount', 'integer', array(
+                'required' => FALSE,
+                'label' => 'Nombre de rencontres'
+            ))
+            ->add('numero', 'checkbox', array(
+                'required' => FALSE,
+                'label' => 'Numéro acquis'                
+            ))
+            ->add('kc', 'checkbox', array(
+                'required' => FALSE,
+                'label' => 'KC'
+            ))
+            ->add('fc', 'checkbox', array(
+                'required' => FALSE,
+                'label' => 'FC'
+            ))
+            ->add('relType', 'choice', array(
+                'required' => TRUE,
+                'choices' => array(
+                    'discussion' => 'Discussion',
+                    'dating' => 'Dating',
+                    'ons' => 'One Night Stand',
+                    'fb' => 'Fuck Buddy',
+                    'gf' => 'Girlfriend',
+                    'or' => 'Open relationship'
+                ),
+                'label' => 'Type de relation'
+            ))
+            ->add('distance', 'checkbox', array(
+                'required' => FALSE,
+                'label' => 'Problème de distance'
+            ))
+            ->add('flake', 'checkbox', array(
+                'required' => FALSE
+            ))
+            ->add('commentaire','textarea', array(
+                'label_attr' => array(
+                    'class' => 'playermanager_welcomebundle_relations_commentaire'
+                )
+            ))
             ->add('prospects', 'entity', array(
                 'required' => TRUE,
                 'class' => 'playerManagerWelcomeBundle:Prospects'
