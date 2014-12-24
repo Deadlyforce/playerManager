@@ -12,9 +12,19 @@ body{
     padding-top: 50px;
 }
 
+table td, table th{
+    text-align: center;
+}
+
 /************************ BOOTSTRAP OVERRIDES ****************************/
 
+/* FORMS */
 .form-control{
+    border-radius: 0px;
+}
+
+/* BOUTONS */
+.btn{
     border-radius: 0px;
 }
 
@@ -22,6 +32,7 @@ body{
 
 label{
     width: 165px;
+    vertical-align: top;
 }
 
 #form-new-prospect div{

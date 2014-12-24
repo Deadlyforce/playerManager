@@ -38,7 +38,7 @@ class RelationsType extends AbstractType
             ))
             ->add('rencontreDate', 'datetime', array(
                 'required' => FALSE,
-                'label' => 'Date de la rencontre: ',
+                'label' => 'Date de création: ',
                 'model_timezone' => 'Europe/Paris',
                 'view_timezone' => 'Europe/Paris',
                 'input' => 'datetime',
@@ -52,16 +52,19 @@ class RelationsType extends AbstractType
             ))
             ->add('numero', 'checkbox', array(
                 'required' => FALSE,
-                'label' => 'Numéro acquis'                
+                'label' => 'Numéro acquis',
+                'data' => FALSE
             ))
             ->add('kc', 'checkbox', array(
                 'required' => FALSE,
-                'label' => 'KC'
+                'label' => 'KC',
+                'data' => FALSE
             ))
             ->add('fc', 'checkbox', array(
                 'required' => FALSE,
-                'label' => 'FC'
-            ))
+                'label' => 'FC',
+                'data' => FALSE
+             ))
             ->add('relType', 'choice', array(
                 'required' => TRUE,
                 'choices' => array(
@@ -76,7 +79,8 @@ class RelationsType extends AbstractType
             ))
             ->add('distance', 'checkbox', array(
                 'required' => FALSE,
-                'label' => 'Problème de distance'
+                'label' => 'Problème de distance',
+                'data' => FALSE
             ))
             ->add('flake', 'checkbox', array(
                 'required' => FALSE
