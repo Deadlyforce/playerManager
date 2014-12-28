@@ -18,7 +18,7 @@ class Echanges
      * @var Prospects 
      * 
      * @ORM\ManyToOne(targetEntity="Prospects", inversedBy="echanges")
-     * @ORM\JoinColumn(name="prospects_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="prospects_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $prospects;
     

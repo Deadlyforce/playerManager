@@ -2,7 +2,7 @@
 {% block title %}Liste des contacts{% endblock %}
 
 {% block body -%}
-    <h1>Prospects list</h1>
+    <h1>Liste des contacts</h1>
 
     <table class="records_list table">
         <thead>
@@ -19,7 +19,7 @@
                 <th>Numéro étranger</th>
                 <th>Site</th>
                 <th>Photo Principale</th>
-                <th>Actions</th>
+                <th>Actions</th>                
             </tr>
         </thead>
         <tbody>
@@ -43,7 +43,9 @@
                 </td>
                 <td>                    
                     <a class="btn btn-default btn-xs" href="{{ path('prospects_show', { 'id': entity.id }) }}">show</a>                       
-                    <a class="btn btn-default btn-xs" href="{{ path('prospects_edit', { 'id': entity.id }) }}">edit</a>                        
+                    <a class="btn btn-default btn-xs" href="{{ path('prospects_edit', { 'id': entity.id }) }}">edit</a>  
+                    
+{#                    <a class="btn btn-default btn-xs" href="{{ path('relations_show', { 'id': entity.relations.getId() }) }}">Relation</a>                        #}
                 </td>
             </tr>
         {% endfor %}
