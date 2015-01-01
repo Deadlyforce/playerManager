@@ -45,7 +45,9 @@
                     <a class="btn btn-default btn-xs" href="{{ path('prospects_show', { 'id': entity.id }) }}">show</a>                       
                     <a class="btn btn-default btn-xs" href="{{ path('prospects_edit', { 'id': entity.id }) }}">edit</a>  
                     
-{#                    <a class="btn btn-default btn-xs" href="{{ path('relations_show', { 'id': entity.relations.getId() }) }}">Relation</a>                        #}
+                    {% if entity.relations %}
+                        <a class="btn btn-default btn-xs" href="{{ path('relations_show', { 'id': entity.relations.id }) }}">relation details</a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
@@ -57,3 +59,4 @@
     </a>
         
     {% endblock %}
+    
