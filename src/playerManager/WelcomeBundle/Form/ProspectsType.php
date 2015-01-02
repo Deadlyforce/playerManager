@@ -30,7 +30,7 @@ class ProspectsType extends AbstractType
 
         $builder
             ->add('pseudo', 'text', array(
-                'required' => TRUE, 
+                'required' => FALSE, 
                 'label_attr' => array(
                     'class' => 'control-label'
                     ), 
@@ -81,7 +81,7 @@ class ProspectsType extends AbstractType
                 'row_attr' => array(
                     'class' => 'row_arrondissement'
                 ),
-                'data' => 1
+//                'data' => 1
                 ))
             ->add('pays', 'text', array(
                 'required' => TRUE, 

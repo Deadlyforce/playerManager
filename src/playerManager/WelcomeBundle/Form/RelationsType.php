@@ -92,7 +92,8 @@ class RelationsType extends AbstractType
             ))
             ->add('prospects', 'entity', array(
                 'required' => TRUE,
-                'class' => 'playerManagerWelcomeBundle:Prospects'
+                'class' => 'playerManagerWelcomeBundle:Prospects',
+                'property' => 'pseudo'
             ))
         ;
     }

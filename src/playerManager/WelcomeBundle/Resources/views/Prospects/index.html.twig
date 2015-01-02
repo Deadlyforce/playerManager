@@ -48,6 +48,8 @@
                     {% if entity.relations %}
                         <a class="btn btn-default btn-xs" href="{{ path('relations_show', { 'id': entity.relations.id }) }}">relation details</a>
                     {% endif %}
+                    
+                    <a class="btn btn-default btn-xs" href="{{ path('relations_new') }}">Nouvelle relation</a>
                 </td>
             </tr>
         {% endfor %}

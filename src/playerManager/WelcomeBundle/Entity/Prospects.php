@@ -46,7 +46,7 @@ class Prospects
     /**
      * @var string
      *
-     * @ORM\Column(name="pseudo", type="string", length=255)
+     * @ORM\Column(name="pseudo", type="string", length=255, nullable=true)
      */
     private $pseudo;
 
