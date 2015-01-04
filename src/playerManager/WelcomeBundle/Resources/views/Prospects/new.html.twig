@@ -6,8 +6,6 @@
 {% block body -%}
     <h1>Nouveau contact</h1>
 
-{#    {{ form(form, {'attr': {'id':'form-new-prospect'}}) }}#}
-
     {{ form_start(form, {'attr': {'id':'form-new-prospect'}}) }}   
    
     {{ form_end(form) }}
@@ -15,11 +13,11 @@
     <ul class="record_actions">
         <li>
             <a href="{{ path('prospects') }}">
-                Retour à la liste des contacts
+                Back to the list
             </a>
         </li>
     </ul>
-            
+        
     <script type="text/javascript"> 
 
         $(document).ready(function(){
@@ -38,10 +36,3 @@
         
     </script>
 {% endblock %}
-
- 
-
-
-    
-  
-

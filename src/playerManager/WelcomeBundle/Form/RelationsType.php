@@ -8,7 +8,6 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class RelationsType extends AbstractType
 {
-    
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -89,11 +88,6 @@ class RelationsType extends AbstractType
                 'label_attr' => array(
                     'class' => 'playermanager_welcomebundle_relations_commentaire'
                 )
-            ))
-            ->add('prospects', 'entity', array(
-                'required' => TRUE,
-                'class' => 'playerManagerWelcomeBundle:Prospects',
-                'property' => 'pseudo'
             ))
         ;
     }

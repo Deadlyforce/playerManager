@@ -19,7 +19,7 @@
                 <th>Numéro étranger</th>
                 <th>Site</th>
                 <th>Photo Principale</th>
-                <th>Actions</th>                
+                <th>Actions</th> 
             </tr>
         </thead>
         <tbody>
@@ -41,24 +41,21 @@
                         <img class="img-responsive" src="{{ asset(entity.getPhotoPrincipaleWeb) }}" alt="{{ asset(entity.getPhotoPrincipaleWeb) }}" />
                     {% endif %}
                 </td>
-                <td>                    
+                <td>
                     <a class="btn btn-default btn-xs" href="{{ path('prospects_show', { 'id': entity.id }) }}">show</a>                       
                     <a class="btn btn-default btn-xs" href="{{ path('prospects_edit', { 'id': entity.id }) }}">edit</a>  
                     
                     {% if entity.relations %}
                         <a class="btn btn-default btn-xs" href="{{ path('relations_show', { 'id': entity.relations.id }) }}">relation details</a>
                     {% endif %}
-                    
-                    <a class="btn btn-default btn-xs" href="{{ path('relations_new') }}">Nouvelle relation</a>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-        
+
     <a class="btn btn-default" href="{{ path('prospects_new') }}">
         Ajouter un contact
     </a>
         
     {% endblock %}
-    

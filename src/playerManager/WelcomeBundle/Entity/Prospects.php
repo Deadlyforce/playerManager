@@ -15,6 +15,12 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class Prospects
 {
+        
+    public function __construct()
+    {
+        $this->echanges = new ArrayCollection();
+    }
+    
     /**
      * @var ArrayCollection
      * 
@@ -25,19 +31,15 @@ class Prospects
     /**
      * @var Relations 
      * 
-     * @ORM\OneToOne(targetEntity="Relations", mappedBy="prospects")
+     * @ORM\OneToOne(targetEntity="Relations", cascade={"persist", "merge", "remove"})
+     * @ORM\JoinColumn(name="relations_id", referencedColumnName="id")
      */
     private $relations;
-    
-    public function __construct()
-    {
-        $this->echanges = new ArrayCollection();
-    }
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */

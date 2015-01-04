@@ -1,14 +1,13 @@
 {% extends '::base.html.twig' %}
-{% block title %}Liste des relations{% endblock %}
 
-{% block body -%}    
-    <h1>Liste des relations</h1>
+{% block body -%}
+    <h1>Relations list</h1>
 
     <table class="records_list table">
         <thead>
             <tr>
-                {#<th>Id</th>#}
-                <th>Pseudo</th>
+{#                <th>Id</th>#}
+{#                <th>Pseudo</th>#}
                 <th>Statut</th>
                 <th>Rencontre</th>
                 <th>Date de création</th>
@@ -26,8 +25,8 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                {#<td><a href="{{ path('relations_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
-                <td>{% if entity.prospects %}{{ entity.prospects.pseudo }}{% endif %}</td>
+{#                <td><a href="{{ path('relations_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
+{#                <td>{% if entity.prospects %}{{ entity.prospects.pseudo }}{% endif %}</td>#}
                 <td>{% if entity.statut %}On{% endif %}</td>
                 <td>{% if entity.rencontre %}Oui{% else %}Non{% endif %}</td>
                 <td>{% if entity.rencontreDate %}{{ entity.rencontreDate|date('Y-m-d H:i:s') }}{% endif %}</td>
@@ -40,14 +39,19 @@
                 <td>{% if entity.flake == 1 %}Oui{% else %}Non{% endif %}</td>
                 <td>{{ entity.commentaire }}</td>
                 <td>                
-                    <a class="btn btn-default btn-xs" href="{{ path('relations_show', { 'id': entity.id }) }}">show</a>
-                    <a class="btn btn-default btn-xs" href="{{ path('relations_edit', { 'id': entity.id }) }}">edit</a>                    
+                    <a href="{{ path('relations_show', { 'id': entity.id }) }}">show</a>                    
+                    <a href="{{ path('relations_edit', { 'id': entity.id }) }}">edit</a>                   
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
-    
-    <a class="btn btn-default" href="{{ path('relations_new') }}">Créer une nouvelle relation</a>
-        
+
+{#    <ul>
+        <li>
+            <a href="{{ path('relations_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>#}
     {% endblock %}

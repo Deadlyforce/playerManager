@@ -12,18 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Relations
 {
-    /**
-     * @var Prospects
-     * 
-     * @ORM\OneToOne(targetEntity="Prospects", inversedBy="relations")
-     * @ORM\JoinColumn(name="prospects_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    private $prospects;
+
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="id", type="integer", nullable=false)
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
@@ -369,27 +363,6 @@ class Relations
     {
         return $this->commentaire;
     }
+    
 
-    /**
-     * Set prospects
-     *
-     * @param \playerManager\WelcomeBundle\Entity\Prospects $prospects
-     * @return Relations
-     */
-    public function setProspects(\playerManager\WelcomeBundle\Entity\Prospects $prospects = null)
-    {
-        $this->prospects = $prospects;
-
-        return $this;
-    }
-
-    /**
-     * Get prospects
-     *
-     * @return \playerManager\WelcomeBundle\Entity\Prospects 
-     */
-    public function getProspects()
-    {
-        return $this->prospects;
-    }
 }

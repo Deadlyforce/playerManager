@@ -7,11 +7,11 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class ProspectsType extends AbstractType
-{    
+{
     protected $ageBracket;
     protected $parisArrondissements;
     
-        /**
+    /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
@@ -25,9 +25,8 @@ class ProspectsType extends AbstractType
         // Chargement de la tranche d'âges
         for($i=1; $i<=20; $i++){
             $parisArrondissements[$i] = $i;
-        }  
+        }
         
-
         $builder
             ->add('pseudo', 'text', array(
                 'required' => FALSE, 
@@ -35,7 +34,7 @@ class ProspectsType extends AbstractType
                     'class' => 'control-label'
                     ), 
                 'attr' => array(
-                    'class' => 'form-control form-input'
+                    'class' => 'form-input'
                     )               
                 ))
             ->add('prenom', 'text', array(
@@ -45,7 +44,7 @@ class ProspectsType extends AbstractType
                     'class' => 'control-label'
                     ), 
                 'attr' => array(
-                    'class' => 'form-control form-input'
+                    'class' => 'form-input'
                     )
                 ))
             ->add('nom', 'text', array(
@@ -55,13 +54,13 @@ class ProspectsType extends AbstractType
                     'class' => 'control-label'
                     ), 
                 'attr' => array(
-                    'class' => 'form-control form-input'
+                    'class' => 'form-input'
                     )
                 ))
             ->add('age', 'choice', array(
                 'choices' => $ageBracket,
                 'attr' => array(
-                    'class' => 'form-control form-input-age',                       
+                    'class' => 'form-input-age',                       
                 ),
                 'data' => 22
             ))
@@ -69,14 +68,14 @@ class ProspectsType extends AbstractType
                 'required' => FALSE, 
                 'attr' => array(
                     'placeholder' => 'Paris',
-                    'class' => 'form-control form-input-ville'
+                    'class' => 'form-input-ville'
                     )
                 ))
             ->add('arrondissement', 'choice', array(
                 'required' => FALSE,
                 'choices' => $parisArrondissements,                
                 'attr' => array(                    
-                    'class' => 'form-control form-input'
+                    'class' => 'form-input'
                     ),
                 'row_attr' => array(
                     'class' => 'row_arrondissement'
@@ -86,7 +85,7 @@ class ProspectsType extends AbstractType
             ->add('pays', 'text', array(
                 'required' => TRUE, 
                 'attr' => array(
-                    'class' => 'form-control form-input',
+                    'class' => 'form-input',
                     'value' => 'France'
                     )
                 ))
@@ -94,14 +93,14 @@ class ProspectsType extends AbstractType
                 'required' => FALSE,
                 'label' => 'Numéro',
                 'attr' => array(
-                    'class' => 'form-control form-input'
+                    'class' => 'form-input'
                     )
                 ))
             ->add('numeroEtranger', 'text', array(
                 'required' => FALSE, 
                 'label' => 'Numéro étranger',
                 'attr' => array(
-                    'class' => 'form-control form-input'
+                    'class' => 'form-input'
                     )
                 ))
             ->add('site', 'choice', array(
@@ -111,17 +110,17 @@ class ProspectsType extends AbstractType
                     ),
                 'required' => TRUE,
                 'attr' => array(
-                    'class' => 'form-control form-input-site'
+                    'class' => 'form-input-site'
                     )
                 ))
             ->add('file', 'file', array(
                 'required' => FALSE, 
                 'label' => 'Photo principale',
                 'attr' => array(
-                    'class' => 'form-control form-input-photoPrincipale'
+                    'class' => 'form-input-photoPrincipale'
                     )
                 ))
-//            ->add('relations')
+            ->add('relations', new RelationsType())
         ;
     }
     

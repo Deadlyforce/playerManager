@@ -30,12 +30,11 @@ class RelationsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('playerManagerWelcomeBundle:Relations')->findAll();
-        
+
         return array(
             'entities' => $entities,
         );
     }
-    
     /**
      * Creates a new Relations entity.
      *
