@@ -85,6 +85,7 @@ class RelationsType extends AbstractType
                 'required' => FALSE
             ))
             ->add('commentaire','textarea', array(
+                'required' => FALSE,
                 'label_attr' => array(
                     'class' => 'playermanager_welcomebundle_relations_commentaire'
                 )

@@ -31,7 +31,7 @@ class Prospects
     /**
      * @var Relations 
      * 
-     * @ORM\OneToOne(targetEntity="Relations", cascade={"persist", "merge", "remove"})
+     * @ORM\OneToOne(targetEntity="Relations", inversedBy="prospects", cascade={"persist", "merge", "remove"})
      * @ORM\JoinColumn(name="relations_id", referencedColumnName="id")
      */
     private $relations;
@@ -76,7 +76,7 @@ class Prospects
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=255)
+     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
      */
     private $ville;
     
@@ -428,6 +428,7 @@ class Prospects
     public function setRelations(\playerManager\WelcomeBundle\Entity\Relations $relations = null)
     {
         $this->relations = $relations;
+        $relations->setProspects($this);
 
         return $this;
     }

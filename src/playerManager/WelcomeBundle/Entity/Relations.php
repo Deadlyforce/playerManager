@@ -12,7 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Relations
 {
-
+    /**     
+     * @var Prospects 
+     * 
+     * @ORM\OneToOne(targetEntity="Prospects", mappedBy="relations", cascade={"persist", "merge"})
+     * @ORM\JoinColumn(name="prospects_id", referencedColumnName="id")
+     */
+    private $prospects;
     
     /**
      * @var integer
@@ -96,7 +102,7 @@ class Relations
     /**
      * @var text
      *
-     * @ORM\Column(name="commentaire", type="text")
+     * @ORM\Column(name="commentaire", type="text", nullable=true)
      */
     private $commentaire;
 
@@ -364,5 +370,27 @@ class Relations
         return $this->commentaire;
     }
     
+    /*
+     * Set prospects
+     *
+     * @param \playerManager\WelcomeBundle\Entity\Prospects $prospects
+     * @return Relations
+    */
+    public function setProspects(\playerManager\WelcomeBundle\Entity\Prospects $prospects = null)
+    {
+        $this->prospects = $prospects;
+        
+        return $this;
+    }
+
+    /**
+     * Get prospects
+     *
+     * @return \playerManager\WelcomeBundle\Entity\Prospects 
+    */
+    public function getProspects()
+    {
+        return $this->prospects;
+    }
 
 }
