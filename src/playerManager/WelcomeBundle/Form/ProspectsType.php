@@ -120,6 +120,16 @@ class ProspectsType extends AbstractType
                     'class' => 'form-input-photoPrincipale'
                     )
                 ))
+            ->add('dateCreation', 'datetime', array(
+		'required' => FALSE,
+		'label' => 'Date de création: ',
+		'model_timezone' => 'Europe/Paris',
+		'view_timezone' => 'Europe/Paris',
+		'input' => 'datetime',
+		'widget' => 'choice',
+		'date_format' => 'dd MM yyyy',
+		'data' => new \DateTime('', new \DateTimeZone('Europe/Paris'))
+                ))
             ->add('relations', new RelationsType())
         ;
     }

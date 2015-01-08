@@ -15,8 +15,8 @@ class Relations
     /**     
      * @var Prospects 
      * 
-     * @ORM\OneToOne(targetEntity="Prospects", mappedBy="relations", cascade={"persist", "merge"})
-     * @ORM\JoinColumn(name="prospects_id", referencedColumnName="id")
+     * @ORM\OneToOne(targetEntity="Prospects", mappedBy="relations", cascade={"persist"})
+     * @ORM\JoinColumn(name="prospects_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $prospects;
     
@@ -42,13 +42,6 @@ class Relations
      * @ORM\Column(name="rencontre", type="integer")
      */
     private $rencontre;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="rencontre_date", type="datetime")
-     */
-    private $rencontreDate;
 
     /**
      * @var integer
@@ -161,29 +154,6 @@ class Relations
     public function getRencontre()
     {
         return $this->rencontre;
-    }
-
-    /**
-     * Set rencontreDate
-     *
-     * @param \DateTime $rencontreDate
-     * @return Relations
-     */
-    public function setRencontreDate($rencontreDate)
-    {
-        $this->rencontreDate = $rencontreDate;
-
-        return $this;
-    }
-
-    /**
-     * Get rencontreDate
-     *
-     * @return \DateTime 
-     */
-    public function getRencontreDate()
-    {
-        return $this->rencontreDate;
     }
 
     /**

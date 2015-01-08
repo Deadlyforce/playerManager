@@ -35,16 +35,6 @@ class RelationsType extends AbstractType
                 'multiple' => FALSE,
                 'data' => 0
             ))
-            ->add('rencontreDate', 'datetime', array(
-                'required' => FALSE,
-                'label' => 'Date de création: ',
-                'model_timezone' => 'Europe/Paris',
-                'view_timezone' => 'Europe/Paris',
-                'input' => 'datetime',
-                'widget' => 'choice',
-                'date_format' => 'dd MM yyyy',
-                'data' => new \DateTime('', new \DateTimeZone('Europe/Paris'))
-            ))
             ->add('rencontreCount', 'integer', array(
                 'required' => FALSE,
                 'label' => 'Nombre de rencontres'

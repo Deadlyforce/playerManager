@@ -1,7 +1,8 @@
 {% extends '::base.html.twig' %}
+{% block title %}Relation{% endblock %}
 
 {% block body -%}
-    <h1>Relations</h1>
+    <h1>Relation</h1>
 
     <table class="record_properties">
         <tbody>
@@ -16,10 +17,6 @@
             <tr>
                 <th>Rencontre</th>
                 <td>{{ entity.rencontre }}</td>
-            </tr>
-            <tr>
-                <th>Rencontredate</th>
-                <td>{{ entity.rencontreDate|date('Y-m-d H:i:s') }}</td>
             </tr>
             <tr>
                 <th>Rencontrecount</th>

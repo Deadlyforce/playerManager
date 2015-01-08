@@ -65,6 +65,13 @@ td.photoPrincipale img{
     height: 100px;
 }
 
+#playermanager_welcomebundle_prospects_dateCreation{
+   display: inline-block;
+}
+#playermanager_welcomebundle_prospects_dateCreation_date, #playermanager_welcomebundle_prospects_dateCreation_time{
+   display: inline-block;
+}
+
 /************************* FORM NEW RELATION *****************************/
 
 #playermanager_welcomebundle_relations_statut{
@@ -72,12 +79,6 @@ td.photoPrincipale img{
 }
 #playermanager_welcomebundle_relations_rencontre{
     display: inline-block;
-}
-#playermanager_welcomebundle_relations_rencontreDate{
-   display: inline-block;
-}
-#playermanager_welcomebundle_relations_rencontreDate_date, #playermanager_welcomebundle_relations_rencontreDate_time{
-   display: inline-block;
 }
 
 #playermanager_welcomebundle_relations_statut label{

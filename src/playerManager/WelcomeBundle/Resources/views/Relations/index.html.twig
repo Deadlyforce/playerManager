@@ -11,7 +11,6 @@
                 <th>Pseudo</th>
                 <th>Statut</th>
                 <th>Rencontre</th>
-                <th>Date de création</th>
                 <th>Rencontres</th>
                 <th>Numéro</th>
                 <th>KC</th>
@@ -30,7 +29,6 @@
                 <td>{% if entity.prospects %}{{ entity.prospects.pseudo }}{% endif %}</td>
                 <td>{% if entity.statut %}On{% endif %}</td>
                 <td>{% if entity.rencontre %}Oui{% else %}Non{% endif %}</td>
-                <td>{% if entity.rencontreDate %}{{ entity.rencontreDate|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{% if entity.rencontreCount %}{{ entity.rencontreCount }}{% else %}0{% endif %}</td>
                 <td>{% if entity.numero == 1 %}Oui{% else %}Non{% endif %}</td>
                 <td>{% if entity.kc == 1 %}Oui{% else %}Non{% endif %}</td>

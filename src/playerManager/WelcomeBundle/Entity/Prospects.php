@@ -32,7 +32,7 @@ class Prospects
      * @var Relations 
      * 
      * @ORM\OneToOne(targetEntity="Relations", inversedBy="prospects", cascade={"persist", "merge", "remove"})
-     * @ORM\JoinColumn(name="relations_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="relations_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $relations;
     
@@ -121,7 +121,14 @@ class Prospects
      * @ORM\Column(name="photo_principale", type="string", length=255, nullable=true)
      */
     private $photoPrincipale;
-
+    
+    /**
+     * @var \Datetime 
+     * 
+     * @ORM\Column(name="date_creation", type="datetime")
+     */
+    private $dateCreation;
+    
 
     /**
      * Get id
@@ -547,4 +554,27 @@ class Prospects
         // Cleanup.
         $this->setFile();
     }
+    
+    /**
+    * Set dateCreation
+    *
+    * @param \DateTime $dateCreation
+    * @return Prospects
+    */
+   public function setDateCreation($dateCreation)
+   {
+           $this->dateCreation = $dateCreation;
+
+           return $this;
+   }
+
+   /**
+    * Get dateCreation
+    *
+    * @return \DateTime 
+    */
+   public function getDateCreation()
+   {
+           return $this->dateCreation;
+   }
 }

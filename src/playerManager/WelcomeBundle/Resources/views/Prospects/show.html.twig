@@ -14,7 +14,7 @@
                 <td>{{ entity.pseudo }}</td>
             </tr>
             <tr>
-                <th>Prenom</th>
+                <th>Prénom</th>
                 <td>{{ entity.prenom }}</td>
             </tr>
             <tr>
@@ -38,11 +38,11 @@
                 <td>{{ entity.pays }}</td>
             </tr>
             <tr>
-                <th>Numero</th>
+                <th>Numéro</th>
                 <td>{{ entity.numero }}</td>
             </tr>
             <tr>
-                <th>Numeroetranger</th>
+                <th>Numéro étranger</th>
                 <td>{{ entity.numeroEtranger }}</td>
             </tr>
             <tr>
@@ -50,8 +50,12 @@
                 <td>{{ entity.site }}</td>
             </tr>
             <tr>
-                <th>Photoprincipale</th>
+                <th>Photo principale</th>
                 <td>{{ entity.photoPrincipale }}</td>
+            </tr>
+            <tr>
+                <th>Date de création</th>
+                <td>{{ entity.dateCreation|date('d-m-Y H:i:s') }}</td>
             </tr>
         </tbody>
     </table>
