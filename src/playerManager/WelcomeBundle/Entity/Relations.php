@@ -12,6 +12,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Relations
 {
+    const RELTYPE_VAL1 = "Discussion";
+    const RELTYPE_VAL2 = "Dating";
+    const RELTYPE_VAL3 = "One Night Stand";
+    const RELTYPE_VAL4 = "Fuck Buddy";
+    const RELTYPE_VAL5 = "Girlfriend";
+    const RELTYPE_VAL6 = "Open Relationship";
+    
+    private static $relTypeValues = NULL;
+    
     /**     
      * @var Prospects 
      * 
@@ -74,7 +83,7 @@ class Relations
     /**
      * @var string
      *
-     * @ORM\Column(name="rel_type", type="string", columnDefinition="enum('discussion','dating','ons','fb','gf','or')")
+     * @ORM\Column(name="rel_type", type="string")
      */
     private $relType;
 
@@ -154,6 +163,32 @@ class Relations
     public function getRencontre()
     {
         return $this->rencontre;
+    }
+    
+    /**
+     * Construit et retourne un tableau de valeurs pour la colonne "relType"
+     * 
+     * @return array $relTypeValues
+     */
+    static public function getRelTypeChoices()
+    {
+        // Build $relTypeValues if that is the first call
+       if(self::$relTypeValues == NULL){
+           
+           self::$relTypeValues = array();
+           
+           $myClass = new \ReflectionClass('\playerManager\WelcomeBundle\Entity\Relations'); // ReflectionClass récupère toutes infos sur une classe
+           $classConstants = $myClass->getConstants();
+           $constantPrefix = "RELTYPE_";
+//var_dump($classConstants);           
+           foreach($classConstants as $key => $value){
+               if(substr($key, 0, strlen($constantPrefix)) === $constantPrefix){
+                self::$relTypeValues[$value] = $value;
+               }
+           }         
+       }
+// var_dump(self::$relTypeValues);   
+       return self::$relTypeValues;
     }
 
     /**
@@ -256,8 +291,11 @@ class Relations
      */
     public function setRelType($relType)
     {
+        if(!in_array($relType, self::getRelTypeChoices())){
+            throw new \InvalidArgumentException('Entrée non valide');
+        }
         $this->relType = $relType;
-
+        
         return $this;
     }
 

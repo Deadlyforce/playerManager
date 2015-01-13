@@ -56,14 +56,7 @@ class RelationsType extends AbstractType
              ))
             ->add('relType', 'choice', array(
                 'required' => TRUE,
-                'choices' => array(
-                    'discussion' => 'Discussion',
-                    'dating' => 'Dating',
-                    'ons' => 'One Night Stand',
-                    'fb' => 'Fuck Buddy',
-                    'gf' => 'Girlfriend',
-                    'or' => 'Open relationship'
-                ),
+                'choices' => \playerManager\WelcomeBundle\Entity\Relations::getRelTypeChoices(),                
                 'label' => 'Type de relation'
             ))
             ->add('distance', 'checkbox', array(

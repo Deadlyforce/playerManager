@@ -10,6 +10,12 @@
                 <td>{{ entity.id }}</td>
             </tr>
             <tr>
+                <th>Photo principale</th>
+                <td class="photoPrincipale">
+                    <img class="img-responsive" src="{{ asset(entity.getPhotoPrincipaleWeb) }}" alt="{{ entity.photoPrincipale }}" />
+                </td>
+            </tr>
+            <tr>
                 <th>Pseudo</th>
                 <td>{{ entity.pseudo }}</td>
             </tr>
@@ -46,16 +52,12 @@
                 <td>{{ entity.numeroEtranger }}</td>
             </tr>
             <tr>
-                <th>Site</th>
+                <th>Origine</th>
                 <td>{{ entity.site }}</td>
             </tr>
             <tr>
-                <th>Photo principale</th>
-                <td>{{ entity.photoPrincipale }}</td>
-            </tr>
-            <tr>
                 <th>Date de création</th>
-                <td>{{ entity.dateCreation|date('d-m-Y H:i:s') }}</td>
+                <td>{{ entity.dateCreation|date('d-m-Y') }}</td>
             </tr>
         </tbody>
     </table>

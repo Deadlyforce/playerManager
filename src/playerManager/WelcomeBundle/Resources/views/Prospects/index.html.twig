@@ -17,7 +17,7 @@
                 <th>Pays</th>
                 <th>Numéro</th>
                 <th>Numéro étranger</th>
-                <th>Site</th>
+                <th>Origine</th>
                 <th>Photo Principale</th>
                 <th>Date de création</th>
                 <th>Actions</th> 
@@ -43,7 +43,7 @@
                     {% endif %}
                 </td>
                 <td>
-                    {% if entity.dateCreation %}{{ entity.dateCreation|date('d-m-Y H:i:s') }}{% endif %}
+                    {% if entity.dateCreation %}{{ entity.dateCreation|date('d-m-Y') }}{% endif %}
                 </td>
                 <td>
                     <a class="btn btn-default btn-xs" href="{{ path('prospects_show', { 'id': entity.id }) }}">show</a>                       

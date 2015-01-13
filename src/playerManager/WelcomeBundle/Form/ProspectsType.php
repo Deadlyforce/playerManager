@@ -17,6 +17,7 @@ class ProspectsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        
         // Chargement de la tranche d'âges
         for($i=18; $i<=50; $i++){
             $ageBracket[$i] = $i;
@@ -104,10 +105,8 @@ class ProspectsType extends AbstractType
                     )
                 ))
             ->add('site', 'choice', array(
-                'choices' => array(
-                    'adopteUnMec' => 'AdopteUnMec', 
-                    'okcupid' => 'OKCupid'
-                    ),
+                'label' => 'Origine',
+                'choices' => \playerManager\WelcomeBundle\Entity\Prospects::getSiteChoices(),
                 'required' => TRUE,
                 'attr' => array(
                     'class' => 'form-input-site'

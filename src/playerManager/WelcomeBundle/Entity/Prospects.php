@@ -21,6 +21,15 @@ class Prospects
         $this->echanges = new ArrayCollection();
     }
     
+    // Enum de la colonne "site"    
+    const SITE_VAL1 = "AdopteUnMec";
+    const SITE_VAL2 = "OkCupid";
+    const SITE_VAL3 = "NightGame";
+    const SITE_VAL4 = "DayGame";
+    const SITE_VAL5 = "SocialCircle";
+    
+    static private $siteValues = NULL;
+    
     /**
      * @var ArrayCollection
      * 
@@ -111,7 +120,7 @@ class Prospects
     /**
      * @var string
      *
-     * @ORM\Column(name="site", type="string", columnDefinition="enum('adopteUnMec','OkCupid')")
+     * @ORM\Column(name="site", type="string")
      */
     private $site;
 
@@ -355,6 +364,9 @@ class Prospects
      */
     public function setSite($site)
     {
+        if(!in_array($site, self::getSiteChoices())){
+           throw new \InvalidArgumentException("Entrée non valide");
+        }
         $this->site = $site;
 
         return $this;
@@ -577,4 +589,36 @@ class Prospects
    {
            return $this->dateCreation;
    }
+   
+   /**
+    * Construis et retourne un tableau de valeurs enum pour la colonne "site"
+    * 
+    * @return array $siteValues
+    */
+   static public function getSiteChoices()
+   {
+       // Build $siteValues if that is the first call
+       if(self::$siteValues == NULL){
+           self::$siteValues = array();
+           $myClass = new \ReflectionClass('\playerManager\WelcomeBundle\Entity\Prospects'); // ReflectionClass récupère toutes infos sur une classe
+           $classConstants = $myClass->getConstants();
+           $constantPrefix = "SITE_";
+           
+           foreach($classConstants as $key => $value){
+               if(substr($key, 0, strlen($constantPrefix)) === $constantPrefix){
+                self::$siteValues[$value] = $value;
+               }
+           }         
+       }
+    
+       return self::$siteValues;
+   }
+   
+//   public function setSiteChoices($site)
+//   {
+//       if(!in_array($site, self::getSiteChoices())){
+//           throw new \InvalidArgumentException("Entrée non valide");
+//       }
+//       $this->site = $site;
+//   }
 }
