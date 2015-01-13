@@ -62,8 +62,7 @@ class ProspectsType extends AbstractType
                 'choices' => $ageBracket,
                 'attr' => array(
                     'class' => 'form-input-age',                       
-                ),
-                'data' => 22
+                )
             ))
             ->add('ville', 'text', array(
                 'required' => FALSE, 
@@ -126,8 +125,7 @@ class ProspectsType extends AbstractType
 		'view_timezone' => 'Europe/Paris',
 		'input' => 'datetime',
 		'widget' => 'choice',
-		'date_format' => 'dd MM yyyy',
-		'data' => new \DateTime('', new \DateTimeZone('Europe/Paris'))
+		'date_format' => 'dd MM yyyy'		
                 ))
             ->add('relations', new RelationsType())
         ;

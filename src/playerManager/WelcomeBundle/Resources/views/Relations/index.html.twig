@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 {% block title %}Liste des relations{% endblock %}
 
-{% block body -%}
+{% block body -%}    
     <h1>Liste des relations</h1>
 
     <table class="records_list table">
@@ -33,7 +33,7 @@
                 <td>{% if entity.numero == 1 %}Oui{% else %}Non{% endif %}</td>
                 <td>{% if entity.kc == 1 %}Oui{% else %}Non{% endif %}</td>
                 <td>{% if entity.fc == 1 %}Oui{% else %}Non{% endif %}</td>
-                <td>{{ entity.relType }}</td>
+                <td>{{ entity.getRelTypeString(entity.relType) }}</td>
                 <td>{% if entity.distance == 1 %}Oui{% else %}Non{% endif %}</td>
                 <td>{% if entity.flake == 1 %}Oui{% else %}Non{% endif %}</td>
                 <td>{{ entity.commentaire }}</td>

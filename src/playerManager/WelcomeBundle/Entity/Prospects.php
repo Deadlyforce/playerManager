@@ -24,9 +24,10 @@ class Prospects
     // Enum de la colonne "site"    
     const SITE_VAL1 = "AdopteUnMec";
     const SITE_VAL2 = "OkCupid";
-    const SITE_VAL3 = "NightGame";
-    const SITE_VAL4 = "DayGame";
-    const SITE_VAL5 = "SocialCircle";
+    const SITE_VAL3 = "Tinder";
+    const SITE_VAL4 = "NightGame";
+    const SITE_VAL5 = "DayGame";
+    const SITE_VAL6 = "SocialCircle";
     
     static private $siteValues = NULL;
     

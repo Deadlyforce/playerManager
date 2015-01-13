@@ -12,12 +12,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Relations
 {
-    const RELTYPE_VAL1 = "Discussion";
-    const RELTYPE_VAL2 = "Dating";
-    const RELTYPE_VAL3 = "One Night Stand";
-    const RELTYPE_VAL4 = "Fuck Buddy";
-    const RELTYPE_VAL5 = "Girlfriend";
-    const RELTYPE_VAL6 = "Open Relationship";
+    const RELTYPE_Discussion = 0;
+    const RELTYPE_Dating = 1;
+    const RELTYPE_OneNightStand = 2;
+    const RELTYPE_FuckBuddy = 3;
+    const RELTYPE_Girlfriend = 4;
+    const RELTYPE_OpenRelationship = 5;
     
     private static $relTypeValues = NULL;
     
@@ -80,10 +80,16 @@ class Relations
      */
     private $fc;
 
+//    /**
+//     * @var string
+//     *
+//     * @ORM\Column(name="rel_type", type="string")
+//     */
+//    private $relType;
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="rel_type", type="string")
+     * @ORM\Column(name="rel_type", type="integer")
      */
     private $relType;
 
@@ -180,14 +186,15 @@ class Relations
            $myClass = new \ReflectionClass('\playerManager\WelcomeBundle\Entity\Relations'); // ReflectionClass récupère toutes infos sur une classe
            $classConstants = $myClass->getConstants();
            $constantPrefix = "RELTYPE_";
-//var_dump($classConstants);           
+           
            foreach($classConstants as $key => $value){
-               if(substr($key, 0, strlen($constantPrefix)) === $constantPrefix){
-                self::$relTypeValues[$value] = $value;
-               }
+               $valueName = substr($key, 8);
+//               if(substr($key, 0, strlen($constantPrefix)) === $constantPrefix){
+                    self::$relTypeValues[$value] = $valueName;
+//               }
            }         
        }
-// var_dump(self::$relTypeValues);   
+  
        return self::$relTypeValues;
     }
 
@@ -286,12 +293,12 @@ class Relations
     /**
      * Set relType
      *
-     * @param string $relType
+     * @param integer $relType
      * @return Relations
      */
     public function setRelType($relType)
     {
-        if(!in_array($relType, self::getRelTypeChoices())){
+        if(!array_key_exists($relType, self::getRelTypeChoices())){
             throw new \InvalidArgumentException('Entrée non valide');
         }
         $this->relType = $relType;
@@ -302,10 +309,24 @@ class Relations
     /**
      * Get relType
      *
-     * @return string 
+     * @return integer 
      */
     public function getRelType()
     {
+        return $this->relType;
+    }
+    
+    /**
+     * Transforme la valeur en base de relType (integer) en chaîne de caractères pour l'affichage
+     * 
+     * @param integer $relType
+     * @return string $relType
+     */
+    public function getRelTypeString($relType)
+    {
+        $array = self::getRelTypeChoices(); 
+        $this->relType = $array[$this->relType];
+        
         return $this->relType;
     }
 

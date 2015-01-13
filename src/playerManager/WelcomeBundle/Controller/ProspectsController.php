@@ -97,7 +97,14 @@ class ProspectsController extends Controller
     public function newAction()
     {
         $entity = new Prospects();
-        $form   = $this->createCreateForm($entity);
+
+        // Définition des paramètres par défaut
+        $entity->setAge(23);
+        
+        $datetime =  new \DateTime('', new \DateTimeZone('Europe/Paris'));
+        $entity->setDateCreation($datetime);
+
+        $form = $this->createCreateForm($entity);
 
         return array(
             'entity' => $entity,
@@ -175,6 +182,7 @@ class ProspectsController extends Controller
 
         return $form;
     }
+    
     /**
      * Edits an existing Prospects entity.
      *

@@ -35,7 +35,7 @@ label{
     vertical-align: top;
 }
 
-#form-new-prospect div{
+#form-new-prospect div, #form-edit-prospect div{
     margin-bottom: 5px;
 }
 
