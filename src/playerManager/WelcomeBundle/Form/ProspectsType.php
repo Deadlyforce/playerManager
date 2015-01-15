@@ -39,7 +39,7 @@ class ProspectsType extends AbstractType
                     )               
                 ))
             ->add('prenom', 'text', array(
-                'required' => FALSE, 
+                'required' => TRUE, 
                 'label' => 'Prénom', 
                 'label_attr' => array(
                     'class' => 'control-label'
@@ -91,14 +91,21 @@ class ProspectsType extends AbstractType
                 ))
             ->add('numero', 'text', array(
                 'required' => FALSE,
-                'label' => 'Numéro',
+                'label' => 'Tel portable',
+                'attr' => array(
+                    'class' => 'form-input'
+                    )
+                ))
+            ->add('numeroDom', 'text', array(
+                'required' => FALSE,
+                'label' => 'Tel Domicile',
                 'attr' => array(
                     'class' => 'form-input'
                     )
                 ))
             ->add('numeroEtranger', 'text', array(
                 'required' => FALSE, 
-                'label' => 'Numéro étranger',
+                'label' => 'Tel étranger',
                 'attr' => array(
                     'class' => 'form-input'
                     )

@@ -91,3 +91,9 @@ td.photoPrincipale img{
 .playermanager_welcomebundle_relations_commentaire{
     vertical-align: top;
 }
+
+/************************* FORM SHOW *****************************/
+
+table.record_properties th{
+    width: 150px;
+}

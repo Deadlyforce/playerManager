@@ -65,7 +65,7 @@ class Prospects
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255, nullable=true)
+     * @ORM\Column(name="prenom", type="string", length=255)
      */
     private $prenom;
 
@@ -110,6 +110,13 @@ class Prospects
      * @ORM\Column(name="numero", type="string", length=10, nullable=true)
      */
     private $numero;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="numero_dom", type="string", length=10, nullable=true)
+     */
+    private $numeroDom;
 
     /**
      * @var string
@@ -333,6 +340,29 @@ class Prospects
     {
         return $this->numero;
     }
+    
+    /**
+     * Set numeroDom
+     *
+     * @param string $numeroDom
+     * @return Prospects
+     */
+    public function setNumeroDom($numeroDom)
+    {
+        $this->numeroDom = $numeroDom;
+
+        return $this;
+    }
+
+    /**
+     * Get numeroDom
+     *
+     * @return string 
+     */
+    public function getNumeroDom()
+    {
+        return $this->numeroDom;
+    }
 
     /**
      * Set numeroEtranger
@@ -470,7 +500,7 @@ class Prospects
      */
     public function __toString() 
     {
-        return $this->getPseudo();
+        return $this->getPrenom();
     }
     
     /**

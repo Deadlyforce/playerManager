@@ -208,7 +208,8 @@ class ProspectsController extends Controller
             $entity->upload();
             $em->flush();
 
-            return $this->redirect($this->generateUrl('prospects_edit', array('id' => $id)));
+//            return $this->redirect($this->generateUrl('prospects_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('prospects'));
         }
 
         return array(

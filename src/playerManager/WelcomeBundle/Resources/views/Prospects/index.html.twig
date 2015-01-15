@@ -9,15 +9,16 @@
             <tr>
                 <th>Id</th>
                 <th>Pseudo</th>
-                <th>Prenom</th>
+                <th>Prénom</th>
                 <th>Nom</th>
                 <th>Age</th>
                 <th>Ville</th>
                 <th>Arr.</th>
                 <th>Pays</th>
-                <th>Numéro</th>
-                <th>Numéro étranger</th>
-                <th>Origine</th>
+                <th>Tel Portable</th>
+                <th>Tel Domicile</th>
+                <th>Tel étranger</th>
+                <th>Source</th>
                 <th>Photo Principale</th>
                 <th>Date de création</th>
                 <th>Actions</th> 
@@ -35,6 +36,7 @@
                 <td>{{ entity.arrondissement }}</td>
                 <td>{{ entity.pays }}</td>
                 <td>{{ entity.numero }}</td>
+                <td>{{ entity.numeroDom }}</td>
                 <td>{{ entity.numeroEtranger }}</td>
                 <td>{{ entity.site }}</td>
                 <td class="photoPrincipale">
@@ -46,11 +48,11 @@
                     {% if entity.dateCreation %}{{ entity.dateCreation|date('d-m-Y') }}{% endif %}
                 </td>
                 <td>
-                    <a class="btn btn-default btn-xs" href="{{ path('prospects_show', { 'id': entity.id }) }}">show</a>                       
-                    <a class="btn btn-default btn-xs" href="{{ path('prospects_edit', { 'id': entity.id }) }}">edit</a>  
+                    <a class="" href="{{ path('prospects_show', { 'id': entity.id }) }}">show</a>                       
+                    <a class="" href="{{ path('prospects_edit', { 'id': entity.id }) }}">edit</a>  
                     
                     {% if entity.relations %}
-                        <a class="btn btn-default btn-xs" href="{{ path('relations_show', { 'id': entity.relations.id }) }}">relation details</a>
+                        <a class="" href="{{ path('relations_show', { 'id': entity.relations.id }) }}">relation</a>
                     {% endif %}
                 </td>
             </tr>

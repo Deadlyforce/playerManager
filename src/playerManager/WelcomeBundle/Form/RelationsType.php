@@ -14,6 +14,7 @@ class RelationsType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+                
         $builder
             ->add('statut', 'choice', array(
                 'required' => TRUE,

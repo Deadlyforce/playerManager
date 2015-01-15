@@ -169,6 +169,7 @@ class RelationsController extends Controller
 
         return $form;
     }
+    
     /**
      * Edits an existing Relations entity.
      *
@@ -193,7 +194,8 @@ class RelationsController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('relations_edit', array('id' => $id)));
+//            return $this->redirect($this->generateUrl('relations_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('relations'));
         }
 
         return array(
@@ -202,6 +204,7 @@ class RelationsController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
     /**
      * Deletes a Relations entity.
      *
