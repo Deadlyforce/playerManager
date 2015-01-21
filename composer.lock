@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "4ef27dc2e2a511866e457f39f3669728",
+    "hash": "42cf1334ab23b618f8143256d0dd872c",
     "packages": [
         {
             "name": "components/jquery",
@@ -1912,16 +1912,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "dev-master",
+            "version": "2.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "5626abfbab92c590a8b68f5125f639c2eb75cf98"
+                "reference": "1f08176f996a325e3bf5ccebeaf7c76be7f3d472"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/5626abfbab92c590a8b68f5125f639c2eb75cf98",
-                "reference": "5626abfbab92c590a8b68f5125f639c2eb75cf98",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/1f08176f996a325e3bf5ccebeaf7c76be7f3d472",
+                "reference": "1f08176f996a325e3bf5ccebeaf7c76be7f3d472",
                 "shasum": ""
             },
             "require": {
@@ -1939,7 +1939,6 @@
                 "symfony/http-foundation": "~2.3",
                 "symfony/routing": "~2.3",
                 "symfony/security-bundle": "~2.3",
-                "symfony/translation": "~2.3",
                 "symfony/twig-bridge": "~2.3",
                 "symfony/validator": "~2.3",
                 "twig/extensions": "~1.0",
@@ -1957,7 +1956,7 @@
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.4.x-dev"
+                    "dev-master": "2.3.x-dev"
                 }
             },
             "autoload": {
@@ -1988,7 +1987,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-01-06 10:19:10"
+            "time": "2015-01-05 10:15:28"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -2521,12 +2520,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "cfca135d98b6f8703468f5c8d29561a1f4ec2c1e"
+                "reference": "77c205153aa84e2ad7a9eb0efd1477136d91d301"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/cfca135d98b6f8703468f5c8d29561a1f4ec2c1e",
-                "reference": "cfca135d98b6f8703468f5c8d29561a1f4ec2c1e",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/77c205153aa84e2ad7a9eb0efd1477136d91d301",
+                "reference": "77c205153aa84e2ad7a9eb0efd1477136d91d301",
                 "shasum": ""
             },
             "require": {
@@ -2586,7 +2585,7 @@
                 "sonata",
                 "user"
             ],
-            "time": "2015-01-12 17:00:18"
+            "time": "2015-01-20 11:14:48"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -2935,16 +2934,16 @@
         },
         {
             "name": "twbs/bootstrap",
-            "version": "v3.3.1",
+            "version": "v3.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twbs/bootstrap.git",
-                "reference": "9a7e365c2c4360335d25246dac11afb1f577210a"
+                "reference": "bcf7dd38b5ab180256e2e4fb5da0369551b3f082"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/9a7e365c2c4360335d25246dac11afb1f577210a",
-                "reference": "9a7e365c2c4360335d25246dac11afb1f577210a",
+                "url": "https://api.github.com/repos/twbs/bootstrap/zipball/bcf7dd38b5ab180256e2e4fb5da0369551b3f082",
+                "reference": "bcf7dd38b5ab180256e2e4fb5da0369551b3f082",
                 "shasum": ""
             },
             "replace": {
@@ -2982,7 +2981,7 @@
                 "responsive",
                 "web"
             ],
-            "time": "2014-11-12 17:03:16"
+            "time": "2015-01-19 17:03:09"
         },
         {
             "name": "twig/extensions",
@@ -3187,7 +3186,6 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "sonata-project/admin-bundle": 20,
         "sonata-project/datagrid-bundle": 20,
         "sonata-project/user-bundle": 20,
         "sonata-project/doctrine-orm-admin-bundle": 20
