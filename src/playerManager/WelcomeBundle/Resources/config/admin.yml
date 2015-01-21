@@ -1,0 +1,11 @@
+services:
+    sonata.admin.prospects:
+        class: playerManager\WelcomeBundle\Admin\ProspectsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Prospects" }
+        arguments:
+            - ~
+            - playerManager\WelcomeBundle\Entity\Prospects
+            - ~
+        calls:
+            - [ setTranslationDomain, [playerManagerWelcomeBundle]]
