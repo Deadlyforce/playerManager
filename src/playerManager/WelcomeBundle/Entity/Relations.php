@@ -421,5 +421,14 @@ class Relations
     {
         return $this->prospects;
     }
-
+    
+    /**
+     * Render a Relation as a string
+     * 
+     * @return string
+     */
+    public function __toString() 
+    {
+        return $this->getRelTypeString($this->getRelType());
+    }
 }

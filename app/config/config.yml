@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: @playerManagerWelcomeBundle/Resources/config/admin.yml }
 
 framework:
     #esi:             ~
@@ -101,7 +102,7 @@ sonata_block:
 
 # Sonata Admin Configuration
 sonata_admin:
-    title: Admin Panel
+    title: Admin Player Manager
     title_logo: /bundles/sonataadmin/logo_title.png
     templates:        
         # default global templates        
@@ -169,3 +170,4 @@ sonata_doctrine_orm_admin:
 sonata_user:
     security_acl: true
     manager_type: orm
+
