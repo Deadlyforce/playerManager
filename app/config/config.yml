@@ -80,27 +80,32 @@ fos_user:
     user_class: Application\Sonata\UserBundle\Entity\User
     group:
         group_class: Application\Sonata\UserBundle\Entity\Group
+        group_manager: sonata.user.orm.group_manager
+    service:
+        user_manager: sonata.user.orm.user_manager
+    profile:
+        # Authentication Form
+        form:
+            type:               fos_user_profile
+            handler:            fos_user.profile.form.handler.default
+            name:               fos_user_profile_form
+            # Please note : this is not the default value
+            validation_groups:  [Authentication] 
 
-# Sonata Block Configuration
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        sonata.admin.block.admin_list:
-            contexts: [admin]
+# SONATA User Configuration    
+sonata_user:
+    security_acl: true
+    manager_type: orm
+    profile:
+        # Customize user portal menu by setting links
+        menu:
+            - { route: 'sonata_user_profile_edit', label: 'link_edit_profile', domain: 'SonataUserBundle'}
+            - { route: 'sonata_user_profile_edit_authentication', label: 'link_edit_authentication', domain: 'SonataUserBundle'}
         
-        # sonata.admin_doctrine_orm.block.audit:
-        #   contexts: [admin]
+    
         
-        sonata.block.service.text:
-        sonata.block.service.action:
-        sonata.block.service.rss:
-        
-        # Some specific block from the SonataMediaBundle        
-        # sonata.media.block.media:        
-        # sonata.media.block.gallery:        
-        # sonata.media.block.feature_media:
 
-# Sonata Admin Configuration
+# SONATA Admin Configuration
 sonata_admin:
     title: Admin Player Manager
     title_logo: /bundles/sonataadmin/logo_title.png
@@ -117,8 +122,33 @@ sonata_admin:
         blocks:               
             # display a dashboard block            
             - { position: left, type: sonata.admin.block.admin_list }
-     
-    
+            
+
+# SONATA Block Configuration
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts: [admin]
+            
+        # used to display the menu in profile pages
+        sonata.user.block.menu: 
+        # used to display menu option (login option)
+        sonata.user.block.account:    
+        
+        # sonata.admin_doctrine_orm.block.audit:
+        #   contexts: [admin]
+        
+        sonata.block.service.text:
+        sonata.block.service.action:
+        sonata.block.service.rss:
+        
+        # Some specific block from the SonataMediaBundle        
+        # sonata.media.block.media:        
+        # sonata.media.block.gallery:        
+        # sonata.media.block.feature_media:
+
+  
 sonata_doctrine_orm_admin:
     # default value is null, so doctrine uses the value defined in the configuration
     entity_manager: ~
@@ -166,8 +196,5 @@ sonata_doctrine_orm_admin:
                 choice:     SonataAdminBundle:CRUD:show_choice.html.twig
                 url:        SonataAdminBundle:CRUD:show_url.html.twig
 
-# Sonata User Configuration    
-sonata_user:
-    security_acl: true
-    manager_type: orm
+
 

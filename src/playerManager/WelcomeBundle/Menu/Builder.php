@@ -17,6 +17,7 @@ namespace playerManager\WelcomeBundle\Menu;
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
+
 class Builder extends ContainerAware
 {
     public function mainMenu(FactoryInterface $factory, array $options)
@@ -26,6 +27,8 @@ class Builder extends ContainerAware
         $menu->addChild('Relations', array('route' => 'relations'));
         $menu->addChild('Prospects', array('route' => 'prospects'));
         $menu->addChild('Echanges', array('route' => 'echanges'));
+        $menu->addChild('Déconnexion', array('route' => 'fos_user_security_logout'));
+        
 //        $menu->addChild('About Me', array(
 //            'route' => 'page_show',
 //            'routeParameters' => array('id' => 42)

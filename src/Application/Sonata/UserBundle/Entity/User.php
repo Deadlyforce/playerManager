@@ -1,7 +1,7 @@
 <?php
 
 /**
- * This file is part of the <name> project.
+ * This file is part of the playerManager project.
  *
  * (c) <yourname> <youremail>
  *
@@ -21,10 +21,16 @@ use Doctrine\ORM\Mapping as ORM;
  *   working with object : http://www.doctrine-project.org/projects/orm/2.0/docs/reference/working-with-objects/en
  *
  * @ORM\Entity
- * @ORM\Table(name="user")
+ * @ORM\Table(name="fos_user_user")
  */
 class User extends BaseUser
 {
+    public function __construct()
+    {
+        parent::__construct();
+        // Your code here...
+    }
+        
     /**
      * @var integer $id
      * 
@@ -33,6 +39,7 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+        
 
     /**
      * Get id

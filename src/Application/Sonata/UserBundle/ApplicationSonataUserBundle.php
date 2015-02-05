@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of the <name> project.
+ * This file is part of the playerManager project.
  *
  * (c) <yourname> <youremail>
  *

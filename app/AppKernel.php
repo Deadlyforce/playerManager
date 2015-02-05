@@ -18,14 +18,18 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             
             new playerManager\WelcomeBundle\playerManagerWelcomeBundle(),
+            
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            
             new FOS\UserBundle\FOSUserBundle(),
+            
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
             new Sonata\AdminBundle\SonataAdminBundle(),
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
+            
             new Application\Sonata\UserBundle\ApplicationSonataUserBundle()
         );
 

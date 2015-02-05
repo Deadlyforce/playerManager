@@ -1,2 +1,6 @@
-{#Hello, {{ name|capitalize }}!#}
-{{ msg }}
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    {#Hello, {{ name|capitalize }}!#}
+    {{ msg }}
+{% endblock %}
