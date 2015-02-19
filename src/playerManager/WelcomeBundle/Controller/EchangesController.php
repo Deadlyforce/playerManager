@@ -10,6 +10,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use playerManager\WelcomeBundle\Entity\Echanges;
 use playerManager\WelcomeBundle\Form\EchangesType;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
+// ACL
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+
 /**
  * Echanges controller.
  *

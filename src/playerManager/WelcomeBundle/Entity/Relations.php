@@ -86,6 +86,7 @@ class Relations
 //     * @ORM\Column(name="rel_type", type="string")
 //     */
 //    private $relType;
+    
     /**
      * @var integer
      *
@@ -325,8 +326,11 @@ class Relations
     public function getRelTypeString($relType)
     {
         $array = self::getRelTypeChoices(); 
-        $this->relType = $array[$this->relType];
-        
+// var_dump($array);
+
+        $this->relType = $array[$relType];
+// var_dump($this->relType);
+// die();        
         return $this->relType;
     }
 

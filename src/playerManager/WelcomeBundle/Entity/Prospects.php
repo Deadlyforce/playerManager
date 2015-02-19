@@ -28,6 +28,7 @@ class Prospects
     const SITE_VAL4 = "NightGame";
     const SITE_VAL5 = "DayGame";
     const SITE_VAL6 = "SocialCircle";
+    const SITE_VAL7 = "Facebook";
     
     static private $siteValues = NULL;
     
