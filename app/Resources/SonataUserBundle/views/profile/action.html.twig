@@ -9,7 +9,8 @@
             {{ sonata_block_render_event('breadcrumb', { 'context': breadcrumb_context, 'current_uri': app.request.requestUri }) }}
         </div>
     {% endblock %}
-
+    
+    {# Titre #}
     <h2>
         {% block sonata_profile_title %}
             {% trans from 'SonataUserBundle' %}sonata_profile_title{% endtrans %}
@@ -25,6 +26,7 @@
         </div>
 
         <div class="span10 col-lg-10">
+            {# Messages flash #}
             {% include 'SonataCoreBundle:FlashMessage:render.html.twig' %}
 
             {# Peut inclure les pages edit_authentication.html.twig, edit_profile.html.twig ou  show.html.twig #}

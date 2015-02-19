@@ -10,6 +10,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use playerManager\WelcomeBundle\Entity\Prospects;
 use playerManager\WelcomeBundle\Form\ProspectsType;
 
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
+// ACL
+use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+
 /**
  * Prospects controller.
  *
@@ -30,11 +37,30 @@ class ProspectsController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('playerManagerWelcomeBundle:Prospects')->findAll();
-
+        
+        // Vérification d'accès ACL
+        $securityContext = $this->get('security.context');
+       
+        // Check for VIEW access
+        foreach($entities as $prospect){            
+            if(FALSE === $securityContext->isGranted('VIEW', $prospect)){
+                
+            }else{                
+                $allowedProspects[] = $prospect;
+            }        
+        }
+        
+        if(!isset($allowedProspects)){
+            $allowedProspects = NULL;
+        }
+        // End of check
+        
         return array(
-            'entities' => $entities,
+//            'entities' => $entities,
+            'entities' => $allowedProspects,
         );
     }
+    
     /**
      * Creates a new Prospects entity.
      *
@@ -47,6 +73,28 @@ class ProspectsController extends Controller
         $entity = new Prospects();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        
+        // Implémentation des ACL
+        if($form->isValid()){
+            $entityManager = $this->get('doctrine.orm.default_entity_manager');
+            $entityManager->persist($entity);
+            $entityManager->flush();
+            
+            // Création de l'ACL
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+            $acl = $aclProvider->createAcl($objectIdentity);
+            
+            // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
+            $securityContext = $this->get('security.context');
+            $user = $securityContext->getToken()->getUser();
+            $securityIdentity = UserSecurityIdentity::fromAccount($user);
+            
+            // Donne accès au propriétaire
+            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+          
+            $aclProvider->updateAcl($acl);
+        }
 
         if ($form->isValid()) {
             $entity->upload();
@@ -96,18 +144,18 @@ class ProspectsController extends Controller
      */
     public function newAction()
     {
-        $entity = new Prospects();
+        $prospect = new Prospects();
 
         // Définition des paramètres par défaut
-        $entity->setAge(23);
+        $prospect->setAge(23);
         
         $datetime =  new \DateTime('', new \DateTimeZone('Europe/Paris'));
-        $entity->setDateCreation($datetime);
+        $prospect->setDateCreation($datetime);
 
-        $form = $this->createCreateForm($entity);
-
+        $form = $this->createCreateForm($prospect);        
+        
         return array(
-            'entity' => $entity,
+            'entity' => $prospect,
             'form'   => $form->createView(),
         );
     }
@@ -128,6 +176,14 @@ class ProspectsController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Prospects entity.');
         }
+        
+        // Vérification d'accès ACL
+        $securityContext = $this->get('security.context');
+        
+        if(FALSE === $securityContext->isGranted('VIEW', $entity)){
+            throw new AccessDeniedException();
+        }
+        // Vérification fin
 
         $deleteForm = $this->createDeleteForm($id);
 
@@ -153,6 +209,14 @@ class ProspectsController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Prospects entity.');
         }
+        
+        // Vérification d'accès ACL
+        $securityContext = $this->get('security.context');
+        
+        if(FALSE === $securityContext->isGranted('EDIT', $entity)){
+            throw new AccessDeniedException();
+        }
+        // Vérification fin
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
@@ -227,7 +291,7 @@ class ProspectsController extends Controller
     public function deleteAction(Request $request, $id)
     {
         $form = $this->createDeleteForm($id);
-        $form->handleRequest($request);
+        $form->handleRequest($request);       
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -236,6 +300,12 @@ class ProspectsController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Prospects entity.');
             }
+            
+            // ACL suppression
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+            $aclProvider->deleteAcl($objectIdentity);
+            // ACL Suppression fin
 
             $em->remove($entity);
             $em->flush();

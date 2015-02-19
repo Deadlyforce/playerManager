@@ -1,7 +1,14 @@
 {% extends "SonataUserBundle:Profile:action.html.twig" %}
 {% block title %}Profil{% endblock %}
 
-{% block sonata_profile_content %}    
+{% block sonata_profile_content %}
+    
+    <h3>Bienvenue {{ app.user.username }}</h3>
+    <p>Prénom: {{ app.user.firstname }}</p>
+    <p>Nom: {{ app.user.lastname }}</p>
+    <p>Email: {{ app.user.email }}</p>
+    <p>Créé le: {{ app.user.createdat|date('d-m-Y') }}</p>
+
     <div class="row row-fluid">
         {% set has_center = false %}
         {% for block in blocks %}
