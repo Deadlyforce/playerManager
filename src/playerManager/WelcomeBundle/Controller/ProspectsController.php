@@ -41,7 +41,6 @@ class ProspectsController extends Controller
         // Vérification d'accès ACL
         $securityContext = $this->get('security.context');
        
-        // Check for VIEW access
         foreach($entities as $prospect){            
             if(FALSE === $securityContext->isGranted('VIEW', $prospect)){
                 
@@ -71,33 +70,21 @@ class ProspectsController extends Controller
     public function createAction(Request $request)
     {
         $entity = new Prospects();
+        
+        // Récup utilisateur et chargement de son id dans l'entité Prospects
+        $user = $this->get('security.context')->getToken()->getUser();
+        $entity->setUserId($user->getId());
+        // Récup fin
+        
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
         
-        // Implémentation des ACL
-        if($form->isValid()){
-            $entityManager = $this->get('doctrine.orm.default_entity_manager');
-            $entityManager->persist($entity);
-            $entityManager->flush();
+        if ($form->isValid()) {            
+            // Création d'ACL
+            $this->createACL($entity);
             
-            // Création de l'ACL
-            $aclProvider = $this->get('security.acl.provider');
-            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-            $acl = $aclProvider->createAcl($objectIdentity);
+//            $entity->upload();
             
-            // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
-            $securityContext = $this->get('security.context');
-            $user = $securityContext->getToken()->getUser();
-            $securityIdentity = UserSecurityIdentity::fromAccount($user);
-            
-            // Donne accès au propriétaire
-            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-          
-            $aclProvider->updateAcl($acl);
-        }
-
-        if ($form->isValid()) {
-            $entity->upload();
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -269,7 +256,7 @@ class ProspectsController extends Controller
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-            $entity->upload();
+//            $entity->upload();
             $em->flush();
 
 //            return $this->redirect($this->generateUrl('prospects_edit', array('id' => $id)));
@@ -282,6 +269,7 @@ class ProspectsController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
     /**
      * Deletes a Prospects entity.
      *
@@ -301,11 +289,8 @@ class ProspectsController extends Controller
                 throw $this->createNotFoundException('Unable to find Prospects entity.');
             }
             
-            // ACL suppression
-            $aclProvider = $this->get('security.acl.provider');
-            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-            $aclProvider->deleteAcl($objectIdentity);
-            // ACL Suppression fin
+            // Suppression des ACL
+            $this->deleteACL($entity);
 
             $em->remove($entity);
             $em->flush();
@@ -329,5 +314,42 @@ class ProspectsController extends Controller
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+    /**
+     * Suppression des ACL associés
+     * 
+     * @param Prospects $entity
+     */
+    private function deleteACL(Prospects $entity){        
+        $aclProvider = $this->get('security.acl.provider');
+        $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+        $aclProvider->deleteAcl($objectIdentity);            
+    }
+    
+    /**
+     * Création d'un ACL
+     * 
+     * @param Prospects $entity
+     */
+    private function createACL(Prospects $entity){
+        $entityManager = $this->get('doctrine.orm.default_entity_manager');
+        $entityManager->persist($entity);
+        $entityManager->flush();
+
+        // Création de l'ACL
+        $aclProvider = $this->get('security.acl.provider');
+        $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+        $acl = $aclProvider->createAcl($objectIdentity);
+
+        // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
+        $securityContext = $this->get('security.context');
+        $user = $securityContext->getToken()->getUser();
+        $securityIdentity = UserSecurityIdentity::fromAccount($user);
+
+        // Donne accès au propriétaire
+        $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+
+        $aclProvider->updateAcl($acl);
     }
 }

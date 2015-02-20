@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  *
  * @ORM\Table(name="prospects")
  * @ORM\Entity(repositoryClass="playerManager\WelcomeBundle\Entity\ProspectsRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Prospects
 {
@@ -31,6 +32,21 @@ class Prospects
     const SITE_VAL7 = "Facebook";
     
     static private $siteValues = NULL;
+    
+    /**
+     * Utilisé pour la création des dossier d'upload utilisateur
+     * 
+     * @var integer 
+     * @ORM\Column(name="user_id", type="integer", nullable=false)
+     */
+    private $user_id;
+    
+    /**
+     * Contient temporairement le chemin de la photo ($photoPrincipale)
+     * 
+     * @var string 
+     */
+    private $temp;
     
     /**
      * @var ArrayCollection
@@ -145,7 +161,13 @@ class Prospects
      * 
      * @ORM\Column(name="date_creation", type="datetime")
      */
-    private $dateCreation;
+    private $dateCreation;    
+    
+    /**
+     *
+     * @Assert\File(maxSize="2000000")
+     */
+    private $file;
     
 
     /**
@@ -157,17 +179,39 @@ class Prospects
     {
         return $this->id;
     }
+    
+    /**
+     * Set user_id
+     *
+     * @param string $user_id
+     * @return Prospects
+     */
+    public function setUserId($user_id)
+    {
+        $this->user_id = $user_id;
+        
+        return $this;
+    }
+    
+    /**
+     * Get user_id
+     *
+     * @return integer 
+     */
+    public function getUserId()
+    {
+        return $this->user_id;
+    }
 
     /**
      * Set pseudo
      *
      * @param string $pseudo
-     * @return Prospects
-     */
+     * @return      */
     public function setPseudo($pseudo)
     {
         $this->pseudo = $pseudo;
-
+        
         return $this;
     }
 
@@ -423,7 +467,7 @@ class Prospects
     public function setPhotoPrincipale($photoPrincipale)
     {
         $this->photoPrincipale = $photoPrincipale;
-
+        
         return $this;
     }
 
@@ -435,6 +479,33 @@ class Prospects
     public function getPhotoPrincipale()
     {
         return $this->photoPrincipale;
+    }
+            
+    /**
+     * Sets file
+     * 
+     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
+     */
+    public function setFile(UploadedFile $file = NULL){
+        $this->file = $file;
+        
+        // check if we have an old image path
+        if(isset($this->photoPrincipale)){
+            // store the old name to delete after the update
+            $this->temp = $this->photoPrincipale;
+            $this->photoPrincipale = NULL;
+        }else{
+            $this->photoPrincipale = 'initial';
+        }
+    }
+    
+    /**
+     * Get file.
+     * 
+     * @return UploadedFile
+     */
+    public function getFile(){
+        return $this->file;
     }
 
     /**
@@ -553,50 +624,70 @@ class Prospects
     }
     
     /**
-     *
-     * @Assert\File(maxSize="1000000")
+     * @ORM\PrePersist()
+     * @ORM\PreUpdate()
      */
-    private $file;
-    
-    /**
-     * Sets file
-     * 
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
-     */
-    public function setFile(UploadedFile $file = NULL){
-        $this->file = $file;
-    }
-    
-    /**
-     * Get file.
-     * 
-     * @return UploadedFile
-     */
-    public function getFile(){
-        return $this->file;
+    public function preUpload()
+    {
+        if(NULL !== $this->getFile()){
+            // Generate a unique name
+            $filename = sha1(uniqid(mt_rand(), TRUE));
+            $extension = $this->getFile()->guessExtension();
+            $this->photoPrincipale = $filename.'.'.$extension;
+        }
     }
     
     /**
      * Upload une photo principale
+     * 
+     * @ORM\PostPersist()
+     * @ORM\PostUpdate()
      */
-    public function upload(){
+    public function upload()
+    {
         // File property can be empty.
         if(NULL === $this->getFile()){
             return;
         }
         
-        $filename = $this->getFile()->getClientOriginalName();
+        // if there is an error when moving the file, an exception will
+        // be automatically thrown by move(). This will properly prevent
+        // the entity from being persisted to the database on error
+        $this->getFile()->move($this->getUploadAbsolutePath(), $this->photoPrincipale);
         
-        // Move the uploaded file to the target directory using original name.
-        $this->getFile()->move(
-                $this->getUploadAbsolutePath(),
-                $filename);
+        // check if we have an old image
+        if (isset($this->temp)) {
+            // delete the old image
+            unlink($this->getUploadAbsolutePath().'/'.$this->temp);
+            // clear the temp image path
+            $this->temp = NULL;
+        }
         
-        // Set the photo principale.
-        $this->setPhotoPrincipale($filename);
+        $this->file = NULL;
         
-        // Cleanup.
-        $this->setFile();
+//        // use the original file name here but you should
+//        // sanitize it at least to avoid any security issues        
+//        $filename = $this->getFile()->getClientOriginalName();
+//        
+//        // Move the uploaded file to the target directory using original name.
+//        $this->getFile()->move($this->getUploadAbsolutePath(), $filename);
+//        
+//        // Set the photo principale.
+//        $this->setPhotoPrincipale($filename);
+//        
+//        // Cleanup de "file"
+//        $this->setFile();
+    }
+    
+    /**
+     * @ORM\PostRemove
+     */
+    public function removeUpload()
+    {
+        $file = $this->getPhotoPrincipaleAbsolute();
+        if($file){
+            unlink($file);
+        }
     }
     
     /**
