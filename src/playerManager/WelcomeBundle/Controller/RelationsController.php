@@ -60,6 +60,7 @@ class RelationsController extends Controller
             'entities' => $allowedEntities,
         );
     }
+    
     /**
      * Creates a new Relations entity.
      *

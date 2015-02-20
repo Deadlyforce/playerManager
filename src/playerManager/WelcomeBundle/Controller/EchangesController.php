@@ -37,9 +37,27 @@ class EchangesController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $entities = $em->getRepository('playerManagerWelcomeBundle:Echanges')->findAll();
+        
+        // Vérification d'accès ACL
+        $securityContext = $this->get('security.context');
+        
+        // Check for VIEW access
+        foreach($entities as $echange){            
+            if(FALSE === $securityContext->isGranted('VIEW', $echange)){
+                // Do nothing
+            }else{                
+                $allowedEntities[] = $echange;
+            }
+        }
+       
+        if(!isset($allowedEntities)){
+            $allowedEntities = NULL;
+        }
+        // Vérification fin
 
         return array(
-            'entities' => $entities,
+//            'entities' => $entities,
+            'entities' => $allowedEntities,
         );
     }
     /**
@@ -54,6 +72,28 @@ class EchangesController extends Controller
         $entity = new Echanges();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
+        
+        // Implémentation des ACL
+        if($form->isValid()){
+            $entityManager = $this->get('doctrine.orm.default_entity_manager');
+            $entityManager->persist($entity);
+            $entityManager->flush();
+            
+            // Création de l'ACL
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+            $acl = $aclProvider->createAcl($objectIdentity);
+            
+            // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
+            $securityContext = $this->get('security.context');
+            $user = $securityContext->getToken()->getUser();
+            $securityIdentity = UserSecurityIdentity::fromAccount($user);
+            
+            // Donne accès au propriétaire
+            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+          
+            $aclProvider->updateAcl($acl);
+        }
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -122,6 +162,14 @@ class EchangesController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Echanges entity.');
         }
+        
+        // Vérification d'accès ACL
+        $securityContext = $this->get('security.context');
+        
+        if(FALSE === $securityContext->isGranted('VIEW', $entity)){
+            throw new AccessDeniedException();
+        }
+        // Vérification fin
 
         $deleteForm = $this->createDeleteForm($id);
 
@@ -147,6 +195,14 @@ class EchangesController extends Controller
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Echanges entity.');
         }
+        
+        // Vérification d'accès ACL
+        $securityContext = $this->get('security.context');
+        
+        if(FALSE === $securityContext->isGranted('EDIT', $entity)){
+            throw new AccessDeniedException();
+        }
+        // Vérification fin
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
@@ -209,6 +265,7 @@ class EchangesController extends Controller
             'delete_form' => $deleteForm->createView(),
         );
     }
+    
     /**
      * Deletes a Echanges entity.
      *
@@ -227,6 +284,12 @@ class EchangesController extends Controller
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find Echanges entity.');
             }
+            
+            // ACL suppression
+            $aclProvider = $this->get('security.acl.provider');
+            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
+            $aclProvider->deleteAcl($objectIdentity);
+            // ACL Suppression fin
 
             $em->remove($entity);
             $em->flush();
