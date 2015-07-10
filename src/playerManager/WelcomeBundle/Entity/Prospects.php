@@ -207,7 +207,8 @@ class Prospects
      * Set pseudo
      *
      * @param string $pseudo
-     * @return      */
+     * @return Prospects     
+     */
     public function setPseudo($pseudo)
     {
         $this->pseudo = $pseudo;
@@ -486,7 +487,8 @@ class Prospects
      * 
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
      */
-    public function setFile(UploadedFile $file = NULL){
+    public function setFile(UploadedFile $file = NULL)
+    {
         $this->file = $file;
         
         // check if we have an old image path
@@ -504,7 +506,8 @@ class Prospects
      * 
      * @return UploadedFile
      */
-    public function getFile(){
+    public function getFile()
+    {
         return $this->file;
     }
 
@@ -583,7 +586,7 @@ class Prospects
      */
     protected function getUploadPath()
     {
-        return 'uploads/photoPrincipale';
+        return 'uploads/photoPrincipale/'.$this->user_id;
     }
     
     /**
@@ -654,7 +657,7 @@ class Prospects
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
         $this->getFile()->move($this->getUploadAbsolutePath(), $this->photoPrincipale);
-        
+
         // check if we have an old image
         if (isset($this->temp)) {
             // delete the old image
