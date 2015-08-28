@@ -1,17 +1,15 @@
 <?php
 
-/**
- * Description of Builder
- *
- * @author Norman
- */
-
 namespace AppBundle\Menu;
 
 use Knp\Menu\FactoryInterface;
 use Symfony\Component\DependencyInjection\ContainerAware;
 
-
+/**
+ * Description of Builder
+ *
+ * @author Norman
+ */
 class Builder extends ContainerAware
 {
     public function mainMenu(FactoryInterface $factory, array $options)
