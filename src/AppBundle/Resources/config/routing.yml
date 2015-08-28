@@ -1,0 +1,9 @@
+#player_manager_welcome_relations:
+#    path:    /relations
+#    defaults: {_controller: AppBundle:Relations:index}
+#    
+#    path:   /prospects
+#    defaults: {_controller: AppBundle:Prospects:index}
+#    
+#    path:   /echanges
+#    defaults: {_controller: AppBundle:Echanges:index}

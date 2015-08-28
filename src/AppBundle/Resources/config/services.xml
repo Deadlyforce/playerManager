@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <!--
+    <parameters>
+        <parameter key="player_manager_welcome.example.class">AppBundle\Example</parameter>
+    </parameters>
+
+    <services>
+        <service id="player_manager_welcome.example" class="%player_manager_welcome.example.class%">
+            <argument type="service" id="service_id" />
+            <argument>plain_value</argument>
+            <argument>%parameter_name%</argument>
+        </service>
+    </services>
+    -->
+    
+    <services>
+        <service id="player_manager_welcome.form_type_extension" class="AppBundle\Form\Extension\FormTypeExtension">
+            <tag name="form.type_extension" alias="form" />
+        </service>
+    </services>
+</container>

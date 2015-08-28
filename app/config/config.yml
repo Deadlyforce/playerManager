@@ -1,7 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: @playerManagerWelcomeBundle/Resources/config/admin.yml }
+    - { resource: @AppBundle/Resources/config/admin.yml }
 
 framework:
     #esi:             ~

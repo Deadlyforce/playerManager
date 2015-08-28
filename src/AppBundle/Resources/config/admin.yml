@@ -1,0 +1,19 @@
+# Sonata Admin services
+services:
+    admin.prospects:
+        class: AppBundle\Admin\ProspectsAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: Prospects, label: Prospects }
+        arguments: [null, AppBundle\Entity\Prospects, SonataAdminBundle:CRUD]
+
+
+#    sonata.admin.prospects:
+#        class: AppBundle\Admin\ProspectsAdmin
+#        tags:
+#            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Prospects" }
+#        arguments:
+#            - ~
+#            - AppBundle\Entity\Prospects
+#            - ~
+#        calls:
+#            - [ setTranslationDomain, [AppBundle]]

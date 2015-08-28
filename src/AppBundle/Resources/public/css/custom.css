@@ -1,0 +1,99 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 16 déc. 2014, 17:15:18
+    Author     : Norman
+*/
+
+body{
+    padding-top: 50px;
+}
+
+/*table td, table th{
+    text-align: center;
+}*/
+
+/************************ BOOTSTRAP OVERRIDES ****************************/
+
+/* FORMS */
+.form-control{
+    border-radius: 0px;
+}
+
+/* BOUTONS */
+.btn{
+    border-radius: 0px;
+}
+
+/************************* FORM NEW PROSPECT *****************************/
+
+label{
+    width: 165px;
+    vertical-align: top;
+}
+
+#form-new-prospect div, #form-edit-prospect div{
+    margin-bottom: 5px;
+}
+
+.form-input, .form-input-ville{
+    width: 250px;
+    display: inline-block;
+}
+.form-input-age{
+    width: 65px;
+    display: inline-block;
+}
+.form-input-site{
+    width: 150px;
+    display: inline-block;
+}
+.form-input-photoPrincipale{
+    width: 300px;
+    display: inline-block;
+}
+
+ul.record_actions{
+    list-style-type: none;
+    padding: 0;
+}
+
+td.photoPrincipale img{
+    height: 100px;
+}
+
+#appbundle_prospects_dateCreation{
+   display: inline-block;
+}
+#appbundle_prospects_dateCreation_date, #appbundle_prospects_dateCreation_time{
+   display: inline-block;
+}
+
+/************************* FORM NEW RELATION *****************************/
+
+#appbundle_relations_statut{
+    display: inline-block;
+}
+#appbundle_relations_rencontre{
+    display: inline-block;
+}
+
+#appbundle_relations_statut label{
+    width: 75px;
+}
+#appbundle_relations_rencontre label{
+    width: 75px;
+}
+
+.appbundle_relations_commentaire{
+    vertical-align: top;
+}
+
+/************************* FORM SHOW *****************************/
+
+table.record_properties th{
+    width: 150px;
+}
