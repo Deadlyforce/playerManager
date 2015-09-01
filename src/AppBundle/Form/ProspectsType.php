@@ -33,35 +33,44 @@ class ProspectsType extends AbstractType
                 'required' => FALSE, 
                 'label_attr' => array(
                     'class' => 'control-label'
-                    ), 
+                ), 
                 'attr' => array(
                     'class' => 'form-input'
-                    )               
-                ))
+                ),
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
             ->add('prenom', 'text', array(
                 'required' => TRUE, 
                 'label' => 'Prénom', 
                 'label_attr' => array(
                     'class' => 'control-label'
-                    ), 
+                ), 
                 'attr' => array(
                     'class' => 'form-input'
-                    )
-                ))
+                ),
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
             ->add('nom', 'text', array(
                 'required' => FALSE, 
                 'label' => 'Nom', 
                 'label_attr' => array(
                     'class' => 'control-label'
-                    ), 
+                ), 
                 'attr' => array(
                     'class' => 'form-input'
-                    )
-                ))
+                ),
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
             ->add('age', 'choice', array(
-                'choices' => $ageBracket,
-                'attr' => array(
-                    'class' => 'form-input-age',                       
+                'choices' => $ageBracket,                
+                'row_attr' => array(
+                    'class' => 'form_row'
                 )
             ))
             ->add('ville', 'text', array(
@@ -69,8 +78,11 @@ class ProspectsType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'Paris',
                     'class' => 'form-input-ville'
-                    )
-                ))
+                ),
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
             ->add('arrondissement', 'choice', array(
                 'required' => FALSE,
                 'choices' => $parisArrondissements,                
@@ -79,52 +91,66 @@ class ProspectsType extends AbstractType
                     ),
                 'row_attr' => array(
                     'class' => 'row_arrondissement'
-                ),
-//                'data' => 1
-                ))
+                )
+            ))
             ->add('pays', 'text', array(
                 'required' => TRUE, 
                 'attr' => array(
                     'class' => 'form-input',
                     'value' => 'France'
-                    )
-                ))
+                ),
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
             ->add('numero', 'text', array(
                 'required' => FALSE,
                 'label' => 'Tel portable',
                 'attr' => array(
                     'class' => 'form-input'
-                    )
-                ))
+                ),
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
             ->add('numeroDom', 'text', array(
                 'required' => FALSE,
                 'label' => 'Tel Domicile',
                 'attr' => array(
                     'class' => 'form-input'
-                    )
-                ))
+                ),
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
             ->add('numeroEtranger', 'text', array(
                 'required' => FALSE, 
                 'label' => 'Tel étranger',
                 'attr' => array(
                     'class' => 'form-input'
-                    )
-                ))
+                ),
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
             ->add('site', 'choice', array(
                 'label' => 'Origine',
                 'choices' => \AppBundle\Entity\Prospects::getSiteChoices(),
-                'required' => TRUE,
-                'attr' => array(
-                    'class' => 'form-input-site'
-                    )
-                ))
+                'required' => TRUE,                
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
             ->add('file', 'file', array(
                 'required' => FALSE, 
                 'label' => 'Photo principale',
                 'attr' => array(
                     'class' => 'form-input-photoPrincipale'
-                    )
-                ))
+                ),
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
             ->add('dateCreation', 'datetime', array(
 		'required' => FALSE,
 		'label' => 'Date de création: ',
@@ -132,9 +158,11 @@ class ProspectsType extends AbstractType
 		'view_timezone' => 'Europe/Paris',
 		'input' => 'datetime',
 		'widget' => 'choice',
-		'date_format' => 'dd MM yyyy'		
-                ))
-            ->add('relations', new RelationsType())
+		'date_format' => 'dd MM yyyy',
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))            
         ;
     }
     

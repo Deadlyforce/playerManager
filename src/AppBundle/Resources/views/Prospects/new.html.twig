@@ -26,7 +26,7 @@
             $('.form-input-ville').change(function(){
                 var ville = $(this).val().toLowerCase();
 
-                if(ville == 'paris'){
+                if(ville === 'paris'){
                     $('.row_arrondissement').show('slow');
                 }else{
                     $('.row_arrondissement').hide('slow');

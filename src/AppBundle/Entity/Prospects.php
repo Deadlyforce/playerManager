@@ -20,6 +20,7 @@ class Prospects
     public function __construct()
     {
         $this->echanges = new ArrayCollection();
+        $this->rencontres = new ArrayCollection();
     }
     
     // Enum de la colonne "site"    
@@ -51,7 +52,7 @@ class Prospects
     /**
      * @var ArrayCollection
      * 
-     * @ORM\OneToMany(targetEntity="Echanges", mappedBy="prospects") 
+     * @ORM\OneToMany(targetEntity="Echanges", mappedBy="prospect") 
      */
     private $echanges;
     
@@ -62,6 +63,13 @@ class Prospects
      * @ORM\JoinColumn(name="relations_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $relations;
+    
+    /**
+     *
+     * @var ArrayCollection
+     * @ORM\OneToMany(targetEntity="Rencontre", mappedBy="prospect") 
+     */
+    private $rencontres;
     
     /**
      * @var integer
@@ -566,6 +574,30 @@ class Prospects
     public function getRelations()
     {
         return $this->relations;
+    }    
+    
+    /**
+     * Set rencontres
+     *
+     * @param \AppBundle\Entity\Rencontres $rencontres
+     * @return Prospect
+     */
+    public function setRencontres(\AppBundle\Entity\Rencontres $rencontres = null)
+    {
+        $this->rencontres = $rencontres;
+        $rencontres->setProspect($this);
+
+        return $this;
+    }
+    
+    /**
+     * Get rencontres
+     *
+     * @return \AppBundle\Entity\Rencontre 
+     */
+    public function getRencontres()
+    {
+        return $this->rencontres;
     }
     
     /**

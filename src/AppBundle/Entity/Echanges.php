@@ -18,9 +18,9 @@ class Echanges
      * @var Prospects 
      * 
      * @ORM\ManyToOne(targetEntity="Prospects", inversedBy="echanges")
-     * @ORM\JoinColumn(name="prospects_id", referencedColumnName="id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $prospects;
+    private $prospect;
     
     /**
      * @var integer
@@ -29,14 +29,7 @@ class Echanges
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
-    
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="prospects_id", type="integer")
-     */
-    private $prospects_id;
+    private $id;   
 
     /**
      * @var \DateTime
@@ -107,40 +100,17 @@ class Echanges
     public function getContenu()
     {
         return $this->contenu;
-    }
-
-    /**
-     * Set prospects_id
-     *
-     * @param integer $prospectsId
-     * @return Echanges
-     */
-    public function setProspectsId($prospectsId)
-    {
-        $this->prospects_id = $prospectsId;
-
-        return $this;
-    }
-
-    /**
-     * Get prospects_id
-     *
-     * @return integer 
-     */
-    public function getProspectsId()
-    {
-        return $this->prospects_id;
-    }
+    }   
 
     /**
      * Set prospects
      *
-     * @param \AppBundle\Entity\Prospects $prospects
+     * @param \AppBundle\Entity\Prospects $prospect
      * @return Echanges
      */
-    public function setProspects(\AppBundle\Entity\Prospects $prospects = null)
+    public function setProspect(\AppBundle\Entity\Prospects $prospect = null)
     {
-        $this->prospects = $prospects;
+        $this->prospect = $prospect;
 
         return $this;
     }
@@ -150,8 +120,8 @@ class Echanges
      *
      * @return \AppBundle\Entity\Prospects 
      */
-    public function getProspects()
+    public function getProspect()
     {
-        return $this->prospects;
+        return $this->prospect;
     }
 }

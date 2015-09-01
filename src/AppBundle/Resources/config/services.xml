@@ -19,7 +19,7 @@
     -->
     
     <services>
-        <service id="player_manager_welcome.form_type_extension" class="AppBundle\Form\Extension\FormTypeExtension">
+        <service id="app.form_type_extension" class="AppBundle\Form\Extension\FormTypeExtension">
             <tag name="form.type_extension" alias="form" />
         </service>
     </services>

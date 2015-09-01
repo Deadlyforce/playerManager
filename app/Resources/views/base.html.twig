@@ -1,37 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>        
-        {% block stylesheets %}
-            {% stylesheets filter='cssrewrite' 
-                '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
-                '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css'
-                '@AppBundle/Resources/public/css/custom.css'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}"/>
-            {% endstylesheets %}
+    
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>        
+    {% block stylesheets %}
+        {% stylesheets filter='cssrewrite' 
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css'
+            'bundles/app/packages/DataTables-1.10.8/datatables.min.css'
+            'bundles/app/css/custom.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    {% block javascripts %}
+        {% javascripts
+            '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'
+            'bundles/app/packages/DataTables-1.10.8/datatables.min.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+<body>
+    <div class="container">
+        {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
+
+        {% block body %}                
         {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <footer>
+        </footer>
+    </div>
         
-        {% block javascripts %}
-            {% javascripts
-                '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
-                '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'                
-            %}
-                <script type="text/javascript" src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-        {% endblock %}
-    </head>
-    <body>
-        <div class="container">
-            {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
-            
-            {% block body %}                
-            {% endblock %}
-            
-            <footer>
-            </footer>
-        </div>       
-    </body>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".datatable").DataTable();
+        });
+    </script>
+</body>
+
 </html>

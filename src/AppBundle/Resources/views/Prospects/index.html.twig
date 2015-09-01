@@ -2,12 +2,11 @@
 {% block title %}Liste des contacts{% endblock %}
 
 {% block body -%}
-    <h1>Liste des contacts</h1>
+    <h3>Liste des contacts</h3>
 
-    <table class="records_list table">
+    <table class="table datatable">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Pseudo</th>
                 <th>Prénom</th>
                 <th>Nom</th>
@@ -15,9 +14,6 @@
                 <th>Ville</th>
                 <th>Arr.</th>
                 <th>Pays</th>
-                <th>Tel Portable</th>
-                <th>Tel Domicile</th>
-                <th>Tel étranger</th>
                 <th>Source</th>
                 <th>Photo Principale</th>
                 <th>Date de création</th>
@@ -26,20 +22,22 @@
         </thead>
         <tbody>
         {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('prospects_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{{ entity.pseudo }}</td>
+            <tr id="{{ entity.id }}">
+                <td>
+                    {% if entity.pseudo %}
+                        {{ entity.pseudo }}
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
                 <td>{{ entity.prenom }}</td>
                 <td>{{ entity.nom }}</td>
                 <td>{{ entity.age }}</td>
                 <td>{{ entity.ville }}</td>
                 <td>{{ entity.arrondissement }}</td>
                 <td>{{ entity.pays }}</td>
-                <td>{{ entity.numero }}</td>
-                <td>{{ entity.numeroDom }}</td>
-                <td>{{ entity.numeroEtranger }}</td>
                 <td>{{ entity.site }}</td>
-                <td class="photoPrincipale">
+                <td class="photo_principale">
                     {% if entity.photoPrincipale %}
                         <img class="img-responsive" src="{{ asset(entity.getPhotoPrincipaleWeb) }}" alt="{{ asset(entity.getPhotoPrincipaleWeb) }}" />
                     {% endif %}
@@ -52,7 +50,7 @@
                     <a class="" href="{{ path('prospects_edit', { 'id': entity.id }) }}">edit</a>  
                     
                     {% if entity.relations %}
-                        <a class="" href="{{ path('relations_show', { 'id': entity.relations.id }) }}">relation</a>
+{#                        <a class="" href="{{ path('relations_show', { 'id': entity.relations.id }) }}">relation</a>#}
                     {% endif %}
                 </td>
             </tr>
@@ -64,4 +62,10 @@
         Ajouter un contact
     </a>
         
-    {% endblock %}
+    <script type="text/javascript">
+        $(document).ready(function(){                   
+            
+            
+        });
+    </script>
+{% endblock %}

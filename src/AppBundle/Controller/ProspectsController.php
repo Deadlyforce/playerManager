@@ -35,7 +35,6 @@ class ProspectsController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $entities = $em->getRepository('AppBundle:Prospects')->findAll();
         
         // Vérification d'accès ACL
@@ -157,17 +156,16 @@ class ProspectsController extends Controller
     public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        $prospect = $em->getRepository('AppBundle:Prospects')->find($id);
 
-        $entity = $em->getRepository('AppBundle:Prospects')->find($id);
-
-        if (!$entity) {
+        if (!$prospect) {
             throw $this->createNotFoundException('Unable to find Prospects entity.');
         }
         
         // Vérification d'accès ACL
         $securityContext = $this->get('security.context');
         
-        if(FALSE === $securityContext->isGranted('VIEW', $entity)){
+        if(FALSE === $securityContext->isGranted('VIEW', $prospect)){
             throw new AccessDeniedException();
         }
         // Vérification fin
@@ -175,7 +173,7 @@ class ProspectsController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'entity'      => $entity,
+            'prospect'      => $prospect,
             'delete_form' => $deleteForm->createView(),
         );
     }
