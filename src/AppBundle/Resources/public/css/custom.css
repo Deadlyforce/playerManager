@@ -50,7 +50,7 @@ td.photo_principale img{
 
 /************************* FORM NEW PROSPECT *****************************/
 
-#appbundle_prospects_file{
+#appbundle_prospect_file{
     display: inline-block;
 }
 
@@ -59,30 +59,30 @@ ul.record_actions{
     padding: 0;
 }
 
-#appbundle_prospects_dateCreation{
+#appbundle_prospect_dateCreation{
    display: inline-block;
 }
-#appbundle_prospects_dateCreation_date, #appbundle_prospects_dateCreation_time{
+#appbundle_prospect_dateCreation_date, #appbundle_prospect_dateCreation_time{
    display: inline-block;
 }
 
 /************************* FORM NEW RELATION *****************************/
 
-#appbundle_relations_statut{
+#appbundle_relation_statut{
     display: inline-block;
 }
-#appbundle_relations_rencontre{
+#appbundle_relation_rencontre{
     display: inline-block;
 }
 
-#appbundle_relations_statut label{
+#appbundle_relation_statut label{
     width: 75px;
 }
-#appbundle_relations_rencontre label{
+#appbundle_relation_rencontre label{
     width: 75px;
 }
 
-.appbundle_relations_commentaire{
+.appbundle_relation_commentaire{
     vertical-align: top;
 }
 

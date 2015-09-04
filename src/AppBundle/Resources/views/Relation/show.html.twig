@@ -1,0 +1,73 @@
+{% extends '::base.html.twig' %}
+{% block title %}Relation{% endblock %}
+
+{% block body -%}
+    <h1>Relation</h1>
+
+    <table class="record_properties">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ entity.id }}</td>                
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{% if entity.prospect %}{{ entity.prospect.prenom }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Statut</th>
+                <td>{% if entity.statut %}On{% else %}Off{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Rencontre</th>
+                <td>{% if entity.rencontre %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Rencontres</th>
+                <td>{{ entity.rencontreCount }}</td>
+            </tr>
+            <tr>
+                <th>Numéro</th>
+                <td>{% if entity.numero %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Kc</th>
+                <td>{% if entity.kc %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Fc</th>
+                <td>{% if entity.fc %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Type</th>
+                <td>{{ entity.getRelTypeString(entity.relType) }}</td>
+            </tr>
+            <tr>
+                <th>Distance</th>
+                <td>{% if entity.distance %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Flake</th>
+                <td>{% if entity.flake %}Oui{% else %}Non{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Commentaire</th>
+                <td>{{ entity.commentaire }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+        <ul class="record_actions">
+    <li>
+        <a href="{{ path('relation') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('relation_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>{{ form(delete_form) }}</li>
+</ul>
+{% endblock %}

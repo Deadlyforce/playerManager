@@ -94,7 +94,7 @@ class RencontreController extends Controller
         $rencontre = new Rencontre();
         
         $em = $this->getDoctrine()->getManager();
-        $prospect = $em->getRepository("AppBundle:Prospects")->find($prospect_id);
+        $prospect = $em->getRepository("AppBundle:Prospect")->find($prospect_id);
         $rencontre->setProspect($prospect);
         
         $form = $this->createCreateForm($rencontre);

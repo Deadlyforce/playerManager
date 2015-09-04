@@ -16,9 +16,9 @@ class Builder extends ContainerAware
     {
         $menu = $factory->createItem('root');
         
-        $menu->addChild('Relations', array('route' => 'relations'));
-        $menu->addChild('Prospects', array('route' => 'prospects'));
-        $menu->addChild('Echanges', array('route' => 'echanges'));        
+        $menu->addChild('Relations', array('route' => 'relation'));
+        $menu->addChild('Prospects', array('route' => 'prospect'));
+        $menu->addChild('Echanges', array('route' => 'echange'));        
         $menu->addChild('Profil', array('route' => 'sonata_user_profile_show'));
         $menu->addChild('Déconnexion', array('route' => 'sonata_user_security_logout'));
         

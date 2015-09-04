@@ -65,7 +65,7 @@ class Rencontre
     
     /**
      * @var Prospect
-     * @ORM\ManyToOne(targetEntity="Prospects", inversedBy="rencontres")
+     * @ORM\ManyToOne(targetEntity="Prospect", inversedBy="rencontres")
      * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id") 
      */
     private $prospect;
