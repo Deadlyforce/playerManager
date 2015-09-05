@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Echange
  *
  * @ORM\Table(name="echanges")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\EchangeRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\EchangeRepository")
  */
 class Echange
 {

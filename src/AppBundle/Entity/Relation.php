@@ -8,19 +8,10 @@ use Doctrine\ORM\Mapping as ORM;
  * Relation
  *
  * @ORM\Table(name="relations")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\RelationRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\RelationRepository")
  */
 class Relation
-{
-    const RELTYPE_Discussion = 0;
-    const RELTYPE_Dating = 1;
-    const RELTYPE_OneNightStand = 2;
-    const RELTYPE_FuckBuddy = 3;
-    const RELTYPE_Girlfriend = 4;
-    const RELTYPE_OpenRelationship = 5;
-    
-    private static $relTypeValues = NULL;
-    
+{        
     /**     
      * @var Prospect 
      * 
@@ -28,6 +19,14 @@ class Relation
      * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $prospect;
+    
+    /**
+     * @var Categorie
+     * 
+     * @ORM\ManyToOne(targetEntity="Categorie") 
+     * @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
+     */
+    private $categorie;
     
     /**
      * @var integer
@@ -78,21 +77,7 @@ class Relation
      *
      * @ORM\Column(name="fc", type="boolean")
      */
-    private $fc;
-
-//    /**
-//     * @var string
-//     *
-//     * @ORM\Column(name="rel_type", type="string")
-//     */
-//    private $relType;
-    
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="rel_type", type="integer")
-     */
-    private $relType;
+    private $fc;    
 
     /**
      * @var integer
@@ -170,35 +155,8 @@ class Relation
     public function getRencontre()
     {
         return $this->rencontre;
-    }
+    }    
     
-    /**
-     * Construit et retourne un tableau de valeurs pour la colonne "relType"
-     * 
-     * @return array $relTypeValues
-     */
-    static public function getRelTypeChoices()
-    {
-        // Build $relTypeValues if that is the first call
-       if(self::$relTypeValues == NULL){
-           
-           self::$relTypeValues = array();
-           
-           $myClass = new \ReflectionClass('\AppBundle\Entity\Relation'); // ReflectionClass récupère toutes infos sur une classe
-           $classConstants = $myClass->getConstants();
-           $constantPrefix = "RELTYPE_";
-           
-           foreach($classConstants as $key => $value){
-               $valueName = substr($key, 8);
-//               if(substr($key, 0, strlen($constantPrefix)) === $constantPrefix){
-                    self::$relTypeValues[$value] = $valueName;
-//               }
-           }         
-       }
-  
-       return self::$relTypeValues;
-    }
-
     /**
      * Set rencontreCount
      *
@@ -231,7 +189,6 @@ class Relation
     public function setNumero($numero)
     {
         $this->numero = $numero;
-
         return $this;
     }
 
@@ -254,7 +211,6 @@ class Relation
     public function setKc($kc)
     {
         $this->kc = $kc;
-
         return $this;
     }
 
@@ -277,7 +233,6 @@ class Relation
     public function setFc($fc)
     {
         $this->fc = $fc;
-
         return $this;
     }
 
@@ -290,49 +245,28 @@ class Relation
     {
         return $this->fc;
     }
-
+    
     /**
-     * Set relType
+     * Set Categorie
      *
-     * @param integer $relType
+     * @param string $categorie
      * @return Relation
      */
-    public function setRelType($relType)
+    public function setCategorie($categorie)
     {
-        if(!array_key_exists($relType, self::getRelTypeChoices())){
-            throw new \InvalidArgumentException('Entrée non valide');
-        }
-        $this->relType = $relType;
-        
+        $this->categorie = $categorie;
         return $this;
     }
 
     /**
-     * Get relType
+     * Get Categorie
      *
-     * @return integer 
+     * @return string 
      */
-    public function getRelType()
+    public function getCategorie()
     {
-        return $this->relType;
-    }
-    
-    /**
-     * Transforme la valeur en base de relType (integer) en chaîne de caractères pour l'affichage
-     * 
-     * @param integer $relType
-     * @return string $relType
-     */
-    public function getRelTypeString($relType)
-    {
-        $array = self::getRelTypeChoices(); 
-// var_dump($array);
-
-        $this->relType = $array[$relType];
-// var_dump($this->relType);
-// die();        
-        return $this->relType;
-    }
+        return $this->categorie;
+    }      
 
     /**
      * Set distance

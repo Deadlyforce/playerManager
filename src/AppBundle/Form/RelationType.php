@@ -55,10 +55,8 @@ class RelationType extends AbstractType
                 'label' => 'FC',
                 'data' => FALSE
              ))
-            ->add('relType', 'choice', array(
-                'required' => TRUE,
-                'choices' => \AppBundle\Entity\Relation::getRelTypeChoices(),                
-                'label' => 'Type de relation'
+            ->add('categorie', 'entity', array(
+                'class' => 'AppBundle:Categorie'
             ))
             ->add('distance', 'checkbox', array(
                 'required' => FALSE,

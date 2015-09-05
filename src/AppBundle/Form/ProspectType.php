@@ -136,14 +136,6 @@ class ProspectType extends AbstractType
             ->add('source', 'entity', array(
                 'class' => 'AppBundle:Source'
             ))
-//            ->add('site', 'choice', array(
-//                'label' => 'Origine',
-//                'choices' => \AppBundle\Entity\Prospect::getSiteChoices(),
-//                'required' => TRUE,                
-//                'row_attr' => array(
-//                    'class' => 'form_row'
-//                )
-//            ))
             ->add('file', 'file', array(
                 'required' => FALSE, 
                 'label' => 'Photo principale',

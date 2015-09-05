@@ -15,7 +15,7 @@
                 <th>Numéro</th>
                 <th>KC</th>
                 <th>FC</th>
-                <th>Type</th>
+                <th>Catégorie</th>
                 <th>Distance</th>
                 <th>Flake</th>
                 <th>Commentaire</th>
@@ -33,7 +33,7 @@
                 <td>{% if entity.numero == 1 %}Oui{% else %}Non{% endif %}</td>
                 <td>{% if entity.kc == 1 %}Oui{% else %}Non{% endif %}</td>
                 <td>{% if entity.fc == 1 %}Oui{% else %}Non{% endif %}</td>
-                <td>{{ entity.getRelTypeString(entity.relType) }}</td>
+                <td>{{ entity.categorie }}</td>
                 <td>{% if entity.distance == 1 %}Oui{% else %}Non{% endif %}</td>
                 <td>{% if entity.flake == 1 %}Oui{% else %}Non{% endif %}</td>
                 <td>{{ entity.commentaire }}</td>

@@ -13,7 +13,7 @@ use AppBundle\Entity\Rencontre;
  * Prospect
  *
  * @ORM\Table(name="prospects")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\ProspectRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\ProspectRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Prospect
@@ -22,19 +22,8 @@ class Prospect
     {
         $this->echanges = new ArrayCollection();
         $this->rencontres = new ArrayCollection();
-    }
-    
-//    // Enum de la colonne "site"    
-//    const SITE_VAL1 = "AdopteUnMec";
-//    const SITE_VAL2 = "OkCupid";
-//    const SITE_VAL3 = "Tinder";
-//    const SITE_VAL4 = "NightGame";
-//    const SITE_VAL5 = "DayGame";
-//    const SITE_VAL6 = "SocialCircle";
-//    const SITE_VAL7 = "Facebook";
-    
-//    static private $siteValues = NULL;
-    
+    }   
+   
     /**
      * Utilisé pour la création des dossier d'upload utilisateur
      * 
@@ -331,18 +320,6 @@ class Prospect
     }
 
     /**
-     * Set Source
-     *
-     * @param string $sources
-     * @return Prospect
-     */
-//    public function setSources($sources)
-//    {
-//        $this->sources = $sources;
-//        return $this;
-//    }
-
-    /**
      * Get Source
      *
      * @return string 
@@ -475,32 +452,6 @@ class Prospect
     }
 
     /**
-     * Set site
-     *
-     * @param string $site
-     * @return Prospect
-     */
-//    public function setSite($site)
-//    {
-//        if(!in_array($site, self::getSiteChoices())){
-//           throw new \InvalidArgumentException("Entrée non valide");
-//        }
-//        $this->site = $site;
-//
-//        return $this;
-//    }
-
-    /**
-     * Get site
-     *
-     * @return string 
-     */
-//    public function getSite()
-//    {
-//        return $this->site;
-//    }
-
-    /**
      * Set photoPrincipale
      *
      * @param string $photoPrincipale
@@ -609,20 +560,6 @@ class Prospect
     }    
     
     /**
-     * Set rencontres
-     *
-     * @param Rencontre $rencontres
-     * @return Prospect
-     */
-//    public function setRencontres(Rencontre $rencontres = null)
-//    {
-//        $this->rencontres = $rencontres;
-//        $rencontres->setProspect($this);
-//
-//        return $this;
-//    }
-    
-    /**
      * Get rencontres
      *
      * @return Rencontre 
@@ -630,6 +567,28 @@ class Prospect
     public function getRencontres()
     {
         return $this->rencontres;
+    }
+    
+    /**
+     * Add Rencontre
+     *
+     * @param \AppBundle\Entity\Rencontre $rencontre
+     * @return Prospect
+     */
+    public function addRencontre(\AppBundle\Entity\Rencontre $rencontre)
+    {
+        $this->rencontres[] = $rencontre;
+        return $this;
+    }
+
+    /**
+     * Remove Rencontre
+     *
+     * @param \AppBundle\Entity\Rencontre $rencontre
+     */
+    public function removeRencontre(\AppBundle\Entity\Rencontre $rencontre)
+    {
+        $this->rencontres->removeElement($rencontre);
     }
     
     /**
@@ -766,28 +725,4 @@ class Prospect
    {
            return $this->dateCreation;
    }
-   
-   /**
-    * Construis et retourne un tableau de valeurs enum pour la colonne "site"
-    * 
-    * @return array $siteValues
-    */
-//   static public function getSiteChoices()
-//   {
-//       // Build $siteValues if that is the first call
-//       if(self::$siteValues == NULL){
-//           self::$siteValues = array();
-//           $myClass = new \ReflectionClass('\AppBundle\Entity\Prospect'); // ReflectionClass récupère toutes infos sur une classe
-//           $classConstants = $myClass->getConstants();
-//           $constantPrefix = "SITE_";
-//           
-//           foreach($classConstants as $key => $value){
-//               if(substr($key, 0, strlen($constantPrefix)) === $constantPrefix){
-//                self::$siteValues[$value] = $value;
-//               }
-//           }         
-//       }
-//    
-//       return self::$siteValues;
-//   }
 }
