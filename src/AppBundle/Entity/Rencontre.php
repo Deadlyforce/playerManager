@@ -47,21 +47,21 @@ class Rencontre
      *
      * @ORM\Column(name="depenses_total", type="integer", nullable=true)
      */
-    private $depensesTotal;
+    private $depenses_total;
 
     /**
      * @var boolean
      *
      * @ORM\Column(name="changement_lieu", type="boolean", nullable=true)
      */
-    private $changementLieu;
+    private $changement_lieu;
 
     /**
      * @var json
      *
      * @ORM\Column(name="liste_lieux", type="json_array", nullable=true)
      */
-    private $listeLieux;
+    private $liste_lieux;
     
     /**
      * @var Prospect
@@ -154,75 +154,75 @@ class Rencontre
     }
 
     /**
-     * Set depensesTotal
+     * Set depenses_total
      *
-     * @param integer $depensesTotal
+     * @param integer $depenses_total
      *
      * @return Rencontre
      */
-    public function setDepensesTotal($depensesTotal)
+    public function setDepensesTotal($depenses_total)
     {
-        $this->depensesTotal = $depensesTotal;
+        $this->depenses_total = $depenses_total;
 
         return $this;
     }
 
     /**
-     * Get depensesTotal
+     * Get depenses_total
      *
      * @return integer
      */
     public function getDepensesTotal()
     {
-        return $this->depensesTotal;
+        return $this->depenses_total;
     }
 
     /**
-     * Set changementLieu
+     * Set changement_lieu
      *
-     * @param boolean $changementLieu
+     * @param boolean $changement_lieu
      *
      * @return Rencontre
      */
-    public function setChangementLieu($changementLieu)
+    public function setChangementLieu($changement_lieu)
     {
-        $this->changementLieu = $changementLieu;
+        $this->changement_lieu = $changement_lieu;
 
         return $this;
     }
 
     /**
-     * Get changementLieu
+     * Get changement_lieu
      *
      * @return boolean
      */
     public function getChangementLieu()
     {
-        return $this->changementLieu;
+        return $this->changement_lieu;
     }
 
     /**
-     * Set listeLieux
+     * Set liste_lieux
      *
-     * @param json $listeLieux
+     * @param json $liste_lieux
      *
      * @return Rencontre
      */
-    public function setListeLieux($listeLieux)
+    public function setListeLieux($liste_lieux)
     {
-        $this->listeLieux = $listeLieux;
+        $this->liste_lieux = $liste_lieux;
 
         return $this;
     }
 
     /**
-     * Get listeLieux
+     * Get liste_lieux
      *
      * @return json
      */
     public function getListeLieux()
     {
-        return $this->listeLieux;
+        return $this->liste_lieux;
     }
 
     /**

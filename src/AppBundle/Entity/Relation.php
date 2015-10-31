@@ -11,11 +11,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\RelationRepository")
  */
 class Relation
-{        
+{
     /**     
      * @var Prospect 
      * 
-     * @ORM\OneToOne(targetEntity="Prospect", mappedBy="relations", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Prospect", mappedBy="relation", cascade={"persist"})
      * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $prospect;
@@ -77,7 +77,7 @@ class Relation
      *
      * @ORM\Column(name="fc", type="boolean")
      */
-    private $fc;    
+    private $fc;
 
     /**
      * @var integer
@@ -155,7 +155,7 @@ class Relation
     public function getRencontre()
     {
         return $this->rencontre;
-    }    
+    }
     
     /**
      * Set rencontreCount
@@ -266,7 +266,7 @@ class Relation
     public function getCategorie()
     {
         return $this->categorie;
-    }      
+    }
 
     /**
      * Set distance
@@ -365,7 +365,7 @@ class Relation
      * 
      * @return string
      */
-    public function __toString() 
+    public function __toString()
     {
         return $this->getRelTypeString($this->getRelType());
     }

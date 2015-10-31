@@ -8,7 +8,10 @@
         {% stylesheets filter='cssrewrite' 
             '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
             '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css'
+            '%kernel.root_dir%/../vendor/components/jqueryui/themes/base/jquery-ui.min.css'
+            'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.css'
             'bundles/app/packages/DataTables-1.10.8/datatables.min.css'
+            'bundles/app/packages/font-awesome-4.4.0/css/font-awesome.min.css'
             'bundles/app/css/custom.css'
         %}
             <link rel="stylesheet" href="{{ asset_url }}"/>
@@ -19,8 +22,11 @@
     {% block javascripts %}
         {% javascripts
             '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
+            '%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js'
+            'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.js'
             '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'
             'bundles/app/packages/DataTables-1.10.8/datatables.min.js'
+            'bundles/app/js/helpers.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
@@ -39,7 +45,30 @@
         
     <script type="text/javascript">
         $(document).ready(function(){
-            $(".datatable").DataTable();
+            
+            $(".datatable").DataTable(); // class datatable
+            
+            getDatepicker();
+            getDatetimepicker();
+            
+            // Datepicker options
+            {#$(".datepicker").datepicker({
+                dateFormat: 'dd-mm-yy', 
+                showSecond: false,
+                controlType: 'select',
+                oneLine: true
+            });
+            // Datetimepicker options
+            $(".datetimepicker").datetimepicker({ 
+                dateFormat: 'dd-mm-yy',
+                timeFormat: 'HH:mm:ss',
+                hourText: 'Heures',
+                timeText: 'Horaire',
+                minuteText: 'Minutes',
+                showSecond: false,
+                controlType: 'select',
+                oneLine: true
+            });#}
         });
     </script>
 </body>

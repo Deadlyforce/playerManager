@@ -1,38 +1,40 @@
-{% extends '::base.html.twig' %}
-{% form_theme form 'AppBundle:Form:fields.html.twig' %}
+{% form_theme form 'AppBundle:Form:fields.html.twig' %}  
 
-{% block title %}Nouveau contact{% endblock %}
+{{ form_start(form, {'attr': {'id':'form-new-prospect'}}) }}   
+    {{ form_row(form.pseudo) }}
+    {{ form_row(form.prenom) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.age) }}
+    {{ form_row(form.ville) }}
+    {{ form_row(form.arrondissement) }}
+    {{ form_row(form.pays) }}
+    {{ form_row(form.numero) }}
+    {{ form_row(form.numeroDom) }}
+    {{ form_row(form.numeroEtranger) }}
+    {{ form_row(form.source) }}
+    {{ form_row(form.file) }}
+    {{ form_row(form.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
+    
+    {{ form_row(form.submit) }}
+    <div class="hidden">{{ form_rest(form) }}</div>
+{{ form_end(form) }}       
 
-{% block body -%}
-    <h1>Nouveau contact</h1>
+<script type="text/javascript"> 
 
-    {{ form_start(form, {'attr': {'id':'form-new-prospect'}}) }}   
-   
-    {{ form_end(form) }}
-
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('prospect') }}">
-                Back to the list
-            </a>
-        </li>
-    </ul>
+    $(document).ready(function(){
         
-    <script type="text/javascript"> 
+        getDatepicker();
 
-        $(document).ready(function(){
-            $('.row_arrondissement').hide();
-            
-            $('.form-input-ville').change(function(){
-                var ville = $(this).val().toLowerCase();
+        $('.form-input-ville').change(function(){
+            var ville = $(this).val().toLowerCase();
 
-                if(ville === 'paris'){
-                    $('.row_arrondissement').show('slow');
-                }else{
-                    $('.row_arrondissement').hide('slow');
-                }
-            });           
-        });
-        
-    </script>
-{% endblock %}
+            if(ville === 'paris'){
+                $('.row_arrondissement').show('slow');
+            }else{
+                $('.row_arrondissement').hide('slow');
+            }
+        });           
+    });
+
+</script>
+

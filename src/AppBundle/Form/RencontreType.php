@@ -15,12 +15,40 @@ class RencontreType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date')
-            ->add('lieu')
-            ->add('duree')
-            ->add('depensesTotal')
-            ->add('changementLieu')
-            ->add('listeLieux')
+            ->add('date', 'datetime', array(
+                'label' => 'Date',
+                'input' => 'datetime',
+        'widget' => 'single_text',
+        'date_format' => 'dd MM yyyy',
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
+            ->add('lieu', 'text', array(
+                'label' => 'Lieu',
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
+            ->add('duree', 'integer', array(
+                'label' => 'Durée',
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
+            ->add('depenses_total', 'integer', array(
+                'label' => 'Total dépenses',
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
+            ->add('changement_lieu', 'checkbox', array(
+                'label' => 'Changement de lieu',
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
+            ))
+            ->add('liste_lieux')
         ;
     }
     

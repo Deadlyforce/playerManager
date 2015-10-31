@@ -1,15 +1,12 @@
 {% extends '::base.html.twig' %}
+{% block title %}Nouvelle rencontre{% endblock %}
+{% form_theme form 'AppBundle:Form:fields.html.twig' %}
 
 {% block body -%}
-    <h1>Rencontre creation</h1>
+    <h3>Rencontre creation</h3>
 
     {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('rencontre') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <a href="{{ path('rencontre') }}">Back to the list</a>
+
 {% endblock %}

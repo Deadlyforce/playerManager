@@ -1,0 +1,15 @@
+# src/AppBundle/Resources/config/services.yml
+
+services:     
+            
+    app.form_type_extension:
+        class: AppBundle\Form\Extension\FormTypeExtension
+        tags: 
+            - {name: form.type_extension, alias: form}
+            
+    prospect_manager:
+        class: AppBundle\DependencyInjection\Prospect\ProspectManager
+        arguments: 
+            - @doctrine.orm.entity_manager
+            - @security.acl.provider
+            - @security.token_storage

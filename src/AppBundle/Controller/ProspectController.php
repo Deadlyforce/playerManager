@@ -9,6 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Prospect;
 use AppBundle\Form\ProspectType;
+use Symfony\Component\HttpFoundation\Response;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
@@ -24,7 +25,28 @@ use Symfony\Component\Security\Acl\Permission\MaskBuilder;
  */
 class ProspectController extends Controller
 {
-
+    /**
+     * Returns a form new prospect
+     * 
+     * @Route("ajax_form_new", name="ajax_new_prospect_form")
+     * @Template("AppBundle:ajax.html.twig")
+     */
+    public function ajax_newFormNewAction()
+    {
+        $prospect = new Prospect();
+        
+        $prospect->setAge(23); // Age par défaut
+        
+        $datetime =  new \DateTime('', new \DateTimeZone('Europe/Paris')); // Date du jour
+        $prospect->setDateCreation($datetime);
+        
+        $form = $this->createCreateForm($prospect)->createView();
+        $form_view = $this->renderView("AppBundle:Prospect:new.html.twig", array('form' => $form));
+                
+        return new Response($form_view);
+    }
+    
+    
     /**
      * Lists all Prospect entities.
      *
@@ -35,27 +57,26 @@ class ProspectController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('AppBundle:Prospect')->findAll();
+        $prospects = $em->getRepository('AppBundle:Prospect')->findAll();
         
         // Vérification d'accès ACL
         $securityContext = $this->get('security.context');
        
-        foreach($entities as $prospect){            
+        foreach($prospects as $prospect){            
             if(FALSE === $securityContext->isGranted('VIEW', $prospect)){
                 
             }else{                
-                $allowedProspect[] = $prospect;
+                $allowedProspects[] = $prospect;
             }        
         }
         
-        if(!isset($allowedProspect)){
-            $allowedProspect = NULL;
+        if(!isset($allowedProspects)){
+            $allowedProspects = NULL;
         }
         // End of check
         
         return array(
-//            'entities' => $entities,
-            'entities' => $allowedProspect,
+            'prospects' => $allowedProspects,
         );
     }
     
@@ -68,31 +89,34 @@ class ProspectController extends Controller
      */
     public function createAction(Request $request)
     {
-        $entity = new Prospect();
+        $manager = $this->get('prospect_manager');
+        $prospect = new Prospect();
         
         // Récup utilisateur et chargement de son id dans l'entité Prospect
-        $user = $this->get('security.context')->getToken()->getUser();
-        $entity->setUserId($user->getId());
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $prospect->setUserId($user->getId());
         // Récup fin
         
-        $form = $this->createCreateForm($entity);
+        $form = $this->createCreateForm($prospect);
         $form->handleRequest($request);
         
         if ($form->isValid()) {            
-            // Création d'ACL
-            $this->createACL($entity);
-            
-//            $entity->upload();
             
             $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
+            $em->persist($prospect);
             $em->flush();
+            
+            $manager->createACL($prospect); // Création d'ACL
+            
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($prospect);
+//            $em->flush();
 
-            return $this->redirect($this->generateUrl('prospect_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('prospect_show', array('id' => $prospect->getId())));
         }
 
         return array(
-            'entity' => $entity,
+            'prospect' => $prospect,
             'form'   => $form->createView(),
         );
     }
@@ -173,7 +197,7 @@ class ProspectController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
-            'prospect'      => $prospect,
+            'prospect' => $prospect,
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -227,7 +251,12 @@ class ProspectController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', 'submit', array(
+            'label' => 'Enregistrer',
+            'attr' => array(
+                'class' => 'btn btn-default'
+            )
+        ));
 
         return $form;
     }
@@ -242,26 +271,25 @@ class ProspectController extends Controller
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AppBundle:Prospect')->find($id);
+        $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
 
-        if (!$entity) {
+        if (!$prospect) {
             throw $this->createNotFoundException('Unable to find Prospect entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
+        $editForm = $this->createEditForm($prospect);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
-//            $entity->upload();
+            
             $em->flush();
 
-//            return $this->redirect($this->generateUrl('prospect_edit', array('id' => $id)));
             return $this->redirect($this->generateUrl('prospect'));
         }
 
         return array(
-            'entity'      => $entity,
+            'prospect'      => $prospect,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
@@ -280,16 +308,15 @@ class ProspectController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Prospect')->find($id);
+            $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
 
-            if (!$entity) {
+            if (!$prospect) {
                 throw $this->createNotFoundException('Unable to find Prospect entity.');
-            }
+            }            
             
-            // Suppression des ACL
-            $this->deleteACL($entity);
+            $this->deleteACL($prospect); // Suppression des ACL
 
-            $em->remove($entity);
+            $em->remove($prospect);
             $em->flush();
         }
 
@@ -308,7 +335,12 @@ class ProspectController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('prospect_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', 'submit', array(
+                'label' => 'Supprimer',
+                'attr' => array(
+                    'class' => 'btn btn-default'
+                )
+            ))
             ->getForm()
         ;
     }
@@ -327,26 +359,23 @@ class ProspectController extends Controller
     /**
      * Création d'un ACL
      * 
-     * @param Prospect $entity
+     * @param Prospect $prospect
      */
-    private function createACL(Prospect $entity){
-        $entityManager = $this->get('doctrine.orm.default_entity_manager');
-        $entityManager->persist($entity);
-        $entityManager->flush();
-
-        // Création de l'ACL
-        $aclProvider = $this->get('security.acl.provider');
-        $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-        $acl = $aclProvider->createAcl($objectIdentity);
-
-        // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
-        $securityContext = $this->get('security.context');
-        $user = $securityContext->getToken()->getUser();
-        $securityIdentity = UserSecurityIdentity::fromAccount($user);
-
-        // Donne accès au propriétaire
-        $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-
-        $aclProvider->updateAcl($acl);
-    }
+//    private function createACL(Prospect $prospect){       
+//
+//        // Création de l'ACL
+//        $aclProvider = $this->get('security.acl.provider');
+//        $objectIdentity = ObjectIdentity::fromDomainObject($prospect);
+//        $acl = $aclProvider->createAcl($objectIdentity);
+//
+//        // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
+//        $securityContext = $this->get('security.context');
+//        $user = $securityContext->getToken()->getUser();
+//        $securityIdentity = UserSecurityIdentity::fromAccount($user);
+//
+//        // Donne accès au propriétaire
+//        $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
+//
+//        $aclProvider->updateAcl($acl);
+//    }
 }

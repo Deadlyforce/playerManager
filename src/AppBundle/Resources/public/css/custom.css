@@ -25,11 +25,28 @@ table.dataTable thead th{
     padding: 10px 10px;
 }
 
+/******************************* PAGES GLOBAL ***********************************/
+.page-header{
+    border-bottom: 1px solid rgb(221, 221, 221);
+    margin-bottom: 45px;
+    padding-bottom: 20px;
+}
+
 /******************************* PROSPECTS - INDEX ***********************************/
 
 td.photo_principale img{
     height: 100px;
 }
+
+/******************************* PROSPECTS - NEW ***********************************/
+
+#modal_form_new{
+    display: none;
+}
+.row_arrondissement{
+    display: none;
+}
+
 
 /******************************* PROSPECTS - SHOW ***********************************/
 

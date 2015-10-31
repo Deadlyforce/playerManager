@@ -28,7 +28,6 @@ class RencontreController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
         $entities = $em->getRepository('AppBundle:Rencontre')->findAll();
 
         return array(

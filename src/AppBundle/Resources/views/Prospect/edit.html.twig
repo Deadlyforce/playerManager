@@ -5,24 +5,34 @@
 {% block body -%}
     <h1>Modifier un contact</h1>
 
-{#    {{ form(edit_form) }}#}
     {{ form_start(edit_form, {'attr': {'id':'form-edit-prospect'}}) }}   
-   
+        {{ form_row(edit_form.pseudo) }}
+        {{ form_row(edit_form.prenom) }}
+        {{ form_row(edit_form.nom) }}
+        {{ form_row(edit_form.age) }}
+        {{ form_row(edit_form.ville) }}
+        {{ form_row(edit_form.arrondissement) }}
+        {{ form_row(edit_form.pays) }}
+        {{ form_row(edit_form.numero) }}
+        {{ form_row(edit_form.numeroDom) }}
+        {{ form_row(edit_form.numeroEtranger) }}
+        {{ form_row(edit_form.source) }}
+        {{ form_row(edit_form.file) }}
+        {{ form_row(edit_form.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
+
+        {{ form_row(edit_form.submit) }}
+        <div class="hidden">{{ form_rest(edit_form) }}</div>
     {{ form_end(edit_form) }}
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('prospect') }}">
-                Back to the list
-            </a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+    
+    <a href="{{ path('prospect') }}">Back to the list</a><br>
+        
+    {{ form(delete_form) }}
+    
         
     <script type="text/javascript"> 
 
-        $(document).ready(function(){
-            $('.row_arrondissement').hide();
+        $(document).ready(function(){            
             
             $('.form-input-ville').change(function(){
                 var ville = $(this).val().toLowerCase();

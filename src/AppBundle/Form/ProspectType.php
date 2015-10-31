@@ -90,14 +90,14 @@ class ProspectType extends AbstractType
                     'class' => 'form-input'
                     ),
                 'row_attr' => array(
-                    'class' => 'row_arrondissement'
+                    'class' => 'form_row row_arrondissement'
                 )
             ))
             ->add('pays', 'text', array(
                 'required' => TRUE, 
+//                'data' => 'France',
                 'attr' => array(
-                    'class' => 'form-input',
-                    'value' => 'France'
+                    'class' => 'form-input'                    
                 ),
                 'row_attr' => array(
                     'class' => 'form_row'
@@ -134,7 +134,10 @@ class ProspectType extends AbstractType
                 )
             ))
             ->add('source', 'entity', array(
-                'class' => 'AppBundle:Source'
+                'class' => 'AppBundle:Source',
+                'row_attr' => array(
+                    'class' => 'form_row'
+                )
             ))
             ->add('file', 'file', array(
                 'required' => FALSE, 
@@ -152,12 +155,16 @@ class ProspectType extends AbstractType
 		'model_timezone' => 'Europe/Paris',
 		'view_timezone' => 'Europe/Paris',
 		'input' => 'datetime',
-		'widget' => 'choice',
-		'date_format' => 'dd MM yyyy',
+		'widget' => 'single_text',
+		'format' => 'dd-MM-yyyy',
                 'row_attr' => array(
                     'class' => 'form_row'
                 )
-            ))            
+            ))
+            ->add('relation', new RelationType(), array(
+                
+            ))
+                
         ;
     }
     

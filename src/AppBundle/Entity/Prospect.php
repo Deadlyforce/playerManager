@@ -49,7 +49,7 @@ class Prospect
     /**
      * @var Relation 
      * 
-     * @ORM\OneToOne(targetEntity="Relation", inversedBy="prospect", cascade={"persist", "merge", "remove"})
+     * @ORM\OneToOne(targetEntity="Relation", inversedBy="prospect", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="relation_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $relation;
@@ -123,7 +123,7 @@ class Prospect
     /**
      * @var string
      *
-     * @ORM\Column(name="pays", type="string", length=255)
+     * @ORM\Column(name="pays", type="string", length=255, nullable=true)
      */
     private $pays;
 
@@ -139,35 +139,28 @@ class Prospect
      *
      * @ORM\Column(name="numero_dom", type="string", length=10, nullable=true)
      */
-    private $numeroDom;
+    private $numero_dom;
 
     /**
      * @var string
      *
      * @ORM\Column(name="numero_etranger", type="string", length=50, nullable=true)
      */
-    private $numeroEtranger;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="site", type="string")
-     */
-//    private $site;
+    private $numero_etranger;   
 
     /**
      * @var string
      *
      * @ORM\Column(name="photo_principale", type="string", length=255, nullable=true)
      */
-    private $photoPrincipale;
+    private $photo_principale;
     
     /**
-     * @var \Datetime 
+     * @var \Date
      * 
-     * @ORM\Column(name="date_creation", type="datetime")
+     * @ORM\Column(name="date_creation", type="date")
      */
-    private $dateCreation;    
+    private $date_creation;    
     
     /**
      *
@@ -175,6 +168,7 @@ class Prospect
      */
     private $file;
     
+    // GETTERS AND SETTERS *****************************************************
 
     /**
      * Get id
@@ -408,70 +402,70 @@ class Prospect
     }
     
     /**
-     * Set numeroDom
+     * Set numero_dom
      *
-     * @param string $numeroDom
+     * @param string $numero_dom
      * @return Prospect
      */
-    public function setNumeroDom($numeroDom)
+    public function setNumeroDom($numero_dom)
     {
-        $this->numeroDom = $numeroDom;
+        $this->numero_dom = $numero_dom;
         return $this;
     }
 
     /**
-     * Get numeroDom
+     * Get numero_dom
      *
      * @return string 
      */
     public function getNumeroDom()
     {
-        return $this->numeroDom;
+        return $this->numero_dom;
     }
 
     /**
-     * Set numeroEtranger
+     * Set numero_etranger
      *
-     * @param string $numeroEtranger
+     * @param string $numero_etranger
      * @return Prospect
      */
-    public function setNumeroEtranger($numeroEtranger)
+    public function setNumeroEtranger($numero_etranger)
     {
-        $this->numeroEtranger = $numeroEtranger;
+        $this->numero_etranger = $numero_etranger;
         return $this;
     }
 
     /**
-     * Get numeroEtranger
+     * Get numero_etranger
      *
      * @return string 
      */
     public function getNumeroEtranger()
     {
-        return $this->numeroEtranger;
+        return $this->numero_etranger;
     }
 
     /**
-     * Set photoPrincipale
+     * Set photo_principale
      *
-     * @param string $photoPrincipale
+     * @param string $photo_principale
      * @return Prospect
      */
-    public function setPhotoPrincipale($photoPrincipale)
+    public function setPhotoPrincipale($photo_principale)
     {
-        $this->photoPrincipale = $photoPrincipale;
+        $this->photo_principale = $photo_principale;
         
         return $this;
     }
 
     /**
-     * Get photoPrincipale
+     * Get photo_principale
      *
      * @return string 
      */
     public function getPhotoPrincipale()
     {
-        return $this->photoPrincipale;
+        return $this->photo_principale;
     }
             
     /**
@@ -484,12 +478,12 @@ class Prospect
         $this->file = $file;
         
         // check if we have an old image path
-        if(isset($this->photoPrincipale)){
+        if(isset($this->photo_principale)){
             // store the old name to delete after the update
-            $this->temp = $this->photoPrincipale;
-            $this->photoPrincipale = NULL;
+            $this->temp = $this->photo_principale;
+            $this->photo_principale = NULL;
         }else{
-            $this->photoPrincipale = 'initial';
+            $this->photo_principale = 'initial';
         }
     }
     
@@ -620,7 +614,7 @@ class Prospect
      */
     protected function getUploadAbsolutePath()
     {
-        return __DIR__ . '/../../../../web/' . $this->getUploadPath();
+        return __DIR__ . '/../../../web/' . $this->getUploadPath();
     }
     
     /**
@@ -659,7 +653,9 @@ class Prospect
             // Generate a unique name
             $filename = sha1(uniqid(mt_rand(), TRUE));
             $extension = $this->getFile()->guessExtension();
-            $this->photoPrincipale = $filename.'.'.$extension;
+            $this->photo_principale = $filename.'.'.$extension;
+var_dump($this->photo_principale);
+
         }
     }
     
@@ -671,15 +667,21 @@ class Prospect
      */
     public function upload()
     {
+var_dump($this->getFile());
+
         // File property can be empty.
         if(NULL === $this->getFile()){
             return;
         }
-        
+var_dump($this->getFile());
+var_dump($this->getUploadAbsolutePath());
+var_dump($this->photo_principale);
+var_dump($this->temp);
+      
         // if there is an error when moving the file, an exception will
         // be automatically thrown by move(). This will properly prevent
         // the entity from being persisted to the database on error
-        $this->getFile()->move($this->getUploadAbsolutePath(), $this->photoPrincipale);
+        $this->getFile()->move($this->getUploadAbsolutePath(), $this->photo_principale);
 
         // check if we have an old image
         if (isset($this->temp)) {
@@ -704,25 +706,25 @@ class Prospect
     }
     
     /**
-    * Set dateCreation
+    * Set date_creation
     *
-    * @param \DateTime $dateCreation
+    * @param \DateTime $date_creation
     * @return Prospect
     */
-   public function setDateCreation($dateCreation)
+   public function setDateCreation($date_creation)
    {
-           $this->dateCreation = $dateCreation;
+           $this->date_creation = $date_creation;
 
            return $this;
    }
 
    /**
-    * Get dateCreation
+    * Get date_creation
     *
     * @return \DateTime 
     */
    public function getDateCreation()
    {
-           return $this->dateCreation;
+           return $this->date_creation;
    }
 }
