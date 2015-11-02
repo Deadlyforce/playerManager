@@ -105,7 +105,7 @@
                     $("#modal_form_new_body").html(response); // coller la vue dans une modale                  
                     $('#modal_form_new').appendTo('body');
                     
-                    $(".loader_standard").hide(function(){
+                    $(".loader_standard").hide(200, function(){
                         $(".overlay").hide();   
                     });                                     
                     
@@ -113,22 +113,38 @@
                 });
             });
             
-            // Ajax: delete prospect
             $(".delete").click(function(event){
                 event.preventDefault();
                 
+                $.confirm({
+                    confirm: function(){
+                        ajaxDeleteProspect();
+                    },
+                    cancel: function(){
+                        console.log('the user clicked cancel');
+                    }
+                });
+            });
+            
+            /**
+             * Deletes a prospect with ajax
+             */
+            function ajaxDeleteProspect()
+            {
                 var prospect_id = $(this).data("id");
                 var csrf_token = $(this).data("token");
-                
+
                 var url = $("#path_delete_prospect").data("path");
                 url = url.replace('id', prospect_id);
-                
+
                 var data = {'csrf_token': csrf_token};
-                
+
                 $.post(url, data, function(response){
                     console.log(response);
                 });
-            });
+            }
+
+            
         });
     </script>
 {% endblock %}
