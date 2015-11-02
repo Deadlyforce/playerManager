@@ -32,10 +32,44 @@ table.dataTable thead th{
     padding-bottom: 20px;
 }
 
+td.actions a{
+    margin-right: 5px;
+    font-size: 1.2em;
+}
+
+.overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+    display: none;  // masqué de base
+}
+.loader_standard{
+    width: 360px;
+    height: 200px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -180px;
+    background-color: #fff;
+    border-radius: 2px;
+    text-align: center;
+    z-index: 11;
+    padding: 60px 10px 25px 10px;
+    border: 1px solid #ddd;
+    
+    display: none;  // masqué de base
+}
+
 /******************************* PROSPECTS - INDEX ***********************************/
 
 td.photo_principale img{
-    height: 100px;
+    height: 75px;
 }
 
 /******************************* PROSPECTS - NEW ***********************************/

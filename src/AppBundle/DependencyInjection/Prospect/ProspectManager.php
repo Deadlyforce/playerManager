@@ -29,7 +29,7 @@ class ProspectManager
      * 
      * @param Prospect $prospect
      */
-    public function createACL(Prospect $prospect)
+    public function createACL($prospect)
     {              
         // Création de l'ACL        
         $objectIdentity = ObjectIdentity::fromDomainObject($prospect);

@@ -15,8 +15,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 // ACL
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
-use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+//use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
+//use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
 /**
  * Prospect controller.
@@ -29,6 +29,7 @@ class ProspectController extends Controller
      * Returns a form new prospect
      * 
      * @Route("ajax_form_new", name="ajax_new_prospect_form")
+     * @Method({"GET"})
      * @Template("AppBundle:ajax.html.twig")
      */
     public function ajax_newFormNewAction()
@@ -44,6 +45,39 @@ class ProspectController extends Controller
         $form_view = $this->renderView("AppBundle:Prospect:new.html.twig", array('form' => $form));
                 
         return new Response($form_view);
+    }
+    
+    /**
+     * Returns a form new prospect
+     * 
+     * @Route("{id}/ajax_delete", name="ajax_delete_prospect")
+     * @Method({"POST"})
+     * @Template("AppBundle:ajax.html.twig")
+     */
+    public function ajax_deleteAction(Request $request, $id)
+    {
+        $data = $request->request->all();
+        $token = $data['csrf_token'];
+       
+        $csrf = $this->get('form.csrf_provider');
+           
+        if ($csrf->isCsrfTokenValid('', $token)) {
+            
+            $em = $this->getDoctrine()->getManager();
+            $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
+
+            if (!$prospect) {
+                throw $this->createNotFoundException('Unable to find Prospect entity.');
+            }            
+            
+            $this->deleteACL($prospect); // Suppression des ACL
+            $this->deleteACL($prospect->getRelation()); // Suppression des ACL
+
+            $em->remove($prospect);
+            $em->flush();
+        }
+                
+        return new Response('Le prospect a bien été supprimé');
     }
     
     
@@ -75,8 +109,12 @@ class ProspectController extends Controller
         }
         // End of check
         
+        $csrf = $this->get('form.csrf_provider');
+        $csrf_token = $csrf->generateCsrfToken('');
+        
         return array(
             'prospects' => $allowedProspects,
+            'csrf_token' => $csrf_token
         );
     }
     
@@ -107,10 +145,7 @@ class ProspectController extends Controller
             $em->flush();
             
             $manager->createACL($prospect); // Création d'ACL
-            
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($prospect);
-//            $em->flush();
+            $manager->createACL($prospect->getRelation()); // Création d'ACL         
 
             return $this->redirect($this->generateUrl('prospect_show', array('id' => $prospect->getId())));
         }
@@ -270,6 +305,8 @@ class ProspectController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        $manager = $this->get('prospect_manager');
+        
         $em = $this->getDoctrine()->getManager();
         $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
 
@@ -284,7 +321,9 @@ class ProspectController extends Controller
         if ($editForm->isValid()) {
             
             $em->flush();
-
+            
+//            $manager->createACL($prospect);
+            
             return $this->redirect($this->generateUrl('prospect'));
         }
 
@@ -348,34 +387,12 @@ class ProspectController extends Controller
     /**
      * Suppression des ACL associés
      * 
-     * @param Prospect $entity
+     * @param $entity
      */
-    private function deleteACL(Prospect $entity){        
+    private function deleteACL($entity){        
         $aclProvider = $this->get('security.acl.provider');
         $objectIdentity = ObjectIdentity::fromDomainObject($entity);
         $aclProvider->deleteAcl($objectIdentity);            
     }
-    
-    /**
-     * Création d'un ACL
-     * 
-     * @param Prospect $prospect
-     */
-//    private function createACL(Prospect $prospect){       
-//
-//        // Création de l'ACL
-//        $aclProvider = $this->get('security.acl.provider');
-//        $objectIdentity = ObjectIdentity::fromDomainObject($prospect);
-//        $acl = $aclProvider->createAcl($objectIdentity);
-//
-//        // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
-//        $securityContext = $this->get('security.context');
-//        $user = $securityContext->getToken()->getUser();
-//        $securityIdentity = UserSecurityIdentity::fromAccount($user);
-//
-//        // Donne accès au propriétaire
-//        $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-//
-//        $aclProvider->updateAcl($acl);
-//    }
+   
 }

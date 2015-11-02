@@ -76,9 +76,9 @@ class RelationController extends Controller
         
         // Implémentation des ACL
         if($form->isValid()){
-            $entityManager = $this->get('doctrine.orm.default_entity_manager');
-            $entityManager->persist($entity);
-            $entityManager->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($entity);
+            $em->flush();
             
             // Création de l'ACL
             $aclProvider = $this->get('security.acl.provider');
@@ -165,7 +165,8 @@ class RelationController extends Controller
         
         // Vérification d'accès ACL
         $securityContext = $this->get('security.context');
-        
+//var_dump($securityContext);
+//die();
         if(FALSE === $securityContext->isGranted('VIEW', $entity)){
             throw new AccessDeniedException();
         }
