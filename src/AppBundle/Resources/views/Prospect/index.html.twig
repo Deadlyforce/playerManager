@@ -7,7 +7,7 @@
         <a href="{{ path('prospect_new') }}" id="add_prospect" title ="Ajouter un contact"><i class="fa fa-plus"></i> Ajouter un contact</a>
     </div>
     
-    <table class="table datatable">
+    <table id="table-prospects">
         <thead>
             <tr>
                 <th>Pseudo</th>
@@ -46,7 +46,7 @@
                 <td>
                     {% if prospect.dateCreation %}{{ prospect.dateCreation|date('d-m-Y') }}{% endif %}
                 </td>
-                <td class="actions">
+                <td>
                     <a class="" href="{{ path('prospect_show', { 'id': prospect.id }) }}"><i class="fa fa-eye"></i></a>                       
                     <a class="" href="{{ path('prospect_edit', { 'id': prospect.id }) }}"><i class="fa fa-pencil-square-o"></i></a>  
                     <a href="#" class="delete" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete"><i class="fa fa-trash-o"></i></a>
@@ -87,8 +87,42 @@
     <div class="hidden" id="path_form_new_prospect" data-path="{{ path("ajax_new_prospect_form") }}"></div>
     <div class="hidden" id="path_delete_prospect" data-path="{{ path("ajax_delete_prospect", {'id': 'id'}) }}"></div>
         
+    {% block javascript %}
+        {% javascripts 
+            'bundles/app/js/prospect_index.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+    
     <script type="text/javascript">
         $(document).ready(function(){                   
+            
+            $.fn.dataTable.moment('DD-MM-YYYY' );
+            
+            initTableProspects();
+            
+            function initTableProspects()
+            {
+                $("#table-prospects").DataTable({
+                    "order": [[ 9, "desc" ]],
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        { 
+                            className: "actions",
+                            "width": "90px"
+                        }
+                    ]
+                });
+            }
             
             // Ajax: get add form
             $("#add_prospect").click(function(event){
@@ -113,12 +147,15 @@
                 });
             });
             
-            $(".delete").click(function(event){
+            $("#table-prospects").on("click", ".delete", function(event){
                 event.preventDefault();
+                
+                var prospect_id = $(this).data("id");
+                var csrf_token = $(this).data("token");
                 
                 $.confirm({
                     confirm: function(){
-                        ajaxDeleteProspect();
+                        ajaxDeleteProspect(prospect_id, csrf_token);
                     },
                     cancel: function(){
                         console.log('the user clicked cancel');
@@ -128,19 +165,20 @@
             
             /**
              * Deletes a prospect with ajax
+             * 
+             * @param {int} prospect_id
+             * @param {string} csrf_token
+             * @returns {undefined}
              */
-            function ajaxDeleteProspect()
+            function ajaxDeleteProspect(prospect_id, csrf_token)
             {
-                var prospect_id = $(this).data("id");
-                var csrf_token = $(this).data("token");
-
                 var url = $("#path_delete_prospect").data("path");
                 url = url.replace('id', prospect_id);
 
                 var data = {'csrf_token': csrf_token};
 
                 $.post(url, data, function(response){
-                    console.log(response);
+console.log(response);
                 });
             }
 

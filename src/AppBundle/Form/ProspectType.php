@@ -2,34 +2,28 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ProspectType extends AbstractType
-{
-    protected $ageBracket;
-    protected $parisArrondissements;
-    
+{   
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
-    {
+    {       
         
-        // Chargement de la tranche d'âges
-        for($i=18; $i<=50; $i++){
-            $ageBracket[$i] = $i;
-        }
-        
-        // Chargement de la tranche d'âges
-        for($i=1; $i<=20; $i++){
-            $parisArrondissements[$i] = $i;
-        }
         
         $builder
-            ->add('pseudo', 'text', array(
+            ->add('pseudo', TextType::class, array(
                 'required' => FALSE, 
                 'label_attr' => array(
                     'class' => 'control-label'
@@ -41,7 +35,7 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('prenom', 'text', array(
+            ->add('prenom', TextType::class, array(
                 'required' => TRUE, 
                 'label' => 'Prénom', 
                 'label_attr' => array(
@@ -54,7 +48,7 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('nom', 'text', array(
+            ->add('nom', TextType::class, array(
                 'required' => FALSE, 
                 'label' => 'Nom', 
                 'label_attr' => array(
@@ -67,13 +61,14 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('age', 'choice', array(
-                'choices' => $ageBracket,                
+            ->add('age', ChoiceType::class, array(
+                'choices' => $this->getAgeBracket(),
+                'choices_as_values' => true,
                 'row_attr' => array(
                     'class' => 'form_row'
                 )
             ))
-            ->add('ville', 'text', array(
+            ->add('ville', TextType::class, array(
                 'required' => FALSE, 
                 'attr' => array(
                     'placeholder' => 'Paris',
@@ -83,9 +78,10 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('arrondissement', 'choice', array(
+            ->add('arrondissement', ChoiceType::class, array(
                 'required' => FALSE,
-                'choices' => $parisArrondissements,                
+                'choices' => $this->getArrondissements(), 
+                'choices_as_values' => true,
                 'attr' => array(                    
                     'class' => 'form-input'
                     ),
@@ -93,7 +89,7 @@ class ProspectType extends AbstractType
                     'class' => 'form_row row_arrondissement'
                 )
             ))
-            ->add('pays', 'text', array(
+            ->add('pays', TextType::class, array(
                 'required' => TRUE, 
 //                'data' => 'France',
                 'attr' => array(
@@ -103,7 +99,7 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('numero', 'text', array(
+            ->add('numero', TextType::class, array(
                 'required' => FALSE,
                 'label' => 'Tel portable',
                 'attr' => array(
@@ -113,7 +109,7 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('numeroDom', 'text', array(
+            ->add('numeroDom', TextType::class, array(
                 'required' => FALSE,
                 'label' => 'Tel Domicile',
                 'attr' => array(
@@ -123,7 +119,7 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('numeroEtranger', 'text', array(
+            ->add('numeroEtranger', TextType::class, array(
                 'required' => FALSE, 
                 'label' => 'Tel étranger',
                 'attr' => array(
@@ -133,13 +129,13 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('source', 'entity', array(
+            ->add('source', EntityType::class, array(
                 'class' => 'AppBundle:Source',
                 'row_attr' => array(
                     'class' => 'form_row'
                 )
             ))
-            ->add('file', 'file', array(
+            ->add('file', FileType::class, array(
                 'required' => FALSE, 
                 'label' => 'Photo principale',
                 'attr' => array(
@@ -149,7 +145,7 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('dateCreation', 'datetime', array(
+            ->add('dateCreation', DateTimeType::class, array(
 		'required' => FALSE,
 		'label' => 'Date de création: ',
 		'model_timezone' => 'Europe/Paris',
@@ -171,7 +167,7 @@ class ProspectType extends AbstractType
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Prospect'
@@ -181,8 +177,38 @@ class ProspectType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'appbundle_prospect';
     }
+    
+    /**
+     * Returns age bracket
+     * 
+     * @return Array
+     */
+    private function getAgeBracket()
+    {
+        // Chargement de la tranche d'âges
+        for($i=18; $i<=50; $i++){
+            $ageBracket[$i] = $i;
+        }
+        
+        return $ageBracket;
+    }
+    
+    /**
+     * Returns Paris arrondissements
+     * 
+     * @return Array
+     */
+    private function getArrondissements()
+    {
+        // Chargement de la tranche d'âges
+        for($i=1; $i<=20; $i++){
+            $parisArrondissements[$i] = $i;
+        }
+        
+        return $parisArrondissements;
+    } 
 }

@@ -38,12 +38,10 @@ class RelationController extends Controller
 
         $entities = $em->getRepository('AppBundle:Relation')->findAll();
 
-        // Vérification d'accès ACL
-        $securityContext = $this->get('security.context');
-        
+        // Vérification d'accès ACL       
         // Check for VIEW access
         foreach($entities as $relation){            
-            if(FALSE === $securityContext->isGranted('VIEW', $relation)){
+            if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $relation)){
                 // Do nothing
             }else{                
                 $allowedEntities[] = $relation;
@@ -86,8 +84,7 @@ class RelationController extends Controller
             $acl = $aclProvider->createAcl($objectIdentity);
             
             // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
-            $securityContext = $this->get('security.context');
-            $user = $securityContext->getToken()->getUser();
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $securityIdentity = UserSecurityIdentity::fromAccount($user);
             
             // Donne accès au propriétaire
@@ -164,10 +161,7 @@ class RelationController extends Controller
         }
         
         // Vérification d'accès ACL
-        $securityContext = $this->get('security.context');
-//var_dump($securityContext);
-//die();
-        if(FALSE === $securityContext->isGranted('VIEW', $entity)){
+        if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $entity)){
             throw new AccessDeniedException();
         }
         // Vérification fin
@@ -197,10 +191,8 @@ class RelationController extends Controller
             throw $this->createNotFoundException('Unable to find Relation entity.');
         }
         
-        // Vérification d'accès ACL
-        $securityContext = $this->get('security.context');
-        
-        if(FALSE === $securityContext->isGranted('EDIT', $entity)){
+        // Vérification d'accès ACL       
+        if(FALSE === $this->get('security.authorization_checker')->isGranted('EDIT', $entity)){
             throw new AccessDeniedException();
         }
         // Vérification fin

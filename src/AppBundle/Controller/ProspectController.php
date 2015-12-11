@@ -2,19 +2,17 @@
 
 namespace AppBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use AppBundle\Entity\Prospect;
+use AppBundle\Form\ProspectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Prospect;
-use AppBundle\Form\ProspectType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
-// ACL
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\Security\Csrf\CsrfToken;
 //use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
 //use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 
@@ -59,9 +57,9 @@ class ProspectController extends Controller
         $data = $request->request->all();
         $token = $data['csrf_token'];
        
-        $csrf = $this->get('form.csrf_provider');
+        $csrf = $this->get('security.csrf.token_manager');
            
-        if ($csrf->isCsrfTokenValid('', $token)) {
+        if ($csrf->isTokenValid(new CsrfToken('', $token))) {
             
             $em = $this->getDoctrine()->getManager();
             $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
@@ -93,11 +91,9 @@ class ProspectController extends Controller
         $em = $this->getDoctrine()->getManager();
         $prospects = $em->getRepository('AppBundle:Prospect')->findAll();
         
-        // Vérification d'accès ACL
-        $securityContext = $this->get('security.context');
-       
+        // Vérification d'accès ACL       
         foreach($prospects as $prospect){            
-            if(FALSE === $securityContext->isGranted('VIEW', $prospect)){
+            if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $prospect)){
                 
             }else{                
                 $allowedProspects[] = $prospect;
@@ -107,11 +103,11 @@ class ProspectController extends Controller
         if(!isset($allowedProspects)){
             $allowedProspects = NULL;
         }
-        // End of check
-        
-        $csrf = $this->get('form.csrf_provider');
-        $csrf_token = $csrf->generateCsrfToken('');
-        
+        // End of check        
+                
+        $tokenManager = $this->get('security.csrf.token_manager');        
+        $csrf_token = $tokenManager->refreshToken('');
+                
         return array(
             'prospects' => $allowedProspects,
             'csrf_token' => $csrf_token
@@ -165,7 +161,7 @@ class ProspectController extends Controller
      */
     private function createCreateForm(Prospect $entity)
     {
-        $form = $this->createForm(new ProspectType(), $entity, array(
+        $form = $this->createForm(ProspectType::class, $entity, array(
             'action' => $this->generateUrl('prospect_create'),
             'method' => 'POST',
         ));
@@ -221,10 +217,8 @@ class ProspectController extends Controller
             throw $this->createNotFoundException('Unable to find Prospect entity.');
         }
         
-        // Vérification d'accès ACL
-        $securityContext = $this->get('security.context');
-        
-        if(FALSE === $securityContext->isGranted('VIEW', $prospect)){
+        // Vérification d'accès ACL       
+        if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $prospect)){
             throw new AccessDeniedException();
         }
         // Vérification fin
@@ -254,10 +248,8 @@ class ProspectController extends Controller
             throw $this->createNotFoundException('Unable to find Prospect entity.');
         }
         
-        // Vérification d'accès ACL
-        $securityContext = $this->get('security.context');
-        
-        if(FALSE === $securityContext->isGranted('EDIT', $entity)){
+        // Vérification d'accès ACL       
+        if(FALSE === $this->get('security.authorization_checker')->isGranted('EDIT', $entity)){
             throw new AccessDeniedException();
         }
         // Vérification fin
@@ -281,7 +273,7 @@ class ProspectController extends Controller
     */
     private function createEditForm(Prospect $entity)
     {
-        $form = $this->createForm(new ProspectType(), $entity, array(
+        $form = $this->createForm(ProspectType::class, $entity, array(
             'action' => $this->generateUrl('prospect_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));

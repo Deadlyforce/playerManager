@@ -10,6 +10,6 @@ services:
     prospect_manager:
         class: AppBundle\DependencyInjection\Prospect\ProspectManager
         arguments: 
-            - @doctrine.orm.entity_manager
-            - @security.acl.provider
-            - @security.token_storage
+            - '@doctrine.orm.entity_manager'
+            - '@security.acl.provider'
+            - '@security.token_storage'

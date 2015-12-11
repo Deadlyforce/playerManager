@@ -38,12 +38,11 @@ class EchangeController extends Controller
 
         $entities = $em->getRepository('AppBundle:Echange')->findAll();
         
-        // Vérification d'accès ACL
-        $securityContext = $this->get('security.context');
+        // Vérification d'accès ACL        
         
         // Check for VIEW access
         foreach($entities as $echange){            
-            if(FALSE === $securityContext->isGranted('VIEW', $echange)){
+            if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $echange)){
                 // Do nothing
             }else{                
                 $allowedEntities[] = $echange;
@@ -85,8 +84,7 @@ class EchangeController extends Controller
             $acl = $aclProvider->createAcl($objectIdentity);
             
             // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
-            $securityContext = $this->get('security.context');
-            $user = $securityContext->getToken()->getUser();
+            $user = $this->get('security.token_storage')->getToken()->getUser();
             $securityIdentity = UserSecurityIdentity::fromAccount($user);
             
             // Donne accès au propriétaire
@@ -163,10 +161,8 @@ class EchangeController extends Controller
             throw $this->createNotFoundException('Unable to find Echange entity.');
         }
         
-        // Vérification d'accès ACL
-        $securityContext = $this->get('security.context');
-        
-        if(FALSE === $securityContext->isGranted('VIEW', $entity)){
+        // Vérification d'accès ACL        
+        if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $entity)){
             throw new AccessDeniedException();
         }
         // Vérification fin
@@ -196,10 +192,8 @@ class EchangeController extends Controller
             throw $this->createNotFoundException('Unable to find Echange entity.');
         }
         
-        // Vérification d'accès ACL
-        $securityContext = $this->get('security.context');
-        
-        if(FALSE === $securityContext->isGranted('EDIT', $entity)){
+        // Vérification d'accès ACL       
+        if(FALSE === $this->get('security.authorization_checker')->isGranted('EDIT', $entity)){
             throw new AccessDeniedException();
         }
         // Vérification fin

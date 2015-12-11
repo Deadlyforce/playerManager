@@ -2,9 +2,15 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class RelationType extends AbstractType
 {
@@ -16,7 +22,7 @@ class RelationType extends AbstractType
     {
                 
         $builder
-            ->add('statut', 'choice', array(
+            ->add('statut', ChoiceType::class, array(
                 'required' => TRUE,
                 'choices' => array(
                     1 => 'On',
@@ -26,7 +32,7 @@ class RelationType extends AbstractType
                 'multiple' => FALSE,
                 'data' => 1
             ))
-            ->add('rencontre', 'choice', array(
+            ->add('rencontre', ChoiceType::class, array(
                 'required' => TRUE,
                 'choices' => array(
                     1 => 'Oui',
@@ -36,37 +42,37 @@ class RelationType extends AbstractType
                 'multiple' => FALSE,
                 'data' => 0
             ))
-            ->add('rencontreCount', 'integer', array(
+            ->add('rencontreCount', IntegerType::class, array(
                 'required' => FALSE,
                 'label' => 'Nombre de rencontres'
             ))
-            ->add('numero', 'checkbox', array(
+            ->add('numero', CheckboxType::class, array(
                 'required' => FALSE,
                 'label' => 'Numéro acquis',
                 'data' => FALSE
             ))
-            ->add('kc', 'checkbox', array(
+            ->add('kc', CheckboxType::class, array(
                 'required' => FALSE,
                 'label' => 'KC',
                 'data' => FALSE
             ))
-            ->add('fc', 'checkbox', array(
+            ->add('fc', CheckboxType::class, array(
                 'required' => FALSE,
                 'label' => 'FC',
                 'data' => FALSE
              ))
-            ->add('categorie', 'entity', array(
+            ->add('categorie', EntityType::class, array(
                 'class' => 'AppBundle:Categorie'
             ))
-            ->add('distance', 'checkbox', array(
+            ->add('distance', CheckboxType::class, array(
                 'required' => FALSE,
                 'label' => 'Problème de distance',
                 'data' => FALSE
             ))
-            ->add('flake', 'checkbox', array(
+            ->add('flake', CheckboxType::class, array(
                 'required' => FALSE
             ))
-            ->add('commentaire','textarea', array(
+            ->add('commentaire', TextareaType::class, array(
                 'required' => FALSE,
                 'label_attr' => array(
                     'class' => 'appbundle_relation_commentaire'
@@ -78,7 +84,7 @@ class RelationType extends AbstractType
     /**
      * @param OptionsResolverInterface $resolver
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Relation'
@@ -88,7 +94,7 @@ class RelationType extends AbstractType
     /**
      * @return string
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'appbundle_relation';
     }
