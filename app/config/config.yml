@@ -3,6 +3,17 @@ imports:
     - { resource: security.yml }
     - { resource: @AppBundle/Resources/config/admin.yml }
 
+# DoctrineExtensionBundle Configuration
+stof_doctrine_extensions:
+    uploadable:
+#        default_file_path: %kernel.root_dir%/../web/uploads
+        mime_type_guesser_class: Stof\DoctrineExtensionsBundle\Uploadable\MimeTypeGuesserAdapter
+        default_file_info_class: Stof\DoctrineExtensionsBundle\Uploadable\UploadedFileInfo
+        validate_writable_directory: false
+    orm:
+        default:
+            uploadable: true
+
 framework:
     #esi:             ~
     translator:      { fallback: "%locale%" }
@@ -206,6 +217,8 @@ sonata_doctrine_orm_admin:
                 percent:    SonataAdminBundle:CRUD:base_percent.html.twig
                 choice:     SonataAdminBundle:CRUD:show_choice.html.twig
                 url:        SonataAdminBundle:CRUD:show_url.html.twig
+                
+
 
 
 

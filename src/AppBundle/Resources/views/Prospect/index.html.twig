@@ -40,7 +40,7 @@
                 <td>{{ prospect.source }}</td>
                 <td class="photo_principale">
                     {% if prospect.photoPrincipale %}
-                        <img class="img-responsive" src="{{ asset(prospect.getPhotoPrincipaleWeb) }}" alt="{{ asset(prospect.getPhotoPrincipaleWeb) }}" />
+                        <img class="img-responsive" src="{{ asset(prospect.photoPrincipale) }}" alt="{{ asset(prospect.photoPrincipale) }}" />
                     {% endif %}
                 </td>
                 <td>
@@ -179,6 +179,7 @@
 
                 $.post(url, data, function(response){
 console.log(response);
+                    // TO DO : supprimer la ligne dataTable correspondante (retourner aussi l'id)
                 });
             }
 

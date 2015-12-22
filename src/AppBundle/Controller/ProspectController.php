@@ -13,8 +13,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Csrf\CsrfToken;
-//use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-//use Symfony\Component\Security\Acl\Permission\MaskBuilder;
+
 
 /**
  * Prospect controller.
@@ -70,6 +69,7 @@ class ProspectController extends Controller
             
             $this->deleteACL($prospect); // Suppression des ACL
             $this->deleteACL($prospect->getRelation()); // Suppression des ACL
+            $this->deleteACL($prospect->getPhoto()); // Suppression des ACL
 
             $em->remove($prospect);
             $em->flush();
@@ -90,7 +90,7 @@ class ProspectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $prospects = $em->getRepository('AppBundle:Prospect')->findAll();
-        
+       
         // Vérification d'accès ACL       
         foreach($prospects as $prospect){            
             if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $prospect)){
@@ -124,24 +124,33 @@ class ProspectController extends Controller
     public function createAction(Request $request)
     {
         $manager = $this->get('prospect_manager');
-        $prospect = new Prospect();
-        
-        // Récup utilisateur et chargement de son id dans l'entité Prospect
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        $prospect->setUserId($user->getId());
-        // Récup fin
+        $prospect = new Prospect();       
         
         $form = $this->createCreateForm($prospect);
-        $form->handleRequest($request);
+        $form->handleRequest($request);        
+        
+        // Récup utilisateur et chargement de son id dans l'entité Photo
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $photo = $prospect->getPhoto();
+        $photo->setUserId($user->getId());
+        // Récup fin
         
         if ($form->isValid()) {            
             
             $em = $this->getDoctrine()->getManager();
-            $em->persist($prospect);
+            $em->persist($prospect);    
+
+            $photo = $prospect->getPhoto();
+        
+            // STOF UPLOADABLE
+            $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+            $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+            
             $em->flush();
             
             $manager->createACL($prospect); // Création d'ACL
             $manager->createACL($prospect->getRelation()); // Création d'ACL         
+            $manager->createACL($prospect->getphoto()); // Création d'ACL         
 
             return $this->redirect($this->generateUrl('prospect_show', array('id' => $prospect->getId())));
         }
@@ -310,11 +319,31 @@ class ProspectController extends Controller
         $editForm = $this->createEditForm($prospect);
         $editForm->handleRequest($request);
 
-        if ($editForm->isValid()) {
+        // Récup utilisateur pour chargement de son id dans l'entité Photo
+        $user = $this->get('security.token_storage')->getToken()->getUser();       
+
+        if ($editForm->isValid()) {  
             
-            $em->flush();
-            
-//            $manager->createACL($prospect);
+            $photo = $prospect->getPhoto();      
+            // S'il s'agit d'une photo qui existait déjà, on ne recrée pas d'acl
+            $acl = ($photo instanceof \Doctrine\Common\Persistence\Proxy && $photo->__isInitialized()) ? false : true;
+               
+            // Si aucun choix utilisateur, upload simple sans se soucier de la photo
+            if($photo === null){
+                $em->flush();
+            }else{
+                $photo->setUserId($user->getId());
+                
+                // STOF UPLOADABLE
+                $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+                $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+                
+                $em->flush();
+                
+                if(!$acl){
+                    $manager->createACL($photo);
+                }               
+            }           
             
             return $this->redirect($this->generateUrl('prospect'));
         }

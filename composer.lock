@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "60cf8c346f31e4504e92770ce8ae7470",
-    "content-hash": "9715656922556f4eda4aa5b419bfc9c3",
+    "hash": "090db70d94cadaeb53db4035d07ac30e",
+    "content-hash": "32f0adde8a34f6c8b13f48c9730f3152",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1732,12 +1732,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/KnpLabs/KnpMenuBundle.git",
-                "reference": "675a8f87d972713b1abec06e5ed63043e7fd5aec"
+                "reference": "ff3434782588fa371adf8361f5d2e9fd162d5508"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/675a8f87d972713b1abec06e5ed63043e7fd5aec",
-                "reference": "675a8f87d972713b1abec06e5ed63043e7fd5aec",
+                "url": "https://api.github.com/repos/KnpLabs/KnpMenuBundle/zipball/ff3434782588fa371adf8361f5d2e9fd162d5508",
+                "reference": "ff3434782588fa371adf8361f5d2e9fd162d5508",
                 "shasum": ""
             },
             "require": {
@@ -1781,7 +1781,7 @@
             "keywords": [
                 "menu"
             ],
-            "time": "2015-11-13 10:51:46"
+            "time": "2015-12-15 13:29:15"
         },
         {
             "name": "kriswallsmith/assetic",
@@ -2074,16 +2074,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "1.1.1",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "a208865a5aeffc2dbbef2a5b3409887272d93f32"
+                "reference": "d762ee5b099a29044603cd4649851e81aa66cb47"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/a208865a5aeffc2dbbef2a5b3409887272d93f32",
-                "reference": "a208865a5aeffc2dbbef2a5b3409887272d93f32",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/d762ee5b099a29044603cd4649851e81aa66cb47",
+                "reference": "d762ee5b099a29044603cd4649851e81aa66cb47",
                 "shasum": ""
             },
             "require": {
@@ -2118,7 +2118,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2015-12-01 02:52:15"
+            "time": "2015-12-10 14:48:13"
         },
         {
             "name": "phpcollection/phpcollection",
@@ -2465,18 +2465,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "9e8f0e60c78b6b410ed896079a6f86ecde491e42"
+                "reference": "77562ccc24831a25ee13dd4c3b7e04e9f2fa8b5c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/9e8f0e60c78b6b410ed896079a6f86ecde491e42",
-                "reference": "9e8f0e60c78b6b410ed896079a6f86ecde491e42",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/77562ccc24831a25ee13dd4c3b7e04e9f2fa8b5c",
+                "reference": "77562ccc24831a25ee13dd4c3b7e04e9f2fa8b5c",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.2",
                 "doctrine/inflector": "~1.0",
-                "knplabs/knp-menu-bundle": "dev-master",
+                "knplabs/knp-menu-bundle": "^2.1.1",
                 "sonata-project/block-bundle": "~2.3,>=2.3.9",
                 "sonata-project/core-bundle": "^2.3.10",
                 "sonata-project/exporter": "~1.0",
@@ -2543,7 +2543,7 @@
                 "bootstrap",
                 "sonata"
             ],
-            "time": "2015-12-09 11:12:09"
+            "time": "2015-12-16 13:54:55"
         },
         {
             "name": "sonata-project/block-bundle",
@@ -2751,12 +2751,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDatagridBundle.git",
-                "reference": "5f7106a80c318e209612fffac8c41d571e0c8770"
+                "reference": "0749e710b936bf84736c648eee16bc45e2c04607"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/5f7106a80c318e209612fffac8c41d571e0c8770",
-                "reference": "5f7106a80c318e209612fffac8c41d571e0c8770",
+                "url": "https://api.github.com/repos/sonata-project/SonataDatagridBundle/zipball/0749e710b936bf84736c648eee16bc45e2c04607",
+                "reference": "0749e710b936bf84736c648eee16bc45e2c04607",
                 "shasum": ""
             },
             "require": {
@@ -2800,7 +2800,7 @@
                 "datagrid",
                 "sonata"
             ],
-            "time": "2015-12-02 22:35:45"
+            "time": "2015-12-16 08:53:13"
         },
         {
             "name": "sonata-project/doctrine-extensions",

@@ -7,10 +7,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
+//use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+
+use AppBundle\Form\PhotoType;
 
 class ProspectType extends AbstractType
 {   
@@ -20,8 +22,6 @@ class ProspectType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {       
-        
-        
         $builder
             ->add('pseudo', TextType::class, array(
                 'required' => FALSE, 
@@ -135,12 +135,19 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('file', FileType::class, array(
-                'required' => FALSE, 
-                'label' => 'Photo principale',
-                'attr' => array(
-                    'class' => 'form-input-photoPrincipale'
-                ),
+//            ->add('file', FileType::class, array(
+//                'required' => FALSE, 
+//                'label' => 'Photo principale',
+//                'attr' => array(
+//                    'class' => 'form-input-photoPrincipale'
+//                ),
+//                'row_attr' => array(
+//                    'class' => 'form_row'
+//                )
+//            ))
+            ->add('photo', new PhotoType(), array(
+                'data_class' => 'AppBundle\Entity\Photo',
+                'required' => false,
                 'row_attr' => array(
                     'class' => 'form_row'
                 )

@@ -19,10 +19,8 @@ class AppKernel extends Kernel
             
             new AppBundle\AppBundle(),
             
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            
-            new FOS\UserBundle\FOSUserBundle(),
-            
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),            
+            new FOS\UserBundle\FOSUserBundle(),            
             new Sonata\CoreBundle\SonataCoreBundle(),
             new Sonata\BlockBundle\SonataBlockBundle(),
             new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
@@ -30,7 +28,8 @@ class AppKernel extends Kernel
             new Sonata\UserBundle\SonataUserBundle('FOSUserBundle'),
             new Sonata\EasyExtendsBundle\SonataEasyExtendsBundle(),
             
-            new Application\Sonata\UserBundle\ApplicationSonataUserBundle()
+            new Application\Sonata\UserBundle\ApplicationSonataUserBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {            

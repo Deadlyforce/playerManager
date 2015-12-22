@@ -7,7 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+use AppBundle\Entity\Relation;
 use AppBundle\Entity\Rencontre;
+use AppBundle\Entity\Photo;
 
 /**
  * Prospect
@@ -22,6 +24,7 @@ class Prospect
     {
         $this->echanges = new ArrayCollection();
         $this->rencontres = new ArrayCollection();
+        $this->relation = null;
     }   
    
     /**
@@ -30,7 +33,7 @@ class Prospect
      * @var integer 
      * @ORM\Column(name="user_id", type="integer", nullable=false)
      */
-    private $user_id;
+//    private $user_id;
     
     /**
      * Contient temporairement le chemin de la photo ($photoPrincipale)
@@ -153,7 +156,7 @@ class Prospect
      *
      * @ORM\Column(name="photo_principale", type="string", length=255, nullable=true)
      */
-    private $photo_principale;
+//    private $photo_principale;
     
     /**
      * @var \Date
@@ -166,7 +169,15 @@ class Prospect
      *
      * @Assert\File(maxSize="2000000")
      */
-    private $file;
+//    private $file;
+    
+    /**
+     *
+     * @ORM\OneToOne(targetEntity="Photo", cascade={"persist", "remove"}) 
+     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", nullable=true)
+     */
+    private $photo;
+    
     
     // GETTERS AND SETTERS *****************************************************
 
@@ -186,21 +197,22 @@ class Prospect
      * @param string $user_id
      * @return Prospect
      */
-    public function setUserId($user_id)
-    {
-        $this->user_id = $user_id;        
-        return $this;
-    }
+//    public function setUserId($user_id)
+//    {
+//        $this->user_id = $user_id;     
+//        
+//        return $this;
+//    }
     
     /**
      * Get user_id
      *
      * @return integer 
      */
-    public function getUserId()
-    {
-        return $this->user_id;
-    }
+//    public function getUserId()
+//    {
+//        return $this->user_id;
+//    }
 
     /**
      * Set pseudo
@@ -327,11 +339,12 @@ class Prospect
      * Set source
      * 
      * @param string $source
-     * @return \AppBundle\Entity\Prospect
+     * @return Prospect
      */
     public function setSource($source)
     {
         $this->source = $source;
+        
         return $this;
     }
     
@@ -344,6 +357,7 @@ class Prospect
     public function setArrondissement($arrondissement)
     {
         $this->arrondissement = $arrondissement;
+        
         return $this;
     }
     
@@ -451,12 +465,12 @@ class Prospect
      * @param string $photo_principale
      * @return Prospect
      */
-    public function setPhotoPrincipale($photo_principale)
-    {
-        $this->photo_principale = $photo_principale;
-        
-        return $this;
-    }
+//    public function setPhotoPrincipale($photo_principale)
+//    {
+//        $this->photo_principale = $photo_principale;
+//        
+//        return $this;
+//    }
 
     /**
      * Get photo_principale
@@ -465,7 +479,11 @@ class Prospect
      */
     public function getPhotoPrincipale()
     {
-        return $this->photo_principale;
+        if($this->getPhoto() !== null){
+            return $this->getPhoto()->getPath();
+        }else{
+            return null;
+        }        
     }
             
     /**
@@ -473,29 +491,29 @@ class Prospect
      * 
      * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
      */
-    public function setFile(UploadedFile $file = NULL)
-    {
-        $this->file = $file;
-        
-        // check if we have an old image path
-        if(isset($this->photo_principale)){
-            // store the old name to delete after the update
-            $this->temp = $this->photo_principale;
-            $this->photo_principale = NULL;
-        }else{
-            $this->photo_principale = 'initial';
-        }
-    }
+//    public function setFile(UploadedFile $file = NULL)
+//    {
+//        $this->file = $file;
+//        
+//        // check if we have an old image path
+//        if(isset($this->photo_principale)){
+//            // store the old name to delete after the update
+//            $this->temp = $this->photo_principale;
+//            $this->photo_principale = NULL;
+//        }else{
+//            $this->photo_principale = 'initial';
+//        }
+//    }
     
     /**
      * Get file.
      * 
      * @return UploadedFile
      */
-    public function getFile()
-    {
-        return $this->file;
-    }
+//    public function getFile()
+//    {
+//        return $this->file;
+//    }
 
     /**
      * Add echanges
@@ -532,10 +550,10 @@ class Prospect
     /**
      * Set relation
      *
-     * @param \AppBundle\Entity\Relation $relation
+     * @param Relation $relation
      * @return Prospect
      */
-    public function setRelation(\AppBundle\Entity\Relation $relation = null)
+    public function setRelation(Relation $relation)
     {
         $this->relation = $relation;
         $relation->setProspect($this);
@@ -546,7 +564,7 @@ class Prospect
     /**
      * Get relation
      *
-     * @return \AppBundle\Entity\Relation 
+     * @return Relation 
      */
     public function getRelation()
     {
@@ -623,12 +641,12 @@ class Prospect
      * @return null|string
      *  Relative path.
      */
-    public function getPhotoPrincipaleWeb()
-    {
-        return NULL === $this->getPhotoPrincipale()
-                ? NULL
-                : $this->getUploadPath() . '/' . $this->getPhotoPrincipale();
-    }
+//    public function getPhotoPrincipaleWeb()
+//    {
+//        return NULL === $this->getPhotoPrincipale()
+//                ? NULL
+//                : $this->getUploadPath() . '/' . $this->getPhotoPrincipale();
+//    }
     
     /**
      * Get path on disk to a photo principale.
@@ -636,28 +654,26 @@ class Prospect
      * @return null|string
      *  Absolute path.
      */
-    public function getPhotoPrincipaleAbsolute()
-    {
-        return NULL === $this->getPhotoPrincipale()
-                ? NULL
-                : $this->getUploadAbsolutePath() . '/' . $this->getPhotoPrincipale();
-    }
+//    public function getPhotoPrincipaleAbsolute()
+//    {
+//        return NULL === $this->getPhotoPrincipale()
+//                ? NULL
+//                : $this->getUploadAbsolutePath() . '/' . $this->getPhotoPrincipale();
+//    }
     
     /**
      * @ORM\PrePersist()
      * @ORM\PreUpdate()
      */
-    public function preUpload()
-    {
-        if(NULL !== $this->getFile()){
-            // Generate a unique name
-            $filename = sha1(uniqid(mt_rand(), TRUE));
-            $extension = $this->getFile()->guessExtension();
-            $this->photo_principale = $filename.'.'.$extension;
-var_dump($this->photo_principale);
-
-        }
-    }
+//    public function preUpload()
+//    {
+//        if(NULL !== $this->getFile()){
+//            // Generate a unique name
+//            $filename = sha1(uniqid(mt_rand(), TRUE));
+//            $extension = $this->getFile()->guessExtension();
+//            $this->photo_principale = $filename.'.'.$extension;
+//        }
+//    }
     
     /**
      * Upload une photo principale
@@ -665,45 +681,36 @@ var_dump($this->photo_principale);
      * @ORM\PostPersist()
      * @ORM\PostUpdate()
      */
-    public function upload()
-    {
-var_dump($this->getFile());
-
-        // File property can be empty.
-        if(NULL === $this->getFile()){
-            return;
-        }
-var_dump($this->getFile());
-var_dump($this->getUploadAbsolutePath());
-var_dump($this->photo_principale);
-var_dump($this->temp);
-      
-        // if there is an error when moving the file, an exception will
-        // be automatically thrown by move(). This will properly prevent
-        // the entity from being persisted to the database on error
-        $this->getFile()->move($this->getUploadAbsolutePath(), $this->photo_principale);
-
-        // check if we have an old image
-        if (isset($this->temp)) {
-            // delete the old image
-            unlink($this->getUploadAbsolutePath().'/'.$this->temp);
-            // clear the temp image path
-            $this->temp = NULL;
-        }
-        
-        $this->file = NULL;
-    }
+//    public function upload()
+//    {
+//        // File property can be empty.
+//        if(NULL === $this->getFile()){
+//            return;
+//        }      
+//        // if there is an error when moving the file, an exception will
+//        // be automatically thrown by move(). This will properly prevent
+//        // the entity from being persisted to the database on error
+//        $this->getFile()->move($this->getUploadAbsolutePath(), $this->photo_principale);
+//
+//        // check if we have an old image
+//        if (isset($this->temp)) {            
+//            unlink($this->getUploadAbsolutePath().'/'.$this->temp); // delete the old image            
+//            $this->temp = NULL; // clear the temp image path
+//        }
+//        
+//        $this->file = NULL;
+//    }
     
     /**
      * @ORM\PostRemove
      */
-    public function removeUpload()
-    {
-        $file = $this->getPhotoPrincipaleAbsolute();
-        if($file){
-            unlink($file);
-        }
-    }
+//    public function removeUpload()
+//    {
+//        $file = $this->getPhotoPrincipaleAbsolute();
+//        if($file){
+//            unlink($file);
+//        }
+//    }
     
     /**
     * Set date_creation
@@ -726,5 +733,28 @@ var_dump($this->temp);
    public function getDateCreation()
    {
            return $this->date_creation;
+   }
+   
+   /**
+    * Get photo
+    * 
+    * @return Photo
+    */
+   public function getPhoto()
+   {
+        return $this->photo;
+   }
+
+   /**
+    * Set Photo
+    * 
+    * @param Photo $photo
+    * @return Prospect
+    */
+   public function setPhoto($photo)
+   {
+        $this->photo = $photo;
+        
+        return $this;
    }
 }
