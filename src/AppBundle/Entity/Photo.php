@@ -64,6 +64,7 @@ class Photo {
     /************************* GETTERS SETTERS ********************************/
     
     /**
+     * Callback function
      * Returns the path used by Doctrine Extensions Uploadable
      * 
      * @return string
@@ -71,6 +72,16 @@ class Photo {
     public function userPath()
     {    
         return 'uploads/photoPrincipale/'. $this->getUserId();
+    }
+    
+    /**
+     * Get absolute path to uploaded picture
+     * 
+     * @return string
+     */
+    public function getUploadAbsolutePath()
+    {
+        return __DIR__ . '/../../../web/' . $this->getPath();
     }
     
     /**
@@ -176,4 +187,17 @@ class Photo {
     {
         return $this->user_id;
     }
+    
+    /**
+     * Removes physically the photo from the directory
+     * 
+     * @ORM\PostRemove
+     */
+//    public function removeUpload()
+//    {
+//        $file = $this->getUploadAbsolutePath();
+//        if($file){
+//            unlink($file);
+//        }
+//    }
 }

@@ -178,8 +178,14 @@
                 var data = {'csrf_token': csrf_token};
 
                 $.post(url, data, function(response){
-console.log(response);
-                    // TO DO : supprimer la ligne dataTable correspondante (retourner aussi l'id)
+
+                    var data = $.parseJSON(response);
+
+                    var table = $("#table-prospects").DataTable();
+                    var tr = $("#" + data.id);
+                    
+                    table.row(tr).remove().draw(false); // false = conserve la pagination actuelle                    
+
                 });
             }
 

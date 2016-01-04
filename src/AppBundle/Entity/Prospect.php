@@ -713,6 +713,17 @@ class Prospect
 //    }
     
     /**
+     * @ORM\PostRemove
+     */
+    public function removePhotoUpload()
+    {
+        $file = $this->getPhoto()->getUploadAbsolutePath();
+        if($file){
+            unlink($file);
+        }
+    }
+    
+    /**
     * Set date_creation
     *
     * @param \DateTime $date_creation

@@ -74,8 +74,11 @@ class ProspectController extends Controller
             $em->remove($prospect);
             $em->flush();
         }
-                
-        return new Response('Le prospect a bien été supprimé');
+        
+        $response_array = array("id" => $id);        
+        $response = json_encode($response_array);
+        
+        return new Response($response);
     }
     
     
@@ -151,8 +154,8 @@ class ProspectController extends Controller
             $manager->createACL($prospect); // Création d'ACL
             $manager->createACL($prospect->getRelation()); // Création d'ACL         
             $manager->createACL($prospect->getphoto()); // Création d'ACL         
-
-            return $this->redirect($this->generateUrl('prospect_show', array('id' => $prospect->getId())));
+            
+            return $this->redirectToRoute('prospect');
         }
 
         return array(
@@ -375,7 +378,11 @@ class ProspectController extends Controller
             }            
             
             $this->deleteACL($prospect); // Suppression des ACL
-
+            $this->deleteACL($prospect->getRelation()); // Suppression des ACL
+            if($prospect->getPhoto()){
+                $this->deleteACL($prospect->getPhoto()); 
+            }
+            
             $em->remove($prospect);
             $em->flush();
         }
