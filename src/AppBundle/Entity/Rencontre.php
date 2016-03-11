@@ -57,7 +57,7 @@ class Rencontre
     private $changement_lieu;
 
     /**
-     * @var json
+     * @var json_array
      *
      * @ORM\Column(name="liste_lieux", type="json_array", nullable=true)
      */
@@ -204,7 +204,7 @@ class Rencontre
     /**
      * Set liste_lieux
      *
-     * @param json $liste_lieux
+     * @param json_array $liste_lieux
      *
      * @return Rencontre
      */
@@ -218,7 +218,7 @@ class Rencontre
     /**
      * Get liste_lieux
      *
-     * @return json
+     * @return json_array
      */
     public function getListeLieux()
     {

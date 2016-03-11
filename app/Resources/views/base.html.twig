@@ -3,7 +3,7 @@
     
 <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}Welcome!{% endblock %}</title>        
+    {#<title>{% block title %}Welcome!{% endblock %}</title>#}        
     {% block stylesheets %}
         {% stylesheets filter='cssrewrite' 
             '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
@@ -39,7 +39,7 @@
     <div class="container">
         {{ knp_menu_render('AppBundle:Builder:mainMenu') }}
 
-        {% block body %}                
+        {% block body %}            
         {% endblock %}
 
         <footer>

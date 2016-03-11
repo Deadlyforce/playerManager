@@ -28,12 +28,11 @@ class Prospect
     }   
    
     /**
-     * Utilisé pour la création des dossier d'upload utilisateur
-     * 
-     * @var integer 
-     * @ORM\Column(name="user_id", type="integer", nullable=false)
+     *
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
-//    private $user_id;
+    private $user;
     
     /**
      * Contient temporairement le chemin de la photo ($photoPrincipale)
@@ -755,7 +754,7 @@ class Prospect
    {
         return $this->photo;
    }
-
+   
    /**
     * Set Photo
     * 
@@ -765,6 +764,29 @@ class Prospect
    public function setPhoto($photo)
    {
         $this->photo = $photo;
+        
+        return $this;
+   }
+   
+   /**
+    * Get User
+    * 
+    * @return User
+    */
+   public function getUser()
+   {
+        return $this->user;
+   }
+   
+   /**
+    * Set User
+    * 
+    * @param User $user
+    * @return Prospect
+    */
+   public function setUser($user)
+   {
+        $this->user = $user;
         
         return $this;
    }

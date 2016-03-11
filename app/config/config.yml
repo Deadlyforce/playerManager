@@ -1,7 +1,6 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
-    - { resource: @AppBundle/Resources/config/admin.yml }
 
 # DoctrineExtensionBundle Configuration
 stof_doctrine_extensions:
@@ -64,13 +63,7 @@ doctrine:
         mapping_types:
             enum: string
         types:
-            json: Sonata\Doctrine\Types\JsonType
-        # if using pdo_sqlite as your database driver:
-        #   1. add the path in parameters.yml
-        #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
-        #   2. Uncomment database_path in parameters.yml.dist
-        #   3. Uncomment next line:
-        #     path:     "%database_path%"
+
 
     orm:
         auto_generate_proxy_classes: "%kernel.debug%"
@@ -88,137 +81,4 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: Application\Sonata\UserBundle\Entity\User
-    group:
-        group_class: Application\Sonata\UserBundle\Entity\Group
-        group_manager: sonata.user.orm.group_manager
-    service:
-        user_manager: sonata.user.orm.user_manager
-    profile:
-        # Authentication Form
-        form:
-            type:               fos_user_profile
-            handler:            fos_user.profile.form.handler.default
-            name:               fos_user_profile_form
-            # Please note : this is not the default value
-            validation_groups:  [Authentication] 
-
-# SONATA User Configuration    
-sonata_user:
-    security_acl: true
-    manager_type: orm
-    profile:
-        dashboard:
-            blocks:
-                - { position: left, type: sonata.block.service.text, settings: { content: "This is a sample user profile dashboard! Want to make this text dynamic? For instance display the user's name? Create a dedicated block and edit the configuration!"} }
-#                - { position: left, type: sonata.order.block.recent_orders, settings: { title: Recent Orders, number: 5, mode: public }}
-#                - { position: right, type: sonata.timeline.block.timeline, settings: { max_per_page: 15 }}
-#                - { position: right, type: sonata.news.block.recent_posts, settings: { title: Recent Posts, number: 5, mode: public }}
-#                - { position: right, type: sonata.news.block.recent_comments, settings: { title: Recent Comments, number: 5, mode: public }}
-            
-        # Customize user portal menu by setting links
-        menu:
-            # Lien vers le profil
-            # - { route: 'sonata_user_profile_show', label: 'sonata_profile_title', domain: 'SonataUserBundle'}
-
-            - { route: 'sonata_user_profile_edit', label: 'Editer le profil', domain: 'SonataUserBundle'}
-            - { route: 'sonata_user_profile_edit_authentication', label: 'Changer le mot de passe', domain: 'SonataUserBundle'}
-        
-    
-        
-
-# SONATA Admin Configuration
-sonata_admin:
-    title: Admin Player Manager
-    title_logo: /bundles/sonataadmin/logo_title.png
-    templates:        
-        # default global templates        
-        layout:  SonataAdminBundle::standard_layout.html.twig        
-        ajax:  SonataAdminBundle::ajax_layout.html.twig         
-        
-        # default actions templates, should extend a global templates        
-        list:    SonataAdminBundle:CRUD:list.html.twig        
-        show:    SonataAdminBundle:CRUD:show.html.twig        
-        edit:    SonataAdminBundle:CRUD:edit.html.twig    
-    dashboard:        
-        blocks:               
-            # display a dashboard block            
-            - { position: left, type: sonata.admin.block.admin_list }
-            
-
-# SONATA Block Configuration
-sonata_block:
-    default_contexts: [cms]
-    blocks:
-        sonata.admin.block.admin_list:
-            contexts: [admin]
-            
-        # used to display the menu in profile pages
-        sonata.user.block.menu: 
-        # used to display menu option (login option)
-        sonata.user.block.account:    
-        
-        # sonata.admin_doctrine_orm.block.audit:
-        #   contexts: [admin]
-        
-        sonata.block.service.text:
-        sonata.block.service.action:
-        sonata.block.service.rss:
-        
-        # Some specific block from the SonataMediaBundle        
-        # sonata.media.block.media:        
-        # sonata.media.block.gallery:        
-        # sonata.media.block.feature_media:
-
-  
-sonata_doctrine_orm_admin:
-    # default value is null, so doctrine uses the value defined in the configuration
-    entity_manager: ~
-
-    templates:
-        form:
-            - SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig
-        filter:
-            - SonataDoctrineORMAdminBundle:Form:filter_admin_fields.html.twig
-        types:
-            list:
-                array:      SonataAdminBundle:CRUD:list_array.html.twig
-                boolean:    SonataAdminBundle:CRUD:list_boolean.html.twig
-                date:       SonataAdminBundle:CRUD:list_date.html.twig
-                time:       SonataAdminBundle:CRUD:list_time.html.twig
-                datetime:   SonataAdminBundle:CRUD:list_datetime.html.twig
-                text:       SonataAdminBundle:CRUD:base_list_field.html.twig
-                trans:      SonataAdminBundle:CRUD:list_trans.html.twig
-                string:     SonataAdminBundle:CRUD:base_list_field.html.twig
-                smallint:   SonataAdminBundle:CRUD:base_list_field.html.twig
-                bigint:     SonataAdminBundle:CRUD:base_list_field.html.twig
-                integer:    SonataAdminBundle:CRUD:base_list_field.html.twig
-                decimal:    SonataAdminBundle:CRUD:base_list_field.html.twig
-                identifier: SonataAdminBundle:CRUD:base_list_field.html.twig
-                currency:   SonataAdminBundle:CRUD:list_currency.html.twig
-                percent:    SonataAdminBundle:CRUD:list_percent.html.twig
-                choice:     SonataAdminBundle:CRUD:list_choice.html.twig
-                url:        SonataAdminBundle:CRUD:list_url.html.twig
-
-            show:
-                array:      SonataAdminBundle:CRUD:show_array.html.twig
-                boolean:    SonataAdminBundle:CRUD:show_boolean.html.twig
-                date:       SonataAdminBundle:CRUD:show_date.html.twig
-                time:       SonataAdminBundle:CRUD:show_time.html.twig
-                datetime:   SonataAdminBundle:CRUD:show_datetime.html.twig
-                text:       SonataAdminBundle:CRUD:base_show_field.html.twig
-                trans:      SonataAdminBundle:CRUD:show_trans.html.twig
-                string:     SonataAdminBundle:CRUD:base_show_field.html.twig
-                smallint:   SonataAdminBundle:CRUD:base_show_field.html.twig
-                bigint:     SonataAdminBundle:CRUD:base_show_field.html.twig
-                integer:    SonataAdminBundle:CRUD:base_show_field.html.twig
-                decimal:    SonataAdminBundle:CRUD:base_show_field.html.twig
-                currency:   SonataAdminBundle:CRUD:base_currency.html.twig
-                percent:    SonataAdminBundle:CRUD:base_percent.html.twig
-                choice:     SonataAdminBundle:CRUD:show_choice.html.twig
-                url:        SonataAdminBundle:CRUD:show_url.html.twig
-                
-
-
-
-
+    user_class: AppBundle\Entity\User    

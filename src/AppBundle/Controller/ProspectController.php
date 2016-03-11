@@ -10,7 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 
@@ -65,11 +64,7 @@ class ProspectController extends Controller
 
             if (!$prospect) {
                 throw $this->createNotFoundException('Unable to find Prospect entity.');
-            }            
-            
-            $this->deleteACL($prospect); // Suppression des ACL
-            $this->deleteACL($prospect->getRelation()); // Suppression des ACL
-            $this->deleteACL($prospect->getPhoto()); // Suppression des ACL
+            }           
 
             $em->remove($prospect);
             $em->flush();
@@ -93,26 +88,12 @@ class ProspectController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $prospects = $em->getRepository('AppBundle:Prospect')->findAll();
-       
-        // Vérification d'accès ACL       
-        foreach($prospects as $prospect){            
-            if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $prospect)){
-                
-            }else{                
-                $allowedProspects[] = $prospect;
-            }        
-        }
-        
-        if(!isset($allowedProspects)){
-            $allowedProspects = NULL;
-        }
-        // End of check        
                 
         $tokenManager = $this->get('security.csrf.token_manager');        
         $csrf_token = $tokenManager->refreshToken('');
                 
         return array(
-            'prospects' => $allowedProspects,
+            'prospects' => $prospects,
             'csrf_token' => $csrf_token
         );
     }
@@ -149,11 +130,7 @@ class ProspectController extends Controller
             $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
             $uploadableManager->markEntityToUpload($photo, $photo->getFile());
             
-            $em->flush();
-            
-            $manager->createACL($prospect); // Création d'ACL
-            $manager->createACL($prospect->getRelation()); // Création d'ACL         
-            $manager->createACL($prospect->getphoto()); // Création d'ACL         
+            $em->flush();                  
             
             return $this->redirectToRoute('prospect');
         }
@@ -227,14 +204,8 @@ class ProspectController extends Controller
 
         if (!$prospect) {
             throw $this->createNotFoundException('Unable to find Prospect entity.');
-        }
+        }        
         
-        // Vérification d'accès ACL       
-        if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $prospect)){
-            throw new AccessDeniedException();
-        }
-        // Vérification fin
-
         $deleteForm = $this->createDeleteForm($id);
 
         return array(
@@ -258,13 +229,7 @@ class ProspectController extends Controller
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Prospect entity.');
-        }
-        
-        // Vérification d'accès ACL       
-        if(FALSE === $this->get('security.authorization_checker')->isGranted('EDIT', $entity)){
-            throw new AccessDeniedException();
-        }
-        // Vérification fin
+        }      
 
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
@@ -341,19 +306,15 @@ class ProspectController extends Controller
                 $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
                 $uploadableManager->markEntityToUpload($photo, $photo->getFile());
                 
-                $em->flush();
-                
-                if(!$acl){
-                    $manager->createACL($photo);
-                }               
+                $em->flush();                             
             }           
             
             return $this->redirect($this->generateUrl('prospect'));
         }
 
         return array(
-            'prospect'      => $prospect,
-            'edit_form'   => $editForm->createView(),
+            'prospect' => $prospect,
+            'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         );
     }
@@ -376,13 +337,7 @@ class ProspectController extends Controller
             if (!$prospect) {
                 throw $this->createNotFoundException('Unable to find Prospect entity.');
             }            
-            
-            $this->deleteACL($prospect); // Suppression des ACL
-            $this->deleteACL($prospect->getRelation()); // Suppression des ACL
-            if($prospect->getPhoto()){
-                $this->deleteACL($prospect->getPhoto()); 
-            }
-            
+                                    
             $em->remove($prospect);
             $em->flush();
         }
@@ -410,17 +365,5 @@ class ProspectController extends Controller
             ))
             ->getForm()
         ;
-    }
-    
-    /**
-     * Suppression des ACL associés
-     * 
-     * @param $entity
-     */
-    private function deleteACL($entity){        
-        $aclProvider = $this->get('security.acl.provider');
-        $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-        $aclProvider->deleteAcl($objectIdentity);            
-    }
-   
+    }  
 }

@@ -12,11 +12,6 @@ use AppBundle\Form\RelationType;
 
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
-// ACL
-use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
-use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-use Symfony\Component\Security\Acl\Permission\MaskBuilder;
-
 /**
  * Relation controller.
  *
@@ -35,27 +30,10 @@ class RelationController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AppBundle:Relation')->findAll();
-
-        // Vérification d'accès ACL       
-        // Check for VIEW access
-        foreach($entities as $relation){            
-            if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $relation)){
-                // Do nothing
-            }else{                
-                $allowedEntities[] = $relation;
-            }
-        }
-       
-        if(!isset($allowedEntities)){
-            $allowedEntities = NULL;
-        }
-        // Vérification fin
+        $relations = $em->getRepository('AppBundle:Relation')->findAll();
 
         return array(
-//            'entities' => $entities,
-            'entities' => $allowedEntities,
+            'entities' => $relations,
         );
     }
     
@@ -70,27 +48,13 @@ class RelationController extends Controller
     {
         $entity = new Relation();
         $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
+        $form->handleRequest($request);        
         
-        // Implémentation des ACL
         if($form->isValid()){
             $em = $this->getDoctrine()->getManager();
+            
             $em->persist($entity);
-            $em->flush();
-            
-            // Création de l'ACL
-            $aclProvider = $this->get('security.acl.provider');
-            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-            $acl = $aclProvider->createAcl($objectIdentity);
-            
-            // retrouve l'identifiant de sécurité de l'utilisateur actuellement connecté
-            $user = $this->get('security.token_storage')->getToken()->getUser();
-            $securityIdentity = UserSecurityIdentity::fromAccount($user);
-            
-            // Donne accès au propriétaire
-            $acl->insertObjectAce($securityIdentity, MaskBuilder::MASK_OWNER);
-          
-            $aclProvider->updateAcl($acl);
+            $em->flush();            
         }
 
         if ($form->isValid()) {
@@ -158,13 +122,7 @@ class RelationController extends Controller
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Relation entity.');
-        }
-        
-        // Vérification d'accès ACL
-        if(FALSE === $this->get('security.authorization_checker')->isGranted('VIEW', $entity)){
-            throw new AccessDeniedException();
-        }
-        // Vérification fin
+        }       
 
         $deleteForm = $this->createDeleteForm($id);
 
@@ -189,13 +147,7 @@ class RelationController extends Controller
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Relation entity.');
-        }
-        
-        // Vérification d'accès ACL       
-        if(FALSE === $this->get('security.authorization_checker')->isGranted('EDIT', $entity)){
-            throw new AccessDeniedException();
-        }
-        // Vérification fin
+        }        
                         
         $editForm = $this->createEditForm($entity);
         $deleteForm = $this->createDeleteForm($id);
@@ -250,7 +202,6 @@ class RelationController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-//            return $this->redirect($this->generateUrl('relation_edit', array('id' => $id)));
             return $this->redirect($this->generateUrl('relation'));
         }
 
@@ -280,12 +231,6 @@ class RelationController extends Controller
                 throw $this->createNotFoundException('Unable to find Relation entity.');
             }
             
-            // ACL suppression
-            $aclProvider = $this->get('security.acl.provider');
-            $objectIdentity = ObjectIdentity::fromDomainObject($entity);
-            $aclProvider->deleteAcl($objectIdentity);
-            // ACL Suppression fin
-
             $em->remove($entity);
             $em->flush();
         }
