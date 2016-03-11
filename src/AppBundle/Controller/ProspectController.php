@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+//use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Csrf\CsrfToken;
 
 
@@ -30,6 +30,10 @@ class ProspectController extends Controller
      */
     public function ajax_newFormNewAction()
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
         $prospect = new Prospect();
         
         $prospect->setAge(23); // Age par défaut
@@ -52,6 +56,12 @@ class ProspectController extends Controller
      */
     public function ajax_deleteAction(Request $request, $id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
         $data = $request->request->all();
         $token = $data['csrf_token'];
        
@@ -66,8 +76,12 @@ class ProspectController extends Controller
                 throw $this->createNotFoundException('Unable to find Prospect entity.');
             }           
 
-            $em->remove($prospect);
-            $em->flush();
+            if($prospect->getUser() === $user){
+                $em->remove($prospect);
+                $em->flush();
+            } else {
+                throw $this->createAccessDeniedException('You cannot access this page!');
+            }
         }
         
         $response_array = array("id" => $id);        
@@ -86,8 +100,14 @@ class ProspectController extends Controller
      */
     public function indexAction()
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
         $em = $this->getDoctrine()->getManager();
-        $prospects = $em->getRepository('AppBundle:Prospect')->findAll();
+        $prospects = $em->getRepository('AppBundle:Prospect')->findBy(array("user" => $user));
                 
         $tokenManager = $this->get('security.csrf.token_manager');        
         $csrf_token = $tokenManager->refreshToken('');
@@ -107,7 +127,10 @@ class ProspectController extends Controller
      */
     public function createAction(Request $request)
     {
-        $manager = $this->get('prospect_manager');
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }        
+        
         $prospect = new Prospect();       
         
         $form = $this->createCreateForm($prospect);
@@ -119,7 +142,9 @@ class ProspectController extends Controller
         $photo->setUserId($user->getId());
         // Récup fin
         
-        if ($form->isValid()) {            
+        $prospect->setUser($user);
+        
+        if ($form->isSubmitted() && $form->isValid()) {            
             
             $em = $this->getDoctrine()->getManager();
             $em->persist($prospect);    
@@ -174,6 +199,10 @@ class ProspectController extends Controller
      */
     public function newAction()
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
         $prospect = new Prospect();
 
         // Définition des paramètres par défaut
@@ -199,19 +228,29 @@ class ProspectController extends Controller
      */
     public function showAction($id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+                       
         $em = $this->getDoctrine()->getManager();
         $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
 
         if (!$prospect) {
             throw $this->createNotFoundException('Unable to find Prospect entity.');
-        }        
+        } 
         
-        $deleteForm = $this->createDeleteForm($id);
+        if($prospect->getUser() === $user){
+            $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'prospect' => $prospect,
-            'delete_form' => $deleteForm->createView(),
-        );
+            return array(
+                'prospect' => $prospect,
+                'delete_form' => $deleteForm->createView(),
+            );
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }       
     }
 
     /**
@@ -223,22 +262,31 @@ class ProspectController extends Controller
      */
     public function editAction($id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
         $em = $this->getDoctrine()->getManager();
+        $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
 
-        $entity = $em->getRepository('AppBundle:Prospect')->find($id);
-
-        if (!$entity) {
+        if (!$prospect) {
             throw $this->createNotFoundException('Unable to find Prospect entity.');
-        }      
+        } 
+        
+        if($prospect->getUser() === $user){
+            $editForm = $this->createEditForm($prospect);
+            $deleteForm = $this->createDeleteForm($id);
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+            return array(
+                'prospect' => $prospect,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            );
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
     }
 
     /**
@@ -274,7 +322,11 @@ class ProspectController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
-        $manager = $this->get('prospect_manager');
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
         $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
@@ -283,40 +335,42 @@ class ProspectController extends Controller
             throw $this->createNotFoundException('Unable to find Prospect entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($prospect);
-        $editForm->handleRequest($request);
-
-        // Récup utilisateur pour chargement de son id dans l'entité Photo
-        $user = $this->get('security.token_storage')->getToken()->getUser();       
-
-        if ($editForm->isValid()) {  
+        if($prospect->getUser() === $user){
+        
+            $deleteForm = $this->createDeleteForm($id);
+            $editForm = $this->createEditForm($prospect);
+            $editForm->handleRequest($request);
             
-            $photo = $prospect->getPhoto();      
-            // S'il s'agit d'une photo qui existait déjà, on ne recrée pas d'acl
-            $acl = ($photo instanceof \Doctrine\Common\Persistence\Proxy && $photo->__isInitialized()) ? false : true;
-               
-            // Si aucun choix utilisateur, upload simple sans se soucier de la photo
-            if($photo === null){
-                $em->flush();
-            }else{
-                $photo->setUserId($user->getId());
-                
-                // STOF UPLOADABLE
-                $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
-                $uploadableManager->markEntityToUpload($photo, $photo->getFile());
-                
-                $em->flush();                             
-            }           
-            
-            return $this->redirect($this->generateUrl('prospect'));
+            if ($editForm->isSubmitted() && $editForm->isValid()) {  
+
+                $photo = $prospect->getPhoto();      
+                // S'il s'agit d'une photo qui existait déjà, on ne recrée pas d'acl
+                $acl = ($photo instanceof \Doctrine\Common\Persistence\Proxy && $photo->__isInitialized()) ? false : true;
+
+                // Si aucun choix utilisateur, upload simple sans se soucier de la photo
+                if ($photo === null) {
+                    $em->flush();
+                } else {
+                    $photo->setUserId($user->getId());
+
+                    // STOF UPLOADABLE
+                    $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+                    $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+
+                    $em->flush();                             
+                }           
+
+                return $this->redirect($this->generateUrl('prospect'));
+            }
+
+            return array(
+                'prospect' => $prospect,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            );
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
         }
-
-        return array(
-            'prospect' => $prospect,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
     }
     
     /**
@@ -327,6 +381,12 @@ class ProspectController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();       
+        
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);       
 
@@ -336,13 +396,18 @@ class ProspectController extends Controller
 
             if (!$prospect) {
                 throw $this->createNotFoundException('Unable to find Prospect entity.');
-            }            
-                                    
-            $em->remove($prospect);
-            $em->flush();
+            }        
+
+            if($prospect->getUser() === $user){
+                $em->remove($prospect);
+                $em->flush();
+            } else {
+                throw $this->createAccessDeniedException('You cannot access this page!');
+            }
         }
 
         return $this->redirect($this->generateUrl('prospect'));
+        
     }
 
     /**

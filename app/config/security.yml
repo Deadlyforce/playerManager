@@ -39,6 +39,7 @@ security:
                 failure_path:   null            
             logout:
                 path: /logout
+
             anonymous: ~
             switch_user: true
         

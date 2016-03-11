@@ -640,12 +640,12 @@ class Prospect
      * @return null|string
      *  Relative path.
      */
-//    public function getPhotoPrincipaleWeb()
-//    {
-//        return NULL === $this->getPhotoPrincipale()
-//                ? NULL
-//                : $this->getUploadPath() . '/' . $this->getPhotoPrincipale();
-//    }
+    public function getPhotoPrincipaleWeb()
+    {
+        return NULL === $this->getPhotoPrincipale()
+                ? NULL
+                : $this->getUploadPath() . '/' . $this->getPhotoPrincipale();
+    }
     
     /**
      * Get path on disk to a photo principale.
