@@ -350,7 +350,7 @@ class ProspectController extends Controller
                     $em->flush();
                 } else {
                     $photo->setUserId($user->getId());
-var_dump($photo);
+
                     // STOF UPLOADABLE
                     $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
                     $uploadableManager->markEntityToUpload($photo, $photo->getFile());
