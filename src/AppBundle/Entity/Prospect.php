@@ -469,21 +469,7 @@ class Prospect
 //        $this->photo_principale = $photo_principale;
 //        
 //        return $this;
-//    }
-
-    /**
-     * Get photo_principale
-     *
-     * @return string 
-     */
-    public function getPhotoPrincipale()
-    {
-        if($this->getPhoto() !== null){
-            return $this->getPhoto()->getPath();
-        }else{
-            return null;
-        }        
-    }
+//    }    
             
     /**
      * Sets file
@@ -620,7 +606,7 @@ class Prospect
      */
     protected function getUploadPath()
     {
-        return 'uploads/photoPrincipale/'.$this->user_id;
+        return 'uploads/photoPrincipale/'.$this->user->getId();
     }
     
     /**
@@ -632,6 +618,20 @@ class Prospect
     protected function getUploadAbsolutePath()
     {
         return __DIR__ . '/../../../web/' . $this->getUploadPath();
+    }
+    
+    /**
+     * Get photo_principale
+     *
+     * @return string 
+     */
+    public function getPhotoPrincipale()
+    {
+        if($this->getPhoto() !== null){
+            return $this->getPhoto()->getPath();
+        }else{
+            return null;
+        }        
     }
     
     /**
