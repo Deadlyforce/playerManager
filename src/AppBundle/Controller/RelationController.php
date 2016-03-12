@@ -10,8 +10,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Relation;
 use AppBundle\Form\RelationType;
 
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-
 /**
  * Relation controller.
  *
@@ -29,47 +27,53 @@ class RelationController extends Controller
      */
     public function indexAction()
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
         $em = $this->getDoctrine()->getManager();
-        $relations = $em->getRepository('AppBundle:Relation')->findAll();
+        $relations = $em->getRepository('AppBundle:Relation')->findByUser($user);
 
         return array(
-            'entities' => $relations,
+            'relations' => $relations,
         );
     }
     
     /**
      * Creates a new Relation entity.
      *
-     * @Route("/", name="relation_create")
+     * @Route("/create", name="relation_create")
      * @Method("POST")
-     * @Template("playerManagerWelcomeBundle:Relation:new.html.twig")
+     * @Template("AppBundle:Relation:new.html.twig")
      */
-    public function createAction(Request $request)
-    {
-        $entity = new Relation();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);        
-        
-        if($form->isValid()){
-            $em = $this->getDoctrine()->getManager();
-            
-            $em->persist($entity);
-            $em->flush();            
-        }
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('relation_show', array('id' => $entity->getId())));
-        }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
+//    public function createAction(Request $request)
+//    {
+//        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+//            throw $this->createAccessDeniedException('You cannot access this page!');
+//        }
+//        
+//        $relation = new Relation();
+//        $form = $this->createCreateForm($relation);
+//        $form->handleRequest($request);        
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $em = $this->getDoctrine()->getManager();
+//            
+//            $em->persist($relation);
+//            $em->flush();
+//
+//            return $this->redirect($this->generateUrl('relation_show', array('id' => $relation->getId())));
+//        } else {
+//            throw $this->createAccessDeniedException('Oops it seems ther is a problem with your form!');
+//        }
+//
+////        return array(
+////            'relation' => $relation,
+////            'form'   => $form->createView(),
+////        );
+//    }
 
     /**
      * Creates a form to create a Relation entity.
@@ -78,17 +82,17 @@ class RelationController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Relation $entity)
-    {
-        $form = $this->createForm(new RelationType(), $entity, array(
-            'action' => $this->generateUrl('relation_create'),
-            'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Create'));
-
-        return $form;
-    }
+//    private function createCreateForm(Relation $entity)
+//    {
+//        $form = $this->createForm(new RelationType(), $entity, array(
+//            'action' => $this->generateUrl('relation_create'),
+//            'method' => 'POST',
+//        ));
+//
+//        $form->add('submit', 'submit', array('label' => 'Create'));
+//
+//        return $form;
+//    }
 
     /**
      * Displays a form to create a new Relation entity.
@@ -97,39 +101,50 @@ class RelationController extends Controller
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
-    {
-        $entity = new Relation();
-        $form   = $this->createCreateForm($entity);
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
+//    public function newAction()
+//    {
+//        $entity = new Relation();
+//        $form   = $this->createCreateForm($entity);
+//
+//        return array(
+//            'entity' => $entity,
+//            'form'   => $form->createView(),
+//        );
+//    }
 
     /**
      * Finds and displays a Relation entity.
      *
-     * @Route("/{id}", name="relation_show")
+     * @Route("/{id}/show", name="relation_show")
      * @Method("GET")
      * @Template()
      */
     public function showAction($id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+                        
         $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AppBundle:Relation')->find($id);
+        $relation = $em->getRepository('AppBundle:Relation')->find($id);
 
-        if (!$entity) {
+        if (!$relation) {
             throw $this->createNotFoundException('Unable to find Relation entity.');
+        } 
+        
+        if($relation->getProspect()->getUser() === $user){                 
+
+            $deleteForm = $this->createDeleteForm($id);
+
+            return array(
+                'relation' => $relation,
+                'delete_form' => $deleteForm->createView(),
+            );
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
         }       
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-        );
     }
 
     /**
@@ -141,22 +156,31 @@ class RelationController extends Controller
      */
     public function editAction($id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
         $em = $this->getDoctrine()->getManager();
+        $relation = $em->getRepository('AppBundle:Relation')->find($id);
 
-        $entity = $em->getRepository('AppBundle:Relation')->find($id);
-
-        if (!$entity) {
+        if (!$relation) {
             throw $this->createNotFoundException('Unable to find Relation entity.');
         }        
-                        
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+                   
+        if($relation->getProspect()->getUser() === $user){
+            $editForm = $this->createEditForm($relation);
+            $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+            return array(
+                'relation' => $relation,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            );
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }       
     }
 
     /**
@@ -187,29 +211,38 @@ class RelationController extends Controller
      */
     public function updateAction(Request $request, $id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
         $em = $this->getDoctrine()->getManager();
+        $relation = $em->getRepository('AppBundle:Relation')->find($id);
 
-        $entity = $em->getRepository('AppBundle:Relation')->find($id);
-
-        if (!$entity) {
+        if (!$relation) {
             throw $this->createNotFoundException('Unable to find Relation entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
+        if($relation->getProspect()->getUser() === $user){
+            $deleteForm = $this->createDeleteForm($id);
+            $editForm = $this->createEditForm($relation);
+            $editForm->handleRequest($request);
 
-        if ($editForm->isValid()) {
-            $em->flush();
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $em->flush();
 
-            return $this->redirect($this->generateUrl('relation'));
-        }
+                return $this->redirect($this->generateUrl('relation'));
+            }
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+            return array(
+                'relation' => $relation,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            );
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }       
     }
     
     /**
@@ -220,22 +253,33 @@ class RelationController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
         $form = $this->createDeleteForm($id);
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Relation')->find($id);
+            $relation = $em->getRepository('AppBundle:Relation')->find($id);
 
-            if (!$entity) {
+            if (!$relation) {
                 throw $this->createNotFoundException('Unable to find Relation entity.');
             }
             
-            $em->remove($entity);
-            $em->flush();
-        }
-
-        return $this->redirect($this->generateUrl('relation'));
+            if($relation->getProspect()->getUser() === $user){
+            
+                $em->remove($relation);
+                $em->flush();
+                
+                return $this->redirect($this->generateUrl('relation'));
+            } else {
+                throw $this->createAccessDeniedException('You cannot access this page!');
+            }
+        }      
     }
 
     /**

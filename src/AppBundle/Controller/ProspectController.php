@@ -342,17 +342,15 @@ class ProspectController extends Controller
             $editForm->handleRequest($request);
             
             if ($editForm->isSubmitted() && $editForm->isValid()) {  
-
-                $photo = $prospect->getPhoto();      
-                // S'il s'agit d'une photo qui existait déjà, on ne recrée pas d'acl
-                $acl = ($photo instanceof \Doctrine\Common\Persistence\Proxy && $photo->__isInitialized()) ? false : true;
+                                
+                $photo = $prospect->getPhoto();                
 
                 // Si aucun choix utilisateur, upload simple sans se soucier de la photo
                 if ($photo === null) {
                     $em->flush();
                 } else {
                     $photo->setUserId($user->getId());
-
+var_dump($photo);
                     // STOF UPLOADABLE
                     $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
                     $uploadableManager->markEntityToUpload($photo, $photo->getFile());

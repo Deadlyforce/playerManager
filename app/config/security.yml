@@ -39,7 +39,7 @@ security:
                 failure_path:   null            
             logout:
                 path: /logout
-
+#                target: /
             anonymous: ~
             switch_user: true
         

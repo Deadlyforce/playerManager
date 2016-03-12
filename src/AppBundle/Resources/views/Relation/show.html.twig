@@ -8,51 +8,51 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ entity.id }}</td>                
+                <td>{{ relation.id }}</td>                
             </tr>
             <tr>
                 <th>Prénom</th>
-                <td>{% if entity.prospect %}{{ entity.prospect.prenom }}{% endif %}</td>
+                <td>{% if relation.prospect %}{{ relation.prospect.prenom }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Statut</th>
-                <td>{% if entity.statut %}On{% else %}Off{% endif %}</td>
+                <td>{% if relation.statut %}On{% else %}Off{% endif %}</td>
             </tr>
             <tr>
                 <th>Rencontre</th>
-                <td>{% if entity.rencontre %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relation.rencontre %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Rencontres</th>
-                <td>{{ entity.rencontreCount }}</td>
+                <td>{{ relation.rencontreCount }}</td>
             </tr>
             <tr>
                 <th>Numéro</th>
-                <td>{% if entity.numero %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relation.numero %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Kc</th>
-                <td>{% if entity.kc %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relation.kc %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Fc</th>
-                <td>{% if entity.fc %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relation.fc %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Type</th>
-                <td>{{ entity.categorie }}</td>
+                <td>{{ relation.categorie }}</td>
             </tr>
             <tr>
                 <th>Distance</th>
-                <td>{% if entity.distance %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relation.distance %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Flake</th>
-                <td>{% if entity.flake %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relation.flake %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Commentaire</th>
-                <td>{{ entity.commentaire }}</td>
+                <td>{{ relation.commentaire }}</td>
             </tr>
         </tbody>
     </table>
@@ -64,7 +64,7 @@
         </a>
     </li>
     <li>
-        <a href="{{ path('relation_edit', { 'id': entity.id }) }}">
+        <a href="{{ path('relation_edit', { 'id': relation.id }) }}">
             Edit
         </a>
     </li>

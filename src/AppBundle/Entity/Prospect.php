@@ -716,9 +716,11 @@ class Prospect
      */
     public function removePhotoUpload()
     {
-        $file = $this->getPhoto()->getUploadAbsolutePath();
-        if($file){
-            unlink($file);
+        if($this->getPhoto() != null){
+            $file = $this->getPhoto()->getUploadAbsolutePath();
+            if($file){
+                unlink($file);
+            }
         }
     }
     
