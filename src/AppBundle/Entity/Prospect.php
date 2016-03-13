@@ -33,14 +33,7 @@ class Prospect
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
-    
-    /**
-     * Contient temporairement le chemin de la photo ($photoPrincipale)
-     * 
-     * @var string 
-     */
-    private $temp;
-    
+       
     /**
      * @var ArrayCollection
      * 
@@ -149,13 +142,6 @@ class Prospect
      * @ORM\Column(name="numero_etranger", type="string", length=50, nullable=true)
      */
     private $numero_etranger;   
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="photo_principale", type="string", length=255, nullable=true)
-     */
-//    private $photo_principale;
     
     /**
      * @var \Date
@@ -190,29 +176,6 @@ class Prospect
         return $this->id;
     }
     
-    /**
-     * Set user_id
-     *
-     * @param string $user_id
-     * @return Prospect
-     */
-//    public function setUserId($user_id)
-//    {
-//        $this->user_id = $user_id;     
-//        
-//        return $this;
-//    }
-    
-    /**
-     * Get user_id
-     *
-     * @return integer 
-     */
-//    public function getUserId()
-//    {
-//        return $this->user_id;
-//    }
-
     /**
      * Set pseudo
      *
@@ -459,48 +422,6 @@ class Prospect
     }
 
     /**
-     * Set photo_principale
-     *
-     * @param string $photo_principale
-     * @return Prospect
-     */
-//    public function setPhotoPrincipale($photo_principale)
-//    {
-//        $this->photo_principale = $photo_principale;
-//        
-//        return $this;
-//    }    
-            
-    /**
-     * Sets file
-     * 
-     * @param \Symfony\Component\HttpFoundation\File\UploadedFile $file
-     */
-//    public function setFile(UploadedFile $file = NULL)
-//    {
-//        $this->file = $file;
-//        
-//        // check if we have an old image path
-//        if(isset($this->photo_principale)){
-//            // store the old name to delete after the update
-//            $this->temp = $this->photo_principale;
-//            $this->photo_principale = NULL;
-//        }else{
-//            $this->photo_principale = 'initial';
-//        }
-//    }
-    
-    /**
-     * Get file.
-     * 
-     * @return UploadedFile
-     */
-//    public function getFile()
-//    {
-//        return $this->file;
-//    }
-
-    /**
      * Add echanges
      *
      * @param \AppBundle\Entity\Echange $echanges
@@ -646,70 +567,6 @@ class Prospect
                 ? NULL
                 : $this->getUploadPath() . '/' . $this->getPhotoPrincipale();
     }
-    
-    /**
-     * Get path on disk to a photo principale.
-     * 
-     * @return null|string
-     *  Absolute path.
-     */
-//    public function getPhotoPrincipaleAbsolute()
-//    {
-//        return NULL === $this->getPhotoPrincipale()
-//                ? NULL
-//                : $this->getUploadAbsolutePath() . '/' . $this->getPhotoPrincipale();
-//    }
-    
-    /**
-     * @ORM\PrePersist()
-     * @ORM\PreUpdate()
-     */
-//    public function preUpload()
-//    {
-//        if(NULL !== $this->getFile()){
-//            // Generate a unique name
-//            $filename = sha1(uniqid(mt_rand(), TRUE));
-//            $extension = $this->getFile()->guessExtension();
-//            $this->photo_principale = $filename.'.'.$extension;
-//        }
-//    }
-    
-    /**
-     * Upload une photo principale
-     * 
-     * @ORM\PostPersist()
-     * @ORM\PostUpdate()
-     */
-//    public function upload()
-//    {
-//        // File property can be empty.
-//        if(NULL === $this->getFile()){
-//            return;
-//        }      
-//        // if there is an error when moving the file, an exception will
-//        // be automatically thrown by move(). This will properly prevent
-//        // the entity from being persisted to the database on error
-//        $this->getFile()->move($this->getUploadAbsolutePath(), $this->photo_principale);
-//
-//        // check if we have an old image
-//        if (isset($this->temp)) {            
-//            unlink($this->getUploadAbsolutePath().'/'.$this->temp); // delete the old image            
-//            $this->temp = NULL; // clear the temp image path
-//        }
-//        
-//        $this->file = NULL;
-//    }
-    
-    /**
-     * @ORM\PostRemove
-     */
-//    public function removeUpload()
-//    {
-//        $file = $this->getPhotoPrincipaleAbsolute();
-//        if($file){
-//            unlink($file);
-//        }
-//    }
     
     /**
      * @ORM\PostRemove
