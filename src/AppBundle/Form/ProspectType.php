@@ -7,8 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-//use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -91,7 +92,6 @@ class ProspectType extends AbstractType
             ))
             ->add('pays', TextType::class, array(
                 'required' => TRUE, 
-//                'data' => 'France',
                 'attr' => array(
                     'class' => 'form-input'                    
                 ),
@@ -135,22 +135,24 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-//            ->add('file', FileType::class, array(
-//                'required' => FALSE, 
-//                'label' => 'Photo principale',
-//                'attr' => array(
-//                    'class' => 'form-input-photoPrincipale'
-//                ),
+            ->add('photos', CollectionType::class, array(
+                'entry_type' => new PhotoType(),
+                'entry_options' => array(
+                    'required' => false,
+                    'row_attr' => array(
+                        'class' => 'form_row'
+                    )
+                ),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false
+//                'data_class' => 'AppBundle\Entity\Photo',
+//                'required' => false,
+//                'multiple' => true,
+//                'mapped' => false,
 //                'row_attr' => array(
 //                    'class' => 'form_row'
 //                )
-//            ))
-            ->add('photo', new PhotoType(), array(
-                'data_class' => 'AppBundle\Entity\Photo',
-                'required' => false,
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
             ))
             ->add('dateCreation', DateTimeType::class, array(
 		'required' => FALSE,
@@ -166,8 +168,7 @@ class ProspectType extends AbstractType
             ))
             ->add('relation', new RelationType(), array(
                 
-            ))
-                
+            ))                
         ;
     }
     

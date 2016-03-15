@@ -1,24 +1,41 @@
+{% extends '::base_nomenu.html.twig' %}
+{% block title %}New contact{% endblock %}
 {% form_theme form 'AppBundle:Form:fields.html.twig' %}  
 
-{{ form_start(form, {'attr': {'id':'form-new-prospect'}}) }}   
-    {{ form_row(form.pseudo) }}
-    {{ form_row(form.prenom) }}
-    {{ form_row(form.nom) }}
-    {{ form_row(form.age) }}
-    {{ form_row(form.ville) }}
-    {{ form_row(form.arrondissement) }}
-    {{ form_row(form.pays) }}
-    {{ form_row(form.numero) }}
-    {{ form_row(form.numeroDom) }}
-    {{ form_row(form.numeroEtranger) }}
-    {{ form_row(form.source) }}
-{#    {{ form_row(form.file) }}#}
-    {{ form_row(form.photo) }}
-    {{ form_row(form.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
+{% block body -%}
+    <h1>New contact</h1>
     
-    {{ form_row(form.submit) }}
-    <div class="hidden">{{ form_rest(form) }}</div>
-{{ form_end(form) }}       
+    {{ form_start(form, {'attr': {'id':'form-new-prospect'}}) }}   
+        {{ form_row(form.pseudo) }}
+        {{ form_row(form.prenom) }}
+        {{ form_row(form.nom) }}
+        {{ form_row(form.age) }}
+        {{ form_row(form.ville) }}
+        {{ form_row(form.arrondissement) }}
+        {{ form_row(form.pays) }}
+        {{ form_row(form.numero) }}
+        {{ form_row(form.numeroDom) }}
+        {{ form_row(form.numeroEtranger) }}
+        {{ form_row(form.source) }}
+        
+        {{ form_label(form.photos) }}
+        {{ form_errors(form.photos) }}
+        
+        <ul id="photo-list" data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}">
+            {% for photo in form.photos %}
+                <li>
+                    {{ form_errors(photo) }}
+                    {{ form_widget(photo) }}
+                </li>
+            {% endfor %}
+        </ul>
+
+        {{ form_row(form.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
+
+        {{ form_row(form.submit) }}
+        <div class="hidden">{{ form_rest(form) }}</div>
+    {{ form_end(form) }} 
+
 
 <script type="text/javascript"> 
 
@@ -34,8 +51,20 @@
             }else{
                 $('.row_arrondissement').hide('fast');
             }
-        });           
-    });
+        });                
+    });  
 
 </script>
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    
+    {% javascripts
+        'bundles/app/js/photos.js'
+    %}        
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts%}
+{% endblock %}
 

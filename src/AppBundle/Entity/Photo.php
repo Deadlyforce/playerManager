@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use AppBundle\Entity\Prospect;
+
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -20,6 +22,14 @@ class Photo {
         $this->path = "";
         $this->name = "";        
     }
+    
+    /**
+     * @var Prospect
+     * 
+     * @ORM\ManyToOne(targetEntity="Prospect", inversedBy="photos")
+     * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id") 
+     */
+    private $prospect;
     
     /**
      * @var integer
@@ -58,7 +68,7 @@ class Photo {
      * @var integer 
      * @ORM\Column(name="user_id", type="integer", nullable=false)
      */
-    private $user_id;
+//    private $user_id;
     
     
     /************************* GETTERS SETTERS ********************************/
@@ -71,7 +81,7 @@ class Photo {
      */
     public function userPath()
     {    
-        return 'uploads/photoPrincipale/'. $this->getUserId();
+        return 'uploads/photoPrincipale/'. $this->getProspect()->getUser()->getId();
     }
     
     /**
@@ -166,38 +176,27 @@ class Photo {
     }
     
     /**
-     * Set user_id
+     * Set prospect
      *
-     * @param integer $user_id
+     * @param Prospect $prospect
      * @return Photo
      */
-    public function setUserId($user_id)
+    public function setProspect($prospect)
     {
-        $this->user_id = $user_id;     
+        $this->prospect = $prospect;     
         
         return $this;
     }
     
     /**
-     * Get user_id
+     * Get prospect
      *
-     * @return integer 
+     * @return Prospect 
      */
-    public function getUserId()
+    public function getProspect()
     {
-        return $this->user_id;
+        return $this->prospect;
     }
     
-    /**
-     * Removes physically the photo from the directory
-     * 
-     * @ORM\PostRemove
-     */
-//    public function removeUpload()
-//    {
-//        $file = $this->getUploadAbsolutePath();
-//        if($file){
-//            unlink($file);
-//        }
-//    }
+
 }

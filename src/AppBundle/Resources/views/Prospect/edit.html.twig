@@ -17,8 +17,22 @@
         {{ form_row(edit_form.numeroDom) }}
         {{ form_row(edit_form.numeroEtranger) }}
         {{ form_row(edit_form.source) }}
-{#        {{ form_row(edit_form.file) }}#}
-        {{ form_row(edit_form.photo) }}
+
+        {{ form_label(edit_form.photos) }}
+        {{ form_errors(edit_form.photos) }}
+               
+        <ul id="photo-list" data-prototype="{{ form_widget(edit_form.photos.vars.prototype)|e }}">
+            {% for photo in edit_form.photos %}
+                <li>
+                    <img class="img-responsive" src="{{ asset(photo.vars.data.path) }}" alt="{{ asset(photo.vars.data.path) }}" />
+                    {{ form_errors(photo) }}
+                    {{ form_widget(photo) }}
+                </li>
+            {% endfor %}
+        </ul>
+        
+{#        {{ form_row(edit_form.photo) }}#}
+        
         {{ form_row(edit_form.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
 
         {{ form_row(edit_form.submit) }}
@@ -47,4 +61,14 @@
         });
         
     </script>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    
+    {% javascripts
+        'bundles/app/js/photos.js'
+    %}        
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts%}
 {% endblock %}

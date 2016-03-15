@@ -24,6 +24,7 @@ class Prospect
     {
         $this->echanges = new ArrayCollection();
         $this->rencontres = new ArrayCollection();
+        $this->photos = new ArrayCollection();
         $this->relation = null;
     }   
    
@@ -157,11 +158,11 @@ class Prospect
 //    private $file;
     
     /**
-     *
-     * @ORM\OneToOne(targetEntity="Photo", cascade={"persist", "remove"}) 
-     * @ORM\JoinColumn(name="photo_id", referencedColumnName="id", nullable=true)
+     * @var ArrayCollection
+     * 
+     * @ORM\OneToMany(targetEntity="Photo", mappedBy="prospect", cascade={"persist", "remove"}) 
      */
-    private $photo;
+    private $photos;
     
     
     // GETTERS AND SETTERS *****************************************************
@@ -490,10 +491,10 @@ class Prospect
     /**
      * Add Rencontre
      *
-     * @param \AppBundle\Entity\Rencontre $rencontre
+     * @param Rencontre $rencontre
      * @return Prospect
      */
-    public function addRencontre(\AppBundle\Entity\Rencontre $rencontre)
+    public function addRencontre(Rencontre $rencontre)
     {
         $this->rencontres[] = $rencontre;
         return $this;
@@ -502,9 +503,9 @@ class Prospect
     /**
      * Remove Rencontre
      *
-     * @param \AppBundle\Entity\Rencontre $rencontre
+     * @param Rencontre $rencontre
      */
-    public function removeRencontre(\AppBundle\Entity\Rencontre $rencontre)
+    public function removeRencontre(Rencontre $rencontre)
     {
         $this->rencontres->removeElement($rencontre);
     }
@@ -571,14 +572,18 @@ class Prospect
     /**
      * @ORM\PostRemove
      */
-    public function removePhotoUpload()
+    public function removePhotoUploads()
     {
-        if($this->getPhoto() != null){
-            $file = $this->getPhoto()->getUploadAbsolutePath();
-            if($file){
-                unlink($file);
+        if($this->getPhotos() != null){
+            
+            foreach($this->getPhotos() as $photo){
+               $file = $photo->getUploadAbsolutePath();
+               
+               if($file){
+                    unlink($file);
+                }
             }
-        }
+        }           
     }
     
     /**
@@ -605,13 +610,13 @@ class Prospect
    }
    
    /**
-    * Get photo
+    * Get photos
     * 
-    * @return Photo
+    * @return Array
     */
-   public function getPhoto()
+   public function getPhotos()
    {
-        return $this->photo;
+        return $this->photos;
    }
    
    /**
@@ -620,12 +625,23 @@ class Prospect
     * @param Photo $photo
     * @return Prospect
     */
-   public function setPhoto($photo)
+   public function addPhoto($photo)
    {
-        $this->photo = $photo;
+        $this->photos[] = $photo;
+        $photo->setProspect($this);
         
         return $this;
    }
+   
+   /**
+     * Remove Photo
+     *
+     * @param Photo $photo
+     */
+    public function removePhoto($photo)
+    {
+        $this->photos->removeElement($photo);
+    }
    
    /**
     * Get User

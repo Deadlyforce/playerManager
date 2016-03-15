@@ -38,9 +38,10 @@
                 <td>{{ prospect.ville }}</td>
                 <td>{{ prospect.pays }}</td>
                 <td>{{ prospect.source }}</td>
-                <td class="photo_principale">
-                    {% if prospect.photoPrincipale %}
-                        <img class="img-responsive" src="{{ asset(prospect.photoPrincipale) }}" alt="{{ asset(prospect.photoPrincipale) }}" />
+                <td class="photo_principale">                    
+                    {% if prospect.photos|last %}
+                        {% set photo = prospect.photos|last %}
+                        <img class="img-responsive" src="{{ asset(photo.path) }}" alt="{{ asset(photo.path) }}" />                        
                     {% endif %}
                 </td>
                 <td>

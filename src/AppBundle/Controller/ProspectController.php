@@ -10,8 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-//use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Csrf\CsrfToken;
+use Doctrine\Common\Collections\ArrayCollection;
 
 
 /**
@@ -136,25 +136,23 @@ class ProspectController extends Controller
         $form = $this->createCreateForm($prospect);
         $form->handleRequest($request);        
         
-        // Récup utilisateur et chargement de son id dans l'entité Photo
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $photo = $prospect->getPhoto();
-        $photo->setUserId($user->getId());
-        // Récup fin
+        $photos = $prospect->getPhotos();
         
         $prospect->setUser($user);
-        
+       
         if ($form->isSubmitted() && $form->isValid()) {            
             
             $em = $this->getDoctrine()->getManager();
-            $em->persist($prospect);    
-
-            $photo = $prospect->getPhoto();
-        
+            $em->persist($prospect);  
+       
             // STOF UPLOADABLE
             $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
-            $uploadableManager->markEntityToUpload($photo, $photo->getFile());
-            
+
+            foreach($photos as $photo){
+                $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+            }           
+           
             $em->flush();                  
             
             return $this->redirectToRoute('prospect');
@@ -336,29 +334,47 @@ class ProspectController extends Controller
         }
 
         if($prospect->getUser() === $user){
+            
+            $originalPhotos = new ArrayCollection();
+
+            // Create an ArrayCollection of the current Tag objects in the database
+            foreach ($prospect->getPhotos() as $photo) {
+                $originalPhotos->add($photo);
+            }
         
             $deleteForm = $this->createDeleteForm($id);
             $editForm = $this->createEditForm($prospect);
             $editForm->handleRequest($request);
-            
+           
             if ($editForm->isSubmitted() && $editForm->isValid()) {  
-                                
-                $photo = $prospect->getPhoto();                
 
-                // Si aucun choix utilisateur, upload simple sans se soucier de la photo
-                if ($photo === null) {
-                    $em->flush();
-                } else {
-                    $photo->setUserId($user->getId());
+                // remove the relationship between the photo and the Prospect
+                foreach ($originalPhotos as $originalPhoto) {                    
+                    if ($prospect->getPhotos()->contains($originalPhoto) === false) {
+                        $prospect->removePhoto($originalPhoto);
+                        
+                        // if it was a many-to-one relationship, remove the relationship like this
+                        $originalPhoto->setProspect(null);
+                        
+//                        $em->persist($tag);
 
-                    // STOF UPLOADABLE
-                    $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
-                    $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+                        // Delete the Photo entirely
+                         $em->remove($originalPhoto);
+                    }
+                }
+                
+                foreach ($prospect->getPhotos() as $photo) {
+                    if ($originalPhotos->contains($photo) === false) {
 
-                    $em->flush();                             
-                }           
+                        $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+                        $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+                    }
+                }
 
-                return $this->redirect($this->generateUrl('prospect'));
+                $em->persist($prospect);
+                $em->flush();
+
+                return $this->redirectToRoute('prospect');
             }
 
             return array(
