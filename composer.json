@@ -21,7 +21,7 @@
         "incenteev/composer-parameter-handler": "~2.0",
         
         "twbs/bootstrap": "3.3.*",
-        "components/jquery": "2.1.*",
+        "components/jquery": "2.2.*",
         "components/jqueryui": "^1.11",
         "knplabs/knp-menu-bundle": "dev-master",        
         "friendsofsymfony/user-bundle": "~2.0@dev",                

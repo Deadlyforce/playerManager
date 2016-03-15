@@ -337,7 +337,7 @@ class ProspectController extends Controller
             
             $originalPhotos = new ArrayCollection();
 
-            // Create an ArrayCollection of the current Tag objects in the database
+            // Create an ArrayCollection of the current Photo objects in the database
             foreach ($prospect->getPhotos() as $photo) {
                 $originalPhotos->add($photo);
             }
@@ -345,34 +345,47 @@ class ProspectController extends Controller
             $deleteForm = $this->createDeleteForm($id);
             $editForm = $this->createEditForm($prospect);
             $editForm->handleRequest($request);
-           
+//var_dump($request->request->get('photos'));           
             if ($editForm->isSubmitted() && $editForm->isValid()) {  
-
-                // remove the relationship between the photo and the Prospect
-                foreach ($originalPhotos as $originalPhoto) {                    
-                    if ($prospect->getPhotos()->contains($originalPhoto) === false) {
-                        $prospect->removePhoto($originalPhoto);
-                        
-                        // if it was a many-to-one relationship, remove the relationship like this
-                        $originalPhoto->setProspect(null);
-                        
-//                        $em->persist($tag);
-
-                        // Delete the Photo entirely
-                         $em->remove($originalPhoto);
-                    }
-                }
+//var_dump($prospect->getPhotos());
+//var_dump($originalPhotos);         
+                $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+                $photos = $prospect->getPhotos();                               
                 
-                foreach ($prospect->getPhotos() as $photo) {
-                    if ($originalPhotos->contains($photo) === false) {
-
-                        $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+                if ($originalPhotos->isEmpty()) {
+                    // Case: update a Prospect without a previous photo
+                    foreach ($photos as $photo) {
                         $uploadableManager->markEntityToUpload($photo, $photo->getFile());
-                    }
-                }
+                    }      
+                    
+                    $em->flush();
+                } else {
+                    // Case: update a Prospect with a previous photo, with and without changes
+                    // remove the relationship between the photo and the Prospect
+                    foreach ($originalPhotos as $originalPhoto) {  
 
-                $em->persist($prospect);
-                $em->flush();
+
+
+                        if ($photos->contains($originalPhoto) === false) {
+                            $prospect->removePhoto($originalPhoto);
+
+                            // if it was a many-to-one relationship, remove the relationship like this
+                            $originalPhoto->setProspect(null);
+                            // Delete the Photo entirely
+                             $em->remove($originalPhoto);
+                        } else {
+                            foreach ($photos as $photo) {
+                                // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
+                                if ($photo->getFile()) {                                
+                                    $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+                                }
+                            }
+                        }
+                    }
+
+                    $em->persist($prospect);
+                    $em->flush();
+                }              
 
                 return $this->redirectToRoute('prospect');
             }

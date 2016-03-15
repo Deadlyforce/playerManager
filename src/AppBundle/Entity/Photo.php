@@ -58,17 +58,9 @@ class Photo {
      * @var file 
      * 
      * @Assert\NotBlank()
-     * @Assert\Image(maxSize="5000000") 
+     * @Assert\Image(maxSize="3000000") 
      */
     private $file;
-            
-    /**
-     * Utilisé pour la création des dossier d'upload utilisateur
-     * 
-     * @var integer 
-     * @ORM\Column(name="user_id", type="integer", nullable=false)
-     */
-//    private $user_id;
     
     
     /************************* GETTERS SETTERS ********************************/

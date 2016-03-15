@@ -91,7 +91,7 @@ class ProspectType extends AbstractType
                 )
             ))
             ->add('pays', TextType::class, array(
-                'required' => TRUE, 
+                'required' => false, 
                 'attr' => array(
                     'class' => 'form-input'                    
                 ),
@@ -100,7 +100,7 @@ class ProspectType extends AbstractType
                 )
             ))
             ->add('numero', TextType::class, array(
-                'required' => FALSE,
+                'required' => false,
                 'label' => 'Tel portable',
                 'attr' => array(
                     'class' => 'form-input'
@@ -110,7 +110,7 @@ class ProspectType extends AbstractType
                 )
             ))
             ->add('numeroDom', TextType::class, array(
-                'required' => FALSE,
+                'required' => false,
                 'label' => 'Tel Domicile',
                 'attr' => array(
                     'class' => 'form-input'
@@ -120,7 +120,7 @@ class ProspectType extends AbstractType
                 )
             ))
             ->add('numeroEtranger', TextType::class, array(
-                'required' => FALSE, 
+                'required' => false, 
                 'label' => 'Tel étranger',
                 'attr' => array(
                     'class' => 'form-input'
@@ -146,16 +146,9 @@ class ProspectType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false
-//                'data_class' => 'AppBundle\Entity\Photo',
-//                'required' => false,
-//                'multiple' => true,
-//                'mapped' => false,
-//                'row_attr' => array(
-//                    'class' => 'form_row'
-//                )
             ))
             ->add('dateCreation', DateTimeType::class, array(
-		'required' => FALSE,
+		'required' => false,
 		'label' => 'Date de création: ',
 		'model_timezone' => 'Europe/Paris',
 		'view_timezone' => 'Europe/Paris',
