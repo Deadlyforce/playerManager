@@ -152,14 +152,12 @@ class Prospect
     private $date_creation;    
     
     /**
-     *
-     * @Assert\File(maxSize="2000000")
-     */
-//    private $file;
-    
-    /**
      * @var ArrayCollection
      * 
+     * @Assert\Count(
+     *      max = "5",
+     *      maxMessage = "You cannot specify more than {{ limit }} photos"
+     * )
      * @ORM\OneToMany(targetEntity="Photo", mappedBy="prospect", cascade={"persist", "remove"}) 
      */
     private $photos;
@@ -540,6 +538,21 @@ class Prospect
     protected function getUploadAbsolutePath()
     {
         return __DIR__ . '/../../../web/' . $this->getUploadPath();
+    }
+    
+    /**
+     * Get last updated photo
+     *
+     * @return string 
+     */
+    public function getLastUpdatedPhoto()
+    {
+        if($this->getPhotos() !== null){
+            $count = count($this->getPhotos());
+            return $this->getPhotos()[$count-1]->getPath();
+        }else{
+            return null;
+        }        
     }
     
     /**

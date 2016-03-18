@@ -18,9 +18,11 @@ $(document).ready(function(){
     collectionHolder.data('index', collectionHolder.find(':input').length);
 
     addPhotoLink.on('click', function(e) {            
-        e.preventDefault();
+        e.preventDefault();       
+        
         // add a new tag form (see next code block)
         addPhotoForm(collectionHolder, newLinkLi);
+        $("#appbundle_prospect_photos_" + (collectionHolder.data('index') - 1));
     });
 });
 
@@ -39,9 +41,10 @@ function addPhotoForm(collectionHolder, newLinkLi)
 
     // Display the form in the page in an li, before the "Add a tag" link li
     var newFormLi = $('<li></li>').append(newForm);
+    
     newLinkLi.before(newFormLi);
 
-    addPhotoFormDeleteLink(newFormLi);
+    addPhotoFormDeleteLinkWithIndexChange(newFormLi, collectionHolder);
 }    
 
 function addPhotoFormDeleteLink(photoFormLi)
@@ -49,9 +52,26 @@ function addPhotoFormDeleteLink(photoFormLi)
     var removeForm =  $("<a href='#'>Delete photo</a>");
     photoFormLi.append(removeForm);
 
-    removeForm.on('click', function(e){
-        e.preventDefault();
-
+    removeForm.click(function(event){
+        event.preventDefault();        
+                
         photoFormLi.remove();
+    });
+}
+
+function addPhotoFormDeleteLinkWithIndexChange(photoFormLi, collectionHolder)
+{
+    var removeForm =  $("<a href='#'>Delete photo</a>");
+    photoFormLi.append(removeForm);
+
+    removeForm.click({collectionHolder: collectionHolder}, function(event){
+        event.preventDefault();
+        
+        collectionHolder = event.data.collectionHolder;
+        // get the new index
+        var index = collectionHolder.data('index');
+        
+        photoFormLi.remove();
+        collectionHolder.data('index', index-1);
     });
 }

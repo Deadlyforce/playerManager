@@ -11,8 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Csrf\CsrfToken;
-use Doctrine\Common\Collections\ArrayCollection;
-
+use Doctrine\Common\Collections\ArrayCollection; 
 
 /**
  * Prospect controller.
@@ -345,10 +344,9 @@ class ProspectController extends Controller
             $deleteForm = $this->createDeleteForm($id);
             $editForm = $this->createEditForm($prospect);
             $editForm->handleRequest($request);
-//var_dump($request->request->get('photos'));           
+         
             if ($editForm->isSubmitted() && $editForm->isValid()) {  
-//var_dump($prospect->getPhotos());
-//var_dump($originalPhotos);         
+         
                 $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
                 $photos = $prospect->getPhotos();                               
                 
@@ -362,9 +360,7 @@ class ProspectController extends Controller
                 } else {
                     // Case: update a Prospect with a previous photo, with and without changes
                     // remove the relationship between the photo and the Prospect
-                    foreach ($originalPhotos as $originalPhoto) {  
-
-
+                    foreach ($originalPhotos as $originalPhoto) {
 
                         if ($photos->contains($originalPhoto) === false) {
                             $prospect->removePhoto($originalPhoto);
@@ -457,5 +453,6 @@ class ProspectController extends Controller
             ))
             ->getForm()
         ;
-    }  
+    } 
+    
 }

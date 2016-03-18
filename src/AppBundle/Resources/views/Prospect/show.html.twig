@@ -8,7 +8,11 @@
     <div class="panel panel-default">
         <div class="panel-heading">{{ prospect.prenom }}</div>
         <div class="panel-body">            
-            <img class="img-responsive prospect_photo" src="{{ asset(prospect.photoPrincipale) }}" alt="{{ prospect.photoPrincipale }}" />
+{#            <img class="img-responsive prospect_photo" src="{{ asset(prospect.lastUpdatedPhoto) }}" alt="{{ prospect.lastUpdatedPhoto }}" />#}
+            
+            {% for photo in prospect.photos %}
+                <img class="img-responsive prospect_photo" src="{{ asset(photo.getPath) }}" alt="{{ photo.getPath }}" />
+            {% endfor%}
             
             <table class="record_properties">
                 <tbody>                    

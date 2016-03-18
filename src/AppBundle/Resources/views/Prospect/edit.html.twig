@@ -2,6 +2,8 @@
 {% block title %}Modifier le contact{% endblock %}
 {% form_theme edit_form 'AppBundle:Form:fields.html.twig' %}
 
+
+
 {% block body -%}
     <h1>Modifier un contact</h1>
 
@@ -17,6 +19,7 @@
         {{ form_row(edit_form.numeroDom) }}
         {{ form_row(edit_form.numeroEtranger) }}
         {{ form_row(edit_form.source) }}
+        {{ form_row(edit_form.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
 
         {{ form_label(edit_form.photos) }}
         {{ form_errors(edit_form.photos) }}
@@ -24,16 +27,12 @@
         <ul id="photo-list" data-prototype="{{ form_widget(edit_form.photos.vars.prototype)|e }}">
             {% for photo in edit_form.photos %}
                 <li>
-                    <img class="img-responsive" src="{{ asset(photo.vars.data.path) }}" alt="{{ asset(photo.vars.data.path) }}" />
+                    <img class="img-responsive original-img" src="{{ asset(photo.vars.data.path) }}" alt="{{ asset(photo.vars.data.path) }}" />
                     {{ form_errors(photo) }}
-                    {{ form_widget(photo) }}
+                    {{ form_widget(photo) }}                    
                 </li>
             {% endfor %}
-        </ul>
-        
-{#        {{ form_row(edit_form.photo) }}#}
-        
-        {{ form_row(edit_form.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
+        </ul>       
 
         {{ form_row(edit_form.submit) }}
         <div class="hidden">{{ form_rest(edit_form) }}</div>
@@ -45,22 +44,21 @@
     {{ form(delete_form) }}
     
         
-    <script type="text/javascript"> 
+<script type="text/javascript"> 
 
-        $(document).ready(function(){            
-            
-            $('.form-input-ville').change(function(){
-                var ville = $(this).val().toLowerCase();
+    $(document).ready(function(){            
 
-                if(ville == 'paris'){
-                    $('.row_arrondissement').show('slow');
-                }else{
-                    $('.row_arrondissement').hide('slow');
-                }
-            });           
-        });
-        
-    </script>
+        $('.form-input-ville').change(function(){
+            var ville = $(this).val().toLowerCase();
+
+            if(ville == 'paris'){
+                $('.row_arrondissement').show('slow');
+            }else{
+                $('.row_arrondissement').hide('slow');
+            }
+        });            
+    });    
+    
 {% endblock %}
 
 {% block javascripts %}

@@ -50,7 +50,7 @@ td.actions a{
     z-index: 10;
     background-color: rgba(0, 0, 0, 0.5);
     
-    display: none;  // masqué de base
+    display: none;  /* masqué de base */
 }
 .loader_standard{
     width: 360px;
@@ -67,7 +67,7 @@ td.actions a{
     padding: 60px 10px 25px 10px;
     border: 1px solid #ddd;
     
-    display: none;  // masqué de base
+    display: none;  /* masqué de base */
 }
 
 /******************************* PROSPECTS - INDEX ***********************************/
@@ -89,6 +89,11 @@ td.photo_principale img{
 /******************************* PROSPECTS - SHOW ***********************************/
 
 .prospect_photo{
+    height: 150px;
+}
+
+/******************************* PROSPECTS - EDIT ***********************************/
+.original-img{
     height: 150px;
 }
 
@@ -154,4 +159,22 @@ form[name="fos_user_security_login"]{
     padding: 15px;
     margin: 0px auto;
     border: 1px solid rgb(204, 204, 204);
+}
+
+/************************* GALLERY *****************************/
+.photo-block{
+    display: inline-block;
+    text-align: center;
+}
+.photo-frame{
+    width: 250px;
+    height: 250px;
+    border: 1px solid #ddd;
+    display: inline-block;
+}
+.photo-frame img{
+    max-width: 100%;
+    max-height: 100%;
+    margin: 0px auto;
+    display: block
 }

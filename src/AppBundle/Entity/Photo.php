@@ -55,6 +55,12 @@ class Photo {
     private $name;
     
     /**
+     * @ORM\Column(type="decimal")
+     * @Gedmo\UploadableFileSize
+     */
+    private $size;
+    
+    /**
      * @var file 
      * 
      * @Assert\NotBlank()
@@ -141,6 +147,29 @@ class Photo {
     public function getName()
     {
         return $this->name;
+    }
+    
+    /**
+     * Set size
+     * 
+     * @param string $size
+     * @return \AppBundle\Entity\Photo
+     */
+    public function setSize($size)
+    {
+        $this->size = $size;
+        
+        return $this;
+    }
+    
+    /**
+     * Get size
+     * 
+     * @return decimal $size
+     */
+    public function getSize()
+    {
+        return $this->size;
     }
 
     /**
