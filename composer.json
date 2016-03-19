@@ -22,8 +22,7 @@
         
         "twbs/bootstrap": "3.3.*",
         "components/jquery": "2.2.*",
-        "components/jqueryui": "^1.11",
-        "knplabs/knp-menu-bundle": "dev-master",        
+        "components/jqueryui": "^1.11",        
         "friendsofsymfony/user-bundle": "~2.0@dev",                
         "fabpot/php-cs-fixer": "^1.10",
         "stof/doctrine-extensions-bundle": "^1.2",

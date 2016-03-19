@@ -13,4 +13,25 @@
             </div>
         </div>
     {% endfor %}
+    
+    {#<h1>Modifier un contact</h1>
+
+    {{ form_start(edit_form, {'attr': {'id':'form-edit-prospect'}}) }}          
+
+        {{ form_label(edit_form.photos) }}
+        {{ form_errors(edit_form.photos) }}
+               
+        <ul id="photo-list" data-prototype="{{ form_widget(edit_form.photos.vars.prototype)|e }}">
+            {% for photo in edit_form.photos %}
+                <li>
+                    <img class="img-responsive original-img" src="{{ asset(photo.vars.data.path) }}" alt="{{ asset(photo.vars.data.path) }}" />
+                    {{ form_errors(photo) }}
+                    {{ form_widget(photo) }}                    
+                </li>
+            {% endfor %}
+        </ul>       
+
+        {{ form_row(edit_form.submit) }}
+        <div class="hidden">{{ form_rest(edit_form) }}</div>
+    {{ form_end(edit_form) }}#}
 {% endblock %}

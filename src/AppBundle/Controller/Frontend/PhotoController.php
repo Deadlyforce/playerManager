@@ -66,7 +66,7 @@ class PhotoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $photo = $em->getRepository('AppBundle:Photo')->find($id);
         
-        if($photo->getProspect->getUser() === $user){        
+        if($photo->getProspect()->getUser() === $user){        
             $form = $this->createForm(PhotoType::class, $photo);
 
             return array(
@@ -95,7 +95,7 @@ class PhotoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $photo = $em->find("AppBundle:Photo", $id);
 
-        if($photo->getProspect->getUser() === $user){        
+        if($photo->getProspect()->getUser() === $user){        
             $x = $request->request->get('x');
             $y = $request->request->get('y');
             $width = $request->request->get('w');

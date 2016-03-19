@@ -2,16 +2,7 @@
 
 {% block title %}Edit photo{% endblock %}
 
-{% block body %}
-    
-    {#<div>
-        <img src="{{ asset(photo.path) }}" alt="Photo">
-    </div>#}
-    
-    {#{{ form_start(form) }}
-        
-    {{ form_end(form) }}#}
-    
+{% block body %}            
     <form id="upload_form" enctype="multipart/form-data" method="post" action="{{ path('photo_crop', {'id': photo.id}) }}" onsubmit="return checkForm();">
         <!-- hidden crop params -->
         <input type="hidden" id="x" name="x" />
@@ -19,7 +10,7 @@
 
         <div>
             <img id="crop-preview" src="{{ asset(photo.path) }}" alt="Photo">
-            <p>Filesize: {{ photo.size }}</p>
+            <p>Filesize: {{ (photo.size/1000) |round }} Kb</p>
         </div>
         <div id="crop-info">                       
             <label>W</label>
