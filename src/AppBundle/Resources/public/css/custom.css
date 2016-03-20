@@ -16,6 +16,101 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'ralewaythin';
+    src: url('../fonts/raleway/raleway-thin-webfont.eot');
+    src: url('../fonts/raleway/raleway-thin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/raleway/raleway-thin-webfont.woff2') format('woff2'),
+         url('../fonts/raleway/raleway-thin-webfont.woff') format('woff'),
+         url('../fonts/raleway/raleway-thin-webfont.ttf') format('truetype'),
+         url('../fonts/raleway/raleway-thin-webfont.svg#ralewaythin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ralewaylight';
+    src: url('../fonts/raleway/raleway-light-webfont.eot');
+    src: url('../fonts/raleway/raleway-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/raleway/raleway-light-webfont.woff2') format('woff2'),
+         url('../fonts/raleway/raleway-light-webfont.woff') format('woff'),
+         url('../fonts/raleway/raleway-light-webfont.ttf') format('truetype'),
+         url('../fonts/raleway/raleway-light-webfont.svg#ralewaylight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+/********************************* LOGIN  *****************************************/
+
+#login-top-bar{
+    height: 38px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-bottom: 1px solid #222;
+}
+#login-body h1{
+    font-family: 'ralewaythin', sans-serif;
+    color: #FFF;
+    font-size: 4em;
+    text-shadow: 1px 1px 2px #888;
+    margin-top: 150px;
+}
+#login-body h1 span{
+    font-size: 0.4em;
+    color: #f47363;
+}
+#login-body p{
+    font-family: 'open_sansregular', sans-serif;
+    color: #f0f0f0;
+    font-size: 1.5em;
+}
+#login-body a{
+    color: white;
+    text-decoration: none;
+    border: 1px solid white;
+    padding: 7px 20px;
+    display: inline-block;
+    background-color: rgba(255,255,255, 0.1);
+    border-radius: 4px;
+    margin-left: 10px;
+}
+#login-body a:hover{
+    color: white;
+    text-decoration: none;
+    background-color: rgba(255,255,255, 0.2);
+}
+
+/***************** FORM LOGIN *********************/
+
+form[name="fos_user_security_login"] .form-control{
+    box-shadow: none;
+    border: 1px solid #888;
+}
+form[name="fos_user_security_login"] label{
+    color: #e0e0e0; 
+}
+form[name="fos_user_security_login"] label[for="remember_me"]{
+    color: #c0c0c0;
+    margin-top: 5px;
+    margin-left: 10px;
+    font-weight: 400;
+}
+form[name="fos_user_security_login"] input#password, form[name="fos_user_security_login"] input#username{
+    color: #e0e0e0;
+    margin-top: 5px;
+    height: 30px;    
+    background-color: transparent;
+    padding-top: 4px;
+}
+form[name="fos_user_security_login"] #_submit{
+    margin-top: 5px;
+    border: none;
+    color: #e0e0e0;
+    background: transparent;
+}
+form[name="fos_user_security_login"] #_submit:hover{
+    color: #f47363;
+}
 
 /******************************* MENU (HEADER) ************************************/
 /* Contains many Bootstrap overrides */
@@ -55,11 +150,19 @@ header{
 .navbar-default .navbar-nav > li > a:hover{
     color: #f0f0f0;
 }
+.navbar-default .navbar-nav > li > a:focus{
+    color: #f47363;
+}
 .navbar-nav > li > a{    
     height: 90px;    
     text-shadow: none;
     display: table-cell;
     vertical-align: middle;    
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+    background-image: none;
+    background-color: #303030;
+    color: #f47363;
 }
 
 /******************************* BODY ************************************/
@@ -212,15 +315,6 @@ ul.record_actions{
 
 table.record_properties th{
     width: 150px;
-}
-
-/************************* FORM LOGIN *****************************/
-
-form[name="fos_user_security_login"]{
-    width: 200px;
-    padding: 15px;
-    margin: 0px auto;
-    border: 1px solid rgb(204, 204, 204);
 }
 
 /************************* GALLERY *****************************/

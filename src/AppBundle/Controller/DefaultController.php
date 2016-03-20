@@ -6,19 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+/**
+ * DefaultController
+ * 
+ */
 class DefaultController extends Controller
-{
-//    /**
-//     * @Route("/hello/{name}")
-//     * @Template()
-//     */
-//    public function indexAction($name)
-//    {
-//        return array('name' => $name);
-//    }
-    
+{   
     /**
-     * @Route("/")
+     * @Route("/", name="home_index")
      * @Template()
      */
     public function indexAction()

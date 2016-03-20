@@ -1,9 +1,6 @@
 imports:
 
-security:
-#    acl:
-#        connection: default
-    
+security:    
     encoders:
         FOS\UserBundle\Model\UserInterface: bcrypt        
 
@@ -33,10 +30,10 @@ security:
                 use_forward: false                
                 check_path: /login_check  
                 
-                # Route par défaut après login
-                default_target_path: fos_user_security_login
-                
-                failure_path:   null            
+                # Default route after successful login
+                default_target_path: home_index
+                # Default route after failed login ( null by default, login route)
+                failure_path: null            
             logout:
                 path: /logout
 #                target: /
