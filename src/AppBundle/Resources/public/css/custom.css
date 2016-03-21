@@ -6,6 +6,17 @@
 /******************************* FONTS ***********************************/
 
 @font-face {
+  font-family: 'fontello';
+  src: url('../fonts/fontello/fontello.eot');
+  src: url('../fonts/fontello/fontello.eot#iefix') format('embedded-opentype'),
+       url('../fonts/fontello/fontello.woff2') format('woff2'),
+       url('../fonts/fontello/fontello.woff') format('woff'),
+       url('../fonts/fontello/fontello.ttf') format('truetype'),
+       url('../fonts/fontello/fontello.svg#fontello') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
     font-family: 'open_sansregular';
     src: url('../fonts/opensans_regular/OpenSans-Regular-webfont.eot');
     src: url('../fonts/opensans_regular/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
@@ -15,7 +26,6 @@
     font-weight: normal;
     font-style: normal;
 }
-
 @font-face {
     font-family: 'ralewaythin';
     src: url('../fonts/raleway/raleway-thin-webfont.eot');
@@ -28,19 +38,6 @@
     font-style: normal;
 }
 
-@font-face {
-    font-family: 'ralewaylight';
-    src: url('../fonts/raleway/raleway-light-webfont.eot');
-    src: url('../fonts/raleway/raleway-light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/raleway/raleway-light-webfont.woff2') format('woff2'),
-         url('../fonts/raleway/raleway-light-webfont.woff') format('woff'),
-         url('../fonts/raleway/raleway-light-webfont.ttf') format('truetype'),
-         url('../fonts/raleway/raleway-light-webfont.svg#ralewaylight') format('svg');
-    font-weight: normal;
-    font-style: normal;
-
-}
-
 /********************************* LOGIN  *****************************************/
 
 #login-top-bar{
@@ -51,7 +48,7 @@
 #login-body h1{
     font-family: 'ralewaythin', sans-serif;
     color: #FFF;
-    font-size: 4em;
+    font-size: 4.2em;
     text-shadow: 1px 1px 2px #888;
     margin-top: 150px;
 }
@@ -62,7 +59,7 @@
 #login-body p{
     font-family: 'open_sansregular', sans-serif;
     color: #f0f0f0;
-    font-size: 1.5em;
+    font-size: 1.2em;
 }
 #login-body a{
     color: white;
@@ -235,7 +232,74 @@ td.actions a{
     display: none;  /* masqué de base */
 }
 
-/******************************* PROSPECTS - INDEX ***********************************/
+/************************************ HOME *****************************************/
+
+.home-carousel img{
+    width: 100%;
+}
+.slick-prev, .slick-next { 
+    position: absolute; 
+    height: 690px;  
+    font-size: 0; 
+    cursor: pointer; 
+    background: transparent;  
+    top: 0;  
+    padding: 0; 
+    border: none;
+}
+.slick-prev:hover:before, .slick-prev:focus:before, .slick-next:hover:before, .slick-next:focus:before {
+    color: rgba(255,255,255, 1);
+}
+.slick-prev:before, .slick-next:before { 
+    font-family: "fontello"; 
+    font-size: 60px;  
+    color: rgba(255,255,255, 0.7);    
+    font-style: normal;
+    display: inline-block;
+    text-decoration: none;
+    width: 1em;
+    /* For safety - reset parent styles, that can break glyph codes*/
+    font-variant: normal;
+    text-transform: none;
+    
+    -webkit-font-smoothing: antialiased; 
+    -moz-osx-font-smoothing: grayscale; 
+}
+.slick-prev{  
+    z-index: 2;
+}
+.slick-next{ 
+    right: 0px;  
+}
+.slick-prev:before{ 
+    content: "\e800";  
+}
+.slick-next:before{ 
+    content: "\e801"; 
+}
+
+/*************** DOTS *****************/
+ul.slick-dots{
+    display: block;
+    text-align: center;  
+}
+ul.slick-dots > li{
+    list-style: none;
+    display: inline-block;
+    margin-right: 10px;
+}
+ul.slick-dots > li > button{
+    width: 15px;
+    height: 15px;
+    border-radius: 10px;
+    border: 2px solid #f47363;
+    font-size: 0px;
+    background-color: transparent;
+}
+ul.slick-dots > li > button:hover{
+    background-color: #f47363;
+}
+/******************************* PROSPECTS - INDEX *********************************/
 
 td.photo_principale img{
     height: 75px;

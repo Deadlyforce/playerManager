@@ -2,5 +2,23 @@
 
 {% block body %}
     {#Hello, {{ name|capitalize }}!#}
-    {{ msg }}
+{#    {{ msg }}#}
+    
+    <div class="home-carousel">
+        <div><img src="{{ asset('bundles/app/images/home/slider_02.jpg') }}" alt="Image_02"></div>
+        <div><img src="{{ asset('bundles/app/images/home/slider_01.jpg') }}" alt="Image_01"></div>        
+{#        <div>your content</div>#}
+    </div>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            
+            $(".home-carousel").slick({
+                dots: true,
+                speed: 500,
+                fade: true,
+                cssEase: 'linear'
+            });
+        });
+    </script>
 {% endblock %}
