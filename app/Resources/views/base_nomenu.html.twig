@@ -1,54 +1,53 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>        
-        {% block stylesheets %}
-            {% stylesheets filter='cssrewrite' 
-                '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
-                '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css'
-                '%kernel.root_dir%/../vendor/components/jqueryui/themes/base/jquery-ui.min.css'
-                'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.css'
-                'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.css'
-                'bundles/app/packages/font-awesome-4.4.0/css/font-awesome.min.css'
-                '@AppBundle/Resources/public/css/custom.css'
-            %}
-                <link rel="stylesheet" href="{{ asset_url }}"/>
-            {% endstylesheets %}
-        {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        
-        {% block javascripts %}
-            {% javascripts
-                '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
-                '%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js'
-                'bundles/app/packages/moment-with-locales.js'
-                'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.js'
-                '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'  
-                'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.js'
-                'bundles/app/js/helpers.js'
-            %}
-                <script type="text/javascript" src="{{ asset_url }}"></script>
-            {% endjavascripts %}
-        {% endblock %}
-    </head>
-    <body>
-        <div class="container">
-                        
-            {% block body %}                
-            {% endblock %}
-            
-            <footer>
-            </footer>
-        </div>  
-            
-        <script type="text/javascript">
-            $(document).ready(function(){
+    
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>        
+    {% block stylesheets %}
+        {% stylesheets filter='cssrewrite' 
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css'
+            '%kernel.root_dir%/../vendor/components/jqueryui/themes/base/jquery-ui.min.css'
+            'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.css'
+            'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.css'
+            'bundles/app/packages/font-awesome-4.4.0/css/font-awesome.min.css'
+            'bundles/app/css/custom.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 
-                getDatepicker();
-                getDatetimepicker();
+    {% block javascripts %}
+        {% javascripts
+            '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
+            '%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js'
+            'bundles/app/packages/moment-with-locales.js'
+            'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.js'
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'  
+            'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.js'
+            'bundles/app/js/helpers.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+<body>                        
+    {% block body %}                
+    {% endblock %}
 
-            });
-        </script>    
-    </body>
+    <footer>
+    </footer>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            getDatepicker();
+            getDatetimepicker();
+
+        });
+    </script>    
+</body>
+    
 </html>

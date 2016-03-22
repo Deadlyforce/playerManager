@@ -2,93 +2,99 @@
 {% block title %}Liste des contacts{% endblock %}
 
 {% block body -%}
-    <div class="page-header">
-        <h3>Liste des contacts</h3>
-        <a href="{{ path('prospect_new') }}" id="add_prospect" title ="Ajouter un contact"><i class="fa fa-plus"></i> Ajouter un contact</a>
-    </div>
-    
-    <table id="table-prospects">
-        <thead>
-            <tr>
-                <th>Pseudo</th>
-                <th>Prénom</th>
-                <th>Nom</th>
-                <th>Age</th>
-                <th>Ville</th>
-                <th>Pays</th>
-                <th>Source</th>
-                <th>Photo Principale</th>
-                <th>Date de création</th>
-                <th>Actions</th> 
-            </tr>
-        </thead>
-        <tbody>
-        {% for prospect in prospects %}
-            <tr id="{{ prospect.id }}">
-                <td>
-                    {% if prospect.pseudo %}
-                        {{ prospect.pseudo }}
-                    {% else %}
-                        -
-                    {% endif %}
-                </td>
-                <td>{{ prospect.prenom }}</td>
-                <td>{{ prospect.nom }}</td>
-                <td>{{ prospect.age }}</td>
-                <td>{{ prospect.ville }}</td>
-                <td>{{ prospect.pays }}</td>
-                <td>{{ prospect.source }}</td>
-                <td class="photo_principale">                    
-                    {% if prospect.photos|last %}
-                        {% set photo = prospect.photos|last %}
-                        <img class="img-responsive" src="{{ asset(photo.path) }}" alt="{{ asset(photo.path) }}" />                        
-                    {% endif %}
-                </td>
-                <td>
-                    {% if prospect.dateCreation %}{{ prospect.dateCreation|date('d-m-Y') }}{% endif %}
-                </td>
-                <td>
-                    <a class="" href="{{ path('prospect_show', { 'id': prospect.id }) }}"><i class="fa fa-eye"></i></a>                       
-                    <a class="" href="{{ path('prospect_edit', { 'id': prospect.id }) }}"><i class="fa fa-pencil-square-o"></i></a>  
-                    <a href="#" class="delete" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete"><i class="fa fa-trash-o"></i></a>
-                    {% if prospect.relation %}
-{#                        <a class="" href="{{ path('relation_show', { 'id': entity.relation.id }) }}">relation</a>#}
-                    {% endif %}
-                    <a class="" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Gallery">Gallery</a>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>   
+    <div class="container">
+        {#<div class="page-header">
+                       
+        </div>#}
+        <h1 class="page-header">Prospects</h1> 
+        <a class="page-button" href="{{ path('prospect_new') }}" id="add_prospect" title ="Add prospect"><i class="fa fa-plus"></i> Add prospect</a>
         
-    {# Modales #}
-    <div class="modal fade" id="modal_form_new" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">                    
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Ajouter un contact</h4>
+        <table id="table-prospects" class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>Pseudo</th>
+                    <th>First name</th>
+                    <th>last name</th>
+                    <th>Age</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Source</th>
+                    <th>Photo</th>
+                    <th>Created</th>
+                    <th>Actions</th> 
+                </tr>
+            </thead>
+            <tbody>
+            {% for prospect in prospects %}
+                <tr id="{{ prospect.id }}">
+                    <td>
+                        {% if prospect.pseudo %}
+                            {{ prospect.pseudo }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>{{ prospect.prenom }}</td>
+                    <td>{{ prospect.nom }}</td>
+                    <td>{{ prospect.age }}</td>
+                    <td>{{ prospect.ville }}</td>
+                    <td>{{ prospect.pays }}</td>
+                    <td>{{ prospect.source }}</td>
+                    <td>                    
+                        {% if prospect.photos|last %}
+                            {% set photo = prospect.photos|last %}
+                            <img class="img-responsive" src="{{ asset(photo.path) }}" alt="Photo" />                        
+                        {% else %}
+                            <img class="img-responsive" src="{{ asset('bundles/app/images/prospect_no_photo.jpg') }}" alt="No photo" />
+                         {% endif %}
+                    </td>
+                    <td>
+                        {% if prospect.dateCreation %}{{ prospect.dateCreation|date('d-m-Y') }}{% endif %}
+                    </td>
+                    <td>
+                        <a class="" href="{{ path('prospect_show', { 'id': prospect.id }) }}"><i class="fa fa-eye"></i></a>                       
+                        <a class="" href="{{ path('prospect_edit', { 'id': prospect.id }) }}"><i class="fa fa-pencil-square-o"></i></a>  
+                        <a href="#" class="delete" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete"><i class="fa fa-trash-o"></i></a>
+                        {% if prospect.relation %}
+    {#                        <a class="" href="{{ path('relation_show', { 'id': entity.relation.id }) }}">relation</a>#}
+                        {% endif %}
+                        <a class="" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Gallery">Gallery</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>   
+       
+            
+        {# Modales #}
+        <div class="modal fade" id="modal_form_new" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">                    
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Ajouter un contact</h4>
+                    </div>    
+                    <div class="modal-body" id="modal_form_new_body">
+                        {# Form returned by ajax #}
+                    </div>    
+                    <div class="modal-footer">    
+                    </div>    
                 </div>    
-                <div class="modal-body" id="modal_form_new_body">
-                    {# Form returned by ajax #}
-                </div>    
-                <div class="modal-footer">    
-                </div>    
-            </div>    
+            </div>
         </div>
-    </div>
-                
-    {# POPUP OVERLAY D'ATTENTE AJAX #}
-    <div class="overlay"></div>
-    <div class="loader_standard">
-        <p>Chargement...</p>
-        <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />
-    </div>             
-        
-    {# WIDGETS #}
-    <div class="hidden" id="path_form_new_prospect" data-path="{{ path("ajax_new_prospect_form") }}"></div>
-    <div class="hidden" id="path_delete_prospect" data-path="{{ path("ajax_delete_prospect", {'id': 'id'}) }}"></div>
-        
+
+        {# POPUP OVERLAY D'ATTENTE AJAX #}
+        <div class="overlay"></div>
+        <div class="loader_standard">
+            <p>Chargement...</p>
+            <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />
+        </div>             
+
+
+        {# WIDGETS #}
+{#        <div class="hidden" id="path_form_new_prospect" data-path="{{ path("ajax_new_prospect_form") }}"></div>#}
+        <div class="hidden" id="path_delete_prospect" data-path="{{ path("ajax_delete_prospect", {'id': 'id'}) }}"></div>
+    </div> 
     {% block javascript %}
         {% javascripts 
             'bundles/app/js/prospect_index.js'
@@ -107,6 +113,9 @@
             function initTableProspects()
             {
                 $("#table-prospects").DataTable({
+                    "language":{
+                        "lengthMenu": "_MENU_ entries"
+                    },                    
                     "order": [[ 9, "desc" ]],
                     "columns": [
                         null,
@@ -116,11 +125,15 @@
                         null,
                         null,
                         null,
-                        null,
+                        { 
+                            className: "last-photo",                            
+                            "width": "80px",                            
+                            "height": "80px"                            
+                        },
                         null,
                         { 
                             className: "actions",
-                            "width": "90px"
+                            "width": "150px"
                         }
                     ]
                 });
@@ -134,7 +147,9 @@
                     $(".loader_standard").show();
                 });                
                 
-                var url = $("#path_form_new_prospect").data("path");
+                var url = Routing.generate('ajax_new_prospect_form');
+               
+{#                var url = $("#path_form_new_prospect").data("path");#}
                 
                 $.get(url, function(response){                    
                     
@@ -173,7 +188,7 @@
              * @returns {undefined}
              */
             function ajaxDeleteProspect(prospect_id, csrf_token)
-            {
+            {               
                 var url = $("#path_delete_prospect").data("path");
                 url = url.replace('id', prospect_id);
 

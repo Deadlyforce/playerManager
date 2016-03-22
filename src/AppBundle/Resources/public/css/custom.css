@@ -37,6 +37,17 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'ralewaylight';
+    src: url('../fonts/raleway/raleway-light-webfont.eot');
+    src: url('../fonts/raleway/raleway-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/raleway/raleway-light-webfont.woff2') format('woff2'),
+         url('../fonts/raleway/raleway-light-webfont.woff') format('woff'),
+         url('../fonts/raleway/raleway-light-webfont.ttf') format('truetype'),
+         url('../fonts/raleway/raleway-light-webfont.svg#ralewaylight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /********************************* LOGIN  *****************************************/
 
@@ -117,6 +128,10 @@ form[name="fos_user_security_login"] #_submit:hover{
     background-color: #3d3d3d;
 }
 
+.header-container{
+    padding: 0px; 
+}
+
 header{
     height: 90px;
     background-color: #303030;
@@ -187,15 +202,61 @@ body{
 
 /************************* DATATABLES ************************************/
 
+.dataTables_wrapper{
+    padding: 20px;
+    box-shadow: 0px 0px 6px rgb(187, 187, 187);
+}
+.dataTables_wrapper .dataTables_length{
+    margin-bottom: 20px;
+    color: #666;
+}
+
 table.dataTable thead th{
     padding: 10px 10px;
+    border-bottom: 1px solid #ccc;
+}
+table.dataTable tbody td{
+    vertical-align: middle;
+}
+.table > thead:first-child > tr:first-child > th{
+    color: #666;
+}
+table.dataTable.no-footer {
+    border-bottom: 1px solid #666;
+}
+.dataTables_wrapper .dataTables_info{
+    color: #333;
+    margin-top: 30px;
 }
 
 /******************************* PAGES GLOBAL ***********************************/
-.page-header{
-    border-bottom: 1px solid rgb(221, 221, 221);
-    margin-bottom: 45px;
-    padding-bottom: 20px;
+
+h1.page-header{
+    font-size: 2.5em;
+    font-family: "ralewaylight", sans-serif;
+    text-align: center;
+    border-bottom: 1px solid #f47363;
+    padding-bottom: 25px;
+    width: 500px;
+    margin: 40px auto 40px auto;
+}
+a.page-button{
+    color: #666;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+a.page-button:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
 }
 
 td.actions a{
@@ -299,10 +360,22 @@ ul.slick-dots > li > button{
 ul.slick-dots > li > button:hover{
     background-color: #f47363;
 }
+
+.home-carousel h1{
+    position: absolute;
+    color: rgb(255, 117, 100);
+    font-family: "ralewaythin",sans-serif;
+    font-size: 5em;
+    left: 10%;
+    top: 16%;
+    text-shadow: 1px 1px 2px rgb(85, 85, 85);
+}
+
 /******************************* PROSPECTS - INDEX *********************************/
 
-td.photo_principale img{
-    height: 75px;
+td.last-photo img{
+    /*height: 100%;*/
+    max-height: 80px;
 }
 
 /******************************* PROSPECTS - NEW ***********************************/

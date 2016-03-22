@@ -79,7 +79,7 @@ class Photo {
      */
     public function userPath()
     {    
-        return 'uploads/photoPrincipale/'. $this->getProspect()->getUser()->getId();
+        return 'uploads/photos/'. $this->getProspect()->getUser()->getId();
     }
     
     /**

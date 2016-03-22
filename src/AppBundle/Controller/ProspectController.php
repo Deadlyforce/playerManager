@@ -23,7 +23,7 @@ class ProspectController extends Controller
     /**
      * Returns a form new prospect
      * 
-     * @Route("ajax_form_new", name="ajax_new_prospect_form")
+     * @Route("/ajax_form_new", name="ajax_new_prospect_form", options={"expose"=true})
      * @Method({"GET"})
      * @Template("AppBundle:ajax.html.twig")
      */
@@ -106,7 +106,10 @@ class ProspectController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
-        $prospects = $em->getRepository('AppBundle:Prospect')->findBy(array("user" => $user));
+        $prospects = $em->getRepository('AppBundle:Prospect')->findBy(
+            array("user" => $user), 
+            array("date_creation" => "DESC")
+        );
                 
         $tokenManager = $this->get('security.csrf.token_manager');        
         $csrf_token = $tokenManager->refreshToken('');
