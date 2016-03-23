@@ -80,6 +80,9 @@
     {% endblock %}
 
     <footer>
+        <div class="container">
+            © 2016 All Rights Reserved. Powered by Deadoralive
+        </div>
     </footer>
 
         
@@ -95,6 +98,9 @@
                 var id = $(this).attr("id");
                 
                 if (id === 'fos_user_security_logout') {
+                    $('#' + id).siblings().each(function(index, element){
+                        $(element).removeClass("active");
+                    });
                     localStorage.clear();                   
                 } else {
                     $('#' + id).siblings().each(function(index, element){

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Form\PhotoType;
+use AppBundle\Form\ProspectType;
 use AppBundle\Entity\Photo;
 
 /**
@@ -39,10 +40,16 @@ class PhotoController extends Controller
         
         if($prospect->getUser() === $user){        
             $photos = $em->getRepository("AppBundle:Photo")->findBy(array("prospect" => $prospect));
-
+            
+            $editForm = $this->createForm(ProspectType::class, $prospect, array(
+                'action' => $this->generateUrl('prospect_update', array('id' => $prospect->getId())),
+                'method' => 'PUT',
+            ));
+            
             return array(
                 'photos' => $photos,
-                'prospect' => $prospect
+                'prospect' => $prospect,
+                'editForm' => $editForm->createView()
             );        
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');

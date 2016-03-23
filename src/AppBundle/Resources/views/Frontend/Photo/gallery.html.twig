@@ -3,35 +3,47 @@
 {% block title %}Gallery{% endblock %}
 
 {% block body %}
-    {% for photo in photos %}
-        <div class="photo-block">
-            <div class="photo-frame">
-                <img src="{{ asset(photo.path) }}" alt="Photo">
+    <div class="container">
+        {% for photo in photos %}
+            <div class="photo-block">
+                <div class="photo-frame">
+                    <img src="{{ asset(photo.path) }}" alt="Photo">
+                </div>
+                <div>
+                    <a href="{{ path('photo_edit', {'id': photo.id}) }}" title="Edit photo">Edit</a>
+                </div>
             </div>
-            <div>
-                <a href="{{ path('photo_edit', {'id': photo.id}) }}" title="Edit photo">Edit</a>
-            </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+
+        <h1>Manage photos</h1>
+
+        {{ form_start(editForm, {'attr': {'id':'form-edit-prospect'}}) }}          
+
+            {{ form_label(editForm.photos) }}
+            {{ form_errors(editForm.photos) }}
+
+            <ul id="photo-list" data-prototype="{{ form_widget(editForm.photos.vars.prototype)|e }}">
+                {% for photo in editForm.photos %}
+                    <li>
+                        <img class="img-responsive original-img" src="{{ asset(photo.vars.data.path) }}" alt="{{ asset(photo.vars.data.path) }}" />
+                        {{ form_errors(photo) }}
+                        {{ form_widget(photo) }}                    
+                    </li>
+                {% endfor %}
+            </ul>       
+
+            {{ form_row(editForm.submit) }}
+            <div class="hidden">{{ form_rest(editForm) }}</div>
+        {{ form_end(editForm) }}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
     
-    {#<h1>Modifier un contact</h1>
-
-    {{ form_start(edit_form, {'attr': {'id':'form-edit-prospect'}}) }}          
-
-        {{ form_label(edit_form.photos) }}
-        {{ form_errors(edit_form.photos) }}
-               
-        <ul id="photo-list" data-prototype="{{ form_widget(edit_form.photos.vars.prototype)|e }}">
-            {% for photo in edit_form.photos %}
-                <li>
-                    <img class="img-responsive original-img" src="{{ asset(photo.vars.data.path) }}" alt="{{ asset(photo.vars.data.path) }}" />
-                    {{ form_errors(photo) }}
-                    {{ form_widget(photo) }}                    
-                </li>
-            {% endfor %}
-        </ul>       
-
-        {{ form_row(edit_form.submit) }}
-        <div class="hidden">{{ form_rest(edit_form) }}</div>
-    {{ form_end(edit_form) }}#}
+    {% javascripts
+        'bundles/app/js/photos.js'
+    %}        
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts%}
 {% endblock %}

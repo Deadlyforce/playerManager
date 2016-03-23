@@ -179,9 +179,20 @@ header{
 
 /******************************* BODY ************************************/
 
+* {
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box;
+}
+
+html{
+    height: 100%;
+}
+
 body{
     font-family: sans-serif;    
-    /*padding-top: 50px;*/
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 65px; /* Footer space */
 }
 
 .container{
@@ -189,6 +200,10 @@ body{
 }
 
 /************************ BOOTSTRAP OVERRIDES ****************************/
+
+.container{
+    padding-bottom: 0px;
+}
 
 /* FORMS */
 .form-control{
@@ -226,6 +241,9 @@ table.dataTable.no-footer {
 }
 .dataTables_wrapper .dataTables_info{
     color: #333;
+    margin-top: 30px;
+}
+.dataTables_wrapper .dataTables_paginate{
     margin-top: 30px;
 }
 
@@ -470,4 +488,19 @@ table.record_properties th{
     max-height: 100%;
     margin: 0px auto;
     display: block
+}
+
+/************************* FOOTER *****************************/
+
+footer{
+    height: 65px;
+    text-align: center;
+    color: #ACB0B0;
+    background-color: #363839;
+    padding: 23px 0px;
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

@@ -135,18 +135,6 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
-            ->add('photos', CollectionType::class, array(
-                'entry_type' => new PhotoType(),
-                'entry_options' => array(
-                    'required' => false,
-                    'row_attr' => array(
-                        'class' => 'form_row'
-                    )
-                ),
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false
-            ))
             ->add('dateCreation', DateTimeType::class, array(
 		'required' => false,
 		'label' => 'Date de création: ',
@@ -159,9 +147,27 @@ class ProspectType extends AbstractType
                     'class' => 'form_row'
                 )
             ))
+            ->add('photos', CollectionType::class, array(
+                'entry_type' => new PhotoType(),
+                'entry_options' => array(
+                    'required' => false,
+                    'row_attr' => array(
+                        'class' => 'form_row'
+                    )
+                ),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false
+            ))            
             ->add('relation', new RelationType(), array(
                 
-            ))                
+            )) 
+            ->add('submit', 'submit', array(
+                'label' => 'Enregistrer',
+                'attr' => array(
+                    'class' => 'btn btn-default'
+                )
+            ))
         ;
     }
     

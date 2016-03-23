@@ -303,13 +303,6 @@ class ProspectController extends Controller
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array(
-            'label' => 'Enregistrer',
-            'attr' => array(
-                'class' => 'btn btn-default'
-            )
-        ));
-
         return $form;
     }
     
@@ -352,7 +345,9 @@ class ProspectController extends Controller
          
                 $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
                 $photos = $prospect->getPhotos();                               
-                
+var_dump($originalPhotos);                
+//var_dump($photos); 
+//die();
                 if ($originalPhotos->isEmpty()) {
                     // Case: update a Prospect without a previous photo
                     foreach ($photos as $photo) {
@@ -366,12 +361,20 @@ class ProspectController extends Controller
                     foreach ($originalPhotos as $originalPhoto) {
 
                         if ($photos->contains($originalPhoto) === false) {
+                            // Remove deleted photos
                             $prospect->removePhoto($originalPhoto);
-
-                            // if it was a many-to-one relationship, remove the relationship like this
-                            $originalPhoto->setProspect(null);
-                            // Delete the Photo entirely
-                             $em->remove($originalPhoto);
+                            
+                            // if many-to-one relationship, remove also the relationship
+                            $originalPhoto->setProspect(null);                            
+                            $em->remove($originalPhoto); // Delete the Photo entirely
+var_dump('done');
+                            // Upload new photos
+                            foreach ($photos as $photo) {
+                                // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
+                                if ($photo->getFile()) {                                
+                                    $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+                                }
+                            }
                         } else {
                             foreach ($photos as $photo) {
                                 // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
@@ -381,7 +384,8 @@ class ProspectController extends Controller
                             }
                         }
                     }
-
+//var_dump($prospect->getPhotos());
+//die();
                     $em->persist($prospect);
                     $em->flush();
                 }              
