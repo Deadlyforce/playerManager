@@ -4,18 +4,22 @@
 
 {% block body %}
     <div class="container">
-        {% for photo in photos %}
-            <div class="photo-block">
+        <h1 class="page-header">Photos gallery</h1> 
+{#        <a class="page-button" href="{{ path('prospect_new') }}" id="add_prospect" title ="Add prospect"><i class="fa fa-plus"></i> Add prospect</a>#}
+        
+        {#{% for photo in photos %}
+            <div class="photo-block col-md-4">
                 <div class="photo-frame">
                     <img src="{{ asset(photo.path) }}" alt="Photo">
                 </div>
-                <div>
-                    <a href="{{ path('photo_edit', {'id': photo.id}) }}" title="Edit photo">Edit</a>
+                <div class="photo-actions">
+                    <a href="{{ path('photo_edit', {'id': photo.id}) }}" title="Crop photo">Crop</a>
                 </div>
             </div>
         {% endfor %}
+        <div class="clearfix"></div>#}
 
-        <h1>Manage photos</h1>
+{#        <h1>Manage photos</h1>#}
 
         {{ form_start(editForm, {'attr': {'id':'form-edit-prospect'}}) }}          
 
@@ -24,14 +28,21 @@
 
             <ul id="photo-list" data-prototype="{{ form_widget(editForm.photos.vars.prototype)|e }}">
                 {% for photo in editForm.photos %}
-                    <li>
-                        <img class="img-responsive original-img" src="{{ asset(photo.vars.data.path) }}" alt="{{ asset(photo.vars.data.path) }}" />
+                    <li class="col-md-4">
+{#{{ dump(photo.vars.data) }}#}
+                        <div class="photo-frame">
+                            <img src="{{ asset(photo.vars.data.path) }}" alt="Photo" />
+                        </div>
+                        <div class="photo-actions">
+                            <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo">Crop</a>
+                        </div>
                         {{ form_errors(photo) }}
                         {{ form_widget(photo) }}                    
                     </li>
                 {% endfor %}
             </ul>       
-
+            <div class="clearfix"></div>
+            
             {{ form_row(editForm.submit) }}
             <div class="hidden">{{ form_rest(editForm) }}</div>
         {{ form_end(editForm) }}

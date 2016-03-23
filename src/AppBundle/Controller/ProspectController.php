@@ -345,9 +345,7 @@ class ProspectController extends Controller
          
                 $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
                 $photos = $prospect->getPhotos();                               
-var_dump($originalPhotos);                
-//var_dump($photos); 
-//die();
+
                 if ($originalPhotos->isEmpty()) {
                     // Case: update a Prospect without a previous photo
                     foreach ($photos as $photo) {
@@ -367,7 +365,7 @@ var_dump($originalPhotos);
                             // if many-to-one relationship, remove also the relationship
                             $originalPhoto->setProspect(null);                            
                             $em->remove($originalPhoto); // Delete the Photo entirely
-var_dump('done');
+
                             // Upload new photos
                             foreach ($photos as $photo) {
                                 // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
@@ -384,13 +382,12 @@ var_dump('done');
                             }
                         }
                     }
-//var_dump($prospect->getPhotos());
-//die();
+
                     $em->persist($prospect);
                     $em->flush();
                 }              
 
-                return $this->redirectToRoute('prospect');
+                return $this->redirectToRoute('gallery');
             }
 
             return array(

@@ -413,9 +413,9 @@ td.last-photo img{
 }
 
 /******************************* PROSPECTS - EDIT ***********************************/
-.original-img{
+/*.original-img{
     height: 150px;
-}
+}*/
 
 /******************************* FORMS ***********************************/
 .form_row{
@@ -473,21 +473,32 @@ table.record_properties th{
 }
 
 /************************* GALLERY *****************************/
+
 .photo-block{
     display: inline-block;
     text-align: center;
 }
 .photo-frame{
-    width: 250px;
-    height: 250px;
+    width: 300px;
+    height: 300px;
     border: 1px solid #ddd;
     display: inline-block;
+    overflow: hidden;
 }
 .photo-frame img{
-    max-width: 100%;
-    max-height: 100%;
-    margin: 0px auto;
+    /*max-width: 100%;*/
+    /*max-height: 100%;*/
+    /*margin: 0px auto;*/
+    width: 100%;
     display: block
+}
+.photo-actions{
+    
+}
+
+ul#photo-list{
+    list-style: none;
+    padding-left: 0px;
 }
 
 /************************* FOOTER *****************************/

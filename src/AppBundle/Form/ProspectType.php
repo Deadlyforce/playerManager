@@ -148,6 +148,7 @@ class ProspectType extends AbstractType
                 )
             ))
             ->add('photos', CollectionType::class, array(
+                'label' => false,
                 'entry_type' => new PhotoType(),
                 'entry_options' => array(
                     'required' => false,
@@ -163,7 +164,7 @@ class ProspectType extends AbstractType
                 
             )) 
             ->add('submit', 'submit', array(
-                'label' => 'Enregistrer',
+                'label' => 'Save changes',
                 'attr' => array(
                     'class' => 'btn btn-default'
                 )

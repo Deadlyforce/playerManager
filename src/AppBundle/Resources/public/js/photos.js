@@ -1,6 +1,6 @@
 var collectionHolder;
         
-var addPhotoLink = $('<a href="#" class="add_photo_link">Add photo</a>');
+var addPhotoLink = $('<a href="#" class="add-photo">Add photo</a>');
 var newLinkLi = $('<li></li>').append(addPhotoLink);
 
 $(document).ready(function(){
@@ -12,6 +12,7 @@ $(document).ready(function(){
     });
 
     collectionHolder.append(newLinkLi);
+//    collectionHolder.after(newLinkLi);
 
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
@@ -40,7 +41,7 @@ function addPhotoForm(collectionHolder, newLinkLi)
     collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a tag" link li
-    var newFormLi = $('<li></li>').append(newForm);
+    var newFormLi = $("<li class='col-md-4'><div class='photo-frame'><img src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div></li>").append(newForm);
     
     newLinkLi.before(newFormLi);
 
