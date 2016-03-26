@@ -522,10 +522,16 @@ table.record_properties th{
     border: 1px solid #ddd;
     overflow: hidden;
 }
-.photo-frame img{
-    width: 100%;
+.photo-frame img{    
     display: block
 }
+.photo-frame img.tall{    
+    width: 100%;
+}
+.photo-frame img.wide{    
+    height: 100%;
+}
+
 .photo-actions{
     background-color: rgb(221, 221, 221);
     height: 80px;

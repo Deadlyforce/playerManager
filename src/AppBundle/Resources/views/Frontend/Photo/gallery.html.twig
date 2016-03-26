@@ -10,7 +10,7 @@
         </section>
         <div class="page-title-underline"></div>
         
-        <a href="{{ path('prospect') }}" title="Back to prospects">Back to prospects</a>
+        <a class="page-button" href="{{ path('prospect') }}" title="Back to prospects">Back to prospects</a>
 
         {{ form_start(editForm, {'attr': {'id':'form-edit-prospect'}}) }}          
 
@@ -71,7 +71,10 @@
             var width = $(".photo-frame").width();
             $(".photo-frame").height(width);
             
-            
+            $("#photo-list .photo-frame").find("img").each(function(){
+                var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
+                $(this).addClass(imgClass);
+            });
 
             
             

@@ -44,19 +44,12 @@ class PhotoController extends Controller
             $editForm = $this->createForm(ProspectType::class, $prospect, array(
                 'action' => $this->generateUrl('prospect_update', array('id' => $prospect->getId())),
                 'method' => 'PUT',
-            ));
-            
-            foreach ($photos as $photo) {
-                list($width, $height) = getimagesize($photo->getPath());
-                $ratio = $width / $height;
-                $ratios[] = $ratio;
-            }
+            ));            
             
             return array(
                 'photos' => $photos,
                 'prospect' => $prospect,
-                'editForm' => $editForm->createView(),
-                'ratios' => $ratios
+                'editForm' => $editForm->createView()
             );        
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');
