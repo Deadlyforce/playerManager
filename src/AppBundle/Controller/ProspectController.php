@@ -334,7 +334,7 @@ class ProspectController extends Controller
 
             // Create an ArrayCollection of the current Photo objects in the database
             foreach ($prospect->getPhotos() as $photo) {
-                $originalPhotos->add($photo);
+                $originalPhotos->add($photo);              
             }
         
             $deleteForm = $this->createDeleteForm($id);
@@ -393,7 +393,7 @@ class ProspectController extends Controller
             return array(
                 'prospect' => $prospect,
                 'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),
+                'delete_form' => $deleteForm->createView()
             );
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');

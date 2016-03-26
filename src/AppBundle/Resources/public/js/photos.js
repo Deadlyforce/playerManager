@@ -40,7 +40,7 @@ function addPhotoForm(collectionHolder, newLiAddPhoto)
     collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a photo" link li
-    var newFormLi = $("<li class='col-md-4'><div class='photo-frame'><img src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div><div class='photo-actions'>"+ newForm +"</div></li>");
+    var newFormLi = $("<li class='col-md-4 new-form'><div class='photo-frame'><img src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div><div class='photo-actions'>"+ newForm +"</div></li>");
     
     newLiAddPhoto.before(newFormLi);
 

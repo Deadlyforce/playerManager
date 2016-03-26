@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Form\PhotoType;
 use AppBundle\Form\ProspectType;
-use AppBundle\Entity\Photo;
+
 
 /**
  * PhotoController
@@ -46,10 +46,17 @@ class PhotoController extends Controller
                 'method' => 'PUT',
             ));
             
+            foreach ($photos as $photo) {
+                list($width, $height) = getimagesize($photo->getPath());
+                $ratio = $width / $height;
+                $ratios[] = $ratio;
+            }
+            
             return array(
                 'photos' => $photos,
                 'prospect' => $prospect,
-                'editForm' => $editForm->createView()
+                'editForm' => $editForm->createView(),
+                'ratios' => $ratios
             );        
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');

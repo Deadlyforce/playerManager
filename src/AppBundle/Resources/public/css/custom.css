@@ -215,6 +215,10 @@ body{
     border-radius: 0px;
 }
 
+.modal-content{
+    border-radius: 0px;
+}
+
 /************************* DATATABLES ************************************/
 
 .dataTables_wrapper{
@@ -249,15 +253,28 @@ table.dataTable.no-footer {
 
 /******************************* PAGES GLOBAL ***********************************/
 
-h1.page-header{
-    font-size: 2.5em;
-    font-family: "ralewaylight", sans-serif;
+section.page-title{
     text-align: center;
-    border-bottom: 1px solid #f47363;
-    padding-bottom: 25px;
-    width: 500px;
-    margin: 50px auto 70px auto;
+    margin-top: 50px;
+    margin-bottom: 30px;
 }
+
+section.page-title h1{
+    font-size: 2.5em;
+    font-family: "ralewaylight", sans-serif;    
+    padding-bottom: 10px;    
+}
+section.page-title h2{
+    font-style: italic;
+    font-size: 1.2em;    
+    color: #777;
+}
+.page-title-underline{
+    width: 500px;
+    border-bottom: 1px solid #f47363;
+    margin: 0px auto 50px auto;
+}
+
 a.page-button{
     color: #666;
     font-size: 1.2em;
@@ -545,6 +562,14 @@ a.add-photo:hover{
     color: #f47363;
     border: 1px solid #f47363;
     background-color: rgba(244,115,99, 0.1);
+}
+
+#image_preview{
+    text-align: center;
+    margin-bottom: 30px;
+}
+#image_preview img{
+    width: 80%;
 }
 
 /************************* FOOTER *****************************/
