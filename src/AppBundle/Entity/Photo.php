@@ -64,7 +64,7 @@ class Photo {
      * @var file 
      * 
      * @Assert\NotBlank()
-     * @Assert\Image(maxSize="3000000") 
+     * @Assert\Image(maxSize="2000000") 
      */
     private $file;
     

@@ -4,22 +4,9 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="page-header">Photos gallery</h1> 
-{#        <a class="page-button" href="{{ path('prospect_new') }}" id="add_prospect" title ="Add prospect"><i class="fa fa-plus"></i> Add prospect</a>#}
         
-        {#{% for photo in photos %}
-            <div class="photo-block col-md-4">
-                <div class="photo-frame">
-                    <img src="{{ asset(photo.path) }}" alt="Photo">
-                </div>
-                <div class="photo-actions">
-                    <a href="{{ path('photo_edit', {'id': photo.id}) }}" title="Crop photo">Crop</a>
-                </div>
-            </div>
-        {% endfor %}
-        <div class="clearfix"></div>#}
-
-{#        <h1>Manage photos</h1>#}
+        <h1 class="page-header">Photos gallery</h1> 
+        <a href="{{ path('prospect') }}" title="Back to prospects">Back to prospects</a>
 
         {{ form_start(editForm, {'attr': {'id':'form-edit-prospect'}}) }}          
 
@@ -27,26 +14,99 @@
             {{ form_errors(editForm.photos) }}
 
             <ul id="photo-list" data-prototype="{{ form_widget(editForm.photos.vars.prototype)|e }}">
-                {% for photo in editForm.photos %}
-                    <li class="col-md-4">
-{#{{ dump(photo.vars.data) }}#}
-                        <div class="photo-frame">
-                            <img src="{{ asset(photo.vars.data.path) }}" alt="Photo" />
-                        </div>
-                        <div class="photo-actions">
-                            <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo">Crop</a>
-                        </div>
-                        {{ form_errors(photo) }}
-                        {{ form_widget(photo) }}                    
-                    </li>
-                {% endfor %}
+                <div class="row">
+                    {% for photo in editForm.photos %}
+                        <li class="col-md-4">
+                            <div class="photo-frame">
+                                <img src="{{ asset(photo.vars.data.path) }}" alt="Photo" />
+                            </div>
+                            <div class="photo-actions">
+                                <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo">Crop</a>
+                                <a href="#" id="{{ photo.vars.data.id }}" class="change-photo">Change</a>
+                                <div class="">
+                                    {{ form_errors(photo) }}
+                                    {{ form_widget(photo) }} 
+                                </div>
+                            </div>                                           
+                        </li>
+
+                        {% if loop.index % 3 == 0 %} {# Close the div row every 3rd item and open a new one #}
+                            </div>
+                            <div class="row">
+                        {% endif %}
+                    {% endfor %}
+                </div>
             </ul>       
             <div class="clearfix"></div>
             
             {{ form_row(editForm.submit) }}
             <div class="hidden">{{ form_rest(editForm) }}</div>
+            
+            <div class="modal fade" id="photoFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Choose another photo</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div id="image_preview">
+                                <img id="" src="{{ asset('/bundles/app/images/prospect_no_photo.jpg') }}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         {{ form_end(editForm) }}
     </div>
+    
+    
+        
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var width = $(".photo-frame").width();
+            $(".photo-frame").height(width);
+            
+            $("#photo-list").on("click",".change-photo", function(e){
+                e.preventDefault();
+                
+                var photoId = $(this).attr("id");
+                var form = $(this).next().children();
+
+                
+                
+                $("<div class="+photoId+"></div>").appendTo("#photoFormModal .modal-body");
+                $(form).appendTo("#photoFormModal .modal-body");
+                
+                $(form).find('input').on('change', function () {
+                    var files = $(this)[0].files;
+                    
+                    if (files.length > 0) {
+                        // On part du principe qu'il n'y qu'un seul fichier
+                        // étant donné que l'on a pas renseigné l'attribut "multiple"
+                        var file = files[0], image_preview = $('#image_preview');                        
+
+                        // Ici on injecte les informations recoltées sur le fichier pour l'utilisateur
+{#                        $image_preview.find('.thumbnail').removeClass('hidden');#}
+                        image_preview.find('img').attr('src', window.URL.createObjectURL(file));
+{#                        $image_preview.find('h4').html(file.name);#}
+{#                        $image_preview.find('.caption p:first').html(file.size +' bytes');#}
+                    }
+                });
+
+                $("#photoFormModal").modal("show");
+            });
+            
+            $('#photoFormModal').on('hidden.bs.modal', function () {
+                var photoId = $("#image_preview").next().attr("class");
+                var form = $("#image_preview").next().next();
+                $(form).appendTo($("#"+photoId).next());
+                
+                $('#photoFormModal .modal-body').empty();
+                $('#photoFormModal .modal-body').append("<div id='image_preview'><img src='/bundles/app/images/prospect_no_photo.jpg' /></div>");
+            });
+        });
+    </script>
 {% endblock %}
 
 {% block javascripts %}

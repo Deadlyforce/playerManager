@@ -256,7 +256,7 @@ h1.page-header{
     border-bottom: 1px solid #f47363;
     padding-bottom: 25px;
     width: 500px;
-    margin: 40px auto 40px auto;
+    margin: 50px auto 70px auto;
 }
 a.page-button{
     color: #666;
@@ -428,6 +428,28 @@ td.last-photo img{
     width: 250px;
 }
 
+button.btn-submit{
+    color: #666;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    background-image: none;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+button.btn-submit:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
+    background: transparent;
+}
+
 /************************* FORM NEW PROSPECT *****************************/
 
 #appbundle_prospect_file{
@@ -479,26 +501,50 @@ table.record_properties th{
     text-align: center;
 }
 .photo-frame{
-    width: 300px;
-    height: 300px;
+    width: 100%;
     border: 1px solid #ddd;
-    display: inline-block;
     overflow: hidden;
 }
 .photo-frame img{
-    /*max-width: 100%;*/
-    /*max-height: 100%;*/
-    /*margin: 0px auto;*/
     width: 100%;
     display: block
 }
 .photo-actions{
-    
+    background-color: rgb(221, 221, 221);
+    height: 80px;
+    padding: 5px 5px 5px 15px;
 }
 
 ul#photo-list{
     list-style: none;
     padding-left: 0px;
+    margin-bottom: 0px;
+}
+ul#photo-list li{
+    margin-bottom: 15px;
+}
+
+a.add-photo{
+    color: #999;
+    font-size: 2em;
+    width: 100%;    
+    display: block;
+    height: 350px;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 150px;
+    border: 1px solid #999;
+    background-color: transparent;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+a.add-photo:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
+    background-color: rgba(244,115,99, 0.1);
 }
 
 /************************* FOOTER *****************************/

@@ -387,7 +387,7 @@ class ProspectController extends Controller
                     $em->flush();
                 }              
 
-                return $this->redirectToRoute('gallery');
+                return $this->redirectToRoute('gallery', array('prospect_id' => $id));
             }
 
             return array(

@@ -1,7 +1,7 @@
 var collectionHolder;
         
 var addPhotoLink = $('<a href="#" class="add-photo">Add photo</a>');
-var newLinkLi = $('<li class="col-md-4"></li>').append(addPhotoLink);
+var newLiAddPhoto = $('<li class="col-md-4"></li>').append(addPhotoLink);
 
 $(document).ready(function(){
     collectionHolder = $('#photo-list');
@@ -11,8 +11,7 @@ $(document).ready(function(){
         addPhotoFormDeleteLink($(this));
     });
 
-    collectionHolder.append(newLinkLi);
-//    collectionHolder.after(newLinkLi);
+    $('#photo-list .row').last().append(newLiAddPhoto); // Append to last row of collectionHolder
 
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
@@ -21,13 +20,13 @@ $(document).ready(function(){
     addPhotoLink.on('click', function(e) {            
         e.preventDefault();       
         
-        // add a new tag form (see next code block)
-        addPhotoForm(collectionHolder, newLinkLi);
+        // add a new Photo form (see next code block)
+        addPhotoForm(collectionHolder, newLiAddPhoto);
         $("#appbundle_prospect_photos_" + (collectionHolder.data('index') - 1));
     });
 });
 
-function addPhotoForm(collectionHolder, newLinkLi)
+function addPhotoForm(collectionHolder, newLiAddPhoto)
 {
     // Get the data-prototype explained earlier
     var prototype = collectionHolder.data('prototype');
@@ -40,10 +39,10 @@ function addPhotoForm(collectionHolder, newLinkLi)
     // increase the index with one for the next item
     collectionHolder.data('index', index + 1);
 
-    // Display the form in the page in an li, before the "Add a tag" link li
-    var newFormLi = $("<li class='col-md-4'><div class='photo-frame'><img src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div><div class='photo-actions'></div></li>").append(newForm);
+    // Display the form in the page in an li, before the "Add a photo" link li
+    var newFormLi = $("<li class='col-md-4'><div class='photo-frame'><img src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div><div class='photo-actions'>"+ newForm +"</div></li>");
     
-    newLinkLi.before(newFormLi);
+    newLiAddPhoto.before(newFormLi);
 
     addPhotoFormDeleteLinkWithIndexChange(newFormLi, collectionHolder);
 }    
@@ -51,7 +50,7 @@ function addPhotoForm(collectionHolder, newLinkLi)
 function addPhotoFormDeleteLink(photoFormLi)
 {
     var removeForm =  $("<a href='#'>Delete photo</a>");
-    photoFormLi.append(removeForm);
+    photoFormLi.find('.photo-actions').append(removeForm);
 
     removeForm.click(function(event){
         event.preventDefault();        
@@ -63,7 +62,7 @@ function addPhotoFormDeleteLink(photoFormLi)
 function addPhotoFormDeleteLinkWithIndexChange(photoFormLi, collectionHolder)
 {
     var removeForm =  $("<a href='#'>Delete photo</a>");
-    photoFormLi.append(removeForm);
+    photoFormLi.find('.photo-actions').append(removeForm);
 
     removeForm.click({collectionHolder: collectionHolder}, function(event){
         event.preventDefault();
