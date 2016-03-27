@@ -164,10 +164,7 @@ class ProspectType extends AbstractType
                 
             )) 
             ->add('submit', 'submit', array(
-                'label' => 'Save changes',
-                'attr' => array(
-                    'class' => 'btn btn-default btn-submit'
-                )
+                'label' => 'Save changes'
             ))
         ;
     }

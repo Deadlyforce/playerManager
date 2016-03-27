@@ -519,8 +519,9 @@ table.record_properties th{
 }
 .photo-frame{
     width: 100%;
-    border: 1px solid #ddd;
-    overflow: hidden;
+    overflow: hidden; 
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
 }
 .photo-frame img{    
     display: block
@@ -533,9 +534,32 @@ table.record_properties th{
 }
 
 .photo-actions{
-    background-color: rgb(221, 221, 221);
+    background-color: #e0e0e0;
     height: 80px;
-    padding: 5px 5px 5px 15px;
+    padding: 25px 5px 5px 15px;
+    text-align: center;
+    border-bottom-left-radius: 2px;
+    border-bottom-right-radius: 2px;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.photo-actions:hover{
+    background-color: #3d3d3d;    
+}
+.photo-actions:hover a{
+    color: #e0e0e0;
+}
+.photo-actions a{
+    font-size: 1.2em;
+    color: #666;
+    text-decoration: none;
+    margin-right: 30px;
+}
+.photo-actions a:hover{    
+    color: #f47363;    
 }
 
 ul#photo-list{

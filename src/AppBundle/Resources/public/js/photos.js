@@ -18,11 +18,14 @@ $(document).ready(function(){
     collectionHolder.data('index', collectionHolder.find(':input').length);
 
     addPhotoLink.on('click', function(e) {            
-        e.preventDefault();       
+        e.preventDefault();  
         
+        var index = collectionHolder.data('index');
         // add a new Photo form (see next code block)
-        addPhotoForm(collectionHolder, newLiAddPhoto);
-        $("#appbundle_prospect_photos_" + (collectionHolder.data('index') - 1));
+        if (index < 5) {
+            addPhotoForm(collectionHolder, newLiAddPhoto);
+            $("#appbundle_prospect_photos_" + (index - 1));
+        }
     });
 });
 
@@ -40,7 +43,7 @@ function addPhotoForm(collectionHolder, newLiAddPhoto)
     collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a photo" link li
-    var newFormLi = $("<li class='col-md-4 new-form'><div class='photo-frame'><img src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div><div class='photo-actions'>"+ newForm +"</div></li>");
+    var newFormLi = $("<li class='col-md-4 new-form'><div class='photo-frame'><img class='tall' src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div><div class='photo-actions'>"+ newForm +"</div></li>");
     
     newLiAddPhoto.before(newFormLi);
 
@@ -49,7 +52,7 @@ function addPhotoForm(collectionHolder, newLiAddPhoto)
 
 function addPhotoFormDeleteLink(photoFormLi)
 {
-    var removeForm =  $("<a href='#'>Delete photo</a>");
+    var removeForm =  $("<a href='#'>Delete</a>");
     photoFormLi.find('.photo-actions').append(removeForm);
 
     removeForm.click(function(event){
@@ -61,7 +64,7 @@ function addPhotoFormDeleteLink(photoFormLi)
 
 function addPhotoFormDeleteLinkWithIndexChange(photoFormLi, collectionHolder)
 {
-    var removeForm =  $("<a href='#'>Delete photo</a>");
+    var removeForm =  $("<a href='#'>Delete</a>");
     photoFormLi.find('.photo-actions').append(removeForm);
 
     removeForm.click({collectionHolder: collectionHolder}, function(event){

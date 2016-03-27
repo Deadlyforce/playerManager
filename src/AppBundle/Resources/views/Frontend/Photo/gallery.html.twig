@@ -6,7 +6,7 @@
     <div class="container">
         <section class="page-title">
             <h1>Photos gallery</h1> 
-            <h2>Add, replace or delete photos, then validate your changes at the bottom of the page</h2>
+            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>
         </section>
         <div class="page-title-underline"></div>
         
@@ -43,7 +43,7 @@
             </ul>       
             <div class="clearfix"></div>
             
-            {{ form_row(editForm.submit) }}
+            {{ form_row(editForm.submit, {'attr': {'class': 'btn-submit pull-right'}}) }}
             <div class="hidden">{{ form_rest(editForm) }}</div>
             
             <div class="modal fade" id="photoFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -70,13 +70,11 @@
             // Adjust photo-frame height for existing photos
             var width = $(".photo-frame").width();
             $(".photo-frame").height(width);
-            
+            // Adjust photo placement with ratio
             $("#photo-list .photo-frame").find("img").each(function(){
                 var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
                 $(this).addClass(imgClass);
-            });
-
-            
+            });            
             
             // On click on "change"
             $("#photo-list").on("click", ".change-photo", function(e){
@@ -117,7 +115,10 @@
                 
                 // Update page preview
                 var src = $('#image_preview').find('img').attr('src');
-                $("#"+liId+" .photo-frame img").attr("src", src);
+                
+                if (src != "/bundles/app/images/prospect_no_photo.jpg") {                   
+                    $("#"+liId+" .photo-frame img").attr("src", src);
+                }
                 
                 // Cleanup and put the image preview template div, back in place
                 $('#photoFormModal .modal-body').empty();
