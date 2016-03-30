@@ -1,6 +1,16 @@
 services:
+    # Captcha form override
     app.registration.form.type:
         class: AppBundle\Form\RegistrationType
         arguments: [%fos_user.model.user.class%]
         tags: 
             - { name: form.type, alias: appbundle_user_registration }
+    
+    # EventSubscriber to redirect the user from registration to home if already logged in        
+    app_user.subscriber.fos_user:
+        class: AppBundle\EventSubscriber\FOSUserSubscriber
+        arguments:
+            - @router
+            - @security.context
+        tags:
+            - { name: kernel.event_subscriber }

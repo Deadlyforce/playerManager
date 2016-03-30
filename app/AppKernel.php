@@ -22,7 +22,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),                
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
-            new Gregwar\CaptchaBundle\GregwarCaptchaBundle()
+            new Gregwar\CaptchaBundle\GregwarCaptchaBundle(),
+            new UserBundle\UserBundle()
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {            
