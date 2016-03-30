@@ -1,6 +1,7 @@
 imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
+    - { resource: services.yml }
 
 # DoctrineExtensionBundle Configuration
 stof_doctrine_extensions:
@@ -81,4 +82,12 @@ swiftmailer:
 fos_user:
     db_driver: orm
     firewall_name: main
-    user_class: AppBundle\Entity\User    
+    user_class: AppBundle\Entity\User
+    # Form register is overridden by my form (as a service) with captcha
+    registration:
+        form:
+            type: appbundle_user_registration
+    
+# Gregwar Captcha Bundle
+gregwar_captcha: 
+    width: 200

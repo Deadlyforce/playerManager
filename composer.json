@@ -26,7 +26,8 @@
         "friendsofsymfony/user-bundle": "~2.0@dev",                
         "fabpot/php-cs-fixer": "^1.10",
         "stof/doctrine-extensions-bundle": "^1.2",
-        "friendsofsymfony/jsrouting-bundle": "^1.6"     
+        "friendsofsymfony/jsrouting-bundle": "^1.6",
+        "gregwar/captcha-bundle": "^2.0"     
     },
     "scripts": {
         "post-install-cmd": [

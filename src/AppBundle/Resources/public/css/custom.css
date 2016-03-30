@@ -49,28 +49,8 @@
     font-style: normal;
 }
 
-/******************************* REGISTER  ****************************************/
+/******************************* FORMS ****************************************/
 
-#modal-register{
-    padding: 20px 20px 30px 20px;
-    /*background-color: rgba(255,255,255, 0.9);*/
-}
-#modal-register h4{
-    margin-bottom: 40px;
-    text-align: center;
-    font-family: "ralewaylight",sans-serif;
-    font-size: 2em;
-}
-
-form[name='fos_user_registration_form']{
-    margin-left: 40px;
-}
-form[name='fos_user_registration_form'] label{
-    width: 150px;
-}
-form[name='fos_user_registration_form'] input[type='email'], form[name='fos_user_registration_form'] input[type='text'], form[name='fos_user_registration_form'] input[type='password']{
-    width: 200px;
-}
 .btn-submit{
     color: #666;
     font-size: 1.2em;
@@ -80,7 +60,6 @@ form[name='fos_user_registration_form'] input[type='email'], form[name='fos_user
     border-radius: 2px;
     padding: 10px 15px;
     margin-bottom: 20px;
-    margin-top: 30px;
     background-image: none;
     
     -moz-transition: all .3s ease-in;
@@ -92,6 +71,71 @@ form[name='fos_user_registration_form'] input[type='email'], form[name='fos_user
     color: #f47363;
     border: 1px solid #f47363;
     background: transparent;
+}
+
+/******************************* REGISTER  ****************************************/
+
+#register-user{
+    width: 55%;
+    margin: 100px auto 0 auto;
+    background-color: rgba(0,0,0,0.2);
+    padding: 20px 20px 30px 20px;
+    border-radius: 2px;
+}
+#register-user h4{
+    color: #fff;
+    margin-bottom: 40px;
+    text-align: center;
+    font-family: "ralewaylight",sans-serif;
+    font-size: 2.3em;
+}
+
+form[name='fos_user_registration_form']{
+    margin-left: 40px;
+}
+form[name='fos_user_registration_form'] label{
+    width: 150px;
+    color: #f0f0f0;
+    font-size: 1.1em;
+    font-weight: 200;
+}
+form[name='fos_user_registration_form'] input[type='email'], form[name='fos_user_registration_form'] input[type='text'], form[name='fos_user_registration_form'] input[type='password']{
+    width: 200px;
+}
+
+.btn-submit-register{
+    color: #e0e0e0;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #e0e0e0;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-top: 30px;
+    background-image: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-submit-register:hover{
+    color: #fff;
+    border: 1px solid #fff;   
+    background-color: transparent;
+}
+/****************** CAPTCHA ************************/
+
+label[for="fos_user_registration_form_captcha"]{
+    margin-top: 20px;        
+}
+input[name='fos_user_registration_form[captcha]']{
+
+}
+img[title="captcha"]{
+    display: block;
 }
 
 

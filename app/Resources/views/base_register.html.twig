@@ -24,29 +24,18 @@
             {% endjavascripts %}
         {% endblock %}
     </head>
-    <body>
-        <section id="login-top-bar">
-            <div class="container">
-                {{ block('fos_user_content') }}
-            </div>
-        </section>
-        <div class="container">
-                        
-            {% block body %}   
-                <div id="login-body">
-                    <h1>Welcome to the PlayerManager<span> beta</span></h1>
-                    <p>New to the site? <a href="{{ path('fos_user_registration_register') }}" title="Register">Register here</a></p>
-                </div>                
-            {% endblock %}
-            
-            <footer>
-            </footer>
-        </div>  
+    <body>                        
+        {% block body %}                  
+            {{ block('fos_user_register') }}                   
+        {% endblock %}
+
+        <footer>
+        </footer>
             
         <script type="text/javascript">
             $(document).ready(function(){
                 
-                var loginImage1 = "{{ asset('bundles/app/images/login/manager_08.jpg') }}"; 
+                var loginImage1 = "{{ asset('bundles/app/images/register/manager_03.jpg') }}"; 
                 {#var loginImage2 = "{{ asset('bundles/app/images/login/manager_03.jpg') }}"; 
                 var loginImage3 = "{{ asset('bundles/app/images/login/manager_02.jpg') }}";#} 
                 

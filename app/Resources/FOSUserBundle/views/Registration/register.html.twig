@@ -1,4 +1,9 @@
+{% extends '::base_register.html.twig' %}
+
+{% block title %}Register{% endblock %}
 
 {% block fos_user_register %}
-    {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    <div class="container">
+        {% include "FOSUserBundle:Registration:register_content.html.twig" %}
+    </div>
 {% endblock fos_user_register %}
