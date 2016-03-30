@@ -35,22 +35,17 @@
             {% block body %}   
                 <div id="login-body">
                     <h1>Welcome to the PlayerManager<span> beta</span></h1>
-                    <p>New to the site? <a href="{{ path('fos_user_registration_register') }}" title="Register">Register here</a></p>
+                    <p>New to the site? <a data-toggle="modal" data-target="#registerModal" href="{{ path('fos_user_registration_register') }}" title="Register">Register here</a></p>
                 </div>
                 
-                {#<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
+                {# Modal #}
+                <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="registerModalLabel">Register</h4>
-                            </div>
-                            <div class="modal-body">
-                                {{ block('fos_user_register') }}
-                            </div>
+                        <div class="modal-content" id="modal-register">                          
+                            {{ block('fos_user_register') }}                            
                         </div>
                     </div>
-                </div>#}
+                </div>
             {% endblock %}
             
             <footer>
