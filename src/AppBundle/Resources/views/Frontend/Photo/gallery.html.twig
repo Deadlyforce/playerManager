@@ -21,8 +21,13 @@
                 <div class="row">
                     {% for photo in editForm.photos %}
                         <li class="col-md-4" id="{{ photo.vars.form.vars['name'] }}">
-                            <div class="photo-frame">
+                            <div class="photo-frame">                                
                                 <img src="{{ asset(photo.vars.data.path) }}" alt="Photo" />                                
+                                
+                                <div class="mask">  
+                                    <a class="gallery" href="{{ asset(photo.vars.data.path) }}"></a>
+{#                                    <a href="#" class="info" title="Full Image">Full Image</a>  #}
+                                </div>                                
                             </div>
                             <div class="photo-actions">
                                 <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo">Crop</a>
@@ -46,6 +51,7 @@
             {{ form_row(editForm.submit, {'attr': {'class': 'btn-submit pull-right'}}) }}
             <div class="hidden">{{ form_rest(editForm) }}</div>
             
+            {# Modal: change photo #}
             <div class="modal fade" id="photoFormModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -67,6 +73,13 @@
         
     <script type="text/javascript">
         $(document).ready(function(){
+            
+            $("a.gallery").colorbox({
+                onLoad: function(){
+                    $('#cboxClose').html('&times;'); // Replace the close button
+                }
+            });
+            
             // Adjust photo-frame height for existing photos
             var width = $(".photo-frame").width();
             $(".photo-frame").height(width);

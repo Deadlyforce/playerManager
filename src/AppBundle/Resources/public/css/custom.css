@@ -616,6 +616,7 @@ table.record_properties th{
     overflow: hidden; 
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
+    position: relative;
 }
 .photo-frame img{    
     display: block
@@ -627,13 +628,52 @@ table.record_properties th{
     height: 100%;
 }
 
+.photo-frame .mask {
+    opacity: 0;
+    overflow: visible;
+    /*border: 200px solid rgba(0,0,0,0.7);*/
+    background-color: rgba(0,0,0,0.6);
+    box-sizing: border-box;
+    box-shadow: 0px 0px 0px #999;
+    border: 5px solid white;
+    transition: all 0.4s ease-in-out;
+   
+    position: absolute;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.photo-frame:hover .mask {
+    opacity: 1;        
+}
+.photo-frame:hover {     
+    box-shadow: 0px 0px 4px #999;
+}
+.photo-frame a.gallery {
+    background: url(../images/link.png) center no-repeat;
+    opacity: 0;
+    transition: opacity 0.5s 0s ease-in-out;
+    display: block;
+    width: 100%;
+    height: 100%;    
+}
+.photo-frame:hover a.gallery {
+    opacity: 1;
+    transition-delay: 0.3s;
+}
+
+
+
 .photo-actions{
     background-color: #e0e0e0;
     height: 80px;
-    padding: 25px 5px 5px 15px;
+    padding: 25px 5px 5px 5px;
     text-align: center;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
+    overflow: hidden;
     
     -moz-transition: all .3s ease-in;
     -o-transition: all .3s ease-in;
@@ -695,6 +735,21 @@ a.add-photo:hover{
 }
 #image_preview img{
     width: 80%;
+}
+
+/************************* (GALLERY) CROP *****************************/
+
+form#upload-form{
+    border: 1px solid rgb(204, 204, 204);
+    padding: 10px;
+}
+
+.jcrop-holder{
+    margin: 30px auto;
+}
+#crop-info{
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 /************************* FOOTER *****************************/

@@ -4,16 +4,25 @@
 
 {% block body %}  
     <div class="container">
+        <section class="page-title">
+            <h1>Crop image</h1> 
+            <h2>Select an area, then validate your selection</h2>
+        </section>
+        <div class="page-title-underline"></div>
+        
+        <a class="page-button" href="{{ path('gallery', {'prospect_id': photo.prospect.id}) }}" title="back to gallery">Back to gallery</a>
+        
         <form id="upload_form" enctype="multipart/form-data" method="post" action="{{ path('photo_crop', {'id': photo.id}) }}" onsubmit="return checkForm();">
             <!-- hidden crop params -->
             <input type="hidden" id="x" name="x" />
             <input type="hidden" id="y" name="y" />
 
             <div>
-                <img id="crop-preview" src="{{ asset(photo.path) }}" alt="Photo">
-                <p>Filesize: {{ (photo.size/1000) |round }} Kb</p>
+                <img id="crop-preview" src="{{ asset(photo.path) }}" alt="Photo">                
             </div>
-            <div id="crop-info">                       
+            <div id="crop-info"> 
+                <p>Filesize: {{ (photo.size/1000) |round }} Kb</p>
+                
                 <label>W</label>
                 <input type="text" id="w" name="w" />
 
@@ -21,10 +30,8 @@
                 <input type="text" id="h" name="h" />
             </div>
 
-            <input type="submit" value="Crop" />
-        </form>
-
-        <a href="{{ path('gallery', {'prospect_id': photo.prospect.id}) }}" title="back to gallery">Back to gallery</a>
+            <input class="btn btn-submit" type="submit" value="Crop image" />
+        </form>       
     </div>
     
     <script type="text/javascript">
