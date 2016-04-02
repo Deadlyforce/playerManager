@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\SecurityContextInterface;
 
 /**
- * Description of FOSUserSubscriber
+ * Redirects the user on "home_index" if trying to register while already authenticated
  *
  * @author Norman
  */
