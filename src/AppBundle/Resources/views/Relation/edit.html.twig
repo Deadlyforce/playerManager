@@ -1,18 +1,27 @@
 {% extends '::base.html.twig' %}
-{% block title %}Modifier une relation{% endblock %}
+{% block title %}Relationship edit{% endblock %}
 
-{% block body -%}
-    <h1>Modifier une relation</h1>
-    <h3>{{ relation.prospect.prenom }}</h3>
-    
-    {{ form(edit_form) }}
+{% block body %}
+    <div class="container-fluid container-data">
+        <div class="container">
+            <section class="page-title">
+                <h1>Relationship details</h1> 
+                <h2>Blablabla</h2>
+            </section>
+            <div class="page-title-underline"></div>
+            
+            <h3>{{ relation.prospect.prenom }}</h3>
 
-    <ul class="record_actions">
-        <li>
-            <a href="{{ path('relation') }}">
-                Back to the list
-            </a>
-        </li>
-        <li>{{ form(delete_form) }}</li>
-    </ul>
+            {{ form(edit_form) }}
+
+            <ul class="record_actions">
+                <li>
+                    <a href="{{ path('relation') }}">
+                        Back to the list
+                    </a>
+                </li>
+                <li>{{ form(delete_form) }}</li>
+            </ul>
+        </div>
+    </div>
 {% endblock %}

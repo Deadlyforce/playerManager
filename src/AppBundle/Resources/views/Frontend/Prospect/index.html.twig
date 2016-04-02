@@ -56,6 +56,8 @@
     {#                        <a class="" href="{{ path('relation_show', { 'id': entity.relation.id }) }}">relation</a>#}
                         {% endif %}
                         <a class="" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Gallery">Gallery</a>
+                        <a class="" href="{{ path('relation_edit', {'id': prospect.relation.id}) }}" title="Relationship">Relationship</a>
+{#                        <a class="" href="{{ path('', {'prospect_id': prospect.id}) }}" title="Encounters">Encounters</a>#}
                     </td>
                 </tr>
             {% endfor %}

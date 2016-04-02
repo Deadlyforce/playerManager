@@ -1,16 +1,18 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>Rencontre edit</h1>
+    <div class="container">
+        <h1>Rencontre edit</h1>
 
-    {{ form(edit_form) }}
+        {{ form(edit_form) }}
 
         <ul class="record_actions">
-    <li>
-        <a href="{{ path('rencontre') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+            <li>
+                <a href="{{ path('rencontre') }}">
+                    Back to the list
+                </a>
+            </li>
+            <li>{{ form(delete_form) }}</li>
+        </ul>
+    </div>
 {% endblock %}

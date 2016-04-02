@@ -78,7 +78,7 @@
         </div>
     </header>                        
 
-    {% block body %}            
+    {% block body %}          
     {% endblock %}
 
     <footer>
@@ -90,6 +90,10 @@
         
     <script type="text/javascript">
         $(document).ready(function(){
+            // css class container-data height
+            $(".container-data").height($("body").height() - 128);
+           
+            
             // Active link in menu *********************************************
             // Deactivated with a click on "brand"
             $(".navbar-header").on("click", ".navbar-brand", function(){

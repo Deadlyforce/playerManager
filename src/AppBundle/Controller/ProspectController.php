@@ -41,7 +41,7 @@ class ProspectController extends Controller
         $prospect->setDateCreation($datetime);
         
         $form = $this->createCreateForm($prospect)->createView();
-        $form_view = $this->renderView("AppBundle:Fronted/Prospect:new.html.twig", array('form' => $form));
+        $form_view = $this->renderView("AppBundle:Frontend/Prospect:new.html.twig", array('form' => $form));
                 
         return new Response($form_view);
     }
