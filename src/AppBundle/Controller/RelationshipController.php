@@ -7,21 +7,21 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Relation;
-use AppBundle\Form\RelationType;
+use AppBundle\Entity\Relationship;
+use AppBundle\Form\RelationshipType;
 
 /**
- * Relation controller.
+ * Relationship controller.
  *
- * @Route("/relation")
+ * @Route("/relationship")
  */
-class RelationController extends Controller
+class RelationshipController extends Controller
 {
 
     /**
-     * Lists all Relation entities.
+     * Lists all Relationship entities.
      *
-     * @Route("/", name="relation")
+     * @Route("/", name="relationship")
      * @Method("GET")
      * @Template()
      */
@@ -34,10 +34,10 @@ class RelationController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
-        $relations = $em->getRepository('AppBundle:Relation')->findByUser($user);
+        $relationships = $em->getRepository('AppBundle:Relationship')->findByUser($user);
 
         return array(
-            'relations' => $relations,
+            'relationships' => $relationships,
         );
     }
     
@@ -113,9 +113,9 @@ class RelationController extends Controller
 //    }
 
     /**
-     * Finds and displays a Relation entity.
+     * Finds and displays a Relationship entity.
      *
-     * @Route("/{id}/show", name="relation_show")
+     * @Route("/{id}/show", name="relationship_show")
      * @Method("GET")
      * @Template()
      */
@@ -128,18 +128,18 @@ class RelationController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
                         
         $em = $this->getDoctrine()->getManager();
-        $relation = $em->getRepository('AppBundle:Relation')->find($id);
+        $relationship = $em->getRepository('AppBundle:Relationship')->find($id);
 
-        if (!$relation) {
-            throw $this->createNotFoundException('Unable to find Relation entity.');
+        if (!$relationship) {
+            throw $this->createNotFoundException('Unable to find Relationship entity.');
         } 
         
-        if($relation->getProspect()->getUser() === $user){                 
+        if($relationship->getProspect()->getUser() === $user){                 
 
             $deleteForm = $this->createDeleteForm($id);
 
             return array(
-                'relation' => $relation,
+                'relationship' => $relationship,
                 'delete_form' => $deleteForm->createView(),
             );
         } else {
@@ -148,9 +148,9 @@ class RelationController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Relation entity.
+     * Displays a form to edit an existing Relationship entity.
      *
-     * @Route("/{id}/edit", name="relation_edit")
+     * @Route("/{id}/edit", name="relationship_edit")
      * @Method("GET")
      * @Template()
      */
@@ -163,18 +163,18 @@ class RelationController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
-        $relation = $em->getRepository('AppBundle:Relation')->find($id);
+        $relationship = $em->getRepository('AppBundle:Relationship')->find($id);
 
-        if (!$relation) {
-            throw $this->createNotFoundException('Unable to find Relation entity.');
+        if (!$relationship) {
+            throw $this->createNotFoundException('Unable to find Relationship entity.');
         }        
                    
-        if($relation->getProspect()->getUser() === $user){
-            $editForm = $this->createEditForm($relation);
+        if($relationship->getProspect()->getUser() === $user){
+            $editForm = $this->createEditForm($relationship);
             $deleteForm = $this->createDeleteForm($id);
 
             return array(
-                'relation' => $relation,
+                'relationship' => $relationship,
                 'edit_form' => $editForm->createView(),
                 'delete_form' => $deleteForm->createView(),
             );
@@ -184,16 +184,16 @@ class RelationController extends Controller
     }
 
     /**
-    * Creates a form to edit a Relation entity.
+    * Creates a form to edit a Relationship entity.
     *
-    * @param Relation $entity The entity
+    * @param Relationship $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Relation $entity)
+    private function createEditForm(Relationship $entity)
     {
-        $form = $this->createForm(new RelationType(), $entity, array(
-            'action' => $this->generateUrl('relation_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new RelationshipType(), $entity, array(
+            'action' => $this->generateUrl('relationship_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -203,11 +203,11 @@ class RelationController extends Controller
     }
     
     /**
-     * Edits an existing Relation entity.
+     * Edits an existing Relationship entity.
      *
-     * @Route("/{id}", name="relation_update")
+     * @Route("/{id}", name="relationship_update")
      * @Method("PUT")
-     * @Template("playerManagerWelcomeBundle:Relation:edit.html.twig")
+     * @Template("playerManagerWelcomeBundle:Relationship:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
@@ -218,25 +218,25 @@ class RelationController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
-        $relation = $em->getRepository('AppBundle:Relation')->find($id);
+        $relationship = $em->getRepository('AppBundle:Relationship')->find($id);
 
-        if (!$relation) {
-            throw $this->createNotFoundException('Unable to find Relation entity.');
+        if (!$relationship) {
+            throw $this->createNotFoundException('Unable to find Relationship entity.');
         }
 
-        if($relation->getProspect()->getUser() === $user){
+        if($relationship->getProspect()->getUser() === $user){
             $deleteForm = $this->createDeleteForm($id);
-            $editForm = $this->createEditForm($relation);
+            $editForm = $this->createEditForm($relationship);
             $editForm->handleRequest($request);
 
             if ($editForm->isSubmitted() && $editForm->isValid()) {
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('relation'));
+                return $this->redirect($this->generateUrl('relationship'));
             }
 
             return array(
-                'relation' => $relation,
+                'relationship' => $relationship,
                 'edit_form' => $editForm->createView(),
                 'delete_form' => $deleteForm->createView(),
             );
@@ -246,9 +246,9 @@ class RelationController extends Controller
     }
     
     /**
-     * Deletes a Relation entity.
+     * Deletes a Relationship entity.
      *
-     * @Route("/{id}", name="relation_delete")
+     * @Route("/{id}", name="relationship_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -264,18 +264,18 @@ class RelationController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $relation = $em->getRepository('AppBundle:Relation')->find($id);
+            $relationship = $em->getRepository('AppBundle:Relationship')->find($id);
 
-            if (!$relation) {
-                throw $this->createNotFoundException('Unable to find Relation entity.');
+            if (!$relationship) {
+                throw $this->createNotFoundException('Unable to find Relationship entity.');
             }
             
-            if($relation->getProspect()->getUser() === $user){
+            if($relationship->getProspect()->getUser() === $user){
             
-                $em->remove($relation);
+                $em->remove($relationship);
                 $em->flush();
                 
-                return $this->redirect($this->generateUrl('relation'));
+                return $this->redirect($this->generateUrl('relationship'));
             } else {
                 throw $this->createAccessDeniedException('You cannot access this page!');
             }
@@ -283,7 +283,7 @@ class RelationController extends Controller
     }
 
     /**
-     * Creates a form to delete a Relation entity by id.
+     * Creates a form to delete a Relationship entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -292,7 +292,7 @@ class RelationController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('relation_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('relationship_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

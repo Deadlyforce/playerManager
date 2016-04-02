@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RelationType extends AbstractType
+class RelationshipType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -87,7 +87,7 @@ class RelationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Relation'
+            'data_class' => 'AppBundle\Entity\Relationship'
         ));
     }
 
@@ -96,6 +96,6 @@ class RelationType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_relation';
+        return 'appbundle_relationship';
     }
 }

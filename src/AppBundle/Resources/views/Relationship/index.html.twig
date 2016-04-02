@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+{% block title %}Relationships{% endblock %}
+
+{% block body -%}    
+    <h1>Relationships</h1>
+
+    <table class="records_list table">
+        <thead>
+            <tr>
+{#                <th>Id</th>#}
+                <th>Prénom</th>
+                <th>Statut</th>
+                <th>Rencontre</th>
+                <th>Rencontres</th>
+                <th>Numéro</th>
+                <th>KC</th>
+                <th>FC</th>
+                <th>Catégorie</th>
+                <th>Distance</th>
+                <th>Flake</th>
+                <th>Commentaire</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for relationship in relationships %}
+            <tr>
+{#                <td><a href="{{ path('relationship_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
+                <td>{% if relationship.prospect %}{{ relationship.prospect.prenom }}{% endif %}</td>
+                <td>{% if relationship.statut %}On{% else %}Off{% endif %}</td>
+                <td>{% if relationship.rencontre %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relationship.rencontreCount %}{{ relationship.rencontreCount }}{% else %}0{% endif %}</td>
+                <td>{% if relationship.numero == 1 %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relationship.kc == 1 %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relationship.fc == 1 %}Oui{% else %}Non{% endif %}</td>
+                <td>{{ relationship.categorie }}</td>
+                <td>{% if relationship.distance == 1 %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relationship.flake == 1 %}Oui{% else %}Non{% endif %}</td>
+                <td>{{ relationship.commentaire }}</td>
+                <td>                
+                    <a href="{{ path('relationship_show', { 'id': relationship.id }) }}">show</a>                    
+                    <a href="{{ path('relationship_edit', { 'id': relationship.id }) }}">edit</a>                   
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{#    <ul>
+        <li>
+            <a href="{{ path('relationship_new') }}">
+                Create a new entry
+            </a>
+        </li>
+    </ul>#}
+    {% endblock %}

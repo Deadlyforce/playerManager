@@ -5,17 +5,17 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Relation
+ * Relationship
  *
- * @ORM\Table(name="relations")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\RelationRepository")
+ * @ORM\Table(name="relationships")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\RelationshipRepository")
  */
-class Relation
+class Relationship
 {
     /**     
      * @var Prospect 
      * 
-     * @ORM\OneToOne(targetEntity="Prospect", mappedBy="relation", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Prospect", mappedBy="relationship", cascade={"persist"})
      * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $prospect;
@@ -115,7 +115,7 @@ class Relation
      * Set statut
      *
      * @param string $statut
-     * @return Relation
+     * @return Relationship
      */
     public function setStatut($statut)
     {
@@ -138,7 +138,7 @@ class Relation
      * Set rencontre
      *
      * @param integer $rencontre
-     * @return Relation
+     * @return Relationship
      */
     public function setRencontre($rencontre)
     {
@@ -161,7 +161,7 @@ class Relation
      * Set rencontreCount
      *
      * @param integer $rencontreCount
-     * @return Relation
+     * @return Relationship
      */
     public function setRencontreCount($rencontreCount)
     {
@@ -184,7 +184,7 @@ class Relation
      * Set numero
      *
      * @param integer $numero
-     * @return Relation
+     * @return Relationship
      */
     public function setNumero($numero)
     {
@@ -206,7 +206,7 @@ class Relation
      * Set kc
      *
      * @param integer $kc
-     * @return Relation
+     * @return Relationship
      */
     public function setKc($kc)
     {
@@ -228,7 +228,7 @@ class Relation
      * Set fc
      *
      * @param integer $fc
-     * @return Relation
+     * @return Relationship
      */
     public function setFc($fc)
     {
@@ -250,7 +250,7 @@ class Relation
      * Set Categorie
      *
      * @param string $categorie
-     * @return Relation
+     * @return Relationship
      */
     public function setCategorie($categorie)
     {
@@ -272,7 +272,7 @@ class Relation
      * Set distance
      *
      * @param integer $distance
-     * @return Relation
+     * @return Relationship
      */
     public function setDistance($distance)
     {
@@ -295,7 +295,7 @@ class Relation
      * Set flake
      *
      * @param integer $flake
-     * @return Relation
+     * @return Relationship
      */
     public function setFlake($flake)
     {
@@ -318,7 +318,7 @@ class Relation
      * Set commentaire
      *
      * @param string $commentaire
-     * @return Relation
+     * @return Relationship
      */
     public function setCommentaire($commentaire)
     {
@@ -341,7 +341,7 @@ class Relation
      * Set prospect
      *
      * @param \AppBundle\Entity\Prospect $prospect
-     * @return Relation
+     * @return Relationship
     */
     public function setProspect(\AppBundle\Entity\Prospect $prospect = null)
     {
@@ -361,7 +361,7 @@ class Relation
     }
     
     /**
-     * Render a Relation as a string
+     * Render a Relationship as a string
      * 
      * @return string
      */

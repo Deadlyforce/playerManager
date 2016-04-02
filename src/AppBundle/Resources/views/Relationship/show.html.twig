@@ -1,70 +1,70 @@
 {% extends '::base.html.twig' %}
-{% block title %}Relation{% endblock %}
+{% block title %}Relationship{% endblock %}
 
 {% block body -%}
-    <h1>Relation</h1>
+    <h1>Relationship</h1>
 
     <table class="record_properties">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ relation.id }}</td>                
+                <td>{{ relationship.id }}</td>                
             </tr>
             <tr>
                 <th>Prénom</th>
-                <td>{% if relation.prospect %}{{ relation.prospect.prenom }}{% endif %}</td>
+                <td>{% if relationship.prospect %}{{ relationship.prospect.prenom }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Statut</th>
-                <td>{% if relation.statut %}On{% else %}Off{% endif %}</td>
+                <td>{% if relationship.statut %}On{% else %}Off{% endif %}</td>
             </tr>
             <tr>
                 <th>Rencontre</th>
-                <td>{% if relation.rencontre %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relationship.rencontre %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Rencontres</th>
-                <td>{{ relation.rencontreCount }}</td>
+                <td>{{ relationship.rencontreCount }}</td>
             </tr>
             <tr>
                 <th>Numéro</th>
-                <td>{% if relation.numero %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relationship.numero %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Kc</th>
-                <td>{% if relation.kc %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relationship.kc %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Fc</th>
-                <td>{% if relation.fc %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relationship.fc %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Type</th>
-                <td>{{ relation.categorie }}</td>
+                <td>{{ relationship.categorie }}</td>
             </tr>
             <tr>
                 <th>Distance</th>
-                <td>{% if relation.distance %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relationship.distance %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Flake</th>
-                <td>{% if relation.flake %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if relationship.flake %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
                 <th>Commentaire</th>
-                <td>{{ relation.commentaire }}</td>
+                <td>{{ relationship.commentaire }}</td>
             </tr>
         </tbody>
     </table>
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('relation') }}">
+        <a href="{{ path('relationship') }}">
             Back to the list
         </a>
     </li>
     <li>
-        <a href="{{ path('relation_edit', { 'id': relation.id }) }}">
+        <a href="{{ path('relationship_edit', { 'id': relationship.id }) }}">
             Edit
         </a>
     </li>

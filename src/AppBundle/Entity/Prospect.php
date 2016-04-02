@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
-use AppBundle\Entity\Relation;
+use AppBundle\Entity\Relationship;
 use AppBundle\Entity\Rencontre;
 use AppBundle\Entity\Photo;
 
@@ -25,7 +25,7 @@ class Prospect
         $this->echanges = new ArrayCollection();
         $this->rencontres = new ArrayCollection();
         $this->photos = new ArrayCollection();
-        $this->relation = null;
+        $this->relationship = null;
     }   
    
     /**
@@ -43,12 +43,12 @@ class Prospect
     private $echanges;
     
     /**
-     * @var Relation 
+     * @var Relationship 
      * 
-     * @ORM\OneToOne(targetEntity="Relation", inversedBy="prospect", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(name="relation_id", referencedColumnName="id", onDelete="SET NULL")
+     * @ORM\OneToOne(targetEntity="Relationship", inversedBy="prospect", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="relationship_id", referencedColumnName="id", onDelete="SET NULL")
      */
-    private $relation;
+    private $relationship;
     
     /**
      * @var ArrayCollection
@@ -453,27 +453,27 @@ class Prospect
     }
 
     /**
-     * Set relation
+     * Set relationship
      *
-     * @param Relation $relation
+     * @param Relatioship $relationship
      * @return Prospect
      */
-    public function setRelation(Relation $relation)
+    public function setRelationship(Relationship $relationship)
     {
-        $this->relation = $relation;
-        $relation->setProspect($this);
+        $this->relationship = $relationship;
+        $relationship->setProspect($this);
 
         return $this;
     }
 
     /**
-     * Get relation
+     * Get relationship
      *
-     * @return Relation 
+     * @return Relationship 
      */
-    public function getRelation()
+    public function getRelationship()
     {
-        return $this->relation;
+        return $this->relationship;
     }    
     
     /**
