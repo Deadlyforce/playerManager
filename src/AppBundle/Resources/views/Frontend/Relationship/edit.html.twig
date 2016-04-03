@@ -3,7 +3,7 @@
 
 {% block body %}
     <div class="container-fluid container-data">
-        <div class="container">
+        <div class="container" id="container-relationship">
             <section class="page-title">
                 <h1>Relationship details</h1> 
                 <h2>Blablabla</h2>
@@ -11,17 +11,39 @@
             <div class="page-title-underline"></div>
             
             <h3>{{ relationship.prospect.prenom }}</h3>
+            
+            <div class="page-content">
+                {{ form_start(edit_form) }}
+                
+                    {{ form_label(edit_form.statut) }} 
+                    <div id="appbundle_relationship_statut_row">
+                        {{ form_widget(edit_form.statut) }}
+                        <div id="appbundle_relationship_statut_button"></div>                        
+                    </div>
+                    {{ form_errors(edit_form.statut) }}
+                    
+                    
+                    
+                    {{ form_rest(edit_form) }}
+                {{ form_end(edit_form) }}
 
-            {{ form(edit_form) }}
+                <a href="{{ path('relationship') }}">Back to the list</a>
 
-            <ul class="record_actions">
-                <li>
-                    <a href="{{ path('relationship') }}">
-                        Back to the list
-                    </a>
-                </li>
-                <li>{{ form(delete_form) }}</li>
-            </ul>
+                {{ form(delete_form) }}
+            </div>
         </div>
     </div>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#appbundle_relationship_statut_row").on("click", "#appbundle_relationship_statut_button", function(){                
+                if($("input#appbundle_relationship_statut").prop("checked")) {
+                    $("input#appbundle_relationship_statut").prop("checked", false);
+                    $("input#appbundle_relationship_statut").val("0");
+                } else {
+                    $("input#appbundle_relationship_statut").prop("checked", true);
+                    $("input#appbundle_relationship_statut").val("1");
+                }
+            });
+        });
+    </script>
 {% endblock %}

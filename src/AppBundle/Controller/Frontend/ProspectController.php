@@ -1,6 +1,5 @@
 <?php
-
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\Prospect;
 use AppBundle\Form\ProspectType;

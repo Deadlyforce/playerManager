@@ -22,15 +22,16 @@ class RelationshipType extends AbstractType
     {
                 
         $builder
-            ->add('statut', ChoiceType::class, array(
-                'required' => TRUE,
-                'choices' => array(
-                    1 => 'On',
-                    0 => 'Off'
-                ),
-                'expanded' => TRUE,
-                'multiple' => FALSE,
-                'data' => 1
+            ->add('statut', CheckboxType::class, array(
+                'label' => 'Relationship status',
+                'required' => false,
+//                'choices' => array(
+//                    1 => 'On',
+//                    0 => 'Off'
+//                ),
+//                'expanded' => TRUE,
+//                'multiple' => FALSE,
+                'data' => true
             ))
             ->add('rencontre', ChoiceType::class, array(
                 'required' => TRUE,

@@ -88,10 +88,14 @@
     </footer>
 
         
-    <script type="text/javascript">
+    <script type="text/javascript">   
+        // css class container-data height
+        // Fired before "document ready" to avoid white flash (height adapting)
+        document.getElementsByClassName("container-data")[0].style.height = (document.body.offsetHeight - 128 -65) + "px";
+        
         $(document).ready(function(){
             // css class container-data height
-            $(".container-data").height($("body").height() - 128);
+{#            $(".container-data").height($("body").height() - 128);#}
            
             
             // Active link in menu *********************************************
