@@ -160,7 +160,7 @@ class ProspectType extends AbstractType
                 'allow_delete' => true,
                 'by_reference' => false
             ))            
-            ->add('relation', new RelationType(), array(
+            ->add('relationship', new RelationshipType(), array(
                 
             )) 
             ->add('submit', 'submit', array(

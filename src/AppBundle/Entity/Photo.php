@@ -66,8 +66,38 @@ class Photo {
      * @Assert\NotBlank()
      * @Assert\Image(maxSize="2000000") 
      */
-    private $file;
+    private $file;   
     
+    /**
+     * Primary picture as selected by the user
+     * 
+     * @var integer
+     * @ORM\Column(name="selected", type="boolean", nullable=true)
+     */
+    private $selected;
+    
+    /**
+ * Set selected
+ *
+ * @param boolean $selected
+ * @return Photo
+ */
+public function setSelected($selected)
+{
+	$this->selected = $selected;     
+	
+	return $this;
+}
+
+/**
+* Get selected
+* 
+* @return boolean
+*/
+public function getSelected()
+{
+	return $this->selected;
+}
     
     /************************* GETTERS SETTERS ********************************/
     
@@ -218,6 +248,4 @@ class Photo {
     {
         return $this->prospect;
     }
-    
-
 }

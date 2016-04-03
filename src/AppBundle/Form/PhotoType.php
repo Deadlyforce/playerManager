@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 /**
  * Description of PhotoType
@@ -22,6 +23,10 @@ class PhotoType extends AbstractType
                 'label' => false                
                 )
             )
+            ->add('selected', CheckboxType::class, array(
+                'label' => "Make primary",
+                'required' => false
+            ))
         ;
     }
     

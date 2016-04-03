@@ -23,7 +23,7 @@ class RelationshipController extends Controller
      *
      * @Route("/", name="relationship")
      * @Method("GET")
-     * @Template()
+     * @Template("AppBundle:Frontend/Relationship:index.html.twig")
      */
     public function indexAction()
     {
@@ -42,82 +42,11 @@ class RelationshipController extends Controller
     }
     
     /**
-     * Creates a new Relation entity.
-     *
-     * @Route("/create", name="relation_create")
-     * @Method("POST")
-     * @Template("AppBundle:Relation:new.html.twig")
-     */
-//    public function createAction(Request $request)
-//    {
-//        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-//            throw $this->createAccessDeniedException('You cannot access this page!');
-//        }
-//        
-//        $relation = new Relation();
-//        $form = $this->createCreateForm($relation);
-//        $form->handleRequest($request);        
-//
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            
-//            $em->persist($relation);
-//            $em->flush();
-//
-//            return $this->redirect($this->generateUrl('relation_show', array('id' => $relation->getId())));
-//        } else {
-//            throw $this->createAccessDeniedException('Oops it seems ther is a problem with your form!');
-//        }
-//
-////        return array(
-////            'relation' => $relation,
-////            'form'   => $form->createView(),
-////        );
-//    }
-
-    /**
-     * Creates a form to create a Relation entity.
-     *
-     * @param Relation $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-//    private function createCreateForm(Relation $entity)
-//    {
-//        $form = $this->createForm(new RelationType(), $entity, array(
-//            'action' => $this->generateUrl('relation_create'),
-//            'method' => 'POST',
-//        ));
-//
-//        $form->add('submit', 'submit', array('label' => 'Create'));
-//
-//        return $form;
-//    }
-
-    /**
-     * Displays a form to create a new Relation entity.
-     *
-     * @Route("/new", name="relation_new")
-     * @Method("GET")
-     * @Template()
-     */
-//    public function newAction()
-//    {
-//        $entity = new Relation();
-//        $form   = $this->createCreateForm($entity);
-//
-//        return array(
-//            'entity' => $entity,
-//            'form'   => $form->createView(),
-//        );
-//    }
-
-    /**
      * Finds and displays a Relationship entity.
      *
      * @Route("/{id}/show", name="relationship_show")
      * @Method("GET")
-     * @Template()
+     * @Template("AppBundle:Frontend/Relationship:show.html.twig")
      */
     public function showAction($id)
     {
@@ -152,7 +81,7 @@ class RelationshipController extends Controller
      *
      * @Route("/{id}/edit", name="relationship_edit")
      * @Method("GET")
-     * @Template()
+     * @Template("AppBundle:Frontend/Relationship:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -207,7 +136,7 @@ class RelationshipController extends Controller
      *
      * @Route("/{id}", name="relationship_update")
      * @Method("PUT")
-     * @Template("playerManagerWelcomeBundle:Relationship:edit.html.twig")
+     * @Template("AppBundle:Frontend/Relationship:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {

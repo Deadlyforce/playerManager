@@ -22,7 +22,7 @@
             {{ form_row(edit_form.source) }}
             {{ form_row(edit_form.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
 
-            {{ form_label(edit_form.photos) }}
+            {#{{ form_label(edit_form.photos) }}
             {{ form_errors(edit_form.photos) }}
 
             <ul id="photo-list" data-prototype="{{ form_widget(edit_form.photos.vars.prototype)|e }}">
@@ -33,7 +33,7 @@
                         {{ form_widget(photo) }}                    
                     </li>
                 {% endfor %}
-            </ul>       
+            </ul> #}      
 
             {{ form_row(edit_form.submit) }}
             <div class="hidden">{{ form_rest(edit_form) }}</div>

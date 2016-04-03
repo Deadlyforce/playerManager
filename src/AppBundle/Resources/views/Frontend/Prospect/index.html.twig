@@ -1,5 +1,7 @@
 {% extends '::base.html.twig' %}
-{% block title %}Liste des contacts{% endblock %}
+{% import "AppBundle:Frontend/Macros:photoDisplay.html.twig" as photoDisplay %}
+
+{% block title %}Prospects{% endblock %}
 
 {% block body -%}
     <div class="container">        
@@ -37,13 +39,25 @@
                     <td>{{ prospect.ville }}</td>
                     <td>{{ prospect.pays }}</td>
                     <td>{{ prospect.source }}</td>
-                    <td>                    
-                        {% if prospect.photos|last %}
-                            {% set photo = prospect.photos|last %}
-                            <img class="img-responsive" src="{{ asset(photo.path) }}" alt="Photo" />                        
-                        {% else %}
-                            <img class="img-responsive" src="{{ asset('bundles/app/images/prospect_no_photo.jpg') }}" alt="No photo" />
-                         {% endif %}
+                    <td>  
+                        
+                        {{ photoDisplay.primaryPhotoOrLast(prospect.photos) }}
+                       
+                        {#{% set primaryPhoto = null %} 
+                        {% for photo in prospect.photos if photo.selected == true %}                               
+                            {% set primaryPhoto = photo %}                           
+                        {% endfor %}
+                        
+                        {% if primaryPhoto is not null %}
+                            <img class="img-responsive" src="{{ asset(primaryPhoto.path) }}" alt="Photo" />
+                        {% else %}                      
+                            {% if prospect.photos|last %}
+                                {% set photo = prospect.photos|last %}
+                                <img class="img-responsive" src="{{ asset(photo.path) }}" alt="Photo" />                        
+                            {% else %}
+                                <img class="img-responsive" src="{{ asset('bundles/app/images/prospect_no_photo.jpg') }}" alt="No photo" />
+                            {% endif %}
+                        {% endif %}#}                       
                     </td>
                     <td>
                         {% if prospect.dateCreation %}{{ prospect.dateCreation|date('d-m-Y') }}{% endif %}

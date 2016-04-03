@@ -1,0 +1,20 @@
+{% macro primaryPhotoOrLast(photos) %}
+    {% set primaryPhoto = null %} 
+    {% for photo in photos if photo.selected == true %}                               
+        {% set primaryPhoto = photo %}                           
+    {% endfor %}
+
+    {% if primaryPhoto is not null %}
+        <img class="img-responsive" src="{{ asset(primaryPhoto.path) }}" alt="Photo" />
+    {% else %}                      
+        {% if photos|last %}
+            {% set photo = photos|last %}
+            <img class="img-responsive" src="{{ asset(photo.path) }}" alt="Photo" />                        
+        {% else %}
+            <img class="img-responsive" src="{{ asset('bundles/app/images/prospect_no_photo.jpg') }}" alt="No photo" />
+        {% endif %}
+    {% endif %}
+{% endmacro %}
+
+
+

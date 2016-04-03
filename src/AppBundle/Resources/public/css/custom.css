@@ -675,7 +675,7 @@ table.record_properties th{
 
 .photo-actions{
     background-color: #e0e0e0;
-    height: 80px;
+    height: 110px;  /* Temporary height - Needs styling */
     padding: 25px 5px 5px 5px;
     text-align: center;
     border-bottom-left-radius: 2px;
