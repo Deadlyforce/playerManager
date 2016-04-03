@@ -624,7 +624,20 @@ table.record_properties th{
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     position: relative;
+    /*border: 5px solid #ddd;*/
 }
+/* :before is used for a border that doesn't propagate to child element (absolute mask)  */
+.photo-frame:before {
+  content: " ";
+  position: absolute;
+  z-index: 1;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  bottom: 0px;
+  border: 5px solid #ddd;
+}
+
 .photo-frame img{    
     display: block
 }
@@ -634,14 +647,25 @@ table.record_properties th{
 .photo-frame img.wide{    
     height: 100%;
 }
-
+/* Masked div, "activated" for primary photo */
+.photo-frame .primary {
+    opacity: 0;
+    overflow: visible;
+    background-color: transparent;
+    border: 5px solid red;
+   
+    position: absolute;
+    z-index: 2;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
 .photo-frame .mask {
     opacity: 0;
     overflow: visible;
-    /*border: 200px solid rgba(0,0,0,0.7);*/
     background-color: rgba(0,0,0,0.6);
     box-sizing: border-box;
-    box-shadow: 0px 0px 0px #999;
     border: 5px solid white;
     transition: all 0.4s ease-in-out;
    

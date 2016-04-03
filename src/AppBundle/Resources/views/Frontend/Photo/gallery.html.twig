@@ -23,7 +23,7 @@
                         <li class="col-md-4" id="{{ photo.vars.form.vars['name'] }}">
                             <div class="photo-frame">                                
                                 <img src="{{ asset(photo.vars.data.path) }}" alt="Photo" />                                
-                                
+                                <div class="primary"></div>
                                 <div class="mask">  
                                     <a class="gallery" href="{{ asset(photo.vars.data.path) }}"></a>
                                 </div>                                
@@ -80,8 +80,15 @@
             // Only one checkbox ticked at a time when selecting primary photo
             $("input[type='checkbox']").on("change", function(){
                 $("input[type='checkbox']").not(this).prop("checked", false);
+                
+                // Put back original border css and add "highlight" css for selected photo
+                $("input[type='checkbox']").not(this).parent().prev(".photo-frame").find(".primary").css("opacity", "0");                
+                $(this).parent().prev(".photo-frame").find(".primary").css("opacity", "1");
             });
             
+            // Highlight selected photo at doc ready
+            $("input[type='checkbox']:checked").parent().prev(".photo-frame").find(".primary").css("opacity", "1");
+          
             // Colorbox for full sized image
             $("a.gallery").colorbox({
                 onLoad: function(){
@@ -153,7 +160,8 @@
                 $(".photo-frame").height(width);
             });
 
-            // On click on class "form-new" (new li with form prototype)            
+            // On click on class "form-new" (new li with form prototype)
+            // Put preview in photo-frame
             $("#photo-list").on("change", ".new-form input[type='file']", function(){
                 var files = $(this)[0].files;
                 // A file should be there, because the input "changed", but test anyway

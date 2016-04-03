@@ -15,12 +15,13 @@ $(document).ready(function(){
 
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
-    collectionHolder.data('index', collectionHolder.find(':input').length);
+    collectionHolder.data('index', collectionHolder.find(":input[type='file']").length);
 
     addPhotoLink.on('click', function(e) {            
         e.preventDefault();  
         
         var index = collectionHolder.data('index');
+
         // add a new Photo form (see next code block)
         if (index < 5) {
             addPhotoForm(collectionHolder, newLiAddPhoto);
