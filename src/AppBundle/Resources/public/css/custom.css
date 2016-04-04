@@ -596,9 +596,26 @@ ul.record_actions{
 #container-relationship h3{
     font-family: "ralewaythin",sans-serif;
     font-size: 2.5em;
+    margin-top: 0px;
 }
 
+.section-aside{
+    display: inline-block;
+    width: 25%;
+    vertical-align: top;
+    padding: 0px 40px 0px 0px;
+}
+.section-content{
+    display: inline-block;
+    height: 600px;
+    padding: 0px 40px;
+    border-left: 1px solid #899BA7;
+}
 /******************************* FORM EDIT ************************************/
+
+form[name="appbundle_relationship"] > div {
+    margin-bottom: 10px;
+}
 
 form[name="appbundle_relationship"] label{
     width: 250px;
@@ -607,38 +624,33 @@ form[name="appbundle_relationship"] label{
     font-family: "open_sansregular", sans-serif;
 }
 
-/* Input status */
-#appbundle_relationship_statut_row{
+.relationship_row{
     width: 80px;
     height: 26px;
     background: #202B33;
-    /*margin: 20px auto;*/
     position: relative;
     display: inline-block;
     border-radius: 50px;
     box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
 }
-#appbundle_relationship_statut_row:after {
-    content: 'OFF';
-    color: #000;
+.relationship_button {
+    display: block;
+    width: 34px;
+    height: 20px;
+    cursor: pointer;
     position: absolute;
-    right: 10px;
-    z-index: 0;
-    font: 12px/26px Arial, sans-serif;
-    font-weight: bold;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    background: #fcfff4;
+    background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    border-radius: 50px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
 }
-#appbundle_relationship_statut_row:before {
-    content: 'ON';
-    color: #899BA7;
-    position: absolute;
-    left: 10px;
-    z-index: 0;
-    font: 12px/26px Arial, sans-serif;
-    font-weight: bold;
-}
-
-#appbundle_relationship_statut_button {
+#appbundle_relationship_meeting_button {
     display: block;
     width: 34px;
     height: 20px;
@@ -656,24 +668,122 @@ form[name="appbundle_relationship"] label{
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
 }
 
-input#appbundle_relationship_statut {
+/* Input status */
+#appbundle_relationship_status_row:after {
+    content: 'OFF';
+    color: #000;
+    position: absolute;
+    right: 10px;
+    z-index: 0;
+    font: 12px/26px Arial, sans-serif;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
+}
+#appbundle_relationship_status_row:before {
+    content: 'ON';
+    color: #899BA7;
+    position: absolute;
+    left: 10px;
+    z-index: 0;
+    font: 12px/26px Arial, sans-serif;
+    font-weight: bold;
+}
+input#appbundle_relationship_status {
     visibility: hidden;
 }
-input#appbundle_relationship_statut:checked + #appbundle_relationship_statut_button {
+input#appbundle_relationship_status:checked + #appbundle_relationship_status_button {
     left: 43px;
 }
 
+/* Input meeting */
+.row-yes-no:after {
+    content: 'NO';
+    color: #000;
+    position: absolute;
+    right: 10px;
+    z-index: 0;
+    font: 12px/26px Arial, sans-serif;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
+}
+.row-yes-no:before {
+    content: 'YES';
+    color: #899BA7;
+    position: absolute;
+    left: 10px;
+    z-index: 0;
+    font: 12px/26px Arial, sans-serif;
+    font-weight: bold;
+}
+input#appbundle_relationship_meeting {
+    visibility: hidden;
+}
+input#appbundle_relationship_meeting:checked + #appbundle_relationship_meeting_button {
+    left: 43px;
+}
+
+/* Input meetingCount */
+input#appbundle_relationship_meetingCount{
+    background-color: rgb(32, 43, 51);
+    border: 1px solid rgb(137, 155, 169);
+    width: 60px;
+    text-align: center;
+    border-radius: 2px;
+}
+
+/* Input numclosed */
+input#appbundle_relationship_numclosed {
+    visibility: hidden;
+}
+input#appbundle_relationship_numclosed:checked + #appbundle_relationship_numclosed_button {
+    left: 43px;
+}
+/* Input kc */
+input#appbundle_relationship_kc {
+    visibility: hidden;
+}
+input#appbundle_relationship_kc:checked + #appbundle_relationship_kc_button {
+    left: 43px;
+}
+/* Input fc */
+input#appbundle_relationship_fc {
+    visibility: hidden;
+}
+input#appbundle_relationship_fc:checked + #appbundle_relationship_fc_button {
+    left: 43px;
+}
+/* Input select realtionshipRank */
+select#appbundle_relationship_relationshipRank{
+    background-color: rgb(32, 43, 51);
+    border: 1px solid rgb(137, 155, 142);
+    border-radius: 2px;
+    height: 25px;
+    
+    -webkit-appearance: none;
+    -moz-appearance: none;
+     appearance: none;
+}
+
+label[for='appbundle_relationship_about']{
+    vertical-align: top;
+}
+textarea#appbundle_relationship_about{
+    background-color: rgb(32, 43, 51);
+    border: 1px solid rgb(137, 155, 169);
+    width: 250px;
+    height: 100px;
+}
 
 /******************************* FORM NEW *************************************/
 
-#appbundle_relationship_statut{
+#appbundle_relationship_status{
     display: inline-block;
 }
 #appbundle_relationship_rencontre{
     display: inline-block;
 }
 
-#appbundle_relationship_statut label{
+#appbundle_relationship_status label{
     width: 75px;
 }
 #appbundle_relationship_rencontre label{

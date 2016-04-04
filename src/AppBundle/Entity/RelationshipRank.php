@@ -7,10 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Categorie
  *
- * @ORM\Table(name="categories")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\CategorieRepository")
+ * @ORM\Table(name="relationship_ranks")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\RelationshipRankRepository")
  */
-class Categorie
+class RelationshipRank
 {
     /**
      * @var integer
@@ -24,9 +24,9 @@ class Categorie
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=255)
+     * @ORM\Column(name="wording", type="string", length=255)
      */
-    private $libelle;
+    private $wording;
 
 
     /**
@@ -40,37 +40,37 @@ class Categorie
     }
 
     /**
-     * Set libelle
+     * Set wording
      *
-     * @param string $libelle
+     * @param string $wording
      *
-     * @return Categorie
+     * @return RelationshipRank
      */
-    public function setLibelle($libelle)
+    public function setWording($wording)
     {
-        $this->libelle = $libelle;
+        $this->wording = $wording;
 
         return $this;
     }
 
     /**
-     * Get libelle
+     * Get wording
      *
      * @return string
      */
-    public function getLibelle()
+    public function getWording()
     {
-        return $this->libelle;
+        return $this->wording;
     }
     
     /**
-     * Retourne le libellé de la catégorie
+     * Returns the wording of the relationship rank
      * 
-     * @return string Libelle
+     * @return string wording
      */
     public function __toString() 
     {
-        return $this->getLibelle();
+        return $this->getWording();
     }
 }
 

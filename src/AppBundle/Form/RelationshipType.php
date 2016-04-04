@@ -22,48 +22,36 @@ class RelationshipType extends AbstractType
     {
                 
         $builder
-            ->add('statut', CheckboxType::class, array(
+            ->add('status', CheckboxType::class, array(
                 'label' => 'Relationship status',
+                'required' => false
+            ))
+            ->add('meeting', CheckboxType::class, array(
+                'label' => 'Have you met ?',
+                'required' => true
+            ))
+            ->add('meetingCount', IntegerType::class, array(
                 'required' => false,
-//                'choices' => array(
-//                    1 => 'On',
-//                    0 => 'Off'
-//                ),
-//                'expanded' => TRUE,
-//                'multiple' => FALSE,
-                'data' => true
+                'label' => 'Meeting count',
+                'attr' => array(
+                    'min' => 0,
+                    'max' => 100
+                )
             ))
-            ->add('rencontre', ChoiceType::class, array(
-                'required' => TRUE,
-                'choices' => array(
-                    1 => 'Oui',
-                    0 => 'Non'
-                ),
-                'expanded' => TRUE,
-                'multiple' => FALSE,
-                'data' => 0
-            ))
-            ->add('rencontreCount', IntegerType::class, array(
-                'required' => FALSE,
-                'label' => 'Nombre de rencontres'
-            ))
-            ->add('numero', CheckboxType::class, array(
-                'required' => FALSE,
-                'label' => 'Numéro acquis',
-                'data' => FALSE
+            ->add('numclosed', CheckboxType::class, array(
+                'required' => false,
+                'label' => 'Phone number ?'                
             ))
             ->add('kc', CheckboxType::class, array(
-                'required' => FALSE,
-                'label' => 'KC',
-                'data' => FALSE
+                'required' => false,
+                'label' => 'Have you kissed ?'                
             ))
             ->add('fc', CheckboxType::class, array(
-                'required' => FALSE,
-                'label' => 'FC',
-                'data' => FALSE
+                'required' => false,
+                'label' => 'Did you have sex ?'
              ))
-            ->add('categorie', EntityType::class, array(
-                'class' => 'AppBundle:Categorie'
+            ->add('relationshipRank', EntityType::class, array(
+                'class' => 'AppBundle:RelationshipRank'
             ))
             ->add('distance', CheckboxType::class, array(
                 'required' => FALSE,
@@ -73,10 +61,11 @@ class RelationshipType extends AbstractType
             ->add('flake', CheckboxType::class, array(
                 'required' => FALSE
             ))
-            ->add('commentaire', TextareaType::class, array(
-                'required' => FALSE,
+            ->add('about', TextareaType::class, array(
+                'label' => 'About',
+                'required' => false,
                 'label_attr' => array(
-                    'class' => 'appbundle_relation_commentaire'
+                    'class' => 'appbundle_relation_about'
                 )
             ))
         ;

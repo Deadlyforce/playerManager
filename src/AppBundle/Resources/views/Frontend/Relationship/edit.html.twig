@@ -1,4 +1,6 @@
 {% extends '::base.html.twig' %}
+{% import "AppBundle:Frontend/Macros:photoDisplay.html.twig" as photoDisplay %}
+
 {% block title %}Relationship edit{% endblock %}
 
 {% block body %}
@@ -6,42 +8,107 @@
         <div class="container" id="container-relationship">
             <section class="page-title">
                 <h1>Relationship details</h1> 
-                <h2>Blablabla</h2>
+{#                <h2>Blablabla</h2>#}
             </section>
-            <div class="page-title-underline"></div>
+            <div class="page-title-underline"></div>            
             
-            <h3>{{ relationship.prospect.prenom }}</h3>
-            
-            <div class="page-content">
-                {{ form_start(edit_form) }}
-                
-                    {{ form_label(edit_form.statut) }} 
-                    <div id="appbundle_relationship_statut_row">
-                        {{ form_widget(edit_form.statut) }}
-                        <div id="appbundle_relationship_statut_button"></div>                        
-                    </div>
-                    {{ form_errors(edit_form.statut) }}
-                    
-                    
-                    
-                    {{ form_rest(edit_form) }}
-                {{ form_end(edit_form) }}
+            <aside class="section-aside">
+                {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
+            </aside>
+            <section class="section-content">
+                <h3>{{ relationship.prospect.prenom }}</h3>
 
-                <a href="{{ path('relationship') }}">Back to the list</a>
+                <div class="page-content">
+                    {{ form_start(edit_form) }}
+                        <div>
+                            {{ form_label(edit_form.status) }} 
+                            <div id="appbundle_relationship_status_row" class="relationship_row">
+                                {{ form_widget(edit_form.status) }}
+                                <div id="appbundle_relationship_status_button" class="relationship_button"></div>   
+                                {{ form_errors(edit_form.status) }}
+                            </div>
+                        </div>
+                        <div>
+                            {{ form_label(edit_form.meeting) }}
+                            <div id="appbundle_relationship_meeting_row" class="relationship_row row-yes-no">
+                                {{ form_widget(edit_form.meeting) }}
+                                <div id="appbundle_relationship_meeting_button"></div>   
+                                {{ form_errors(edit_form.meeting) }}
+                            </div>           
+                        </div>           
+                        {{ form_row(edit_form.meetingCount) }}          
+                        <div>
+                            {{ form_label(edit_form.numclosed) }}
+                            <div id="appbundle_relationship_numclosed_row" class="relationship_row row-yes-no">
+                                {{ form_widget(edit_form.numclosed) }}
+                                <div id="appbundle_relationship_numclosed_button" class="relationship_button"></div>   
+                                {{ form_errors(edit_form.meeting) }}
+                            </div>           
+                        </div>    
+                        <div class="collapse">
+                            {{ form_label(edit_form.kc) }}
+                            <div id="appbundle_relationship_kc_row" class="relationship_row row-yes-no">
+                                {{ form_widget(edit_form.kc) }}
+                                <div id="appbundle_relationship_kc_button" class="relationship_button"></div>   
+                                {{ form_errors(edit_form.kc) }}
+                            </div>           
+                        </div>    
+                        <div class="collapse">
+                            {{ form_label(edit_form.fc) }}
+                            <div id="appbundle_relationship_fc_row" class="relationship_row row-yes-no">
+                                {{ form_widget(edit_form.fc) }}
+                                <div id="appbundle_relationship_fc_button" class="relationship_button"></div>   
+                                {{ form_errors(edit_form.fc) }}
+                            </div>           
+                        </div>    
 
-                {{ form(delete_form) }}
-            </div>
+                        {{ form_rest(edit_form) }}
+                    {{ form_end(edit_form) }}
+
+                    <a href="{{ path('relationship') }}">Back to the list</a>
+
+                    {{ form(delete_form) }}
+                </div>
+            </section>           
         </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function(){
-            $("#appbundle_relationship_statut_row").on("click", "#appbundle_relationship_statut_button", function(){                
-                if($("input#appbundle_relationship_statut").prop("checked")) {
-                    $("input#appbundle_relationship_statut").prop("checked", false);
-                    $("input#appbundle_relationship_statut").val("0");
+            
+            // Masking of kc and fc fields if no meeting
+            var inputMeeting = $("input#appbundle_relationship_meeting");
+
+            if (inputMeeting.prop("checked") && inputMeeting.val() == 1) {
+                $("#appbundle_relationship_kc_row").parent().show();
+                $("#appbundle_relationship_fc_row").parent().show();
+            }
+            // End
+            
+            $(".relationship_row").on("click", ".relationship_button", function(){      
+                var input = $(this).prev();
+                if(input.prop("checked")) {
+                    input.prop("checked", false);
+                    input.val("0");
                 } else {
-                    $("input#appbundle_relationship_statut").prop("checked", true);
-                    $("input#appbundle_relationship_statut").val("1");
+                    input.prop("checked", true);
+                    input.val("1");
+                }
+            });
+            
+            // Special rule for meeting row: to hide kc and fc if unchecked
+            $("#appbundle_relationship_meeting_row").on("click", "#appbundle_relationship_meeting_button", function(){                
+                if($("input#appbundle_relationship_meeting").prop("checked")) {
+                    $("input#appbundle_relationship_meeting").prop("checked", false);
+                    $("input#appbundle_relationship_meeting").val("0");
+                    
+                    $("#appbundle_relationship_kc_row").parent().hide("slow");
+                    $("#appbundle_relationship_fc_row").parent().hide("slow");                    
+                } else {
+                    $("input#appbundle_relationship_meeting").prop("checked", true);
+                    $("input#appbundle_relationship_meeting").val("1");
+                    
+                    $("#appbundle_relationship_kc_row").parent().show("slow");
+                    $("#appbundle_relationship_fc_row").parent().show("slow");
                 }
             });
         });

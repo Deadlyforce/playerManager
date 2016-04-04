@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Relationship
@@ -21,12 +22,12 @@ class Relationship
     private $prospect;
     
     /**
-     * @var Categorie
+     * @var RelationshipRank
      * 
-     * @ORM\ManyToOne(targetEntity="Categorie") 
-     * @ORM\JoinColumn(name="categorie_id", referencedColumnName="id")
+     * @ORM\ManyToOne(targetEntity="RelationshipRank") 
+     * @ORM\JoinColumn(name="relationship_rank_id", referencedColumnName="id")
      */
-    private $categorie;
+    private $relationshipRank;
     
     /**
      * @var integer
@@ -38,32 +39,39 @@ class Relationship
     private $id;
 
     /**
-     * @var string
+     * @var boolean
      *
-     * @ORM\Column(name="statut", type="boolean")
+     * @ORM\Column(name="status", type="boolean")
      */
-    private $statut;
+    private $status;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="meeting", type="boolean")
+     */
+    private $meeting;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="rencontre", type="integer")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 100,
+     *      minMessage = "Unauthorized number",
+     *      maxMessage = "Unauthorized number"
+     * )
+     * 
+     * @ORM\Column(name="meeting_count", type="integer", nullable=true)
      */
-    private $rencontre;
+    private $meetingCount;
 
     /**
-     * @var integer
+     * @var boolean
      *
-     * @ORM\Column(name="rencontre_count", type="integer", nullable=true)
+     * @ORM\Column(name="numclosed", type="boolean")
      */
-    private $rencontreCount;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="numero", type="boolean")
-     */
-    private $numero;
+    private $numclosed;
 
     /**
      * @var integer
@@ -96,9 +104,9 @@ class Relationship
     /**
      * @var text
      *
-     * @ORM\Column(name="commentaire", type="text", nullable=true)
+     * @ORM\Column(name="about", type="text", nullable=true)
      */
-    private $commentaire;
+    private $about;
 
 
     /**
@@ -112,94 +120,94 @@ class Relationship
     }
 
     /**
-     * Set statut
+     * Set status
      *
-     * @param string $statut
+     * @param boolean $status
      * @return Relationship
      */
-    public function setStatut($statut)
+    public function setStatus($status)
     {
-        $this->statut = $statut;
+        $this->status = $status;
 
         return $this;
     }
 
     /**
-     * Get statut
+     * Get status
      *
-     * @return string 
+     * @return boolean 
      */
-    public function getStatut()
+    public function getStatus()
     {
-        return $this->statut;
+        return $this->status;
     }
 
     /**
-     * Set rencontre
+     * Set meeting
      *
-     * @param integer $rencontre
+     * @param boolean $meeting
      * @return Relationship
      */
-    public function setRencontre($rencontre)
+    public function setMeeting($meeting)
     {
-        $this->rencontre = $rencontre;
+        $this->meeting = $meeting;
 
         return $this;
     }
 
     /**
-     * Get rencontre
+     * Get meeting
      *
-     * @return integer 
+     * @return boolean 
      */
-    public function getRencontre()
+    public function getMeeting()
     {
-        return $this->rencontre;
+        return $this->meeting;
     }
     
     /**
-     * Set rencontreCount
+     * Set meetingCount
      *
-     * @param integer $rencontreCount
+     * @param integer $meetingCount
      * @return Relationship
      */
-    public function setRencontreCount($rencontreCount)
+    public function setMeetingCount($meetingCount)
     {
-        $this->rencontreCount = $rencontreCount;
+        $this->meetingCount = $meetingCount;
 
         return $this;
     }
 
     /**
-     * Get rencontreCount
+     * Get meetingCount
      *
      * @return integer 
      */
-    public function getRencontreCount()
+    public function getMeetingCount()
     {
-        return $this->rencontreCount;
+        return $this->meetingCount;
     }
 
     /**
-     * Set numero
+     * Set numclosed
      *
-     * @param integer $numero
+     * @param boolean $numclosed
      * @return Relationship
      */
-    public function setNumero($numero)
+    public function setNumclosed($numclosed)
     {
-        $this->numero = $numero;
+        $this->numclosed = $numclosed;
         return $this;
     }
 
     /**
-     * Get numero
+     * Get numclosed
      *
-     * @return integer 
+     * @return boolean 
      */
-    public function getNumero()
+    public function getNumclosed()
     {
-        return $this->numero;
+        return $this->numclosed;
     }
 
     /**
@@ -247,25 +255,25 @@ class Relationship
     }
     
     /**
-     * Set Categorie
+     * Set RelationshipRank
      *
-     * @param string $categorie
-     * @return Relationship
+     * @param string $relationshipRank
+     * @return RelationshipRank
      */
-    public function setCategorie($categorie)
+    public function setRelationshipRank($relationshipRank)
     {
-        $this->categorie = $categorie;
+        $this->relationshipRank = $relationshipRank;
         return $this;
     }
 
     /**
-     * Get Categorie
+     * Get RelationshipRank
      *
      * @return string 
      */
-    public function getCategorie()
+    public function getRelationshipRank()
     {
-        return $this->categorie;
+        return $this->relationshipRank;
     }
 
     /**
@@ -315,26 +323,26 @@ class Relationship
     }
 
     /**
-     * Set commentaire
+     * Set about
      *
-     * @param string $commentaire
+     * @param string $about
      * @return Relationship
      */
-    public function setCommentaire($commentaire)
+    public function setAbout($about)
     {
-        $this->commentaire = $commentaire;
+        $this->commentaire = $about;
 
         return $this;
     }
 
     /**
-     * Get commentaire
+     * Get about
      *
      * @return string 
      */
-    public function getCommentaire()
+    public function getAbout()
     {
-        return $this->commentaire;
+        return $this->about;
     }
     
     /*
