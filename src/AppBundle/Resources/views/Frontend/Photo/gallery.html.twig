@@ -39,6 +39,9 @@
                                 <div class="prototype hidden">
                                     {{ form_errors(photo.file) }}
                                     {{ form_widget(photo.file) }} 
+{#                                    {{ form_rest(photo) }}#}
+                                    {#{{ form_errors(photo) }}
+                                    {{ form_widget(photo) }} #}
                                 </div>
                             </div>                                           
                         </li>
@@ -77,6 +80,7 @@
         
     <script type="text/javascript">
         $(document).ready(function(){
+            
             // Only one checkbox ticked at a time when selecting primary photo
             $("input[type='checkbox']").on("change", function(){
                 $("input[type='checkbox']").not(this).prop("checked", false);
@@ -110,14 +114,14 @@
                 e.preventDefault();
 
                 var liId = $(this).closest('li').attr("id");
-                var form = $(this).next().children();                
+                var inputFile = $(this).next().children();                
                 
                 $("<div id="+liId+"></div>").appendTo("#photoFormModal .modal-body");
-                $(form).appendTo("#photoFormModal .modal-body");
-                
-                $(form).find('input').on('change', function () {
+                $(inputFile).appendTo("#photoFormModal .modal-body");               
+;                
+                $(inputFile).on('change', function () {
                     var files = $(this)[0].files;
-                    
+                   
                     if (files.length > 0) {
                         // On part du principe qu'il n'y qu'un seul fichier (pas d'attribut "multiple")
                         var 
@@ -125,10 +129,7 @@
                             image_preview = $('#image_preview');                        
 
                         // Ici on injecte les informations recoltées sur le fichier pour l'utilisateur
-{#                        $image_preview.find('.thumbnail').removeClass('hidden');#}
                         image_preview.find('img').attr('src', window.URL.createObjectURL(file));
-{#                        $image_preview.find('h4').html(file.name);#}
-{#                        $image_preview.find('.caption p:first').html(file.size +' bytes');#}
                     }
                 });
 
@@ -138,9 +139,9 @@
             // On modal close :
             $('#photoFormModal').on('hidden.bs.modal', function () {
                 var liId = $("#image_preview").next().attr("id");
-                var form = $("#photoFormModal div[id^='appbundle_prospect_photos_']");
+                var inputFile = $("#photoFormModal").find("input");
                 // Put the form back in its place
-                $(form).appendTo($("#"+liId+" .prototype")); 
+                $(inputFile).appendTo($("#"+liId+" .prototype")); 
                 
                 // Update page preview
                 var src = $('#image_preview').find('img').attr('src');

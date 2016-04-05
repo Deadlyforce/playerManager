@@ -28,7 +28,7 @@ class RelationshipType extends AbstractType
             ))
             ->add('meeting', CheckboxType::class, array(
                 'label' => 'Have you met ?',
-                'required' => true
+                'required' => false
             ))
             ->add('meetingCount', IntegerType::class, array(
                 'required' => false,

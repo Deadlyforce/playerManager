@@ -124,7 +124,7 @@ class PhotoController extends Controller
             $filesize = filesize($photo->getPath());        
             $photo->setSize($filesize);
 
-            $em->flush();
+            $em->flush();                        
 
             return $this->redirectToRoute('gallery', array('prospect_id' => $photo->getProspect()->getId()));
         } else {

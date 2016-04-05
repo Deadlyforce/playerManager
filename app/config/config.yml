@@ -91,3 +91,15 @@ fos_user:
 # Gregwar Captcha Bundle
 gregwar_captcha: 
     width: 200
+    
+liip_imagine:
+    resolvers:
+        default:
+            web_path: ~
+    
+    filter_sets:
+        cache: ~
+        thumb_prospect_index:
+            quality: 75
+            filters:
+                thumbnail: { size:[80,80], mode: outbound }

@@ -90,8 +90,11 @@
         
     <script type="text/javascript">   
         // css class container-data height
-        // Fired before "document ready" to avoid white flash (height adapting)
-        document.getElementsByClassName("container-data")[0].style.height = (document.body.offsetHeight - 128 -65) + "px";
+        // Fired before "document ready" to avoid white flash (height adapting) 
+        // on pages that have .container-data class
+        if (typeof document.getElementsByClassName("container-data")[0] !== 'undefined') {
+            document.getElementsByClassName("container-data")[0].style.height = (document.body.offsetHeight - 128 -65) + "px";
+        }
         
         $(document).ready(function(){
             // css class container-data height

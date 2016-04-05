@@ -27,7 +27,7 @@ class ProspectController extends Controller
      * @Template("AppBundle:ajax.html.twig")
      */
     public function ajax_newFormNewAction()
-    {
+    {       
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
@@ -48,7 +48,7 @@ class ProspectController extends Controller
     /**
      * Returns a form new prospect
      * 
-     * @Route("{id}/ajax_delete", name="ajax_delete_prospect")
+     * @Route("{id}/ajax_delete", name="ajax_delete_prospect", options={"expose"=true})
      * @Method({"POST"})
      * @Template("AppBundle:ajax.html.twig")
      */

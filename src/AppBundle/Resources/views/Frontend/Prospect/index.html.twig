@@ -101,12 +101,7 @@
         <div class="loader_standard">
             <p>Chargement...</p>
             <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />
-        </div>             
-
-
-        {# WIDGETS #}
-{#        <div class="hidden" id="path_form_new_prospect" data-path="{{ path("ajax_new_prospect_form") }}"></div>#}
-        <div class="hidden" id="path_delete_prospect" data-path="{{ path("ajax_delete_prospect", {'id': 'id'}) }}"></div>
+        </div>
     </div> 
     {% block javascript %}
         {% javascripts 
@@ -161,8 +156,6 @@
                 });                
                 
                 var url = Routing.generate('ajax_new_prospect_form');
-               
-{#                var url = $("#path_form_new_prospect").data("path");#}
                 
                 $.get(url, function(response){                    
                     
@@ -201,10 +194,8 @@
              * @returns {undefined}
              */
             function ajaxDeleteProspect(prospect_id, csrf_token)
-            {               
-                var url = $("#path_delete_prospect").data("path");
-                url = url.replace('id', prospect_id);
-
+            {                
+                var url = Routing.generate('ajax_new_prospect_form', {'id': prospect_id});                
                 var data = {'csrf_token': csrf_token};
 
                 $.post(url, data, function(response){
@@ -218,7 +209,6 @@
 
                 });
             }
-
             
         });
     </script>
