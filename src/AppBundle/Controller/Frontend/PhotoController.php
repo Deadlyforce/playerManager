@@ -24,7 +24,7 @@ class PhotoController extends Controller
      * 
      * @Route("/gallery/{prospect_id}", name="gallery")
      * @param int $prospect_id
-     * @Template("AppBundle:Frontend/Photo:gallery.html.twig")
+     * @Template(":Frontend/Photo:gallery.html.twig")
      */
     public function galleryAction($prospect_id)
     {

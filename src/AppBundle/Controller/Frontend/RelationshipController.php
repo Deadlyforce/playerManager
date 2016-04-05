@@ -23,7 +23,7 @@ class RelationshipController extends Controller
      *
      * @Route("/", name="relationship")
      * @Method("GET")
-     * @Template("AppBundle:Frontend/Relationship:index.html.twig")
+     * @Template(":Frontend/Relationship:index.html.twig")
      */
     public function indexAction()
     {
@@ -46,7 +46,7 @@ class RelationshipController extends Controller
      *
      * @Route("/{id}/show", name="relationship_show")
      * @Method("GET")
-     * @Template("AppBundle:Frontend/Relationship:show.html.twig")
+     * @Template(":Frontend/Relationship:show.html.twig")
      */
     public function showAction($id)
     {
@@ -81,7 +81,7 @@ class RelationshipController extends Controller
      *
      * @Route("/{id}/edit", name="relationship_edit")
      * @Method("GET")
-     * @Template("AppBundle:Frontend/Relationship:edit.html.twig")
+     * @Template(":Frontend/Relationship:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -134,7 +134,7 @@ class RelationshipController extends Controller
      *
      * @Route("/{id}", name="relationship_update")
      * @Method("PUT")
-     * @Template("AppBundle:Frontend/Relationship:edit.html.twig")
+     * @Template(":Frontend/Relationship:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {

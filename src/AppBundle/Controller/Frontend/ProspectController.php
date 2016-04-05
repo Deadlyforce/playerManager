@@ -94,7 +94,7 @@ class ProspectController extends Controller
      *
      * @Route("/", name="prospect")
      * @Method("GET")
-     * @Template("AppBundle:Frontend/Prospect:index.html.twig")
+     * @Template(":Frontend/Prospect:index.html.twig")
      */
     public function indexAction()
     {
@@ -124,7 +124,7 @@ class ProspectController extends Controller
      *
      * @Route("/", name="prospect_create")
      * @Method("POST")
-     * @Template("AppBundle:Frontend/Prospect:new.html.twig")
+     * @Template(":Frontend/Prospect:new.html.twig")
      */
     public function createAction(Request $request)
     {
@@ -191,7 +191,7 @@ class ProspectController extends Controller
      *
      * @Route("/new", name="prospect_new")
      * @Method("GET")
-     * @Template("AppBundle:Frontend/Prospect:new.html.twig")
+     * @Template(":Frontend/Prospect:new.html.twig")
      */
     public function newAction()
     {
@@ -220,7 +220,7 @@ class ProspectController extends Controller
      *
      * @Route("/{id}", name="prospect_show")
      * @Method("GET")
-     * @Template("AppBundle:Frontend/Prospect:show.html.twig")
+     * @Template(":Frontend/Prospect:show.html.twig")
      */
     public function showAction($id)
     {
@@ -254,7 +254,7 @@ class ProspectController extends Controller
      *
      * @Route("/{id}/edit", name="prospect_edit")
      * @Method("GET")
-     * @Template("AppBundle:Frontend/Prospect:edit.html.twig")
+     * @Template(":Frontend/Prospect:edit.html.twig")
      */
     public function editAction($id)
     {
@@ -307,7 +307,7 @@ class ProspectController extends Controller
      *
      * @Route("/{id}", name="prospect_update")
      * @Method("PUT")
-     * @Template("AppBundle:Frontend/Prospect:edit.html.twig")
+     * @Template(":Frontend/Prospect:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
