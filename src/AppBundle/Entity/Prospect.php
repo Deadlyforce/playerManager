@@ -25,7 +25,7 @@ class Prospect
         $this->echanges = new ArrayCollection();
         $this->rencontres = new ArrayCollection();
         $this->photos = new ArrayCollection();
-        $this->relationship = null;
+//        $this->relationship = null;
     }   
    
     /**

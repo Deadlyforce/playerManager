@@ -7,9 +7,9 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -31,10 +31,7 @@ class ProspectType extends AbstractType
                 ), 
                 'attr' => array(
                     'class' => 'form-input'
-                ),
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
+                )                
             ))
             ->add('prenom', TextType::class, array(
                 'required' => TRUE, 
@@ -44,9 +41,6 @@ class ProspectType extends AbstractType
                 ), 
                 'attr' => array(
                     'class' => 'form-input'
-                ),
-                'row_attr' => array(
-                    'class' => 'form_row'
                 )
             ))
             ->add('nom', TextType::class, array(
@@ -57,26 +51,17 @@ class ProspectType extends AbstractType
                 ), 
                 'attr' => array(
                     'class' => 'form-input'
-                ),
-                'row_attr' => array(
-                    'class' => 'form_row'
                 )
             ))
             ->add('age', ChoiceType::class, array(
                 'choices' => $this->getAgeBracket(),
-                'choices_as_values' => true,
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
+                'choices_as_values' => true                
             ))
             ->add('ville', TextType::class, array(
                 'required' => FALSE, 
                 'attr' => array(
                     'placeholder' => 'Paris',
                     'class' => 'form-input-ville'
-                ),
-                'row_attr' => array(
-                    'class' => 'form_row'
                 )
             ))
             ->add('arrondissement', ChoiceType::class, array(
@@ -85,28 +70,19 @@ class ProspectType extends AbstractType
                 'choices_as_values' => true,
                 'attr' => array(                    
                     'class' => 'form-input'
-                    ),
-                'row_attr' => array(
-                    'class' => 'form_row row_arrondissement'
                 )
             ))
             ->add('pays', TextType::class, array(
                 'required' => false, 
                 'attr' => array(
                     'class' => 'form-input'                    
-                ),
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
+                )                
             ))
             ->add('numero', TextType::class, array(
                 'required' => false,
                 'label' => 'Tel portable',
                 'attr' => array(
                     'class' => 'form-input'
-                ),
-                'row_attr' => array(
-                    'class' => 'form_row'
                 )
             ))
             ->add('numeroDom', TextType::class, array(
@@ -114,9 +90,6 @@ class ProspectType extends AbstractType
                 'label' => 'Tel Domicile',
                 'attr' => array(
                     'class' => 'form-input'
-                ),
-                'row_attr' => array(
-                    'class' => 'form_row'
                 )
             ))
             ->add('numeroEtranger', TextType::class, array(
@@ -124,16 +97,10 @@ class ProspectType extends AbstractType
                 'label' => 'Tel étranger',
                 'attr' => array(
                     'class' => 'form-input'
-                ),
-                'row_attr' => array(
-                    'class' => 'form_row'
                 )
             ))
             ->add('source', EntityType::class, array(
-                'class' => 'AppBundle:Source',
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
+                'class' => 'AppBundle:Source'                
             ))
             ->add('dateCreation', DateTimeType::class, array(
 		'required' => false,
@@ -142,28 +109,22 @@ class ProspectType extends AbstractType
 		'view_timezone' => 'Europe/Paris',
 		'input' => 'datetime',
 		'widget' => 'single_text',
-		'format' => 'dd-MM-yyyy',
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
+		'format' => 'dd-MM-yyyy'                
             ))
             ->add('photos', CollectionType::class, array(
                 'label' => false,
-                'entry_type' => new PhotoType(),
+                'entry_type' => PhotoType::class,
                 'entry_options' => array(
-                    'required' => false,
-                    'row_attr' => array(
-                        'class' => 'form_row'
-                    )
+                    'required' => false                    
                 ),
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false
             ))            
-            ->add('relationship', new RelationshipType(), array(
-                
+            ->add('relationship', RelationshipType::class, array(
+
             )) 
-            ->add('submit', 'submit', array(
+            ->add('submit', SubmitType::class, array(
                 'label' => 'Save changes'
             ))
         ;

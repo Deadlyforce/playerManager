@@ -13,6 +13,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Relationship
 {
+    public function __construct() 
+    {
+        $this->meetingCount = 0;
+    }
+    
     /**     
      * @var Prospect 
      * 
@@ -257,7 +262,7 @@ class Relationship
     /**
      * Set RelationshipRank
      *
-     * @param string $relationshipRank
+     * @param RelationshipRank $relationshipRank
      * @return RelationshipRank
      */
     public function setRelationshipRank($relationshipRank)
@@ -269,7 +274,7 @@ class Relationship
     /**
      * Get RelationshipRank
      *
-     * @return string 
+     * @return RelationshipRank 
      */
     public function getRelationshipRank()
     {
@@ -325,7 +330,7 @@ class Relationship
     /**
      * Set about
      *
-     * @param string $about
+     * @param text $about
      * @return Relationship
      */
     public function setAbout($about)
@@ -338,7 +343,7 @@ class Relationship
     /**
      * Get about
      *
-     * @return string 
+     * @return text 
      */
     public function getAbout()
     {
@@ -375,6 +380,6 @@ class Relationship
      */
     public function __toString()
     {
-        return $this->getRelTypeString($this->getRelType());
+        return $this->getProspect()->getPrenom();
     }
 }

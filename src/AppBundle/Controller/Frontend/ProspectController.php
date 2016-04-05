@@ -140,19 +140,23 @@ class ProspectController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $photos = $prospect->getPhotos();
         
-        $prospect->setUser($user);
+        $prospect->setUser($user);        
        
         if ($form->isSubmitted() && $form->isValid()) {            
             
             $em = $this->getDoctrine()->getManager();
+            
+            $prospect->getRelationship()->setMeetingCount(0); // Needed, not nullable
+            
             $em->persist($prospect);  
        
-            // STOF UPLOADABLE
-            $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
-
-            foreach($photos as $photo){
-                $uploadableManager->markEntityToUpload($photo, $photo->getFile());
-            }           
+            // Removed at prospect creation => done in gallery
+            // STOF UPLOADABLE 
+//            $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+//
+//            foreach($photos as $photo){
+//                $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+//            }           
            
             $em->flush();                  
             
@@ -177,13 +181,6 @@ class ProspectController extends Controller
         $form = $this->createForm(ProspectType::class, $entity, array(
             'action' => $this->generateUrl('prospect_create'),
             'method' => 'POST',
-        ));
-
-        $form->add('submit', 'submit', array(
-            'label' => 'Créer ce contact',
-            'attr' => array(
-                'class' => 'btn btn-default'
-            )
         ));
 
         return $form;

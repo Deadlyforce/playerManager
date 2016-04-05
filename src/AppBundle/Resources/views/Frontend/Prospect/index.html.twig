@@ -178,7 +178,7 @@
              */
             function ajaxDeleteProspect(prospect_id, csrf_token)
             {                
-                var url = Routing.generate('ajax_new_prospect_form', {'id': prospect_id});                
+                var url = Routing.generate('ajax_delete_prospect', {'id': prospect_id});                
                 var data = {'csrf_token': csrf_token};
 
                 $.post(url, data, function(response){

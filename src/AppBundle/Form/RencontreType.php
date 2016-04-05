@@ -24,34 +24,19 @@ class RencontreType extends AbstractType
                 'label' => 'Date',
                 'input' => 'datetime',
                 'widget' => 'single_text',
-                'date_format' => 'dd MM yyyy',
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
+                'date_format' => 'dd MM yyyy'                
             ))
             ->add('lieu', TextType::class, array(
-                'label' => 'Lieu',
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
+                'label' => 'Lieu'
             ))
             ->add('duree', IntegerType::class, array(
-                'label' => 'Durée',
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
+                'label' => 'Durée'                
             ))
             ->add('depenses_total', IntegerType::class, array(
-                'label' => 'Total dépenses',
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
+                'label' => 'Total dépenses'                
             ))
             ->add('changement_lieu', CheckboxType::class, array(
-                'label' => 'Changement de lieu',
-                'row_attr' => array(
-                    'class' => 'form_row'
-                )
+                'label' => 'Changement de lieu'                
             ))
             ->add('liste_lieux')
         ;

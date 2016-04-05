@@ -7,7 +7,7 @@ use FOS\UserBundle\FOSUserEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\SecurityContextInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 /**
  * Redirects the user on "home_index" if trying to register while already authenticated
@@ -17,12 +17,12 @@ use Symfony\Component\Security\Core\SecurityContextInterface;
 class FOSUserSubscriber implements EventSubscriberInterface
 {
     protected $router;
-    protected $securityContext;
+    protected $authorizationChecker;
     
-    public function __construct(UrlGeneratorInterface $router, SecurityContextInterface $securityContext) 
+    public function __construct(UrlGeneratorInterface $router, AuthorizationCheckerInterface $authorizationChecker) 
     {
         $this->router = $router;
-        $this->securityContext = $securityContext;
+        $this->authorizationChecker = $authorizationChecker;
     }
     
     public static function getSubscribedEvents()
@@ -34,7 +34,7 @@ class FOSUserSubscriber implements EventSubscriberInterface
     
     public function forwardToRouteIfUser(GetResponseUserEvent $event)
     {
-        if (!$this->securityContext->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->$authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return;
         }
 

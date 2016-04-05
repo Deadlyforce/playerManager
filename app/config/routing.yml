@@ -14,5 +14,5 @@ _liip_imagine:
 
 # error-prevention
 homepage:
-    pattern: /
+    path: /
 

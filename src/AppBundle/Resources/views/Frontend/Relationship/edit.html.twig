@@ -66,8 +66,10 @@
                     {{ form_end(edit_form) }}
 
                     <a href="{{ path('relationship') }}">Back to the list</a>
-
-                    {{ form(delete_form) }}
+                    
+                    {{ form_start(delete_form) }}
+                        <input class="btn btn-default" type="submit" value="Delete">
+                    {{ form_end(delete_form) }}
                 </div>
             </section>           
         </div>

@@ -1,4 +1,4 @@
-services:
+services:    
     # Captcha form override
     app.registration.form.type:
         class: AppBundle\Form\RegistrationType
@@ -10,16 +10,22 @@ services:
     app_user.subscriber.fos_user:
         class: AppBundle\EventSubscriber\FOSUserSubscriber
         arguments:
-            - @router
-            - @security.context
+            - "@router"
+            - "@security.authorization_checker"
         tags:
             - { name: kernel.event_subscriber }
             
     app.cachephoto_listener:
         class: AppBundle\EventListener\CachePhotoListener
         arguments: 
-            - @liip_imagine.cache.manager
-            - @request_stack
+            - "@liip_imagine.cache.manager"
+            - "@request_stack"
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: preRemove }
+
+    prospect_manager:
+        class: AppBundle\DependencyInjection\Prospect\ProspectManager
+        arguments: 
+            - '@doctrine.orm.entity_manager'
+            - '@security.token_storage'

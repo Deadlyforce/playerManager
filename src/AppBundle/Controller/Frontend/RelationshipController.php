@@ -121,12 +121,10 @@ class RelationshipController extends Controller
     */
     private function createEditForm(Relationship $entity)
     {
-        $form = $this->createForm(new RelationshipType(), $entity, array(
+        $form = $this->createForm(RelationshipType::class, $entity, array(
             'action' => $this->generateUrl('relationship_update', array('id' => $entity->getId())),
             'method' => 'PUT',
-        ));
-
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        ));       
 
         return $form;
     }
@@ -223,7 +221,7 @@ class RelationshipController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('relationship_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+//            ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()
         ;
     }
