@@ -62,7 +62,7 @@ class Relationship
      *      maxMessage = "Unauthorized number"
      * )
      * 
-     * @ORM\Column(name="meeting_count", type="integer", nullable=true)
+     * @ORM\Column(name="meeting_count", type="integer", nullable=false)
      */
     private $meetingCount;
 

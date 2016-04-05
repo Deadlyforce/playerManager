@@ -24,8 +24,7 @@ class CachePhotoListener
     // Case : update photo (crop or different photo)
     public function postUpdate(LifecycleEventArgs $args)
     {
-        $entity = $args->getEntity();
-        $filter = 'thumb_prospect_index';
+        $entity = $args->getEntity();        
         
         if ($entity instanceof Photo) {
             // Remove all the cached images for that user

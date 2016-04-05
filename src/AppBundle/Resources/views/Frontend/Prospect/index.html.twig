@@ -1,5 +1,5 @@
 {% extends '::base.html.twig' %}
-{% import "AppBundle:Frontend/Macros:photoDisplay.html.twig" as photoDisplay %}
+{% import "AppBundle:Frontend/Macros/Prospect:photoDisplayIndex.html.twig" as photoDisplayIndex %}
 
 {% block title %}Prospects{% endblock %}
 
@@ -39,25 +39,8 @@
                     <td>{{ prospect.ville }}</td>
                     <td>{{ prospect.pays }}</td>
                     <td>{{ prospect.source }}</td>
-                    <td>  
-                        
-                        {{ photoDisplay.primaryPhotoOrLast(prospect.photos) }}
-                       
-                        {#{% set primaryPhoto = null %} 
-                        {% for photo in prospect.photos if photo.selected == true %}                               
-                            {% set primaryPhoto = photo %}                           
-                        {% endfor %}
-                        
-                        {% if primaryPhoto is not null %}
-                            <img class="img-responsive" src="{{ asset(primaryPhoto.path) }}" alt="Photo" />
-                        {% else %}                      
-                            {% if prospect.photos|last %}
-                                {% set photo = prospect.photos|last %}
-                                <img class="img-responsive" src="{{ asset(photo.path) }}" alt="Photo" />                        
-                            {% else %}
-                                <img class="img-responsive" src="{{ asset('bundles/app/images/prospect_no_photo.jpg') }}" alt="No photo" />
-                            {% endif %}
-                        {% endif %}#}                       
+                    <td>                          
+                        {{ photoDisplayIndex.primaryPhotoOrLast(prospect.photos) }}                                              
                     </td>
                     <td>
                         {% if prospect.dateCreation %}{{ prospect.dateCreation|date('d-m-Y') }}{% endif %}
