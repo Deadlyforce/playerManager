@@ -63,7 +63,9 @@
                 </table>  
 
                 <a class="btn btn-default" href="{{ path('prospect_edit', { 'id': prospect.id }) }}">Edit</a><br/>
-                {{ form(delete_form) }}
+                {{ form_start(delete_form) }}
+                        <input class="btn btn-default" type="submit" value="Delete">
+                {{ form_end(delete_form) }}
             </div>
             <div class="panel-footer">
                 {% if prospect.relationship %}

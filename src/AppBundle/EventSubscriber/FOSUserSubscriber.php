@@ -34,7 +34,7 @@ class FOSUserSubscriber implements EventSubscriberInterface
     
     public function forwardToRouteIfUser(GetResponseUserEvent $event)
     {
-        if (!$this->$authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->authorizationChecker->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return;
         }
 

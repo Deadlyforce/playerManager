@@ -444,13 +444,7 @@ class ProspectController extends Controller
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('prospect_delete', array('id' => $id)))
-            ->setMethod('DELETE')
-            ->add('submit', 'submit', array(
-                'label' => 'Supprimer',
-                'attr' => array(
-                    'class' => 'btn btn-default'
-                )
-            ))
+            ->setMethod('DELETE')            
             ->getForm()
         ;
     } 

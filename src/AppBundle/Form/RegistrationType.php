@@ -4,6 +4,7 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 /**
  * Description of RegistrationType
@@ -16,13 +17,16 @@ class RegistrationType extends BaseType
     {
         parent::buildForm($builder, $options);
         
-        $builder->add('captcha', 'captcha', array(
+        $builder->add('captcha', CaptchaType::class, array(
             'label' => 'Visual confirmation '
         ));
     }
-    
-    public function getName() 
+            
+    /**
+     * @return string
+     */
+    public function getBlockPrefix()
     {
         return 'appbundle_user_registration';
-    }
+    }    
 }

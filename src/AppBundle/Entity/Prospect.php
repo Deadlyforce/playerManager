@@ -556,33 +556,6 @@ class Prospect
     }
     
     /**
-     * Get photo_principale
-     *
-     * @return string 
-     */
-//    public function getPhotoPrincipale()
-//    {
-//        if($this->getPhoto() !== null){
-//            return $this->getPhoto()->getPath();
-//        }else{
-//            return null;
-//        }        
-//    }
-    
-    /**
-     * Get web path to a photo principale.
-     * 
-     * @return null|string
-     *  Relative path.
-     */
-//    public function getPhotoPrincipaleWeb()
-//    {
-//        return NULL === $this->getPhotoPrincipale()
-//                ? NULL
-//                : $this->getUploadPath() . '/' . $this->getPhotoPrincipale();
-//    }
-    
-    /**
      * @ORM\PostRemove
      */
     public function removePhotoUploads()

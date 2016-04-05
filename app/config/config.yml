@@ -86,7 +86,7 @@ fos_user:
     # Form register is overridden by my form (as a service) with captcha
     registration:
         form:
-            type: appbundle_user_registration
+            type: AppBundle\Form\RegistrationType
     
 # Gregwar Captcha Bundle
 gregwar_captcha: 
