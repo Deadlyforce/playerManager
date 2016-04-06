@@ -1,73 +1,82 @@
 {% extends '::base.html.twig' %}
+{% import ":Frontend/Macros:photoDisplay.html.twig" as photoDisplay %}
 {% block title %}Relationship{% endblock %}
 
 {% block body -%}
-    <h1>Relationship</h1>
+    <div class="container-fluid container-data">
+        <div class="container" id="container-relationship">
+            <section class="page-title">
+                <h1>Relationship details</h1>
+            </section>
+            <div class="page-title-underline"></div>            
+            
+            <aside class="section-aside-relationship">
+                {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
+            </aside>
+            <section class="section-content">
+                <h3>{{ relationship.prospect.firstname }}</h3>
+                
+                <div class="page-content">
+                    <table class="table table-responsive" id="table-relationship-show">
+                        <tbody>                        
+                            <tr>
+                                <th>Start Date</th>
+                                <td>{% if relationship.startDate %}{{ relationship.startDate|date('d-m-Y') }}{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th>Status</th>
+                                <td>{% if relationship.status %}On{% else %}Off{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th>Meeting</th>
+                                <td>{% if relationship.meeting %}Oui{% else %}Non{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th>Meeting count</th>
+                                <td>{{ relationship.meetingCount }}</td>
+                            </tr>
+                            <tr>
+                                <th>Kc</th>
+                                <td>{% if relationship.kc %}Oui{% else %}Non{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th>Fc</th>
+                                <td>{% if relationship.fc %}Oui{% else %}Non{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th>Type</th>
+                                <td>{{ relationship.relationshipRank }}</td>
+                            </tr>
+                            <tr>
+                                <th>Distance</th>
+                                <td>{% if relationship.distance %}Oui{% else %}Non{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th>Flake</th>
+                                <td>{% if relationship.flake %}Oui{% else %}Non{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th>About</th>
+                                <td>{{ relationship.about }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
 
-    <table class="record_properties">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ relationship.id }}</td>                
-            </tr>
-            <tr>
-                <th>First Name</th>
-                <td>{% if relationship.prospect %}{{ relationship.prospect.firstname }}{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Statut</th>
-                <td>{% if relationship.status %}On{% else %}Off{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Meeting</th>
-                <td>{% if relationship.meeting %}Oui{% else %}Non{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Meeting count</th>
-                <td>{{ relationship.meetingCount }}</td>
-            </tr>
-            {#<tr>
-                <th>Numéro</th>
-                <td>{% if relationship.cellNumber %}Oui{% else %}Non{% endif %}</td>
-            </tr>#}
-            <tr>
-                <th>Kc</th>
-                <td>{% if relationship.kc %}Oui{% else %}Non{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Fc</th>
-                <td>{% if relationship.fc %}Oui{% else %}Non{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Type</th>
-                <td>{{ relationship.relationshipRank }}</td>
-            </tr>
-            <tr>
-                <th>Distance</th>
-                <td>{% if relationship.distance %}Oui{% else %}Non{% endif %}</td>
-            </tr>
-            <tr>
-                <th>Flake</th>
-                <td>{% if relationship.flake %}Oui{% else %}Non{% endif %}</td>
-            </tr>
-            <tr>
-                <th>About</th>
-                <td>{{ relationship.about }}</td>
-            </tr>
-        </tbody>
-    </table>
-
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('relationship') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>
-        <a href="{{ path('relationship_edit', { 'id': relationship.id }) }}">
-            Edit
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+                    <ul class="record_actions">
+                        <li>
+                            <a href="{{ path('relationship') }}">
+                                Back to the list
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('relationship_edit', { 'id': relationship.id }) }}">
+                                Edit
+                            </a>
+                        </li>
+                        <li>{{ form(delete_form) }}</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+    </div>
 {% endblock %}

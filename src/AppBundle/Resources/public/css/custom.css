@@ -454,7 +454,7 @@ td.actions a{
 
 .page-content{
     margin-top: 40px;
-    margin-bottom: 50px;        
+    font-family: "open_sansregular", sans-serif;        
 }
 
 /************************************ HOME *****************************************/
@@ -623,18 +623,34 @@ ul.record_actions{
     color: #e2e4f3;
 }
 
-.section-aside{
+.section-aside-relationship{
     display: inline-block;
-    width: 25%;
+/*    width: 25%;*/
     vertical-align: top;
     padding: 0px 40px 0px 0px;
 }
-#section-content-relationship-edit{
-    display: inline-block;
-    height: 680px;
+.section-aside-relationship img{
+    width: 245px;
+}
+.section-content{
+    display: inline-block;    
     padding: 0px 40px;
     border-left: 1px solid #899BA7;
 }
+
+/********************************** SHOW **************************************/
+
+#table-relationship-show tr{   
+    border-bottom: 1px solid #283640;
+}
+#table-relationship-show th{
+    width: 200px;  
+    border-top: none;
+}
+#table-relationship-show td{      
+    border-top: none;
+}
+
 /******************************* FORM EDIT ************************************/
 
 form[name="appbundle_relationship"] > div {
@@ -645,7 +661,7 @@ form[name="appbundle_relationship"] label{
     width: 250px;
     font-weight: 200;
     font-size: 1.2em;
-    font-family: "open_sansregular", sans-serif;
+    
 }
 
 input#appbundle_relationship_startDate {
