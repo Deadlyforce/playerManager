@@ -28,7 +28,8 @@ function getDatepicker()
         dateFormat: 'dd-mm-yy', 
         showSecond: false,
         controlType: 'select',
-        oneLine: true
+        oneLine: true,
+        changeYear: true
     });
 }
 

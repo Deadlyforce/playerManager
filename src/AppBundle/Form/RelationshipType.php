@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -22,6 +23,15 @@ class RelationshipType extends AbstractType
     {
                 
         $builder
+            ->add('startDate', DateTimeType::class, array(
+		'required' => false,
+		'label' => 'Start date',
+		'model_timezone' => 'Europe/Paris',
+		'view_timezone' => 'Europe/Paris',
+		'input' => 'datetime',
+		'widget' => 'single_text',
+		'format' => 'dd-MM-yyyy'                
+            ))
             ->add('status', CheckboxType::class, array(
                 'label' => 'Relationship status',
                 'required' => false
@@ -69,7 +79,7 @@ class RelationshipType extends AbstractType
                 )
             ))
             ->add('submit', SubmitType::class, array(
-                'label' => 'Update'
+                'label' => 'Save changes'
             ))
         ;
     }

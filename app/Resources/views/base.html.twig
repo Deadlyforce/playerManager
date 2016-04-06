@@ -107,7 +107,7 @@
                 localStorage.clear();
             });
             
-            $("li").click(function () {
+            $(".navbar-nav").on("click", "li", function () {
                 var id = $(this).attr("id");
                 
                 if (id === 'fos_user_security_logout') {

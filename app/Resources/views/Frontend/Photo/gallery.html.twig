@@ -39,9 +39,6 @@
                                 <div class="prototype hidden">
                                     {{ form_errors(photo.file) }}
                                     {{ form_widget(photo.file) }} 
-{#                                    {{ form_rest(photo) }}#}
-                                    {#{{ form_errors(photo) }}
-                                    {{ form_widget(photo) }} #}
                                 </div>
                             </div>                                           
                         </li>
@@ -55,7 +52,7 @@
             </ul>       
             <div class="clearfix"></div>
             
-            {{ form_row(editForm.submit, {'attr': {'class': 'btn-submit pull-right'}}) }}
+            {{ form_row(editForm.submit, {'attr': {'class': 'btn-submit-light pull-right'}}) }}
             <div class="hidden">{{ form_rest(editForm) }}</div>
             
             {# Modal: change photo #}

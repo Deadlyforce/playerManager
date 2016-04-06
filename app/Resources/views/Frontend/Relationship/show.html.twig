@@ -11,25 +11,25 @@
                 <td>{{ relationship.id }}</td>                
             </tr>
             <tr>
-                <th>Prénom</th>
-                <td>{% if relationship.prospect %}{{ relationship.prospect.prenom }}{% endif %}</td>
+                <th>First Name</th>
+                <td>{% if relationship.prospect %}{{ relationship.prospect.firstname }}{% endif %}</td>
             </tr>
             <tr>
                 <th>Statut</th>
-                <td>{% if relationship.statut %}On{% else %}Off{% endif %}</td>
+                <td>{% if relationship.status %}On{% else %}Off{% endif %}</td>
             </tr>
             <tr>
-                <th>Rencontre</th>
-                <td>{% if relationship.rencontre %}Oui{% else %}Non{% endif %}</td>
+                <th>Meeting</th>
+                <td>{% if relationship.meeting %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
-                <th>Rencontres</th>
-                <td>{{ relationship.rencontreCount }}</td>
+                <th>Meeting count</th>
+                <td>{{ relationship.meetingCount }}</td>
             </tr>
-            <tr>
+            {#<tr>
                 <th>Numéro</th>
-                <td>{% if relationship.numero %}Oui{% else %}Non{% endif %}</td>
-            </tr>
+                <td>{% if relationship.cellNumber %}Oui{% else %}Non{% endif %}</td>
+            </tr>#}
             <tr>
                 <th>Kc</th>
                 <td>{% if relationship.kc %}Oui{% else %}Non{% endif %}</td>
@@ -40,7 +40,7 @@
             </tr>
             <tr>
                 <th>Type</th>
-                <td>{{ relationship.categorie }}</td>
+                <td>{{ relationship.relationshipRank }}</td>
             </tr>
             <tr>
                 <th>Distance</th>
@@ -51,8 +51,8 @@
                 <td>{% if relationship.flake %}Oui{% else %}Non{% endif %}</td>
             </tr>
             <tr>
-                <th>Commentaire</th>
-                <td>{{ relationship.commentaire }}</td>
+                <th>About</th>
+                <td>{{ relationship.about }}</td>
             </tr>
         </tbody>
     </table>

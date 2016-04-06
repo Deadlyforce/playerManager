@@ -51,7 +51,7 @@
 
 /******************************* FORMS ****************************************/
 
-.btn-submit{
+.btn-submit-light{
     color: #666;
     font-size: 1.2em;
     text-decoration: none;
@@ -67,7 +67,29 @@
     -webkit-transition: all .3s ease-in;
     transition: all .3s ease-in;
 }
-.btn-submit:hover{
+.btn-submit-light:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
+    background: transparent;
+}
+.btn-submit-dark{
+    color: #899BA9;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-top: 10px;
+    background-color: rgb(54, 61, 77);
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-submit-dark:hover{
     color: #f47363;
     border: 1px solid #f47363;
     background: transparent;
@@ -183,6 +205,14 @@ img[title="captcha"]{
 form[name="fos_user_security_login"] .form-control{
     box-shadow: none;
     border: 1px solid #888;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+form[name="fos_user_security_login"] .form-control:hover{    
+    border: 1px solid #f47363;
 }
 form[name="fos_user_security_login"] label{
     color: #e0e0e0; 
@@ -290,21 +320,14 @@ body {
     padding-bottom: 65px; /* Footer space */
 }
 
-.container {
-    padding-bottom: 150px;
-}
-
 .container-data {
     background-color: #202B33;
     color: #899BA9;
     height: calc(100% - 128px); /* Not working with a min-height on parent (body) - Calculated with javascript in template */
+    padding-bottom: 150px;
 }
 
 /************************ BOOTSTRAP OVERRIDES ****************************/
-
-.container{
-    padding-bottom: 0px;
-}
 
 /* FORMS */
 .form-control{
@@ -524,7 +547,7 @@ td.last-photo img{
 #modal_form_new{
     display: none;
 }
-.row_arrondissement{
+.row_parisDistrict{
     display: none;
 }
 
@@ -584,10 +607,10 @@ ul.record_actions{
     padding: 0;
 }
 
-#appbundle_prospect_dateCreation{
+#appbundle_prospect_creationDate{
    display: inline-block;
 }
-#appbundle_prospect_dateCreation_date, #appbundle_prospect_dateCreation_time{
+#appbundle_prospect_creationDate_date, #appbundle_prospect_creationDate_time{
    display: inline-block;
 }
 
@@ -597,6 +620,7 @@ ul.record_actions{
     font-family: "ralewaythin",sans-serif;
     font-size: 2.5em;
     margin-top: 0px;
+    color: #e2e4f3;
 }
 
 .section-aside{
@@ -605,9 +629,9 @@ ul.record_actions{
     vertical-align: top;
     padding: 0px 40px 0px 0px;
 }
-.section-content{
+#section-content-relationship-edit{
     display: inline-block;
-    height: 600px;
+    height: 680px;
     padding: 0px 40px;
     border-left: 1px solid #899BA7;
 }
@@ -624,10 +648,17 @@ form[name="appbundle_relationship"] label{
     font-family: "open_sansregular", sans-serif;
 }
 
+input#appbundle_relationship_startDate {
+    background-color: #202B33;
+    border: 1px solid rgb(137, 155, 142);
+    border-radius: 2px;
+    height: 25px;
+}
+
 .relationship_row{
     width: 80px;
     height: 26px;
-    background: #202B33;
+    background: #283640;
     position: relative;
     display: inline-block;
     border-radius: 50px;
@@ -674,6 +705,7 @@ form[name="appbundle_relationship"] label{
     color: #000;
     position: absolute;
     right: 10px;
+    top: 2px;
     z-index: 0;
     font: 12px/26px Arial, sans-serif;
     font-weight: bold;
@@ -684,6 +716,7 @@ form[name="appbundle_relationship"] label{
     color: #899BA7;
     position: absolute;
     left: 10px;
+    top: 2px;
     z-index: 0;
     font: 12px/26px Arial, sans-serif;
     font-weight: bold;
@@ -701,6 +734,7 @@ input#appbundle_relationship_status:checked + #appbundle_relationship_status_but
     color: #000;
     position: absolute;
     right: 10px;
+    top: 2px;
     z-index: 0;
     font: 12px/26px Arial, sans-serif;
     font-weight: bold;
@@ -711,6 +745,7 @@ input#appbundle_relationship_status:checked + #appbundle_relationship_status_but
     color: #899BA7;
     position: absolute;
     left: 10px;
+    top: 2px;
     z-index: 0;
     font: 12px/26px Arial, sans-serif;
     font-weight: bold;

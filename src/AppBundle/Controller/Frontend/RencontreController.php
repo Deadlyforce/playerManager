@@ -1,50 +1,49 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Frontend;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use AppBundle\Entity\Source;
-use AppBundle\Form\SourceType;
+use AppBundle\Entity\Rencontre;
+use AppBundle\Form\RencontreType;
 
 /**
- * Source controller.
+ * Rencontre controller.
  *
- * @Route("/source")
+ * @Route("/rencontre")
  */
-class SourceController extends Controller
+class RencontreController extends Controller
 {
 
     /**
-     * Lists all Source entities.
+     * Lists all Rencontre entities.
      *
-     * @Route("/", name="source")
+     * @Route("/", name="rencontre")
      * @Method("GET")
      * @Template()
      */
     public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
-
-        $entities = $em->getRepository('AppBundle:Source')->findAll();
+        $entities = $em->getRepository('AppBundle:Rencontre')->findAll();
 
         return array(
             'entities' => $entities,
         );
     }
     /**
-     * Creates a new Source entity.
+     * Creates a new Rencontre entity.
      *
-     * @Route("/", name="source_create")
+     * @Route("/", name="rencontre_create")
      * @Method("POST")
-     * @Template("AppBundle:Source:new.html.twig")
+     * @Template("AppBundle:Rencontre:new.html.twig")
      */
     public function createAction(Request $request)
     {
-        $entity = new Source();
+        $entity = new Rencontre();
         $form = $this->createCreateForm($entity);
         $form->handleRequest($request);
 
@@ -53,7 +52,7 @@ class SourceController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('source_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('rencontre_show', array('id' => $entity->getId())));
         }
 
         return array(
@@ -63,46 +62,52 @@ class SourceController extends Controller
     }
 
     /**
-     * Creates a form to create a Source entity.
+     * Creates a form to create a Rencontre entity.
      *
-     * @param Source $entity The entity
+     * @param Rencontre $entity The entity
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Source $entity)
+    private function createCreateForm(Rencontre $entity)
     {
-        $form = $this->createForm(new SourceType(), $entity, array(
-            'action' => $this->generateUrl('source_create'),
+        $form = $this->createForm(new RencontreType(), $entity, array(
+            'action' => $this->generateUrl('rencontre_create'),
             'method' => 'POST',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Create'));
+        $form->add('submit', 'submit', array('label' => 'Enregistrer'));
 
         return $form;
     }
 
     /**
-     * Displays a form to create a new Source entity.
+     * Displays a form to create a new Rencontre entity.
      *
-     * @Route("/new", name="source_new")
+     * @Route("/new/{prospect_id}", name="rencontre_new")
+     * @param int $prospect_id Prospect id
      * @Method("GET")
      * @Template()
      */
-    public function newAction()
+    public function newAction($prospect_id)
     {
-        $entity = new Source();
-        $form   = $this->createCreateForm($entity);
+        $rencontre = new Rencontre();
+        
+        $em = $this->getDoctrine()->getManager();
+        $prospect = $em->getRepository("AppBundle:Prospect")->find($prospect_id);
+        $rencontre->setProspect($prospect);
+        
+        $form = $this->createCreateForm($rencontre);
 
         return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
+            'rencontre' => $rencontre,
+            'form' => $form->createView(),
         );
     }
 
     /**
-     * Finds and displays a Source entity.
+     * Finds and displays a Rencontre entity.
      *
-     * @Route("/{id}", name="source_show")
+     * @Route("/{id}", name="rencontre_show")
      * @Method("GET")
      * @Template()
      */
@@ -110,10 +115,10 @@ class SourceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Source')->find($id);
+        $entity = $em->getRepository('AppBundle:Rencontre')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Source entity.');
+            throw $this->createNotFoundException('Unable to find Rencontre entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -125,9 +130,9 @@ class SourceController extends Controller
     }
 
     /**
-     * Displays a form to edit an existing Source entity.
+     * Displays a form to edit an existing Rencontre entity.
      *
-     * @Route("/{id}/edit", name="source_edit")
+     * @Route("/{id}/edit", name="rencontre_edit")
      * @Method("GET")
      * @Template()
      */
@@ -135,10 +140,10 @@ class SourceController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Source')->find($id);
+        $entity = $em->getRepository('AppBundle:Rencontre')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Source entity.');
+            throw $this->createNotFoundException('Unable to find Rencontre entity.');
         }
 
         $editForm = $this->createEditForm($entity);
@@ -152,16 +157,16 @@ class SourceController extends Controller
     }
 
     /**
-    * Creates a form to edit a Source entity.
+    * Creates a form to edit a Rencontre entity.
     *
-    * @param Source $entity The entity
+    * @param Rencontre $entity The entity
     *
     * @return \Symfony\Component\Form\Form The form
     */
-    private function createEditForm(Source $entity)
+    private function createEditForm(Rencontre $entity)
     {
-        $form = $this->createForm(new SourceType(), $entity, array(
-            'action' => $this->generateUrl('source_update', array('id' => $entity->getId())),
+        $form = $this->createForm(new RencontreType(), $entity, array(
+            'action' => $this->generateUrl('rencontre_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
@@ -170,20 +175,20 @@ class SourceController extends Controller
         return $form;
     }
     /**
-     * Edits an existing Source entity.
+     * Edits an existing Rencontre entity.
      *
-     * @Route("/{id}", name="source_update")
+     * @Route("/{id}", name="rencontre_update")
      * @Method("PUT")
-     * @Template("AppBundle:Source:edit.html.twig")
+     * @Template("AppBundle:Rencontre:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:Source')->find($id);
+        $entity = $em->getRepository('AppBundle:Rencontre')->find($id);
 
         if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Source entity.');
+            throw $this->createNotFoundException('Unable to find Rencontre entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
@@ -193,7 +198,7 @@ class SourceController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('source_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('rencontre_edit', array('id' => $id)));
         }
 
         return array(
@@ -203,9 +208,9 @@ class SourceController extends Controller
         );
     }
     /**
-     * Deletes a Source entity.
+     * Deletes a Rencontre entity.
      *
-     * @Route("/{id}", name="source_delete")
+     * @Route("/{id}", name="rencontre_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
@@ -215,21 +220,21 @@ class SourceController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $entity = $em->getRepository('AppBundle:Source')->find($id);
+            $entity = $em->getRepository('AppBundle:Rencontre')->find($id);
 
             if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Source entity.');
+                throw $this->createNotFoundException('Unable to find Rencontre entity.');
             }
 
             $em->remove($entity);
             $em->flush();
         }
 
-        return $this->redirect($this->generateUrl('source'));
+        return $this->redirect($this->generateUrl('rencontre'));
     }
 
     /**
-     * Creates a form to delete a Source entity by id.
+     * Creates a form to delete a Rencontre entity by id.
      *
      * @param mixed $id The entity id
      *
@@ -238,7 +243,7 @@ class SourceController extends Controller
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder()
-            ->setAction($this->generateUrl('source_delete', array('id' => $id)))
+            ->setAction($this->generateUrl('rencontre_delete', array('id' => $id)))
             ->setMethod('DELETE')
             ->add('submit', 'submit', array('label' => 'Delete'))
             ->getForm()

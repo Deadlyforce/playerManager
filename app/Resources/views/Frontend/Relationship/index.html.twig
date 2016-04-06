@@ -9,7 +9,7 @@
             <thead>
                 <tr>
     {#                <th>Id</th>#}
-                    <th>Prénom</th>
+                    <th>First Name</th>
                     <th>Status</th>
                     <th>Meeting</th>
                     <th>Meeting count</th>
@@ -27,7 +27,7 @@
             {% for relationship in relationships %}
                 <tr>
     {#                <td><a href="{{ path('relationship_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>#}
-                    <td>{% if relationship.prospect %}{{ relationship.prospect.prenom }}{% endif %}</td>
+                    <td>{% if relationship.prospect %}{{ relationship.prospect.firstname }}{% endif %}</td>
                     <td>{% if relationship.status %}On{% else %}Off{% endif %}</td>
                     <td>{% if relationship.meeting %}Oui{% else %}Non{% endif %}</td>
                     <td>{% if relationship.meetingCount %}{{ relationship.meetingCount }}{% else %}0{% endif %}</td>

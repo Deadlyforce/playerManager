@@ -1,14 +1,14 @@
 {% extends '::base.html.twig' %}
 {% import ":Frontend/Macros:photoDisplay.html.twig" as photoDisplay %}
 
-{% block title %}{{ prospect.prenom }}{% endblock %}
+{% block title %}{{ prospect.firstname }}{% endblock %}
 
 {% block body -%}
     <div class="container">
         <h3>Fiche contact</h3>
 
         <div class="panel panel-default">
-            <div class="panel-heading">{{ prospect.prenom }}</div>
+            <div class="panel-heading">{{ prospect.firstname }}</div>
             <div class="panel-body">           
 
                 {{ photoDisplay.primaryPhotoOrLast(prospect.photos) }}                                
@@ -16,48 +16,44 @@
                 <table class="record_properties">
                     <tbody>                    
                         <tr>
-                            <th>Pseudo</th>
-                            <td>{{ prospect.pseudo }}</td>
+                            <th>Nickname</th>
+                            <td>{{ prospect.nickname }}</td>
                         </tr>
                         <tr>
-                            <th>Prénom</th>
-                            <td>{{ prospect.prenom }}</td>
+                            <th>First Name</th>
+                            <td>{{ prospect.firstname }}</td>
                         </tr>
                         <tr>
-                            <th>Nom</th>
-                            <td>{{ prospect.nom }}</td>
+                            <th>Last Name</th>
+                            <td>{{ prospect.lastname }}</td>
                         </tr>
                         <tr>
                             <th>Age</th>
                             <td>{{ prospect.age }}</td>
                         </tr>
                         <tr>
-                            <th>Ville</th>
-                            <td>{{ prospect.ville }}</td>
+                            <th>City</th>
+                            <td>{{ prospect.city }}</td>
                         </tr>
                         <tr>
-                            <th>Arrondissement</th>
-                            <td>{{ prospect.arrondissement }}</td>
+                            <th>Paris district</th>
+                            <td>{{ prospect.parisDistrict }}</td>
                         </tr>
                         <tr>
-                            <th>Pays</th>
-                            <td>{{ prospect.pays }}</td>
+                            <th>Country</th>
+                            <td>{{ prospect.country }}</td>
                         </tr>
                         <tr>
-                            <th>Numéro</th>
-                            <td>{{ prospect.numero }}</td>
-                        </tr>
-                        <tr>
-                            <th>Numéro étranger</th>
-                            <td>{{ prospect.numeroEtranger }}</td>
+                            <th>Cell Number</th>
+                            <td>{{ prospect.cellNumber }}</td>
                         </tr>
                         <tr>
                             <th>Source</th>
                             <td>{{ prospect.source }}</td>
                         </tr>
                         <tr>
-                            <th>Date de création</th>
-                            <td>{{ prospect.dateCreation|date('d-m-Y') }}</td>
+                            <th>Creation date</th>
+                            <td>{{ prospect.creationDate|date('d-m-Y') }}</td>
                         </tr>
                     </tbody>
                 </table>  

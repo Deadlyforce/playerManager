@@ -5,16 +5,15 @@
     <h1>New contact</h1>
     
     {{ form_start(form, {'attr': {'id':'form-new-prospect'}}) }}   
-        {{ form_row(form.pseudo) }}
-        {{ form_row(form.prenom) }}
-        {{ form_row(form.nom) }}
+        {{ form_row(form.nickname) }}
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
         {{ form_row(form.age) }}
-        {{ form_row(form.ville) }}
-        {{ form_row(form.arrondissement) }}
-        {{ form_row(form.pays) }}
-        {{ form_row(form.numero) }}
-        {{ form_row(form.numeroDom) }}
-        {{ form_row(form.numeroEtranger) }}
+        {{ form_row(form.city) }}
+        {{ form_row(form.parisDistrict) }}
+        {{ form_row(form.country) }}
+        {{ form_row(form.cellNumber) }}
+        {{ form_row(form.homeNumber) }}
         {{ form_row(form.source) }}
         
         {{ form_label(form.photos) }}
@@ -29,7 +28,7 @@
             {% endfor %}
         </ul>
 
-        {{ form_row(form.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
+{#        {{ form_row(form.creationDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}#}
 
         {{ form_row(form.submit) }}
         <div class="hidden">{{ form_rest(form) }}</div>
@@ -42,13 +41,13 @@
         
         getDatepicker();
 
-        $('.form-input-ville').change(function(){
-            var ville = $(this).val().toLowerCase();
+        $('.form-input-city').change(function(){
+            var city = $(this).val().toLowerCase();
 
-            if(ville === 'paris'){
-                $('.row_arrondissement').show('fast');
+            if(city === 'paris'){
+                $('.row_parisDistrict').show('fast');
             }else{
-                $('.row_arrondissement').hide('fast');
+                $('.row_parisDistrict').hide('fast');
             }
         });        
         

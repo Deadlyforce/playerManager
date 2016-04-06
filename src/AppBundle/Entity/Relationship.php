@@ -16,6 +16,7 @@ class Relationship
     public function __construct() 
     {
         $this->meetingCount = 0;
+        $this->startDate = new \DateTime();
     }
     
     /**     
@@ -42,6 +43,13 @@ class Relationship
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+    
+    /**
+     * @var \Date
+     * 
+     * @ORM\Column(name="start_date", type="date")
+     */
+    private $startDate;
 
     /**
      * @var boolean
@@ -122,6 +130,29 @@ class Relationship
     public function getId()
     {
         return $this->id;
+    }
+    
+    /**
+     * Set startDate
+     *
+     * @param \DateTime $startDate
+     * @return Prospect
+     */
+    public function setStartDate($startDate)
+    {
+         $this->startDate = $startDate;
+
+         return $this;
+    }
+
+    /**
+     * Get $startDate
+     *
+     * @return \DateTime 
+     */
+    public function getStartDate()
+    {
+         return $this->startDate;
     }
 
     /**
@@ -380,6 +411,6 @@ class Relationship
      */
     public function __toString()
     {
-        return $this->getProspect()->getPrenom();
+        return $this->getProspect()->getFirstname();
     }
 }

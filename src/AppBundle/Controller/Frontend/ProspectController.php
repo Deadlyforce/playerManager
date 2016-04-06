@@ -24,7 +24,7 @@ class ProspectController extends Controller
      * 
      * @Route("/ajax_form_new", name="ajax_new_prospect_form", options={"expose"=true})
      * @Method({"GET"})
-     * @Template("AppBundle:ajax.html.twig")
+     * @Template(":ajax.html.twig")
      */
     public function ajax_newFormNewAction()
     {       
@@ -37,10 +37,10 @@ class ProspectController extends Controller
         $prospect->setAge(23); // Age par défaut
         
         $datetime =  new \DateTime('', new \DateTimeZone('Europe/Paris')); // Date du jour
-        $prospect->setDateCreation($datetime);
+        $prospect->setCreationDate($datetime);
         
         $form = $this->createCreateForm($prospect)->createView();
-        $form_view = $this->renderView("AppBundle:Frontend/Prospect:new.html.twig", array('form' => $form));
+        $form_view = $this->renderView(":Frontend/Prospect:new.html.twig", array('form' => $form));
                 
         return new Response($form_view);
     }
@@ -50,7 +50,7 @@ class ProspectController extends Controller
      * 
      * @Route("{id}/ajax_delete", name="ajax_delete_prospect", options={"expose"=true})
      * @Method({"POST"})
-     * @Template("AppBundle:ajax.html.twig")
+     * @Template(":ajax.html.twig")
      */
     public function ajax_deleteAction(Request $request, $id)
     {
@@ -107,7 +107,7 @@ class ProspectController extends Controller
         $em = $this->getDoctrine()->getManager();
         $prospects = $em->getRepository('AppBundle:Prospect')->findBy(
             array("user" => $user), 
-            array("date_creation" => "DESC")
+            array("creationDate" => "DESC")
         );
                 
         $tokenManager = $this->get('security.csrf.token_manager');        
@@ -138,7 +138,7 @@ class ProspectController extends Controller
         $form->handleRequest($request);        
         
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        $photos = $prospect->getPhotos();
+//        $photos = $prospect->getPhotos();
         
         $prospect->setUser($user);        
        
@@ -205,7 +205,7 @@ class ProspectController extends Controller
         $prospect->setAge(23);
         
         $datetime =  new \DateTime('', new \DateTimeZone('Europe/Paris'));
-        $prospect->setDateCreation($datetime);
+        $prospect->setCreationDate($datetime);
 
         $form = $this->createCreateForm($prospect);        
         

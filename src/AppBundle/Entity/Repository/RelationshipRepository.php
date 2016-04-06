@@ -25,7 +25,7 @@ class RelationshipRepository extends EntityRepository
             FROM AppBundle:Relationship r
             LEFT JOIN r.prospect p
             WHERE  p.user = :user
-            ORDER BY p.date_creation DESC
+            ORDER BY p.creationDate DESC
         ')
         ->setParameter('user', $user);
         

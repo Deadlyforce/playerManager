@@ -25,7 +25,8 @@ class Prospect
         $this->echanges = new ArrayCollection();
         $this->rencontres = new ArrayCollection();
         $this->photos = new ArrayCollection();
-//        $this->relationship = null;
+        $this->relationship = null;
+        $this->creationDate = new \DateTime();
     }   
    
     /**
@@ -77,23 +78,23 @@ class Prospect
     /**
      * @var string
      *
-     * @ORM\Column(name="pseudo", type="string", length=255, nullable=true)
+     * @ORM\Column(name="nickname", type="string", length=255, nullable=true)
      */
-    private $pseudo;
+    private $nickname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="prenom", type="string", length=255)
+     * @ORM\Column(name="firstname", type="string", length=255)
      */
-    private $prenom;
+    private $firstname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="nom", type="string", length=255, nullable=true)
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
      */
-    private $nom;
+    private $lastname;
 
     /**
      * @var integer
@@ -105,51 +106,44 @@ class Prospect
     /**
      * @var string
      *
-     * @ORM\Column(name="ville", type="string", length=255, nullable=true)
+     * @ORM\Column(name="city", type="string", length=255, nullable=true)
      */
-    private $ville;
+    private $city;
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="arrondissement", type="integer", nullable=true)
+     * @ORM\Column(name="paris_district", type="integer", nullable=true)
      */
-    private $arrondissement;
+    private $parisDistrict;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="pays", type="string", length=255, nullable=true)
+     * @ORM\Column(name="country", type="string", length=255, nullable=true)
      */
-    private $pays;
+    private $country;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="numero", type="string", length=10, nullable=true)
+     * @ORM\Column(name="cell_number", type="string", length=15, nullable=true)
      */
-    private $numero;
+    private $cellNumber;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="numero_dom", type="string", length=10, nullable=true)
+     * @ORM\Column(name="home_number", type="string", length=15, nullable=true)
      */
-    private $numero_dom;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="numero_etranger", type="string", length=50, nullable=true)
-     */
-    private $numero_etranger;   
+    private $homeNumber;
     
     /**
      * @var \Date
      * 
-     * @ORM\Column(name="date_creation", type="date")
+     * @ORM\Column(name="creation_date", type="date")
      */
-    private $date_creation;    
+    private $creationDate;    
     
     /**
      * @var ArrayCollection
@@ -176,70 +170,70 @@ class Prospect
     }
     
     /**
-     * Set pseudo
+     * Set nickname
      *
-     * @param string $pseudo
+     * @param string $nickname
      * @return Prospect     
      */
-    public function setPseudo($pseudo)
+    public function setNickname($nickname)
     {
-        $this->pseudo = $pseudo;        
+        $this->nickname = $nickname;        
         return $this;
     }
 
     /**
-     * Get pseudo
+     * Get fnickname
      *
      * @return string 
      */
-    public function getPseudo()
+    public function getNickname()
     {
-        return $this->pseudo;
+        return $this->nickname;
     }
 
     /**
-     * Set prenom
+     * Set firstname
      *
-     * @param string $prenom
+     * @param string $firstname
      * @return Prospect
      */
-    public function setPrenom($prenom)
+    public function setFirstname($firstname)
     {
-        $this->prenom = $prenom;
+        $this->firstname = $firstname;
         return $this;
     }
 
     /**
-     * Get prenom
+     * Get firstname
      *
      * @return string 
      */
-    public function getPrenom()
+    public function getFirstname()
     {
-        return $this->prenom;
+        return $this->firstname;
     }
 
     /**
-     * Set nom
+     * Set lastname
      *
-     * @param string $nom
+     * @param string $lastname
      * @return Prospect
      */
-    public function setNom($nom)
+    public function setLastname($lastname)
     {
-        $this->nom = $nom;
+        $this->lastname = $lastname;
 
         return $this;
     }
 
     /**
-     * Get nom
+     * Get lastname
      *
      * @return string 
      */
-    public function getNom()
+    public function getLastname()
     {
-        return $this->nom;
+        return $this->lastname;
     }
 
     /**
@@ -265,25 +259,25 @@ class Prospect
     }
 
     /**
-     * Set ville
+     * Set city
      *
-     * @param string $ville
+     * @param string $city
      * @return Prospect
      */
-    public function setVille($ville)
+    public function setCity($city)
     {
-        $this->ville = $ville;
+        $this->city = $city;
         return $this;
     }
 
     /**
-     * Get ville
+     * Get city
      *
      * @return string 
      */
-    public function getVille()
+    public function getCity()
     {
-        return $this->ville;
+        return $this->city;
     }
 
     /**
@@ -310,114 +304,92 @@ class Prospect
     }
     
     /**
-     * Set arrondissement
+     * Set parisDistrict
      *
-     * @param integer $arrondissement
+     * @param integer $parisDistrict
      * @return Prospect
      */
-    public function setArrondissement($arrondissement)
+    public function setParisDistrict($parisDistrict)
     {
-        $this->arrondissement = $arrondissement;
+        $this->parisDistrict = $parisDistrict;
         
         return $this;
     }
     
     /**
-     * Get arrondissement
+     * Get parisDistrict
      *
      * @return integer 
      */
-    public function getArrondissement()
+    public function getParisDistrict()
     {
-        return $this->arrondissement;
+        return $this->parisDistrict;
     }
 
     /**
-     * Set pays
+     * Set country
      *
-     * @param string $pays
+     * @param string $country
      * @return Prospect
      */
-    public function setPays($pays)
+    public function setCountry($country)
     {
-        $this->pays = $pays;
+        $this->country = $country;
         return $this;
     }
 
     /**
-     * Get pays
+     * Get country
      *
      * @return string 
      */
-    public function getPays()
+    public function getCountry()
     {
-        return $this->pays;
+        return $this->country;
     }
 
     /**
-     * Set numero
+     * Set cellNumber
      *
-     * @param string $numero
+     * @param string $cellNumber
      * @return Prospect
      */
-    public function setNumero($numero)
+    public function setCellNumber($cellNumber)
     {
-        $this->numero = $numero;
+        $this->cellNumber = $cellNumber;
         return $this;
     }
 
     /**
-     * Get numero
+     * Get number
      *
      * @return string 
      */
-    public function getNumero()
+    public function getCellNumber()
     {
-        return $this->numero;
+        return $this->cellNumber;
     }
     
     /**
-     * Set numero_dom
+     * Set homeNumber
      *
-     * @param string $numero_dom
+     * @param string $homeNumber
      * @return Prospect
      */
-    public function setNumeroDom($numero_dom)
+    public function setHomeNumber($homeNumber)
     {
-        $this->numero_dom = $numero_dom;
+        $this->homeNumber = $homeNumber;
         return $this;
     }
 
     /**
-     * Get numero_dom
+     * Get homeNumber
      *
      * @return string 
      */
-    public function getNumeroDom()
+    public function getHomeNumber()
     {
-        return $this->numero_dom;
-    }
-
-    /**
-     * Set numero_etranger
-     *
-     * @param string $numero_etranger
-     * @return Prospect
-     */
-    public function setNumeroEtranger($numero_etranger)
-    {
-        $this->numero_etranger = $numero_etranger;
-        return $this;
-    }
-
-    /**
-     * Get numero_etranger
-     *
-     * @return string 
-     */
-    public function getNumeroEtranger()
-    {
-        return $this->numero_etranger;
+        return $this->homeNumber;
     }
 
     /**
@@ -515,7 +487,7 @@ class Prospect
      */
     public function __toString() 
     {
-        return $this->getPrenom();
+        return $this->getFirstname();
     }
     
     /**
@@ -573,27 +545,27 @@ class Prospect
     }
     
     /**
-    * Set date_creation
-    *
-    * @param \DateTime $date_creation
-    * @return Prospect
-    */
-   public function setDateCreation($date_creation)
-   {
-           $this->date_creation = $date_creation;
+     * Set creationDate
+     *
+     * @param \DateTime $creationDate
+     * @return Prospect
+     */
+    public function setCreationDate($creationDate)
+    {
+         $this->creationDate = $creationDate;
 
-           return $this;
-   }
+         return $this;
+    }
 
-   /**
-    * Get date_creation
-    *
-    * @return \DateTime 
-    */
-   public function getDateCreation()
-   {
-           return $this->date_creation;
-   }
+    /**
+     * Get $creationDate
+     *
+     * @return \DateTime 
+     */
+    public function getCreationDate()
+    {
+         return $this->creationDate;
+    }
    
    /**
     * Get photos

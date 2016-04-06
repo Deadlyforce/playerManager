@@ -6,7 +6,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+//use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -24,8 +24,8 @@ class ProspectType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {       
         $builder
-            ->add('pseudo', TextType::class, array(
-                'required' => FALSE, 
+            ->add('nickname', TextType::class, array(
+                'required' => false, 
                 'label_attr' => array(
                     'class' => 'control-label'
                 ), 
@@ -33,9 +33,9 @@ class ProspectType extends AbstractType
                     'class' => 'form-input'
                 )                
             ))
-            ->add('prenom', TextType::class, array(
-                'required' => TRUE, 
-                'label' => 'Prénom', 
+            ->add('firstname', TextType::class, array(
+                'required' => true, 
+                'label' => 'First Name', 
                 'label_attr' => array(
                     'class' => 'control-label'
                 ), 
@@ -43,9 +43,9 @@ class ProspectType extends AbstractType
                     'class' => 'form-input'
                 )
             ))
-            ->add('nom', TextType::class, array(
+            ->add('lastname', TextType::class, array(
                 'required' => FALSE, 
-                'label' => 'Nom', 
+                'label' => 'Last Name', 
                 'label_attr' => array(
                     'class' => 'control-label'
                 ), 
@@ -57,59 +57,43 @@ class ProspectType extends AbstractType
                 'choices' => $this->getAgeBracket(),
                 'choices_as_values' => true                
             ))
-            ->add('ville', TextType::class, array(
+            ->add('city', TextType::class, array(
                 'required' => FALSE, 
                 'attr' => array(
                     'placeholder' => 'Paris',
-                    'class' => 'form-input-ville'
+                    'class' => 'form-input-city'
                 )
             ))
-            ->add('arrondissement', ChoiceType::class, array(
-                'required' => FALSE,
-                'choices' => $this->getArrondissements(), 
+            ->add('parisDistrict', ChoiceType::class, array(
+                'required' => false,
+                'choices' => $this->getParisDistricts(), 
                 'choices_as_values' => true,
                 'attr' => array(                    
                     'class' => 'form-input'
                 )
             ))
-            ->add('pays', TextType::class, array(
+            ->add('country', TextType::class, array(
                 'required' => false, 
                 'attr' => array(
                     'class' => 'form-input'                    
                 )                
             ))
-            ->add('numero', TextType::class, array(
+            ->add('cellNumber', TextType::class, array(
                 'required' => false,
-                'label' => 'Tel portable',
+                'label' => 'Cell number',
                 'attr' => array(
                     'class' => 'form-input'
                 )
             ))
-            ->add('numeroDom', TextType::class, array(
+            ->add('homeNumber', TextType::class, array(
                 'required' => false,
-                'label' => 'Tel Domicile',
-                'attr' => array(
-                    'class' => 'form-input'
-                )
-            ))
-            ->add('numeroEtranger', TextType::class, array(
-                'required' => false, 
-                'label' => 'Tel étranger',
+                'label' => 'Home number',
                 'attr' => array(
                     'class' => 'form-input'
                 )
             ))
             ->add('source', EntityType::class, array(
                 'class' => 'AppBundle:Source'                
-            ))
-            ->add('dateCreation', DateTimeType::class, array(
-		'required' => false,
-		'label' => 'Date de création: ',
-		'model_timezone' => 'Europe/Paris',
-		'view_timezone' => 'Europe/Paris',
-		'input' => 'datetime',
-		'widget' => 'single_text',
-		'format' => 'dd-MM-yyyy'                
             ))
             ->add('photos', CollectionType::class, array(
                 'label' => false,
@@ -154,8 +138,7 @@ class ProspectType extends AbstractType
      * @return Array
      */
     private function getAgeBracket()
-    {
-        // Chargement de la tranche d'âges
+    {        
         for($i=18; $i<=50; $i++){
             $ageBracket[$i] = $i;
         }
@@ -164,17 +147,16 @@ class ProspectType extends AbstractType
     }
     
     /**
-     * Returns Paris arrondissements
+     * Returns Paris Districts
      * 
      * @return Array
      */
-    private function getArrondissements()
-    {
-        // Chargement de la tranche d'âges
+    private function getParisDistricts()
+    {        
         for($i=1; $i<=20; $i++){
-            $parisArrondissements[$i] = $i;
+            $paris_districts[$i] = $i;
         }
         
-        return $parisArrondissements;
+        return $paris_districts;
     } 
 }

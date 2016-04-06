@@ -1,17 +1,21 @@
 {% extends '::base.html.twig' %}
-{% import ":Frontend/Macros/Prospect:photoDisplayIndex.html.twig" as photoDisplayIndex %}
-
 {% block title %}Prospects{% endblock %}
+{% import ":Frontend/Macros/Prospect:photoDisplayIndex.html.twig" as photoDisplayIndex %}
 
 {% block body -%}
     <div class="container">        
-        <h1 class="page-header">Prospects</h1> 
+        <section class="page-title">
+            <h1>Contacts</h1> 
+{#            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>#}
+        </section>
+        <div class="page-title-underline"></div> 
+        
         <a class="page-button" href="{{ path('prospect_new') }}" id="add_prospect" title ="Add prospect"><i class="fa fa-plus"></i> Add prospect</a>
         
         <table id="table-prospects" class="table table-hover table-striped">
             <thead>
                 <tr>
-                    <th>Pseudo</th>
+                    <th>Nickname</th>
                     <th>First name</th>
                     <th>last name</th>
                     <th>Age</th>
@@ -27,23 +31,23 @@
             {% for prospect in prospects %}
                 <tr id="{{ prospect.id }}">
                     <td>
-                        {% if prospect.pseudo %}
-                            {{ prospect.pseudo }}
+                        {% if prospect.nickname %}
+                            {{ prospect.nickname }}
                         {% else %}
                             -
                         {% endif %}
                     </td>
-                    <td>{{ prospect.prenom }}</td>
-                    <td>{{ prospect.nom }}</td>
+                    <td>{{ prospect.firstname }}</td>
+                    <td>{{ prospect.lastname }}</td>
                     <td>{{ prospect.age }}</td>
-                    <td>{{ prospect.ville }}</td>
-                    <td>{{ prospect.pays }}</td>
+                    <td>{{ prospect.city }}</td>
+                    <td>{{ prospect.country }}</td>
                     <td>{{ prospect.source }}</td>
                     <td>                          
                         {{ photoDisplayIndex.primaryPhotoOrLast(prospect.photos) }}                                              
                     </td>
                     <td>
-                        {% if prospect.dateCreation %}{{ prospect.dateCreation|date('d-m-Y') }}{% endif %}
+                        {% if prospect.creationDate %}{{ prospect.creationDate|date('d-m-Y') }}{% endif %}
                     </td>
                     <td>
                         <a class="" href="{{ path('prospect_show', { 'id': prospect.id }) }}"><i class="fa fa-eye"></i></a>                       

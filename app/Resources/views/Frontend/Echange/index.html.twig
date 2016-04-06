@@ -17,7 +17,7 @@
         <tbody>
         {% for entity in entities %}
             <tr>
-                <td>{{ entity.prospect.pseudo }}</td>
+                <td>{{ entity.prospect.nickname }}</td>
 {#                <td>{{ entity.prospect.id }}</td>#}
                 <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
                 <td>{{ entity.contenu }}</td>
