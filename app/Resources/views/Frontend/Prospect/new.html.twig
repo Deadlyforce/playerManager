@@ -1,9 +1,7 @@
 {% extends '::base_modal.html.twig' %}
 {% block title %}New contact{% endblock %} 
 
-{% block body -%}
-    <h1>New contact</h1>
-    
+{% block content %}   
     {{ form_start(form, {'attr': {'id':'form-new-prospect'}}) }}   
         {{ form_row(form.nickname) }}
         {{ form_row(form.firstname) }}
@@ -15,10 +13,10 @@
         {{ form_row(form.cellNumber) }}
         {{ form_row(form.homeNumber) }}
         {{ form_row(form.source) }}
-        
-        {{ form_label(form.photos) }}
+
+        {#{{ form_label(form.photos) }}
         {{ form_errors(form.photos) }}
-        
+
         <ul id="photo-list" data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}">
             {% for photo in form.photos %}
                 <li>
@@ -26,44 +24,38 @@
                     {{ form_widget(photo) }}
                 </li>
             {% endfor %}
-        </ul>
+        </ul>#}
 
-{#        {{ form_row(form.creationDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}#}
-
-        {{ form_row(form.submit) }}
+        {{ form_row(form.submit, {'attr': {'class': 'btn-submit-light'}}) }}
         <div class="hidden">{{ form_rest(form) }}</div>
     {{ form_end(form) }} 
 
+    <script type="text/javascript"> 
 
-<script type="text/javascript"> 
+        $(document).ready(function(){
 
-    $(document).ready(function(){
-        
-        getDatepicker();
+            getDatepicker();
 
-        $('.form-input-city').change(function(){
-            var city = $(this).val().toLowerCase();
+            $('.form-input-city').change(function(){
+                var city = $(this).val().toLowerCase();
 
-            if(city === 'paris'){
-                $('.row_parisDistrict').show('fast');
-            }else{
-                $('.row_parisDistrict').hide('fast');
-            }
-        });        
-        
-    });  
+                if(city === 'paris'){
+                    $('.row_parisDistrict').show('fast');
+                }else{
+                    $('.row_parisDistrict').hide('fast');
+                }
+            });        
 
-</script>
+        });  
 
+    </script>
 {% endblock %}
 
-{% block javascripts %}
-    {{ parent() }}
-    
+{#{% block javascripts %}    
     {% javascripts
         'bundles/app/js/photos.js'
     %}        
     <script src="{{ asset_url }}"></script>
     {% endjavascripts%}
-{% endblock %}
+{% endblock %}#}
 

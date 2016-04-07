@@ -1,0 +1,117 @@
+{% extends '::base.html.twig' %}
+{% block title %}Users{% endblock %}
+
+
+{% block content %}
+    <div class="container" id="container-user">        
+        <section class="page-title">
+            <h1>Users</h1> 
+{#            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>#}
+        </section>
+        <div class="page-title-underline"></div>         
+
+        <table id="table-users" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Email</th>                    
+                    <th>Last login</th>                  
+                    <th>Created at</th>
+                    <th>IP Adress</th>
+                    <th>Actions</th> 
+                </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr id="{{ user.id }}">
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>                    
+                    <td>{{ user.lastLogin|date('d-m-Y H:i:s') }}</td>                    
+                    <td>{{ user.createdAt|date('d-m-Y H:i:s') }}</td>                    
+                    <td>{{ user.ip }}</td>                    
+                    <td>
+{#                        <a class="" href="{{ path('user_show', { 'id': user.id }) }}"><i class="fa fa-eye"></i></a>                       
+                        <a class="" href="{{ path('user_edit', { 'id': user.id }) }}"><i class="fa fa-pencil-square-o"></i></a> #} 
+                        <a href="#" class="delete" data-id="{{ user.id }}" data-token="{{ csrf_token }}" title="Delete"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>        
+    </div>     
+    
+    <script type="text/javascript">
+        $(document).ready(function(){                   
+            
+            $.fn.dataTable.moment('DD-MM-YYYY' );
+            
+            initTableUsers();
+            
+            function initTableUsers()
+            {
+                $("#table-users").DataTable({
+                    "language":{
+                        "lengthMenu": "_MENU_ entries"
+                    },                    
+                    "order": [[ 5, "desc" ]],
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,                   
+                        { 
+                            className: "actions",
+                            "width": "120px"
+                        }
+                    ]
+                });
+            }            
+            
+            $("#table-users").on("click", ".delete", function(event){
+                event.preventDefault();
+                
+                var user_id = $(this).data("id");
+                var csrf_token = $(this).data("token");
+                
+                $.confirm({
+                    confirm: function(){
+                        ajaxDeleteUser(user_id, csrf_token);
+                    },
+                    cancel: function(){
+                        console.log('the user clicked cancel');
+                    }
+                });
+            });
+            
+            /**
+             * Deletes a prospect with ajax
+             * 
+             * @param {int} user_id
+             * @param {string} csrf_token
+             * @returns {undefined}
+             */
+            function ajaxDeleteUser(user_id, csrf_token)
+            {                
+                var url = Routing.generate('ajax_delete_user', {'id': user_id});                
+                var data = {'csrf_token': csrf_token};
+
+                $.post(url, data, function(response){
+
+                    var data = $.parseJSON(response);
+
+                    var table = $("#table-users").DataTable();
+                    var tr = $("#" + data.id);
+                    
+                    table.row(tr).remove().draw(false); // false = conserve la pagination actuelle                    
+
+                });
+            }
+            
+        });
+    </script>
+{% endblock %}
+

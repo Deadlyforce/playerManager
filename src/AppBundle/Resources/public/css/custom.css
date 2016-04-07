@@ -60,6 +60,7 @@
     border-radius: 2px;
     padding: 10px 15px;
     margin-bottom: 20px;
+    margin-top: 15px;
     background-image: none;
     
     -moz-transition: all .3s ease-in;
@@ -81,7 +82,7 @@
     border-radius: 2px;
     padding: 10px 15px;
     margin-bottom: 20px;
-    margin-top: 10px;
+    margin-top: 15px;
     background-color: rgb(54, 61, 77);
     
     -moz-transition: all .3s ease-in;
@@ -253,7 +254,7 @@ form[name="fos_user_security_login"] #_submit:hover{
 }
 
 header{
-    height: 90px;
+    /*height: 90px;*/
     background-color: #303030;
 }
 
@@ -271,8 +272,8 @@ header{
 }
 .navbar{
     font-family: 'open_sansregular', sans-serif;
-    height: 90px;
-    border-radius: 0;   
+    border-radius: 0;  
+    margin-bottom: 0px;
 }
 .navbar-default{
     border: none;    
@@ -318,14 +319,17 @@ body {
     min-height: 100%;
     position: relative;
     padding-bottom: 65px; /* Footer space */
-}
-
-.container-data {
     background-color: #202B33;
     color: #899BA9;
-    height: calc(100% - 128px); /* Not working with a min-height on parent (body) - Calculated with javascript in template */
     padding-bottom: 150px;
 }
+
+/*.container-data {
+    background-color: #202B33;
+    color: #899BA9;
+    height: calc(100% - 128px);  Not working with a min-height on parent (body) - Calculated with javascript in template 
+    padding-bottom: 150px;
+}*/
 
 /************************ BOOTSTRAP OVERRIDES ****************************/
 
@@ -343,35 +347,42 @@ body {
     border-radius: 0px;
 }
 
-/************************* DATATABLES ************************************/
+/*********************** DATATABLE PROSPECT INDEX ******************************/
 
-.dataTables_wrapper{
-    padding: 20px;
-    box-shadow: 0px 0px 6px rgb(187, 187, 187);
+#table-prospects_wrapper{
+    padding: 20px 0px 20px 0px;
+    background-color: #202B33;
 }
-.dataTables_wrapper .dataTables_length{
-    margin-bottom: 20px;
-    color: #666;
+#table-prospects{
+    width: 100%;
 }
-
-table.dataTable thead th{
+#table-prospects thead th{
     padding: 10px 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #899BA9;
 }
-table.dataTable tbody td{
+#table-prospects tbody td{
     vertical-align: middle;
-}
-.table > thead:first-child > tr:first-child > th{
-    color: #666;
+    background-color: #202B33;
+    border-top: none;
+    border-bottom: 1px solid #283640;
 }
 table.dataTable.no-footer {
-    border-bottom: 1px solid #666;
+    border-bottom: none;
 }
-.dataTables_wrapper .dataTables_info{
-    color: #333;
+#table-prospects_length, #table-prospects_filter{
+    margin-bottom: 20px;
+    color: #899BA9;
+}
+#table-prospects_length select, #table-prospects_filter input{
+    background-color: transparent;
+    border: 1px solid rgb(137, 155, 169);
+}
+
+#table-prospects_wrapper .dataTables_info{
+    color: #899BA9;
     margin-top: 30px;
 }
-.dataTables_wrapper .dataTables_paginate{
+#table-prospects_wrapper .dataTables_paginate{
     margin-top: 30px;
 }
 
@@ -400,14 +411,16 @@ section.page-title h2{
 }
 
 a.page-button{
-    color: #666;
+    color: #899BA9;
+    background-color: #283640;
     font-size: 1.2em;
     text-decoration: none;
     display: inline-block;
-    border: 1px solid #666;
+    border: 1px solid #899BA9;
     border-radius: 2px;
     padding: 10px 15px;
-    margin-bottom: 20px;
+    margin-bottom: 25px;    
+    
     -moz-transition: all .3s ease-in;
     -o-transition: all .3s ease-in;
     -webkit-transition: all .3s ease-in;
@@ -524,7 +537,6 @@ ul.slick-dots > li > button{
 ul.slick-dots > li > button:hover{
     background-color: #f47363;
 }
-
 .home-carousel h1{
     position: absolute;
     color: rgb(255, 117, 100);
@@ -537,15 +549,16 @@ ul.slick-dots > li > button:hover{
 
 /******************************* PROSPECTS - INDEX *********************************/
 
-td.last-photo img{
-    /*height: 100%;*/
-    max-height: 80px;
-}
+
 
 /******************************* PROSPECTS - NEW ***********************************/
 
 #modal_form_new{
     display: none;
+}
+
+form[name='appbundle_prospect'] label{
+    width: 200px;
 }
 .row_parisDistrict{
     display: none;

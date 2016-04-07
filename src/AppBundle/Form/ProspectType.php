@@ -25,33 +25,15 @@ class ProspectType extends AbstractType
     {       
         $builder
             ->add('nickname', TextType::class, array(
-                'required' => false, 
-                'label_attr' => array(
-                    'class' => 'control-label'
-                ), 
-                'attr' => array(
-                    'class' => 'form-input'
-                )                
+                'required' => false                                
             ))
             ->add('firstname', TextType::class, array(
                 'required' => true, 
-                'label' => 'First Name', 
-                'label_attr' => array(
-                    'class' => 'control-label'
-                ), 
-                'attr' => array(
-                    'class' => 'form-input'
-                )
+                'label' => 'First Name'                
             ))
             ->add('lastname', TextType::class, array(
                 'required' => FALSE, 
-                'label' => 'Last Name', 
-                'label_attr' => array(
-                    'class' => 'control-label'
-                ), 
-                'attr' => array(
-                    'class' => 'form-input'
-                )
+                'label' => 'Last Name'                
             ))
             ->add('age', ChoiceType::class, array(
                 'choices' => $this->getAgeBracket(),
@@ -67,30 +49,18 @@ class ProspectType extends AbstractType
             ->add('parisDistrict', ChoiceType::class, array(
                 'required' => false,
                 'choices' => $this->getParisDistricts(), 
-                'choices_as_values' => true,
-                'attr' => array(                    
-                    'class' => 'form-input'
-                )
+                'choices_as_values' => true                
             ))
             ->add('country', TextType::class, array(
-                'required' => false, 
-                'attr' => array(
-                    'class' => 'form-input'                    
-                )                
+                'required' => false                                
             ))
             ->add('cellNumber', TextType::class, array(
                 'required' => false,
-                'label' => 'Cell number',
-                'attr' => array(
-                    'class' => 'form-input'
-                )
+                'label' => 'Cell number'                
             ))
             ->add('homeNumber', TextType::class, array(
                 'required' => false,
-                'label' => 'Home number',
-                'attr' => array(
-                    'class' => 'form-input'
-                )
+                'label' => 'Home number'                
             ))
             ->add('source', EntityType::class, array(
                 'class' => 'AppBundle:Source'                

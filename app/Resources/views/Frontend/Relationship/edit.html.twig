@@ -3,80 +3,78 @@
 
 {% block title %}Edit relationship{% endblock %}
 
-{% block body %}
-    <div class="container-fluid container-data">
-        <div class="container" id="container-relationship">
-            <section class="page-title">
-                <h1>Relationship details</h1> 
+{% block content %}
+    <div class="container" id="container-relationship">
+        <section class="page-title">
+            <h1>Relationship details</h1> 
 {#                <h2>Blablabla</h2>#}
-            </section>
-            <div class="page-title-underline"></div>            
-            
-            <aside class="section-aside-relationship">
-                {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
-            </aside>
-            <section class="section-content">
-                <h3>{{ relationship.prospect.firstname }}</h3>
+        </section>
+        <div class="page-title-underline"></div>            
 
-                <div class="page-content">
-                    {{ form_start(edit_form) }}
-                        {{ form_row(edit_form.startDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
-                        <div>
-                            {{ form_label(edit_form.status) }} 
-                            <div id="appbundle_relationship_status_row" class="relationship_row">
-                                {{ form_widget(edit_form.status) }}
-                                <div id="appbundle_relationship_status_button" class="relationship_button"></div>   
-                                {{ form_errors(edit_form.status) }}
-                            </div>
+        <aside class="section-aside-relationship">
+            {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
+        </aside>
+        <section class="section-content">
+            <h3>{{ relationship.prospect.firstname }}</h3>
+
+            <div class="page-content">
+                {{ form_start(edit_form) }}
+                    {{ form_row(edit_form.startDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
+                    <div>
+                        {{ form_label(edit_form.status) }} 
+                        <div id="appbundle_relationship_status_row" class="relationship_row">
+                            {{ form_widget(edit_form.status) }}
+                            <div id="appbundle_relationship_status_button" class="relationship_button"></div>   
+                            {{ form_errors(edit_form.status) }}
                         </div>
-                        <div>
-                            {{ form_label(edit_form.meeting) }}
-                            <div id="appbundle_relationship_meeting_row" class="relationship_row row-yes-no">
-                                {{ form_widget(edit_form.meeting) }}
-                                <div id="appbundle_relationship_meeting_button"></div>   
-                                {{ form_errors(edit_form.meeting) }}
-                            </div>           
+                    </div>
+                    <div>
+                        {{ form_label(edit_form.meeting) }}
+                        <div id="appbundle_relationship_meeting_row" class="relationship_row row-yes-no">
+                            {{ form_widget(edit_form.meeting) }}
+                            <div id="appbundle_relationship_meeting_button"></div>   
+                            {{ form_errors(edit_form.meeting) }}
                         </div>           
-                        {{ form_row(edit_form.meetingCount) }}          
-                        <div>
-                            {{ form_label(edit_form.numclosed) }}
-                            <div id="appbundle_relationship_numclosed_row" class="relationship_row row-yes-no">
-                                {{ form_widget(edit_form.numclosed) }}
-                                <div id="appbundle_relationship_numclosed_button" class="relationship_button"></div>   
-                                {{ form_errors(edit_form.meeting) }}
-                            </div>           
-                        </div>    
-                        <div class="collapse">
-                            {{ form_label(edit_form.kc) }}
-                            <div id="appbundle_relationship_kc_row" class="relationship_row row-yes-no">
-                                {{ form_widget(edit_form.kc) }}
-                                <div id="appbundle_relationship_kc_button" class="relationship_button"></div>   
-                                {{ form_errors(edit_form.kc) }}
-                            </div>           
-                        </div>    
-                        <div class="collapse">
-                            {{ form_label(edit_form.fc) }}
-                            <div id="appbundle_relationship_fc_row" class="relationship_row row-yes-no">
-                                {{ form_widget(edit_form.fc) }}
-                                <div id="appbundle_relationship_fc_button" class="relationship_button"></div>   
-                                {{ form_errors(edit_form.fc) }}
-                            </div>           
-                        </div>    
-                        {{ form_row(edit_form.relationshipRank) }}
-                        {{ form_row(edit_form.distance) }}
-                        {{ form_row(edit_form.flake) }}
-                        {{ form_row(edit_form.about) }}
-                        {{ form_row(edit_form.submit, {'attr': {'class': 'btn-submit-dark'}}) }}
-                    {{ form_end(edit_form) }}
+                    </div>           
+                    {{ form_row(edit_form.meetingCount) }}          
+                    <div>
+                        {{ form_label(edit_form.numclosed) }}
+                        <div id="appbundle_relationship_numclosed_row" class="relationship_row row-yes-no">
+                            {{ form_widget(edit_form.numclosed) }}
+                            <div id="appbundle_relationship_numclosed_button" class="relationship_button"></div>   
+                            {{ form_errors(edit_form.meeting) }}
+                        </div>           
+                    </div>    
+                    <div class="collapse">
+                        {{ form_label(edit_form.kc) }}
+                        <div id="appbundle_relationship_kc_row" class="relationship_row row-yes-no">
+                            {{ form_widget(edit_form.kc) }}
+                            <div id="appbundle_relationship_kc_button" class="relationship_button"></div>   
+                            {{ form_errors(edit_form.kc) }}
+                        </div>           
+                    </div>    
+                    <div class="collapse">
+                        {{ form_label(edit_form.fc) }}
+                        <div id="appbundle_relationship_fc_row" class="relationship_row row-yes-no">
+                            {{ form_widget(edit_form.fc) }}
+                            <div id="appbundle_relationship_fc_button" class="relationship_button"></div>   
+                            {{ form_errors(edit_form.fc) }}
+                        </div>           
+                    </div>    
+                    {{ form_row(edit_form.relationshipRank) }}
+                    {{ form_row(edit_form.distance) }}
+                    {{ form_row(edit_form.flake) }}
+                    {{ form_row(edit_form.about) }}
+                    {{ form_row(edit_form.submit, {'attr': {'class': 'btn-submit-dark'}}) }}
+                {{ form_end(edit_form) }}
 
-                    <a href="{{ path('relationship_show', {'id': relationship.id }) }}">Back to relationship page</a>
-                    
-                    {#{{ form_start(delete_form) }}
-                        <input class="btn btn-default" type="submit" value="Delete">
-                    {{ form_end(delete_form) }}#}
-                </div>
-            </section>           
-        </div>
+                <a href="{{ path('relationship_show', {'id': relationship.id }) }}">Back to relationship page</a>
+
+                {#{{ form_start(delete_form) }}
+                    <input class="btn btn-default" type="submit" value="Delete">
+                {{ form_end(delete_form) }}#}
+            </div>
+        </section>           
     </div>
     <script type="text/javascript">
         $(document).ready(function(){
