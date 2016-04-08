@@ -1,15 +1,9 @@
-{% extends '::base.html.twig' %}
+{% extends '::base_bo.html.twig' %}
 {% block title %}Users{% endblock %}
 
 
 {% block content %}
-    <div class="container" id="container-user">        
-        <section class="page-title">
-            <h1>Users</h1> 
-{#            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>#}
-        </section>
-        <div class="page-title-underline"></div>         
-
+    <div class="container" id="container-user">                  
         <table id="table-users" class="table table-hover">
             <thead>
                 <tr>
@@ -40,8 +34,8 @@
             {% endfor %}
             </tbody>
         </table>        
-    </div>     
-    
+    </div>    
+
     <script type="text/javascript">
         $(document).ready(function(){                   
             

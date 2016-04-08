@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="UTF-8" />
+    {#<title>{% block title %}Welcome!{% endblock %}</title>#}        
+    {% block stylesheets %}
+        {% stylesheets filter='cssrewrite' 
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css'
+            '%kernel.root_dir%/../vendor/components/jqueryui/themes/base/jquery-ui.min.css'
+            'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.css'
+            'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.css'
+            'bundles/app/packages/DataTables-1.10.8/datatables.min.css'
+            'bundles/app/packages/font-awesome-4.4.0/css/font-awesome.min.css'           
+            'bundles/app/css/bo.css'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    {% block javascripts %}
+        {% javascripts
+            '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
+            '%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js'
+            'bundles/app/packages/moment-with-locales.js'
+            'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.js'
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'
+            'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.js'
+            'bundles/app/packages/DataTables-1.10.8/datatables.min.js' 
+            'bundles/app/js/helpers.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+<body>
+    <section id="top-bar">
+        <div class="container">
+            
+        </div>
+    </section>
+    {#<header>
+        <div class="container">
+            
+        </div>
+    </header> #}                       
+
+    <div class="row">                    
+        <div class="col-md-2">
+            <nav class="navbar navbar-default">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="{{ path('home_index') }}" title="Brand">PlayerManager</a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li id="prospect"><a href="{{ path('user_index') }}">Users</a></li>                                  
+                        <li id="fos_user_profile_show"><a href="{{ path('fos_user_profile_show') }}">Profile</a></li>  
+                        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                            <li id="fos_user_security_logout"><a href="{{ path('fos_user_security_logout') }}">Logout</a></li>           
+                        {% endif %}
+                    </ul>
+                </div>
+            </nav>
+
+        </div>
+        <div class="col-md-10">
+            {% block content %}          
+            {% endblock %}
+        </div>
+    </div>
+    <footer>
+        <div class="container">
+            © 2016 All Rights Reserved. Powered by Deadoralive
+        </div>
+    </footer>
+
+        
+    <script type="text/javascript">   
+        // navbar (left side) height (minus topbar 38 and footer 65)             
+        document.getElementsByClassName("navbar")[0].style.height = document.body.offsetHeight - 38 - 65 + "px";
+        
+        
+        $(document).ready(function(){           
+            
+            // Active link in menu *********************************************
+            // Deactivated with a click on "brand"
+            $(".navbar-header").on("click", ".navbar-brand", function(){
+                localStorage.clear();
+            });
+            
+            $(".navbar-nav").on("click", "li", function () {
+                var id = $(this).attr("id");
+                
+                if (id === 'fos_user_security_logout') {
+                    $('#' + id).siblings().each(function(index, element){
+                        $(element).removeClass("active");
+                    });
+                    localStorage.clear();                   
+                } else {
+                    $('#' + id).siblings().each(function(index, element){
+                        $(element).removeClass("active");
+                    });
+                    $('#' + id).addClass("active");
+                    localStorage.setItem("selectedItem", id);
+                }               
+            });
+
+            var selectedItem = localStorage.getItem('selectedItem');
+
+            if (selectedItem != null) {
+                $('#' + selectedItem).siblings().each(function(index, element){
+                    $(element).removeClass("active");
+                });
+                $('#' + selectedItem).addClass("active");
+            }
+            // Active link in menu *********************************************
+            
+            $(".datatable").DataTable(); // class datatable
+            
+            getDatepicker();
+            getDatetimepicker();
+           
+            
+        });
+    </script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+</body>
+
+</html>

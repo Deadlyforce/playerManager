@@ -1,0 +1,329 @@
+
+/******************************* FONTS ***********************************/
+
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('../fonts/opensans_regular/OpenSans-Regular-webfont.eot');
+    src: url('../fonts/opensans_regular/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/opensans_regular/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../fonts/opensans_regular/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../fonts/opensans_regular/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ralewaythin';
+    src: url('../fonts/raleway/raleway-thin-webfont.eot');
+    src: url('../fonts/raleway/raleway-thin-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/raleway/raleway-thin-webfont.woff2') format('woff2'),
+         url('../fonts/raleway/raleway-thin-webfont.woff') format('woff'),
+         url('../fonts/raleway/raleway-thin-webfont.ttf') format('truetype'),
+         url('../fonts/raleway/raleway-thin-webfont.svg#ralewaythin') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'ralewaylight';
+    src: url('../fonts/raleway/raleway-light-webfont.eot');
+    src: url('../fonts/raleway/raleway-light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/raleway/raleway-light-webfont.woff2') format('woff2'),
+         url('../fonts/raleway/raleway-light-webfont.woff') format('woff'),
+         url('../fonts/raleway/raleway-light-webfont.ttf') format('truetype'),
+         url('../fonts/raleway/raleway-light-webfont.svg#ralewaylight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    background-color: #fff;
+}
+
+/******************************* FORMS ****************************************/
+
+.btn-submit-light{
+    color: #666;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    background-image: none;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-submit-light:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
+    background: transparent;
+}
+.btn-submit-dark{
+    color: #899BA9;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    background-color: rgb(54, 61, 77);
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-submit-dark:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
+    background: transparent;
+}
+
+/******************************* MENU (HEADER) ************************************/
+/* Contains many Bootstrap overrides */
+
+#top-bar{
+    height: 38px;
+    background-color: #3d3d3d;
+}
+
+.header-container{
+    padding: 0px; 
+}
+
+header{
+    background-color: #303030;
+}
+
+.container-fluid > .navbar-header{
+    padding-left: 0px;
+}
+.navbar-header{
+    float: none;
+}
+.navbar-brand{
+    text-shadow: none; 
+    float: none;
+    color: #e0e0e0;
+    padding-left: 0px;
+}
+.navbar{
+    font-family: 'open_sansregular', sans-serif;
+    border-radius: 0;  
+    margin-bottom: 0px;
+}
+.navbar-default{
+    border: none;    
+    box-shadow: none;
+    background-image: none;
+    background-color: #303030;
+    padding-top: 20px;
+    padding-left: 20px;
+}
+.navbar-collapse{
+    padding-top: 15px;
+    padding-left: 0px;
+}
+.navbar-default .navbar-nav > li {
+    float: none;
+}
+.navbar-default .navbar-nav > li > a{
+    color: #e0e0e0;
+}
+.navbar-default .navbar-nav > li > a:hover{
+    color: #f0f0f0;
+}
+.navbar-default .navbar-nav > li > a:focus{
+    color: #f47363;
+}
+.navbar-nav > li > a{    
+    /*height: 90px;*/    
+    text-shadow: none;
+    padding-left: 0px;
+}
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+    background-image: none;
+    background-color: #303030;
+    color: #f47363;
+    box-shadow: none;
+}
+
+/******************************* BODY ************************************/
+
+* {
+    -moz-box-sizing: border-box; 
+    box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    font-family: sans-serif;    
+    min-height: 100%;
+    position: relative;
+    padding-bottom: 65px; /* Footer space */
+    background-color: #fff;
+    color: #666;
+    /*padding-bottom: 150px;*/
+}
+
+/************************ BOOTSTRAP OVERRIDES ****************************/
+
+/* FORMS */
+.form-control{
+    border-radius: 0px;
+}
+/* BOUTONS */
+.btn{
+    border-radius: 0px;
+}
+.modal-content{
+    border-radius: 0px;
+}
+
+/******************************* PAGES GLOBAL ***********************************/
+
+#container-user{
+    padding-bottom: 150px;
+    padding-top: 50px;
+}
+
+section.page-title{
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 30px;
+}
+
+section.page-title h1{
+    font-size: 2.5em;
+    font-family: "ralewaylight", sans-serif;    
+    padding-bottom: 10px;    
+}
+section.page-title h2{
+    font-style: italic;
+    font-size: 1.2em;    
+    color: #777;
+}
+.page-title-underline{
+    width: 500px;
+    border-bottom: 1px solid #f47363;
+    margin: 0px auto 60px auto;
+}
+
+a.page-button{
+    color: #899BA9;
+    background-color: #283640;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #899BA9;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 25px;    
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+a.page-button:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
+}
+
+td.actions a{
+    margin-right: 5px;
+    font-size: 1.2em;
+}
+
+.overlay{
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.5);
+    
+    display: none;  /* masqué de base */
+}
+.loader_standard{
+    width: 360px;
+    height: 200px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    margin-left: -180px;
+    background-color: #fff;
+    border-radius: 2px;
+    text-align: center;
+    z-index: 11;
+    padding: 60px 10px 25px 10px;
+    border: 1px solid #ddd;
+    
+    display: none;  /* masqué de base */
+}
+
+.page-content{
+    margin-top: 40px;
+    font-family: "open_sansregular", sans-serif;        
+}
+
+
+/******************************* FORMS ***********************************/
+.form_row{
+    margin-bottom: 5px;
+}
+.form_row label{
+    width: 170px;
+}
+.form_row input{
+    width: 250px;
+}
+
+button.btn-submit{
+    color: #666;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    background-image: none;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+button.btn-submit:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
+    background: transparent;
+}
+
+
+/************************* FOOTER *****************************/
+
+footer{
+    height: 65px;
+    text-align: center;
+    color: #ACB0B0;
+    background-color: #363839;
+    padding: 23px 0px;
+    
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
