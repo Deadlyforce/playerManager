@@ -48,7 +48,7 @@ class ProspectController extends Controller
     /**
      * Returns a form new prospect
      * 
-     * @Route("{id}/ajax_delete", name="ajax_delete_prospect", options={"expose"=true})
+     * @Route("/{id}/ajax_delete", name="ajax_delete_prospect", options={"expose"=true})
      * @Method({"POST"})
      * @Template(":ajax.html.twig")
      */

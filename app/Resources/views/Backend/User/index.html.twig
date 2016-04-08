@@ -9,6 +9,7 @@
                 <tr>
                     <th>Id</th>
                     <th>Username</th>
+                    <th>Enabled</th>
                     <th>Email</th>                    
                     <th>Last login</th>                  
                     <th>Created at</th>
@@ -21,6 +22,13 @@
                 <tr id="{{ user.id }}">
                     <td>{{ user.id }}</td>
                     <td>{{ user.username }}</td>
+                    <td>
+                        {% if user.enabled == false %}
+                            0
+                        {% else %}
+                            {{ user.enabled }}
+                        {% endif %}
+                    </td>
                     <td>{{ user.email }}</td>                    
                     <td>{{ user.lastLogin|date('d-m-Y H:i:s') }}</td>                    
                     <td>{{ user.createdAt|date('d-m-Y H:i:s') }}</td>                    
@@ -29,6 +37,11 @@
 {#                        <a class="" href="{{ path('user_show', { 'id': user.id }) }}"><i class="fa fa-eye"></i></a>                       
                         <a class="" href="{{ path('user_edit', { 'id': user.id }) }}"><i class="fa fa-pencil-square-o"></i></a> #} 
                         <a href="#" class="delete" data-id="{{ user.id }}" data-token="{{ csrf_token }}" title="Delete"><i class="fa fa-trash-o"></i></a>
+                        {% if user.enabled == 1 %}
+                            <a href="#" class="disable" data-id="{{ user.id }}" data-token="{{ csrf_token }}" title="Disable"><i class="fa fa-toggle-on"></i></a>
+                        {% else %}
+                            <a href="#" class="enable" data-id="{{ user.id }}" data-token="{{ csrf_token }}" title="Enable"><i class="fa fa-toggle-off"></i></a>
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
@@ -49,13 +62,14 @@
                     "language":{
                         "lengthMenu": "_MENU_ entries"
                     },                    
-                    "order": [[ 5, "desc" ]],
+                    "order": [[ 6, "desc" ]],
                     "columns": [
                         null,
                         null,
                         null,
                         null,
                         null,
+                        null,                   
                         null,                   
                         { 
                             className: "actions",
@@ -71,7 +85,10 @@
                 var user_id = $(this).data("id");
                 var csrf_token = $(this).data("token");
                 
-                $.confirm({
+                $.confirm({ 
+                    animation: 'zoom',
+                    animationBounce: 1,
+           
                     confirm: function(){
                         ajaxDeleteUser(user_id, csrf_token);
                     },
@@ -82,7 +99,7 @@
             });
             
             /**
-             * Deletes a prospect with ajax
+             * Deletes a user with ajax
              * 
              * @param {int} user_id
              * @param {string} csrf_token
@@ -102,6 +119,85 @@
                     
                     table.row(tr).remove().draw(false); // false = conserve la pagination actuelle                    
 
+                });
+            }
+            
+            $("#table-users").on("click", ".disable", function(event){
+                event.preventDefault();
+                
+                var user_id = $(this).data("id");
+                var csrf_token = $(this).data("token");
+                
+                ajaxDisableUser(user_id, csrf_token);              
+            });
+            
+                       
+            /**
+             * Disables a user with ajax
+             * 
+             * @param {int} user_id
+             * @param {string} csrf_token
+             * @returns {undefined}
+             */
+            function ajaxDisableUser(user_id, csrf_token)
+            {                
+                var url = Routing.generate('ajax_disable_user', {'id': user_id});                
+                var data = {'csrf_token': csrf_token};
+
+                $.post(url, data, function(response){
+
+                    var data = $.parseJSON(response);
+
+                    var table = $("#table-users").DataTable();
+                    var tr = $("#" + data.id);
+                    var user = data;
+                    var actionDeleting = "<a href='#' class='delete' data-id='"+ user.id +"' data-token='"+ csrf_token +"' title='Delete'><i class='fa fa-trash-o'></i></a>";
+                    var actionEnabling = "<a href='#' class='enable' data-id='"+ user.id +"' data-token='"+ user.csrf +"' title='Enable'><i class='fa fa-toggle-off'></i></a>";
+                    var actions = actionDeleting + actionEnabling;
+                    
+                    table.row(tr).data([user.id, user.username, 0, user.email, user.lastLogin.date, user.createdAt.date, user.ip, actions]).draw(false); // false = conserve la pagination actuelle     
+                    
+                    $("#"+ data.id + " a.disable").removeClass("disable").addClass("enable");
+                    $("#"+ data.id + " .actions a").css("margin-right", "9px");
+                });
+            }
+            
+            $("#table-users").on("click", ".enable", function(event){
+                event.preventDefault();
+                
+                var user_id = $(this).data("id");
+                var csrf_token = $(this).data("token");
+                
+                ajaxEnableUser(user_id, csrf_token);              
+            });
+            
+            /**
+             * Enables a user with ajax
+             * 
+             * @param {int} user_id
+             * @param {string} csrf_token
+             * @returns {undefined}
+             */
+            function ajaxEnableUser(user_id, csrf_token)
+            {                
+                var url = Routing.generate('ajax_enable_user', {'id': user_id});                
+                var data = {'csrf_token': csrf_token};
+
+                $.post(url, data, function(response){
+
+                    var data = $.parseJSON(response);
+
+                    var table = $("#table-users").DataTable();
+                    var tr = $("#" + data.id);
+                    var user = data;
+                    var actionDeleting = "<a href='#' class='delete' data-id='"+ user.id +"' data-token='"+ csrf_token +"' title='Delete'><i class='fa fa-trash-o'></i></a>";
+                    var actionDisabling = "<a href='#' class='disable' data-id='"+ user.id +"' data-token='"+ user.csrf +"' title='Disable'><i class='fa fa-toggle-on'></i></a>";
+                    var actions = actionDeleting + actionDisabling;
+                    
+                    table.row(tr).data([user.id, user.username, 1, user.email, user.lastLogin.date, user.createdAt.date, user.ip, actions]).draw(false); // false = conserve la pagination actuelle     
+                    
+                    $("#"+ data.id + " a.enable").removeClass("enable").addClass("disable");
+                    $("#"+ data.id + " .actions a").css("margin-right", "9px");
                 });
             }
             

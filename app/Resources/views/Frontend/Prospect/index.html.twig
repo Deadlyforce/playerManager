@@ -159,6 +159,8 @@
                 var csrf_token = $(this).data("token");
                 
                 $.confirm({
+                    animation: 'zoom',
+                    animationBounce: 1,
                     confirm: function(){
                         ajaxDeleteProspect(prospect_id, csrf_token);
                     },

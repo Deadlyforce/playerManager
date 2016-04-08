@@ -279,38 +279,14 @@ td.actions a{
 }
 
 
-/******************************* FORMS ***********************************/
-.form_row{
-    margin-bottom: 5px;
-}
-.form_row label{
-    width: 170px;
-}
-.form_row input{
-    width: 250px;
-}
+/******************************* USERS ***********************************/
 
-button.btn-submit{
-    color: #666;
-    font-size: 1.2em;
-    text-decoration: none;
-    display: inline-block;
-    border: 1px solid #666;
-    border-radius: 2px;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    background-image: none;
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
-    transition: all .3s ease-in;
-}
-button.btn-submit:hover{
-    color: #f47363;
-    border: 1px solid #f47363;
-    background: transparent;
-}
+
+
+
+
+
+
 
 
 /************************* FOOTER *****************************/
