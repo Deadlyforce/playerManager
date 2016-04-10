@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use AppBundle\Entity\Relationship;
-use AppBundle\Entity\Rencontre;
+use AppBundle\Entity\Encounter;
 use AppBundle\Entity\Photo;
 
 /**
@@ -23,7 +23,7 @@ class Prospect
     public function __construct()
     {
         $this->echanges = new ArrayCollection();
-        $this->rencontres = new ArrayCollection();
+        $this->encounters = new ArrayCollection();
         $this->photos = new ArrayCollection();
         $this->relationship = null;
         $this->creationDate = new \DateTime();
@@ -54,9 +54,9 @@ class Prospect
     /**
      * @var ArrayCollection
      * 
-     * @ORM\OneToMany(targetEntity="Rencontre", mappedBy="prospect") 
+     * @ORM\OneToMany(targetEntity="Encounter", mappedBy="prospect") 
      */
-    private $rencontres;
+    private $encounters;
     
     /**
      * @var Source
@@ -449,35 +449,35 @@ class Prospect
     }    
     
     /**
-     * Get rencontres
+     * Get encounters
      *
-     * @return Rencontre 
+     * @return Encounter 
      */
-    public function getRencontres()
+    public function getEncounters()
     {
-        return $this->rencontres;
+        return $this->encounters;
     }
     
     /**
-     * Add Rencontre
+     * Add Encounter
      *
-     * @param Rencontre $rencontre
+     * @param Encounter $encounter
      * @return Prospect
      */
-    public function addRencontre(Rencontre $rencontre)
+    public function addEncounter(Rencontre $encounter)
     {
-        $this->rencontres[] = $rencontre;
+        $this->encounters[] = $encounter;
         return $this;
     }
 
     /**
-     * Remove Rencontre
+     * Remove Encounter
      *
-     * @param Rencontre $rencontre
+     * @param Encounter $encounter
      */
-    public function removeRencontre(Rencontre $rencontre)
+    public function removeEncounter(Rencontre $encounter)
     {
-        $this->rencontres->removeElement($rencontre);
+        $this->encounters->removeElement($encounter);
     }
     
     /**

@@ -40,11 +40,7 @@ class ProspectType extends AbstractType
                 'choices_as_values' => true                
             ))
             ->add('city', TextType::class, array(
-                'required' => FALSE, 
-                'attr' => array(
-                    'placeholder' => 'Paris',
-                    'class' => 'form-input-city'
-                )
+                'required' => false                
             ))
             ->add('parisDistrict', ChoiceType::class, array(
                 'required' => false,

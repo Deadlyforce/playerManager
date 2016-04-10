@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Rencontre
+ * Encounter
  *
- * @ORM\Table(name="rencontres")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\RencontreRepository")
+ * @ORM\Table(name="encounters")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\EncounterRepository")
  */
-class Rencontre
+class Encounter
 {
     /**
      * @var integer
@@ -65,7 +65,7 @@ class Rencontre
     
     /**
      * @var Prospect
-     * @ORM\ManyToOne(targetEntity="Prospect", inversedBy="rencontres")
+     * @ORM\ManyToOne(targetEntity="Prospect", inversedBy="encounters")
      * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id") 
      */
     private $prospect;

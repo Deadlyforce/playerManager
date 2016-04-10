@@ -64,7 +64,7 @@
 
                     <div class="collapse navbar-collapse col-md-8 pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
-                            <li id="prospect"><a href="{{ path('prospect') }}">Prospects</a></li>
+                            <li id="prospect"><a href="{{ path('prospect') }}">Contacts</a></li>
                             <li id="relation"><a href="{{ path('relationship') }}">Relationships</a></li>                                        
                             <li id="echange"><a href="{{ path('echange') }}">Chats</a></li>            
                             <li id="fos_user_profile_show"><a href="{{ path('fos_user_profile_show') }}">Profile</a></li>  
@@ -88,15 +88,11 @@
     </footer>
 
         
-    <script type="text/javascript">   
-        // css class container-data height
-        // Fired before "document ready" to avoid white flash (height adapting) 
-        // on pages that have .container-data class
-        {#if (typeof document.getElementsByClassName("container-data")[0] !== 'undefined') {
-            document.getElementsByClassName("container-data")[0].style.height = (document.body.offsetHeight - 128 -65) + "px";
-        }#}
+    <script type="text/javascript">       
         
-        $(document).ready(function(){           
+        $(document).ready(function(){
+            
+            
             
             // Active link in menu *********************************************
             // Deactivated with a click on "brand"

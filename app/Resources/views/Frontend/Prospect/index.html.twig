@@ -1,7 +1,6 @@
 {% extends '::base.html.twig' %}
-{% block title %}Prospects{% endblock %}
 {% import ":Frontend/Macros/Prospect:photoDisplayIndex.html.twig" as photoDisplayIndex %}
-
+{% block title %}Contacts{% endblock %}
 
 {% block content %}
     <div class="container" id="container-prospect">        
@@ -98,14 +97,25 @@
     {% endblock %}
     
     <script type="text/javascript">
-        $(document).ready(function(){                   
+        $(document).ready(function(){        
+            
+            // Form new prospect - parisDistrict
+            $("#container-prospect").on("change", "input#appbundle_prospect_city", function(){
+                var city = $(this).val().toLowerCase();
+
+                if(city === 'paris'){
+                    $('.row-paris-district').show('fast');
+                }else{
+                    $('.row-paris-district').hide('fast');
+                }
+            });
             
             $.fn.dataTable.moment('DD-MM-YYYY' );
             
             initTableProspects();
             
             function initTableProspects()
-            {
+            {               
                 $("#table-prospects").DataTable({
                     "language":{
                         "lengthMenu": "_MENU_ entries"
@@ -142,7 +152,7 @@
                 $.get(url, function(response){                    
                     
                     $("#modal_prospect_form_new_body").html(response); // coller la vue dans une modale                  
-                    $('#modal_prospect_form_new').appendTo('body');
+{#                    $('#modal_prospect_form_new').appendTo('body');#}
                     
                     $(".loader_standard").hide(200, function(){
                         $(".overlay").hide();   
