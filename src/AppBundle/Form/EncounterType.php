@@ -11,7 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class RencontreType extends AbstractType
+class EncounterType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -26,19 +26,19 @@ class RencontreType extends AbstractType
                 'widget' => 'single_text',
                 'date_format' => 'dd MM yyyy'                
             ))
-            ->add('lieu', TextType::class, array(
-                'label' => 'Lieu'
+            ->add('place', TextType::class, array(
+                'label' => 'Place'
             ))
-            ->add('duree', IntegerType::class, array(
-                'label' => 'Durée'                
+            ->add('duration', IntegerType::class, array(
+                'label' => 'Duration'                
             ))
-            ->add('depenses_total', IntegerType::class, array(
-                'label' => 'Total dépenses'                
+            ->add('expenses', IntegerType::class, array(
+                'label' => 'Total expenses'                
             ))
-            ->add('changement_lieu', CheckboxType::class, array(
-                'label' => 'Changement de lieu'                
+            ->add('venueChange', CheckboxType::class, array(
+                'label' => 'Venue change ?'                
             ))
-            ->add('liste_lieux')
+            ->add('venuesList')
         ;
     }
     
@@ -48,7 +48,7 @@ class RencontreType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Rencontre'
+            'data_class' => 'AppBundle\Entity\Encounter'
         ));
     }
 
@@ -57,6 +57,6 @@ class RencontreType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_rencontre';
+        return 'appbundle_encounter';
     }
 }
