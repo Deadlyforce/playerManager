@@ -67,7 +67,7 @@
                 {% if prospect.relationship %}
                     <a href="{{ path('relationship_show', { 'id': prospect.relationship.id }) }}" title="Détails">Détails de la relationship</a><br/>
                 {% endif %}
-                <a href="{{ path('rencontre_new', { 'prospect_id': prospect.id }) }}" title="Nouvelle rencontre">Ajouter une rencontre</a>
+                <a href="{{ path('encounter_new', { 'prospect_id': prospect.id }) }}" title="New encounter">Add encounter</a>
             </div>
         </div>   
     </div>

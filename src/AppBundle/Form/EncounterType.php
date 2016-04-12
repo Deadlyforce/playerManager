@@ -5,7 +5,7 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
-
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,25 +20,30 @@ class EncounterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('date', DateTimeType::class, array(
-                'label' => 'Date',
-                'input' => 'datetime',
-                'widget' => 'single_text',
-                'date_format' => 'dd MM yyyy'                
+            ->add('date', DateTimeType::class, array(                                   
+                'required' => true,		
+		'model_timezone' => 'Europe/Paris',
+		'view_timezone' => 'Europe/Paris',
+		'input' => 'datetime',
+		'widget' => 'single_text',
+		'format' => 'dd-MM-yyyy'
             ))
             ->add('place', TextType::class, array(
-                'label' => 'Place'
+                
             ))
             ->add('duration', IntegerType::class, array(
-                'label' => 'Duration'                
+                           
             ))
             ->add('expenses', IntegerType::class, array(
-                'label' => 'Total expenses'                
+                           
             ))
             ->add('venueChange', CheckboxType::class, array(
-                'label' => 'Venue change ?'                
+                          
             ))
             ->add('venuesList')
+            ->add('submit', SubmitType::class, array(
+                
+            ))
         ;
     }
     

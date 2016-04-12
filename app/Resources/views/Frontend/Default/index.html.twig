@@ -1,16 +1,38 @@
 {% extends '::base.html.twig' %}
+{% block title %}Home{% endblock %}
 
 {% block content %}
     
     <div class="home-carousel">
         <div>
-            <h1>Keep easily track of your dates<br>Manage your love life</h1>
+            <h1>Keep track of your dates<br>Manage your love life</h1>
             <img src="{{ asset('bundles/app/images/home/slider_02.jpg') }}" alt="Image_02">
         </div>
-        <div><img src="{{ asset('bundles/app/images/home/slider_01.jpg') }}" alt="Image_01"></div>        
-{#        <div>your content</div>#}
+        <div>
+            <img src="{{ asset('bundles/app/images/home/slider_01.jpg') }}" alt="Image_01">
+        </div>  
     </div>
-    
+    <div class="container-fluid" id="features"> 
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 feature">
+                    <i class="fa fa-users"></i>
+                    <h2>Contact management</h2>
+                    <p>Keep track of your contacts<br>Save basic information for future reference<br>Remember everything<br>Rate your contact</p>
+                </div>
+                <div class="col-md-4 feature">
+                    <i class="fa fa-code-fork"></i>
+                    <h2>Relationship tracking</h2>
+                    <p>Whatever the nature of the relationship<br>Keep track of logistics<br>Monitor your progression</p>
+                </div>
+                <div class="col-md-4 feature">
+                    <i class="fa fa-picture-o"></i>
+                    <h2>Photos Gallery</h2>
+                    <p>Upload up to 5 photos<br>for everyone of your contacts<br>Use the crop functionality<br>to frame them as you desire</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
         $(document).ready(function(){
             

@@ -1,51 +1,45 @@
 {% extends '::base.html.twig' %}
+{% block title %}Encounters{% endblock %}
 
-{% block body -%}
-    <h1>Encounters list</h1>
+{% block content %}    
+    <div class="container">
+        <section class="page-title">
+                <h1>Encounters</h1> 
+    {#            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>#}
+        </section>
+        <div class="page-title-underline"></div> 
 
-    <table class="records_list">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Date</th>
-                <th>Place</th>
-                <th>Duration</th>
-                <th>Total expenses</th>
-                <th>Venue Change</th>
-                <th>Venues list</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for entity in entities %}
-            <tr>
-                <td><a href="{{ path('encounter_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
-                <td>{% if entity.date %}{{ entity.date|date('Y-m-d H:i:s') }}{% endif %}</td>
-                <td>{{ entity.place }}</td>
-                <td>{{ entity.duration }}</td>
-                <td>{{ entity.expenses }}</td>
-                <td>{{ entity.venueChange }}</td>
-                <td>{{ entity.venuesList }}</td>
-                <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('encounter_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('encounter_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <a class="page-button" href="{{ path('encounter_new', {'prospect_id': prospect.id}) }}" id="add_encounter" title ="Add encounter"><i class="fa fa-plus"></i> Add an encounter</a>
 
-        <ul>
-        <li>
-            <a href="{{ path('encounter_new') }}">
-                Create a new entry
-            </a>
-        </li>
-    </ul>
-    {% endblock %}
+
+        <table class="table table-hover">
+            <thead>
+                <tr>                    
+                    <th>Date</th>
+                    <th>Place</th>
+                    <th>Duration</th>
+                    <th>Total expenses</th>
+                    <th>Venue Change</th>
+                    <th>Venues list</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for encounter in encounters %}
+                <tr>                    
+                    <td>{% if encounter.date %}{{ encounter.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+                    <td>{{ encounter.place }}</td>
+                    <td>{{ encounter.duration }}</td>
+                    <td>{{ encounter.expenses }}</td>
+                    <td>{{ encounter.venueChange }}</td>
+                    <td>{{ encounter.venuesList }}</td>
+                    <td>
+                        <a href="{{ path('encounter_show', { 'id': entity.id }) }}">show</a>                        
+                        <a href="{{ path('encounter_edit', { 'id': entity.id }) }}">edit</a>                        
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>   
+    </div>
+{% endblock %}

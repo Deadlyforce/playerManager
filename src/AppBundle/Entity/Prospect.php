@@ -464,7 +464,7 @@ class Prospect
      * @param Encounter $encounter
      * @return Prospect
      */
-    public function addEncounter(Rencontre $encounter)
+    public function addEncounter(Encounter $encounter)
     {
         $this->encounters[] = $encounter;
         return $this;
@@ -475,7 +475,7 @@ class Prospect
      *
      * @param Encounter $encounter
      */
-    public function removeEncounter(Rencontre $encounter)
+    public function removeEncounter(Encounter $encounter)
     {
         $this->encounters->removeElement($encounter);
     }

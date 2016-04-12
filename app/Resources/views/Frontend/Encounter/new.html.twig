@@ -1,11 +1,20 @@
 {% extends '::base.html.twig' %}
-{% block title %}Nouvelle rencontre{% endblock %}
+{% block title %}New Encounter{% endblock %}
 
-{% block body -%}
-    <h3>Rencontre creation</h3>
+{% block content %}
+    <div class="container">
+        <h3>Encounter creation</h3>
 
-    {{ form(form) }}
+        {{ form_start(form) }}
+            {{ form_row(form.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datepicker'} }) }}
+            {{ form_row(form.place, {'label': 'Place'}) }}
+            {{ form_row(form.duration, {'label': 'Duration'}) }}
+            {{ form_row(form.expenses, {'label': 'Total expenses'}) }}
+            {{ form_row(form.venueChange, {'label': 'Venue change?'}) }}
+            {{ form_row(form.venuesList, {'label': 'Venues list'}) }}
+            {{ form_row(form.submit, {'label': 'Save changes'}) }}
+        {{ form_end(form) }}
 
-    <a href="{{ path('rencontre') }}">Back to the list</a>
-
+        <a href="{{ path('encounter', {'prospect_id': prospect_id}) }}">Back to the list of encounters</a>
+    </div>
 {% endblock %}

@@ -17,7 +17,7 @@
                 <tr>
                     <th>Nickname</th>
                     <th>First name</th>
-                    <th>last name</th>
+                    <th>Last name</th>
                     <th>Age</th>
                     <th>City</th>
                     <th>Country</th>
@@ -58,7 +58,7 @@
                         {% endif %}
                         <a class="" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Gallery">Gallery</a>
                         <a class="" href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Relationship">Relationship edit</a>
-{#                        <a class="" href="{{ path('', {'prospect_id': prospect.id}) }}" title="Encounters">Encounters</a>#}
+                        <a class="" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Encounters">Encounters</a>
                     </td>
                 </tr>
             {% endfor %}
