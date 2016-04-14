@@ -125,7 +125,7 @@ class ProspectController extends Controller
      * @Method("GET")
      * @Template(":Frontend/Prospect:list.html.twig")
      */
-    public function listAction($page = 0)
+    public function listAction(Request $request)
     {
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You cannot access this page!');
@@ -138,19 +138,23 @@ class ProspectController extends Controller
 //            array("user" => $user), 
 //            array("creationDate" => "DESC")
 //        );
-        $paginate = 5;
-        $prospects = $em->getRepository('AppBundle:Prospect')->getProspects($user, $page, $paginate);            
- 
-        $totalPages = ceil(count($prospects)/$paginate);
         
+        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user);            
+        $paginator = $this->get('knp_paginator');
         
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1) /*page number*/,
+            5 /*limit per page*/
+        );
+       
         $tokenManager = $this->get('security.csrf.token_manager');        
         $csrf_token = $tokenManager->refreshToken('');
                 
         return array(
-            'prospects' => $prospects,
+//            'prospects' => $prospects,
             'csrf_token' => $csrf_token,
-            'totalPages' => $totalPages
+            'pagination' => $pagination
         );
     }
     

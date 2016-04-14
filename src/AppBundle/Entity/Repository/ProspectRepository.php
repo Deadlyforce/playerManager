@@ -3,7 +3,7 @@
 namespace AppBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\Tools\Pagination\Paginator;
+//use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * prospectRepository
@@ -21,22 +21,33 @@ class ProspectRepository extends EntityRepository
      * @param int $maxResults
      * @return Paginator
      */
-    public function getProspects($user, $firstResult, $maxResults = 5)
+    public function getProspectsQuery($user)
     {
-        $qb = $this->createQueryBuilder('p');
+//        $qb = $this->createQueryBuilder('p');
+//        
+//        $qb
+//            ->select('p')
+//            ->setFirstResult($firstResult)
+//            ->setMaxResults($maxResults)
+//            ->where('p.user = :user')
+//            ->orderBy('p.creationDate', 'DESC')
+//            ->setParameter('user', $user)
+//        ;
+//        
+//        $pag = new Paginator($qb);
+//        
+//        return $pag;
         
-        $qb
-            ->select('p')
-            ->setFirstResult($firstResult)
-            ->setMaxResults($maxResults)
-            ->where('p.user = :user')
-            ->orderBy('p.creationDate', 'DESC')
-            ->setParameter('user', $user)
-        ;
+        $query = $this->_em->createQuery('
+            SELECT p
+            FROM AppBundle:Prospect p
+            WHERE p.user = :user
+            ORDER BY p.creationDate DESC
+        ')
+        ->setParameter('user', $user);
         
-        $pag = new Paginator($qb);
+        return $query;
         
-        return $pag;                
     }
     
 }
