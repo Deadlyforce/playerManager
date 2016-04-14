@@ -37,13 +37,14 @@ function getDatetimepicker()
 {
     $(".datetimepicker").datetimepicker({ 
         dateFormat: 'dd-mm-yy',
-        timeFormat: 'HH:mm:ss',
-        hourText: 'Heures',
-        timeText: 'Horaire',
+        timeFormat: 'HH:mm',
+        hourText: 'Hours',
+        timeText: 'Time',
         minuteText: 'Minutes',
         showSecond: false,
-        controlType: 'select',
-        oneLine: true
+        controlType: 'slider',
+        oneLine: true,
+        stepMinute: 5
     });
 }
 

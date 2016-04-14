@@ -26,21 +26,31 @@ class EncounterType extends AbstractType
 		'view_timezone' => 'Europe/Paris',
 		'input' => 'datetime',
 		'widget' => 'single_text',
-		'format' => 'dd-MM-yyyy'
+		'format' => 'dd-MM-yyyy HH:mm'
             ))
             ->add('place', TextType::class, array(
-                
+                'required' => false
             ))
             ->add('duration', IntegerType::class, array(
-                           
+                'required' => false,
+                'attr' => array(
+                    'min' => 0,
+                    'max' => 12
+                )                
             ))
             ->add('expenses', IntegerType::class, array(
-                           
+                'required' => false,                
+                'attr' => array(
+                    'min' => 0,
+                    'max' => 5000
+                )         
             ))
             ->add('venueChange', CheckboxType::class, array(
-                          
+                'required' => false
             ))
-            ->add('venuesList')
+            ->add('venuesList', TextType::class,  array(
+                'required' => false
+            ))
             ->add('submit', SubmitType::class, array(
                 
             ))

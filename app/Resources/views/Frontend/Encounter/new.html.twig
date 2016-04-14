@@ -3,18 +3,53 @@
 
 {% block content %}
     <div class="container">
-        <h3>Encounter creation</h3>
+        <section class="page-title">
+            <h1>New encounter with {{ prospect.firstname }}</h1> 
+{#                <h2>Blablabla</h2>#}
+        </section>
+        <div class="page-title-underline"></div> 
+        
+        <div class="row encounter-new">
+            <div class="col-md-2 left-col">
+                <i class="fa fa-glass"></i>
+            </div>
+            <div class="col-md-10 main-col">
+                {{ form_start(form) }}
+                    {{ form_row(form.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datetimepicker'} }) }}
+                    {{ form_row(form.place, {'label': 'Place'}) }}
+                    {{ form_row(form.duration, {'label': 'Duration (Hours)'}) }}
+                    {{ form_row(form.expenses, {'label': 'Total expenses (€)'}) }}
+                    <div>                        
+                        {{ form_label(form.venueChange, 'Venue change?') }}
+                        <div class="slide-button-base yes-no-button">
+                            {{ form_widget(form.venueChange) }}
+                            <div id="encounter_venueChange_button" class="slide-button"></div> 
+                            {{ form_errors(form.venueChange) }}
+                        </div>
+                    </div>
+                    {{ form_row(form.venuesList, {'label': 'Venues list'}) }}
+                    {{ form_row(form.submit, {'label': 'Save changes', 'attr': {'class': 'btn-submit-dark'} }) }}
+                {{ form_end(form) }}
 
-        {{ form_start(form) }}
-            {{ form_row(form.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datepicker'} }) }}
-            {{ form_row(form.place, {'label': 'Place'}) }}
-            {{ form_row(form.duration, {'label': 'Duration'}) }}
-            {{ form_row(form.expenses, {'label': 'Total expenses'}) }}
-            {{ form_row(form.venueChange, {'label': 'Venue change?'}) }}
-            {{ form_row(form.venuesList, {'label': 'Venues list'}) }}
-            {{ form_row(form.submit, {'label': 'Save changes'}) }}
-        {{ form_end(form) }}
-
-        <a href="{{ path('encounter', {'prospect_id': prospect_id}) }}">Back to the list of encounters</a>
+                <a href="{{ path('encounter', {'prospect_id': prospect.id}) }}">Back to the list of encounters</a>
+            </div>
+        </div>
     </div>
+                
+    <script type="text/javascript">
+        $(document).ready(function(){
+                                    
+            $(".slide-button-base").on("click", ".slide-button", function(){      
+                var input = $(this).prev();
+                if(input.prop("checked")) {
+                    input.prop("checked", false);
+                    input.val("0");
+                } else {
+                    input.prop("checked", true);
+                    input.val("1");
+                }
+            });            
+            
+        });
+    </script>
 {% endblock %}

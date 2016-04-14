@@ -86,8 +86,7 @@ class ProspectController extends Controller
         $response = json_encode($response_array);
         
         return new Response($response);
-    }
-    
+    }    
     
     /**
      * Lists all Prospect entities.
@@ -116,6 +115,42 @@ class ProspectController extends Controller
         return array(
             'prospects' => $prospects,
             'csrf_token' => $csrf_token
+        );
+    }
+    
+    /**
+     * Lists Prospect entities.
+     *
+     * @Route("/list", name="prospect_list")
+     * @Method("GET")
+     * @Template(":Frontend/Prospect:list.html.twig")
+     */
+    public function listAction($page = 0)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+//        $prospects = $em->getRepository('AppBundle:Prospect')->findBy(
+//            array("user" => $user), 
+//            array("creationDate" => "DESC")
+//        );
+        $paginate = 5;
+        $prospects = $em->getRepository('AppBundle:Prospect')->getProspects($user, $page, $paginate);            
+ 
+        $totalPages = ceil(count($prospects)/$paginate);
+        
+        
+        $tokenManager = $this->get('security.csrf.token_manager');        
+        $csrf_token = $tokenManager->refreshToken('');
+                
+        return array(
+            'prospects' => $prospects,
+            'csrf_token' => $csrf_token,
+            'totalPages' => $totalPages
         );
     }
     

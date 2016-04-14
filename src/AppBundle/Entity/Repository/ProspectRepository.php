@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * prospectRepository
@@ -12,4 +13,30 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProspectRepository extends EntityRepository
 {
+    /**
+     * Get prospects (for index)
+     * 
+     * @param User $user
+     * @param int $firstResult
+     * @param int $maxResults
+     * @return Paginator
+     */
+    public function getProspects($user, $firstResult, $maxResults = 5)
+    {
+        $qb = $this->createQueryBuilder('p');
+        
+        $qb
+            ->select('p')
+            ->setFirstResult($firstResult)
+            ->setMaxResults($maxResults)
+            ->where('p.user = :user')
+            ->orderBy('p.creationDate', 'DESC')
+            ->setParameter('user', $user)
+        ;
+        
+        $pag = new Paginator($qb);
+        
+        return $pag;                
+    }
+    
 }

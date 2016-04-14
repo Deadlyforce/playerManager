@@ -48,32 +48,6 @@ class EncounterController extends Controller
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
     }
-    /**
-     * Creates a new Encounter entity.
-     *
-     * @Route("/", name="encounter_create")
-     * @Method("POST")
-     * @Template(":Frontend/Encounter:new.html.twig")
-     */
-    public function createAction(Request $request)
-    {
-        $entity = new Encounter();
-        $form = $this->createCreateForm($entity);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($entity);
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('encounter_show', array('id' => $entity->getId())));
-        }
-
-        return array(
-            'entity' => $entity,
-            'form'   => $form->createView(),
-        );
-    }
 
     /**
      * Displays a form to create a new Encounter entity.
@@ -84,24 +58,38 @@ class EncounterController extends Controller
      */
     public function newAction(Request $request, $prospect_id)
     {
-        $encounter = new Encounter();
-        
-        $form = $this->createForm(EncounterType::class, $encounter);
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($encounter);
-            $em->flush();
-            
-            return $this->redirectToRoute('encounter', array('prospect_id' => $prospect_id));
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
         }
         
-        return $this->render(':Frontend/Encounter:new.html.twig', array(
-            'encounter' => $encounter,
-            'prospect_id' => $prospect_id,
-            'form' => $form->createView()
-        ));
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $em = $this->getDoctrine()->getManager();
+        $prospect = $em->find("AppBundle:Prospect", $prospect_id);
+        
+        if ($user === $prospect->getUser()) {
+        
+            $encounter = new Encounter();       
+
+            $form = $this->createForm(EncounterType::class, $encounter);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $encounter->setProspect($prospect);
+                $em->persist($encounter);
+                $em->flush();
+
+                return $this->redirectToRoute('encounter', array('prospect_id' => $prospect_id));
+            }
+
+            return $this->render(':Frontend/Encounter:new.html.twig', array(
+                'encounter' => $encounter,
+                'prospect' => $prospect,
+                'form' => $form->createView()
+            ));
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
     }
 
     /**

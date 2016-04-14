@@ -1,0 +1,251 @@
+{% extends '::base.html.twig' %}
+{% import ":Frontend/Macros/Prospect:photoDisplayIndex.html.twig" as photoDisplayIndex %}
+{% block title %}Contacts{% endblock %}
+
+{% block content %}
+    <div class="container" id="container-prospect">        
+        <section class="page-title">
+            <h1>Contacts</h1> 
+{#            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>#}
+        </section>
+        <div class="page-title-underline"></div> 
+
+        <a class="page-button" href="#" id="add_prospect" title ="Add prospect"><i class="fa fa-plus"></i> Add contact</a>
+
+        {% for prospect in prospects %}
+            <div class="prospect-record row">
+                <div class="row">
+                <div class="prospect-record-photo col-md-3">
+                    {{ photoDisplayIndex.primaryPhotoOrLast(prospect.photos) }}                     
+                </div>
+                <div class="prospect-record-card col-md-9">
+                    <p class="record-firstname">{{ prospect.firstname }} {{ prospect.lastname }}</em></p>
+                    <p class="record-date pull-right">Created: {{ prospect.creationDate|date('d-m-Y') }}</p>
+                    <div class="card-separator"></div>
+                    
+                    <p class="record-info"><span>Age:</span> {{ prospect.age }}</p>
+                    <p class="record-info"><span>City:</span> {{ prospect.city }}</p>
+                    <p class="record-info"><span>Country:</span> {{ prospect.country }}</p>
+                    <p class="record-info"><span>Cellphone:</span> {{ prospect.cellNumber }}</p>                    
+                    <p class="record-info"><span>Origin:</span> {{ prospect.source }}</p>                    
+                </div>
+                </div>
+                <div class="row">
+                    <div class="record-actions">
+                        <ul>
+                            <li>
+                                <a href="#" class="delete" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete"><i class="fa fa-trash-o"></i></a>
+                            </li>
+                            <li>
+                                <a href="{{ path('prospect_edit', { 'id': prospect.id }) }}" title="Modify contact"><i class="fa fa-pencil-square-o"></i></a>
+                            </li>
+                            <li>
+                                <a href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show all contact infos"><i class="fa fa-eye"></i></a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+        <table id="table-prospects" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nickname</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Age</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    <th>Source</th>
+                    <th>Photo</th>
+                    <th>Created</th>
+                    <th>Actions</th> 
+                </tr>
+            </thead>
+            <tbody>
+            {% for prospect in prospects %}
+                <tr id="{{ prospect.id }}">
+                    <td>
+                        {% if prospect.nickname %}
+                            {{ prospect.nickname }}
+                        {% else %}
+                            -
+                        {% endif %}
+                    </td>
+                    <td>{{ prospect.firstname }}</td>
+                    <td>{{ prospect.lastname }}</td>
+                    <td>{{ prospect.age }}</td>
+                    <td>{{ prospect.city }}</td>
+                    <td>{{ prospect.country }}</td>
+                    <td>{{ prospect.source }}</td>
+                    <td>                          
+{#                        {{ photoDisplayIndex.primaryPhotoOrLast(prospect.photos) }}                                              #}
+                    </td>
+                    <td>
+                        {% if prospect.creationDate %}{{ prospect.creationDate|date('d-m-Y') }}{% endif %}
+                    </td>
+                    <td>
+                        <a class="" href="{{ path('prospect_show', { 'id': prospect.id }) }}"><i class="fa fa-eye"></i></a>                       
+                        <a class="" href="{{ path('prospect_edit', { 'id': prospect.id }) }}"><i class="fa fa-pencil-square-o"></i></a>  
+                        <a href="#" class="delete" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete"><i class="fa fa-trash-o"></i></a>
+                        {% if prospect.relationship %}
+    {#                        <a class="" href="{{ path('relationship_show', { 'id': entity.relationship.id }) }}">relationship</a>#}
+                        {% endif %}
+                        <a class="" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Gallery">Gallery</a>
+                        <a class="" href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Relationship">Relationship edit</a>
+                        <a class="" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Encounters">Encounters</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>  
+            
+        {# Modales #}
+        <div class="modal fade" id="modal_prospect_form_new" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">                    
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">New contact</h4>
+                    </div>    
+                    <div class="modal-body" id="modal_prospect_form_new_body">
+                        {# Form returned by ajax #}
+                    </div>                       
+                </div>    
+            </div>
+        </div>
+
+        {# POPUP OVERLAY D'ATTENTE AJAX #}
+        <div class="overlay"></div>
+        <div class="loader_standard">
+            <p>Chargement...</p>
+            <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />
+        </div>
+    </div> 
+
+    {% block javascript %}
+        {% javascripts 
+            'bundles/app/js/prospect_index.js'
+        %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // Adjust images ratio class 
+            {#$(".prospect-record").find("img").each(function(){
+                var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
+                $(this).addClass(imgClass);
+            });#}
+            
+            // Form new prospect - parisDistrict
+            $("#container-prospect").on("change", "input#appbundle_prospect_city", function(){
+                var city = $(this).val().toLowerCase();
+
+                if(city === 'paris'){
+                    $('.row-paris-district').show('fast');
+                }else{
+                    $('.row-paris-district').hide('fast');
+                }
+            });
+            
+            $.fn.dataTable.moment('DD-MM-YYYY' );
+            
+            initTableProspects();
+            
+            function initTableProspects()
+            {               
+                $("#table-prospects").DataTable({
+                    "language":{
+                        "lengthMenu": "_MENU_ entries"
+                    },                    
+                    "order": [[ 9, "desc" ]],
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        { 
+                            className: "actions",
+                            "width": "120px"
+                        }
+                    ]
+                });
+            }
+            
+            // Ajax: get add form
+            $("#add_prospect").click(function(event){
+                event.preventDefault();
+                
+                $(".overlay").show(200, function(){
+                    $(".loader_standard").show();
+                });                
+                
+                var url = Routing.generate('ajax_new_prospect_form');
+                
+                $.get(url, function(response){                    
+                    
+                    $("#modal_prospect_form_new_body").html(response); // coller la vue dans une modale                  
+{#                    $('#modal_prospect_form_new').appendTo('body');#}
+                    
+                    $(".loader_standard").hide(200, function(){
+                        $(".overlay").hide();   
+                    });                                     
+                    
+                    $('#modal_prospect_form_new').modal('show');
+                });
+            });
+            
+            $("#table-prospects").on("click", ".delete", function(event){
+                event.preventDefault();
+                
+                var prospect_id = $(this).data("id");
+                var csrf_token = $(this).data("token");
+                
+                $.confirm({
+                    animation: 'zoom',
+                    animationBounce: 1,
+                    confirm: function(){
+                        ajaxDeleteProspect(prospect_id, csrf_token);
+                    },
+                    cancel: function(){
+                        console.log('the user clicked cancel');
+                    }
+                });
+            });
+            
+            /**
+             * Deletes a prospect with ajax
+             * 
+             * @param {int} prospect_id
+             * @param {string} csrf_token
+             * @returns {undefined}
+             */
+            function ajaxDeleteProspect(prospect_id, csrf_token)
+            {                
+                var url = Routing.generate('ajax_delete_prospect', {'id': prospect_id});                
+                var data = {'csrf_token': csrf_token};
+
+                $.post(url, data, function(response){
+
+                    var data = $.parseJSON(response);
+
+                    var table = $("#table-prospects").DataTable();
+                    var tr = $("#" + data.id);
+                    
+                    table.row(tr).remove().draw(false); // false = conserve la pagination actuelle                    
+
+                });
+            }
+            
+        });
+    </script>
+{% endblock %}

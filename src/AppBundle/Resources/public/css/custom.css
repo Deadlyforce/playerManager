@@ -564,6 +564,7 @@ ul.slick-dots{
     position: absolute;
     left: 0;
     right: 0;    
+    z-index: 2;
 }
 ul.slick-dots > li{
     list-style: none;
@@ -616,7 +617,79 @@ ul.slick-dots > li > button:hover{
 
 /******************************* PROSPECTS - INDEX *********************************/
 
-
+.prospect-record{
+    color: #fff;
+    background-color: #f47363;
+    margin: 0px 0px 40px 0px;
+}
+.prospect-record .row{
+    margin: 0px;
+}
+.prospect-record-photo{
+    padding: 0px;
+}
+.prospect-record-card{
+    position: relative;
+    padding-left: 0px;
+    padding-top: 10px;
+}
+p.record-firstname{
+    font-size: 2em;
+    font-family: "ralewaylight", sans-serif;
+    display: inline-block;
+    vertical-align: top;
+}
+p.record-date{
+    font-family: sans-serif;
+    font-size: 1.2em;
+    display: inline-block;
+    padding-top: 12px;
+}
+.card-separator{
+    border-bottom: 1px solid #fff;
+    margin-bottom: 15px;
+}
+.prospect-record-card p.record-info span{
+    font-weight: 600;
+    display: inline-block;
+    width: 100px;
+}
+.prospect-record-card p.record-info{
+    font-size: 1.1em;
+}
+.record-actions{
+    border-top: 1px solid rgba(255,255,255,0.3);
+    height: 50px;
+}
+.record-actions ul{
+    margin-top: 0;
+    list-style: none;
+}
+.record-actions li{
+    float: right;
+    text-align: center;
+}
+.record-actions a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.8em;
+    display: table-cell;
+    vertical-align: middle;
+/*    border: 1px solid white;*/
+    width: 50px;
+    height: 50px;    
+    
+    border-left: 1px solid rgba(255,255,255,0.7);
+    border-right: 1px solid rgba(0,0,0,0.2);
+    
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+.record-actions a:hover{
+    background-color: #DA6759;    
+}
 
 /******************************* PROSPECTS - NEW ***********************************/
 
@@ -705,7 +778,6 @@ ul.record_actions{
 
 .section-aside-relationship{
     display: inline-block;
-/*    width: 25%;*/
     vertical-align: top;
     padding: 0px 40px 0px 0px;
 }
@@ -1100,6 +1172,92 @@ form#upload-form{
 #crop-info{
     text-align: center;
     margin-bottom: 20px;
+}
+
+/******************************** ENCOUNTER *************************************/
+
+/***  NEW  ***/
+
+.encounter-new .left-col{
+    text-align: center;
+}
+.encounter-new .left-col i{
+    font-size: 6em;
+}
+.encounter-new .main-col{
+    border-left: 1px solid #899BA7;
+    padding: 0px 40px;
+}
+form[name="appbundle_encounter"]{
+    font-family: "open_sansregular", sans-serif;
+}
+form[name="appbundle_encounter"] > div{
+    margin-bottom: 10px;
+}
+form[name="appbundle_encounter"] label {
+    width: 250px;
+    font-weight: 200;
+    font-size: 1.2em;
+}
+form[name="appbundle_encounter"] input[type="text"], form[name="appbundle_encounter"] input[type="number"]{ 
+    background-color: transparent;
+    border: 1px solid rgb(137, 155, 142);
+    border-radius: 2px;
+    height: 25px;
+}
+
+.slide-button-base{
+    width: 80px;
+    height: 26px;
+    background: #283640;
+    position: relative;
+    display: inline-block;
+    border-radius: 50px;
+    box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.5), 0px 1px 0px rgba(255, 255, 255, 0.2);
+}
+.slide-button {
+    display: block;
+    width: 34px;
+    height: 20px;
+    cursor: pointer;
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    z-index: 1;
+    background: #fcfff4;
+    background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+    border-radius: 50px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+}
+.yes-no-button:after {
+    content: 'NO';
+    color: #000;
+    position: absolute;
+    right: 10px;
+    top: 2px;
+    z-index: 0;
+    font: 12px/26px Arial, sans-serif;
+    font-weight: bold;
+    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
+}
+.yes-no-button:before {
+    content: 'YES';
+    color: #899BA7;
+    position: absolute;
+    left: 10px;
+    top: 2px;
+    z-index: 0;
+    font: 12px/26px Arial, sans-serif;
+    font-weight: bold;
+}
+input#appbundle_encounter_venueChange {
+    visibility: hidden;
+}
+input#appbundle_encounter_venueChange:checked + .slide-button {
+    left: 43px;
 }
 
 /************************* FOOTER *****************************/
