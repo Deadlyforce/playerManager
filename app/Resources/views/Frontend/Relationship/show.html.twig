@@ -1,21 +1,24 @@
 {% extends '::base.html.twig' %}
-{% import ":Frontend/Macros:photoDisplay.html.twig" as photoDisplay %}
+{% import ":Frontend/Macros/prospect:photoDisplay250px.html.twig" as photoDisplay %}
 {% block title %}Relationship{% endblock %}
 
 {% block content %}
     <div class="container" id="container-relationship">
         <section class="page-title">
-            <h1>Relationship details</h1>
+            <h1>Relationship with {{ relationship.prospect.firstname }}</h1>
         </section>
-        <div class="page-title-underline"></div>            
+        <div class="page-title-underline"></div> 
+        
+        <div class="row">
+    {#        <aside class="section-aside-relationship">#}
+            <div class="col-md-3">
+                {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
+            </div>
+    {#        </aside>#}
+{#            <section class="section-content">#}
+            <div class="col-md-9 relationship-content">
+{#                <h3>{{ relationship.prospect.firstname }}</h3>#}
 
-        <aside class="section-aside-relationship">
-            {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
-        </aside>
-        <section class="section-content">
-            <h3>{{ relationship.prospect.firstname }}</h3>
-
-            <div class="page-content">
                 <table class="table table-responsive" id="table-relationship-show">
                     <tbody>                        
                         <tr>
@@ -75,6 +78,7 @@
                     <li>{{ form(delete_form) }}</li>
                 </ul>
             </div>
-        </section>
+{#            </section>#}
+        </div>
     </div>
 {% endblock %}

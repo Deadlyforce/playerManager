@@ -1,23 +1,21 @@
 {% extends '::base.html.twig' %}
-{% import ":Frontend/Macros:photoDisplay.html.twig" as photoDisplay %}
+{% import ":Frontend/Macros/Prospect:photoDisplay250px.html.twig" as photoDisplay %}
 
 {% block title %}Edit relationship{% endblock %}
 
 {% block content %}
     <div class="container" id="container-relationship">
         <section class="page-title">
-            <h1>Relationship details</h1> 
+            <h1>Relationship with {{ relationship.prospect.firstname }}</h1> 
 {#                <h2>Blablabla</h2>#}
         </section>
         <div class="page-title-underline"></div>            
-
-        <aside class="section-aside-relationship">
-            {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
-        </aside>
-        <section class="section-content">
-            <h3>{{ relationship.prospect.firstname }}</h3>
-
-            <div class="page-content">
+        
+        <div class="row">
+            <div class="col-md-3">
+                {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
+            </div>
+            <div class="col-md-9 relationship-content">                   
                 {{ form_start(edit_form) }}
                     {{ form_row(edit_form.startDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
                     <div>
@@ -73,8 +71,8 @@
                 {#{{ form_start(delete_form) }}
                     <input class="btn btn-default" type="submit" value="Delete">
                 {{ form_end(delete_form) }}#}
-            </div>
-        </section>           
+            </div>           
+        </div>
     </div>
     <script type="text/javascript">
         $(document).ready(function(){

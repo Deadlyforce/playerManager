@@ -465,10 +465,10 @@ td.actions a{
     display: none;  /* masqué de base */
 }
 
-.page-content{
+/*.page-content{
     margin-top: 40px;
     font-family: "open_sansregular", sans-serif;        
-}
+}*/
 
 /************************************ HOME *****************************************/
 
@@ -703,6 +703,17 @@ p.record-date{
     border-left: 1px solid rgba(255,255,255,0.7);
 }
 
+/*** CUSTOM TOOLTIP ***/
+.custom-tooltip + .tooltip > .tooltip-inner{
+    color: #f0f0f0;
+    background-color: #202B33;
+    padding: 10px 15px 10px 15px;
+}
+.custom-tooltip + .tooltip > .tooltip-arrow{
+    border-top-color: #202B33;
+}
+
+
 /*** PAGINATION ***/
 
 .pagination span{     
@@ -812,6 +823,9 @@ ul.record_actions{
 
 /****************************** RELATIONSHIP **********************************/
 
+
+/*************** SHOW *****************/
+
 #container-relationship h3{
     font-family: "ralewaythin",sans-serif;
     font-size: 2.5em;
@@ -819,21 +833,9 @@ ul.record_actions{
     color: #e2e4f3;
 }
 
-.section-aside-relationship{
-    display: inline-block;
-    vertical-align: top;
-    padding: 0px 40px 0px 0px;
-}
-.section-aside-relationship img{
-    width: 245px;
-}
-.section-content{
-    display: inline-block;    
-    padding: 0px 40px;
+.relationship-content{
     border-left: 1px solid #899BA7;
 }
-
-/********************************** SHOW **************************************/
 
 #table-relationship-show tr{   
     border-bottom: 1px solid #283640;

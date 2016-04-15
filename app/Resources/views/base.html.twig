@@ -91,8 +91,10 @@
         
     <script type="text/javascript">       
         
+        
         $(document).ready(function(){
             
+            // Menu animation
             $(".navbar-brand").animate({
                 'height': '0px'
             }, 800);
@@ -112,36 +114,19 @@
             }, 1000);
             
             // Active link in menu *********************************************
-            // Deactivated with a click on "brand"
-            $(".navbar-header").on("click", ".navbar-brand", function(){
-                localStorage.clear();
+            // Page name must match EXACTLY with menu link name !!
+            var currentTitle = $(document).attr('title');            
+
+            $(".nav").find("li").each(function(index, element){
+                if ($(element).find("a").html() === currentTitle ) {    
+                    $(element).addClass("active");
+                }
             });
             
             $(".navbar-nav").on("click", "li", function () {
-                var id = $(this).attr("id");
-                
-                if (id === 'fos_user_security_logout') {
-                    $('#' + id).siblings().each(function(index, element){
-                        $(element).removeClass("active");
-                    });
-                    localStorage.clear();                   
-                } else {
-                    $('#' + id).siblings().each(function(index, element){
-                        $(element).removeClass("active");
-                    });
-                    $('#' + id).addClass("active");
-                    localStorage.setItem("selectedItem", id);
-                }               
-            });
-
-            var selectedItem = localStorage.getItem('selectedItem');
-
-            if (selectedItem != null) {
-                $('#' + selectedItem).siblings().each(function(index, element){
-                    $(element).removeClass("active");
-                });
-                $('#' + selectedItem).addClass("active");
-            }
+                var activeLi = $(".nav").find(".active");
+                $(activeLi).removeClass("active");
+            });        
             // Active link in menu *********************************************
             
             $(".datatable").DataTable(); // class datatable
