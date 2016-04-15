@@ -384,45 +384,6 @@ body {
     border: 1px solid rgb(137, 155, 169);
 }*/
 
-/*********************** DATATABLE PROSPECT INDEX ******************************/
-
-#table-prospects_wrapper{
-    padding: 20px 0px 20px 0px;
-    background-color: #202B33;
-}
-#table-prospects{
-    width: 100%;
-}
-#table-prospects thead th{
-    padding: 10px 10px;
-    border-bottom: 1px solid #899BA9;
-}
-#table-prospects tbody td{
-    vertical-align: middle;
-    background-color: #202B33;
-    border-top: none;
-    border-bottom: 1px solid #283640;
-}
-table.dataTable.no-footer {
-    border-bottom: none;
-}
-
-#table-prospects_wrapper .dataTables_info, #table-prospects_wrapper .dataTables_length, #table-prospects_wrapper .dataTables_filter{
-    color: #899BA9;
-}
-#table-prospects_length, #table-prospects_filter{
-    margin-bottom: 20px;    
-}
-#table-prospects_wrapper .dataTables_info, #table-prospects_wrapper .dataTables_paginate{
-    margin-top: 30px;
-}
-#table-prospects_length select, #table-prospects_filter input{
-    background-color: transparent;
-    border: 1px solid rgb(137, 155, 169);
-}
-#table-prospects_wrapper .dataTables_paginate .paginate_button.disabled, #table-prospects_wrapper .dataTables_paginate .paginate_button.disabled:hover{
-    color: #3E5260 !important;
-}
 
 /******************************* PAGES GLOBAL ***********************************/
 
@@ -444,7 +405,7 @@ section.page-title h2{
     color: #777;
 }
 .page-title-underline{
-    width: 500px;
+    width: 700px;
     border-bottom: 1px solid #f47363;
     margin: 0px auto 60px auto;
 }
@@ -614,6 +575,46 @@ ul.slick-dots > li > button:hover{
     font-size: 1.1em;
 }
 
+/*********************** DATATABLE ALL PROSPECTS INDEX ******************************/
+
+#table-prospects_wrapper{
+    padding: 20px 0px 20px 0px;
+    background-color: #202B33;
+}
+#table-prospects{
+    width: 100%;
+}
+#table-prospects thead th{
+    padding: 10px 10px;
+    border-bottom: 1px solid #899BA9;
+}
+#table-prospects tbody td{
+    vertical-align: middle;
+    background-color: #202B33;
+    border-top: none;
+    border-bottom: 1px solid #283640;
+}
+table.dataTable.no-footer {
+    border-bottom: none;
+}
+
+#table-prospects_wrapper .dataTables_info, #table-prospects_wrapper .dataTables_length, #table-prospects_wrapper .dataTables_filter{
+    color: #899BA9;
+}
+#table-prospects_length, #table-prospects_filter{
+    margin-bottom: 20px;    
+}
+#table-prospects_wrapper .dataTables_info, #table-prospects_wrapper .dataTables_paginate{
+    margin-top: 30px;
+}
+#table-prospects_length select, #table-prospects_filter input{
+    background-color: transparent;
+    border: 1px solid rgb(137, 155, 169);
+}
+#table-prospects_wrapper .dataTables_paginate .paginate_button.disabled, #table-prospects_wrapper .dataTables_paginate .paginate_button.disabled:hover{
+    color: #3E5260 !important;
+}
+
 
 /******************************* PROSPECTS - INDEX *********************************/
 
@@ -659,7 +660,7 @@ p.record-date{
 }
 .record-actions{
     border-top: 1px solid rgba(255,255,255,0.3);
-    height: 50px;
+    /*height: 50px;*/
 }
 .record-actions ul{
     margin-top: 0;
@@ -690,6 +691,48 @@ p.record-date{
 .record-actions a:hover{
     background-color: #DA6759;    
 }
+.record-actions p{
+    font-size: 1.2em;
+    padding: 12px 10px 0px;
+}
+.record-actions li.separator{
+    float: right;
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border-left: 1px solid rgba(255,255,255,0.7);
+}
+
+/*** PAGINATION ***/
+
+.pagination span{     
+    display: inline-block;    
+    text-align: center;
+    margin-right: 10px;
+}
+.pagination span.current{ 
+    background-color: rgb(244, 115, 99);
+    padding: 10px 15px;
+    color: #202B33;
+}
+.pagination span a{    
+    background-color: rgb(244, 115, 99);
+    display: block;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #fff;
+    
+    -moz-transition: all .2s ease-in;
+    -o-transition: all .2s ease-in;
+    -webkit-transition: all .2s ease-in;
+    transition: all .2s ease-in;
+}
+.pagination span a:hover{   
+    color: #fff;
+    background-color: transparent;
+    box-shadow: inset 0px 0px 0px 1px #f14833; /* Border alternative, without changing the size of element */
+}
+
 
 /******************************* PROSPECTS - NEW ***********************************/
 

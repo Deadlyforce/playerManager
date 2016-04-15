@@ -42,7 +42,20 @@
                             <li>
                                 <a href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show all contact infos"><i class="fa fa-eye"></i></a>
                             </li>
-                            
+                            <li><p>Actions</p></li>
+                            <li class="separator"></li>
+                            <li>
+                                <a href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Edit relationship"><i class="fa fa-user-plus"></i></a>
+                            </li>
+                            <li>
+                                <a href="{{ path('relationship_show', {'id': prospect.relationship.id}) }}" title="Show relationship"><i class="fa fa-user"></i></a>
+                            </li>
+                            <li><p>Relationship</p></li>
+                            <li class="separator"></li>
+                            <li>
+                                <a href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Gallery"><i class="fa fa-file-image-o"></i></a>
+                            </li>
+                            <li><p>Gallery</p></li>
                         </ul>
                     </div>
                 </div>

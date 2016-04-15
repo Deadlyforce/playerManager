@@ -93,7 +93,23 @@
         
         $(document).ready(function(){
             
+            $(".navbar-brand").animate({
+                'height': '0px'
+            }, 800);
+            $(".navbar-nav > li > a").animate({
+                'height': '0px'
+            }, 800);
             
+            
+            // Title animation
+            $("section.page-title").animate({
+                'margin-top': '25px',
+                'margin-bottom': '15px'
+            }, 800);
+            
+            $(".page-title-underline").animate({
+                'width': '500px'
+            }, 1000);
             
             // Active link in menu *********************************************
             // Deactivated with a click on "brand"
