@@ -389,18 +389,22 @@ class ProspectController extends Controller
                     
                     $em->flush();
                 } else {
+var_dump("youpi");
                     // Case: update a Prospect with a previous photo, with and without changes
                     // remove the relationship between the photo and the Prospect
                     foreach ($originalPhotos as $originalPhoto) {
 
                         if ($photos->contains($originalPhoto) === false) {
+var_dump("that case");
                             // Remove deleted photos
                             $prospect->removePhoto($originalPhoto);
-                            
+var_dump("removed photo");                            
                             // if many-to-one relationship, remove also the relationship
-                            $originalPhoto->setProspect(null);                            
+                            $originalPhoto->setProspect(null);    
+var_dump("prospect nulled");
+var_dump($originalPhoto);
                             $em->remove($originalPhoto); // Delete the Photo entirely
-
+var_dump("photo entirely removed");
                             // Upload new photos
                             foreach ($photos as $photo) {
                                 // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.

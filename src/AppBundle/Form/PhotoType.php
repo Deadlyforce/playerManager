@@ -23,8 +23,8 @@ class PhotoType extends AbstractType
                 'label' => false                
                 )
             )
-            ->add('selected', CheckboxType::class, array(
-                'label' => "Make primary",
+            ->add('selected', CheckboxType::class, array(                
+                'label' => "Primary",
                 'required' => false
             ))
         ;

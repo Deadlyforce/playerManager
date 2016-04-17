@@ -40,8 +40,14 @@ class CachePhotoListener
         $filter = 'thumb_prospect_index';
         
         if ($entity instanceof Photo) {
-            $this->cacheManager->resolve($this->request, $entity->getPath(), $filter);
-            $this->cacheManager->remove($entity->getPath());
+            // Added check if the thumb exists
+            // when a previous postUpdate deleted the whole cache folder without regenerating the thumbs
+            $expectedCachePath = $this->cacheManager->getBrowserPath($entity->getPath(), $filter);            
+
+            if (file_exists($expectedCachePath)) {
+                $this->cacheManager->resolve($this->request, $entity->getPath(), $filter);
+                $this->cacheManager->remove($entity->getPath());
+            }
         }
     }
 }

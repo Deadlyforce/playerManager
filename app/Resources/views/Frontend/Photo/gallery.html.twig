@@ -29,17 +29,27 @@
                                 </div>                                
                             </div>
                             <div class="photo-actions">
-                                {# Make photo primary #}
-                                {{ form_errors(photo.selected) }}
-                                {{ form_label(photo.selected) }}
-                                {{ form_widget(photo.selected) }}
-                                
-                                <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo">Crop</a>
-                                <a href="#" id="{{ photo.vars.data.id }}" class="change-photo">Change</a>                                
-                                <div class="prototype hidden">
-                                    {{ form_errors(photo.file) }}
-                                    {{ form_widget(photo.file) }} 
-                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        {# Make photo primary #}
+                                        {{ form_errors(photo.selected) }}
+                                        {{ form_label(photo.selected) }}
+                                        {{ form_widget(photo.selected) }}
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo"><i class="fa fa-crop"></i></a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href="#" id="{{ photo.vars.data.id }}" class="change-photo"><i class="fa fa-file-image-o"></i></a>    
+                                    </div>
+                                    <div class="col-md-3 delete-photo">
+                                         
+                                    </div>
+                                    <div class="prototype hidden">
+                                        {{ form_errors(photo.file) }}
+                                        {{ form_widget(photo.file) }} 
+                                    </div>
+                                </div>                                           
                             </div>                                           
                         </li>
 
@@ -83,12 +93,12 @@
                 $("input[type='checkbox']").not(this).prop("checked", false);
                 
                 // Put back original border css and add "highlight" css for selected photo
-                $("input[type='checkbox']").not(this).parent().prev(".photo-frame").find(".primary").css("opacity", "0");                
-                $(this).parent().prev(".photo-frame").find(".primary").css("opacity", "1");
+                $("input[type='checkbox']").not(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "0");                
+                $(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");
             });
             
             // Highlight selected photo at doc ready
-            $("input[type='checkbox']:checked").parent().prev(".photo-frame").find(".primary").css("opacity", "1");
+            $("input[type='checkbox']:checked").closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");
           
             // Colorbox for full sized image
             $("a.gallery").colorbox({
@@ -111,11 +121,11 @@
                 e.preventDefault();
 
                 var liId = $(this).closest('li').attr("id");
-                var inputFile = $(this).next().children();                
-                
+                var inputFile = $(this).closest(".row").find(".prototype").children("input");                
+              
                 $("<div id="+liId+"></div>").appendTo("#photoFormModal .modal-body");
                 $(inputFile).appendTo("#photoFormModal .modal-body");               
-;                
+                
                 $(inputFile).on('change', function () {
                     var files = $(this)[0].files;
                    

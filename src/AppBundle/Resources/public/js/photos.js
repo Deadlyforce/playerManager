@@ -44,7 +44,10 @@ function addPhotoForm(collectionHolder, newLiAddPhoto)
     collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a photo" link li
-    var newFormLi = $("<li class='col-md-4 new-form'><div class='photo-frame'><img class='tall' src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div><div class='photo-actions'>"+ newForm +"</div></li>");
+    var photoFrame = "<div class='photo-frame'><img class='tall' src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div>";
+    var photoActions = "<div class='photo-actions'><div class='row'><div class='col-md-8'>"+ newForm +"</div><div class='col-md-4 delete-photo'></div></div></div>";
+    
+    var newFormLi = $("<li class='col-md-4 new-form'>" + photoFrame + photoActions + "</li>");
     
     newLiAddPhoto.before(newFormLi);
 
@@ -53,8 +56,8 @@ function addPhotoForm(collectionHolder, newLiAddPhoto)
 
 function addPhotoFormDeleteLink(photoFormLi)
 {
-    var removeForm =  $("<a href='#'>Delete</a>");
-    photoFormLi.find('.photo-actions').append(removeForm);
+    var removeForm =  $("<a href='#'><i class='fa fa-trash-o'></i></a>");
+    photoFormLi.find('.photo-actions .delete-photo').append(removeForm);
 
     removeForm.click(function(event){
         event.preventDefault();        
@@ -65,8 +68,8 @@ function addPhotoFormDeleteLink(photoFormLi)
 
 function addPhotoFormDeleteLinkWithIndexChange(photoFormLi, collectionHolder)
 {
-    var removeForm =  $("<a href='#'>Delete</a>");
-    photoFormLi.find('.photo-actions').append(removeForm);
+    var removeForm =  $("<a href='#'><i class='fa fa-trash-o'></i></a>");
+    photoFormLi.find('.photo-actions .delete-photo').append(removeForm);
 
     removeForm.click({collectionHolder: collectionHolder}, function(event){
         event.preventDefault();

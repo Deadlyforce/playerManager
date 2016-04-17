@@ -1071,7 +1071,7 @@ table.record_properties th{
   left: 0px;
   right: 0px;
   bottom: 0px;
-  border: 5px solid #ddd;
+  border: 3px solid #F47363;
 }
 
 .photo-frame img{    
@@ -1088,7 +1088,7 @@ table.record_properties th{
     opacity: 0;
     overflow: visible;
     background-color: transparent;
-    border: 5px solid red;
+    border: 3px solid #E0ECF5;
    
     position: absolute;
     z-index: 2;
@@ -1101,8 +1101,7 @@ table.record_properties th{
     opacity: 0;
     overflow: visible;
     background-color: rgba(0,0,0,0.6);
-    box-sizing: border-box;
-    border: 5px solid white;
+    border: 3px solid white;
     transition: all 0.4s ease-in-out;
    
     position: absolute;
@@ -1134,13 +1133,14 @@ table.record_properties th{
 
 
 .photo-actions{
-    background-color: #e0e0e0;
+    background-color: #F47363;
     height: 110px;  /* Temporary height - Needs styling */
     padding: 25px 5px 5px 5px;
     text-align: center;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
     overflow: hidden;
+    color: #fff;
     
     -moz-transition: all .3s ease-in;
     -o-transition: all .3s ease-in;
@@ -1155,7 +1155,7 @@ table.record_properties th{
 }
 .photo-actions a{
     font-size: 1.2em;
-    color: #666;
+    color: #fff;
     text-decoration: none;
     margin-right: 15px;
     margin-right: 15px;
