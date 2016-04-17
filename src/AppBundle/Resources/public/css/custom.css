@@ -1050,17 +1050,12 @@ table.record_properties th{
 
 /************************* GALLERY *****************************/
 
-.photo-block{
-    display: inline-block;
-    text-align: center;
-}
 .photo-frame{
     width: 100%;
     overflow: hidden; 
     border-top-left-radius: 2px;
     border-top-right-radius: 2px;
     position: relative;
-    /*border: 5px solid #ddd;*/
 }
 /* :before is used for a border that doesn't propagate to child element (absolute mask)  */
 .photo-frame:before {
@@ -1071,11 +1066,11 @@ table.record_properties th{
   left: 0px;
   right: 0px;
   bottom: 0px;
-  border: 3px solid #F47363;
+  border: 1px solid #F47363;
 }
 
 .photo-frame img{    
-    display: block
+    display: block;
 }
 .photo-frame img.tall{    
     width: 100%;
@@ -1101,7 +1096,7 @@ table.record_properties th{
     opacity: 0;
     overflow: visible;
     background-color: rgba(0,0,0,0.6);
-    border: 3px solid white;
+    border: 1px solid white;
     transition: all 0.4s ease-in-out;
    
     position: absolute;
@@ -1114,9 +1109,7 @@ table.record_properties th{
 .photo-frame:hover .mask {
     opacity: 1;        
 }
-.photo-frame:hover {     
-    box-shadow: 0px 0px 4px #999;
-}
+
 .photo-frame a.gallery {
     background: url(../images/link.png) center no-repeat;
     opacity: 0;
@@ -1130,58 +1123,99 @@ table.record_properties th{
     transition-delay: 0.3s;
 }
 
-
-
 .photo-actions{
     background-color: #F47363;
-    height: 110px;  /* Temporary height - Needs styling */
-    padding: 25px 5px 5px 5px;
+    height: 55px;   
+    /*padding: 20px 5px 20px 5px;*/
     text-align: center;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
     overflow: hidden;
+    color: #fff;    
+}
+.photo-actions .row{
+    height: 100%;
+}
+.photo-actions .row .photo-buttons{
+    height: 100%;
+}
+.photo-actions .row .photo-buttons ul{
+    list-style: none;
+    height: 100%;
+    display: table;
+}
+.photo-actions .row .photo-buttons li{
+    display: table-cell;
+    height: 100%;
+}
+
+.photo-actions a{
+    font-size: 1.6em;
     color: #fff;
+    text-decoration: none;
+    padding: 5px 15px;    
+    float: right;
+    border-left: 1px solid #fff;
+    height: 100%;
+    line-height: 1.9em;
     
     -moz-transition: all .3s ease-in;
     -o-transition: all .3s ease-in;
     -webkit-transition: all .3s ease-in;
     transition: all .3s ease-in;
 }
-.photo-actions:hover{
-    background-color: #3d3d3d;    
-}
-.photo-actions:hover a{
-    color: #e0e0e0;
-}
-.photo-actions a{
-    font-size: 1.2em;
-    color: #fff;
-    text-decoration: none;
-    margin-right: 15px;
-    margin-right: 15px;
-}
 .photo-actions a:hover{    
-    color: #f47363;    
+    background-color: #DA6759;
 }
+
+.photo-actions .photo-selected{
+    padding-top: 17px;
+}
+.photo-actions .photo-selected label{
+    width: 60px;
+    font-weight: 200;    
+}
+.photo-actions .photo-selected input{
+    display: table-cell;
+    vertical-align: top;
+}
+
+/** NEW FORM PROTOTYPE **/
+.new-form .file-selector{
+    display: inline-block;
+}
+.new-form .delete-photo{
+    display: inline-block;
+}
+li.new-form label{
+    width: 60px;
+    font-weight: 200;
+}
+li.new-form input[type="checkbox"]{
+    display: table-cell;
+    vertical-align: top;
+}
+
+
 
 ul#photo-list{
     list-style: none;
     padding-left: 0px;
     margin-bottom: 0px;
 }
-ul#photo-list li{
+ul#photo-list .row > li{
     margin-bottom: 15px;
 }
 
 a.add-photo{
     color: #999;
-    font-size: 2em;
-    width: 100%;    
-    display: block;
+    font-size: 2em;    
+    display: block;    
     height: 350px;
+    width: 100%;
+    line-height: 12em;
     text-decoration: none;
     text-align: center;
-    padding-top: 150px;
     border: 1px solid #999;
     background-color: transparent;
     

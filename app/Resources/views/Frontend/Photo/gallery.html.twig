@@ -30,20 +30,24 @@
                             </div>
                             <div class="photo-actions">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-4 photo-selected">
                                         {# Make photo primary #}
                                         {{ form_errors(photo.selected) }}
                                         {{ form_label(photo.selected) }}
                                         {{ form_widget(photo.selected) }}
                                     </div>
-                                    <div class="col-md-3">
-                                        <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo"><i class="fa fa-crop"></i></a>
-                                    </div>
-                                    <div class="col-md-3">
-                                        <a href="#" id="{{ photo.vars.data.id }}" class="change-photo"><i class="fa fa-file-image-o"></i></a>    
-                                    </div>
-                                    <div class="col-md-3 delete-photo">
-                                         
+                                    <div class="col-md-8 photo-buttons">
+                                        <ul class="pull-right">                                            
+                                            <li>
+                                                <a href="#" id="{{ photo.vars.data.id }}" class="change-photo"><i class="fa fa-file-image-o"></i></a>    
+                                            </li>
+                                             <li>
+                                                <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo"><i class="fa fa-crop"></i></a>
+                                            </li>
+                                            <li class="delete-photo">
+
+                                            </li>
+                                        </ul>                                            
                                     </div>
                                     <div class="prototype hidden">
                                         {{ form_errors(photo.file) }}
@@ -90,6 +94,7 @@
             
             // Only one checkbox ticked at a time when selecting primary photo
             $("input[type='checkbox']").on("change", function(){
+                                
                 $("input[type='checkbox']").not(this).prop("checked", false);
                 
                 // Put back original border css and add "highlight" css for selected photo
@@ -97,8 +102,10 @@
                 $(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");
             });
             
+            
             // Highlight selected photo at doc ready
             $("input[type='checkbox']:checked").closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");
+          
           
             // Colorbox for full sized image
             $("a.gallery").colorbox({
@@ -107,9 +114,11 @@
                 }
             });
             
+            
             // Adjust photo-frame height for existing photos
             var width = $(".photo-frame").width();
             $(".photo-frame").height(width);
+
             // Adjust photo placement with ratio
             $("#photo-list .photo-frame").find("img").each(function(){
                 var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
@@ -120,7 +129,7 @@
             $("#photo-list").on("click", ".change-photo", function(e){
                 e.preventDefault();
 
-                var liId = $(this).closest('li').attr("id");
+                var liId = $(this).closest('ul').closest('.row').closest('li').attr("id");
                 var inputFile = $(this).closest(".row").find(".prototype").children("input");                
               
                 $("<div id="+liId+"></div>").appendTo("#photoFormModal .modal-body");
@@ -147,6 +156,7 @@
             $('#photoFormModal').on('hidden.bs.modal', function () {
                 var liId = $("#image_preview").next().attr("id");
                 var inputFile = $("#photoFormModal").find("input");
+
                 // Put the form back in its place
                 $(inputFile).appendTo($("#"+liId+" .prototype")); 
                 
@@ -161,12 +171,14 @@
                 $('#photoFormModal .modal-body').empty();
                 $('#photoFormModal .modal-body').append("<div id='image_preview'><img src='/bundles/app/images/prospect_no_photo.jpg' /></div>");
             });
-            
+           
             // Adjust photo-frame height for added photos
-            $("#photo-list").on("click", ".add-photo", function(){
-                var width = $(".new-form .photo-frame").width();
-                $(".photo-frame").height(width);
-            });
+{#            $("#photo-list").on("click", ".add-photo", function(){#}
+{#                var height = $(this).height();#}
+{#                var width = $(".new-form .photo-frame").width();#}
+
+{#                $(".photo-frame").height(height);#}
+{#            });#}
 
             // On click on class "form-new" (new li with form prototype)
             // Put preview in photo-frame

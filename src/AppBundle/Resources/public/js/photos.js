@@ -11,7 +11,7 @@ $(document).ready(function(){
         addPhotoFormDeleteLink($(this));
     });
 
-    $('#photo-list .row').last().append(newLiAddPhoto); // Append to last row of collectionHolder
+    $('#photo-list').find("> .row").last().append(newLiAddPhoto); // Append to last row of collectionHolder
 
     // count the current form inputs we have (e.g. 2), use that as the new
     // index when inserting a new item (e.g. 2)
@@ -45,7 +45,7 @@ function addPhotoForm(collectionHolder, newLiAddPhoto)
 
     // Display the form in the page in an li, before the "Add a photo" link li
     var photoFrame = "<div class='photo-frame'><img class='tall' src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div>";
-    var photoActions = "<div class='photo-actions'><div class='row'><div class='col-md-8'>"+ newForm +"</div><div class='col-md-4 delete-photo'></div></div></div>";
+    var photoActions = "<div class='photo-actions'><div><div class='file-selector'>"+ newForm +"</div><div class='delete-photo pull-right'></div></div></div>";
     
     var newFormLi = $("<li class='col-md-4 new-form'>" + photoFrame + photoActions + "</li>");
     

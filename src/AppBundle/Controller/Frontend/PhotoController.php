@@ -59,7 +59,7 @@ class PhotoController extends Controller
      * Edit photo (for cropping)
      * 
      * @Route("/{id}/edit", name="photo_edit")
-     * @Template()
+     * @Template(":Frontend\Photo:edit.html.twig")
      */
     public function editAction($id)
     {

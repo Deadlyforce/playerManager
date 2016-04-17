@@ -18,7 +18,7 @@
             <input type="hidden" id="y" name="y" />
 
             <div>
-                <img id="crop-preview" src="{{ asset(photo.path) }}" alt="Photo">                
+                <img class="img-responsive" id="crop-preview" src="{{ asset(photo.path) }}" alt="Photo">                
             </div>
             <div id="crop-info"> 
                 <p>Filesize: {{ (photo.size/1000) |round }} Kb</p>
