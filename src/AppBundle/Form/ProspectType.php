@@ -39,6 +39,9 @@ class ProspectType extends AbstractType
                 'choices' => $this->getAgeBracket(),
                 'choices_as_values' => true                
             ))
+            ->add('address', TextType::class, array(
+                'required' => false                
+            ))
             ->add('city', TextType::class, array(
                 'required' => false                
             ))

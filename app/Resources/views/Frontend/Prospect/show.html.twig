@@ -1,44 +1,68 @@
 {% extends '::base.html.twig' %}
-{% import ":Frontend/Macros:photoDisplay.html.twig" as photoDisplay %}
+{% import ":Frontend/Macros/Prospect:photoDisplay250px.html.twig" as photoDisplay %}
 
 {% block title %}{{ prospect.firstname }}{% endblock %}
 
+{% form_theme delete_form _self %}
+
+{% block button_widget %}
+    {% set attr = attr|merge({class: (attr.class|default('btn-default') ~ ' btn')|trim}) %}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain)|raw }}</button>    
+{% endblock %}
+
+
+
 {% block content %}
     <div class="container">
-        <h3>Fiche contact</h3>
-
-        <div class="panel panel-default">
-            <div class="panel-heading">{{ prospect.firstname }}</div>
-            <div class="panel-body">           
-
+        {#<section class="page-title">
+            <h1>{{ prospect.firstname }} {{ prospect.lastname }}</h1>
+        </section>
+        <div class="page-title-underline"></div> #}
+        
+        <div class="row" id="prospect-show-content">                
+            <div class="col-md-3 show-left-col">
                 {{ photoDisplay.primaryPhotoOrLast(prospect.photos) }}                                
-
-                <table class="record_properties">
+            </div>                
+            <div class="col-md-9 show-right-col">
+                <div id="prospect-info-basic">
+                    <p id="firstname">{{ prospect.firstname }}</p>
+                    {% if prospect.lastname %}
+                        <p id="lastname">{{ prospect.lastname }}</p>
+                    {% endif %}
+                    {% if prospect.age %}
+                        <p id="age">{{ prospect.age }} years old</p>
+                    {% endif %}
+                </div>
+                <table class="table table-responsive" id="table-prospect-show">
                     <tbody>                    
                         <tr>
                             <th>Nickname</th>
                             <td>{{ prospect.nickname }}</td>
-                        </tr>
+                        </tr>                        
                         <tr>
-                            <th>First Name</th>
-                            <td>{{ prospect.firstname }}</td>
-                        </tr>
-                        <tr>
-                            <th>Last Name</th>
-                            <td>{{ prospect.lastname }}</td>
-                        </tr>
-                        <tr>
-                            <th>Age</th>
-                            <td>{{ prospect.age }}</td>
+                            <th>Address</th>
+                            <td>{{ prospect.address }}</td>
                         </tr>
                         <tr>
                             <th>City</th>
                             <td>{{ prospect.city }}</td>
                         </tr>
-                        <tr>
-                            <th>Paris district</th>
-                            <td>{{ prospect.parisDistrict }}</td>
-                        </tr>
+                        {% if prospect.parisDistrict %}
+                            <tr>
+                                <th>Paris district</th>
+                                <td>{{ prospect.parisDistrict }}</td>
+                            </tr>
+                        {% endif %}
                         <tr>
                             <th>Country</th>
                             <td>{{ prospect.country }}</td>
@@ -57,18 +81,34 @@
                         </tr>
                     </tbody>
                 </table>  
-
-                <a class="btn btn-default" href="{{ path('prospect_edit', { 'id': prospect.id }) }}">Edit</a><br/>
-                {{ form_start(delete_form) }}
-                        <input class="btn btn-default" type="submit" value="Delete">
-                {{ form_end(delete_form) }}
-            </div>
-            <div class="panel-footer">
-                {% if prospect.relationship %}
-                    <a href="{{ path('relationship_show', { 'id': prospect.relationship.id }) }}" title="Détails">Détails de la relationship</a><br/>
-                {% endif %}
-                <a href="{{ path('encounter_new', { 'prospect_id': prospect.id }) }}" title="New encounter">Add encounter</a>
-            </div>
+                
+                <div class="show-actions">
+                    <ul>
+                        <li>
+                            <a class="" href="{{ path('prospect_list') }}" title="Back to contacts"><i class="fa fa-list"></i></a>
+                        </li>                        
+                        <li>
+                            {% if prospect.relationship %}
+                                <a class="" href="{{ path('relationship_show', { 'id': prospect.relationship.id }) }}" title="Show relationship">
+                                    <i class="fa fa-link"></i>
+                                </a>
+                            {% endif %}
+                        </li>
+                        <li>
+                            <a class="" href="{{ path('encounter_new', { 'prospect_id': prospect.id }) }}" title="Add new encounter"><i class="fa fa-glass"></i></a>
+                        </li>
+                        <li>
+                            <a class="" href="{{ path('prospect_edit', { 'id': prospect.id }) }}" title="Edit contact"><i class="fa fa-pencil-square-o"></i></a>                
+                        </li>
+                        <li>
+                            {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete this contact'}}) }}
+        {#                        <input class="" type="submit" value="Delete">#}                        
+                                {{ form_widget(delete_form.submit, {'label': '<i class="fa fa-trash-o"></i>'}) }}
+                            {{ form_end(delete_form) }}
+                        </li>
+                    </ul>
+                </div>            
+            </div>            
         </div>   
     </div>
 {% endblock %}

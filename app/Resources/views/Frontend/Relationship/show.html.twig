@@ -10,15 +10,11 @@
         <div class="page-title-underline"></div> 
         
         <div class="row">
-    {#        <aside class="section-aside-relationship">#}
             <div class="col-md-3">
                 {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
             </div>
-    {#        </aside>#}
-{#            <section class="section-content">#}
-            <div class="col-md-9 relationship-content">
-{#                <h3>{{ relationship.prospect.firstname }}</h3>#}
 
+            <div class="col-md-9 page-content">
                 <table class="table table-responsive" id="table-relationship-show">
                     <tbody>                        
                         <tr>
@@ -63,22 +59,13 @@
                         </tr>
                     </tbody>
                 </table>
-
-                <ul class="record_actions">
-                    <li>
-                        <a href="{{ path('relationship') }}">
-                            Back to the list
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ path('relationship_edit', { 'id': relationship.id }) }}">
-                            Edit
-                        </a>
-                    </li>
-                    <li>{{ form(delete_form) }}</li>
-                </ul>
+                
+                <a class="btn-dark" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact"><i class="fa fa-user"></i> Show contact</a>             
+                <a class="btn-dark" href="{{ path('relationship_edit', { 'id': relationship.id }) }}" title="Edit relationship"><i class="fa fa-edit"></i> Edit relationship</a>
+                   
+                {{ form(delete_form) }}
+                
             </div>
-{#            </section>#}
         </div>
     </div>
 {% endblock %}

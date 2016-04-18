@@ -1,7 +1,7 @@
 {% extends '::base.html.twig' %}
 {% block title %}Modifier le contact{% endblock %}
 
-{% block body -%}
+{% block content %}
     <div class="container">
         <h1>Modifier un contact</h1>
 
@@ -10,6 +10,7 @@
             {{ form_row(edit_form.firstname) }}
             {{ form_row(edit_form.lastname) }}
             {{ form_row(edit_form.age) }}
+            {{ form_row(edit_form.address) }}
             {{ form_row(edit_form.city) }}
             {{ form_row(edit_form.parisDistrict) }}
             {{ form_row(edit_form.country) }}

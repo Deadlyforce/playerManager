@@ -10,7 +10,7 @@
         </section>
         <div class="page-title-underline"></div>
         
-        <a class="page-button" href="{{ path('prospect') }}" title="Back to prospects">Back to prospects</a>
+        <a class="page-button" href="{{ path('prospect') }}" title="Back to prospects">Back to contacts</a>
 
         {{ form_start(editForm, {'attr': {'id':'form-edit-prospect'}}) }}          
 
@@ -39,12 +39,12 @@
                                     <div class="col-md-8 photo-buttons">
                                         <ul class="pull-right">                                            
                                             <li>
-                                                <a href="#" id="{{ photo.vars.data.id }}" class="change-photo"><i class="fa fa-file-image-o"></i></a>    
+                                                <a href="#" id="{{ photo.vars.data.id }}" class="change-photo" title="Modify photo"><i class="fa fa-file-image-o"></i></a>    
                                             </li>
                                              <li>
                                                 <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo"><i class="fa fa-crop"></i></a>
                                             </li>
-                                            <li class="delete-photo">
+                                            <li class="delete-photo" title="Delete photo">
 
                                             </li>
                                         </ul>                                            

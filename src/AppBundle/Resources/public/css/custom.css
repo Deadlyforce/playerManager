@@ -114,6 +114,30 @@ body#bo{
     background: transparent;
 }
 
+.btn-dark{
+    color: #899BA9;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 5px 15px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    background-color: transparent;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-dark:hover{
+    text-decoration: none;
+    color: #f47363;
+    border: 1px solid #f47363;
+    background: transparent;
+}
+
 /******************************* REGISTER  ****************************************/
 
 #register-user{
@@ -761,14 +785,92 @@ form[name='appbundle_prospect'] label{
 
 /******************************* PROSPECTS - SHOW ***********************************/
 
-.prospect_photo{
-    height: 150px;
+#prospect-show-content{
+    background-color: #F47363;
+    color: white;
+    margin-top: 50px;
+}
+.show-left-col{
+    padding-left: 0px;
+}
+.show-right-col{
+    padding-right: 0px;
+}
+#prospect-info-basic{
+    padding: 15px 0px 0px 10px;
+    font-family: "ralewaylight", sans-serif;
+}
+#prospect-info-basic p{
+    margin-bottom: 5px;
+}
+#prospect-info-basic p#firstname, #prospect-info-basic p#lastname{
+    font-size: 2.5em;
+}
+#prospect-info-basic p#age{
+    font-size: 1.5em;
 }
 
+#table-prospect-show{   
+    border: none;
+}
+#table-prospect-show th{
+    width: 150px;  
+    border-top: none;
+}
+#table-prospect-show td{      
+    border-top: none;
+}
+
+.show-actions{
+    height: 70px;
+}
+.show-actions ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: table;
+    float: right;
+    text-align: center;
+}
+.show-actions ul li{
+    display: table-cell;
+    vertical-align: middle;
+    height: 70px;
+}
+.show-actions ul li a, .show-actions ul li button{
+    background-color: #DA6759;
+    height: 70px;
+    width: 70px;
+}
+.show-actions ul li a{    
+    color: #fff;
+    display: block;
+    line-height: 3em;
+    font-size: 1.6em;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.show-actions ul li a:hover{    
+    background-color: #F47363;
+    border-top: 1px solid #fff;
+}
+.show-actions ul li button{
+    font-size: 1.6em;
+}
+.show-actions ul li button:hover{
+    color: #fff;
+    background-color: #F47363;
+    border-top: 1px solid #fff;
+}
+
+
+
 /******************************* PROSPECTS - EDIT ***********************************/
-/*.original-img{
-    height: 150px;
-}*/
+
+
 
 /******************************* FORMS ***********************************/
 .form_row{
@@ -833,7 +935,7 @@ ul.record_actions{
     color: #e2e4f3;
 }
 
-.relationship-content{
+.page-content{
     border-left: 1px solid #899BA7;
 }
 

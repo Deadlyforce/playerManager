@@ -6,7 +6,7 @@
 {% block content %}
     <div class="container" id="container-relationship">
         <section class="page-title">
-            <h1>Relationship with {{ relationship.prospect.firstname }}</h1> 
+            <h1>Edit your relationship with {{ relationship.prospect.firstname }}</h1> 
 {#                <h2>Blablabla</h2>#}
         </section>
         <div class="page-title-underline"></div>            
@@ -15,7 +15,7 @@
             <div class="col-md-3">
                 {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
             </div>
-            <div class="col-md-9 relationship-content">                   
+            <div class="col-md-9 page-content">                   
                 {{ form_start(edit_form) }}
                     {{ form_row(edit_form.startDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
                     <div>
@@ -66,7 +66,8 @@
                     {{ form_row(edit_form.submit, {'attr': {'class': 'btn-submit-dark'}}) }}
                 {{ form_end(edit_form) }}
 
-                <a href="{{ path('relationship_show', {'id': relationship.id }) }}">Back to relationship page</a>
+                <a  class="btn-dark" href="{{ path('relationship_show', {'id': relationship.id }) }}"><i class="fa fa-caret-left"></i> Back to relationship</a>
+                <a class="btn-dark" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact"><i class="fa fa-user"></i> Show contact</a>
 
                 {#{{ form_start(delete_form) }}
                     <input class="btn btn-default" type="submit" value="Delete">

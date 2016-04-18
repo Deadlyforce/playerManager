@@ -358,6 +358,7 @@ class ProspectController extends Controller
         
         $em = $this->getDoctrine()->getManager();
         $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
+        $manager = $this->get('prospect_manager');
 
         if (!$prospect) {
             throw $this->createNotFoundException('Unable to find Prospect entity.');
@@ -379,7 +380,10 @@ class ProspectController extends Controller
             if ($editForm->isSubmitted() && $editForm->isValid()) {  
          
                 $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
-                $photos = $prospect->getPhotos();                               
+                $photos = $prospect->getPhotos();  
+                
+                // Check for changes in photos. Used for redirection below.
+                $changed = $manager->checkPhotoChange($originalPhotos, $photos);
 
                 if ($originalPhotos->isEmpty()) {
                     // Case: update a Prospect without a previous photo
@@ -389,22 +393,19 @@ class ProspectController extends Controller
                     
                     $em->flush();
                 } else {
-var_dump("youpi");
                     // Case: update a Prospect with a previous photo, with and without changes
                     // remove the relationship between the photo and the Prospect
                     foreach ($originalPhotos as $originalPhoto) {
 
                         if ($photos->contains($originalPhoto) === false) {
-var_dump("that case");
                             // Remove deleted photos
                             $prospect->removePhoto($originalPhoto);
-var_dump("removed photo");                            
+                           
                             // if many-to-one relationship, remove also the relationship
                             $originalPhoto->setProspect(null);    
-var_dump("prospect nulled");
-var_dump($originalPhoto);
+
                             $em->remove($originalPhoto); // Delete the Photo entirely
-var_dump("photo entirely removed");
+
                             // Upload new photos
                             foreach ($photos as $photo) {
                                 // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
@@ -426,14 +427,19 @@ var_dump("photo entirely removed");
                     $em->flush();
                 }              
 
-                return $this->redirectToRoute('gallery', array('prospect_id' => $id));
+                if ($changed) {
+                    return $this->redirectToRoute('gallery', array('prospect_id' => $id));
+                } else {
+                    return $this->redirectToRoute('prospect_show', array('id' => $id));
+                }
             }
-
+            // TO DELETE ?
             return array(
                 'prospect' => $prospect,
                 'edit_form' => $editForm->createView(),
                 'delete_form' => $deleteForm->createView()
             );
+            // ***
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
@@ -487,7 +493,12 @@ var_dump("photo entirely removed");
     {
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('prospect_delete', array('id' => $id)))
-            ->setMethod('DELETE')            
+            ->setMethod('DELETE') 
+            ->add('submit', \Symfony\Component\Form\Extension\Core\Type\ButtonType::class, array(
+                'attr' => array(
+                    'class' => 'submit'
+                ),
+            ))
             ->getForm()
         ;
     } 
