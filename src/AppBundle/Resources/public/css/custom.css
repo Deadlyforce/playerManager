@@ -771,17 +771,58 @@ p.record-date{
 
 /******************************* PROSPECTS - NEW ***********************************/
 
-#modal_form_new{
-    display: none;
+#modal_prospect_form .modal-dialog{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+#modal_prospect_form .modal-dialog .modal-content{
+    min-height: 100%;
+}
+#modal_prospect_form .modal-dialog .modal-content .modal-body{
+    padding: 50px 15px 15px 15px;
+    color: #999;
 }
 
+#modal_prospect_form .modal-header h2{
+    text-align: center;
+    font-family: "ralewaylight",sans-serif;
+    font-size: 2em;
+    color: #666;
+}
+#modal_prospect_form .modal-header button.close{
+    font-size: 6em;
+    position: absolute;
+    top: -5px;
+    right: 20px;
+}
+form[name='appbundle_prospect']{
+    width: 355px;
+    margin: 0 auto;
+}
+form[name='appbundle_prospect'] > div{
+    margin-bottom: 5px;
+}
 form[name='appbundle_prospect'] label{
-    width: 200px;
+    width: 175px;
+    font-weight: 200;
+    font-size: 1.1em;
 }
-.row_parisDistrict{
+.paris-district{
     display: none;
 }
 
+/******************************* PROSPECTS - EDIT ***********************************/
+
+form#form-delete-prospect{
+    text-align: center;
+}
+form#form-delete-prospect button{
+    font-size: 2em;
+    width: 70px;
+    height: 70px;
+}
 
 /******************************* PROSPECTS - SHOW ***********************************/
 
@@ -845,20 +886,24 @@ form[name='appbundle_prospect'] label{
 .show-actions ul li a{    
     color: #fff;
     display: block;
-    line-height: 3em;
-    font-size: 1.6em;
+    line-height: 2.5em;
+    font-size: 2em;
     
     -moz-transition: all .3s ease-in;
     -o-transition: all .3s ease-in;
     -webkit-transition: all .3s ease-in;
     transition: all .3s ease-in;
 }
+.show-actions ul li.icon-add a{
+    font-size: 3em;
+    line-height: 1.7em;
+}
 .show-actions ul li a:hover{    
     background-color: #F47363;
     border-top: 1px solid #fff;
 }
 .show-actions ul li button{
-    font-size: 1.6em;
+    font-size: 2em;
 }
 .show-actions ul li button:hover{
     color: #fff;
@@ -866,10 +911,17 @@ form[name='appbundle_prospect'] label{
     border-top: 1px solid #fff;
 }
 
-
-
-/******************************* PROSPECTS - EDIT ***********************************/
-
+.show-actions ul li.icon-title{
+    padding: 0px 15px;
+}
+.show-actions ul li.icon-title p{
+    margin-bottom: 0px;
+    font-family: "ralewayregular", sans-serif;
+    font-size: 1.1em;
+}
+.show-actions ul li.icon-separator{
+    width: 70px;
+}
 
 
 /******************************* FORMS ***********************************/

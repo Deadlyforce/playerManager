@@ -68,14 +68,17 @@
          
             
         {# Modales #}
-        <div class="modal fade" id="modal_prospect_form_new" tabindex="-1" role="dialog">
+        <div class="modal fade" id="modal_prospect_form" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">                    
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">New contact</h4>
+{#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
+                        </button>
+                        <h2 class="modal-title">New contact</h2>
                     </div>    
-                    <div class="modal-body" id="modal_prospect_form_new_body">
+                    <div class="modal-body" id="modal_prospect_form_body">
                         {# Form returned by ajax #}
                     </div>                       
                 </div>    
@@ -85,7 +88,7 @@
         {# POPUP OVERLAY D'ATTENTE AJAX #}
         <div class="overlay"></div>
         <div class="loader_standard">
-            <p>Chargement...</p>
+            <p>Loading...</p>
             <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />
         </div>
     </div> 
@@ -112,37 +115,8 @@
                     $('.row-paris-district').hide('fast');
                 }
             });
-            
-            $.fn.dataTable.moment('DD-MM-YYYY' );
-            
-            initTableProspects();
-            
-            function initTableProspects()
-            {               
-                $("#table-prospects").DataTable({
-                    "language":{
-                        "lengthMenu": "_MENU_ entries"
-                    },                    
-                    "order": [[ 9, "desc" ]],
-                    "columns": [
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        null,
-                        { 
-                            className: "actions",
-                            "width": "120px"
-                        }
-                    ]
-                });
-            }
-            
-            // Ajax: get add form
+                        
+            // Ajax: get form new
             $("#add_prospect").click(function(event){
                 event.preventDefault();
                 
@@ -152,16 +126,14 @@
                 
                 var url = Routing.generate('ajax_new_prospect_form');
                 
-                $.get(url, function(response){                    
-                    
-                    $("#modal_prospect_form_new_body").html(response); // coller la vue dans une modale                  
-{#                    $('#modal_prospect_form_new').appendTo('body');#}
+                $.get(url, function(response){                   
+                    $("#modal_prospect_form_body").html(response); // coller la vue dans une modale  
                     
                     $(".loader_standard").hide(200, function(){
                         $(".overlay").hide();   
                     });                                     
                     
-                    $('#modal_prospect_form_new').modal('show');
+                    $('#modal_prospect_form').modal('show');
                 });
             });
             

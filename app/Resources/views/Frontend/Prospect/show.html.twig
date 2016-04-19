@@ -35,10 +35,7 @@
             </div>                
             <div class="col-md-9 show-right-col">
                 <div id="prospect-info-basic">
-                    <p id="firstname">{{ prospect.firstname }}</p>
-                    {% if prospect.lastname %}
-                        <p id="lastname">{{ prospect.lastname }}</p>
-                    {% endif %}
+                    <p id="firstname">{{ prospect.firstname }} {{ prospect.lastname }}</p>                    
                     {% if prospect.age %}
                         <p id="age">{{ prospect.age }} years old</p>
                     {% endif %}
@@ -84,31 +81,93 @@
                 
                 <div class="show-actions">
                     <ul>
-                        <li>
-                            <a class="" href="{{ path('prospect_list') }}" title="Back to contacts"><i class="fa fa-list"></i></a>
-                        </li>                        
+                        <li class="icon-title">
+                            <p>Relationship</p>
+                        </li>                       
                         <li>
                             {% if prospect.relationship %}
                                 <a class="" href="{{ path('relationship_show', { 'id': prospect.relationship.id }) }}" title="Show relationship">
-                                    <i class="fa fa-link"></i>
+                                    <i class="icon ion-ios-eye-outline"></i>
                                 </a>
                             {% endif %}
                         </li>
+                        <li class="icon-separator"></li>
+                        <li class="icon-title">
+                            <p>Encounters</p>
+                        </li>
+                        <li class="icon-add">
+                            <a class="" href="{{ path('encounter_new', { 'prospect_id': prospect.id }) }}" title="Add new encounter"><i class="icon ion-ios-plus-empty"></i></a>
+                        </li>
+                        <li class="icon-separator"></li>
+                        {#<li class="icon-title">
+                            <p>Edit / Delete</p>
+                        </li>#}
                         <li>
-                            <a class="" href="{{ path('encounter_new', { 'prospect_id': prospect.id }) }}" title="Add new encounter"><i class="fa fa-glass"></i></a>
+                            <a class="" href="{{ path('prospect_list') }}" title="Back to contacts"><i class="icon ion-ios-list-outline"></i></a>
+                        </li> 
+                        <li>
+{#                            <a href="{{ path('prospect_edit', { 'id': prospect.id }) }}" title="Edit contact"><i class="icon ion-compose"></i></a>            #}
+                            <a id="edit_prospect" href="#" title="Edit contact"><i class="icon ion-compose"></i></a>                
                         </li>
                         <li>
-                            <a class="" href="{{ path('prospect_edit', { 'id': prospect.id }) }}" title="Edit contact"><i class="fa fa-pencil-square-o"></i></a>                
-                        </li>
-                        <li>
-                            {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete this contact'}}) }}
-        {#                        <input class="" type="submit" value="Delete">#}                        
-                                {{ form_widget(delete_form.submit, {'label': '<i class="fa fa-trash-o"></i>'}) }}
+                            {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete contact'}}) }}                       
+                                {{ form_widget(delete_form.submit, {'label': '<i class="icon ion-ios-trash-outline"></i>'}) }}
                             {{ form_end(delete_form) }}
                         </li>
                     </ul>
                 </div>            
             </div>            
-        </div>   
-    </div>
+        </div>
+            
+        {# Modales #}
+        <div class="modal fade" id="modal_prospect_form" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">                    
+{#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
+                        </button>
+                        <h2 class="modal-title">Edit contact</h2>
+                    </div>    
+                    <div class="modal-body" id="modal_prospect_form_body">
+                        {# Form returned by ajax #}
+                    </div>                       
+                </div>    
+            </div>
+        </div>                
+                        
+        {# POPUP OVERLAY D'ATTENTE AJAX #}
+        <div class="overlay"></div>
+        <div class="loader_standard">
+            <p>Loading...</p>
+            <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />
+        </div>                
+    </div>                            
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            // Ajax: get form edit
+            $(".show-actions").on("click", "#edit_prospect", function(event){
+                event.preventDefault();
+               
+                $(".overlay").show(200, function(){
+                    $(".loader_standard").show();
+                });                
+                
+                var id = "{{ prospect.id }}";
+                var url = Routing.generate('ajax_edit_prospect_form', {'id':id});
+                
+                $.get(url, function(response){                   
+                    $("#modal_prospect_form_body").html(response); // coller la vue dans une modale  
+                    
+                    $(".loader_standard").hide(200, function(){
+                        $(".overlay").hide();   
+                    });                                     
+                    
+                    $('#modal_prospect_form').modal('show');
+                });
+            });
+        });
+    </script>
 {% endblock %}

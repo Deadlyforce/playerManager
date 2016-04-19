@@ -1,58 +1,65 @@
-{% extends '::base.html.twig' %}
-{% block title %}Modifier le contact{% endblock %}
+{% extends '::base_ajax.html.twig' %}
+{#{% block title %}Modifier le contact{% endblock %}#}
+
+{% form_theme delete_form _self %}
+
+{% block button_widget %}
+    {% set attr = attr|merge({class: (attr.class|default('btn-default') ~ ' btn')|trim}) %}
+    {%- if label is empty -%}
+        {%- if label_format is not empty -%}
+            {% set label = label_format|replace({
+                '%name%': name,
+                '%id%': id,
+            }) %}
+        {%- else -%}
+            {% set label = name|humanize %}
+        {%- endif -%}
+    {%- endif -%}
+    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain)|raw }}</button>    
+{% endblock %}
 
 {% block content %}
     <div class="container">
-        <h1>Modifier un contact</h1>
+        {{ form_start(editForm, {'attr': {'id':'form-edit-prospect'}}) }}   
+            {{ form_row(editForm.nickname) }}
+            {{ form_row(editForm.firstname) }}
+            {{ form_row(editForm.lastname) }}
+            {{ form_row(editForm.age) }}
+            {{ form_row(editForm.address) }}
+            {{ form_row(editForm.city) }}
+            <div class="paris-district">
+                {{ form_label(editForm.parisDistrict) }}
+                {{ form_widget(editForm.parisDistrict) }}
+                {{ form_errors(editForm.parisDistrict) }}
+            </div>
+            {{ form_row(editForm.country) }}
+            {{ form_row(editForm.cellNumber) }}
+            {{ form_row(editForm.homeNumber) }}
+            {{ form_row(editForm.source) }}
+{#            {{ form_row(editForm.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}                 #}
 
-        {{ form_start(edit_form, {'attr': {'id':'form-edit-prospect'}}) }}   
-            {{ form_row(edit_form.nickname) }}
-            {{ form_row(edit_form.firstname) }}
-            {{ form_row(edit_form.lastname) }}
-            {{ form_row(edit_form.age) }}
-            {{ form_row(edit_form.address) }}
-            {{ form_row(edit_form.city) }}
-            {{ form_row(edit_form.parisDistrict) }}
-            {{ form_row(edit_form.country) }}
-            {{ form_row(edit_form.cellNumber) }}
-            {{ form_row(edit_form.homeNumber) }}
-            {{ form_row(edit_form.source) }}
-{#            {{ form_row(edit_form.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}                 #}
+            {{ form_row(editForm.submit) }}
+            <div class="hidden">{{ form_rest(editForm) }}</div>
+        {{ form_end(editForm) }}        
 
-            {{ form_row(edit_form.submit) }}
-            <div class="hidden">{{ form_rest(edit_form) }}</div>
-        {{ form_end(edit_form) }}
-
-
-        <a href="{{ path('prospect') }}">Back to the list</a><br>
-
-        {{ form(delete_form) }}
-
-
-        <script type="text/javascript"> 
-
-            $(document).ready(function(){            
-
-                $('.form-input-city').change(function(){
-                    var city = $(this).val().toLowerCase();
-
-                    if(city == 'paris'){
-                        $('.row_parisDistrict').show('slow');
-                    }else{
-                        $('.row_parisDistrict').hide('slow');
-                    }
-                });            
-            }); 
-        </script>
+        {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete contact'}}) }}                       
+            {{ form_widget(delete_form.submit, {'label': '<i class="icon ion-ios-trash-outline"></i>'}) }}
+        {{ form_end(delete_form) }}       
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
     
-    {% javascripts
-        'bundles/app/js/photos.js'
-    %}        
-    <script src="{{ asset_url }}"></script>
-    {% endjavascripts%}
+    <script type="text/javascript"> 
+
+        $(document).ready(function(){            
+
+            $('input#appbundle_prospect_city').change(function(){
+                var city = $(this).val().toLowerCase();
+
+                if(city == 'paris'){
+                    $('.paris-district').show('fast');
+                }else{
+                    $('.paris-district').hide('fast');
+                }
+            });            
+        }); 
+    </script>
 {% endblock %}

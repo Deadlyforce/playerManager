@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Doctrine\Common\Collections\ArrayCollection; 
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
  * Prospect controller.
@@ -26,7 +27,7 @@ class ProspectController extends Controller
      * @Method({"GET"})
      * @Template(":ajax.html.twig")
      */
-    public function ajax_newFormNewAction()
+    public function ajax_FormNewAction()
     {       
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You cannot access this page!');
@@ -43,6 +44,43 @@ class ProspectController extends Controller
         $form_view = $this->renderView(":Frontend/Prospect:new.html.twig", array('form' => $form));
                 
         return new Response($form_view);
+    }
+    
+    /**
+     * Returns a form new prospect
+     * 
+     * @Route("/{id}/ajax_form_edit", name="ajax_edit_prospect_form", options={"expose"=true})
+     * @Method({"GET"})
+     * @Template(":ajax.html.twig")
+     */
+    public function ajax_FormEditAction($id)
+    {       
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();               
+        $prospect = $em->find("AppBundle:Prospect", $id);
+        
+        if ($user === $prospect->getUser()) {        
+//            $form = $this->createCreateForm($prospect)->createView();
+            $editForm = $this->createForm('AppBundle\Form\ProspectType', $prospect, array(
+                'action' => $this->generateUrl('prospect_update', array('id' => $id)),
+                'method' => 'PUT'
+            ));
+            $delete_form = $this->createDeleteForm($id);
+            
+            $editForm_view = $this->renderView(":Frontend/Prospect:edit.html.twig", array(
+                'editForm' => $editForm->createView(),
+                'delete_form' => $delete_form->createView()  
+            ));
+
+            return new Response($editForm_view);
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
     }
     
     /**
@@ -185,7 +223,8 @@ class ProspectController extends Controller
             
             $em = $this->getDoctrine()->getManager();
             
-            $prospect->getRelationship()->setMeetingCount(0); // Needed, not nullable
+            $prospect->getRelationship()->setMeetingCount(0);       // Needed, not nullable
+            $prospect->getRelationship()->setStartDate(new \DateTime());  // Needed, not nullable
             
             $em->persist($prospect);  
        
@@ -199,7 +238,7 @@ class ProspectController extends Controller
            
             $em->flush();                  
             
-            return $this->redirectToRoute('prospect');
+            return $this->redirectToRoute('prospect_list');
         }
 
         return array(
@@ -244,7 +283,7 @@ class ProspectController extends Controller
         $prospect->setAge(23);
         
         $datetime =  new \DateTime('', new \DateTimeZone('Europe/Paris'));
-        $prospect->setCreationDate($datetime);
+        $prospect->setCreationDate($datetime);        
 
         $form = $this->createCreateForm($prospect);        
         
@@ -478,7 +517,7 @@ class ProspectController extends Controller
             }
         }
 
-        return $this->redirect($this->generateUrl('prospect'));
+        return $this->redirectToRoute('prospect_list');
         
     }
 
@@ -494,7 +533,7 @@ class ProspectController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('prospect_delete', array('id' => $id)))
             ->setMethod('DELETE') 
-            ->add('submit', \Symfony\Component\Form\Extension\Core\Type\ButtonType::class, array(
+            ->add('submit', SubmitType::class, array(
                 'attr' => array(
                     'class' => 'submit'
                 ),

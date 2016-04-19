@@ -1,38 +1,41 @@
 {#{% block title %}New contact{% endblock %} #}
 
-{% block content %}   
-    {{ form_start(form, {'attr': {'id':'form-new-prospect'}}) }}   
-        {{ form_row(form.nickname) }}
-        {{ form_row(form.firstname) }}
-        {{ form_row(form.lastname) }}
-        {{ form_row(form.age) }}
-        {{ form_row(form.city) }}
-        <div class="collapse row-paris-district">
-            {{ form_label(form.parisDistrict) }}
-            {{ form_widget(form.parisDistrict) }}
-            {{ form_errors(form.parisDistrict) }}
-        </div>
-        {{ form_row(form.country) }}
-        {{ form_row(form.cellNumber) }}
-        {{ form_row(form.homeNumber) }}
-        {{ form_row(form.source) }}
+{% block content %}  
+{#    <div class="container">#}
+        {{ form_start(form, {'attr': {'id':'form-new-prospect'}}) }}   
+            {{ form_row(form.nickname) }}
+            {{ form_row(form.firstname) }}
+            {{ form_row(form.lastname) }}
+            {{ form_row(form.age) }}
+            {{ form_row(form.address) }}
+            {{ form_row(form.city) }}
+            <div class="collapse row-paris-district">
+                {{ form_label(form.parisDistrict) }}
+                {{ form_widget(form.parisDistrict) }}
+                {{ form_errors(form.parisDistrict) }}
+            </div>
+            {{ form_row(form.country) }}
+            {{ form_row(form.cellNumber) }}
+            {{ form_row(form.homeNumber) }}
+            {{ form_row(form.source) }}
 
-        {#{{ form_label(form.photos) }}
-        {{ form_errors(form.photos) }}
+            {#{{ form_label(form.photos) }}
+            {{ form_errors(form.photos) }}
 
-        <ul id="photo-list" data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}">
-            {% for photo in form.photos %}
-                <li>
-                    {{ form_errors(photo) }}
-                    {{ form_widget(photo) }}
-                </li>
-            {% endfor %}
-        </ul>#}
+            <ul id="photo-list" data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}">
+                {% for photo in form.photos %}
+                    <li>
+                        {{ form_errors(photo) }}
+                        {{ form_widget(photo) }}
+                    </li>
+                {% endfor %}
+            </ul>#}
 
-        {{ form_row(form.submit, {'attr': {'class': 'btn-submit-light'}}) }}
-        <div class="hidden">{{ form_rest(form) }}</div>
-    {{ form_end(form) }} 
-
+            {{ form_row(form.submit, {'attr': {'class': 'btn-submit-light'}}) }}
+            <div class="hidden">{{ form_rest(form) }}</div>
+        {{ form_end(form) }} 
+{#    </div>#}
+    
     <script type="text/javascript"> 
         $(document).ready(function(){
      
