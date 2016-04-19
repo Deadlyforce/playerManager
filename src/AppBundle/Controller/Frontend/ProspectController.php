@@ -115,15 +115,15 @@ class ProspectController extends Controller
             if($prospect->getUser() === $user){
                 $em->remove($prospect);
                 $em->flush();
+                
+                $response_array = array("id" => $id);        
+                $response = json_encode($response_array);
+
+                return new Response($response);
             } else {
                 throw $this->createAccessDeniedException('You cannot access this page!');
             }
-        }
-        
-        $response_array = array("id" => $id);        
-        $response = json_encode($response_array);
-        
-        return new Response($response);
+        }      
     }    
     
     /**

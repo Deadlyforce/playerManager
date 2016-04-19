@@ -2,7 +2,7 @@
 
 {% block content %}  
 {#    <div class="container">#}
-        {{ form_start(form, {'attr': {'id':'form-new-prospect'}}) }}   
+        {{ form_start(form, {'attr': {'id':'form-new-prospect', 'data': 'prospect-data'}}) }}   
             {{ form_row(form.nickname) }}
             {{ form_row(form.firstname) }}
             {{ form_row(form.lastname) }}

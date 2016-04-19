@@ -20,14 +20,14 @@
 
 {% block content %}
     <div class="container">
-        {{ form_start(editForm, {'attr': {'id':'form-edit-prospect'}}) }}   
+        {{ form_start(editForm, {'attr': {'id':'form-edit-prospect', 'data': 'prospect-data'}}) }}   
             {{ form_row(editForm.nickname) }}
             {{ form_row(editForm.firstname) }}
             {{ form_row(editForm.lastname) }}
             {{ form_row(editForm.age) }}
             {{ form_row(editForm.address) }}
             {{ form_row(editForm.city) }}
-            <div class="paris-district">
+            <div class="row-paris-district">
                 {{ form_label(editForm.parisDistrict) }}
                 {{ form_widget(editForm.parisDistrict) }}
                 {{ form_errors(editForm.parisDistrict) }}
@@ -51,7 +51,7 @@
 
         $(document).ready(function(){            
 
-            $('input#appbundle_prospect_city').change(function(){
+            {#$('input#appbundle_prospect_city').change(function(){
                 var city = $(this).val().toLowerCase();
 
                 if(city == 'paris'){
@@ -59,7 +59,7 @@
                 }else{
                     $('.paris-district').hide('fast');
                 }
-            });            
+            }); #}           
         }); 
     </script>
 {% endblock %}

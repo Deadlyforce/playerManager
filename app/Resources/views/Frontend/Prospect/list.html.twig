@@ -13,7 +13,7 @@
         <a class="page-button" href="#" id="add_prospect" title ="Add prospect"><i class="fa fa-plus"></i> Add contact</a>
 
         {% for prospect in pagination %}
-            <div class="prospect-record row">
+            <div class="prospect-record row" id="{{ prospect.id }}">
                 <div class="row">
                 <div class="prospect-record-photo col-md-3">
                     {{ photoDisplayIndex.primaryPhotoOrLast(prospect.photos) }}                     
@@ -25,7 +25,6 @@
                     
                     <p class="record-info"><span>Age:</span> {{ prospect.age }}</p>
                     <p class="record-info"><span>City:</span> {{ prospect.city }}</p>
-                    <p class="record-info"><span>Country:</span> {{ prospect.country }}</p>
                     <p class="record-info"><span>Cellphone:</span> {{ prospect.cellNumber }}</p>                    
                     <p class="record-info"><span>Origin:</span> {{ prospect.source }}</p>                    
                 </div>
@@ -37,7 +36,9 @@
                                 <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i></a>
                             </li>
                             <li>
-                                <a class="custom-tooltip" href="{{ path('prospect_edit', { 'id': prospect.id }) }}" title="Modify contact" data-toggle="tooltip" data-placement="top"><i class="fa fa-pencil-square-o"></i></a>
+                                <a id="edit_prospect" class="custom-tooltip" href="#" data-id="{{ prospect.id }}" title="Modify contact" data-toggle="tooltip" data-placement="top">
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </a>
                             </li>
                             <li>
                                 <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show all contact infos" data-toggle="tooltip" data-placement="top"><i class="fa fa-eye"></i></a>
@@ -137,7 +138,36 @@
                 });
             });
             
-            $("#table-prospects").on("click", ".delete", function(event){
+            // Ajax: get form edit
+            $(".record-actions").on("click", "#edit_prospect", function(event){
+                event.preventDefault();
+               
+                $(".overlay").show(200, function(){
+                    $(".loader_standard").show();
+                });                
+                
+                var id = $(this).data("id");
+                var url = Routing.generate('ajax_edit_prospect_form', {'id':id});
+                
+                $.get(url, function(response){                   
+                    $("#modal_prospect_form_body").html(response);
+                    $(".modal-header h2").empty().html("Edit contact"); // Change header to "edit"
+                    
+                    $(".loader_standard").hide(200, function(){
+                        $(".overlay").hide();   
+                    });                                     
+                    
+                    $('#modal_prospect_form').modal('show');
+                });
+            });
+            
+            
+            
+            
+            
+            
+            
+            $(".record-actions").on("click", ".delete", function(event){
                 event.preventDefault();
                 
                 var prospect_id = $(this).data("id");
@@ -170,12 +200,9 @@
                 $.post(url, data, function(response){
 
                     var data = $.parseJSON(response);
-
-                    var table = $("#table-prospects").DataTable();
-                    var tr = $("#" + data.id);
-                    
-                    table.row(tr).remove().draw(false); // false = conserve la pagination actuelle                    
-
+                    var id = data.id;
+                                       
+                    $("#"+id).remove(); // Remove contact row
                 });
             }
             

@@ -3,6 +3,7 @@ namespace AppBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\User;
 
 /**
@@ -28,6 +29,19 @@ class User extends BaseUser
     protected $id;
     
     /**
+     * @var int
+     * 
+     * @Assert\NotBlank(groups={"Registration"})
+     * @Assert\Length(
+     *      min=1,
+     *      max=2,
+     *      groups={"Registration"}
+     * )
+     * @ORM\Column(name="genre", type="integer") 
+     */
+    protected $genre;
+    
+    /**
      * @var Datetime 
      * 
      * @ORM\Column(name="created_at", type="datetime")
@@ -40,6 +54,27 @@ class User extends BaseUser
      * @ORM\Column(name="ip", type="string", length=45)
      */
     protected $ip;
+    
+    /**
+     * 
+     * @return int
+     */
+    public function getGenre()
+    {
+        return $this->genre;
+    }
+    
+    /**
+     * 
+     * @param int $genre
+     * @return User
+     */
+    public function setGenre($genre)
+    {
+        $this->genre = $genre;
+        
+        return $this;
+    }
     
     /**
      * 

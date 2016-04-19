@@ -42,7 +42,7 @@ class ProspectRepository extends EntityRepository
             SELECT p
             FROM AppBundle:Prospect p
             WHERE p.user = :user
-            ORDER BY p.creationDate DESC
+            ORDER BY p.creationDate DESC, p.id DESC
         ')
         ->setParameter('user', $user);
         

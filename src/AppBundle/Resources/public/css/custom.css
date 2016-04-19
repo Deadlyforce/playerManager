@@ -3,6 +3,20 @@
     Author     : Norman
 */
 
+/******************************* ERRORS ***********************************/
+
+.error-403{
+    text-align: center;
+    padding: 50px 0px 0px 0px;
+    font-family: "ralewaylight", sans-serif;
+}
+.error-403 i{
+    font-size: 6em;
+}
+.error-403 p{
+    font-size: 1.2em;
+}
+
 /******************************* FONTS ***********************************/
 
 @font-face {
@@ -347,31 +361,50 @@ header{
 
 /******************************* BODY ************************************/
 
-* {
+*{
     -moz-box-sizing: border-box; 
     box-sizing: border-box;
 }
 
-html {
+html{
     height: 100%;
 }
 
-body {
+body{
     font-family: sans-serif;    
     min-height: 100%;
     position: relative;
     padding-bottom: 65px; /* Footer space */
-    background-color: #202B33;
-    color: #899BA9;
+    background-color: #fff;
+    color: #666;
     padding-bottom: 150px;
 }
 
-/*.container-data {
-    background-color: #202B33;
-    color: #899BA9;
-    height: calc(100% - 128px);  Not working with a min-height on parent (body) - Calculated with javascript in template 
-    padding-bottom: 150px;
-}*/
+a{    
+    color: #666;
+}
+a:hover, a:visited, a:focus{
+    text-decoration: none;
+}
+
+.btn-basic{
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    display: inline-block;
+    margin-top: 25px;
+}
+.btn-basic:hover{
+    background-color: #3D3D3D;
+    color: #f0f0f0;
+}
+
+/*************************** REGISTRATION ********************************/
+
+p.confirmed{
+    font-family: "ralewayregular",sans-serif;
+    font-size: 1.2em;
+    text-align: center;
+}
 
 /************************ BOOTSTRAP OVERRIDES ****************************/
 
@@ -386,6 +419,12 @@ body {
 }
 
 .modal-content{
+    border-radius: 0px;
+}
+
+/************************ JCONFIRM OVERRIDES ****************************/
+
+.jconfirm.white .jconfirm-box{
     border-radius: 0px;
 }
 
@@ -421,7 +460,7 @@ section.page-title h1{
     font-size: 2.5em;
     font-family: "ralewaylight", sans-serif;    
     padding-bottom: 10px;    
-    color: #f0f0f0;
+    /*color: #f0f0f0;*/
 }
 section.page-title h2{
     font-style: italic;
@@ -646,6 +685,7 @@ table.dataTable.no-footer {
     color: #fff;
     background-color: #f47363;
     margin: 0px 0px 40px 0px;
+    box-shadow: 1px 1px 5px 2px rgba(0,0,0,0.2);
 }
 .prospect-record .row{
     margin: 0px;
@@ -776,6 +816,7 @@ p.record-date{
     width: 100%;
     height: 100%;
     margin: 0;
+    /*opacity: 0.9;*/
 }
 #modal_prospect_form .modal-dialog .modal-content{
     min-height: 100%;
@@ -797,14 +838,14 @@ p.record-date{
     top: -5px;
     right: 20px;
 }
-form[name='appbundle_prospect']{
+form[data='prospect-data']{
     width: 355px;
     margin: 0 auto;
 }
-form[name='appbundle_prospect'] > div{
+form[data='prospect-data'] > div{
     margin-bottom: 5px;
 }
-form[name='appbundle_prospect'] label{
+form[data='prospect-data'] label{
     width: 175px;
     font-weight: 200;
     font-size: 1.1em;
