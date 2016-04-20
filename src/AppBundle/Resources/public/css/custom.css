@@ -75,11 +75,12 @@
 
 }
 
-/***************************** BACKOFFICE *************************************/
+/***************************** DATEPICKER *************************************/
 
-body#bo{
-    background-color: #fff;
+.ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next{
+    background-color: #ccc;
 }
+
 
 /******************************* FORMS ****************************************/
 
@@ -387,14 +388,76 @@ a:hover, a:visited, a:focus{
     text-decoration: none;
 }
 
+/**************************** BUTTONS *********************************/
+
+.btn-start{
+    border: 1px solid #ccc;
+    padding: 10px 0px;
+    display: block;
+    margin: 25px auto;
+    width: 140px;
+    font-size: 1.2em;
+    text-align: center;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-start:hover{
+    background-color: #3D3D3D;
+    color: #f0f0f0;
+}
+
 .btn-basic{
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    display: inline-block;    
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-basic-ico{
+    border: 1px solid #ccc;
+    padding: 2px 15px;
+    display: inline-block;    
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-basic-ico span{
+    vertical-align: middle;
+}
+.btn-basic-ico i.icon::before{
+    font-size: 3em;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.btn-basic:hover, .btn-basic-ico:hover{
+    background-color: #3D3D3D;
+    color: #f0f0f0;
+}
+
+
+
+.btn-basic-rose{
     border: 1px solid #ccc;
     padding: 10px 20px;
     display: inline-block;
     margin-top: 25px;
+    background-color: transparent;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
 }
-.btn-basic:hover{
-    background-color: #3D3D3D;
+.btn-basic-rose:hover{
+    background-color: #F47363;
     color: #f0f0f0;
 }
 
@@ -449,6 +512,10 @@ p.confirmed{
 
 
 /******************************* PAGES GLOBAL ***********************************/
+
+.page-nav{
+    margin-bottom: 25px;
+}
 
 section.page-title{
     text-align: center;
@@ -528,10 +595,7 @@ td.actions a{
     display: none;  /* masqué de base */
 }
 
-/*.page-content{
-    margin-top: 40px;
-    font-family: "open_sansregular", sans-serif;        
-}*/
+
 
 /************************************ HOME *****************************************/
 
@@ -1016,10 +1080,10 @@ ul.record_actions{
    display: inline-block;
 }
 
-/****************************** RELATIONSHIP **********************************/
 
 
-/*************** SHOW *****************/
+
+/************************** RELATIONSHIP SHOW *********************************/
 
 #container-relationship h3{
     font-family: "ralewaythin",sans-serif;
@@ -1029,21 +1093,24 @@ ul.record_actions{
 }
 
 .page-content{
-    border-left: 1px solid #899BA7;
+    border-left: 1px solid #ccc;
 }
 
-#table-relationship-show tr{   
-    border-bottom: 1px solid #283640;
-}
+/*#table-relationship-show tr{*/   
+    /*border-bottom: 1px solid #283640;*/
+/*}*/
 #table-relationship-show th{
     width: 200px;  
     border-top: none;
+    font-weight: 200;
+    font-size: 1.2em;
+    font-family: "ralewayregular", sans-serif;
 }
 #table-relationship-show td{      
     border-top: none;
 }
 
-/******************************* FORM EDIT ************************************/
+/**************************** RELATIONSHIP EDIT *******************************/
 
 form[name="appbundle_relationship"] > div {
     margin-bottom: 10px;
@@ -1053,20 +1120,22 @@ form[name="appbundle_relationship"] label{
     width: 250px;
     font-weight: 200;
     font-size: 1.2em;
-    
+    font-family: "ralewayregular", sans-serif;
 }
 
 input#appbundle_relationship_startDate {
-    background-color: #202B33;
-    border: 1px solid rgb(137, 155, 142);
-    border-radius: 2px;
+    /*background-color: #202B33;*/
+    border-bottom: 1px solid rgb(137, 155, 142);
+    border-top: none;
+    border-left: none;
+    border-right: none;
     height: 25px;
 }
 
 .relationship_row{
     width: 80px;
     height: 26px;
-    background: #283640;
+    background: #eee;
     position: relative;
     display: inline-block;
     border-radius: 50px;
@@ -1087,7 +1156,7 @@ input#appbundle_relationship_startDate {
     border-radius: 50px;
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease;
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.4);
 }
 #appbundle_relationship_meeting_button {
     display: block;
@@ -1110,7 +1179,7 @@ input#appbundle_relationship_startDate {
 /* Input status */
 #appbundle_relationship_status_row:after {
     content: 'OFF';
-    color: #000;
+    color: #999;
     position: absolute;
     right: 10px;
     top: 2px;
@@ -1120,8 +1189,7 @@ input#appbundle_relationship_startDate {
     text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
 }
 #appbundle_relationship_status_row:before {
-    content: 'ON';
-    color: #899BA7;
+    content: 'ON';    
     position: absolute;
     left: 10px;
     top: 2px;
@@ -1138,8 +1206,8 @@ input#appbundle_relationship_status:checked + #appbundle_relationship_status_but
 
 /* Input meeting */
 .row-yes-no:after {
-    content: 'NO';
-    color: #000;
+    content: 'NO';  
+    color: #999;
     position: absolute;
     right: 10px;
     top: 2px;
@@ -1149,8 +1217,7 @@ input#appbundle_relationship_status:checked + #appbundle_relationship_status_but
     text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
 }
 .row-yes-no:before {
-    content: 'YES';
-    color: #899BA7;
+    content: 'YES';    
     position: absolute;
     left: 10px;
     top: 2px;
@@ -1167,8 +1234,8 @@ input#appbundle_relationship_meeting:checked + #appbundle_relationship_meeting_b
 
 /* Input meetingCount */
 input#appbundle_relationship_meetingCount{
-    background-color: rgb(32, 43, 51);
-    border: 1px solid rgb(137, 155, 169);
+    /*background-color: rgb(32, 43, 51);*/
+    border: 1px solid #ccc;
     width: 60px;
     text-align: center;
     border-radius: 2px;
@@ -1197,9 +1264,11 @@ input#appbundle_relationship_fc:checked + #appbundle_relationship_fc_button {
 }
 /* Input select realtionshipRank */
 select#appbundle_relationship_relationshipRank{
-    background-color: rgb(32, 43, 51);
-    border: 1px solid rgb(137, 155, 142);
-    border-radius: 2px;
+    /*background-color: rgb(32, 43, 51);*/    
+    border-bottom: 1px solid rgb(137, 155, 142);
+    border-top: none;
+    border-left: none;
+    border-right: none;
     height: 25px;
     
     -webkit-appearance: none;
@@ -1211,8 +1280,8 @@ label[for='appbundle_relationship_about']{
     vertical-align: top;
 }
 textarea#appbundle_relationship_about{
-    background-color: rgb(32, 43, 51);
-    border: 1px solid rgb(137, 155, 169);
+    /*background-color: rgb(32, 43, 51);*/
+    border: 1px solid #ccc;
     width: 250px;
     height: 100px;
 }

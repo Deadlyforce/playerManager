@@ -10,8 +10,10 @@
         </section>
         <div class="page-title-underline"></div> 
 
-        <a class="page-button" href="#" id="add_prospect" title ="Add prospect"><i class="fa fa-plus"></i> Add contact</a>
-
+        <div class="page-nav">
+            <a class="btn-basic-ico" href="#" id="add_prospect" title ="Add contact"><i class="icon ion-ios-plus-empty"></i><span>Add contact</span></a>
+        </div>
+        
         {% for prospect in pagination %}
             <div class="prospect-record row" id="{{ prospect.id }}">
                 <div class="row">

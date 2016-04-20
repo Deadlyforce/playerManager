@@ -9,6 +9,12 @@
         </section>
         <div class="page-title-underline"></div> 
         
+        <div class="page-nav">
+            <a class="btn-basic" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact">Contact</a>             
+            <a class="btn-basic" href="{{ path('relationship_edit', { 'id': relationship.id }) }}" title="Edit relationship"><i class="icon ion-ios-compose-outline"></i> Edit relationship</a>
+            {{ form(delete_form) }}
+        </div>
+            
         <div class="row">
             <div class="col-md-3">
                 {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
@@ -18,40 +24,40 @@
                 <table class="table table-responsive" id="table-relationship-show">
                     <tbody>                        
                         <tr>
-                            <th>Start Date</th>
+                            <th>Start date</th>
                             <td>{% if relationship.startDate %}{{ relationship.startDate|date('d-m-Y') }}{% endif %}</td>
                         </tr>
                         <tr>
-                            <th>Status</th>
+                            <th>Relationship status</th>
                             <td>{% if relationship.status %}On{% else %}Off{% endif %}</td>
                         </tr>
                         <tr>
-                            <th>Meeting</th>
-                            <td>{% if relationship.meeting %}Oui{% else %}Non{% endif %}</td>
+                            <th>Have you met ?</th>
+                            <td>{% if relationship.meeting %}Yes{% else %}No{% endif %}</td>
                         </tr>
                         <tr>
                             <th>Meeting count</th>
                             <td>{{ relationship.meetingCount }}</td>
                         </tr>
                         <tr>
-                            <th>Kc</th>
-                            <td>{% if relationship.kc %}Oui{% else %}Non{% endif %}</td>
+                            <th>Have you kissed ?</th>
+                            <td>{% if relationship.kc %}Yes{% else %}No{% endif %}</td>
                         </tr>
                         <tr>
-                            <th>Fc</th>
-                            <td>{% if relationship.fc %}Oui{% else %}Non{% endif %}</td>
+                            <th>Did you have sex ?</th>
+                            <td>{% if relationship.fc %}Yes{% else %}No{% endif %}</td>
                         </tr>
                         <tr>
-                            <th>Type</th>
+                            <th>Relationship level</th>
                             <td>{{ relationship.relationshipRank }}</td>
                         </tr>
                         <tr>
-                            <th>Distance</th>
-                            <td>{% if relationship.distance %}Oui{% else %}Non{% endif %}</td>
+                            <th>Distance problem ?</th>
+                            <td>{% if relationship.distance %}Yes{% else %}No{% endif %}</td>
                         </tr>
                         <tr>
                             <th>Flake</th>
-                            <td>{% if relationship.flake %}Oui{% else %}Non{% endif %}</td>
+                            <td>{% if relationship.flake %}Yes{% else %}No{% endif %}</td>
                         </tr>
                         <tr>
                             <th>About</th>
@@ -59,11 +65,8 @@
                         </tr>
                     </tbody>
                 </table>
+                                                   
                 
-                <a class="btn-dark" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact"><i class="fa fa-user"></i> Show contact</a>             
-                <a class="btn-dark" href="{{ path('relationship_edit', { 'id': relationship.id }) }}" title="Edit relationship"><i class="fa fa-edit"></i> Edit relationship</a>
-                   
-                {{ form(delete_form) }}
                 
             </div>
         </div>

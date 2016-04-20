@@ -64,9 +64,8 @@ class RelationshipType extends AbstractType
                 'class' => 'AppBundle:RelationshipRank'
             ))
             ->add('distance', CheckboxType::class, array(
-                'required' => FALSE,
-                'label' => 'Problème de distance',
-                'data' => FALSE
+                'required' => false,                
+                'data' => false
             ))
             ->add('flake', CheckboxType::class, array(
                 'required' => FALSE

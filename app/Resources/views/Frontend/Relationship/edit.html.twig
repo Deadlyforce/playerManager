@@ -11,6 +11,11 @@
         </section>
         <div class="page-title-underline"></div>            
         
+        <div class="page-nav">
+            {#                <a  class="btn-dark" href="{{ path('relationship_show', {'id': relationship.id }) }}"><i class="fa fa-caret-left"></i> Relationship</a>#}
+            <a class="btn-basic" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact">Contact</a>
+        </div>
+        
         <div class="row">
             <div class="col-md-3">
                 {{ photoDisplay.primaryPhotoOrLast(relationship.prospect.photos) }}
@@ -59,15 +64,12 @@
                             {{ form_errors(edit_form.fc) }}
                         </div>           
                     </div>    
-                    {{ form_row(edit_form.relationshipRank) }}
-                    {{ form_row(edit_form.distance) }}
+                    {{ form_row(edit_form.relationshipRank, {'label': 'Relationship level'}) }}
+                    {{ form_row(edit_form.distance, {'label': 'Distance problem'}) }}
                     {{ form_row(edit_form.flake) }}
                     {{ form_row(edit_form.about) }}
-                    {{ form_row(edit_form.submit, {'attr': {'class': 'btn-submit-dark'}}) }}
+                    {{ form_row(edit_form.submit, {"label":"Save changes", "attr": {"class": "btn-basic-rose"}}) }}
                 {{ form_end(edit_form) }}
-
-                <a  class="btn-dark" href="{{ path('relationship_show', {'id': relationship.id }) }}"><i class="fa fa-caret-left"></i> Back to relationship</a>
-                <a class="btn-dark" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact"><i class="fa fa-user"></i> Show contact</a>
 
                 {#{{ form_start(delete_form) }}
                     <input class="btn btn-default" type="submit" value="Delete">
