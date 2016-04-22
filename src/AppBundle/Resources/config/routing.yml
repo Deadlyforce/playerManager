@@ -1,9 +1,1 @@
-#app_relation:
-#    path:    /relation
-#    defaults: {_controller: AppBundle:Relation:index}
-#    
-#    path:   /prospect
-#    defaults: {_controller: AppBundle:Prospect:index}
-#    
-#    path:   /echange
-#    defaults: {_controller: AppBundle:Echange:index}
+

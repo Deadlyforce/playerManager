@@ -56,8 +56,12 @@ class RegistrationController extends Controller
         if (null !== $event->getResponse()) {
             return $event->getResponse();
         }
-
+        // Add locale as set by the user with button (or not, then defaults to 'en')
+        $locale = $request->getLocale();
+        $user->setLocale($locale);
+        
         $form = $formFactory->createForm();
+
         $form->setData($user);
 
         $form->handleRequest($request);

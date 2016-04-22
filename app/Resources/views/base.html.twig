@@ -67,7 +67,7 @@
                         <ul class="nav navbar-nav">
                             <li id="prospect_list"><a href="{{ path('prospect_list') }}">Contacts</a></li>
                             <li id="prospect"><a href="{{ path('prospect') }}">All contacts</a></li>
-                            <li id="relation"><a href="{{ path('relationship') }}">All relationships</a></li>                                        
+                            <li id="relation"><a href="{{ path('relationship') }}">{{ 'All relationships'|trans }}</a></li>                                        
                             <li id="echange"><a href="{{ path('echange') }}">Chats</a></li>            
                             <li id="fos_user_profile_show"><a href="{{ path('fos_user_profile_show') }}">Profile</a></li>  
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}

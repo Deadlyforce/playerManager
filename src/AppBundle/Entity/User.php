@@ -56,6 +56,14 @@ class User extends BaseUser
     protected $ip;
     
     /**
+     *
+     * @var string
+     * 
+     * @ORM\Column(name="locale", type="string", length=2, nullable=true) 
+     */
+    protected $locale;
+    
+    /**
      * 
      * @return int
      */
@@ -115,6 +123,26 @@ class User extends BaseUser
     {
         $this->ip = $ip;
         
+        return $this;
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getLocale()
+    {
+        return $this->locale;
+    }
+    
+    /**
+     * 
+     * @param string $locale
+     * @return User
+     */
+    public function setLocale($locale)
+    {
+        $this->locale = $locale;
         return $this;
     }
 }

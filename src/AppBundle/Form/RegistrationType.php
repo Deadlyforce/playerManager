@@ -15,7 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 class RegistrationType extends BaseType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) 
-    {
+    {            
         parent::buildForm($builder, $options);
         
         $builder
@@ -24,6 +24,13 @@ class RegistrationType extends BaseType
                 'choices' => array(
                     'Male' => 1,
                     'Female' => 2
+                )                
+            ))
+            ->add('locale', ChoiceType::class, array(
+                'required' => true,
+                'choices' => array(
+                    'English' => 'en',
+                    'French' => 'fr'
                 )
             ))
             ->add('captcha', CaptchaType::class, array(

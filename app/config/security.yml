@@ -26,17 +26,19 @@ security:
             form_login:                
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
-                login_path: /login                
+                login_path: fos_user_security_login                
                 use_forward: false                
-                check_path: /login_check  
+                check_path: fos_user_security_check  
                 
                 # Default route after successful login
                 default_target_path: home_index
+                success_handler: redirection_after_login
+
                 # Default route after failed login ( null by default, login route)
                 failure_path: null            
             logout:
-                path: /logout
-#                target: /
+                path: fos_user_security_logout
+                target: fos_user_security_login
             anonymous: ~
             switch_user: true
         
@@ -48,9 +50,10 @@ security:
 
         # USERS
         # URL of FOSUserBundle which need to be available to anonymous users
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }         
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }        
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        # With regex prefix to allow locale prefix
+        - { path: ^/[a-z]+/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }         
+        - { path: ^/[a-z]+/register, role: IS_AUTHENTICATED_ANONYMOUSLY }        
+        - { path: ^/[a-z]+/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         
         # ADMIN
         # Custom access control for the admin area of the URL 

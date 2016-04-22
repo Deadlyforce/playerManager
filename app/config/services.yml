@@ -23,9 +23,25 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: preRemove }
+            
+    app.locale_listener:
+        class: AppBundle\EventListener\LocaleListener
+        arguments: ['@router','%kernel.default_locale%']
+        tags:
+            - { name: kernel.event_subscriber }
+
+#    app.user_locale_listener:
+#        class: AppBundle\EventListener\UserLocaleListener
+#        arguments: ['@router','@session']
+#        tags:
+#            - { name: kernel.event_listener, event: security.interactive_login, method: onInteractiveLogin }
 
     prospect_manager:
         class: AppBundle\DependencyInjection\Prospect\ProspectManager
         arguments: 
             - '@doctrine.orm.entity_manager'
             - '@security.token_storage'
+            
+    redirection_after_login:
+        class: AppBundle\Handler\RedirectionAfterLogin
+        arguments: ['@router']

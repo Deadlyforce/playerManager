@@ -10,8 +10,8 @@
         <div class="page-title-underline"></div> 
         
         <div class="page-nav">
-            <a class="btn-basic" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact">Contact</a>             
-            <a class="btn-basic" href="{{ path('relationship_edit', { 'id': relationship.id }) }}" title="Edit relationship"><i class="icon ion-ios-compose-outline"></i> Edit relationship</a>
+            <a class="btn-basic" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact">Contact page</a>             
+            <a class="btn-basic-ico" href="{{ path('relationship_edit', { 'id': relationship.id }) }}" title="Edit relationship"><i class="icon ion-ios-compose-outline"></i><span>Edit relationship</span></a>
             {{ form(delete_form) }}
         </div>
             

@@ -26,16 +26,29 @@
 </head>
 <body>
     <section id="login-top-bar">
-        <div class="container">
-            {{ block('fos_user_content') }}
+        {#<div class="container">
+            
+        </div>
+        #}
+        <div class="container">  
+            <div class="row">
+            <div class="col-md-1">
+                <ul class="lang-menu">
+                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Fr</a></li>
+                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">En</a></li>
+                </ul>
+            </div>
+            <div class="col-md-11">
+                {{ block('fos_user_content') }}
+            </div>
         </div>
     </section>
     <div class="container">
 
         {% block content %}   
             <div id="login-body">
-                <h1>Welcome to the PlayerManager<span> beta</span></h1>
-                <p>New to the site? <a href="{{ path('fos_user_registration_register') }}" title="Register">Register here</a></p>
+                <h1>{{ 'Welcome to the PlayerManager'|trans }}<span> beta</span></h1>
+                <p>{{ 'New to the site?'|trans }}<a href="{{ path('fos_user_registration_register') }}" title="Register">{{ 'Register here'|trans }}</a></p>
             </div>                
         {% endblock %}
 

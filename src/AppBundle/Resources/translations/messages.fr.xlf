@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="file.ext">
+        <body>            
+            <trans-unit id="Welcome_to_the_PlayerManager">
+                <source>Welcome to the PlayerManager</source>
+                <target>Bienvenue dans le PlayerManager</target>
+            </trans-unit>
+            <trans-unit id="New_to_the_site?">
+                <source>New to the site?</source>
+                <target>Première visite?</target>
+            </trans-unit>
+            <trans-unit id="Register_here">
+                <source>Register here</source>
+                <target>Créer un compte</target>
+            </trans-unit>
+            <trans-unit id="All_relationships">
+                <source>All relationships</source>
+                <target>Toutes les relations</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
+

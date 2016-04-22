@@ -260,6 +260,25 @@ img[title="captcha"]{
 
 /***************** FORM LOGIN *********************/
 
+ul.lang-menu{
+    list-style: none;
+    padding-left: 0;
+    margin: 8px 0px 0px 0px;
+}
+ul.lang-menu li{
+    display: inline-block;
+    margin-right: 5px;
+}
+ul.lang-menu li a{
+   color: #ccc;
+}
+ul.lang-menu li a:hover{
+   color: #fff;
+}
+
+form[name="fos_user_security_login"]{
+
+}
 form[name="fos_user_security_login"] .form-control{
     box-shadow: none;
     border: 1px solid #888;
@@ -281,6 +300,10 @@ form[name="fos_user_security_login"] label[for="remember_me"]{
     margin-left: 10px;
     font-weight: 400;
 }
+form[name="fos_user_security_login"] input#remember_me{
+    display: table-cell;
+    vertical-align: top;
+}
 form[name="fos_user_security_login"] input#password, form[name="fos_user_security_login"] input#username{
     color: #e0e0e0;
     margin-top: 5px;
@@ -289,7 +312,7 @@ form[name="fos_user_security_login"] input#password, form[name="fos_user_securit
     padding-top: 4px;
 }
 form[name="fos_user_security_login"] #_submit{
-    margin-top: 5px;
+    margin-top: 7px;
     border: none;
     color: #e0e0e0;
     background: transparent;
@@ -411,8 +434,9 @@ a:hover, a:visited, a:focus{
 
 .btn-basic{
     border: 1px solid #ccc;
-    padding: 10px 20px;
+    padding: 13px 20px;
     display: inline-block;    
+    vertical-align: top;
     
     -moz-transition: all .3s ease-in;
     -o-transition: all .3s ease-in;
