@@ -56,8 +56,9 @@ class RegistrationController extends Controller
         if (null !== $event->getResponse()) {
             return $event->getResponse();
         }
-        // Add locale as set by the user with button (or not, then defaults to 'en')
-        $locale = $request->getLocale();
+        // Add locale as set by the user in register form
+        $registerForm = $request->request->get('fos_user_registration_form');
+        $locale = $registerForm['locale'];
         $user->setLocale($locale);
         
         $form = $formFactory->createForm();
@@ -71,9 +72,12 @@ class RegistrationController extends Controller
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
             $userManager->updateUser($user);
-
+                      
             if (null === $response = $event->getResponse()) {
-                $url = $this->generateUrl('fos_user_registration_confirmed');
+//                $url = $this->generateUrl('fos_user_registration_confirmed');    
+                // Redirection page confirmed, with locale chosen by user
+                $url = $this->generateUrl('fos_user_registration_confirmed', array("_locale" => $locale));
+
                 $response = new RedirectResponse($url);
             }
 

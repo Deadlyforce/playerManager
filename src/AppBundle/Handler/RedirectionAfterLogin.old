@@ -27,6 +27,7 @@ class RedirectionAfterLogin implements AuthenticationSuccessHandlerInterface
         $this->defaultLocale = $defaultLocale;
     }
     
+    
     /**
      * @param Request $request
      * @param TokenInterface $token
@@ -35,7 +36,6 @@ class RedirectionAfterLogin implements AuthenticationSuccessHandlerInterface
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         $defaultLocale = $request->getSession()->get('_locale', $this->defaultLocale);
-
         $locale = $token->getUser()->getLocale();
         
         if ($locale) {

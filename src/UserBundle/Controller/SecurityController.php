@@ -19,14 +19,14 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 use FOS\UserBundle\Controller\SecurityController as BaseController;
 
-use Symfony\Component\HttpFoundation\RedirectResponse;
+//use Symfony\Component\HttpFoundation\RedirectResponse;
 
 
 class SecurityController extends BaseController
 {
        
     public function loginAction(Request $request)
-    {          
+    {        
         /** @var $session \Symfony\Component\HttpFoundation\Session\Session */
         $session = $request->getSession();
 
@@ -82,9 +82,10 @@ class SecurityController extends BaseController
      */
     protected function renderLogin(array $data)
     {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {      
             return $this->render('FOSUserBundle:Security:login.html.twig', $data);           
         } else {
+            // If user authenticated goes back to login -> redirected to home_index
             return $this->redirectToRoute("home_index");
         }
         
