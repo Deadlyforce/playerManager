@@ -770,21 +770,26 @@ table.dataTable.no-footer {
 /******************************* PROSPECTS - INDEX *********************************/
 
 .prospect-record{
-    color: #fff;
-    background-color: #f47363;
-    margin: 0px 0px 40px 0px;
-    box-shadow: 1px 1px 5px 2px rgba(0,0,0,0.2);
+    color: #666;
+    background-color: #fff;
+    margin: 0px 0px 85px 0px;
+    position: relative;
+    /*box-shadow: 1px 1px 5px 2px rgba(0,0,0,0.2);*/
 }
 .prospect-record .row{
     margin: 0px;
+}
+.prospect-record .row-info{
+    box-shadow: 0px 4px 8px 4px #ddd;
+    border: 1px solid #ddd;
 }
 .prospect-record-photo{
     padding: 0px;
 }
 .prospect-record-card{
-    position: relative;
     padding-left: 0px;
     padding-top: 10px;
+    height: 250px;
 }
 p.record-firstname{
     font-size: 2em;
@@ -810,30 +815,40 @@ p.record-date{
 .prospect-record-card p.record-info{
     font-size: 1.1em;
 }
-.record-actions{
-    border-top: 1px solid rgba(255,255,255,0.3);
-    /*height: 50px;*/
+
+.row-actions{
+    position: absolute;
+    right: 0;
+    bottom: -50px;
+    z-index: 2;
+    width: 100%;
 }
-.record-actions ul{
-    margin-top: 0;
+.row-actions:hover{
+    background-color: rgba(0,0,0,0.03);
+}
+
+ul.record-actions{
+    margin: 0;
     list-style: none;
+    padding: 0;
+    float: right;
 }
 .record-actions li{
     float: right;
     text-align: center;
 }
 .record-actions a{
-    color: #fff;
+    color: #666;
     text-decoration: none;
-    font-size: 1.8em;
+    font-size: 2em;
     display: table-cell;
     vertical-align: middle;
 /*    border: 1px solid white;*/
     width: 50px;
     height: 50px;    
     
-    border-left: 1px solid rgba(255,255,255,0.7);
-    border-right: 1px solid rgba(0,0,0,0.2);
+/*    border-left: 1px solid rgba(255,255,255,0.7);
+    border-right: 1px solid rgba(0,0,0,0.2);*/
     
     -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
@@ -841,18 +856,20 @@ p.record-date{
     transition: all .2s ease-in;
 }
 .record-actions a:hover{
+    color: #fff;
     background-color: #DA6759;    
 }
 .record-actions p{
     font-size: 1.2em;
     padding: 12px 10px 0px;
+    font-family: "ralewayregular", sans-serif;
 }
 .record-actions li.separator{
     float: right;
     text-align: center;
     width: 50px;
     height: 50px;
-    border-left: 1px solid rgba(255,255,255,0.7);
+    /*border-left: 1px solid rgba(255,255,255,0.7);*/
 }
 
 /*** CUSTOM TOOLTIP ***/

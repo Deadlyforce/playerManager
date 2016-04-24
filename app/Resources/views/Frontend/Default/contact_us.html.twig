@@ -1,0 +1,34 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Contact us{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <section class="page-title">
+            <h1>Send us a message</h1>
+        </section>
+        <div class="page-title-underline"></div>
+        
+        {{ form_start(form) }}
+            <div>
+                {{ form_widget(form.name) }}
+                {{ form_errors(form.name) }}
+            </div>
+            <div>
+                {{ form_widget(form.email) }}
+                {{ form_errors(form.email) }}
+            </div>
+            <div>
+                {{ form_widget(form.subject) }}
+                {{ form_errors(form.subject) }}
+            </div>
+            <div>
+                {{ form_widget(form.message) }}            
+                {{ form_errors(form.message) }}            
+            </div>
+            <div>
+                {{ form_widget(form.submit, {'attr': {'class': 'btn-submit'} }) }}
+            </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

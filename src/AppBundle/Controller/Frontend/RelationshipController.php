@@ -17,7 +17,6 @@ use AppBundle\Form\RelationshipType;
  */
 class RelationshipController extends Controller
 {
-
     /**
      * Lists all Relationship entities.
      *

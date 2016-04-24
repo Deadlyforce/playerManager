@@ -16,52 +16,51 @@
         
         {% for prospect in pagination %}
             <div class="prospect-record row" id="{{ prospect.id }}">
-                <div class="row">
-                <div class="prospect-record-photo col-md-3">
-                    {{ photoDisplayIndex.primaryPhotoOrLast(prospect.photos) }}                     
-                </div>
-                <div class="prospect-record-card col-md-9">
-                    <p class="record-firstname">{{ prospect.firstname }} {{ prospect.lastname }}</em></p>
-                    <p class="record-date pull-right">Created: {{ prospect.creationDate|date('d-m-Y') }}</p>
-                    <div class="card-separator"></div>
-                    
-                    <p class="record-info"><span>Age:</span> {{ prospect.age }}</p>
-                    <p class="record-info"><span>City:</span> {{ prospect.city }}</p>
-                    <p class="record-info"><span>Cellphone:</span> {{ prospect.cellNumber }}</p>                    
-                    <p class="record-info"><span>Origin:</span> {{ prospect.source }}</p>                    
-                </div>
-                </div>
-                <div class="row">
-                    <div class="record-actions">
-                        <ul>
-                            <li>
-                                <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="fa fa-trash-o"></i></a>
-                            </li>
-                            <li>
-                                <a id="edit_prospect" class="custom-tooltip" href="#" data-id="{{ prospect.id }}" title="Modify contact" data-toggle="tooltip" data-placement="top">
-                                    <i class="fa fa-pencil-square-o"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show all contact infos" data-toggle="tooltip" data-placement="top"><i class="fa fa-eye"></i></a>
-                            </li>
-                            <li><p>Actions</p></li>
-                            <li class="separator"></li>
-                            <li>
-                                <a class="custom-tooltip" href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Edit relationship" data-toggle="tooltip" data-placement="top"><i class="fa fa-user-plus"></i></a>
-                            </li>
-                            <li>
-                                <a class="custom-tooltip" href="{{ path('relationship_show', {'id': prospect.relationship.id}) }}" title="Show relationship" data-toggle="tooltip" data-placement="top"><i class="fa fa-user"></i></a>
-                            </li>
-                            <li><p>Relationship</p></li>
-                            <li class="separator"></li>
-                            <li>
-                                <a class="custom-tooltip" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Add and remove photos"  data-toggle="tooltip" data-placement="top"><i class="fa fa-file-image-o"></i></a>
-                            </li>
-                            <li><p>Gallery</p></li>
-                        </ul>
+                <div class="row row-info">
+                    <div class="prospect-record-photo col-md-3">
+                        {{ photoDisplayIndex.primaryPhotoOrLast(prospect.photos) }}                     
                     </div>
-                </div>
+                    <div class="prospect-record-card col-md-9">
+                        <p class="record-firstname">{{ prospect.firstname }} {{ prospect.lastname }}</em></p>
+                        <p class="record-date pull-right">Created: {{ prospect.creationDate|date('d-m-Y') }}</p>
+                        <div class="card-separator"></div>
+
+                        <p class="record-info"><span>Age:</span> {{ prospect.age }}</p>
+                        <p class="record-info"><span>City:</span> {{ prospect.city }}</p>
+                        <p class="record-info"><span>Cellphone:</span> {{ prospect.cellNumber }}</p>                    
+                        <p class="record-info"><span>Origin:</span> {{ prospect.source }}</p>                    
+                    </div>
+                </div>                 
+                
+                <div class="row row-actions">                    
+                    <ul class="record-actions">
+                        <li>
+                            <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-trash-outline"></i></a>
+                        </li>
+                        <li>
+                            <a id="edit_prospect" class="custom-tooltip" href="#" data-id="{{ prospect.id }}" title="Modify contact" data-toggle="tooltip" data-placement="top">
+                                <i class="icon ion-ios-compose-outline"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show all contact infos" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-eye-outline"></i></a>
+                        </li>
+                        <li><p>Contact</p></li>
+                        <li class="separator"></li>
+                        <li>
+                            <a class="custom-tooltip" href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Edit relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
+                        </li>
+                        <li>
+                            <a class="custom-tooltip" href="{{ path('relationship_show', {'id': prospect.relationship.id}) }}" title="Show relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-eye-outline"></i></a>
+                        </li>
+                        <li><p>Relationship</p></li>
+                        <li class="separator"></li>
+                        <li>
+                            <a class="custom-tooltip" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Add and remove photos"  data-toggle="tooltip" data-placement="top"><i class="icon ion-images"></i></a>
+                        </li>
+                        <li><p>Gallery</p></li>
+                    </ul>                    
+                </div>               
             </div>
         {% endfor %}
         
@@ -106,6 +105,34 @@
     
     <script type="text/javascript">
         $(document).ready(function(){
+            var locale = "{{ app.request.locale }}";
+            
+            {#$("#container-prospect").on("mouseenter", ".prospect-record", function(){
+                var rowActions = $(this).children().last();
+               
+                rowActions.parent().css('margin-bottom', '95px');
+                rowActions.parent().animate(function(){
+                    marginBottom: "95px"
+                });
+        
+                rowActions.stop(true, true).animate({
+                    bottom: "-50"                    
+                },300, function(){
+                    rowActions.css('z-index', 2);
+                    
+                    rowActions.parent().on("mouseleave", function(){                         
+                        rowActions.css('z-index', -1);
+                        rowActions.stop(true, true).animate({
+                            bottom: "0"
+                        },300, function(){
+                            rowActions.parent().css('margin-bottom', '45px');
+                        });
+                    });
+                });
+            });#}
+                 
+            
+            
             $('[data-toggle="tooltip"]').tooltip();
             
             // Form new prospect - parisDistrict
@@ -125,9 +152,9 @@
                 
                 $(".overlay").show(200, function(){
                     $(".loader_standard").show();
-                });                
+                });                       
                 
-                var url = Routing.generate('ajax_new_prospect_form');
+                var url = Routing.generate('ajax_new_prospect_form', {'_locale': locale});
                 
                 $.get(url, function(response){                   
                     $("#modal_prospect_form_body").html(response); // coller la vue dans une modale  
@@ -148,8 +175,8 @@
                     $(".loader_standard").show();
                 });                
                 
-                var id = $(this).data("id");
-                var url = Routing.generate('ajax_edit_prospect_form', {'id':id});
+                var id = $(this).data("id");                
+                var url = Routing.generate('ajax_edit_prospect_form', {'id':id, '_locale': locale});
                 
                 $.get(url, function(response){                   
                     $("#modal_prospect_form_body").html(response);
@@ -196,7 +223,7 @@
              */
             function ajaxDeleteProspect(prospect_id, csrf_token)
             {                
-                var url = Routing.generate('ajax_delete_prospect', {'id': prospect_id});                
+                var url = Routing.generate('ajax_delete_prospect', {'id': prospect_id, '_locale': locale});                
                 var data = {'csrf_token': csrf_token};
 
                 $.post(url, data, function(response){
