@@ -61,7 +61,7 @@ class User extends BaseUser
      * 
      * @ORM\Column(name="locale", type="string", length=2, nullable=true) 
      */
-    protected $locale;
+//    protected $locale;
     
     /**
      * 
@@ -130,19 +130,19 @@ class User extends BaseUser
      * 
      * @return string
      */
-    public function getLocale()
-    {
-        return $this->locale;
-    }
-    
-    /**
-     * 
-     * @param string $locale
-     * @return User
-     */
-    public function setLocale($locale)
-    {
-        $this->locale = $locale;
-        return $this;
-    }
+//    public function getLocale()
+//    {
+//        return $this->locale;
+//    }
+//    
+//    /**
+//     * 
+//     * @param string $locale
+//     * @return User
+//     */
+//    public function setLocale($locale)
+//    {
+//        $this->locale = $locale;
+//        return $this;
+//    }
 }

@@ -57,9 +57,10 @@ class RegistrationController extends Controller
             return $event->getResponse();
         }
         // Add locale as set by the user in register form
-        $registerForm = $request->request->get('fos_user_registration_form');
-        $locale = $registerForm['locale'];
-        $user->setLocale($locale);
+//        $registerForm = $request->request->get('fos_user_registration_form');
+//        $locale = $registerForm['locale'];
+//        $user->setLocale($locale);
+        $locale = $request->getLocale();
         
         $form = $formFactory->createForm();
 

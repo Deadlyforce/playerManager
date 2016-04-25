@@ -26,13 +26,13 @@ class RegistrationType extends BaseType
                     'Female' => 2
                 )                
             ))
-            ->add('locale', ChoiceType::class, array(
-                'required' => true,
-                'choices' => array(
-                    'English' => 'en',
-                    'French' => 'fr'
-                )
-            ))
+//            ->add('locale', ChoiceType::class, array(
+//                'required' => true,
+//                'choices' => array(
+//                    'English' => 'en',
+//                    'French' => 'fr'
+//                )
+//            ))
             ->add('captcha', CaptchaType::class, array(
                 'label' => 'Visual confirmation '
             ));
