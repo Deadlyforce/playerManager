@@ -1,8 +1,15 @@
-New message from {{ name }}
+<h3>New message from {{ name }}</h3>
 
 Sent from playermanager
 
 IP: {{ ip }}
 
-{{ subject }}
-{{ message|raw }}
+<p>
+    {{ subject }}
+</p>
+<p>
+    {{ message|raw }}
+</p>
+<p>
+    {{ email }}
+</p>

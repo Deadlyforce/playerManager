@@ -1,5 +1,7 @@
 {% extends "::base.html.twig" %}
 
+{% form_theme form ':Form:captcha.html.twig' %}
+
 {% block title %}Contact us{% endblock %}
 
 {% block content %}
@@ -27,7 +29,10 @@
                 {{ form_errors(form.message) }}            
             </div>
             <div>
-                {{ form_widget(form.submit, {'attr': {'class': 'btn-submit'} }) }}
+                {{ form_widget(form.captcha) }}                              
+            </div>
+            <div>
+                {{ form_widget(form.submit, {'attr': {'class': 'btn-submit', 'title': 'Send message'} }) }}
             </div>
         {{ form_end(form) }}
     </div>

@@ -82,77 +82,6 @@
 }
 
 
-/******************************* FORMS ****************************************/
-
-.btn-submit-light{
-    color: #666;
-    font-size: 1.2em;
-    text-decoration: none;
-    display: inline-block;
-    border: 1px solid #666;
-    border-radius: 2px;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    margin-top: 15px;
-    background-image: none;
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
-    transition: all .3s ease-in;
-}
-.btn-submit-light:hover{
-    color: #f47363;
-    border: 1px solid #f47363;
-    background: transparent;
-}
-.btn-submit-dark{
-    color: #899BA9;
-    font-size: 1.2em;
-    text-decoration: none;
-    display: inline-block;
-    border: 1px solid #666;
-    border-radius: 2px;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    margin-top: 15px;
-    background-color: rgb(54, 61, 77);
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
-    transition: all .3s ease-in;
-}
-.btn-submit-dark:hover{
-    color: #f47363;
-    border: 1px solid #f47363;
-    background: transparent;
-}
-
-.btn-dark{
-    color: #899BA9;
-    font-size: 1.2em;
-    text-decoration: none;
-    display: inline-block;
-    border: 1px solid #666;
-    border-radius: 2px;
-    padding: 5px 15px;
-    margin-bottom: 20px;
-    margin-top: 15px;
-    background-color: transparent;
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
-    transition: all .3s ease-in;
-}
-.btn-dark:hover{
-    text-decoration: none;
-    color: #f47363;
-    border: 1px solid #f47363;
-    background: transparent;
-}
-
 /******************************* REGISTER  ****************************************/
 
 #register-user{
@@ -413,6 +342,98 @@ a:hover, a:visited, a:focus{
 
 /**************************** BUTTONS *********************************/
 
+.btn-submit-light{
+    color: #666;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    background-image: none;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-submit-light:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
+    background: transparent;
+}
+.btn-submit-dark{
+    color: #899BA9;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    background-color: rgb(54, 61, 77);
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-submit-dark:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
+    background: transparent;
+}
+
+.btn-dark{
+    color: #899BA9;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 5px 15px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+    background-color: transparent;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.btn-dark:hover{
+    text-decoration: none;
+    color: #f47363;
+    border: 1px solid #f47363;
+    background: transparent;
+}
+
+button.btn-submit{
+    color: #666;
+    font-size: 1.2em;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid #666;
+    border-radius: 2px;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    background-image: none;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+button.btn-submit:hover{
+    color: #f47363;
+    border: 1px solid #f47363;
+    background: transparent;
+}
+
 .btn-start{
     border: 1px solid #ccc;
     padding: 10px 0px;
@@ -455,11 +476,12 @@ a:hover, a:visited, a:focus{
 }
 .btn-basic-ico span{
     vertical-align: middle;
+    margin-left: 10px;
 }
 .btn-basic-ico i.icon::before{
     font-size: 3em;
     vertical-align: middle;
-    margin-right: 10px;
+    /*margin-right: 10px;*/
 }
 .btn-basic:hover, .btn-basic-ico:hover{
     background-color: #3D3D3D;
@@ -730,7 +752,7 @@ ul.slick-dots > li > button:hover{
 
 #table-prospects_wrapper{
     padding: 20px 0px 20px 0px;
-    background-color: #202B33;
+    background-color: transparent;
 }
 #table-prospects{
     width: 100%;
@@ -741,9 +763,12 @@ ul.slick-dots > li > button:hover{
 }
 #table-prospects tbody td{
     vertical-align: middle;
-    background-color: #202B33;
+    background-color: transparent;
     border-top: none;
-    border-bottom: 1px solid #283640;
+    border-bottom: 1px solid #ccc;
+}
+#table-prospects tbody td img.img-responsive{
+    max-width: 35%;
 }
 table.dataTable.no-footer {
     border-bottom: none;
@@ -1071,7 +1096,7 @@ form#form-delete-prospect button{
 
 
 /******************************* FORMS ***********************************/
-.form_row{
+/*.form_row{
     margin-bottom: 5px;
 }
 .form_row label{
@@ -1079,29 +1104,9 @@ form#form-delete-prospect button{
 }
 .form_row input{
     width: 250px;
-}
+}*/
 
-button.btn-submit{
-    color: #666;
-    font-size: 1.2em;
-    text-decoration: none;
-    display: inline-block;
-    border: 1px solid #666;
-    border-radius: 2px;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    background-image: none;
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
-    transition: all .3s ease-in;
-}
-button.btn-submit:hover{
-    color: #f47363;
-    border: 1px solid #f47363;
-    background: transparent;
-}
+
 
 /************************* FORM NEW PROSPECT *****************************/
 
@@ -1556,6 +1561,23 @@ form#upload-form{
 #crop-info{
     text-align: center;
     margin-bottom: 20px;
+}
+
+/******************************** CONTACT US ************************************/
+
+form[name="appbundle_contact_us"]{
+    width: 600px;
+    margin: 0 auto;
+}
+form[name="appbundle_contact_us"] > div{
+    margin-bottom: 10px;
+}
+
+input#appbundle_contact_us_name, input#appbundle_contact_us_email, input#appbundle_contact_us_captcha{ 
+    width: 200px;
+}
+input#appbundle_contact_us_subject{
+    width: 300px;
 }
 
 /******************************** ENCOUNTER *************************************/

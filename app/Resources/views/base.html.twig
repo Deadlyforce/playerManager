@@ -66,9 +66,8 @@
                     <div class="collapse navbar-collapse col-md-8 pull-right" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav">
                             <li><a href="{{ path('prospect_list') }}">Contacts</a></li>
-                            <li><a href="{{ path('prospect') }}">All contacts</a></li>
-                            <li><a href="{{ path('relationship') }}">{{ 'All relationships'|trans }}</a></li>                                        
-                            <li><a href="{{ path('echange') }}">Chats</a></li>            
+{#                            <li><a href="{{ path('relationship') }}">{{ 'All relationships'|trans }}</a></li>                                        #}
+{#                            <li><a href="{{ path('echange') }}">Chats</a></li>            #}
                             <li><a href="{{ path('fos_user_profile_show') }}">Profile</a></li> 
                             <li><a href="{{ path('contact_us') }}">Contact us</a></li>  
                             {% if is_granted('IS_AUTHENTICATED_FULLY') %}

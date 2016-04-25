@@ -5,12 +5,14 @@
 {% block content %}
     <div class="container" id="container-prospect">        
         <section class="page-title">
-            <h1>Contacts</h1> 
-{#            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>#}
+            <h1>All contacts</h1> 
+            <h2>Quick overview of your contacts as a table</h2>
         </section>
         <div class="page-title-underline"></div> 
 
-        <a class="page-button" href="#" id="add_prospect" title ="Add prospect"><i class="fa fa-plus"></i> Add contact</a>
+        <div class="page-nav">
+            <a class="btn-basic-ico" href="#" id="add_prospect" title ="Add contact"><i class="icon ion-ios-plus-empty"></i><span>Add contact</span></a>
+        </div>
 
         <table id="table-prospects" class="table table-hover">
             <thead>
@@ -50,15 +52,15 @@
                         {% if prospect.creationDate %}{{ prospect.creationDate|date('d-m-Y') }}{% endif %}
                     </td>
                     <td>
-                        <a class="" href="{{ path('prospect_show', { 'id': prospect.id }) }}"><i class="fa fa-eye"></i></a>                       
-                        <a class="" href="{{ path('prospect_edit', { 'id': prospect.id }) }}"><i class="fa fa-pencil-square-o"></i></a>  
-                        <a href="#" class="delete" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete"><i class="fa fa-trash-o"></i></a>
+                        <a class="" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show contact"><i class="fa fa-eye"></i></a>                       
+                        <a class="" href="{{ path('prospect_edit', { 'id': prospect.id }) }}" title="Edit contact"><i class="fa fa-pencil-square-o"></i></a>  
+                        <a href="#" class="delete" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete"  title="Delete contact"><i class="fa fa-trash-o"></i></a>
                         {% if prospect.relationship %}
     {#                        <a class="" href="{{ path('relationship_show', { 'id': entity.relationship.id }) }}">relationship</a>#}
                         {% endif %}
-                        <a class="" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Gallery">Gallery</a>
+                        {#<a class="" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Gallery">Gallery</a>
                         <a class="" href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Relationship">Relationship edit</a>
-                        <a class="" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Encounters">Encounters</a>
+                        <a class="" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Encounters">Encounters</a>#}
                     </td>
                 </tr>
             {% endfor %}
@@ -99,6 +101,8 @@
     <script type="text/javascript">
         $(document).ready(function(){        
             
+            var locale = "{{ app.request.locale }}";
+            
             // Form new prospect - parisDistrict
             $("#container-prospect").on("change", "input#appbundle_prospect_city", function(){
                 var city = $(this).val().toLowerCase();
@@ -133,7 +137,7 @@
                         null,
                         { 
                             className: "actions",
-                            "width": "120px"
+                            "width": "80px"
                         }
                     ]
                 });
@@ -147,12 +151,10 @@
                     $(".loader_standard").show();
                 });                
                 
-                var url = Routing.generate('ajax_new_prospect_form');
+                var url = Routing.generate('ajax_new_prospect_form', {'_locale':locale});
                 
-                $.get(url, function(response){                    
-                    
+                $.get(url, function(response){                   
                     $("#modal_prospect_form_new_body").html(response); // coller la vue dans une modale                  
-{#                    $('#modal_prospect_form_new').appendTo('body');#}
                     
                     $(".loader_standard").hide(200, function(){
                         $(".overlay").hide();   
@@ -189,7 +191,7 @@
              */
             function ajaxDeleteProspect(prospect_id, csrf_token)
             {                
-                var url = Routing.generate('ajax_delete_prospect', {'id': prospect_id});                
+                var url = Routing.generate('ajax_delete_prospect', {'id': prospect_id, '_locale': locale});                
                 var data = {'csrf_token': csrf_token};
 
                 $.post(url, data, function(response){

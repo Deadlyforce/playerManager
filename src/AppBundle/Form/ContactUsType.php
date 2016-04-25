@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 
 /**
  * Description of ContactUsType
@@ -48,6 +49,9 @@ class ContactUsType extends AbstractType
                     'rows' => 10,
                     'placeholder' => 'Your message...'
                 )
+            ))
+            ->add('captcha', CaptchaType::class, array(
+                'label' => 'Visual confirmation '
             ))
             ->add('submit', SubmitType::class, array(
                 'label' => 'Send message'
