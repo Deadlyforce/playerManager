@@ -5,7 +5,6 @@ namespace AppBundle\Controller\Frontend;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Cookie;
@@ -34,14 +33,6 @@ class DefaultController extends Controller
      */
     public function changeLocaleAction(Request $request)
     {
-        $localeCookie = $this->readCookie($request);
-
-        if ($localeCookie != null) {
-            $response = new Response();
-            $response->headers->clearCookie('user_locale');
-            $response->send();                    
-        } 
-        
         $routeLocale = $request->getLocale();
         $this->setCookie($routeLocale);
 
@@ -90,28 +81,14 @@ class DefaultController extends Controller
     }
     
     /**
-     * Returns the locale cookie if it exists.     
+     * Sets a cookie
+     * 
+     * @param string $locale
      */
-    public function readCookie($request)
-    {      
-        $localeCookie = $request->cookies->get('user_locale');
-
-        if ($localeCookie != null) {
-            $response = new Response($localeCookie);
-        } else {
-            $response = null;
-        }
-  
-        return $response;        
-    }
-    
     public function setCookie($locale)
     {
-        $value = $locale;
         $response = new Response();          
-        $response->headers->setCookie(new Cookie('user_locale', $value, time() + (3600 * 48))); 
+        $response->headers->setCookie(new Cookie('user_locale', $locale, time() + (3600 * 72))); 
         $response->send();
-        
-        return $response; 
     }
 }

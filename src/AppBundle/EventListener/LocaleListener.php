@@ -7,8 +7,6 @@ use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
-//use Symfony\Component\HttpFoundation\Response;
-
 
 class LocaleListener implements EventSubscriberInterface
 {
@@ -49,13 +47,17 @@ class LocaleListener implements EventSubscriberInterface
             // Locale found in URL
             $request->getSession()->set('_locale', $locale); // Standard behavior           
         } else {
-            // No locale detected in URL
+            // Root path actions "/"
+            // No locale detected in URL, reads cookie
             $localeCookie = $this->readCookie($request);
-
+            
+            // If cookie exists
             if ($localeCookie != null) {
+                // Set cookie locale
                 $request->getSession()->set('_locale', $localeCookie);
                 $this->router->getContext()->setParameter('_locale', $localeCookie);
             } else {
+                // No cookie exists
                 // Get locale from browser preferences and use it
                 if ($localeBrowser) {
                     $request->getSession()->set('_locale', $localeBrowser);
