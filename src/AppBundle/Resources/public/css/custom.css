@@ -1666,6 +1666,57 @@ input#appbundle_encounter_venueChange:checked + .slide-button {
     left: 43px;
 }
 
+/********************************* RATINGS **************************************/
+
+form[name="rating"] > div {
+    margin-bottom: 10px;
+}
+form[name="rating"] > div > label {
+    width: 170px;
+    font-family: "ralewayregular", sans-serif;
+    font-weight: 200;
+    font-size: 1.3em;
+}
+
+.rating{
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Star widget without hover */
+/*.rating { 
+    width: 160px;
+    display: inline-block;
+    vertical-align: middle;
+}
+.rating > input { 
+    display: none; 
+} 
+.rating > label:before { 
+    font-size: 2.5em;
+    font-family:"Ionicons";
+    display: inline-block;
+    content: "\f4b2";
+}
+.rating > label { 
+    color: #ccc; 
+    float: right;
+    font-weight: 200;
+}
+
+ Star widget : hover section 
+
+ hover previous stars in list 
+.rating > input:checked ~ label:before,   keep gold stars when clicked 
+.rating:not(:checked) > label:hover:before,  hover current star 
+.rating:not(:checked) > label:hover ~ label:before { 
+    color: #FFD700; 
+    font-family:"Ionicons";
+    content: "\f4b3";
+} */
+
+
+
 /************************* FOOTER *****************************/
 
 footer{

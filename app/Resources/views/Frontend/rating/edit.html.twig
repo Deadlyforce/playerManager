@@ -9,13 +9,41 @@
             <h2>Here you can rate your contact!</h2>
         </section>
         <div class="page-title-underline"></div>
+        
+        
+       
 
         {{ form_start(edit_form) }}
-            {{ form_row(edit_form.attractiveness) }}
-            {{ form_row(edit_form.socialStatus) }}
-            {{ form_row(edit_form.senseHumor) }}
-            {{ form_row(edit_form.kissing) }}
-            {{ form_row(edit_form.sex) }}
+            <div>
+                {{ form_label(edit_form.attractiveness) }}     
+                <div class="rating attractiveness-rating"></div>               
+                <div class="hidden">{{ form_widget(edit_form.attractiveness) }}</div>
+                {{ form_errors(edit_form.attractiveness) }}
+            </div>
+            <div>
+                {{ form_label(edit_form.socialStatus) }} 
+                <div class="rating social-status-rating"></div>
+                <div class="hidden">{{ form_widget(edit_form.socialStatus) }}</div>
+                {{ form_errors(edit_form.socialStatus) }}
+            </div>
+            <div>
+                {{ form_label(edit_form.senseHumor, 'Sense of humor') }}
+                <div class="rating sense-humor-rating"></div>                
+                <div class="hidden">{{ form_widget(edit_form.senseHumor) }}</div>
+                {{ form_errors(edit_form.senseHumor) }}
+            </div>
+            <div>
+                {{ form_label(edit_form.kissing) }}
+                <div class="rating kissing-rating"></div> 
+                <div class="hidden">{{ form_widget(edit_form.kissing) }}</div>
+                {{ form_errors(edit_form.kissing) }}
+            </div>
+            <div>
+                {{ form_label(edit_form.sex) }}
+                <div class="rating sex-rating"></div> 
+                <div class="hidden">{{ form_widget(edit_form.sex) }}</div>
+                {{ form_errors(edit_form.sex) }}
+            </div>
             
             <div class="hidden">
                 {{ form_rest(edit_form) }}
@@ -25,15 +53,32 @@
             </div>
         {{ form_end(edit_form) }}
 
-        <ul>
-            <li>
-                <a href="{{ path('prospect_list') }}" title="Back to contacts">Back to contacts</a>
-            </li>
-            <li>
-                {{ form_start(delete_form) }}
-                    <input type="submit" value="Delete">
-                {{ form_end(delete_form) }}
-            </li>
-        </ul>
+
+        <a href="{{ path('prospect_list') }}" title="Back to contacts">Back to contacts</a>
+
     </div>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(".rating").starRating({
+                totalStars: 5,
+                initialRating: 0,
+                starSize: 30,
+                disableAfterRate: false,
+                useGradient: false,
+                emptyColor: '#ddd',
+                hoverColor: 'gold',
+                useFullStars: true,
+                callback: function(currentRating, $el){                    
+                    console.log(currentRating);
+                    console.log('DOM element ', $el);
+                    
+                    // Option 1 : update input for future submit
+                    // Option 2 : immediate ajax request update
+                }
+            });
+        });       
+        
+    </script>
 {% endblock %}
+
