@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ratings{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <section class="page-title">
+            <h1>Ratings</h1> 
+            <h2>Here you can rate your contact!</h2>
+        </section>
+        <div class="page-title-underline"></div>
+
+        {{ form_start(edit_form) }}
+            {{ form_row(edit_form.attractiveness) }}
+            {{ form_row(edit_form.socialStatus) }}
+            {{ form_row(edit_form.senseHumor) }}
+            {{ form_row(edit_form.kissing) }}
+            {{ form_row(edit_form.sex) }}
+            
+            <div class="hidden">
+                {{ form_rest(edit_form) }}
+            </div>
+            <div>
+                <input type="submit" value="Edit" />
+            </div>
+        {{ form_end(edit_form) }}
+
+        <ul>
+            <li>
+                <a href="{{ path('prospect_list') }}" title="Back to contacts">Back to contacts</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+{% endblock %}

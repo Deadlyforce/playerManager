@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Entity\Prospect;
 
 /**
  * Relationship
@@ -381,13 +382,13 @@ class Relationship
         return $this->about;
     }
     
-    /*
+    /**
      * Set prospect
      *
-     * @param \AppBundle\Entity\Prospect $prospect
+     * @param Prospect $prospect
      * @return Relationship
-    */
-    public function setProspect(\AppBundle\Entity\Prospect $prospect = null)
+     */
+    public function setProspect(Prospect $prospect = null)
     {
         $this->prospect = $prospect;
         
@@ -397,8 +398,8 @@ class Relationship
     /**
      * Get prospect
      *
-     * @return \AppBundle\Entity\Prospect 
-    */
+     * @return Prospect 
+     */
     public function getProspect()
     {
         return $this->prospect;

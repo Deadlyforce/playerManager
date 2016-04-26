@@ -54,14 +54,7 @@
                     <td>
                         <a class="" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show contact"><i class="fa fa-eye"></i></a>                       
                         <a class="" href="{{ path('prospect_edit', { 'id': prospect.id }) }}" title="Edit contact"><i class="fa fa-pencil-square-o"></i></a>  
-                        <a href="#" class="delete" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete"  title="Delete contact"><i class="fa fa-trash-o"></i></a>
-                        {% if prospect.relationship %}
-    {#                        <a class="" href="{{ path('relationship_show', { 'id': entity.relationship.id }) }}">relationship</a>#}
-                        {% endif %}
-                        {#<a class="" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Gallery">Gallery</a>
-                        <a class="" href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Relationship">Relationship edit</a>
-                        <a class="" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Encounters">Encounters</a>#}
-                    </td>
+                        <a href="#" class="delete" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete"  title="Delete contact"><i class="fa fa-trash-o"></i></a>                     </td>
                 </tr>
             {% endfor %}
             </tbody>

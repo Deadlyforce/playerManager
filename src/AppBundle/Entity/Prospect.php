@@ -67,6 +67,14 @@ class Prospect
     private $source;
     
     /**
+     * @var Rating 
+     * 
+     * @ORM\OneToOne(targetEntity="Rating", inversedBy="prospect", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="rating_id", referencedColumnName="id")
+     */
+    private $rating;
+    
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
@@ -456,7 +464,7 @@ class Prospect
     /**
      * Set relationship
      *
-     * @param Relatioship $relationship
+     * @param Relationship $relationship
      * @return Prospect
      */
     public function setRelationship(Relationship $relationship)
@@ -510,6 +518,30 @@ class Prospect
     }
     
     /**
+     * Set rating
+     *
+     * @param Rating $rating
+     * @return Prospect
+     */
+    public function setRating(Rating $rating)
+    {
+        $this->rating = $rating;
+        $rating->setProspect($this);
+
+        return $this;
+    }
+
+    /**
+     * Get rating
+     *
+     * @return Rating 
+     */
+    public function getRating()
+    {
+        return $this->rating;
+    } 
+    
+    /**
      * Render a Prospect as a string
      * 
      * @return string
@@ -525,10 +557,10 @@ class Prospect
      * @return string
      *  Relative path.
      */
-    protected function getUploadPath()
-    {
-        return 'uploads/photoPrincipale/'.$this->user->getId();
-    }
+//    protected function getUploadPath()
+//    {
+//        return 'uploads/photoPrincipale/'.$this->user->getId();
+//    }
     
     /**
      * Get absolute path to upload directory
@@ -536,10 +568,10 @@ class Prospect
      * @return string
      *  Absolute path.
      */
-    protected function getUploadAbsolutePath()
-    {
-        return __DIR__ . '/../../../web/' . $this->getUploadPath();
-    }
+//    protected function getUploadAbsolutePath()
+//    {
+//        return __DIR__ . '/../../../web/' . $this->getUploadPath();
+//    }
     
     /**
      * Get last updated photo
@@ -559,19 +591,19 @@ class Prospect
     /**
      * @ORM\PostRemove
      */
-    public function removePhotoUploads()
-    {
-        if($this->getPhotos() != null){
-            
-            foreach($this->getPhotos() as $photo){
-               $file = $photo->getUploadAbsolutePath();
-               
-               if($file){
-                    unlink($file);
-                }
-            }
-        }           
-    }
+//    public function removePhotoUploads()
+//    {
+//        if($this->getPhotos() != null){
+//            
+//            foreach($this->getPhotos() as $photo){
+//               $file = $photo->getUploadAbsolutePath();
+//               
+//               if($file){
+//                    unlink($file);
+//                }
+//            }
+//        }           
+//    }
     
     /**
      * Set creationDate

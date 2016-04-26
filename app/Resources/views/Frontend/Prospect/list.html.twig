@@ -39,9 +39,7 @@
                             <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-trash-outline"></i></a>
                         </li>
                         <li>
-                            <a id="edit_prospect" class="custom-tooltip" href="#" data-id="{{ prospect.id }}" title="Modify contact" data-toggle="tooltip" data-placement="top">
-                                <i class="icon ion-ios-compose-outline"></i>
-                            </a>
+                            <a id="edit_prospect" class="custom-tooltip" href="#" data-id="{{ prospect.id }}" title="Modify contact" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
                         </li>
                         <li>
                             <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show all contact infos" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-eye-outline"></i></a>
@@ -60,6 +58,11 @@
                             <a class="custom-tooltip" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Add and remove photos"  data-toggle="tooltip" data-placement="top"><i class="icon ion-images"></i></a>
                         </li>
                         <li><p>Gallery</p></li>
+                        <li class="separator"></li>
+                        <li>
+                            <a class="custom-tooltip" href="{{ path('rating_edit', {'prospect_id': prospect.id}) }}" title="Rate this contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-star-outline"></i></a>
+                        </li>
+                        <li><p>Ratings</p></li>
                     </ul>                    
                 </div>               
             </div>

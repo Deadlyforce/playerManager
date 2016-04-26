@@ -36,6 +36,6 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@security.token_storage'
             
-    redirection_after_login:
-        class: AppBundle\Handler\RedirectionAfterLogin
-        arguments: ['@router']
+#    redirection_after_login:
+#        class: AppBundle\Handler\RedirectionAfterLogin
+#        arguments: ['@router']

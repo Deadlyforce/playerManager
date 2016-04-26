@@ -147,7 +147,9 @@
     
     <script type="text/javascript">
         $(document).ready(function(){
-            // Ajax: get form edit
+            var locale = "{{ app.request.locale }}";
+            
+            // Ajax: get edit form 
             $(".show-actions").on("click", "#edit_prospect", function(event){
                 event.preventDefault();
                
@@ -156,7 +158,7 @@
                 });                
                 
                 var id = "{{ prospect.id }}";
-                var url = Routing.generate('ajax_edit_prospect_form', {'id':id});
+                var url = Routing.generate('ajax_edit_prospect_form', {'id':id, '_locale': locale});
                 
                 $.get(url, function(response){                   
                     $("#modal_prospect_form_body").html(response); // coller la vue dans une modale  
