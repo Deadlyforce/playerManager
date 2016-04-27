@@ -1,0 +1,12 @@
+app:
+    login:
+        title: Mnaomai
+        subtitle: Souvenirs de rencontres
+        new: Première visite?
+
+    register:
+        browsertab: Inscription
+        
+Register here: Créer un compte            
+All relationships: Toutes les relations
+           

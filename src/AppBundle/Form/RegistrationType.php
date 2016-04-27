@@ -19,7 +19,7 @@ class RegistrationType extends BaseType
         parent::buildForm($builder, $options);
         
         $builder
-            ->add('genre', ChoiceType::class, array(
+            ->add('gender', ChoiceType::class, array(
                 'required' => true,
                 'choices' => array(
                     'Male' => 1,

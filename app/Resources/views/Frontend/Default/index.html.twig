@@ -2,14 +2,23 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    
     <div class="home-carousel">
         <div>
-            <h1>Keep track of your dates<br>Manage your love life</h1>
-            <img src="{{ asset('bundles/app/images/home/slider_02.jpg') }}" alt="Image_02">
+{#            <div class="slider-text">#}
+                <h1>Remember your dates<br>Keep track of your love life</h1>
+{#            </div>#}
+            {% if app.user.gender == 1 %}
+                <img src="{{ asset('bundles/app/images/home/slider_02.jpg') }}" alt="Image_02">
+            {% else %}
+                <img src="{{ asset('bundles/app/images/home/slider_03.jpg') }}" alt="Image_03">
+            {% endif %}
         </div>
         <div>
-            <img src="{{ asset('bundles/app/images/home/slider_01.jpg') }}" alt="Image_01">
+            {% if app.user.gender == 1 %}
+                <img src="{{ asset('bundles/app/images/home/slider_01.jpg') }}" alt="Image_01">
+            {% else %}
+                <img src="{{ asset('bundles/app/images/home/slider_04.jpg') }}" alt="Image_04">
+            {% endif %}
         </div>  
     </div>
     <div class="container-fluid" id="features"> 

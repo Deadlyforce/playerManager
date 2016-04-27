@@ -37,9 +37,9 @@ class User extends BaseUser
      *      max=2,
      *      groups={"Registration"}
      * )
-     * @ORM\Column(name="genre", type="integer") 
+     * @ORM\Column(name="gender", type="integer") 
      */
-    protected $genre;
+    protected $gender;
     
     /**
      * @var Datetime 
@@ -67,19 +67,19 @@ class User extends BaseUser
      * 
      * @return int
      */
-    public function getGenre()
+    public function getGender()
     {
-        return $this->genre;
+        return $this->gender;
     }
     
     /**
      * 
-     * @param int $genre
+     * @param int $gender
      * @return User
      */
-    public function setGenre($genre)
+    public function setGender($gender)
     {
-        $this->genre = $genre;
+        $this->gender = $gender;
         
         return $this;
     }

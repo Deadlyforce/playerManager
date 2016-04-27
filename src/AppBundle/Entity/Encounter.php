@@ -31,7 +31,7 @@ class Encounter
     /**
      * @var string
      *
-     * @ORM\Column(name="place", type="string", length=255, nullable=false)
+     * @ORM\Column(name="place", type="string", length=255, nullable=true)
      */
     private $place;
 

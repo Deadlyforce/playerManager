@@ -75,6 +75,13 @@
 
 }
 
+/************************** FORMS REQUIRED ************************************/
+
+label.required:after {
+    content: " *";
+    color: red;
+}
+
 /***************************** DATEPICKER *************************************/
 
 .ui-datepicker .ui-datepicker-prev, .ui-datepicker .ui-datepicker-next{
@@ -118,7 +125,6 @@ form[name='fos_user_registration_form'] input[type='email'], form[name='fos_user
     text-decoration: none;
     display: inline-block;
     border: 1px solid #e0e0e0;
-    border-radius: 2px;
     padding: 10px 15px;
     margin-bottom: 20px;
     margin-top: 30px;
@@ -155,21 +161,49 @@ img[title="captcha"]{
     background-color: rgba(0, 0, 0, 0.6);
     border-bottom: 1px solid #222;
 }
-#login-body h1{
+#login-body{
+    margin-top: 150px;    
+}
+#login-title{
+    background-color: rgba(0,0,0,0.4);
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    margin-bottom: 25px;
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    /*height: 190px;*/
+}
+#login-title h1{
+    font-family: 'ralewaylight', sans-serif;
+    color: #FFF;
+    font-size: 4.5em;
+    text-shadow: 1px 1px 2px #666;
+}
+#login-title p#beta{
+    font-size: 1.5em;
+    color: #f47363;
+    font-family: "ralewaythin", sans-serif;
+    position: absolute;
+    top: 50px;
+    right: 380px;
+}
+#login-title h2{
     font-family: 'ralewaythin', sans-serif;
     color: #FFF;
-    font-size: 4.2em;
-    text-shadow: 1px 1px 2px #888;
-    margin-top: 150px;
+    font-size: 2em;
+    text-shadow: 1px 1px 2px #666;
+    margin-bottom: 25px;
+/*    position: absolute;
+    left: 410px;
+    top: 85px;*/
 }
-#login-body h1 span{
-    font-size: 0.4em;
-    color: #f47363;
-}
-#login-body p{
+
+#login-body p#link-register{
     font-family: 'open_sansregular', sans-serif;
     color: #f0f0f0;
     font-size: 1.2em;
+    text-shadow: 1px 1px 2px #666;
 }
 #login-body a{
     color: white;
@@ -177,14 +211,22 @@ img[title="captcha"]{
     border: 1px solid white;
     padding: 7px 20px;
     display: inline-block;
-    background-color: rgba(255,255,255, 0.1);
-    border-radius: 2px;
+    background-color: rgba(0,0,0, 0.5);
+    /*border-radius: 2px;*/
     margin-left: 10px;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
 }
 #login-body a:hover{
     color: white;
     text-decoration: none;
-    background-color: rgba(255,255,255, 0.2);
+    /*background-color: rgba(255,255,255, 0.2);*/
+    background-color: #DA6759;
+    border: 1px solid #DA6759;
+    text-shadow: none;
 }
 
 /***************** FORM LOGIN *********************/
@@ -239,15 +281,20 @@ form[name="fos_user_security_login"] input#password, form[name="fos_user_securit
     height: 30px;    
     background-color: transparent;
     padding-top: 4px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
 }
 form[name="fos_user_security_login"] #_submit{
-    margin-top: 7px;
+    /*margin-top: 7px;*/
+    height: 38px;
     border: none;
     color: #e0e0e0;
     background: transparent;
 }
 form[name="fos_user_security_login"] #_submit:hover{
-    color: #f47363;
+    color: #fff;
+    background-color: #f47363;
 }
 
 /******************************* MENU (HEADER) ************************************/
@@ -271,13 +318,23 @@ header{
     padding-left: 0px;
 }
 
+/* Website title in nav */ 
+.navbar-header .navbar-brand {
+    font-family: "ralewaylight", sans-serif;
+    color: #F47363;
+    font-size: 1.5em;
+}
+.navbar-header .navbar-brand:hover {
+    color: white;
+}
+
 .navbar-brand{
     text-shadow: none;
     vertical-align: middle;
     height: 90px;
     display: table-cell;
     float: none;
-    color: #e0e0e0;
+    /*color: #e0e0e0;*/
 }
 .navbar{
     font-family: 'open_sansregular', sans-serif;
@@ -649,6 +706,32 @@ td.actions a{
 .home-carousel img{
     width: 100%;
 }
+/*.slider-text{
+    
+    
+    top: 16%;
+}*/
+.home-carousel h1{
+    position: absolute;
+    /*color: rgb(255, 117, 100);*/
+    color: #f0f0f0;
+    font-family: "ralewaythin",sans-serif;
+    font-size: 5em;
+    /*left: 10%;*/
+    top: 16%;
+    text-shadow: 1px 1px 2px rgb(85, 85, 85);
+    line-height: 1.3em;    
+    
+    width: 100%;
+    padding-left: 250px;
+    /*background-color: rgba(0,0,0,0.3);*/
+    
+    background: -webkit-linear-gradient(left, rgba(0,0,0,0.3) , transparent); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(right, rgba(0,0,0,0.3), transparent); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(right, rgba(0,0,0,0.3), transparent); /* For Firefox 3.6 to 15 */
+    background: linear-gradient(to right, rgba(0,0,0,0.3) , transparent); /* Standard syntax */
+}
+
 .slick-prev, .slick-next { 
     position: absolute; 
     height: 690px;  
@@ -717,15 +800,7 @@ ul.slick-dots > li > button{
 ul.slick-dots > li > button:hover{
     background-color: #f47363;
 }
-.home-carousel h1{
-    position: absolute;
-    color: rgb(255, 117, 100);
-    font-family: "ralewaythin",sans-serif;
-    font-size: 5em;
-    left: 10%;
-    top: 16%;
-    text-shadow: 1px 1px 2px rgb(85, 85, 85);
-}
+
 
 /*************  FEATURES ****************/
 
@@ -970,7 +1045,7 @@ ul.record-actions{
     right: 20px;
 }
 form[data='prospect-data']{
-    width: 355px;
+    width: 390px;
     margin: 0 auto;
 }
 form[data='prospect-data'] > div{
@@ -981,9 +1056,15 @@ form[data='prospect-data'] label{
     font-weight: 200;
     font-size: 1.1em;
 }
+form[data='prospect-data'] input[type="text"]{
+    width: 200px;
+}
+
 .paris-district{
     display: none;
 }
+
+
 
 /******************************* PROSPECTS - EDIT ***********************************/
 

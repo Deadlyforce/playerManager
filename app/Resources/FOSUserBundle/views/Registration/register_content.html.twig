@@ -3,7 +3,7 @@
 {% form_theme form ':Form:captcha.html.twig' %}
 
 <div id="register-user">
-    <h4>Create an account</h4>
+    <h4>{{ 'app.register.form.title'|trans }}</h4>
 
     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
         {{ form_widget(form) }}

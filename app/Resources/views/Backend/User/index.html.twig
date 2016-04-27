@@ -11,6 +11,7 @@
                     <th>Username</th>
                     <th>Enabled</th>
                     <th>Email</th>                    
+                    <th>Gender</th>                    
                     <th>Last login</th>                  
                     <th>Created at</th>
                     <th>IP Adress</th>
@@ -30,6 +31,7 @@
                         {% endif %}
                     </td>
                     <td>{{ user.email }}</td>                    
+                    <td>{{ user.gender }}</td>                    
                     <td>{{ user.lastLogin|date('d-m-Y H:i:s') }}</td>                    
                     <td>{{ user.createdAt|date('d-m-Y H:i:s') }}</td>                    
                     <td>{{ user.ip }}</td>                    

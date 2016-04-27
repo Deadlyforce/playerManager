@@ -49,8 +49,12 @@
 
         {% block content %}   
             <div id="login-body">
-                <h1>{{ 'Welcome to the PlayerManager'|trans }}<span> beta</span></h1>
-                <p>{{ 'New to the site?'|trans }}<a href="{{ path('fos_user_registration_register') }}" title="Register">{{ 'Register here'|trans }}</a></p>
+                <div id="login-title">
+                    <h1>{{ 'app.login.title'|trans }}</h1>
+                    <p id="beta">beta</p>
+                    <h2>{{ 'app.login.subtitle'|trans }}</h2>
+                </div>
+                <p id="link-register">{{ 'app.login.new'|trans }}<a href="{{ path('fos_user_registration_register') }}" title="Register">{{ 'Register here'|trans }}</a></p>
             </div>                
         {% endblock %}
 
@@ -61,12 +65,12 @@
     <script type="text/javascript">
         $(document).ready(function(){
 
-            var loginImage1 = "{{ asset('bundles/app/images/login/manager_08.jpg') }}"; 
-            {#var loginImage2 = "{{ asset('bundles/app/images/login/manager_03.jpg') }}"; 
-            var loginImage3 = "{{ asset('bundles/app/images/login/manager_02.jpg') }}";#} 
+            var loginImage1 = "{{ asset('bundles/app/images/login/manager_16.jpg') }}"; 
+            var loginImage2 = "{{ asset('bundles/app/images/login/manager_17.jpg') }}"; 
+            var loginImage3 = "{{ asset('bundles/app/images/login/manager_25.jpg') }}"; 
 
-            $.backstretch(loginImage1);
-{#                $.backstretch([loginImage1, loginImage2, loginImage3], {duration: 5000, fade: 750});#}
+{#            $.backstretch(loginImage1);#}
+                $.backstretch([loginImage1, loginImage2, loginImage3], {duration: 5000, fade: 750});
 
         });
     </script>    
