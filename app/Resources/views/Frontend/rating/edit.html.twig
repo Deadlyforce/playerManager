@@ -1,82 +1,96 @@
 {% extends 'base.html.twig' %}
-
+{% import ":Frontend/Macros/prospect:photoDisplay250px.html.twig" as photoDisplay %}
 {% block title %}Ratings{% endblock %}
 
 {% block content %}
     <div class="container">
         <section class="page-title">
-            <h1>Ratings</h1> 
+            <h1>Ratings for {{ rating.prospect.firstname }}</h1> 
             <h2>Here you can rate your contact!</h2>
         </section>
         <div class="page-title-underline"></div>
         
+        <div class="page-nav">
+            <a class="btn-basic" href="{{ path('prospect_show', {"id": rating.prospect.id}) }}" title="Show contact">Contact page</a>
+        </div>
         
-       
-
-        {{ form_start(edit_form) }}
-            <div>
-                {{ form_label(edit_form.attractiveness) }}     
-                <div class="rating attractiveness-rating"></div>               
-                <div class="hidden">{{ form_widget(edit_form.attractiveness) }}</div>
-                {{ form_errors(edit_form.attractiveness) }}
-            </div>
-            <div>
-                {{ form_label(edit_form.socialStatus) }} 
-                <div class="rating social-status-rating"></div>
-                <div class="hidden">{{ form_widget(edit_form.socialStatus) }}</div>
-                {{ form_errors(edit_form.socialStatus) }}
-            </div>
-            <div>
-                {{ form_label(edit_form.senseHumor, 'Sense of humor') }}
-                <div class="rating sense-humor-rating"></div>                
-                <div class="hidden">{{ form_widget(edit_form.senseHumor) }}</div>
-                {{ form_errors(edit_form.senseHumor) }}
-            </div>
-            <div>
-                {{ form_label(edit_form.kissing) }}
-                <div class="rating kissing-rating"></div> 
-                <div class="hidden">{{ form_widget(edit_form.kissing) }}</div>
-                {{ form_errors(edit_form.kissing) }}
-            </div>
-            <div>
-                {{ form_label(edit_form.sex) }}
-                <div class="rating sex-rating"></div> 
-                <div class="hidden">{{ form_widget(edit_form.sex) }}</div>
-                {{ form_errors(edit_form.sex) }}
+        <div class="row">
+            <div class="col-md-3">
+                {{ photoDisplay.primaryPhotoOrLast(rating.prospect.photos) }}
             </div>
             
-            <div class="hidden">
-                {{ form_rest(edit_form) }}
+            <div class="col-md-9 page-content">
+                {{ form_start(edit_form) }}
+                    <div>
+                        {{ form_label(edit_form.attractiveness) }}     
+                        <div class="rating attractiveness-rating"></div>               
+                        <div class="hidden">{{ form_widget(edit_form.attractiveness) }}</div>
+                        {{ form_errors(edit_form.attractiveness) }}
+                    </div>
+                    <div>
+                        {{ form_label(edit_form.socialStatus) }} 
+                        <div class="rating social-status-rating"></div>
+                        <div class="hidden">{{ form_widget(edit_form.socialStatus) }}</div>
+                        {{ form_errors(edit_form.socialStatus) }}
+                    </div>
+                    <div>
+                        {{ form_label(edit_form.senseHumor, 'Sense of humor') }}
+                        <div class="rating sense-humor-rating"></div>                
+                        <div class="hidden">{{ form_widget(edit_form.senseHumor) }}</div>
+                        {{ form_errors(edit_form.senseHumor) }}
+                    </div>
+                    <div>
+                        {{ form_label(edit_form.kissing) }}
+                        <div class="rating kissing-rating"></div> 
+                        <div class="hidden">{{ form_widget(edit_form.kissing) }}</div>
+                        {{ form_errors(edit_form.kissing) }}
+                    </div>
+                    <div>
+                        {{ form_label(edit_form.sex) }}
+                        <div class="rating sex-rating"></div> 
+                        <div class="hidden">{{ form_widget(edit_form.sex) }}</div>
+                        {{ form_errors(edit_form.sex) }}
+                    </div>
+
+                    <div class="hidden">
+                        {{ form_rest(edit_form) }}
+                    </div>
+                    <div>
+                        <input class="btn-basic-rose" type="submit" value="Save changes" />
+                    </div>
+                {{ form_end(edit_form) }}
             </div>
-            <div>
-                <input type="submit" value="Edit" />
-            </div>
-        {{ form_end(edit_form) }}
-
-
-        <a href="{{ path('prospect_list') }}" title="Back to contacts">Back to contacts</a>
-
+        </div>
     </div>
     
     <script type="text/javascript">
-        $(document).ready(function(){
-            $(".rating").starRating({
-                totalStars: 5,
-                initialRating: 0,
-                starSize: 30,
-                disableAfterRate: false,
-                useGradient: false,
-                emptyColor: '#ddd',
-                hoverColor: 'gold',
-                useFullStars: true,
-                callback: function(currentRating, $el){                    
-                    console.log(currentRating);
-                    console.log('DOM element ', $el);
-                    
-                    // Option 1 : update input for future submit
-                    // Option 2 : immediate ajax request update
-                }
-            });
+        $(document).ready(function(){            
+            
+            $("form[name='rating'] input[max=5]").each(function(index, input) {
+{#                console.log(input.value);#}
+                var bddValue = input.value;
+                
+                $(input).parent().prev().starRating({
+                    initialRating: bddValue,
+                    totalStars: 5,                
+                    starSize: 30,
+                    disableAfterRate: false,
+                    useGradient: false,
+                    emptyColor: '#ddd',
+                    hoverColor: 'gold',
+                    useFullStars: true,
+                    callback: function(currentRating, $el){                    
+                        console.log(currentRating);
+                        console.log('DOM element ', $el);
+
+                        $el.next().children().val(currentRating);    
+                        
+                        // Option 1 : update input for future submit
+                        // Option 2 : immediate ajax request update
+                    }
+                });                
+            });            
+            
         });       
         
     </script>

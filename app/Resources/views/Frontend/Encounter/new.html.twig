@@ -9,6 +9,10 @@
         </section>
         <div class="page-title-underline"></div> 
         
+        <div class="page-nav">            
+            <a class="btn-basic" href="{{ path('encounter', {'prospect_id': prospect.id}) }}">Back to the list of encounters</a>
+        </div>
+        
         <div class="row encounter-new">
             <div class="col-md-2 left-col">
                 <i class="fa fa-glass"></i>
@@ -28,10 +32,8 @@
                         </div>
                     </div>
                     {{ form_row(form.venuesList, {'label': 'Venues list'}) }}
-                    {{ form_row(form.submit, {'label': 'Save changes', 'attr': {'class': 'btn-submit-dark'} }) }}
-                {{ form_end(form) }}
-
-                <a href="{{ path('encounter', {'prospect_id': prospect.id}) }}">Back to the list of encounters</a>
+                    {{ form_row(form.submit, {'label': 'Save changes', 'attr': {'class': 'btn-basic-rose'} }) }}
+                {{ form_end(form) }}               
             </div>
         </div>
     </div>

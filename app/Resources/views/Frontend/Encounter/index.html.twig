@@ -4,13 +4,15 @@
 {% block content %}    
     <div class="container">
         <section class="page-title">
-                <h1>Encounters</h1> 
+            <h1>Encounters</h1> 
     {#            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>#}
         </section>
         <div class="page-title-underline"></div> 
 
-        <a class="page-button" href="{{ path('encounter_new', {'prospect_id': prospect.id}) }}" id="add_encounter" title ="Add encounter"><i class="fa fa-plus"></i> Add an encounter</a>
-
+        <div class="page-nav">
+            <a class="btn-basic-ico" href="{{ path('encounter_new', {'prospect_id': prospect.id}) }}" id="add_encounter" title ="Add encounter"><i class="icon ion-ios-plus-empty"></i><span>Add contact</span></a>
+        </div>
+        
         <table class="table table-hover">
             <thead>
                 <tr>                    
@@ -43,6 +45,6 @@
                 </tr>
             {% endfor %}
             </tbody>
-        </table>   
+        </table>
     </div>
 {% endblock %}

@@ -503,6 +503,7 @@ button.btn-submit:hover{
     transition: all .3s ease-in;
 }
 .btn-basic-rose:hover{
+    border: 1px solid #F47363;
     background-color: #F47363;
     color: #f0f0f0;
 }
@@ -1615,7 +1616,7 @@ form[name="appbundle_encounter"] input[type="text"], form[name="appbundle_encoun
 .slide-button-base{
     width: 80px;
     height: 26px;
-    background: #283640;
+    background: #EEEEEE;
     position: relative;
     display: inline-block;
     border-radius: 50px;
@@ -1683,37 +1684,8 @@ form[name="rating"] > div > label {
     vertical-align: middle;
 }
 
-/* Star widget without hover */
-/*.rating { 
-    width: 160px;
-    display: inline-block;
-    vertical-align: middle;
-}
-.rating > input { 
-    display: none; 
-} 
-.rating > label:before { 
-    font-size: 2.5em;
-    font-family:"Ionicons";
-    display: inline-block;
-    content: "\f4b2";
-}
-.rating > label { 
-    color: #ccc; 
-    float: right;
-    font-weight: 200;
-}
 
- Star widget : hover section 
 
- hover previous stars in list 
-.rating > input:checked ~ label:before,   keep gold stars when clicked 
-.rating:not(:checked) > label:hover:before,  hover current star 
-.rating:not(:checked) > label:hover ~ label:before { 
-    color: #FFD700; 
-    font-family:"Ionicons";
-    content: "\f4b3";
-} */
 
 
 
