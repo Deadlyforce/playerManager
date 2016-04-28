@@ -1,23 +1,23 @@
-{% extends '::base.html.twig' %}
-{% block title %}New Encounter{% endblock %}
+{#{% extends '::base.html.twig' %}#}
+{#{% block title %}New Encounter{% endblock %}#}
 
 {% block content %}
     <div class="container">
-        <section class="page-title">
-            <h1>New encounter with {{ prospect.firstname }}</h1> 
+{#        <section class="page-title">
+            <h1>New encounter with {{ prospect.firstname }}</h1> #}
 {#                <h2>Blablabla</h2>#}
-        </section>
-        <div class="page-title-underline"></div> 
+{#        </section>#}
+{#        <div class="page-title-underline"></div> #}
         
-        <div class="page-nav">            
+        {#<div class="page-nav">            
             <a class="btn-basic" href="{{ path('encounter', {'prospect_id': prospect.id}) }}">Back to the list of encounters</a>
-        </div>
+        </div>#}
         
         <div class="row encounter-new">
-            <div class="col-md-2 left-col">
-                <i class="fa fa-glass"></i>
+            <div class="col-md-3 left-col">
+                <i class="icon ion-ios-wineglass-outline"></i>
             </div>
-            <div class="col-md-10 main-col">
+            <div class="col-md-9 main-col">
                 {{ form_start(form) }}
                     {{ form_row(form.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datetimepicker'} }) }}
                     {{ form_row(form.place, {'label': 'Place'}) }}
@@ -40,7 +40,9 @@
                 
     <script type="text/javascript">
         $(document).ready(function(){
-                                    
+            getDatetimepicker();
+            
+            // Used in modale with form new
             $(".slide-button-base").on("click", ".slide-button", function(){      
                 var input = $(this).prev();
                 if(input.prop("checked")) {
@@ -50,7 +52,7 @@
                     input.prop("checked", true);
                     input.val("1");
                 }
-            });            
+            });                     
             
         });
     </script>

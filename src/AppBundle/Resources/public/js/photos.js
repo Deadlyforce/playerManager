@@ -56,7 +56,7 @@ function addPhotoForm(collectionHolder, newLiAddPhoto)
 
 function addPhotoFormDeleteLink(photoFormLi)
 {
-    var removeForm =  $("<a href='#'><i class='fa fa-trash-o'></i></a>");
+    var removeForm =  $("<a href='#' title='Delete'><i class='icon ion-ios-trash-outline'></i></a>");
     photoFormLi.find('.photo-actions .delete-photo').append(removeForm);
 
     removeForm.click(function(event){
@@ -68,7 +68,7 @@ function addPhotoFormDeleteLink(photoFormLi)
 
 function addPhotoFormDeleteLinkWithIndexChange(photoFormLi, collectionHolder)
 {
-    var removeForm =  $("<a href='#'><i class='fa fa-trash-o'></i></a>");
+    var removeForm =  $("<a href='#' title='Delete'><i class='icon ion-ios-trash-outline'></i></a>");
     photoFormLi.find('.photo-actions .delete-photo').append(removeForm);
 
     removeForm.click({collectionHolder: collectionHolder}, function(event){

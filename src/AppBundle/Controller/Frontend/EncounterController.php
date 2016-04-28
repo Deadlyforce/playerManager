@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Encounter;
 use AppBundle\Form\EncounterType;
 
@@ -18,6 +20,45 @@ use AppBundle\Form\EncounterType;
 class EncounterController extends Controller
 {
 
+    /**
+     * Returns a form new encounter
+     * 
+     * @Route("/ajax_form_new/{prospect_id}", name="ajax_new_encounter_form", options={"expose"=true})
+     * @Method({"GET"})
+     * @Template(":ajax.html.twig")
+     */
+    public function ajaxFormNewAction($prospect_id)
+    {   
+        $em = $this->getDoctrine()->getManager();
+        
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $prospect = $em->find("AppBundle:Prospect", $prospect_id);
+        
+        if ($user === $prospect->getUser()) {
+            $encounter = new Encounter();
+        
+//            $encounter->setProspect($prospect);           
+
+            $form = $this->createForm(EncounterType::class, $encounter, array(
+                'method' => 'POST',
+                'action' => $this->generateUrl('encounter_new', array('prospect_id' => $prospect_id))
+            ));
+            
+            $form_view = $this->renderView(":Frontend/Encounter:new.html.twig", array(
+                'form' => $form->createView(),
+                'prospect' => $prospect
+            ));
+
+            return new Response($form_view);
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }      
+    }
+    
     /**
      * Lists all Encounter entities for a specific prospect
      *
@@ -60,8 +101,7 @@ class EncounterController extends Controller
     {
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
+        }        
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
         $em = $this->getDoctrine()->getManager();
@@ -95,9 +135,9 @@ class EncounterController extends Controller
     /**
      * Finds and displays a Encounter entity.
      *
-     * @Route("/{id}", name="encounter_show")
+     * @Route("/{id}/show", name="encounter_show")
      * @Method("GET")
-     * @Template()
+     * @Template(":Frontend/Encounter:show.html.twig")
      */
     public function showAction($id)
     {
@@ -233,7 +273,7 @@ class EncounterController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('encounter_delete', array('id' => $id)))
             ->setMethod('DELETE')
-            ->add('submit', 'submit', array('label' => 'Delete'))
+            ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
     }

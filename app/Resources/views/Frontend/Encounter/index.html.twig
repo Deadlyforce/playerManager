@@ -5,12 +5,13 @@
     <div class="container">
         <section class="page-title">
             <h1>Encounters</h1> 
-    {#            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>#}
+            <h2>Your last dates...add some more !</h2>
         </section>
         <div class="page-title-underline"></div> 
 
         <div class="page-nav">
-            <a class="btn-basic-ico" href="{{ path('encounter_new', {'prospect_id': prospect.id}) }}" id="add_encounter" title ="Add encounter"><i class="icon ion-ios-plus-empty"></i><span>Add an encounter</span></a>
+            {#<a class="btn-basic-ico" href="{{ path('encounter_new', {'prospect_id': prospect.id}) }}" id="add_encounter" title ="Add encounter"><i class="icon ion-ios-plus-empty"></i><span>Add an encounter</span></a>#}
+            <a class="btn-basic-ico" href="#" id="add_encounter" title ="Add encounter"><i class="icon ion-ios-plus-empty"></i><span>Add an encounter</span></a>
         </div>
         
         <table class="table table-hover">
@@ -39,7 +40,7 @@
                         {% endif %}
                     </td>
                     <td>
-                        <a href="{{ path('encounter_show', { 'id': encounter.id }) }}">show</a>                        
+{#                        <a href="{{ path('encounter_show', { 'id': encounter.id }) }}">show</a>                        #}
                         <a href="{{ path('encounter_edit', { 'id': encounter.id }) }}">edit</a>                        
                     </td>
                 </tr>
@@ -47,4 +48,57 @@
             </tbody>
         </table>
     </div>
+            
+    {# Modales #}
+    <div class="modal fade modal-full" id="modal_encounter_form" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
+                    </button>
+                    <h2 class="modal-title">New encounter</h2>
+                </div>    
+                <div class="modal-body" id="modal_encounter_form_body">
+                    {# Form returned by ajax #}
+                </div>                       
+            </div>    
+        </div>
+    </div>
+
+    {# POPUP OVERLAY D'ATTENTE AJAX #}
+    <div class="overlay"></div>
+    <div class="loader_standard">
+        <p>Loading...</p>
+        <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />
+    </div>
+            
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var locale = "{{ app.request.locale }}";            
+            
+            
+            // Ajax: get form new
+            $("#add_encounter").click(function(event){
+                event.preventDefault();
+                
+                $(".overlay").show(200, function(){
+                    $(".loader_standard").show();
+                });                       
+                
+                var prospect_id = "{{ prospect.id }}";
+                var url = Routing.generate('ajax_new_encounter_form', {'prospect_id': prospect_id, '_locale': locale});
+                
+                $.get(url, function(response){                   
+                    $("#modal_encounter_form_body").html(response); // coller la vue dans une modale  
+                    
+                    $(".loader_standard").hide(200, function(){
+                        $(".overlay").hide();   
+                    });                                     
+                    
+                    $('#modal_encounter_form').modal('show');
+                });
+            });            
+        });
+    </script>        
 {% endblock %}

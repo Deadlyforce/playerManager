@@ -10,7 +10,9 @@
         </section>
         <div class="page-title-underline"></div>
         
-        <a class="page-button" href="{{ path('prospect_list') }}" title="Back to prospects">Back to contacts</a>
+        <div class="page-nav">
+            <a class="btn-basic" href="{{ path('prospect_list') }}" title="Back to prospects">Back to contacts</a>
+        </div>        
 
         {{ form_start(editForm, {'attr': {'id':'form-edit-prospect'}}) }}          
 
@@ -39,13 +41,13 @@
                                     <div class="col-md-8 photo-buttons">
                                         <ul class="pull-right">                                            
                                             <li>
-                                                <a href="#" id="{{ photo.vars.data.id }}" class="change-photo" title="Modify photo"><i class="fa fa-file-image-o"></i></a>    
+                                                <a href="#" id="{{ photo.vars.data.id }}" class="change-photo" title="Change photo"><i class="icon ion-ios-reverse-camera-outline"></i></a>    
                                             </li>
                                              <li>
-                                                <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo"><i class="fa fa-crop"></i></a>
+                                                <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo"><i class="icon ion-ios-crop-strong"></i></a>
                                             </li>
                                             <li class="delete-photo" title="Delete photo">
-
+                                                {# Container for the delete button #}
                                             </li>
                                         </ul>                                            
                                     </div>
@@ -66,7 +68,7 @@
             </ul>       
             <div class="clearfix"></div>
             
-            {{ form_row(editForm.submit, {'attr': {'class': 'btn-submit-light pull-right'}}) }}
+            {{ form_row(editForm.submit, {'attr': {'class': 'btn-basic-rose pull-right'}}) }}
             <div class="hidden">{{ form_rest(editForm) }}</div>
             
             {# Modal: change photo #}
@@ -100,24 +102,22 @@
                 // Put back original border css and add "highlight" css for selected photo
                 $("input[type='checkbox']").not(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "0");                
                 $(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");
-            });
-            
+            });            
             
             // Highlight selected photo at doc ready
-            $("input[type='checkbox']:checked").closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");
-          
+            $("input[type='checkbox']:checked").closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");          
           
             // Colorbox for full sized image
             $("a.gallery").colorbox({
                 onLoad: function(){
                     $('#cboxClose').html('&times;'); // Replace the close button
                 }
-            });
+            });            
             
-            
-            // Adjust photo-frame height for existing photos
+            // Adjust photo-frame height for existing photos and "add photo" 
             var width = $(".photo-frame").width();
             $(".photo-frame").height(width);
+            $("a.add-photo").height(width);
 
             // Adjust photo placement with ratio
             $("#photo-list .photo-frame").find("img").each(function(){
@@ -142,8 +142,9 @@
                         // On part du principe qu'il n'y qu'un seul fichier (pas d'attribut "multiple")
                         var 
                             file = files[0], 
-                            image_preview = $('#image_preview');                        
-
+                            image_preview = $('#image_preview')
+                        ;                            
+                          
                         // Ici on injecte les informations recoltées sur le fichier pour l'utilisateur
                         image_preview.find('img').attr('src', window.URL.createObjectURL(file));
                     }
@@ -163,22 +164,15 @@
                 // Update page preview
                 var src = $('#image_preview').find('img').attr('src');
                 
-                if (src != "/bundles/app/images/prospect_no_photo.jpg") {                   
-                    $("#"+liId+" .photo-frame img").attr("src", src);
+                if (src != "/bundles/app/images/prospect_no_photo.jpg") {                              
+                    $("#"+liId+" .photo-frame img").attr("src", src);  
                 }
                 
                 // Cleanup and put the image preview template div, back in place
                 $('#photoFormModal .modal-body').empty();
                 $('#photoFormModal .modal-body').append("<div id='image_preview'><img src='/bundles/app/images/prospect_no_photo.jpg' /></div>");
             });
-           
-            // Adjust photo-frame height for added photos
-{#            $("#photo-list").on("click", ".add-photo", function(){#}
-{#                var height = $(this).height();#}
-{#                var width = $(".new-form .photo-frame").width();#}
 
-{#                $(".photo-frame").height(height);#}
-{#            });#}
 
             // On click on class "form-new" (new li with form prototype)
             // Put preview in photo-frame
@@ -188,7 +182,12 @@
                 if (files.length > 0) {                    
                     
                     var file = files[0];
+                    var photoFrame = $(this).closest('li.new-form').find('.photo-frame');
+                    var photoFrameHeight = photoFrame.height();
+                    // Put new pic in photo frame
                     $(this).closest('li.new-form').find('.photo-frame img').attr('src', window.URL.createObjectURL(file));
+                    // Give photo frame its original height (so tall pics don't stretch it)
+                    photoFrame.height(photoFrameHeight);
                 }
             });            
         });

@@ -726,10 +726,10 @@ td.actions a{
     padding-left: 250px;
     /*background-color: rgba(0,0,0,0.3);*/
     
-    background: -webkit-linear-gradient(left, rgba(0,0,0,0.3) , transparent); /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(right, rgba(0,0,0,0.3), transparent); /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(right, rgba(0,0,0,0.3), transparent); /* For Firefox 3.6 to 15 */
-    background: linear-gradient(to right, rgba(0,0,0,0.3) , transparent); /* Standard syntax */
+/*    background: -webkit-linear-gradient(left, rgba(0,0,0,0.3) , transparent);  For Safari 5.1 to 6.0 
+    background: -o-linear-gradient(right, rgba(0,0,0,0.3), transparent);  For Opera 11.1 to 12.0 
+    background: -moz-linear-gradient(right, rgba(0,0,0,0.3), transparent);  For Firefox 3.6 to 15 
+    background: linear-gradient(to right, rgba(0,0,0,0.3) , transparent);  Standard syntax */
 }
 
 .slick-prev, .slick-next { 
@@ -814,10 +814,10 @@ ul.slick-dots > li > button:hover{
 }
 .feature i{
     color: #F14833;
-    font-size: 6em;
+    font-size: 8em;
 }
 .feature h2{
-    margin-top: 35px;
+    margin-top: 0px;
     font-family: "ralewayregular", sans-serif;
 }
 .feature p{
@@ -1016,34 +1016,36 @@ ul.record-actions{
 
 
 /******************************* PROSPECTS - NEW ***********************************/
+/************** The modal-full class is used for all full page modals **************/
 
-#modal_prospect_form .modal-dialog{
+.modal-full .modal-dialog{
     position: fixed;
     width: 100%;
     height: 100%;
     margin: 0;
     /*opacity: 0.9;*/
 }
-#modal_prospect_form .modal-dialog .modal-content{
+.modal-full .modal-dialog .modal-content{
     min-height: 100%;
 }
-#modal_prospect_form .modal-dialog .modal-content .modal-body{
+.modal-full .modal-dialog .modal-content .modal-body{
     padding: 50px 15px 15px 15px;
     color: #999;
 }
 
-#modal_prospect_form .modal-header h2{
+.modal-full .modal-header h2{
     text-align: center;
     font-family: "ralewaylight",sans-serif;
     font-size: 2em;
     color: #666;
 }
-#modal_prospect_form .modal-header button.close{
+.modal-full .modal-header button.close{
     font-size: 6em;
     position: absolute;
     top: -5px;
     right: 20px;
 }
+
 form[data='prospect-data']{
     width: 390px;
     margin: 0 auto;
@@ -1059,7 +1061,6 @@ form[data='prospect-data'] label{
 form[data='prospect-data'] input[type="text"]{
     width: 200px;
 }
-
 .paris-district{
     display: none;
 }
@@ -1445,9 +1446,8 @@ table.record_properties th{
 .photo-frame{
     width: 100%;
     overflow: hidden; 
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
     position: relative;
+    box-shadow: 0px 10px 10px -2px #bbb;
 }
 /* :before is used for a border that doesn't propagate to child element (absolute mask)  */
 .photo-frame:before {
@@ -1475,7 +1475,7 @@ table.record_properties th{
     opacity: 0;
     overflow: visible;
     background-color: transparent;
-    border: 3px solid #E0ECF5;
+    border: 3px solid #F47363;
    
     position: absolute;
     z-index: 2;
@@ -1516,14 +1516,11 @@ table.record_properties th{
 }
 
 .photo-actions{
-    background-color: #F47363;
-    height: 55px;   
-    /*padding: 20px 5px 20px 5px;*/
+    background-color: #FFF;
+    /*height: 55px;*/   
     text-align: center;
-    border-bottom-left-radius: 2px;
-    border-bottom-right-radius: 2px;
     overflow: hidden;
-    color: #fff;    
+    color: #666;    
 }
 .photo-actions .row{
     height: 100%;
@@ -1535,6 +1532,7 @@ table.record_properties th{
     list-style: none;
     height: 100%;
     display: table;
+    padding-left: 0;
 }
 .photo-actions .row .photo-buttons li{
     display: table-cell;
@@ -1542,14 +1540,12 @@ table.record_properties th{
 }
 
 .photo-actions a{
-    font-size: 1.6em;
-    color: #fff;
-    text-decoration: none;
-    padding: 5px 15px;    
-    float: right;
-    border-left: 1px solid #fff;
-    height: 100%;
+    font-size: 2em;
+    color: #666;
+    text-decoration: none;   
+    display: block;
     line-height: 1.9em;
+    width: 50px;
     
     -moz-transition: all .3s ease-in;
     -o-transition: all .3s ease-in;
@@ -1558,6 +1554,7 @@ table.record_properties th{
 }
 .photo-actions a:hover{    
     background-color: #DA6759;
+    color: #fff;
 }
 
 .photo-actions .photo-selected{
@@ -1565,7 +1562,10 @@ table.record_properties th{
 }
 .photo-actions .photo-selected label{
     width: 60px;
-    font-weight: 200;    
+    font-weight: 200;  
+    font-family: "ralewayregular", sans-serif;
+    font-size: 1.1em;
+    line-height: 1em;
 }
 .photo-actions .photo-selected input{
     display: table-cell;
@@ -1605,7 +1605,7 @@ a.add-photo{
     display: block;    
     height: 350px;
     width: 100%;
-    line-height: 12em;
+    line-height: 12.5em;
     text-decoration: none;
     text-align: center;
     border: 1px solid #999;
@@ -1670,7 +1670,7 @@ input#appbundle_contact_us_subject{
     text-align: center;
 }
 .encounter-new .left-col i{
-    font-size: 6em;
+    font-size: 8em;
 }
 .encounter-new .main-col{
     border-left: 1px solid #899BA7;
@@ -1722,7 +1722,7 @@ form[name="appbundle_encounter"] input[type="text"], form[name="appbundle_encoun
 }
 .yes-no-button:after {
     content: 'NO';
-    color: #000;
+    color: #999;
     position: absolute;
     right: 10px;
     top: 2px;
