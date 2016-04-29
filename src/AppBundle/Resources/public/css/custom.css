@@ -206,13 +206,13 @@ img[title="captcha"]{
     text-shadow: 1px 1px 2px #666;
 }
 #login-body a{
-    color: white;
-    text-decoration: none;
-    border: 1px solid white;
+    background-color: #DA6759;
+    border: 1px solid #DA6759;
+    text-shadow: none;    
+    color: white;    
+    text-decoration: none;    
     padding: 7px 20px;
-    display: inline-block;
-    background-color: rgba(0,0,0, 0.5);
-    /*border-radius: 2px;*/
+    display: inline-block;    
     margin-left: 10px;
     
     -moz-transition: all .3s ease-in;
@@ -222,11 +222,12 @@ img[title="captcha"]{
 }
 #login-body a:hover{
     color: white;
+    background-color: rgba(0,0,0, 0.5);
     text-decoration: none;
+    border: 1px solid white;
     /*background-color: rgba(255,255,255, 0.2);*/
-    background-color: #DA6759;
-    border: 1px solid #DA6759;
-    text-shadow: none;
+    
+    
 }
 
 /***************** FORM LOGIN *********************/
@@ -682,24 +683,33 @@ td.actions a{
     display: none;  /* masqué de base */
 }
 .loader_standard{
-    width: 360px;
-    height: 200px;
+/*    width: 360px;
+    height: 200px;*/
+    width: 100%;
+    height: 100%;
     position: fixed;
-    top: 50%;
-    left: 50%;
-    margin-top: -100px;
-    margin-left: -180px;
+/*    top: 50%;
+    left: 50%;*/
+    top: 0;
+    left: 0;
+/*    margin-top: -100px;
+    margin-left: -180px;*/
     background-color: #fff;
-    border-radius: 2px;
+    /*border-radius: 2px;*/
     text-align: center;
     z-index: 11;
-    padding: 60px 10px 25px 10px;
-    border: 1px solid #ddd;
-    
+    /*padding: 60px 10px 25px 10px;*/
+    /*border: 1px solid #ddd;*/
+    opacity: 0.9;
     display: none;  /* masqué de base */
 }
-
-
+.loader_standard p{
+    top: 45%;
+    position: absolute;
+    left: 50%;
+    font-family: "ralewaylight", sans-serif;
+    font-size: 1.6em;
+}
 
 /************************************ HOME *****************************************/
 
@@ -1081,9 +1091,12 @@ form#form-delete-prospect button{
 /******************************* PROSPECTS - SHOW ***********************************/
 
 #prospect-show-content{
-    background-color: #F47363;
-    color: white;
-    margin-top: 50px;
+    background-color: #FFF;
+    color: #666;
+    margin: 0;
+    box-shadow: 0px 4px 8px 4px #ddd;
+    border: 1px solid #ddd;
+    /*position: relative;*/
 }
 .show-left-col{
     padding-left: 0px;
@@ -1133,12 +1146,12 @@ form#form-delete-prospect button{
     height: 70px;
 }
 .show-actions ul li a, .show-actions ul li button{
-    background-color: #DA6759;
+    /*background-color: #DA6759;*/
     height: 70px;
     width: 70px;
+    color: #666;
 }
-.show-actions ul li a{    
-    color: #fff;
+.show-actions ul li a{        
     display: block;
     line-height: 2.5em;
     font-size: 2em;
@@ -1154,16 +1167,16 @@ form#form-delete-prospect button{
 }
 .show-actions ul li a:hover{    
     background-color: #F47363;
-    border-top: 1px solid #fff;
+    color: #FFF;
 }
-.show-actions ul li button{
+/*.show-actions ul li button{
     font-size: 2em;
+    background-color: white;
 }
 .show-actions ul li button:hover{
     color: #fff;
-    background-color: #F47363;
-    border-top: 1px solid #fff;
-}
+    background-color: #F47363;    
+}*/
 
 .show-actions ul li.icon-title{
     padding: 0px 15px;

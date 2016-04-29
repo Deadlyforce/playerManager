@@ -60,6 +60,10 @@ class ProspectType extends AbstractType
                 'required' => false,
                 'label' => 'Home number'                
             ))
+            ->add('job', TextType::class, array(
+                'required' => false,
+                'label' => 'Job'                
+            ))
             ->add('source', EntityType::class, array(
                 'class' => 'AppBundle:Source'                
             ))

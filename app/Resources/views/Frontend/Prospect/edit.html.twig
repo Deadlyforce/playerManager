@@ -35,10 +35,11 @@
             {{ form_row(editForm.country) }}
             {{ form_row(editForm.cellNumber) }}
             {{ form_row(editForm.homeNumber) }}
+            {{ form_row(editForm.job) }}
             {{ form_row(editForm.source) }}
 {#            {{ form_row(editForm.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}                 #}
 
-            {{ form_row(editForm.submit) }}
+            {{ form_row(editForm.submit, {'attr': {'class': 'btn-basic-rose'} }) }}
             <div class="hidden">{{ form_rest(editForm) }}</div>
         {{ form_end(editForm) }}        
 

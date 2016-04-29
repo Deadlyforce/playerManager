@@ -21,13 +21,17 @@
 {% endblock %}
 
 
-
 {% block content %}
-    <div class="container">
-        {#<section class="page-title">
-            <h1>{{ prospect.firstname }} {{ prospect.lastname }}</h1>
+    <div class="container">        
+        <section class="page-title">
+            <h1>Detailed view for {{ prospect.firstname }}</h1> 
+{#                <h2>Blablabla</h2>#}
         </section>
-        <div class="page-title-underline"></div> #}
+        <div class="page-title-underline"></div>            
+        
+        <div class="page-nav">            
+            <a class="btn-basic" href="{{ path('prospect_list') }}" title="Back to contacts">Back to contacts</a>
+        </div>        
         
         <div class="row" id="prospect-show-content">                
             <div class="col-md-3 show-left-col">
@@ -69,6 +73,14 @@
                             <td>{{ prospect.cellNumber }}</td>
                         </tr>
                         <tr>
+                            <th>Home Number</th>
+                            <td>{{ prospect.homeNumber }}</td>
+                        </tr>
+                        <tr>
+                            <th>Job</th>
+                            <td>{{ prospect.job }}</td>
+                        </tr>
+                        <tr>
                             <th>Source</th>
                             <td>{{ prospect.source }}</td>
                         </tr>
@@ -77,50 +89,47 @@
                             <td>{{ prospect.creationDate|date('d-m-Y') }}</td>
                         </tr>
                     </tbody>
-                </table>  
-                
-                <div class="show-actions">
-                    <ul>
-                        <li class="icon-title">
-                            <p>Relationship</p>
-                        </li>                       
-                        <li>
-                            {% if prospect.relationship %}
-                                <a class="" href="{{ path('relationship_show', { 'id': prospect.relationship.id }) }}" title="Show relationship">
-                                    <i class="icon ion-ios-eye-outline"></i>
-                                </a>
-                            {% endif %}
-                        </li>
-                        <li class="icon-separator"></li>
-                        <li class="icon-title">
-                            <p>Encounters</p>
-                        </li>
-                        <li class="icon-add">
-                            <a class="" href="{{ path('encounter_new', { 'prospect_id': prospect.id }) }}" title="Add new encounter"><i class="icon ion-ios-plus-empty"></i></a>
-                        </li>
-                        <li class="icon-separator"></li>
-                        {#<li class="icon-title">
-                            <p>Edit / Delete</p>
-                        </li>#}
-                        <li>
-                            <a class="" href="{{ path('prospect_list') }}" title="Back to contacts"><i class="icon ion-ios-list-outline"></i></a>
-                        </li> 
-                        <li>
-{#                            <a href="{{ path('prospect_edit', { 'id': prospect.id }) }}" title="Edit contact"><i class="icon ion-compose"></i></a>            #}
-                            <a id="edit_prospect" href="#" title="Edit contact"><i class="icon ion-compose"></i></a>                
-                        </li>
-                        <li>
-                            {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete contact'}}) }}                       
-                                {{ form_widget(delete_form.submit, {'label': '<i class="icon ion-ios-trash-outline"></i>'}) }}
-                            {{ form_end(delete_form) }}
-                        </li>
-                    </ul>
-                </div>            
-            </div>            
+                </table>                             
+            </div> 
+            
+        </div>
+        <div class="show-actions">
+            <ul>
+                <li class="icon-title">
+                    <p>Relationship</p>
+                </li>                       
+                <li>
+                    {% if prospect.relationship %}
+                        <a class="" href="{{ path('relationship_show', { 'id': prospect.relationship.id }) }}" title="Show relationship">
+                            <i class="icon ion-ios-eye-outline"></i>
+                        </a>
+                    {% endif %}
+                </li>
+                <li class="icon-separator"></li>
+                <li class="icon-title">
+                    <p>Encounters</p>
+                </li>
+                <li class="icon-add">
+                    {# AJAX TO DO !! #}
+                    <a id="new-encounter" href="{{ path('encounter_new', { 'prospect_id': prospect.id }) }}" title="Add new encounter"><i class="icon ion-ios-plus-empty"></i></a>
+                </li>
+                <li class="icon-separator"></li>  
+                <li class="icon-title">
+                    <p>Contact</p>
+                </li>
+                <li>
+                    <a id="edit_prospect" href="#" title="Edit contact"><i class="icon ion-ios-compose-outline"></i></a>                
+                </li>
+{#                <li>
+                    {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete contact'}}) }}                       
+                        {{ form_widget(delete_form.submit, {'label': '<i class="icon ion-ios-trash-outline"></i>'}) }}
+                    {{ form_end(delete_form) }}
+                </li>#}
+            </ul>
         </div>
             
         {# Modales #}
-        <div class="modal fade" id="modal_prospect_form" tabindex="-1" role="dialog">
+        <div class="modal fade modal-full" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">                    
@@ -128,7 +137,7 @@
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
                         </button>
-                        <h2 class="modal-title">Edit contact</h2>
+                        <h2 class="modal-title"></h2>
                     </div>    
                     <div class="modal-body" id="modal_prospect_form_body">
                         {# Form returned by ajax #}
@@ -141,23 +150,22 @@
         <div class="overlay"></div>
         <div class="loader_standard">
             <p>Loading...</p>
-            <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />
         </div>                
     </div>                            
     
     <script type="text/javascript">
         $(document).ready(function(){
             var locale = "{{ app.request.locale }}";
+            var id = "{{ prospect.id }}";
             
-            // Ajax: get edit form 
+            // Ajax: get edit form prospect
             $(".show-actions").on("click", "#edit_prospect", function(event){
                 event.preventDefault();
                
                 $(".overlay").show(200, function(){
                     $(".loader_standard").show();
-                });                
+                });                 
                 
-                var id = "{{ prospect.id }}";
                 var url = Routing.generate('ajax_edit_prospect_form', {'id':id, '_locale': locale});
                 
                 $.get(url, function(response){                   
@@ -167,8 +175,37 @@
                         $(".overlay").hide();   
                     });                                     
                     
-                    $('#modal_prospect_form').modal('show');
+                    $(".modal-title").text("Edit contact");
+                    $('.modal-full').modal('show');
                 });
+            });
+            
+            // Ajax: get form new encounter
+            $(".show-actions").on("click", "#new-encounter", function(event){
+                event.preventDefault();
+                
+                $(".overlay").show(200, function(){
+                    $(".loader_standard").show();
+                });                       
+
+                var url = Routing.generate('ajax_new_encounter_form', {'prospect_id': id, '_locale': locale});
+                
+                $.get(url, function(response){                   
+                    $(".modal-body").html(response); // coller la vue dans une modale  
+                    
+                    $(".loader_standard").hide(200, function(){
+                        $(".overlay").hide();   
+                    });                                     
+                    
+                    $(".modal-title").text("New encounter");
+                    $('.modal-full').modal('show');
+                });
+            }); 
+            
+            
+            $('.modal-full').on('hidden.bs.modal', function (e) {
+                $(".modal-body").empty();
+                $(".modal-title").empty();
             });
         });
     </script>

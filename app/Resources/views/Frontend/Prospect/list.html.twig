@@ -99,7 +99,7 @@
         <div class="overlay"></div>
         <div class="loader_standard">
             <p>Loading...</p>
-            <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />
+{#            <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />#}
         </div>
     </div> 
 
@@ -161,7 +161,7 @@
                 $(".overlay").show(200, function(){
                     $(".loader_standard").show();
                 });                       
-                
+              
                 var url = Routing.generate('ajax_new_prospect_form', {'_locale': locale});
                 
                 $.get(url, function(response){                   

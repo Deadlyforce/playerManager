@@ -154,6 +154,13 @@ class Prospect
     private $homeNumber;
     
     /**
+     * @var string
+     * 
+     * @ORM\Column(name="job", type="string", length=100, nullable=true)
+     */
+    private $job;
+    
+    /**
      * @var \Date
      * 
      * @ORM\Column(name="creation_date", type="date")
@@ -427,6 +434,28 @@ class Prospect
     public function getHomeNumber()
     {
         return $this->homeNumber;
+    }
+    
+    /**
+     * Set Job
+     *
+     * @param string $job
+     * @return Prospect
+     */
+    public function setJob($job)
+    {
+        $this->job = $job;
+        return $this;
+    }
+
+    /**
+     * Get Job
+     *
+     * @return string 
+     */
+    public function getJob()
+    {
+        return $this->job;
     }
 
     /**
