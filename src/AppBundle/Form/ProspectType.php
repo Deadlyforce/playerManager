@@ -44,10 +44,8 @@ class ProspectType extends AbstractType
             ->add('city', TextType::class, array(
                 'required' => false                
             ))
-            ->add('parisDistrict', ChoiceType::class, array(
-                'required' => false,
-                'choices' => $this->getParisDistricts(), 
-                'choices_as_values' => true                
+            ->add('zipcode', TextType::class, array(
+                'required' => false                                
             ))
             ->add('country', TextType::class, array(
                 'required' => false                                

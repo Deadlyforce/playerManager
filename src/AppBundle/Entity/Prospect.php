@@ -126,11 +126,11 @@ class Prospect
     private $city;
     
     /**
-     * @var integer
+     * @var string
      *
-     * @ORM\Column(name="paris_district", type="integer", nullable=true)
+     * @ORM\Column(name="zipcode", type="string", length=7, nullable=true)
      */
-    private $parisDistrict;
+    private $zipcode;
 
     /**
      * @var string
@@ -348,26 +348,26 @@ class Prospect
     }
     
     /**
-     * Set parisDistrict
+     * Set zipcode
      *
-     * @param integer $parisDistrict
+     * @param string $zipcode
      * @return Prospect
      */
-    public function setParisDistrict($parisDistrict)
+    public function setZipcode($zipcode)
     {
-        $this->parisDistrict = $parisDistrict;
+        $this->zipcode = $zipcode;
         
         return $this;
     }
     
     /**
-     * Get parisDistrict
+     * Get zipcode
      *
-     * @return integer 
+     * @return string 
      */
-    public function getParisDistrict()
+    public function getZipcode()
     {
-        return $this->parisDistrict;
+        return $this->zipcode;
     }
 
     /**

@@ -111,92 +111,51 @@
     
     <script type="text/javascript">
         $(document).ready(function(){
-            var locale = "{{ app.request.locale }}";
-            
-            {#$("#container-prospect").on("mouseenter", ".prospect-record", function(){
-                var rowActions = $(this).children().last();
-               
-                rowActions.parent().css('margin-bottom', '95px');
-                rowActions.parent().animate(function(){
-                    marginBottom: "95px"
-                });
-        
-                rowActions.stop(true, true).animate({
-                    bottom: "-50"                    
-                },300, function(){
-                    rowActions.css('z-index', 2);
-                    
-                    rowActions.parent().on("mouseleave", function(){                         
-                        rowActions.css('z-index', -1);
-                        rowActions.stop(true, true).animate({
-                            bottom: "0"
-                        },300, function(){
-                            rowActions.parent().css('margin-bottom', '45px');
-                        });
-                    });
-                });
-            });#}
-                 
-            
-            
-            $('[data-toggle="tooltip"]').tooltip();
-            
-            // Form new prospect - parisDistrict
-            $("#container-prospect").on("change", "input#appbundle_prospect_city", function(){
-                var city = $(this).val().toLowerCase();
-
-                if(city === 'paris'){
-                    $('.row-paris-district').show('fast');
-                }else{
-                    $('.row-paris-district').hide('fast');
-                }
-            });
-                        
+            var locale = "{{ app.request.locale }}";      
+           
+            $('[data-toggle="tooltip"]').tooltip();            
+                   
             // Ajax: get form new prospect
             $("#add_prospect").click(function(event){
-                event.preventDefault();
-                
-                $(".overlay").show(200, function(){
-                    $(".loader_standard").show();
-                });                       
+                event.preventDefault();                
+     
+                $(".loader_standard").show();
               
                 var url = Routing.generate('ajax_new_prospect_form', {'_locale': locale});
                 
                 $.get(url, function(response){                   
-                    $("#modal_prospect_form_body").html(response); // coller la vue dans une modale  
+                    $(".modal-body").html(response); // coller la vue dans une modale  
                     
-                    $(".loader_standard").hide(200, function(){
-                        $(".overlay").hide();   
-                    });                                     
+                    $(".loader_standard").hide(200, function(){});                                     
                     
-                    $('#modal_prospect_form').modal('show');
+                    $(".modal-title").text("New contact");
+                    $('.modal-full').modal('show');
                 });
             });
             
             // Ajax: get form edit prospect
             $(".record-actions").on("click", "#edit_prospect", function(event){
-                event.preventDefault();
-               
-                $(".overlay").show(200, function(){
-                    $(".loader_standard").show();
-                });                
+                event.preventDefault();               
                 
+                $(".loader_standard").show();
+            
                 var id = $(this).data("id");                
                 var url = Routing.generate('ajax_edit_prospect_form', {'id':id, '_locale': locale});
                 
                 $.get(url, function(response){                   
-                    $("#modal_prospect_form_body").html(response);
-                    $(".modal-header h2").empty().html("Edit contact"); // Change header to "edit"
+                    $(".modal-body").html(response);                    
                     
-                    $(".loader_standard").hide(200, function(){
-                        $(".overlay").hide();   
-                    });                                     
+                    $(".loader_standard").hide(200, function(){});                                     
                     
-                    $('#modal_prospect_form').modal('show');
+                    $(".modal-title").text("Edit contact");
+                    $('.modal-full').modal('show');
                 });
             });
             
-            
+            $('.modal-full').on('hidden.bs.modal', function (e) {
+                $(".modal-body").empty();
+                $(".modal-title").empty();
+            });
             
             
             

@@ -20,26 +20,70 @@
 
 {% block content %}
     <div class="container">
-        {{ form_start(editForm, {'attr': {'id':'form-edit-prospect', 'data': 'prospect-data'}}) }}   
-            {{ form_row(editForm.nickname) }}
-            {{ form_row(editForm.firstname) }}
-            {{ form_row(editForm.lastname) }}
-            {{ form_row(editForm.age) }}
-            {{ form_row(editForm.address) }}
-            {{ form_row(editForm.city) }}
-            <div class="collapse row-paris-district">
-                {{ form_label(editForm.parisDistrict) }}
-                {{ form_widget(editForm.parisDistrict) }}
-                {{ form_errors(editForm.parisDistrict) }}
+        {{ form_start(editForm, {'attr': {'id':'form-edit-prospect', 'data': 'prospect-data', 'class': 'form-inline' }}) }} 
+            <div class="form-group">
+                {{ form_label(editForm.nickname) }}
+                {{ form_widget(editForm.nickname, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.nickname) }}
             </div>
-            {{ form_row(editForm.country) }}
-            {{ form_row(editForm.cellNumber) }}
-            {{ form_row(editForm.homeNumber) }}
-            {{ form_row(editForm.job) }}
-            {{ form_row(editForm.source) }}
-{#            {{ form_row(editForm.dateCreation, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}                 #}
+            <div class="form-group">
+                {{ form_label(editForm.firstname) }}
+                {{ form_widget(editForm.firstname, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.firstname) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.lastname) }}
+                {{ form_widget(editForm.lastname, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.lastname) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.age) }}
+                {{ form_widget(editForm.age, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.age) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.address) }}
+                {{ form_widget(editForm.address, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.address) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.city) }}
+                {{ form_widget(editForm.city, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.city) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.zipcode) }}
+                {{ form_widget(editForm.zipcode, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.zipcode) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.country) }}
+                {{ form_widget(editForm.country, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.country) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.cellNumber) }}
+                {{ form_widget(editForm.cellNumber, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.cellNumber) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.homeNumber) }}
+                {{ form_widget(editForm.homeNumber, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.homeNumber) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.job) }}
+                {{ form_widget(editForm.job, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.job) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(editForm.source) }}
+                {{ form_widget(editForm.source, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.source) }}
+            </div>
 
             {{ form_row(editForm.submit, {'attr': {'class': 'btn-basic-rose'} }) }}
+            
             <div class="hidden">{{ form_rest(editForm) }}</div>
         {{ form_end(editForm) }}        
 

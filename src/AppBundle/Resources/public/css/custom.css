@@ -579,13 +579,19 @@ p.confirmed{
 /* FORMS */
 .form-control{
     border-radius: 0px;
+    width: 75%;
 }
-
+.form-inline .form-group{
+    margin-bottom: 8px;
+}
 /* BOUTONS */
 .btn{
     border-radius: 0px;
 }
 
+.modal-dialog{
+    overflow-y: scroll;
+}
 .modal-content{
     border-radius: 0px;
 }
@@ -706,7 +712,8 @@ td.actions a{
 .loader_standard p{
     top: 45%;
     position: absolute;
-    left: 50%;
+    left: 0;
+    width: 100%;
     font-family: "ralewaylight", sans-serif;
     font-size: 1.6em;
 }
