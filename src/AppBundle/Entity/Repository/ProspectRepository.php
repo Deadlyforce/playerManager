@@ -50,4 +50,15 @@ class ProspectRepository extends EntityRepository
         
     }
     
+    public function getProspectIds($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT p.id
+            FROM AppBundle:Prospect p
+            WHERE p.user = :user
+        ')
+         ->setParameter('user', $user);
+        
+        return $qb->getResult();
+    }
 }

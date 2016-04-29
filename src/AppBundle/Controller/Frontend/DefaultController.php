@@ -25,7 +25,24 @@ class DefaultController extends Controller
      */
     public function indexAction()
     { 
-        return array('msg' => 'Bienvenue sur la page d\'index du Player Manager');
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();          
+        
+        // Check the presence of previous prospects
+        $results = $em->getRepository("AppBundle:Prospect")->getProspectIds($user);
+        
+        if (count($results) === 0) {
+            $noProspect = true;
+        } else {
+            $noProspect = false;
+        }
+        
+        return array('noProspect' => $noProspect);
     }
     
     /**

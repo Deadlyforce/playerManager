@@ -4,9 +4,10 @@
 {% block content %}
     <div class="home-carousel">
         <div>
-{#            <div class="slider-text">#}
-                <h1>Remember your dates<br>Remember your life</h1>
-{#            </div>#}
+            <h1>Remember your dates<br>Remember your life</h1>
+            {% if noProspect == true %}
+                <a id="btn-first-contact" href="#" title="Add your first contact">Add your first contact</a>
+            {% endif %}
             {% if app.user.gender == 1 %}
                 <img src="{{ asset('bundles/app/images/home/slider_02.jpg') }}" alt="Image_02">
             {% else %}
@@ -15,9 +16,9 @@
         </div>
         <div>
             {% if app.user.gender == 1 %}
-                <img src="{{ asset('bundles/app/images/home/slider_01.jpg') }}" alt="Image_01">
+                <img data-lazy="{{ asset('bundles/app/images/home/slider_01.jpg') }}" alt="Image_01">
             {% else %}
-                <img src="{{ asset('bundles/app/images/home/slider_04.jpg') }}" alt="Image_04">
+                <img data-lazy="{{ asset('bundles/app/images/home/slider_04.jpg') }}" alt="Image_04">
             {% endif %}
         </div>  
     </div>
@@ -26,13 +27,13 @@
             <div class="row">
                 <div class="col-md-4 feature">
                     <i class="icon ion-ios-people"></i>
-                    <h2>Contact management</h2>
+                    <h2>Preserve Contacts</h2>
                     <p>Remember your contacts<br>Save basic information for future reference<br>Keep track of essentials<br>Rate your contacts</p>
                 </div>
                 <div class="col-md-4 feature">
                     <i class="icon ion-ios-heart"></i>
-                    <h2>Date tracking</h2>
-                    <p>Whatever the nature of the relationship<br>Remember the whole story<br>Avoid previous mistakes</p>
+                    <h2>Keep your dates</h2>
+                    <p>Whatever the nature of the relationship<br>Remember the story<br>Avoid previous mistakes</p>
                 </div>
                 <div class="col-md-4 feature">
                     <i class="icon ion-ios-albums-outline"></i>
@@ -42,14 +43,67 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
+        
+    {# Modales #}
+    <div class="modal fade modal-full" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
+                    </button>
+                    <h2 class="modal-title"></h2>
+                </div>    
+                <div class="modal-body" id="modal_prospect_form_body">
+                    {# Form returned by ajax #}
+                </div>                       
+            </div>    
+        </div>
+    </div>
+
+    {# POPUP OVERLAY D'ATTENTE AJAX #}
+    <div class="overlay"></div>
+    <div class="loader_standard">
+        <p>Loading...</p>
+    </div>
+        
+    <script type="text/javascript">          
         $(document).ready(function(){
+            var locale = "{{ app.request.locale }}";
             
-            $(".home-carousel").slick({
+            $(".home-carousel").slick({ 
+                lazyLoad: 'ondemand',
                 dots: true,
                 speed: 500,
                 fade: true,
                 cssEase: 'linear'
+            });
+            
+            // Ajax: get form new prospect
+            $("#btn-first-contact").click(function(event){
+                event.preventDefault();
+                
+                $(".overlay").show(200, function(){
+                    $(".loader_standard").show();
+                });                       
+              
+                var url = Routing.generate('ajax_new_prospect_form', {'_locale': locale});
+                
+                $.get(url, function(response){                   
+                    $(".modal-body").html(response); // coller la vue dans une modale  
+                    
+                    $(".loader_standard").hide(200, function(){
+                        $(".overlay").hide();   
+                    });                                     
+                    
+                    $(".modal-title").text("New contact");
+                    $('.modal-full').modal('show');
+                });
+            });
+            
+            $('.modal-full').on('hidden.bs.modal', function (e) {
+                $(".modal-body").empty();
+                $(".modal-title").empty();
             });
         });
     </script>

@@ -311,7 +311,6 @@ form[name="fos_user_security_login"] #_submit:hover{
 }
 
 header{
-    /*height: 90px;*/
     background-color: #303030;
 }
 
@@ -566,6 +565,7 @@ button.btn-submit:hover{
     color: #f0f0f0;
 }
 
+
 /*************************** REGISTRATION ********************************/
 
 p.confirmed{
@@ -716,30 +716,40 @@ td.actions a{
 .home-carousel img{
     width: 100%;
 }
-/*.slider-text{
-    
-    
-    top: 16%;
-}*/
 .home-carousel h1{
-    position: absolute;
-    /*color: rgb(255, 117, 100);*/
+    position: absolute;    
     color: #f0f0f0;
     font-family: "ralewaythin",sans-serif;
-    font-size: 5em;
-    /*left: 10%;*/
+    font-size: 5em;    
     top: 16%;
+    left: 20%;
     text-shadow: 1px 1px 2px rgb(85, 85, 85);
     line-height: 1.3em;    
     
-    width: 100%;
-    padding-left: 250px;
-    /*background-color: rgba(0,0,0,0.3);*/
+    width: 100%; 
+}
+a#btn-first-contact {
+    color: #fff;
+    position: absolute;
+    top: 48%;
+    left: 20%;
+    font-family: "ralewaylight", sans-serif;
+    font-size: 1.5em;
+    background-color: #F47363;
+    border: 1px solid #F47363;
+    padding: 10px 10px;
     
-/*    background: -webkit-linear-gradient(left, rgba(0,0,0,0.3) , transparent);  For Safari 5.1 to 6.0 
-    background: -o-linear-gradient(right, rgba(0,0,0,0.3), transparent);  For Opera 11.1 to 12.0 
-    background: -moz-linear-gradient(right, rgba(0,0,0,0.3), transparent);  For Firefox 3.6 to 15 
-    background: linear-gradient(to right, rgba(0,0,0,0.3) , transparent);  Standard syntax */
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+a#btn-first-contact:hover {
+    background-color: rgba(0,0,0,0.2);
+    border-left: 1px solid #F47363;
+    border-right: 1px solid #F47363;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
 }
 
 .slick-prev, .slick-next { 

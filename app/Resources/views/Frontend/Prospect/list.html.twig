@@ -41,7 +41,7 @@
                             <a id="edit_prospect" class="custom-tooltip" href="#" data-id="{{ prospect.id }}" title="Modify contact" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
                         </li>
                         <li>
-                            <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show all contact infos" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-eye-outline"></i></a>
+                            <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show all contact infos" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-search"></i></a>
                         </li>
                         <li><p>Contact</p></li>
                         <li class="separator"></li>
@@ -81,8 +81,7 @@
         <div class="modal fade modal-full" id="modal_prospect_form" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header">                    
-{#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+                    <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
                         </button>
@@ -99,7 +98,6 @@
         <div class="overlay"></div>
         <div class="loader_standard">
             <p>Loading...</p>
-{#            <img src="{{ asset('bundles/app/images/ajax-loader.gif') }}" />#}
         </div>
     </div> 
 
@@ -154,7 +152,7 @@
                 }
             });
                         
-            // Ajax: get form new
+            // Ajax: get form new prospect
             $("#add_prospect").click(function(event){
                 event.preventDefault();
                 
@@ -175,7 +173,7 @@
                 });
             });
             
-            // Ajax: get form edit
+            // Ajax: get form edit prospect
             $(".record-actions").on("click", "#edit_prospect", function(event){
                 event.preventDefault();
                
