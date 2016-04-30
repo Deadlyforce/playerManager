@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EchangeType extends AbstractType
+class ChatType extends AbstractType
 {
         /**
      * @param FormBuilderInterface $builder
@@ -17,7 +17,7 @@ class EchangeType extends AbstractType
         $builder
             ->add('prospect_id')
             ->add('date', 'date', array('required' => TRUE))
-            ->add('contenu')
+            ->add('content')
             ->add('prospect', 'entity', array(
                 'required' => TRUE,
                 'class' => 'AppBundle:Prospect'
@@ -31,7 +31,7 @@ class EchangeType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Echange'
+            'data_class' => 'AppBundle\Entity\Chat'
         ));
     }
 
@@ -40,6 +40,6 @@ class EchangeType extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_echange';
+        return 'appbundle_chat';
     }
 }

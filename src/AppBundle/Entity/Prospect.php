@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use AppBundle\Entity\Relationship;
 use AppBundle\Entity\Encounter;
 use AppBundle\Entity\Photo;
+use AppBundle\Entity\Chat;
 
 /**
  * Prospect
@@ -39,9 +40,9 @@ class Prospect
     /**
      * @var ArrayCollection
      * 
-     * @ORM\OneToMany(targetEntity="Echange", mappedBy="prospect") 
+     * @ORM\OneToMany(targetEntity="Chat", mappedBy="prospect") 
      */
-    private $echanges;
+    private $chats;
     
     /**
      * @var Relationship 
@@ -459,35 +460,35 @@ class Prospect
     }
 
     /**
-     * Add echanges
+     * Add chat
      *
-     * @param \AppBundle\Entity\Echange $echanges
+     * @param Chat $chat
      * @return Prospect
      */
-    public function addEchange(\AppBundle\Entity\Echange $echanges)
+    public function addChat(Chat $chat)
     {
-        $this->echanges[] = $echanges;
+        $this->chats[] = $chat;
         return $this;
     }
 
     /**
-     * Remove echanges
+     * Remove chat
      *
-     * @param \AppBundle\Entity\Echange $echanges
+     * @param Chat $chat
      */
-    public function removeEchange(\AppBundle\Entity\Echange $echanges)
+    public function removeChat(Chat $chat)
     {
-        $this->echanges->removeElement($echanges);
+        $this->chats->removeElement($chat);
     }
 
     /**
-     * Get echanges
+     * Get chats
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getEchanges()
+    public function getChats()
     {
-        return $this->echanges;
+        return $this->chats;
     }
 
     /**

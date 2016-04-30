@@ -337,7 +337,8 @@ header{
     /*color: #e0e0e0;*/
 }
 .navbar{
-    font-family: 'open_sansregular', sans-serif;
+    /*font-family: 'open_sansregular', sans-serif;*/
+    font-family: "ralewayregular", sans-serif;
     border-radius: 0;  
     margin-bottom: 0px;
 }
@@ -351,7 +352,8 @@ header{
     color: #e0e0e0;
 }
 .navbar-default .navbar-nav > li > a:hover{
-    color: #f0f0f0;
+    color: #fff;
+    background-color: #f47363;
 }
 .navbar-default .navbar-nav > li > a:focus{
     color: #f47363;

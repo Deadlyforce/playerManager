@@ -6,17 +6,17 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 /**
- * Echange
+ * Chat
  *
- * @ORM\Table(name="echanges")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\EchangeRepository")
+ * @ORM\Table(name="chats")
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\ChatRepository")
  */
-class Echange
+class Chat
 {
     /**
      * @var Prospect 
      * 
-     * @ORM\ManyToOne(targetEntity="Prospect", inversedBy="echanges")
+     * @ORM\ManyToOne(targetEntity="Prospect", inversedBy="chats")
      * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $prospect;
@@ -40,9 +40,9 @@ class Echange
     /**
      * @var string
      *
-     * @ORM\Column(name="contenu", type="text")
+     * @ORM\Column(name="content", type="text")
      */
-    private $contenu;
+    private $content;
 
 
     /**
@@ -79,26 +79,26 @@ class Echange
     }
 
     /**
-     * Set contenu
+     * Set content
      *
-     * @param string $contenu
-     * @return Echange
+     * @param string $content
+     * @return Chat
      */
-    public function setContenu($contenu)
+    public function setContent($content)
     {
-        $this->contenu = $contenu;
+        $this->content = $content;
 
         return $this;
     }
 
     /**
-     * Get contenu
+     * Get content
      *
      * @return string 
      */
-    public function getContenu()
+    public function getContent()
     {
-        return $this->contenu;
+        return $this->content;
     }   
 
     /**
