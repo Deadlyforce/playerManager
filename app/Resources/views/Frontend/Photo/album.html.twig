@@ -1,0 +1,32 @@
+{% extends '::base.html.twig' %}
+{% import ":Frontend/Macros/Prospect:photoDisplay250px.html.twig" as photoDisplayIndex %}
+{% block title %}Photo album{% endblock %}
+
+
+{% block content %}
+    <section class="page-title">
+        <h1>Album</h1> 
+        <h2>All your contacts, just photos for now...</h2>
+    </section>
+    <div class="page-title-underline"></div>
+    
+    <div class="container" id="container-album">
+        <div class="row row-album">
+        {% for photo in photos %}
+            <div class="col-md-2">
+                <img class="img-responsive" src="{{ asset(photo.path) | imagine_filter('thumb_prospect_index') }}" />     
+            </div>
+            
+            {% if loop.index % 6 == 0 %} {# Close the div row every 3rd item and open a new one #}
+                </div>
+                <div class="row row-album">
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            
+        });
+    </script>
+{% endblock %}

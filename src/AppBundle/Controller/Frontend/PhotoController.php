@@ -130,4 +130,44 @@ class PhotoController extends Controller
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
     }
+    
+    /**
+     * Displays all prospect primary pictures (or last uploaded)
+     * 
+     * @Route("/album/{user_id}", name="photo_album")
+     * @param int $user_id
+     * @Template(":Frontend/Photo:album.html.twig")
+     */
+    public function albumAction($user_id)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        $loggedUser = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+        $requestedUser = $em->find('AppBundle:User', $user_id);
+        
+        if ($loggedUser === $requestedUser) {            
+            $photos = $em->getRepository('AppBundle:Photo')->getAlbum($requestedUser);
+            
+//            $prospects = $em->getRepository('AppBundle:Prospect')->findBy(array("user" => $requestedUser));
+//            
+//            foreach($prospects as $prospect){
+//                $prospectPhotos = $em->getRepository('AppBundle:Photo')->getProspectPhoto($prospect);
+//                foreach($prospectPhotos as $prospectPhoto){
+//                    if ($prospectPhoto->getSelected() === 1) {
+//                        $id = $prospectPhoto->getId();
+//                    }
+//                }
+//                $photos[] =
+//            }
+            
+            return array(
+                'photos' => $photos
+            );
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+    }
 }

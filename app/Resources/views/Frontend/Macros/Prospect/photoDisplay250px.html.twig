@@ -1,19 +1,11 @@
-{% macro primaryPhotoOrLast(photos) %}
+{% macro primaryPhoto(photos) %}
+    
     {% set primaryPhoto = null %} 
     {% for photo in photos if photo.selected == true %}                               
         {% set primaryPhoto = photo %}                           
     {% endfor %}
 
-    {% if primaryPhoto is not null %}
-        <img class="img-responsive" src="{{ asset(primaryPhoto.path) | imagine_filter('thumb_prospect_index') }}" alt="Photo" />
-    {% else %}                      
-        {% if photos|last %}
-            {% set photo = photos|last %}
-            <img class="img-responsive" src="{{ asset(photo.path) | imagine_filter('thumb_prospect_index') }}" alt="Photo" />                        
-        {% else %}
-            <img class="img-responsive" src="{{ asset('bundles/app/images/prospect_no_photo.jpg') }}" alt="No photo" />
-        {% endif %}
-    {% endif %}
+    <img class="img-responsive" src="{{ asset(primaryPhoto.path) | imagine_filter('thumb_prospect_index') }}" alt="Photo" />    
 {% endmacro %}
 
 

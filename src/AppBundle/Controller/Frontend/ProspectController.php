@@ -426,6 +426,10 @@ class ProspectController extends Controller
 
                 if ($originalPhotos->isEmpty()) {
                     // Case: update a Prospect without a previous photo
+                    
+                    // Set first element (photo) as primary selected = true so there's always a primary
+                    $photos->first()->setSelected(true); 
+                            
                     foreach ($photos as $photo) {
                         $uploadableManager->markEntityToUpload($photo, $photo->getFile());
                     }      
@@ -464,8 +468,9 @@ class ProspectController extends Controller
 
                     $em->persist($prospect);
                     $em->flush();
-                }              
-
+                }   
+                
+                // If change happened in photos.
                 if ($changed) {
                     return $this->redirectToRoute('gallery', array('prospect_id' => $id));
                 } else {

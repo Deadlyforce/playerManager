@@ -46,7 +46,7 @@
                     <td>{{ prospect.country }}</td>
                     <td>{{ prospect.source }}</td>
                     <td>                          
-                        {{ photoDisplayIndex.primaryPhotoOrLast(prospect.photos) }}                                              
+                        {{ photoDisplayIndex.primaryPhoto(prospect.photos) }}                                              
                     </td>
                     <td>
                         {% if prospect.creationDate %}{{ prospect.creationDate|date('d-m-Y') }}{% endif %}

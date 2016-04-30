@@ -364,10 +364,16 @@ header{
     display: table-cell;
     vertical-align: middle;    
 }
-.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:hover, .navbar-default .navbar-nav > .active > a:focus{
+.navbar-default .navbar-nav > .active > a, .navbar-default .navbar-nav > .active > a:focus{
     background-image: none;
     background-color: #303030;
     color: #f47363;
+    box-shadow: none;
+}
+.navbar-default .navbar-nav > .active > a:hover{
+    background-image: none;
+    background-color: #f47363;
+    color: #fff;
     box-shadow: none;
 }
 
@@ -1808,9 +1814,16 @@ form[name="rating"] > div > label {
 }
 
 
+/********************************* ALBUM **************************************/
 
-
-
+#container-album .row-album{
+    margin-bottom: 20px;
+}
+#container-album img{
+    width: 150px;
+    box-shadow: 0px 0px 6px 3px #ccc;
+    border: 1px solid #ccc;
+}
 
 /************************* FOOTER *****************************/
 

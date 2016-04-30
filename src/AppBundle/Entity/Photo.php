@@ -13,6 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * 
  * @ORM\Table(name="photo")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\PhotoRepository")
  * @Gedmo\Uploadable(pathMethod="userPath", filenameGenerator="SHA1", allowOverwrite=true)
  */
 class Photo {
@@ -72,7 +73,7 @@ class Photo {
      * Primary picture as selected by the user
      * 
      * @var integer
-     * @ORM\Column(name="selected", type="boolean", nullable=true)
+     * @ORM\Column(name="selected", type="boolean", nullable=false)
      */
     private $selected;
     
