@@ -39,7 +39,12 @@
                             {{ form_errors(edit_form.meeting) }}
                         </div>           
                     </div>           
-                    {{ form_row(edit_form.meetingCount) }}          
+                    <div>           
+                        {{ form_label(edit_form.meetingCount) }}     
+                        {{ form_widget(edit_form.meetingCount) }}
+                        <div id="slider-meetingCount"></div>
+                        {{ form_errors(edit_form.meetingCount) }}                        
+                    </div>
                     <div>
                         {{ form_label(edit_form.numclosed) }}
                         <div id="appbundle_relationship_numclosed_row" class="relationship_row row-yes-no">
@@ -116,6 +121,21 @@
                     $("#appbundle_relationship_fc_row").parent().show("slow");
                 }
             });
-        });
+
+
+            $( "#slider-meetingCount" ).slider({
+                range: "max",
+                orientation: "horizontal",
+                min: 0,
+                max: 50,
+                value: $( "#appbundle_relationship_meetingCount" ).val(),
+                animate: 'slow',
+                slide: function( event, ui ) {
+                  $( "#appbundle_relationship_meetingCount" ).val( ui.value );
+                }
+            });
+            
+            $( "#appbundle_relationship_meetingCount" ).val( $( "#slider-meetingCount" ).slider( "value" ) );
+        });    
     </script>
 {% endblock %}

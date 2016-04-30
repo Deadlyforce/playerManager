@@ -38,6 +38,13 @@ class RatingType extends AbstractType
                     'max' => 5
                 )
             ))
+            ->add('cooking', IntegerType::class, array(
+                'required' => false,
+                'attr' => array(
+                    'min' => 0,
+                    'max' => 5
+                )
+            ))
             ->add('kissing', IntegerType::class, array(
                 'required' => false,
                 'attr' => array(

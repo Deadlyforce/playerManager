@@ -45,7 +45,7 @@ class RelationshipType extends AbstractType
                 'label' => 'Meeting count',
                 'attr' => array(
                     'min' => 0,
-                    'max' => 100
+                    'max' => 50
                 )
             ))
             ->add('numclosed', CheckboxType::class, array(

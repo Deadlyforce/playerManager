@@ -1272,7 +1272,7 @@ ul.record_actions{
 /**************************** RELATIONSHIP EDIT *******************************/
 
 form[name="appbundle_relationship"] > div {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 form[name="appbundle_relationship"] label{
@@ -1398,6 +1398,16 @@ input#appbundle_relationship_meetingCount{
     width: 60px;
     text-align: center;
     border-radius: 2px;
+    -moz-appearance: textfield;
+}
+input#appbundle_relationship_meetingCount::-webkit-inner-spin-button, 
+input#appbundle_relationship_meetingCount::-webkit-outer-spin-button { 
+    -webkit-appearance: none; 
+    -moz-appearance: textfield;
+    margin: 0; 
+}
+#slider-meetingCount{
+    width: 60%;
 }
 
 /* Input numclosed */

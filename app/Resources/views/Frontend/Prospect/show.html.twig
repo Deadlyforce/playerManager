@@ -92,7 +92,14 @@
             
         </div>
         <div class="show-actions">
-            <ul>
+            <ul>                  
+                <li class="icon-title">
+                    <p>Ratings</p>
+                </li>
+                <li>
+                    <a href="{{ path('rating_edit', {'prospect_id': prospect.id}) }}" title="Rate this contact"><i class="icon ion-ios-star-outline"></i></a>
+                </li>
+                <li class="icon-separator"></li>
                 <li class="icon-title">
                     <p>Relationship</p>
                 </li>                       
@@ -117,7 +124,7 @@
                 </li>
                 <li>
                     <a id="edit_prospect" href="#" title="Edit contact"><i class="icon ion-ios-compose-outline"></i></a>                
-                </li>
+                </li>                
 {#                <li>
                     {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete contact'}}) }}                       
                         {{ form_widget(delete_form.submit, {'label': '<i class="icon ion-ios-trash-outline"></i>'}) }}

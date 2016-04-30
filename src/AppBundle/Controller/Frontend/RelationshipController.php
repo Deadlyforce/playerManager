@@ -158,7 +158,7 @@ class RelationshipController extends Controller
             if ($editForm->isSubmitted() && $editForm->isValid()) {
                 $em->flush();
 
-                return $this->redirect($this->generateUrl('relationship'));
+                return $this->redirect($this->generateUrl('relationship_edit', array('id' => $id)));
             }
 
             return array(

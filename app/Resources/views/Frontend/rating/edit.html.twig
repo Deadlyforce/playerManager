@@ -40,6 +40,12 @@
                         {{ form_errors(edit_form.senseHumor) }}
                     </div>
                     <div>
+                        {{ form_label(edit_form.cooking, 'Cooking') }}
+                        <div class="rating cooking-rating"></div>                
+                        <div class="hidden">{{ form_widget(edit_form.cooking) }}</div>
+                        {{ form_errors(edit_form.cooking) }}
+                    </div>
+                    <div>
                         {{ form_label(edit_form.kissing) }}
                         <div class="rating kissing-rating"></div> 
                         <div class="hidden">{{ form_widget(edit_form.kissing) }}</div>

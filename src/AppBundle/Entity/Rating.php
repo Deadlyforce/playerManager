@@ -69,6 +69,19 @@ class Rating
      * @ORM\Column(name="senseHumor", type="integer", nullable=true)
      */
     private $senseHumor;
+    
+    /**
+     * @var int
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *      minMessage = "Unauthorized number",
+     *      maxMessage = "Unauthorized number"
+     * )
+     * @ORM\Column(name="cooking", type="integer", nullable=true)
+     */
+    private $cooking;
 
     /**
      * @var int
@@ -165,6 +178,29 @@ class Rating
     public function setSenseHumor($senseHumor)
     {
         $this->senseHumor = $senseHumor;
+
+        return $this;
+    }
+
+    /**
+     * Get cooking
+     *
+     * @return int
+     */
+    public function getCooking()
+    {
+        return $this->cooking;
+    }
+
+    /**
+     * Set cooking
+     *
+     * @param integer $cooking
+     * @return Rating
+     */
+    public function setCooking($cooking)
+    {
+        $this->cooking = $cooking;
 
         return $this;
     }

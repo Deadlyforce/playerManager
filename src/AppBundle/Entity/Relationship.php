@@ -71,7 +71,7 @@ class Relationship
      *
      * @Assert\Range(
      *      min = 0,
-     *      max = 100,
+     *      max = 50,
      *      minMessage = "Unauthorized number",
      *      maxMessage = "Unauthorized number"
      * )
