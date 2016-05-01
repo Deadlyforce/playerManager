@@ -1713,6 +1713,11 @@ input#appbundle_contact_us_subject{
 
 /******************************** ENCOUNTER *************************************/
 
+.encounter-new, .encounter-edit{
+    margin: 0 auto;
+    width: 80%;
+}
+
 /***  NEW  ***/
 
 .encounter-new .left-col{
@@ -1725,6 +1730,22 @@ input#appbundle_contact_us_subject{
     border-left: 1px solid #899BA7;
     padding: 0px 40px;
 }
+
+/*** EDIT ***/
+
+.encounter-edit .left-col{
+    text-align: center;
+}
+.encounter-edit .left-col i{
+    font-size: 8em;
+}
+.encounter-edit .main-col{
+    border-left: 1px solid #899BA7;
+    padding: 0px 40px;
+}
+
+/*** GENERAL ? ***/
+
 form[name="appbundle_encounter"]{
     font-family: "open_sansregular", sans-serif;
 }

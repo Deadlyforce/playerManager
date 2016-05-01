@@ -41,7 +41,7 @@
                     </td>
                     <td>
 {#                        <a href="{{ path('encounter_show', { 'id': encounter.id }) }}">show</a>                        #}
-                        <a href="{{ path('encounter_edit', { 'id': encounter.id }) }}">edit</a>                        
+                        <a class="edit-encounter" href="#" data-id="{{ encounter.id }}">edit</a>                        
                     </td>
                 </tr>
             {% endfor %}
@@ -57,7 +57,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
                     </button>
-                    <h2 class="modal-title">New encounter</h2>
+                    <h2 class="modal-title">{# Populated with jquery #}</h2>
                 </div>    
                 <div class="modal-body" id="modal_encounter_form_body">
                     {# Form returned by ajax #}
@@ -67,7 +67,7 @@
     </div>
 
     {# POPUP OVERLAY D'ATTENTE AJAX #}
-    <div class="overlay"></div>
+{#    <div class="overlay"></div>#}
     <div class="loader_standard">
         <p>Loading...</p>        
     </div>
@@ -81,9 +81,7 @@
             $("#add_encounter").click(function(event){
                 event.preventDefault();
                 
-                $(".overlay").show(200, function(){
-                    $(".loader_standard").show();
-                });                       
+                $(".loader_standard").show();
                 
                 var prospect_id = "{{ prospect.id }}";
                 var url = Routing.generate('ajax_new_encounter_form', {'prospect_id': prospect_id, '_locale': locale});
@@ -91,13 +89,38 @@
                 $.get(url, function(response){                   
                     $("#modal_encounter_form_body").html(response); // coller la vue dans une modale  
                     
-                    $(".loader_standard").hide(200, function(){
-                        $(".overlay").hide();   
-                    });                                     
+                    $(".loader_standard").hide(200, function(){});                                     
                     
-                    $('#modal_encounter_form').modal('show');
+                    $(".modal-title").text("New encounter");
+                    $('.modal-full').modal('show');
                 });
-            });            
+            });
+            
+            
+            // Ajax: get form edit
+            $(".edit-encounter").click(function(event){
+                event.preventDefault();
+                
+                $(".loader_standard").show();
+                
+                var id = $(this).data("id");
+                var url = Routing.generate('ajax_edit_encounter_form', {'id': id, '_locale': locale});
+                
+                $.get(url, function(response){                   
+                    $("#modal_encounter_form_body").html(response); // coller la vue dans une modale  
+                    
+                    $(".loader_standard").hide(200, function(){});                                     
+                    
+                    $(".modal-title").text("Edit encounter");
+                    $('.modal-full').modal('show');
+                });
+            });  
+            
+            // Cleanup modal at close
+            $('.modal-full').on('hidden.bs.modal', function (e) {
+                $(".modal-body").empty();
+                $(".modal-title").empty();
+            });
         });
     </script>        
 {% endblock %}

@@ -1,18 +1,47 @@
-{% extends '::base.html.twig' %}
 
-{% block body -%}
+{% block content %}
     <div class="container">
-        <h1>Encounter edit</h1>
-
-        {{ form(edit_form) }}
-
-        <ul class="record_actions">
-            <li>
-                <a href="{{ path('rencontre') }}">
-                    Back to the list
-                </a>
-            </li>
-            <li>{{ form(delete_form) }}</li>
-        </ul>
+        <div class="row encounter-edit">
+            <div class="col-md-3 left-col">
+                <i class="icon ion-ios-wineglass-outline"></i>
+            </div>
+            <div class="col-md-9 main-col">
+                {{ form_start(editForm) }}
+                    {{ form_row(editForm.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datetimepicker'} }) }}
+                    {{ form_row(editForm.place, {'label': 'Place'}) }}
+                    {{ form_row(editForm.duration, {'label': 'Duration (Hours)'}) }}
+                    {{ form_row(editForm.expenses, {'label': 'Total expenses (€)'}) }}
+                    <div>                        
+                        {{ form_label(editForm.venueChange, 'Venue change?') }}
+                        <div class="slide-button-base yes-no-button">
+                            {{ form_widget(editForm.venueChange) }}
+                            <div id="encounter_venueChange_button" class="slide-button"></div> 
+                            {{ form_errors(editForm.venueChange) }}
+                        </div>
+                    </div>
+                    {{ form_row(editForm.venuesList, {'label': 'Venues list'}) }}
+                    {{ form_row(editForm.submit, {'label': 'Save changes', 'attr': {'class': 'btn-basic-rose'} }) }}
+                {{ form_end(editForm) }}       
+            </div>
+        </div>
     </div>
+                
+    <script type="text/javascript">
+        $(document).ready(function(){
+            getDatetimepicker();
+            
+            // Used in modale with form new
+            $(".slide-button-base").on("click", ".slide-button", function(){      
+                var input = $(this).prev();
+                if(input.prop("checked")) {
+                    input.prop("checked", false);
+                    input.val("0");
+                } else {
+                    input.prop("checked", true);
+                    input.val("1");
+                }
+            });                     
+            
+        });
+    </script>
 {% endblock %}

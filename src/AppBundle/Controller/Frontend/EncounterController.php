@@ -39,9 +39,7 @@ class EncounterController extends Controller
         $prospect = $em->find("AppBundle:Prospect", $prospect_id);
         
         if ($user === $prospect->getUser()) {
-            $encounter = new Encounter();
-        
-//            $encounter->setProspect($prospect);           
+            $encounter = new Encounter();       
 
             $form = $this->createForm(EncounterType::class, $encounter, array(
                 'method' => 'POST',
@@ -54,6 +52,42 @@ class EncounterController extends Controller
             ));
 
             return new Response($form_view);
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }      
+    }
+    
+    /**
+     * Returns a form edit encounter
+     * 
+     * @Route("/{id}/ajax_form_edit", name="ajax_edit_encounter_form", options={"expose"=true})
+     * @Method({"GET"})
+     * @Template(":ajax.html.twig")
+     */
+    public function ajaxFormEditAction($id)
+    {   
+        $em = $this->getDoctrine()->getManager();
+        
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $encounter = $em->find("AppBundle:Encounter", $id);
+        
+        if ($user === $encounter->getProspect()->getUser()) {      
+
+            $editForm = $this->createForm(EncounterType::class, $encounter, array(
+                'method' => 'POST',
+                'action' => $this->generateUrl('encounter_edit', array('id' => $id))
+            ));
+            
+            $editForm_view = $this->renderView(":Frontend/Encounter:edit.html.twig", array(
+                'editForm' => $editForm->createView()
+            ));
+
+            return new Response($editForm_view);    
+            
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }      
@@ -160,27 +194,45 @@ class EncounterController extends Controller
      * Displays a form to edit an existing Encounter entity.
      *
      * @Route("/{id}/edit", name="encounter_edit")
-     * @Method("GET")
-     * @Template()
+     * @Method({"GET","POST"})
+     * @Template(":Frontend/Encounter:edit.html.twig")
      */
-    public function editAction($id)
+    public function editAction(Request $request, $id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
         $em = $this->getDoctrine()->getManager();
-
-        $entity = $em->getRepository('AppBundle:Encounter')->find($id);
-
-        if (!$entity) {
+        $encounter = $em->getRepository('AppBundle:Encounter')->find($id);
+        
+        if (!$encounter) {
             throw $this->createNotFoundException('Unable to find Encounter entity.');
         }
+        
+        if ($user === $encounter->getProspect()->getUser()) {
+            $deleteForm = $this->createDeleteForm($id);
+            $editForm = $this->createForm('AppBundle\Form\EncounterType', $encounter);
+            $editForm->handleRequest($request);        
 
-        $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
 
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+                $em->persist($encounter);
+                $em->flush();
+
+                return $this->redirectToRoute('encounter', array('prospect_id' => $encounter->getProspect()->getId()));
+            }       
+
+            return array(
+                'encounter' => $encounter,
+                'edit_form' => $editForm->createView(),
+                'delete_form' => $deleteForm->createView(),
+            );
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }       
     }
 
     /**
@@ -192,12 +244,12 @@ class EncounterController extends Controller
     */
     private function createEditForm(Encounter $entity)
     {
-        $form = $this->createForm(new EncounterType(), $entity, array(
+        $form = $this->createForm(EncounterType::class, $entity, array(
             'action' => $this->generateUrl('encounter_update', array('id' => $entity->getId())),
             'method' => 'PUT',
         ));
 
-        $form->add('submit', 'submit', array('label' => 'Update'));
+        $form->add('submit', SubmitType::class, array('label' => 'Update'));
 
         return $form;
     }
