@@ -1,0 +1,82 @@
+{% extends '::base.html.twig' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+    <div class="container" id="container-dashboard">
+        <section class="page-title">
+            <h1>Dashboard</h1> 
+        </section>
+        <div class="page-title-underline"></div>
+        
+        <div class="row">
+            <div class="col-md-4">
+                <h2>How many showed up on the first date</h2>
+                <canvas id="flakeChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-md-4">
+                <h2>Where do you meet people</h2>
+                <canvas id="sourceChart" width="400" height="400"></canvas>
+            </div>
+            <div class="col-md-4">
+{#                <canvas id="myChart" width="800" height="800"></canvas>#}
+            </div>
+        </div>
+    </div>
+    
+    {% block javascripts %}
+        {{ parent() }}
+        {% javascripts 'bundles/app/js/Chart.min.js' %}
+            <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var ctx1 = $("#flakeChart");
+            var ctx2 = $("#sourceChart");
+            
+            var flakeStats = Array({{ flakeStats }});              
+            var sourceStats = Array({{ sourceStats }});              
+            
+            var flakeChart = new Chart(ctx1, {
+                type: 'doughnut',                
+                data: {
+                    labels: ["Flakes", "Showed up"],
+                    datasets: [{
+                        label: 'Number of Flakes',
+                        data: flakeStats,
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB"                            
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB"                            
+                        ]
+                    }]
+                }                
+            });
+            
+            var sourceChart = new Chart(ctx2, {
+                type: 'doughnut',                
+                data: {
+                    labels: ["Online", "In Real Life"],
+                    datasets: [{
+                        label: 'Where do you meet people',
+                        data: sourceStats,
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB"                            
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB"                            
+                        ]
+                    }]
+                }                
+            });
+          
+        });        
+    </script>
+{% endblock %}
+

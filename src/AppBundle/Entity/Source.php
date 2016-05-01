@@ -24,9 +24,9 @@ class Source
     /**
      * @var string
      *
-     * @ORM\Column(name="libelle", type="string", length=255, nullable=false)
+     * @ORM\Column(name="wording", type="string", length=255, nullable=false)
      */
-    private $libelle;
+    private $wording;
 
 
     /**
@@ -40,36 +40,36 @@ class Source
     }
 
     /**
-     * Set libelle
+     * Set wording
      *
-     * @param string $libelle
+     * @param string $wording
      *
-     * @return Source
+     * @return $wording
      */
-    public function setLibelle($libelle)
+    public function setWording($wording)
     {
-        $this->libelle = $libelle;
+        $this->wording = $wording;
         return $this;
     }
 
     /**
-     * Get libelle
+     * Get wording
      *
      * @return string
      */
-    public function getLibelle()
+    public function getWording()
     {
-        return $this->libelle;
+        return $this->wording;
     }
     
     /**
-     * Retourne le libellé de l'entité (son nom)
+     * Returns wording
      *  
      * @return string
      */
     public function __toString() 
     {
-        return $this->getLibelle();
+        return $this->getWording();
     }
 }
 

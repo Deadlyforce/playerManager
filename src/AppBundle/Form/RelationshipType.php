@@ -33,49 +33,41 @@ class RelationshipType extends AbstractType
 		'format' => 'dd-MM-yyyy'                
             ))
             ->add('status', CheckboxType::class, array(
-                'label' => 'Relationship status',
                 'required' => false
             ))
-            ->add('meeting', CheckboxType::class, array(
-                'label' => 'Have you met ?',
+            ->add('meeting', CheckboxType::class, array(                
                 'required' => false
             ))
             ->add('meetingCount', IntegerType::class, array(
                 'required' => false,
-                'label' => 'Meeting count',
                 'attr' => array(
                     'min' => 0,
                     'max' => 50
                 )
             ))
             ->add('numclosed', CheckboxType::class, array(
-                'required' => false,
-                'label' => 'Phone number ?'                
+                'required' => false               
             ))
             ->add('kc', CheckboxType::class, array(
-                'required' => false,
-                'label' => 'Have you kissed ?'                
+                'required' => false              
             ))
             ->add('fc', CheckboxType::class, array(
-                'required' => false,
-                'label' => 'Did you have sex ?'
+                'required' => false
              ))
             ->add('relationshipRank', EntityType::class, array(
                 'class' => 'AppBundle:RelationshipRank'
             ))
             ->add('distance', CheckboxType::class, array(
-                'required' => false,                
-                'data' => false
+                'required' => false               
             ))
             ->add('flake', CheckboxType::class, array(
-                'required' => FALSE
+                'required' => false
             ))
             ->add('about', TextareaType::class, array(
-                'label' => 'About',
                 'required' => false,
-                'label_attr' => array(
-                    'class' => 'appbundle_relation_about'
-                )
+//                'label_attr' => array(
+//                    'class' => 'appbundle_relationship_about'
+//                )
             ))
             ->add('submit', SubmitType::class, array(
                 'label' => 'Save changes'

@@ -13,6 +13,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use AppBundle\Form\PhotoType;
+use AppBundle\Form\RatingType;
 
 class ProspectType extends AbstractType
 {   
@@ -78,6 +79,9 @@ class ProspectType extends AbstractType
             ->add('relationship', RelationshipType::class, array(
 
             )) 
+            ->add('rating', RatingType::class, array(
+
+            )) 
             ->add('submit', SubmitType::class, array(
                 'label' => 'Save changes'
             ))
@@ -116,17 +120,4 @@ class ProspectType extends AbstractType
         return $ageBracket;
     }
     
-    /**
-     * Returns Paris Districts
-     * 
-     * @return Array
-     */
-    private function getParisDistricts()
-    {        
-        for($i=1; $i<=20; $i++){
-            $paris_districts[$i] = $i;
-        }
-        
-        return $paris_districts;
-    } 
 }

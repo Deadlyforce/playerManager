@@ -38,10 +38,13 @@ class ProspectController extends Controller
         $prospect->setAge(23); // Age par défaut
         
         $datetime =  new \DateTime('', new \DateTimeZone('Europe/Paris')); // Date du jour
-        $prospect->setCreationDate($datetime);
-        
-        $form = $this->createCreateForm($prospect)->createView();
-        $form_view = $this->renderView(":Frontend/Prospect:new.html.twig", array('form' => $form));
+        $prospect->setCreationDate($datetime);        
+
+        $form = $this->createForm('AppBundle\Form\ProspectType', $prospect, array(
+            'action' => $this->generateUrl('prospect_create'),
+            'method' => 'POST'
+        ));
+        $form_view = $this->renderView(":Frontend/Prospect:new.html.twig", array('form' => $form->createView()));
                 
         return new Response($form_view);
     }
@@ -65,7 +68,7 @@ class ProspectController extends Controller
         $prospect = $em->find("AppBundle:Prospect", $id);
         
         if ($user === $prospect->getUser()) {        
-//            $form = $this->createCreateForm($prospect)->createView();
+
             $editForm = $this->createForm('AppBundle\Form\ProspectType', $prospect, array(
                 'action' => $this->generateUrl('prospect_update', array('id' => $id)),
                 'method' => 'PUT'
@@ -172,10 +175,6 @@ class ProspectController extends Controller
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
-//        $prospects = $em->getRepository('AppBundle:Prospect')->findBy(
-//            array("user" => $user), 
-//            array("creationDate" => "DESC")
-//        );
         
         $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user);            
         $paginator = $this->get('knp_paginator');
@@ -190,7 +189,6 @@ class ProspectController extends Controller
         $csrf_token = $tokenManager->refreshToken('');
                 
         return array(
-//            'prospects' => $prospects,
             'csrf_token' => $csrf_token,
             'pagination' => $pagination
         );
@@ -209,13 +207,16 @@ class ProspectController extends Controller
             throw $this->createAccessDeniedException('You cannot access this page!');
         }        
         
-        $prospect = new Prospect();       
+        $prospect = new Prospect();        
+
+        $form = $this->createForm('AppBundle\Form\ProspectType', $prospect, array(
+            'action' => $this->generateUrl('prospect_create'),
+            'method' => 'POST'
+        ));
         
-        $form = $this->createCreateForm($prospect);
         $form->handleRequest($request);        
         
         $user = $this->get('security.token_storage')->getToken()->getUser();
-//        $photos = $prospect->getPhotos();
         
         $prospect->setUser($user);        
        
@@ -226,16 +227,7 @@ class ProspectController extends Controller
             $prospect->getRelationship()->setMeetingCount(0);       // Needed, not nullable
             $prospect->getRelationship()->setStartDate(new \DateTime());  // Needed, not nullable
             
-            $em->persist($prospect);  
-       
-            // Removed at prospect creation => done in gallery
-            // STOF UPLOADABLE 
-//            $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
-//
-//            foreach($photos as $photo){
-//                $uploadableManager->markEntityToUpload($photo, $photo->getFile());
-//            }           
-           
+            $em->persist($prospect);         
             $em->flush();                  
             
             return $this->redirectToRoute('prospect_list');
@@ -245,23 +237,6 @@ class ProspectController extends Controller
             'prospect' => $prospect,
             'form'   => $form->createView(),
         );
-    }
-
-    /**
-     * Creates a form to create a Prospect entity.
-     *
-     * @param Prospect $entity The entity
-     *
-     * @return \Symfony\Component\Form\Form The form
-     */
-    private function createCreateForm(Prospect $entity)
-    {
-        $form = $this->createForm(ProspectType::class, $entity, array(
-            'action' => $this->generateUrl('prospect_create'),
-            'method' => 'POST',
-        ));
-
-        return $form;
     }
 
     /**
@@ -283,9 +258,12 @@ class ProspectController extends Controller
         $prospect->setAge(23);
         
         $datetime =  new \DateTime('', new \DateTimeZone('Europe/Paris'));
-        $prospect->setCreationDate($datetime);        
-
-        $form = $this->createCreateForm($prospect);        
+        $prospect->setCreationDate($datetime);  
+        
+        $form = $this->createForm('AppBundle\Form\ProspectType', $prospect, array(
+            'action' => $this->generateUrl('prospect_create'),
+            'method' => 'POST'
+        ));        
         
         return array(
             'entity' => $prospect,
@@ -547,4 +525,68 @@ class ProspectController extends Controller
         ;
     } 
     
+    /**
+     * Returns dashboard page with various statistics.
+     * 
+     * @Route("/dashboard/{user_id}", name="dashboard")
+     * @Template(":Frontend/Prospect:dashboard.html.twig")
+     */
+    public function dashboardAction($user_id)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }        
+        $loggedUser = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->find('AppBundle:User', $user_id);
+        
+        $manager = $this->get('prospect_manager');
+        
+        if ($loggedUser === $user) {
+            // FLAKES
+            $flakes = $em->getRepository('AppBundle:Prospect')->getUserFlakes($user);            
+            $flakeResults = array_column($flakes, 'flake');  
+              
+            $booleanToBinary = function($bool)
+            {
+                if ($bool === true)  {
+                    $val = 1;
+                } else {
+                    $val = 0;
+                }
+
+                return $val;
+            };           
+            
+            $flakeStats = implode(',', array_count_values(array_map($booleanToBinary, $flakeResults)));
+            
+            // SOURCES
+            $sources = $em->getRepository('AppBundle:Prospect')->getUserSources($user);
+            $sourcesResults = array_column($sources, 'wording');   
+
+            $sourceToBinary = function($source)
+            {
+                if ($source === 'Online')  {
+                    $val = 1;
+                } else {
+                    $val = 0;
+                }
+
+                return $val;
+            };
+            
+            $sourceStats = implode(',', array_count_values(array_map($sourceToBinary, $sourcesResults)));
+
+            return array(
+                'flakeStats' => $flakeStats,
+                'sourceStats' => $sourceStats
+            );
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+    }
+    
+    
+
 }

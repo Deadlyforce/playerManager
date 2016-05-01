@@ -5,7 +5,11 @@
         {% set primaryPhoto = photo %}                           
     {% endfor %}
 
-    <img class="img-responsive" src="{{ asset(primaryPhoto.path) }}" alt="Photo" />    
+    {% if primaryPhoto != null %}
+        <img class="img-responsive" src="{{ asset(primaryPhoto.path) }}" alt="Photo" />    
+    {% else %}
+        <img class="img-responsive" src="{{ asset('bundles/app/images/prospect_no_photo.jpg') }}" alt="No photo" />
+    {% endif %}
 {% endmacro %}
 
 

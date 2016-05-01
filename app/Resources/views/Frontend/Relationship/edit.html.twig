@@ -24,7 +24,7 @@
                 {{ form_start(edit_form) }}
                     {{ form_row(edit_form.startDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
                     <div>
-                        {{ form_label(edit_form.status) }} 
+                        {{ form_label(edit_form.status, 'Ongoing relationship ?', {'label_attr': {'title': 'Do you still see each other ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }} 
                         <div id="appbundle_relationship_status_row" class="relationship_row">
                             {{ form_widget(edit_form.status) }}
                             <div id="appbundle_relationship_status_button" class="relationship_button"></div>   
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                     <div>
-                        {{ form_label(edit_form.meeting) }}
+                        {{ form_label(edit_form.meeting, 'Have you met ?') }}
                         <div id="appbundle_relationship_meeting_row" class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.meeting) }}
                             <div id="appbundle_relationship_meeting_button"></div>   
@@ -40,13 +40,13 @@
                         </div>           
                     </div>           
                     <div>           
-                        {{ form_label(edit_form.meetingCount) }}     
+                        {{ form_label(edit_form.meetingCount, 'Meeting count', {'label_attr': {'title': 'How many dates so far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}     
                         {{ form_widget(edit_form.meetingCount) }}
                         <div id="slider-meetingCount"></div>
                         {{ form_errors(edit_form.meetingCount) }}                        
                     </div>
                     <div>
-                        {{ form_label(edit_form.numclosed) }}
+                        {{ form_label(edit_form.numclosed, 'Phone number', {'label_attr': {'title': 'Did you get a phone number ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
                         <div id="appbundle_relationship_numclosed_row" class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.numclosed) }}
                             <div id="appbundle_relationship_numclosed_button" class="relationship_button"></div>   
@@ -54,7 +54,7 @@
                         </div>           
                     </div>    
                     <div class="collapse">
-                        {{ form_label(edit_form.kc) }}
+                        {{ form_label(edit_form.kc, 'Have you kissed ?') }}
                         <div id="appbundle_relationship_kc_row" class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.kc) }}
                             <div id="appbundle_relationship_kc_button" class="relationship_button"></div>   
@@ -62,18 +62,35 @@
                         </div>           
                     </div>    
                     <div class="collapse">
-                        {{ form_label(edit_form.fc) }}
+                        {{ form_label(edit_form.fc, 'Did you have sex ?') }}
                         <div id="appbundle_relationship_fc_row" class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.fc) }}
                             <div id="appbundle_relationship_fc_button" class="relationship_button"></div>   
                             {{ form_errors(edit_form.fc) }}
                         </div>           
                     </div>    
-                    {{ form_row(edit_form.relationshipRank, {'label': 'Relationship level'}) }}
-                    {{ form_row(edit_form.distance, {'label': 'Distance problem'}) }}
-                    {{ form_row(edit_form.flake) }}
-                    {{ form_row(edit_form.about) }}
-                    {{ form_row(edit_form.submit, {"label":"Save changes", "attr": {"class": "btn-basic-rose"}}) }}
+                    <div>
+                        {{ form_label(edit_form.relationshipRank, 'Relationship level', {'label_attr': {'title': 'What is the nature of the relationship so far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        {{ form_widget(edit_form.relationshipRank) }}
+                        {{ form_errors(edit_form.relationshipRank) }}
+                    </div>
+                    <div>
+                        {{ form_label(edit_form.distance, 'Distance problem ?', {'label_attr': {'title': 'Is he/she living too far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        {{ form_widget(edit_form.distance) }}
+                        {{ form_errors(edit_form.distance) }}
+                    </div>
+                    <div>
+                        {{ form_label(edit_form.flake, 'Flake', {'label_attr': {'title': 'Did he/she show up on the first planned date ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        {{ form_widget(edit_form.flake) }}
+                        {{ form_errors(edit_form.flake) }}
+                    </div>
+                    <div>
+                        {{ form_label(edit_form.about, 'About', {'label_attr': {'title': 'Your comments', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        {{ form_widget(edit_form.about) }}
+                        {{ form_errors(edit_form.about) }}
+                    </div>
+                    
+                    {{ form_widget(edit_form.submit, {"label":"Save changes", "attr": {"class": "btn-basic-rose"}}) }}
                 {{ form_end(edit_form) }}
 
                 {#{{ form_start(delete_form) }}
@@ -84,6 +101,7 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function(){
+            $('[data-toggle="tooltip"]').tooltip();
             
             // Masking of kc and fc fields if no meeting
             var inputMeeting = $("input#appbundle_relationship_meeting");

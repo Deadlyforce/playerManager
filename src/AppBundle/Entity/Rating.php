@@ -27,7 +27,7 @@ class Rating
      * @var Prospect
      * 
      * @ORM\OneToOne(targetEntity="Prospect", mappedBy="rating", cascade={"persist"})
-     * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $prospect;
 

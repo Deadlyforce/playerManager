@@ -151,18 +151,6 @@ class PhotoController extends Controller
         if ($loggedUser === $requestedUser) {            
             $photos = $em->getRepository('AppBundle:Photo')->getAlbum($requestedUser);
             
-//            $prospects = $em->getRepository('AppBundle:Prospect')->findBy(array("user" => $requestedUser));
-//            
-//            foreach($prospects as $prospect){
-//                $prospectPhotos = $em->getRepository('AppBundle:Photo')->getProspectPhoto($prospect);
-//                foreach($prospectPhotos as $prospectPhoto){
-//                    if ($prospectPhoto->getSelected() === 1) {
-//                        $id = $prospectPhoto->getId();
-//                    }
-//                }
-//                $photos[] =
-//            }
-            
             return array(
                 'photos' => $photos
             );

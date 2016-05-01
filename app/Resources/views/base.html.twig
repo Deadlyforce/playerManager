@@ -37,7 +37,7 @@
             'bundles/app/packages/Jcrop/js/jquery.Jcrop.min.js'
             'bundles/app/packages/slick_1.5.9/slick.min.js'            
             'bundles/app/packages/colorbox/jquery.colorbox-min.js'
-            'bundles/app/js/helpers.js'            
+            'bundles/app/js/helpers.js'                       
             'bundles/app/packages/star-rating-svg/jquery.star-rating-svg.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
@@ -69,6 +69,7 @@
                         <ul class="nav navbar-nav">
                             <li><a href="{{ path('prospect_list') }}" title="Contacts">Contacts</a></li>
                             <li><a href="{{ path('photo_album', {'user_id': app.user.id}) }}" title="Photo album">Photo album</a></li>
+                            <li><a href="{{ path('dashboard', {'user_id': app.user.id}) }}" title="Dashboard">Dashboard</a></li>
 {#                            <li><a href="{{ path('relationship') }}">{{ 'All relationships'|trans }}</a></li>                                        #}
                             <li><a href="{{ path('fos_user_profile_show') }}" title="Profile">Profile</a></li>                             
                             <li><a href="{{ path('contact_us') }}" title="Contact us">Contact us</a></li>  
@@ -104,13 +105,6 @@
             $(".navbar-nav > li > a").animate({
                 'height': '0px'
             }, 800);
-            
-            
-            // Title animation
-            {#$("section.page-title").animate({
-                'margin-top': '25px',
-                'margin-bottom': '15px'
-            }, 800);#}
             
             $(".page-title-underline").animate({
                 'width': '500px'

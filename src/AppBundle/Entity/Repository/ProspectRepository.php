@@ -3,6 +3,7 @@
 namespace AppBundle\Entity\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use AppBundle\Entity\User;
 //use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
@@ -50,6 +51,12 @@ class ProspectRepository extends EntityRepository
         
     }
     
+    /**
+     * Returns an array of all prospect ids from the user.
+     * 
+     * @param User $user
+     * @return array
+     */
     public function getProspectIds($user)
     {
         $qb = $this->_em->createQuery('
@@ -61,4 +68,42 @@ class ProspectRepository extends EntityRepository
         
         return $qb->getResult();
     }
+    
+    /**
+     * Returns all flakes for that user.
+     * 
+     * @param User $user
+     * @return array
+     */
+    public function getUserFlakes($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT r.flake
+            FROM AppBundle:Prospect p LEFT JOIN p.relationship r
+            WHERE p.user = :user
+        ')
+         ->setParameter('user', $user);
+        
+        return $qb->getResult();
+    }
+    
+    /**
+     * Returns all sources (Online or IRL) for that user.
+     * 
+     * @param User $user
+     * @return array
+     */
+    public function getUserSources($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT s.wording
+            FROM AppBundle:Prospect p LEFT JOIN p.source s
+            WHERE p.user = :user
+        ')
+         ->setParameter('user', $user);
+        
+        return $qb->getResult();
+    }
+    
+    
 }

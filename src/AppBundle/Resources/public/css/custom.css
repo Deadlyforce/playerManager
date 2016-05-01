@@ -1010,12 +1010,13 @@ ul.record-actions{
 
 /*** CUSTOM TOOLTIP ***/
 .custom-tooltip + .tooltip > .tooltip-inner{
-    color: #f0f0f0;
-    background-color: #202B33;
+    color: #fff;
+    font-size: 1.2em;
+    background-color: #F47363;
     padding: 10px 15px 10px 15px;
 }
 .custom-tooltip + .tooltip > .tooltip-arrow{
-    border-top-color: #202B33;
+    border-top-color: #F47363;
 }
 
 
@@ -1798,10 +1799,10 @@ input#appbundle_encounter_venueChange:checked + .slide-button {
 
 /********************************* RATINGS **************************************/
 
-form[name="rating"] > div {
+form[name="appbundle_rating"] > div {
     margin-bottom: 10px;
 }
-form[name="rating"] > div > label {
+form[name="appbundle_rating"] > div > label {
     width: 170px;
     font-family: "ralewayregular", sans-serif;
     font-weight: 200;
@@ -1823,6 +1824,14 @@ form[name="rating"] > div > label {
     width: 150px;
     box-shadow: 0px 0px 6px 3px #ccc;
     border: 1px solid #ccc;
+}
+
+/******************************* DASHBOARD ************************************/
+
+#container-dashboard h2{
+    font-size: 1.3em;
+    font-family: "ralewaylight",sans-serif;
+    text-align: center;
 }
 
 /************************* FOOTER *****************************/

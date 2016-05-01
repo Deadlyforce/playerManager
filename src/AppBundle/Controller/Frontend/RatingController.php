@@ -23,7 +23,7 @@ class RatingController extends Controller
      * @Route("/", name="rating_index")
      * @Method("GET")
      */
-    public function indexAction($prospect_id)
+    public function indexAction()
     {
         $em = $this->getDoctrine()->getManager();
 

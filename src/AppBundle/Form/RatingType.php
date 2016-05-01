@@ -59,7 +59,7 @@ class RatingType extends AbstractType
                     'max' => 5
                 )
             ))
-            ->add('prospect', ProspectType::class, array())
+
         ;
     }
     
@@ -71,5 +71,13 @@ class RatingType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Rating'
         ));
+    }
+    
+    /**
+     * @return string
+     */
+    public function getBlockPrefix()
+    {
+        return 'appbundle_rating';
     }
 }
