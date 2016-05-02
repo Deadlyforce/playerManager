@@ -20,10 +20,11 @@ class RegistrationType extends BaseType
         
         $builder
             ->add('gender', ChoiceType::class, array(
+                'label' => 'app.register.form.gender',
                 'required' => true,
                 'choices' => array(
-                    'Male' => 1,
-                    'Female' => 2
+                    'app.register.form.male' => 1,
+                    'app.register.form.female' => 2
                 )                
             ))
 //            ->add('locale', ChoiceType::class, array(
@@ -34,7 +35,7 @@ class RegistrationType extends BaseType
 //                )
 //            ))
             ->add('captcha', CaptchaType::class, array(
-                'label' => 'Visual confirmation '
+                'label' => 'app.register.form.captcha'
             ));
     }
             

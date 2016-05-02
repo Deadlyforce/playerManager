@@ -6,5 +6,33 @@ app:
 
     register:
         browsertab: Register
-
-           
+        form:
+               gender: You are
+               male: Male
+               female: Female   
+               captcha: Visual confirmation
+    home:
+        btn-add: Add your first contact
+    nav:
+        album: Photo album
+        dashboard: Dashboard
+        profile: Profile
+        contactus: Contact us
+        logout: Logout
+    contact:
+        list:
+            add: Add contact
+    photo:
+        album:
+            subtitle: All your contacts, just photos for now...
+    contactus:
+        title: Send us a message
+        subtitle: Report bugs, send us ideas, suggestions...
+        
+        name: Your name
+        email: Email
+        subject: Subject of your message
+        message: Your message...
+        send: Send message
+    profile:
+        btn-edit: Edit profile

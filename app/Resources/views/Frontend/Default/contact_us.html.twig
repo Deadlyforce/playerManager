@@ -2,39 +2,39 @@
 
 {% form_theme form ':Form:captcha.html.twig' %}
 
-{% block title %}Contact us{% endblock %}
+{% block title %}{{ 'app.nav.contactus'|trans }}{% endblock %}
 
 {% block content %}
     <div class="container">
         <section class="page-title">
-            <h1>Send us a message</h1>
-            <h2>Report bugs, send us ideas, suggestions...</h2>
+            <h1>{{ 'app.contactus.title'|trans }}</h1>
+            <h2>{{ 'app.contactus.subtitle'|trans }}</h2>
         </section>
         <div class="page-title-underline"></div>
         
         {{ form_start(form) }}
             <div>
-                {{ form_widget(form.name) }}
+                {{ form_widget(form.name, {'attr': {'placeholder': 'app.contactus.name'|trans } }) }}
                 {{ form_errors(form.name) }}
             </div>
             <div>
-                {{ form_widget(form.email) }}
+                {{ form_widget(form.email, {'attr': {'placeholder': 'app.contactus.email'|trans } }) }}
                 {{ form_errors(form.email) }}
             </div>
             <div>
-                {{ form_widget(form.subject) }}
+                {{ form_widget(form.subject, {'attr': {'placeholder': 'app.contactus.subject'|trans } }) }}
                 {{ form_errors(form.subject) }}
             </div>
             <div>
-                {{ form_widget(form.message) }}            
+                {{ form_widget(form.message, {'attr': {'placeholder': 'app.contactus.message'|trans } }) }}            
                 {{ form_errors(form.message) }}            
             </div>
             <div>
                 {{ form_widget(form.captcha) }}                              
             </div>
-            <div>
-                {{ form_widget(form.submit, {'attr': {'class': 'btn-submit', 'title': 'Send message'} }) }}
-            </div>
+
+            {{ form_widget(form.submit, {'label': 'app.contactus.send'|trans,'attr': {'class': 'btn-basic', 'title': 'Send message'} }) }}
+
         {{ form_end(form) }}
     </div>
 {% endblock %}

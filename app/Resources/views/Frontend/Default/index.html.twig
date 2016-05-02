@@ -6,7 +6,7 @@
         <div>
             <h1>Remember your dates<br>Remember your life</h1>
             {% if noProspect == true %}
-                <a id="btn-first-contact" href="#" title="Add your first contact">Add your first contact</a>
+                <a id="btn-first-contact" href="#" title="Add your first contact">{{ 'app.home.btn-add'|trans }}</a>
             {% endif %}
             {% if app.user.gender == 1 %}
                 <img src="{{ asset('bundles/app/images/home/slider_02.jpg') }}" alt="Image_02">
@@ -27,18 +27,18 @@
             <div class="row">
                 <div class="col-md-4 feature">
                     <i class="icon ion-ios-people"></i>
-                    <h2>Preserve Contacts</h2>
-                    <p>Remember your contacts<br>Save basic information for future reference<br>Keep track of essentials<br>Rate your contacts</p>
+                    <h2>Keep track of your contacts</h2>
+                    <p>Save essential information for future reference<br>Evaluate them with stars</p>
                 </div>
                 <div class="col-md-4 feature">
                     <i class="icon ion-ios-heart"></i>
-                    <h2>Keep your dates</h2>
+                    <h2>Memorize your dates</h2>
                     <p>Whatever the nature of the relationship<br>Remember the story<br>Avoid previous mistakes</p>
                 </div>
                 <div class="col-md-4 feature">
                     <i class="icon ion-ios-albums-outline"></i>
                     <h2>Photos Gallery</h2>
-                    <p>Upload up to 5 photos<br>for everyone of your contacts<br>Crop them as you see fit<br>See them all in one page</p>
+                    <p>Upload up to 5 photos for every contact<br>Crop them as you see fit<br>See them all in one page</p>
                 </div>
             </div>
         </div>

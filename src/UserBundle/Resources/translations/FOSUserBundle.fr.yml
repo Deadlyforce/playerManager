@@ -70,3 +70,6 @@ app:
     register:
         form:
             title: Nouveau compte
+        confirmed:
+            title: Compte validé
+            start: Commencer

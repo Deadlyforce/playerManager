@@ -27,34 +27,29 @@ class ContactUsType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array(
-                'attr' => array(
-                    'placeholder' => 'Your name',
+                'attr' => array(                    
                     'pattern'     => '.{2,}' //minlength
                 )
             ))
             ->add('email', EmailType::class, array(
-                'attr' => array(
-                    'placeholder' => 'Your email'
-                )
+                
             ))
             ->add('subject', TextType::class, array(
-                'attr' => array(
-                    'placeholder' => 'Subject of your message.',
+                'attr' => array(                    
                     'pattern'     => '.{3,}' //minlength
                 )
             ))
             ->add('message', TextareaType::class, array(
                 'attr' => array(
                     'cols' => 90,
-                    'rows' => 10,
-                    'placeholder' => 'Your message...'
+                    'rows' => 10
                 )
             ))
             ->add('captcha', CaptchaType::class, array(
-                'label' => 'Visual confirmation '
+
             ))
             ->add('submit', SubmitType::class, array(
-                'label' => 'Send message'
+//                'label' => 'Send message'
             ))
         ;
     }

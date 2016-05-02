@@ -1,12 +1,12 @@
 {% extends '::base.html.twig' %}
 {% import ":Frontend/Macros/Prospect:photoDisplay250px.html.twig" as photoDisplayIndex %}
-{% block title %}Photo album{% endblock %}
+{% block title %}{{ 'app.nav.album'|trans }}{% endblock %}
 
 
 {% block content %}
     <section class="page-title">
         <h1>Album</h1> 
-        <h2>All your contacts, just photos for now...</h2>
+        <h2>{{ 'app.photo.album.subtitle'|trans }}</h2>
     </section>
     <div class="page-title-underline"></div>
     

@@ -6,6 +6,37 @@ app:
 
     register:
         browsertab: Inscription
+        form:
+            gender: Vous êtes
+            male: Un homme
+            female: Une femme
+            captcha: Confirmation visuelle
+    home:
+        btn-add: Ajouter un premier contact
+    nav:
+        album: Album photo
+        dashboard: Tableau de bord
+        profile: Profil
+        contactus: Nous contacter
+        logout: Déconnexion
+    contact:
+        list:
+            add: Ajouter un contact
+    photo:
+        album:
+            subtitle: Tous vos contacts, uniquement des photos pour l'instant...
+    contactus:
+        title: Envoyez nous un message
+        subtitle: Bugs, idées, suggestions...
+        
+        name: Nom
+        email: Courriel
+        subject: Sujet du message
+        message: Votre message...
+        send: Envoyer
+    profile:
+        btn-edit: Modifier le profil
+        
         
 Sign up here: Nouveau compte            
 All relationships: Toutes les relations

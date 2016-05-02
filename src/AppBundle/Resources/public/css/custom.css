@@ -110,7 +110,7 @@ form[name='fos_user_registration_form']{
     margin-left: 40px;
 }
 form[name='fos_user_registration_form'] label{
-    width: 150px;
+    width: 155px;
     color: #f0f0f0;
     font-size: 1.1em;
     font-weight: 200;
@@ -504,7 +504,7 @@ button.btn-submit:hover{
     padding: 10px 0px;
     display: block;
     margin: 25px auto;
-    width: 140px;
+    width: 150px;
     font-size: 1.2em;
     text-align: center;
     
@@ -514,8 +514,13 @@ button.btn-submit:hover{
     transition: all .3s ease-in;
 }
 .btn-start:hover{
-    background-color: #3D3D3D;
-    color: #f0f0f0;
+    background-color: #f47363;
+    border: 1px solid #f47363;
+    color: #fff;
+}
+.btn-start i{
+    margin-right: 8px;
+    font-size: 1.3em;
 }
 
 .btn-basic{
