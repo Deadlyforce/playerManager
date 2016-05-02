@@ -38,7 +38,7 @@
                             <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-trash-outline"></i></a>
                         </li>
                         <li>
-                            <a id="edit_prospect" class="custom-tooltip" href="#" data-id="{{ prospect.id }}" title="Modify contact" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
+                            <a class="edit_prospect" class="custom-tooltip" href="#" data-id="{{ prospect.id }}" title="Modify contact" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
                         </li>
                         <li>
                             <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show all contact infos" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-search"></i></a>
@@ -46,7 +46,7 @@
                         <li><p>Contact</p></li>
                         <li class="separator"></li>
                         <li>
-                            <a class="custom-tooltip" href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Edit relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
+                            <a class="edit-relationship custom-tooltip" data-id="{{ prospect.relationship.id }}" href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Edit relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
                         </li>
                         <li>
                             <a class="custom-tooltip" href="{{ path('relationship_show', {'id': prospect.relationship.id}) }}" title="Show relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-eye-outline"></i></a>
@@ -134,7 +134,7 @@
             });
             
             // Ajax: get form edit prospect
-            $(".record-actions").on("click", "#edit_prospect", function(event){
+            $(".record-actions").on("click", ".edit_prospect", function(event){
                 event.preventDefault();               
                 
                 $(".loader_standard").show();
@@ -148,6 +148,30 @@
                     $(".loader_standard").hide(200, function(){});                                     
                     
                     $(".modal-title").text("Edit contact");
+                    $('.modal-full').modal('show');
+                });
+            });
+            
+            $('.modal-full').on('hidden.bs.modal', function (e) {
+                $(".modal-body").empty();
+                $(".modal-title").empty();
+            });
+            
+            // Ajax: get form edit relationship
+            $(".record-actions").on("click", ".edit-relationship", function(event){
+                event.preventDefault();               
+                
+                $(".loader_standard").show();
+            
+                var id = $(this).data("id");                
+                var url = Routing.generate('ajax_edit_relationship_form', {'id':id, '_locale': locale});
+                
+                $.get(url, function(response){                   
+                    $(".modal-body").html(response);                    
+                    
+                    $(".loader_standard").hide(200, function(){});                                     
+                    
+                    $(".modal-title").text("Edit relationship");
                     $('.modal-full').modal('show');
                 });
             });

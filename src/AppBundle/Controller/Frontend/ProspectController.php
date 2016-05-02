@@ -50,7 +50,7 @@ class ProspectController extends Controller
     }
     
     /**
-     * Returns a form new prospect
+     * Returns a form edit prospect.
      * 
      * @Route("/{id}/ajax_form_edit", name="ajax_edit_prospect_form", options={"expose"=true})
      * @Method({"GET"})
