@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7fa612237d3ad74abf9c04c4093801f6",
-    "content-hash": "926c4733b288f6032f8366b80c612817",
+    "hash": "0213318e7011ef8f2bdeca8e1a3d7aac",
+    "content-hash": "2e6e030b549b6a1c63135a86437fb8ec",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1062,7 +1062,7 @@
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/16b04c49af05dd3fb381e4abe04f0e5e231ac76d",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/def27463609e24af410b2606f0062de46fab5662",
                 "reference": "16b04c49af05dd3fb381e4abe04f0e5e231ac76d",
                 "shasum": ""
             },

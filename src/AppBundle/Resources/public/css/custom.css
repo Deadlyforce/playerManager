@@ -546,11 +546,11 @@ button.btn-submit:hover{
 .btn-basic-ico i.icon::before{
     font-size: 3em;
     vertical-align: middle;
-    /*margin-right: 10px;*/
 }
 .btn-basic:hover, .btn-basic-ico:hover{
-    background-color: #3D3D3D;
-    color: #f0f0f0;
+    background-color: #F47363;
+    border: 1px solid #F47363;
+    color: #fff;
 }
 
 
@@ -993,7 +993,7 @@ ul.record-actions{
 }
 .record-actions a:hover{
     color: #fff;
-    background-color: #DA6759;    
+    background-color: #F47363;    
 }
 .record-actions p{
     font-size: 1.2em;
@@ -1716,6 +1716,63 @@ input#appbundle_contact_us_subject{
 .encounter-new, .encounter-edit{
     margin: 0 auto;
     width: 80%;
+}
+
+/***  INDEX  ***/
+
+.encounter-box{
+    box-shadow: 0px 0px 4px 4px rgba(221, 221, 221,0.5);
+    border: 1px solid #ddd;    
+}
+.encounter-date-details{
+    box-shadow: 0px 6px 6px 0px #ccc;
+}
+.encounter-date{    
+    text-align: center;
+    padding: 15px 0px;
+    font-size: 1.5em;
+    background-color: #F47363;
+    color: #fff;
+}
+.encounter-details{
+    padding: 25px 10px 30px 15px;
+    font-family: "ralewayregular", sans-serif;
+    font-size: 1.2em;
+}
+.encounter-details > div{
+    margin-bottom: 5px;
+}
+.encounter-details span{
+    display: inline-block;
+    width: 145px;
+    font-weight: 600;
+}
+.encounter-details .venues-list{
+    font-weight: 600;
+}
+.encounter-actions ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+.encounter-actions ul li{
+    float: left;
+}
+.encounter-actions ul li a{
+    width: 50px;
+    height: 50px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+}
+.encounter-actions ul li a:hover{
+    background-color: #F47363;
+    color: #fff;
+}
+
+.encounter-actions ul li a i{
+    font-size: 2em;
 }
 
 /***  NEW  ***/

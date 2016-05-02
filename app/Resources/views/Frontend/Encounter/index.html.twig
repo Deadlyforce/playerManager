@@ -13,8 +13,52 @@
             {#<a class="btn-basic-ico" href="{{ path('encounter_new', {'prospect_id': prospect.id}) }}" id="add_encounter" title ="Add encounter"><i class="icon ion-ios-plus-empty"></i><span>Add an encounter</span></a>#}
             <a class="btn-basic-ico" href="#" id="add_encounter" title ="Add encounter"><i class="icon ion-ios-plus-empty"></i><span>Add an encounter</span></a>
         </div>
-        
-        <table class="table table-hover">
+            
+        {# Set euro currencies array #}
+        {% set localesEuro = 'es,fr,it,de' %}
+            
+        <div class="row">
+        {% for encounter in encounters %}    
+            <div class="col-md-4">
+                <div class="encounter-box">
+                    <div class="encounter-date-details">
+                        <div class="encounter-date">
+{#                            {{ encounter.date|localizeddate('short', 'short', app.request.locale) }}#}
+                            {% if app.request.locale == 'fr' %}
+                                {{ encounter.date|date("d-m-Y \à H:i") }}
+                            {% else %}
+                                {{ encounter.date|date("Y-m-d") }} at {{ encounter.date|date("H:i") }}
+                            {% endif %}
+                        </div>
+                        <div class="encounter-details">
+                            <div><span>Place: </span>{{ encounter.place }}</div>
+                            <div><span>Duration: </span>{{ encounter.duration }} h</div>
+                            <div><span>Expenses: </span>{{ encounter.expenses }}{% if app.request.locale in localesEuro %} €{% else %} ${% endif %}</div>
+                            <div><span>Changed venue: </span>{% if encounter.venueChange == 1 %}Yes{% else %}No{% endif %}</div>
+                            <div>
+                                <div class="venues-list">Venues list: </div>
+                                {% if encounter.venuesList %}
+                                    {{ encounter.venuesList }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="encounter-actions">
+                        <ul>
+                            <li><a class="edit-encounter" href="#" data-id="{{ encounter.id }}" title="Edit encounter"><i class="icon ion-ios-compose-outline"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            
+            {% if loop.index % 3 == 0 %}
+                </div>
+                <div class="row">
+            {% endif %}  
+        {% endfor %}  
+            
+        {#<table class="table table-hover">
             <thead>
                 <tr>                    
                     <th>Date</th>
@@ -40,13 +84,12 @@
                         {% endif %}
                     </td>
                     <td>
-{#                        <a href="{{ path('encounter_show', { 'id': encounter.id }) }}">show</a>                        #}
                         <a class="edit-encounter" href="#" data-id="{{ encounter.id }}">edit</a>                        
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
-        </table>
+        </table>#}
     </div>
             
     {# Modales #}

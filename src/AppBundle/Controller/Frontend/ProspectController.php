@@ -545,39 +545,57 @@ class ProspectController extends Controller
         
         if ($loggedUser === $user) {
             // FLAKES
-            $flakes = $em->getRepository('AppBundle:Prospect')->getUserFlakes($user);            
-            $flakeResults = array_column($flakes, 'flake');  
+            $flakes = $em->getRepository('AppBundle:Prospect')->getUserFlakes($user);          
+            $flakesResult = array_column($flakes, 'flake');  // Get the correct column values
               
-            $booleanToBinary = function($bool)
+            $valueToBinary = function($value)
             {
-                if ($bool === true)  {
-                    $val = 1;
+                if ($value === true)  {
+                    $res = 1;
                 } else {
-                    $val = 0;
+                    $res = 0;
                 }
 
-                return $val;
+                return $res;
             };           
-            
-            $flakeStats = implode(',', array_count_values(array_map($booleanToBinary, $flakeResults)));
+            // array_map transforms the values to binary, array_count values stacks identical ones, implode builds a string
+            $flakeArray = array_map($valueToBinary, $flakesResult);
+            $flakeStats = implode(',', array_count_values($flakeArray));
+            // The string have to pass 2 values (implode makes only one if no 0s or 1s)
+            if (!in_array('1', $flakeArray)) {
+                $flakeStats = '0,' . $flakeStats; // 0 flakes and n showed up
+            }
+            if (!in_array('0', $flakeArray)) {
+                $flakeStats = $flakeStats . ', 0'; // n flakes and 0 showed up
+            }
             
             // SOURCES
             $sources = $em->getRepository('AppBundle:Prospect')->getUserSources($user);
-            $sourcesResults = array_column($sources, 'wording');   
+            $sourcesResult = array_column($sources, 'wording');   
 
-            $sourceToBinary = function($source)
+            $valueToBinary = function($value)
             {
-                if ($source === 'Online')  {
-                    $val = 1;
+                if ($value === 'Online')  {
+                    $res = 1;
                 } else {
-                    $val = 0;
+                    $res = 0;
                 }
 
-                return $val;
+                return $res;
             };
             
-            $sourceStats = implode(',', array_count_values(array_map($sourceToBinary, $sourcesResults)));
-
+            $sourceArray = array_map($valueToBinary, $sourcesResult);
+            $sourceStats = implode(',', array_count_values($sourceArray));
+            // The string have to pass 2 values (implode makes only one if no 0s or 1s)
+            if (!in_array('1', $sourceArray)) {
+                $sourceStats = '0,' . $sourceStats; // 0 flakes and n showed up
+            }
+            if (!in_array('0', $sourceArray)) {
+                $sourceStats = $sourceStats . ', 0'; // n flakes and 0 showed up
+            }
+            
+//var_dump($flakeStats);
+//var_dump($sourceStats);
             return array(
                 'flakeStats' => $flakeStats,
                 'sourceStats' => $sourceStats
