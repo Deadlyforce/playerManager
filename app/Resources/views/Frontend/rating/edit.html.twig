@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 {% import ":Frontend/Macros/prospect:photoDisplay250px.html.twig" as photoDisplay %}
-{% block title %}Ratings{% endblock %}
+{% block title %}{{ 'app.rating.browser-tab'|trans }}{% endblock %}
 
 {% block content %}
     <div class="container">
         <section class="page-title">
-            <h1>Ratings for {{ rating.prospect.firstname }}</h1> 
-            <h2>Here you can rate your contact!</h2>
+            <h1>{{ 'app.rating.title'|trans }} {{ rating.prospect.firstname }}</h1> 
+            <h2>{{ 'app.rating.subtitle'|trans }}</h2>
         </section>
         <div class="page-title-underline"></div>
         
         <div class="page-nav">
-            <a class="btn-basic" href="{{ path('prospect_show', {"id": rating.prospect.id}) }}" title="Show contact">Contact page</a>
+            <a class="btn-basic" href="{{ path('prospect_show', {"id": rating.prospect.id}) }}" title="{{ 'app.rating.btn-contact'|trans }}">{{ 'app.rating.btn-contact'|trans }}</a>
         </div>
         
         <div class="row">
@@ -22,37 +22,37 @@
             <div class="col-md-9 page-content">
                 {{ form_start(edit_form) }}
                     <div>
-                        {{ form_label(edit_form.attractiveness) }}     
+                        {{ form_label(edit_form.attractiveness, 'app.rating.edit.label.attractiveness'|trans) }}     
                         <div class="rating attractiveness-rating"></div>               
                         <div class="hidden">{{ form_widget(edit_form.attractiveness) }}</div>
                         {{ form_errors(edit_form.attractiveness) }}
                     </div>
                     <div>
-                        {{ form_label(edit_form.socialStatus) }} 
+                        {{ form_label(edit_form.socialStatus, 'app.rating.edit.label.social-status'|trans) }} 
                         <div class="rating social-status-rating"></div>
                         <div class="hidden">{{ form_widget(edit_form.socialStatus) }}</div>
                         {{ form_errors(edit_form.socialStatus) }}
                     </div>
                     <div>
-                        {{ form_label(edit_form.senseHumor, 'Sense of humor') }}
+                        {{ form_label(edit_form.senseHumor, 'app.rating.edit.label.humor'|trans) }}
                         <div class="rating sense-humor-rating"></div>                
                         <div class="hidden">{{ form_widget(edit_form.senseHumor) }}</div>
                         {{ form_errors(edit_form.senseHumor) }}
                     </div>
                     <div>
-                        {{ form_label(edit_form.cooking, 'Cooking') }}
+                        {{ form_label(edit_form.cooking, 'app.rating.edit.label.cooking'|trans) }}
                         <div class="rating cooking-rating"></div>                
                         <div class="hidden">{{ form_widget(edit_form.cooking) }}</div>
                         {{ form_errors(edit_form.cooking) }}
                     </div>
                     <div>
-                        {{ form_label(edit_form.kissing) }}
+                        {{ form_label(edit_form.kissing, 'app.rating.edit.label.kissing'|trans) }}
                         <div class="rating kissing-rating"></div> 
                         <div class="hidden">{{ form_widget(edit_form.kissing) }}</div>
                         {{ form_errors(edit_form.kissing) }}
                     </div>
                     <div>
-                        {{ form_label(edit_form.sex) }}
+                        {{ form_label(edit_form.sex, 'app.rating.edit.label.sex'|trans) }}
                         <div class="rating sex-rating"></div> 
                         <div class="hidden">{{ form_widget(edit_form.sex) }}</div>
                         {{ form_errors(edit_form.sex) }}
@@ -61,9 +61,9 @@
                     <div class="hidden">
                         {{ form_rest(edit_form) }}
                     </div>
-                    <div>
-                        <input class="btn-basic-rose" type="submit" value="Save changes" />
-                    </div>
+                    
+                    <input class="btn-basic-rose" type="submit" value="{{ 'app.rating.btn-save'|trans }}" />
+                    
                 {{ form_end(edit_form) }}
             </div>
         </div>

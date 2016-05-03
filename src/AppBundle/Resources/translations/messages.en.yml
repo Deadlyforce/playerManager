@@ -36,3 +36,17 @@ app:
         send: Send message
     profile:
         btn-edit: Edit profile
+    rating:
+        edit:
+            label:
+                attractiveness: Attractiveness
+                social-status: Social Status
+                humor: Sense of humor
+                cooking: Cooking
+                kissing: Kissing
+                sex: Sex
+        browser-tab: Rating
+        title: Ratings for
+        subtitle: Here you can rate your contact!
+        btn-contact: Contact page
+        btn-save: Save changes

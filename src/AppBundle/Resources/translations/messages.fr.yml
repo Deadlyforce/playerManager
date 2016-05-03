@@ -36,7 +36,20 @@ app:
         send: Envoyer
     profile:
         btn-edit: Modifier le profil
-        
+    rating:
+        edit:
+            label:
+                attractiveness: Attirance
+                social-status: Statut Social
+                humor: Sens de l'humour
+                cooking: Cuisine
+                kissing: Embrasse bien
+                sex: Sexe
+        browser-tab: Evaluation
+        title: Evaluations pour
+        subtitle: Evaluez votre contact!
+        btn-contact: Page du contact        
+        btn-save: Enregistrer
         
 Sign up here: Nouveau compte            
 All relationships: Toutes les relations

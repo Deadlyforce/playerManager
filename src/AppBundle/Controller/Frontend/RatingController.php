@@ -29,7 +29,7 @@ class RatingController extends Controller
 
         $ratings = $em->getRepository('AppBundle:Rating')->findAll();
 
-        return $this->render('Frontend/rating/index.html.twig', array(
+        return $this->render('Frontend/Rating/index.html.twig', array(
             'ratings' => $ratings,
         ));
     }
@@ -81,7 +81,7 @@ class RatingController extends Controller
         
             $deleteForm = $this->createDeleteForm($rating);
 
-            return $this->render('Frontend/rating/show.html.twig', array(
+            return $this->render('Frontend/Rating/show.html.twig', array(
                 'rating' => $rating,
                 'delete_form' => $deleteForm->createView(),
             ));
@@ -121,7 +121,7 @@ class RatingController extends Controller
                 return $this->redirectToRoute('rating_edit', array('prospect_id' => $rating->getProspect()->getId()));
             }
 
-            return $this->render('Frontend/rating/edit.html.twig', array(
+            return $this->render('Frontend/Rating/edit.html.twig', array(
                 'rating' => $rating,
                 'edit_form' => $editForm->createView(),
                 'delete_form' => $deleteForm->createView(),
