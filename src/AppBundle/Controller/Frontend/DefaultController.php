@@ -7,8 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Cookie;
-use Symfony\Component\HttpFoundation\Response;
+
 
 use AppBundle\Form\ContactUsType;
 
@@ -51,7 +50,9 @@ class DefaultController extends Controller
     public function changeLocaleAction(Request $request)
     {
         $routeLocale = $request->getLocale();
-        $this->setCookie($routeLocale);
+        
+        $manager = $this->get('default_manager');
+        $manager->setCookie($routeLocale);
 
         return $this->redirectToRoute('fos_user_security_login', array("_locale" => $routeLocale));
     }
@@ -97,15 +98,5 @@ class DefaultController extends Controller
         );
     }
     
-    /**
-     * Sets a cookie
-     * 
-     * @param string $locale
-     */
-    public function setCookie($locale)
-    {
-        $response = new Response();          
-        $response->headers->setCookie(new Cookie('user_locale', $locale, time() + (3600 * 72))); 
-        $response->send();
-    }
+    
 }

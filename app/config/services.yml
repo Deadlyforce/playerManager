@@ -36,10 +36,15 @@ services:
             - { name: kernel.event_subscriber }
 
     prospect_manager:
-        class: AppBundle\DependencyInjection\Prospect\ProspectManager
+        class: AppBundle\DependencyInjection\Managers\ProspectManager
         arguments: 
             - '@doctrine.orm.entity_manager'
             - '@security.token_storage'
+            
+    default_manager:
+        class: AppBundle\DependencyInjection\Managers\DefaultManager
+        arguments: 
+            - '@doctrine.orm.entity_manager'
 
     
 #    redirection_after_login:

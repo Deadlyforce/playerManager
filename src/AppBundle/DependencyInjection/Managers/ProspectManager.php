@@ -1,12 +1,11 @@
 <?php
 
-namespace AppBundle\DependencyInjection\Prospect;
+namespace AppBundle\DependencyInjection\Managers;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use AppBundle\Entity\Prospect;
 
 /**
  * Description of ProspectManager
@@ -48,7 +47,5 @@ class ProspectManager
         }
         
         return $changed;
-    }
-    
-   
+    } 
 }

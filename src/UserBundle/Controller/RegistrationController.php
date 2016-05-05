@@ -45,8 +45,8 @@ class RegistrationController extends Controller
         // OVERRIDE NORMAN
         $today = new \DateTime();
         $user->setCreatedAt($today);
-        
-        $ip = filter_var($_SERVER['REMOTE_ADDR'], FILTER_VALIDATE_IP);
+
+        $ip = $request->getClientIp();
         $user->setIp($ip);
         // END OVERRIDE NORMAN
         

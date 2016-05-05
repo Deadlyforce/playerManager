@@ -240,38 +240,6 @@ class ProspectController extends Controller
     }
 
     /**
-     * Displays a form to create a new Prospect entity.
-     *
-     * @Route("/new", name="prospect_new")
-     * @Method("GET")
-     * @Template(":Frontend/Prospect:new.html.twig")
-     */
-    public function newAction()
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
-        $prospect = new Prospect();
-
-        // Définition des paramètres par défaut
-        $prospect->setAge(23);
-        
-        $datetime =  new \DateTime('', new \DateTimeZone('Europe/Paris'));
-        $prospect->setCreationDate($datetime);  
-        
-        $form = $this->createForm('AppBundle\Form\ProspectType', $prospect, array(
-            'action' => $this->generateUrl('prospect_create'),
-            'method' => 'POST'
-        ));        
-        
-        return array(
-            'entity' => $prospect,
-            'form'   => $form->createView(),
-        );
-    }
-
-    /**
      * Finds and displays a Prospect entity.
      *
      * @Route("/{id}", name="prospect_show")
@@ -312,52 +280,35 @@ class ProspectController extends Controller
      * @Method("GET")
      * @Template(":Frontend/Prospect:edit.html.twig")
      */
-    public function editAction($id)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        
-        $em = $this->getDoctrine()->getManager();
-        $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
-
-        if (!$prospect) {
-            throw $this->createNotFoundException('Unable to find Prospect entity.');
-        } 
-        
-        if($prospect->getUser() === $user){
-            $editForm = $this->createEditForm($prospect);
-            $deleteForm = $this->createDeleteForm($id);
-
-            return array(
-                'prospect' => $prospect,
-                'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView(),
-            );
-        } else {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-    }
-
-    /**
-    * Creates a form to edit a Prospect entity.
-    *
-    * @param Prospect $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Prospect $entity)
-    {
-        $form = $this->createForm(ProspectType::class, $entity, array(
-            'action' => $this->generateUrl('prospect_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        return $form;
-    }
-    
+//    public function editAction($id)
+//    {
+//        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+//            throw $this->createAccessDeniedException('You cannot access this page!');
+//        }
+//        
+//        $user = $this->get('security.token_storage')->getToken()->getUser();
+//        
+//        $em = $this->getDoctrine()->getManager();
+//        $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
+//
+//        if (!$prospect) {
+//            throw $this->createNotFoundException('Unable to find Prospect entity.');
+//        } 
+//        
+//        if($prospect->getUser() === $user){
+//            $editForm = $this->createEditForm($prospect);
+//            $deleteForm = $this->createDeleteForm($id);
+//
+//            return array(
+//                'prospect' => $prospect,
+//                'edit_form' => $editForm->createView(),
+//                'delete_form' => $deleteForm->createView(),
+//            );
+//        } else {
+//            throw $this->createAccessDeniedException('You cannot access this page!');
+//        }
+//    }
+   
     /**
      * Edits an existing Prospect entity.
      *
@@ -391,7 +342,10 @@ class ProspectController extends Controller
             }
         
             $deleteForm = $this->createDeleteForm($id);
-            $editForm = $this->createEditForm($prospect);
+            $editForm = $this->createForm(ProspectType::class, $prospect, array(
+                'action' => $this->generateUrl('prospect_update', array('id' => $id)),
+                'method' => 'PUT'
+            ));
             $editForm->handleRequest($request);
          
             if ($editForm->isSubmitted() && $editForm->isValid()) {  
@@ -406,8 +360,11 @@ class ProspectController extends Controller
                     // Case: update a Prospect without a previous photo
                     
                     // Set first element (photo) as primary selected = true so there's always a primary
-                    $photos->first()->setSelected(true); 
-                            
+                    // If there's a new photo in the form
+                    if ($photos->first()) {
+                        $photos->first()->setSelected(true); 
+                    } 
+                    
                     foreach ($photos as $photo) {
                         $uploadableManager->markEntityToUpload($photo, $photo->getFile());
                     }      
