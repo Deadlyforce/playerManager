@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ratings{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <section class="page-title">
+            <h1>Ratings show</h1> 
+            <h2>Here you can rate your contact!</h2>
+        </section>
+        <div class="page-title-underline"></div>
+
+        <table>
+            <tbody>
+                <tr>
+                    <th>Id</th>
+                    <td>{{ rating.id }}</td>
+                </tr>
+                <tr>
+                    <th>Attractiveness</th>
+                    <td>{{ rating.attractiveness }}</td>
+                </tr>
+                <tr>
+                    <th>Socialstatus</th>
+                    <td>{{ rating.socialStatus }}</td>
+                </tr>
+                <tr>
+                    <th>Sensehumor</th>
+                    <td>{{ rating.senseHumor }}</td>
+                </tr>
+                <tr>
+                    <th>Kissing</th>
+                    <td>{{ rating.kissing }}</td>
+                </tr>
+                <tr>
+                    <th>Sex</th>
+                    <td>{{ rating.sex }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('rating_index') }}">Back to the list</a>
+            </li>
+            <li>
+                <a href="{{ path('rating_edit', { 'id': rating.id }) }}">Edit</a>
+            </li>
+            <li>
+                {{ form_start(delete_form) }}
+                    <input type="submit" value="Delete">
+                {{ form_end(delete_form) }}
+            </li>
+        </ul>
+    </div>
+{% endblock %}

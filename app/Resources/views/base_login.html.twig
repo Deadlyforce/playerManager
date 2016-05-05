@@ -25,28 +25,22 @@
     {% endblock %}
 </head>
 <body>
-    <section id="login-top-bar">
-        {#<div class="container">
-            
-        </div>
-        #}
+    <section id="login-top-bar">        
         <div class="container">  
             <div class="row">
-            <div class="col-md-1">
-                <ul class="lang-menu">
-                    {#<li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'fr'})) }}">Fr</a></li>
-                    <li><a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': 'en'})) }}">En</a></li>#}
-                    <li><a href="{{ path('change_locale', {'_locale': 'fr'} ) }}">Fr</a></li>
-                    <li><a href="{{ path('change_locale', {'_locale': 'en'} ) }}">En</a></li>
-                </ul>
-            </div>
-            <div class="col-md-11">
-                {{ block('fos_user_content') }}
+                <div class="col-md-1">
+                    <ul class="lang-menu">
+                        <li><a href="{{ path('change_locale', {'_locale': 'fr'} ) }}">Fr</a></li>
+                        <li><a href="{{ path('change_locale', {'_locale': 'en'} ) }}">En</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-11">
+                    {{ block('fos_user_content') }}
+                </div>
             </div>
         </div>
     </section>
     <div class="container">
-
         {% block content %}   
             <div id="login-body">
                 <div id="login-title">
@@ -57,9 +51,6 @@
                 <p id="link-register">{{ 'app.login.new'|trans }}<a href="{{ path('fos_user_registration_register') }}" title="Sign up here">{{ 'Sign up here'|trans }}</a></p>
             </div>                
         {% endblock %}
-
-{#            <footer>#}
-{#            </footer>#}
     </div>  
 
     <script type="text/javascript">
@@ -67,11 +58,9 @@
 
             var loginImage1 = "{{ asset('bundles/app/images/login/manager_16.jpg') }}"; 
             var loginImage2 = "{{ asset('bundles/app/images/login/manager_17.jpg') }}"; 
-            var loginImage3 = "{{ asset('bundles/app/images/login/manager_25.jpg') }}"; 
-
-{#            $.backstretch(loginImage1);#}
-                $.backstretch([loginImage1, loginImage2, loginImage3], {duration: 5000, fade: 1000});
-
+            var loginImage3 = "{{ asset('bundles/app/images/login/manager_25.jpg') }}";
+            
+            $.backstretch([loginImage1, loginImage2, loginImage3], {duration: 5000, fade: 1000});
         });
     </script>    
 </body>

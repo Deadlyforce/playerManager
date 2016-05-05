@@ -92,55 +92,34 @@ label.required:after {
 /******************************* REGISTER  ****************************************/
 
 #register-user{
-    width: 55%;
+    /*width: 55%;*/
     margin: 100px auto 0 auto;
-    background-color: rgba(0,0,0,0.2);
-    padding: 20px 20px 30px 20px;
+    background-color: #fff;
+    padding: 20px 50px 30px 50px;
+    display: table;
+    box-shadow: 0px 0px 4px 2px rgba(0,0,0,0.1);
     border-radius: 2px;
 }
 #register-user h4{
-    color: #fff;
+    color: #666;
     margin-bottom: 40px;
     text-align: center;
     font-family: "ralewaylight",sans-serif;
     font-size: 2.3em;
 }
 
-form[name='fos_user_registration_form']{
-    margin-left: 40px;
-}
-form[name='fos_user_registration_form'] label{
-    width: 155px;
-    color: #f0f0f0;
-    font-size: 1.1em;
-    font-weight: 200;
-}
-form[name='fos_user_registration_form'] input[type='email'], form[name='fos_user_registration_form'] input[type='text'], form[name='fos_user_registration_form'] input[type='password']{
-    width: 200px;
+form[name='fos_user_registration_form'] > div, #fos_user_registration_form_plainPassword > div{
+    margin-bottom: 5px;
 }
 
-.btn-submit-register{
-    color: #e0e0e0;
-    font-size: 1.2em;
-    text-decoration: none;
-    display: inline-block;
-    border: 1px solid #e0e0e0;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    margin-top: 30px;
-    background-image: none;
-    background-color: rgba(0, 0, 0, 0.1);
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
-    transition: all .3s ease-in;
+form[name='fos_user_registration_form']{
+    font-family: "ralewayregular", sans-serif;     
 }
-.btn-submit-register:hover{
-    color: #fff;
-    border: 1px solid #fff;   
-    background-color: transparent;
+form[name='fos_user_registration_form'] label{
+    font-size: 1.2em; 
+    font-weight: 200;
 }
+
 /****************** CAPTCHA ************************/
 
 label[for="fos_user_registration_form_captcha"]{
@@ -156,10 +135,14 @@ img[title="captcha"]{
 
 /********************************* LOGIN  *****************************************/
 
+.fos-error-login{
+    color: red;
+}
+
 #login-top-bar{
-    height: 38px;
+    /*height: 38px;*/
     background-color: rgba(0, 0, 0, 0.6);
-    border-bottom: 1px solid #222;
+    /*border-bottom: 1px solid #222;*/
 }
 #login-body{
     margin-top: 150px;    
@@ -225,9 +208,6 @@ img[title="captcha"]{
     background-color: rgba(0,0,0, 0.5);
     text-decoration: none;
     border: 1px solid white;
-    /*background-color: rgba(255,255,255, 0.2);*/
-    
-    
 }
 
 /***************** FORM LOGIN *********************/
@@ -288,10 +268,11 @@ form[name="fos_user_security_login"] input#password, form[name="fos_user_securit
 }
 form[name="fos_user_security_login"] #_submit{
     /*margin-top: 7px;*/
-    height: 38px;
+    /*height: 38px;*/
     border: none;
     color: #e0e0e0;
     background: transparent;
+    padding: 12px 15px;
 }
 form[name="fos_user_security_login"] #_submit:hover{
     color: #fff;
@@ -592,7 +573,7 @@ p.confirmed{
 /* FORMS */
 .form-control{
     border-radius: 0px;
-    width: 75%;
+    /*width: 75%;*/
 }
 .form-inline .form-group{
     margin-bottom: 8px;

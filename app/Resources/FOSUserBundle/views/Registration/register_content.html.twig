@@ -6,9 +6,34 @@
     <h4>{{ 'app.register.form.title'|trans }}</h4>
 
     {{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
-        {{ form_widget(form) }}
+{#        {{ form_widget(form) }}#}
+        <div class="form-group">
+            {{ form_widget(form.email, { 'attr': {'placeholder': 'Email', 'class': 'form-control'} }) }}
+            {{ form_errors(form.email) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.username, { 'attr': {'placeholder': 'Username', 'class': 'form-control'} }) }}
+            {{ form_errors(form.username) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.plainPassword.first, { 'attr': {'placeholder': 'Password', 'class': 'form-control'} }) }}
+            {{ form_errors(form.plainPassword.first) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.plainPassword.second, { 'attr': {'placeholder': 'Repeat password', 'class': 'form-control'} }) }}
+            {{ form_errors(form.plainPassword.second) }}
+        </div>
+        <div class="form-group">
+            {{ form_widget(form.gender, { 'attr': {'placeholder': 'You are', 'class': 'form-control'} }) }}
+            {{ form_errors(form.gender) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.captcha) }}
+            {{ form_widget(form.captcha, { 'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.captcha) }}
+        </div>
         <div>        
-            <input class="btn-submit-register" type="submit" value="{{ 'registration.submit'|trans }}" />
+            <input class="btn-basic-rose" type="submit" value="{{ 'registration.submit'|trans }}" />
         </div>
     {{ form_end(form) }}
 </div>

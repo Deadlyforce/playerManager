@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="container">
+        <section class="page-title">
+            <h1>Ratings</h1> 
+{#            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>#}
+        </section>
+        <div class="page-title-underline"></div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Attractiveness</th>
+                    <th>Socialstatus</th>
+                    <th>Sensehumor</th>
+                    <th>Kissing</th>
+                    <th>Sex</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for rating in ratings %}
+                <tr>
+                    <td><a href="{{ path('rating_show', { 'id': rating.id }) }}">{{ rating.id }}</a></td>
+                    <td>{{ rating.attractiveness }}</td>
+                    <td>{{ rating.socialStatus }}</td>
+                    <td>{{ rating.senseHumor }}</td>
+                    <td>{{ rating.kissing }}</td>
+                    <td>{{ rating.sex }}</td>
+                    <td>
+                        <ul>
+                            <li>
+                                <a href="{{ path('rating_show', { 'id': rating.id }) }}">show</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('rating_edit', { 'id': rating.id }) }}">edit</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+        <ul>
+            <li>
+                <a href="{{ path('rating_new') }}">Create a new entry</a>
+            </li>
+        </ul>
+    </div>
+{% endblock %}

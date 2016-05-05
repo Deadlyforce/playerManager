@@ -6,10 +6,6 @@
 
 
 {% block fos_user_content %}
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
-
     <form class="form-inline" name="fos_user_security_login" action="{{ path("fos_user_security_check") }}" method="post">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
@@ -28,6 +24,9 @@
         </div>
         <input class="pull-right" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
     </form>
+    {% if error %}
+        <div class="fos-error-login">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
         
 {% endblock fos_user_content %}
 
