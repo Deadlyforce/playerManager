@@ -95,7 +95,8 @@ gregwar_captcha:
 liip_imagine:
     resolvers:
         default:
-            web_path: ~
+            web_path:
+                web_root: %kernel.root_dir%/../web
     
     filter_sets:
         cache: ~

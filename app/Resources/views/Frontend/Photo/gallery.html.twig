@@ -5,7 +5,7 @@
 {% block content %}
     <div class="container">
         <section class="page-title">
-            <h1>Photos gallery</h1> 
+            <h1>{{ prospect.firstname }} {{ prospect.lastname }} Photos Gallery</h1> 
             <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>
         </section>
         <div class="page-title-underline"></div>
@@ -93,7 +93,7 @@
         
     <script type="text/javascript">
         $(document).ready(function(){
-            
+
             // Only one checkbox ticked at a time when selecting primary photo
             $("input[type='checkbox']").on("change", function(){
                                 
@@ -191,15 +191,52 @@
                 }
             });            
         });
+        
+        // PHOTOS ************************************
+        
+        // VAR NECESSARY TO HAVE AN ASSETIC PATH IN photos.js (without it, works in dev, not in prod) ******
+        var imgDir = "{{ asset('bundles/app/images/') }}";
+        
+        // JAVASCRIPT USED AT DOC READY BY photos.js *******************************************************
+        // STAYS HERE BECAUSE OF PRIORITY LOADING, NEEDS imgDir var ****************************************
+        
+        collectionHolder = $('#photo-list');
+        
+        // add a delete link to all of the existing tag form li elements
+        collectionHolder.find('li').each(function() {
+            addPhotoFormDeleteLink($(this));
+        });
+
+        $('#photo-list').find("> .row").last().append(newLiAddPhoto); // Append to last row of collectionHolder
+
+        // count the current form inputs we have (e.g. 2), use that as the new
+        // index when inserting a new item (e.g. 2)
+        collectionHolder.data('index', collectionHolder.find(":input[type='file']").length);
+
+        addPhotoLink.click(function(e) {            
+            e.preventDefault();  
+
+            var index = collectionHolder.data('index');
+
+            // add a new Photo form (see next code block)
+            if (index < 5) {
+                addPhotoForm(collectionHolder, newLiAddPhoto, imgDir);
+                $("#appbundle_prospect_photos_" + (index - 1));
+            }
+        });
+    
+
     </script>
 {% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
-    
+
     {% javascripts
         'bundles/app/js/photos.js'
     %}        
     <script src="{{ asset_url }}"></script>
     {% endjavascripts%}
 {% endblock %}
+
+

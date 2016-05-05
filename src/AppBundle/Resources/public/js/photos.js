@@ -1,36 +1,13 @@
 var collectionHolder;
-        
+       
 var addPhotoLink = $('<a href="#" class="add-photo">Add photo</a>');
 var newLiAddPhoto = $('<li class="col-md-4"></li>').append(addPhotoLink);
 
 $(document).ready(function(){
-    collectionHolder = $('#photo-list');
-        
-    // add a delete link to all of the existing tag form li elements
-    collectionHolder.find('li').each(function() {
-        addPhotoFormDeleteLink($(this));
-    });
-
-    $('#photo-list').find("> .row").last().append(newLiAddPhoto); // Append to last row of collectionHolder
-
-    // count the current form inputs we have (e.g. 2), use that as the new
-    // index when inserting a new item (e.g. 2)
-    collectionHolder.data('index', collectionHolder.find(":input[type='file']").length);
-
-    addPhotoLink.on('click', function(e) {            
-        e.preventDefault();  
-        
-        var index = collectionHolder.data('index');
-
-        // add a new Photo form (see next code block)
-        if (index < 5) {
-            addPhotoForm(collectionHolder, newLiAddPhoto);
-            $("#appbundle_prospect_photos_" + (index - 1));
-        }
-    });
+   
 });
 
-function addPhotoForm(collectionHolder, newLiAddPhoto)
+function addPhotoForm(collectionHolder, newLiAddPhoto, imgDir)
 {
     // Get the data-prototype explained earlier
     var prototype = collectionHolder.data('prototype');
@@ -44,7 +21,7 @@ function addPhotoForm(collectionHolder, newLiAddPhoto)
     collectionHolder.data('index', index + 1);
 
     // Display the form in the page in an li, before the "Add a photo" link li
-    var photoFrame = "<div class='photo-frame'><img class='tall' src='/bundles/app/images/prospect_no_photo.jpg' alt='No photo' /></div>";
+    var photoFrame = "<div class='photo-frame'><img class='tall' src='"+imgDir+"prospect_no_photo.jpg' alt='No photo' /></div>";
     var photoActions = "<div class='photo-actions'><div><div class='file-selector'>"+ newForm +"</div><div class='delete-photo pull-right'></div></div></div>";
     
     var newFormLi = $("<li class='col-md-4 new-form'>" + photoFrame + photoActions + "</li>");

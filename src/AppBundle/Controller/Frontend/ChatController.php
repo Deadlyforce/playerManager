@@ -73,7 +73,7 @@ class ChatController extends Controller
      *
      * @return \Symfony\Component\Form\Form The form
      */
-    private function createCreateForm(Echange $entity)
+    private function createCreateForm(Chat $entity)
     {
         $form = $this->createForm(new ChatType(), $entity, array(
             'action' => $this->generateUrl('echange_create'),

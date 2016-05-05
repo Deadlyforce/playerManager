@@ -545,32 +545,37 @@ class ProspectController extends Controller
         
         if ($loggedUser === $user) {
             // FLAKES
-            $flakes = $em->getRepository('AppBundle:Prospect')->getUserFlakes($user);          
-            $flakesResult = array_column($flakes, 'flake');  // Get the correct column values
-              
-            $valueToBinary = function($value)
-            {
-                if ($value === true)  {
-                    $res = 1;
-                } else {
-                    $res = 0;
-                }
+            $flakes = $em->getRepository('AppBundle:Prospect')->getUserFlakes($user);   
 
-                return $res;
-            };           
-            // array_map transforms the values to binary, array_count values stacks identical ones, implode builds a string
-            $flakeArray = array_map($valueToBinary, $flakesResult);
-            $flakeStats = implode(',', array_count_values($flakeArray));
-            // The string have to pass 2 values (implode makes only one if no 0s or 1s)
-            if (!in_array('1', $flakeArray)) {
-                $flakeStats = '0,' . $flakeStats; // 0 flakes and n showed up
+            if (!empty($flakes)) {
+                $flakesResult = array_column($flakes, 'flake');  // Get the correct column values
+              
+                $valueToBinary = function($value)
+                {
+                    if ($value === true)  {
+                        $res = 1;
+                    } else {
+                        $res = 0;
+                    }
+
+                    return $res;
+                };           
+                // array_map transforms the values to binary, array_count values stacks identical ones, implode builds a string
+                $flakeArray = array_map($valueToBinary, $flakesResult);
+                $flakeStats = implode(',', array_count_values($flakeArray));
+                // The string have to pass 2 values (implode makes only one if no 0s or 1s)
+                if (!in_array('1', $flakeArray)) {
+                    $flakeStats = '0,' . $flakeStats; // 0 flakes and n showed up
+                }
+                if (!in_array('0', $flakeArray)) {
+                    $flakeStats = $flakeStats . ', 0'; // n flakes and 0 showed up
+                }
+            } else {
+                $flakeStats = "0,0";
             }
-            if (!in_array('0', $flakeArray)) {
-                $flakeStats = $flakeStats . ', 0'; // n flakes and 0 showed up
-            }
-            
+                        
             // SOURCES
-            $sources = $em->getRepository('AppBundle:Prospect')->getUserSources($user);
+            $sources = $em->getRepository('AppBundle:Prospect')->getUserSources($user);           
             $sourcesResult = array_column($sources, 'wording');   
 
             $valueToBinary = function($value)

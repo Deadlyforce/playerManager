@@ -3,10 +3,10 @@
     {% set primaryPhoto = null %} 
     {% for photo in photos if photo.selected == true %}                               
         {% set primaryPhoto = photo %}                           
-    {% endfor %}
+    {% endfor %}   
     
     {% if primaryPhoto != null %}
-        <img class="img-responsive" src="{{ asset(primaryPhoto.path) | imagine_filter('thumb_prospect_index') }}" alt="Photo" />    
+        <img class="img-responsive" src="{{ primaryPhoto.path | imagine_filter('thumb_prospect_index') }}" alt="Photo" />    
     {% else %}
         <img class="img-responsive" src="{{ asset('bundles/app/images/prospect_no_photo.jpg') }}" alt="No photo" />
     {% endif %}

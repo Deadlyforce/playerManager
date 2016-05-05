@@ -1,7 +1,7 @@
 app:
     login:
         title: Mnaomai
-        subtitle: Souvenirs de rencontres
+        subtitle: Souvenez vous de vos rencontres
         new: Première visite?
 
     register:

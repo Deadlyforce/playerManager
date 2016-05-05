@@ -6,8 +6,8 @@
     <title>{% block title %}Playermanager{% endblock %}</title>        
     {% block stylesheets %}
         {% stylesheets filter='cssrewrite' 
-            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
-            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css'
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css'
+            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css'
             '%kernel.root_dir%/../vendor/components/jqueryui/themes/base/jquery-ui.min.css'
             'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.css'
             'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.css'
@@ -97,7 +97,7 @@
         
         
         $(document).ready(function(){
-            
+                        
             // Menu animation
             $(".navbar-brand").animate({
                 'height': '0px'

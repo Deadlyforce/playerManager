@@ -72,7 +72,7 @@ class DefaultController extends Controller
                 $message = \Swift_Message::newInstance()
                     ->setSubject($form->get('subject')->getData())
                     ->setFrom($form->get('email')->getData())
-                    ->setTo('webmaster@playermanager.com')
+                    ->setTo('contact@playermanager.normanwebdev.com')
                     ->setBody(
                         $this->renderView(':Frontend/Mail:mail_message.html.twig', array(
                                 'ip' => $request->getClientIp(),

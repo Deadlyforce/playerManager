@@ -77,10 +77,13 @@ class ProspectRepository extends EntityRepository
      */
     public function getUserFlakes($user)
     {
+        // Only if have met !!!
+        
         $qb = $this->_em->createQuery('
             SELECT r.flake
-            FROM AppBundle:Prospect p LEFT JOIN p.relationship r
+            FROM AppBundle:Relationship r LEFT JOIN r.prospect p
             WHERE p.user = :user
+            AND r.meeting = 1
         ')
          ->setParameter('user', $user);
         
