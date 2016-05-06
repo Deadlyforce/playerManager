@@ -31,6 +31,17 @@
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
+set :stage, :staging
+set :symfony_env, "staging"
+
+set :branch, 'develop' # your development branch
+set :deploy_to, '/home/myproject/www' # path on staging server
+
+set :controllers_to_clear, []
+set :composer_install_flags, '--prefer-dist --no-interaction --optimize-autoloader'
+
+server 'staging.mywebsite.com', user: 'mysshuser', port: 22, roles: %w{app db web}# edit IP / Port and SSH user of your staging server
+SSHKit.config.command_map[:composer] = "php #{shared_path.join("composer.phar")}"
 
 
 # Custom SSH Options
