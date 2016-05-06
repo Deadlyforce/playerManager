@@ -5,7 +5,6 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use AppBundle\Entity\Relationship;
 use AppBundle\Entity\Encounter;
@@ -674,7 +673,7 @@ class Prospect
     * @param Photo $photo
     * @return Prospect
     */
-   public function addPhoto($photo)
+   public function addPhoto(Photo $photo)
    {
         $this->photos[] = $photo;
         $photo->setProspect($this);
@@ -687,7 +686,7 @@ class Prospect
      *
      * @param Photo $photo
      */
-    public function removePhoto($photo)
+    public function removePhoto(Photo $photo)
     {
         $this->photos->removeElement($photo);
     }

@@ -2,6 +2,8 @@
 {% import ":Frontend/Macros/Prospect:photoDisplay250px.html.twig" as photoDisplayIndex %}
 {% block title %}Contacts{% endblock %}
 
+{% set csrfDelete = csrf_token('delete') %}
+
 {% block content %}
     <div class="container" id="container-prospect">        
         <section class="page-title">
@@ -11,7 +13,6 @@
 
         <div class="page-nav">
             <a class="btn-basic-ico" href="#" id="add_prospect" title ="{{ 'app.contact.list.add'|trans }}"><i class="icon ion-ios-plus-empty"></i><span>{{ 'app.contact.list.add'|trans }}</span></a>
-{#            <a class="btn-basic-ico pull-right" href="{{ path('prospect') }}" id="prospect_index" title ="View as a table (with reduced options)"><i class="icon ion-ios-list-outline"></i></a>#}
         </div>
         
         {% for prospect in pagination %}
@@ -35,7 +36,7 @@
                 <div class="row row-actions">                    
                     <ul class="record-actions">
                         <li>
-                            <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" data-token="{{ csrf_token }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-trash-outline"></i></a>
+                            <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-trash-outline"></i></a>
                         </li>
                         <li>
                             <a class="edit_prospect custom-tooltip" href="#" data-id="{{ prospect.id }}" title="Modify contact" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
@@ -188,14 +189,13 @@
             $(".record-actions").on("click", ".delete", function(event){
                 event.preventDefault();
                 
-                var prospect_id = $(this).data("id");
-                var csrf_token = $(this).data("token");
+                var prospect_id = $(this).data("id");                
                 
                 $.confirm({
                     animation: 'zoom',
                     animationBounce: 1,
                     confirm: function(){
-                        ajaxDeleteProspect(prospect_id, csrf_token);
+                        ajaxDeleteProspect(prospect_id);
                     },
                     cancel: function(){
                         console.log('the user clicked cancel');
@@ -207,13 +207,13 @@
              * Deletes a prospect with ajax
              * 
              * @param {int} prospect_id
-             * @param {string} csrf_token
              * @returns {undefined}
              */
-            function ajaxDeleteProspect(prospect_id, csrf_token)
+            function ajaxDeleteProspect(prospect_id)
             {                
-                var url = Routing.generate('ajax_delete_prospect', {'id': prospect_id, '_locale': locale});                
-                var data = {'csrf_token': csrf_token};
+                var url = Routing.generate('ajax_delete_prospect', {'id': prospect_id, '_locale': locale});  
+                var csrfDelete = "{{ csrfDelete }}";
+                var data = {'csrfDelete': csrfDelete};
 
                 $.post(url, data, function(response){
 

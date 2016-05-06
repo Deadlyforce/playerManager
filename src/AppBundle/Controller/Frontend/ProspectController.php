@@ -97,16 +97,15 @@ class ProspectController extends Controller
     {
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
+        }        
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $data = $request->request->all();
-        $token = $data['csrf_token'];
-       
+        $token = $data['csrfDelete'];
+        
         $csrf = $this->get('security.csrf.token_manager');
            
-        if ($csrf->isTokenValid(new CsrfToken('', $token))) {
+        if ($csrf->isTokenValid(new CsrfToken('delete', $token))) {
             
             $em = $this->getDoctrine()->getManager();
             $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
@@ -126,6 +125,8 @@ class ProspectController extends Controller
             } else {
                 throw $this->createAccessDeniedException('You cannot access this page!');
             }
+        } else {
+            throw $this->createAccessDeniedException('CSRF token is invalid.');
         }      
     }    
     
@@ -501,65 +502,18 @@ class ProspectController extends Controller
         $manager = $this->get('prospect_manager');
         
         if ($loggedUser === $user) {
-            // FLAKES
-            $flakes = $em->getRepository('AppBundle:Prospect')->getUserFlakes($user);   
-
-            if (!empty($flakes)) {
-                $flakesResult = array_column($flakes, 'flake');  // Get the correct column values
-              
-                $valueToBinary = function($value)
-                {
-                    if ($value === true)  {
-                        $res = 1;
-                    } else {
-                        $res = 0;
-                    }
-
-                    return $res;
-                };           
-                // array_map transforms the values to binary, array_count values stacks identical ones, implode builds a string
-                $flakeArray = array_map($valueToBinary, $flakesResult);
-                $flakeStats = implode(',', array_count_values($flakeArray));
-                // The string have to pass 2 values (implode makes only one if no 0s or 1s)
-                if (!in_array('1', $flakeArray)) {
-                    $flakeStats = '0,' . $flakeStats; // 0 flakes and n showed up
-                }
-                if (!in_array('0', $flakeArray)) {
-                    $flakeStats = $flakeStats . ', 0'; // n flakes and 0 showed up
-                }
-            } else {
-                $flakeStats = "0,0";
-            }
+            // FLAKES 
+            $flakesOn = $em->getRepository('AppBundle:Prospect')->getUserFlakesOn($user);   
+            $flakesOff = $em->getRepository('AppBundle:Prospect')->getUserFlakesOff($user);   
+            $flakeStats = "$flakesOn, $flakesOff";
                         
-            // SOURCES
-            $sources = $em->getRepository('AppBundle:Prospect')->getUserSources($user);           
-            $sourcesResult = array_column($sources, 'wording');   
+            // SOURCES         
+            $sourcesOnline = $em->getRepository('AppBundle:Prospect')->getUserSourcesOnline($user);   
+            $sourcesIRL = $em->getRepository('AppBundle:Prospect')->getUserSourcesIRL($user);   
+            $sourceStats = "$sourcesOnline, $sourcesIRL";
 
-            $valueToBinary = function($value)
-            {
-                if ($value === 'Online')  {
-                    $res = 1;
-                } else {
-                    $res = 0;
-                }
-
-                return $res;
-            };
-            
-            $sourceArray = array_map($valueToBinary, $sourcesResult);
-            $sourceStats = implode(',', array_count_values($sourceArray));
-            // The string have to pass 2 values (implode makes only one if no 0s or 1s)
-            if (!in_array('1', $sourceArray)) {
-                $sourceStats = '0,' . $sourceStats; // 0 flakes and n showed up
-            }
-            if (!in_array('0', $sourceArray)) {
-                $sourceStats = $sourceStats . ', 0'; // n flakes and 0 showed up
-            }
-            
-//var_dump($flakeStats);
-//var_dump($sourceStats);
             return array(
-                'flakeStats' => $flakeStats,
+                'flakeStats' => "$flakeStats",
                 'sourceStats' => $sourceStats
             );
         } else {

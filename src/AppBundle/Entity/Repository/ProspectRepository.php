@@ -70,42 +70,81 @@ class ProspectRepository extends EntityRepository
     }
     
     /**
-     * Returns all flakes for that user.
+     * Returns flakes On for that user.
      * 
      * @param User $user
      * @return array
      */
-    public function getUserFlakes($user)
-    {
-        // Only if have met !!!
-        
+    public function getUserFlakesOn($user)
+    {        
         $qb = $this->_em->createQuery('
-            SELECT r.flake
+            SELECT COUNT(r.flake)
             FROM AppBundle:Relationship r LEFT JOIN r.prospect p
             WHERE p.user = :user
             AND r.meeting = 1
+            AND r.flake = 1
         ')
          ->setParameter('user', $user);
         
-        return $qb->getResult();
+        return $qb->getSingleScalarResult();
     }
-    
     /**
-     * Returns all sources (Online or IRL) for that user.
+     * Returns flakes Off for that user.
      * 
      * @param User $user
      * @return array
      */
-    public function getUserSources($user)
-    {
+    public function getUserFlakesOff($user)
+    {        
         $qb = $this->_em->createQuery('
-            SELECT s.wording
-            FROM AppBundle:Prospect p LEFT JOIN p.source s
+            SELECT COUNT(r.flake)
+            FROM AppBundle:Relationship r LEFT JOIN r.prospect p
             WHERE p.user = :user
+            AND r.meeting = 1
+            AND r.flake = 0
         ')
          ->setParameter('user', $user);
         
-        return $qb->getResult();
+        return $qb->getSingleScalarResult();
+    }
+    
+    /**
+     * Returns sources (Online) for that user.
+     * 
+     * @param User $user
+     * @return array
+     */
+    public function getUserSourcesOnline($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT COUNT(s.wording)
+            FROM AppBundle:Prospect p LEFT JOIN p.source s
+            WHERE p.user = :user
+            AND s.wording = :Online
+        ')
+        ->setParameter('user', $user)
+        ->setParameter('Online', 'Online');
+        
+        return $qb->getSingleScalarResult();
+    }
+    /**
+     * Returns sources (IRL) for that user.
+     * 
+     * @param User $user
+     * @return array
+     */
+    public function getUserSourcesIRL($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT COUNT(s.wording)
+            FROM AppBundle:Prospect p LEFT JOIN p.source s
+            WHERE p.user = :user
+            AND s.wording = :IRL
+        ')
+        ->setParameter('user', $user)
+        ->setParameter('IRL', 'IRL (In Real Life');
+        
+        return $qb->getSingleScalarResult();
     }
     
     

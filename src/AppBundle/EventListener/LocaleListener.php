@@ -52,7 +52,7 @@ class LocaleListener implements EventSubscriberInterface
             $localeCookie = $this->readCookie($request);
             
             // If cookie exists
-            if ($localeCookie != null) {
+            if ($localeCookie !== null) {
                 // Set cookie locale
                 $request->getSession()->set('_locale', $localeCookie);
                 $this->router->getContext()->setParameter('_locale', $localeCookie);
