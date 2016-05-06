@@ -1,7 +1,7 @@
 {% extends '::base_ajax.html.twig' %}
 {#{% block title %}Modifier le contact{% endblock %}#}
 
-{% form_theme delete_form _self %}
+{#{% form_theme delete_form _self %}
 
 {% block button_widget %}
     {% set attr = attr|merge({class: (attr.class|default('btn-default') ~ ' btn')|trim}) %}
@@ -16,7 +16,7 @@
         {%- endif -%}
     {%- endif -%}
     <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain)|raw }}</button>    
-{% endblock %}
+{% endblock %}#}
 
 {% block content %}
     <div class="container">
@@ -87,9 +87,9 @@
             <div class="hidden">{{ form_rest(editForm) }}</div>
         {{ form_end(editForm) }}        
 
-        {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete contact'}}) }}                       
+{#        {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete contact'}}) }}                       
             {{ form_widget(delete_form.submit, {'label': '<i class="icon ion-ios-trash-outline"></i>'}) }}
-        {{ form_end(delete_form) }}       
+        {{ form_end(delete_form) }} #}      
     </div>
     
     <script type="text/javascript"> 

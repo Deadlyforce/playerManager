@@ -12,7 +12,6 @@
         <div class="page-title-underline"></div>            
         
         <div class="page-nav">
-            {#                <a  class="btn-dark" href="{{ path('relationship_show', {'id': relationship.id }) }}"><i class="fa fa-caret-left"></i> Relationship</a>#}
             <a class="btn-basic" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact">Contact page</a>
         </div>
         
@@ -25,7 +24,7 @@
                     {{ form_row(edit_form.startDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
                     <div>
                         {{ form_label(edit_form.status, 'Ongoing relationship ?', {'label_attr': {'title': 'Do you still see each other ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }} 
-                        <div id="appbundle_relationship_status_row" class="relationship_row">
+                        <div id="appbundle_relationship_status_row" class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.status) }}
                             <div id="appbundle_relationship_status_button" class="relationship_button"></div>   
                             {{ form_errors(edit_form.status) }}

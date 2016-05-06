@@ -18,34 +18,17 @@ class ProspectManager
     {
         $this->em = $em;        
         $this->tokenStorage = $tokenStorage;
-    }
+    }        
     
     /**
-     * Check if some photos were modified, added or deleted
+     * Set first element (photo) as primary selected = true so there's always a primary
      * 
-     * @param ArrayCollection $originalPhotos
-     * @param ArrayCollection $photos
-     * @return boolean
+     * @param PersistentCollection $photos
      */
-    public function checkPhotoChange(ArrayCollection $originalPhotos, PersistentCollection $photos)
+    public function setFirstPhotoPrimary(PersistentCollection $photos)
     {
-        $changed = false;
-        
-        foreach ($originalPhotos as $originalPhoto) {
-            if ($photos->contains($originalPhoto)) {
-
-            } else {
-                $changed = true;
-            }
+        if ($photos->first()) {
+            $photos->first()->setSelected(true); 
         }
-        foreach ($photos as $photo) {
-            if ($originalPhotos->contains($photo)) {
-
-            } else {
-                $changed = true;
-            }
-        }
-        
-        return $changed;
-    } 
+    }
 }

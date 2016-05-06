@@ -113,7 +113,7 @@ class ProspectType extends AbstractType
      */
     private function getAgeBracket()
     {        
-        for($i=18; $i<=50; $i++){
+        for($i=18; $i<=99; $i++){
             $ageBracket[$i] = $i;
         }
         

@@ -142,7 +142,7 @@ class ProspectRepository extends EntityRepository
             AND s.wording = :IRL
         ')
         ->setParameter('user', $user)
-        ->setParameter('IRL', 'IRL (In Real Life');
+        ->setParameter('IRL', 'IRL (In Real Life)');
         
         return $qb->getSingleScalarResult();
     }

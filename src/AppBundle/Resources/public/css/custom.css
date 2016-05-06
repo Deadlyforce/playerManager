@@ -583,7 +583,7 @@ p.confirmed{
     border-radius: 0px;
 }
 
-.modal-dialog{
+.modal-dialog-scroll{
     overflow-y: scroll;
 }
 .modal-content{
@@ -1330,34 +1330,6 @@ input#appbundle_relationship_startDate {
     box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
 }
 
-/* Input status */
-#appbundle_relationship_status_row:after {
-    content: 'OFF';
-    color: #999;
-    position: absolute;
-    right: 10px;
-    top: 2px;
-    z-index: 0;
-    font: 12px/26px Arial, sans-serif;
-    font-weight: bold;
-    text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.15);
-}
-#appbundle_relationship_status_row:before {
-    content: 'ON';    
-    position: absolute;
-    left: 10px;
-    top: 2px;
-    z-index: 0;
-    font: 12px/26px Arial, sans-serif;
-    font-weight: bold;
-}
-input#appbundle_relationship_status {
-    visibility: hidden;
-}
-input#appbundle_relationship_status:checked + #appbundle_relationship_status_button {
-    left: 43px;
-}
-
 /* Input meeting */
 .row-yes-no:after {
     content: 'NO';  
@@ -1379,16 +1351,23 @@ input#appbundle_relationship_status:checked + #appbundle_relationship_status_but
     font: 12px/26px Arial, sans-serif;
     font-weight: bold;
 }
-input#appbundle_relationship_meeting {
+input#appbundle_relationship_status,
+input#appbundle_relationship_meeting, 
+input#appbundle_relationship_numclosed,
+input#appbundle_relationship_kc,
+input#appbundle_relationship_fc{
     visibility: hidden;
 }
-input#appbundle_relationship_meeting:checked + #appbundle_relationship_meeting_button {
+input#appbundle_relationship_status:checked + #appbundle_relationship_status_button,
+input#appbundle_relationship_meeting:checked + #appbundle_relationship_meeting_button,
+input#appbundle_relationship_numclosed:checked + #appbundle_relationship_numclosed_button,
+input#appbundle_relationship_kc:checked + #appbundle_relationship_kc_button,
+input#appbundle_relationship_fc:checked + #appbundle_relationship_fc_button{
     left: 43px;
 }
 
 /* Input meetingCount */
 input#appbundle_relationship_meetingCount{
-    /*background-color: rgb(32, 43, 51);*/
     border: 1px solid #ccc;
     width: 60px;
     text-align: center;
@@ -1401,31 +1380,16 @@ input#appbundle_relationship_meetingCount::-webkit-outer-spin-button {
     -moz-appearance: textfield;
     margin: 0; 
 }
+
+#meeting-count-input{
+    margin-bottom: 5px;
+}
 #slider-meetingCount{
-    width: 60%;
+    width: 250px;
+    display: inline-block;
+    margin-left: 10px;
 }
 
-/* Input numclosed */
-input#appbundle_relationship_numclosed {
-    visibility: hidden;
-}
-input#appbundle_relationship_numclosed:checked + #appbundle_relationship_numclosed_button {
-    left: 43px;
-}
-/* Input kc */
-input#appbundle_relationship_kc {
-    visibility: hidden;
-}
-input#appbundle_relationship_kc:checked + #appbundle_relationship_kc_button {
-    left: 43px;
-}
-/* Input fc */
-input#appbundle_relationship_fc {
-    visibility: hidden;
-}
-input#appbundle_relationship_fc:checked + #appbundle_relationship_fc_button {
-    left: 43px;
-}
 /* Input select realtionshipRank */
 select#appbundle_relationship_relationshipRank{
     /*background-color: rgb(32, 43, 51);*/    

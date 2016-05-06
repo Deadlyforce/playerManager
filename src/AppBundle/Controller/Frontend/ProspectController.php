@@ -10,7 +10,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Csrf\CsrfToken;
-use Doctrine\Common\Collections\ArrayCollection; 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 /**
@@ -73,11 +72,11 @@ class ProspectController extends Controller
                 'action' => $this->generateUrl('prospect_update', array('id' => $id)),
                 'method' => 'PUT'
             ));
-            $delete_form = $this->createDeleteForm($id);
+//            $delete_form = $this->createDeleteForm($id);
             
             $editForm_view = $this->renderView(":Frontend/Prospect:edit.html.twig", array(
                 'editForm' => $editForm->createView(),
-                'delete_form' => $delete_form->createView()  
+//                'delete_form' => $delete_form->createView()  
             ));
 
             return new Response($editForm_view);
@@ -327,99 +326,26 @@ class ProspectController extends Controller
         
         $em = $this->getDoctrine()->getManager();
         $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
-        $manager = $this->get('prospect_manager');
 
         if (!$prospect) {
             throw $this->createNotFoundException('Unable to find Prospect entity.');
         }
 
-        if($prospect->getUser() === $user){
+        if($prospect->getUser() === $user){       
             
-            $originalPhotos = new ArrayCollection();
-
-            // Create an ArrayCollection of the current Photo objects in the database
-            foreach ($prospect->getPhotos() as $photo) {
-                $originalPhotos->add($photo);              
-            }
-        
-            $deleteForm = $this->createDeleteForm($id);
             $editForm = $this->createForm(ProspectType::class, $prospect, array(
                 'action' => $this->generateUrl('prospect_update', array('id' => $id)),
                 'method' => 'PUT'
             ));
             $editForm->handleRequest($request);
          
-            if ($editForm->isSubmitted() && $editForm->isValid()) {  
-         
-                $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
-                $photos = $prospect->getPhotos();  
+            if ($editForm->isSubmitted() && $editForm->isValid()) {                      
+                    
+                $em->persist($prospect);               
+                $em->flush();               
                 
-                // Check for changes in photos. Used for redirection below.
-                $changed = $manager->checkPhotoChange($originalPhotos, $photos);
-
-                if ($originalPhotos->isEmpty()) {
-                    // Case: update a Prospect without a previous photo
-                    
-                    // Set first element (photo) as primary selected = true so there's always a primary
-                    // If there's a new photo in the form
-                    if ($photos->first()) {
-                        $photos->first()->setSelected(true); 
-                    } 
-                    
-                    foreach ($photos as $photo) {
-                        $uploadableManager->markEntityToUpload($photo, $photo->getFile());
-                    }      
-                    
-                    $em->flush();
-                } else {
-                    // Case: update a Prospect with a previous photo, with and without changes
-                    // remove the relationship between the photo and the Prospect
-                    foreach ($originalPhotos as $originalPhoto) {
-
-                        if ($photos->contains($originalPhoto) === false) {
-                            // Remove deleted photos
-                            $prospect->removePhoto($originalPhoto);
-                           
-                            // if many-to-one relationship, remove also the relationship
-                            $originalPhoto->setProspect(null);    
-
-                            $em->remove($originalPhoto); // Delete the Photo entirely
-
-                            // Upload new photos
-                            foreach ($photos as $photo) {
-                                // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
-                                if ($photo->getFile()) {                                
-                                    $uploadableManager->markEntityToUpload($photo, $photo->getFile());
-                                }
-                            }
-                        } else {
-                            foreach ($photos as $photo) {
-                                // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
-                                if ($photo->getFile()) {                                
-                                    $uploadableManager->markEntityToUpload($photo, $photo->getFile());
-                                }
-                            }
-                        }
-                    }
-
-                    $em->persist($prospect);
-                    $em->flush();
-                }   
-                
-                // If change happened in photos.
-                if ($changed) {
-                    return $this->redirectToRoute('gallery', array('prospect_id' => $id));
-                } else {
-                    return $this->redirectToRoute('prospect_show', array('id' => $id));
-                }
+                return $this->redirectToRoute('prospect_show', array('id' => $id));
             }
-            // TO DELETE ?
-            return array(
-                'prospect' => $prospect,
-                'edit_form' => $editForm->createView(),
-                'delete_form' => $deleteForm->createView()
-            );
-            // ***
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
@@ -513,7 +439,7 @@ class ProspectController extends Controller
             $sourceStats = "$sourcesOnline, $sourcesIRL";
 
             return array(
-                'flakeStats' => "$flakeStats",
+                'flakeStats' => $flakeStats,
                 'sourceStats' => $sourceStats
             );
         } else {

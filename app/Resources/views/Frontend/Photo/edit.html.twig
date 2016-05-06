@@ -10,7 +10,7 @@
         </section>
         <div class="page-title-underline"></div>
         
-        <a class="page-button" href="{{ path('gallery', {'prospect_id': photo.prospect.id}) }}" title="back to gallery">Back to gallery</a>
+        <a class="btn-basic" href="{{ path('gallery', {'prospect_id': photo.prospect.id}) }}" title="back to gallery">Back to gallery</a>
         
         <form id="upload_form" enctype="multipart/form-data" method="post" action="{{ path('photo_crop', {'id': photo.id}) }}" onsubmit="return checkForm();">
             <!-- hidden crop params -->

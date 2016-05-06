@@ -6,6 +6,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\ArrayCollection; 
 
 use AppBundle\Form\PhotoType;
 use AppBundle\Form\ProspectType;
@@ -41,7 +42,7 @@ class PhotoController extends Controller
             $photos = $em->getRepository("AppBundle:Photo")->findBy(array("prospect" => $prospect));
             
             $editForm = $this->createForm(ProspectType::class, $prospect, array(
-                'action' => $this->generateUrl('prospect_update', array('id' => $prospect->getId())),
+                'action' => $this->generateUrl('prospect_photos_update', array('id' => $prospect->getId())),
                 'method' => 'PUT',
             ));            
             
@@ -50,6 +51,99 @@ class PhotoController extends Controller
                 'prospect' => $prospect,
                 'editForm' => $editForm->createView()
             );        
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+    }
+    
+    /**
+     * Updates photos in an existing Prospect entity.
+     *
+     * @Route("/{id}/photos_update", name="prospect_photos_update")
+     * @Method("PUT")
+     * @Template(":Frontend/Prospect:edit.html.twig")
+     */
+    public function updateAction(Request $request, $id)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+        $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
+        $manager = $this->get('prospect_manager');
+
+        if (!$prospect) {
+            throw $this->createNotFoundException('Unable to find Prospect entity.');
+        }
+
+        if($prospect->getUser() === $user){
+            
+            $originalPhotos = new ArrayCollection();
+
+            // Create an ArrayCollection of the current Photo objects in the database
+            foreach ($prospect->getPhotos() as $photo) {
+                $originalPhotos->add($photo);              
+            }
+            
+            $editForm = $this->createForm(ProspectType::class, $prospect, array(
+                'action' => $this->generateUrl('prospect_update', array('id' => $id)),
+                'method' => 'PUT'
+            ));
+            $editForm->handleRequest($request);
+         
+            if ($editForm->isSubmitted() && $editForm->isValid()) {  
+         
+                $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
+                $photos = $prospect->getPhotos();  
+
+                if ($originalPhotos->isEmpty()) {
+                    // Case: update a Prospect without a previous photo                    
+                    $manager->setFirstPhotoPrimary($photos);
+                    
+                    foreach ($photos as $photo) {
+                        $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+                    }      
+                    
+                    $em->flush();
+                } else {
+                    // Case: update a Prospect with a previous photo, with and without changes
+                    // remove the relationship between the photo and the Prospect
+                    foreach ($originalPhotos as $originalPhoto) {
+
+                        if ($photos->contains($originalPhoto) === false) {
+                            // Remove deleted photos
+                            $prospect->removePhoto($originalPhoto);                           
+                            // many-to-one relationship, remove also the relationship
+                            $originalPhoto->setProspect(null);    
+
+                            $em->remove($originalPhoto); // Delete the Photo entirely
+
+                            // Upload new photos
+                            foreach ($photos as $photo) {
+                                // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
+                                if ($photo->getFile()) { 
+                                    $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+                                }
+                            }
+                        } else {
+                            foreach ($photos as $photo) {
+                                // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
+                                if ($photo->getFile()) {                                
+                                    $uploadableManager->markEntityToUpload($photo, $photo->getFile());
+                                }
+                            }
+                        }
+                    }
+
+                    $em->persist($prospect);
+                    $em->flush();
+                }   
+              
+                return $this->redirectToRoute('gallery', array('prospect_id' => $id));               
+            }
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
@@ -112,11 +206,11 @@ class PhotoController extends Controller
             
             $src = $photo->getPath();
 
-            $img_r = imagecreatefromjpeg($src);
+            $img_r = imagecreatefromjpeg($src);           
             $dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
 
             imagecopyresampled($dst_r, $img_r, 0, 0, $x, $y, $targ_w, $targ_h, $width, $height);
-            // Write image ($dst_r) to destination path
+            // Write image ($dst_r) to destination path        
             imagejpeg($dst_r, $photo->getPath(), $jpeg_quality);
 
             // Update Photo entity filesize

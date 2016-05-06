@@ -80,7 +80,7 @@
             
         {# Modales #}
         <div class="modal fade modal-full" id="modal_prospect_form" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg">
+            <div class="modal-dialog modal-lg modal-dialog-scroll">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -111,7 +111,8 @@
     {% endblock %}
     
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function(){          
+            
             var locale = "{{ app.request.locale }}";      
            
             $('[data-toggle="tooltip"]').tooltip();            

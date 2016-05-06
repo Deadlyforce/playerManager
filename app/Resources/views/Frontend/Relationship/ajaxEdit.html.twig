@@ -15,9 +15,10 @@
             <div class="col-md-9 page-content">                   
                 {{ form_start(edit_form) }}
                     {{ form_row(edit_form.startDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
+                    
                     <div>
                         {{ form_label(edit_form.status, 'Ongoing relationship ?', {'label_attr': {'title': 'Do you still see each other ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }} 
-                        <div id="appbundle_relationship_status_row" class="relationship_row">
+                        <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.status) }}
                             <div id="appbundle_relationship_status_button" class="relationship_button"></div>   
                             {{ form_errors(edit_form.status) }}
@@ -25,21 +26,25 @@
                     </div>
                     <div>
                         {{ form_label(edit_form.meeting, 'Have you met ?') }}
-                        <div id="appbundle_relationship_meeting_row" class="relationship_row row-yes-no">
+                        <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.meeting) }}
                             <div id="appbundle_relationship_meeting_button"></div>   
                             {{ form_errors(edit_form.meeting) }}
                         </div>           
                     </div>           
-                    <div>           
+                    <div>
+                        <div id="meeting-count-input">
                         {{ form_label(edit_form.meetingCount, 'Meeting count', {'label_attr': {'title': 'How many dates so far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}     
                         {{ form_widget(edit_form.meetingCount) }}
-                        <div id="slider-meetingCount"></div>
+                        </div>
+                        <div>
+                            <label></label><div id="slider-meetingCount"></div>
+                        </div>
                         {{ form_errors(edit_form.meetingCount) }}                        
                     </div>
                     <div>
                         {{ form_label(edit_form.numclosed, 'Phone number', {'label_attr': {'title': 'Did you get a phone number ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
-                        <div id="appbundle_relationship_numclosed_row" class="relationship_row row-yes-no">
+                        <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.numclosed) }}
                             <div id="appbundle_relationship_numclosed_button" class="relationship_button"></div>   
                             {{ form_errors(edit_form.meeting) }}
@@ -47,7 +52,7 @@
                     </div>    
                     <div class="collapse">
                         {{ form_label(edit_form.kc, 'Have you kissed ?') }}
-                        <div id="appbundle_relationship_kc_row" class="relationship_row row-yes-no">
+                        <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.kc) }}
                             <div id="appbundle_relationship_kc_button" class="relationship_button"></div>   
                             {{ form_errors(edit_form.kc) }}
@@ -55,7 +60,7 @@
                     </div>    
                     <div class="collapse">
                         {{ form_label(edit_form.fc, 'Did you have sex ?') }}
-                        <div id="appbundle_relationship_fc_row" class="relationship_row row-yes-no">
+                        <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.fc) }}
                             <div id="appbundle_relationship_fc_button" class="relationship_button"></div>   
                             {{ form_errors(edit_form.fc) }}
@@ -93,6 +98,8 @@
     </div>
     <script type="text/javascript">
         $(document).ready(function(){
+            getDatepicker();
+            
             $('[data-toggle="tooltip"]').tooltip();
             
             // Masking of kc and fc fields if no meeting

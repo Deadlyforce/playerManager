@@ -69,6 +69,7 @@
             <div class="clearfix"></div>
             
             {{ form_row(editForm.submit, {'attr': {'class': 'btn-basic-rose pull-right'}}) }}
+            
             <div class="hidden">{{ form_rest(editForm) }}</div>
             
             {# Modal: change photo #}
@@ -94,21 +95,25 @@
     <script type="text/javascript">
         $(document).ready(function(){
 
-            // Only one checkbox ticked at a time when selecting primary photo
-            $("input[type='checkbox']").on("change", function(){
-                                
+            // Mandatory one checkbox checked
+            // and only one checkbox ticked at a time when selecting primary photo                                         
+            $("input[type='checkbox']").on("click", function(e){               
                 $("input[type='checkbox']").not(this).prop("checked", false);
                 
                 // Put back original border css and add "highlight" css for selected photo
                 $("input[type='checkbox']").not(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "0");                
-                $(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");
-            });            
+                $(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");               
+            });
+            
+                       
             
             // Highlight selected photo at doc ready
             $("input[type='checkbox']:checked").closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");          
           
             // Colorbox for full sized image
             $("a.gallery").colorbox({
+                maxHeight: "90%",
+                maxWidth: "90%",
                 onLoad: function(){
                     $('#cboxClose').html('&times;'); // Replace the close button
                 }
@@ -126,6 +131,7 @@
             });            
             
             // On click on "change" photo
+            // moves prototype form inside modal and diplays it ****************
             $("#photo-list").on("click", ".change-photo", function(e){
                 e.preventDefault();
 
@@ -135,25 +141,26 @@
                 $("<div id="+liId+"></div>").appendTo("#photoFormModal .modal-body");
                 $(inputFile).appendTo("#photoFormModal .modal-body");               
                 
-                $(inputFile).on('change', function () {
-                    var files = $(this)[0].files;
+                // Get a new file
+                $(inputFile).on('change', function () {                                       
+                    var files = $(this)[0].files;                 
                    
                     if (files.length > 0) {
-                        // On part du principe qu'il n'y qu'un seul fichier (pas d'attribut "multiple")
+                        // Un seul fichier (pas d'attribut "multiple")
                         var 
                             file = files[0], 
                             image_preview = $('#image_preview')
-                        ;                            
-                          
+                        ;                   
+                    
                         // Ici on injecte les informations recoltées sur le fichier pour l'utilisateur
                         image_preview.find('img').attr('src', window.URL.createObjectURL(file));
                     }
-                });
+                });                
 
                 $("#photoFormModal").modal("show");
             });
             
-            // On modal close :
+            // On modal close **************************************************
             $('#photoFormModal').on('hidden.bs.modal', function () {
                 var liId = $("#image_preview").next().attr("id");
                 var inputFile = $("#photoFormModal").find("input");
@@ -174,7 +181,7 @@
             });
 
 
-            // On click on class "form-new" (new li with form prototype)
+            // On click on class "form-new" (new li with form prototype)********
             // Put preview in photo-frame
             $("#photo-list").on("change", ".new-form input[type='file']", function(){
                 var files = $(this)[0].files;
@@ -224,8 +231,7 @@
                 $("#appbundle_prospect_photos_" + (index - 1));
             }
         });
-    
-
+        
     </script>
 {% endblock %}
 
