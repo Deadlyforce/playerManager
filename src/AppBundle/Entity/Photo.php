@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="photo")
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\PhotoRepository")
- * @Gedmo\Uploadable(pathMethod="userPath", filenameGenerator="SHA1", allowOverwrite=true)
+ * @Gedmo\Uploadable(pathMethod="userPath", filenameGenerator="SHA1", maxSize=1200000, allowOverwrite=true, allowedTypes="image/jpeg")
  */
 class Photo {
     
@@ -64,8 +64,7 @@ class Photo {
     /**
      * @var file 
      * 
-     * @Assert\NotBlank()
-     * @Assert\Image(maxSize="2000000") 
+     * @Assert\NotBlank()     
      */
     private $file;   
     
@@ -78,27 +77,27 @@ class Photo {
     private $selected;
     
     /**
- * Set selected
- *
- * @param boolean $selected
- * @return Photo
- */
-public function setSelected($selected)
-{
-	$this->selected = $selected;     
-	
-	return $this;
-}
+     * Set selected
+     *
+     * @param boolean $selected
+     * @return Photo
+     */
+    public function setSelected($selected)
+    {
+            $this->selected = $selected;     
 
-/**
-* Get selected
-* 
-* @return boolean
-*/
-public function getSelected()
-{
-	return $this->selected;
-}
+            return $this;
+    }
+
+    /**
+     * Get selected
+     * 
+     * @return boolean
+     */
+    public function getSelected()
+    {
+            return $this->selected;
+    }
     
     /************************* GETTERS SETTERS ********************************/
     

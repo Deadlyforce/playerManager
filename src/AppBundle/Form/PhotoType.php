@@ -20,9 +20,11 @@ class PhotoType extends AbstractType
         
         $builder   
             ->add('file', FileType::class, array(
-                'label' => false                
+                'label' => false, 
+                'attr' => array(
+                    'accept' => 'image/jpeg' 
                 )
-            )
+            ))
             ->add('selected', CheckboxType::class, array(                
                 'label' => "Primary",
                 'required' => false

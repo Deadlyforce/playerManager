@@ -73,7 +73,7 @@ class PhotoController extends Controller
         
         $em = $this->getDoctrine()->getManager();
         $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
-        $manager = $this->get('prospect_manager');
+        $manager = $this->get('photo_manager');
 
         if (!$prospect) {
             throw $this->createNotFoundException('Unable to find Prospect entity.');
@@ -98,14 +98,15 @@ class PhotoController extends Controller
          
                 $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
                 $photos = $prospect->getPhotos();  
-
+//var_dump($photos);
+//var_dump($photos->getValues());
+//die();
                 if ($originalPhotos->isEmpty()) {
-                    // Case: update a Prospect without a previous photo                    
-                    $manager->setFirstPhotoPrimary($photos);
+                    $missingFiles = $manager->updateEmptyGallery($photos, $uploadableManager);
                     
-                    foreach ($photos as $photo) {
-                        $uploadableManager->markEntityToUpload($photo, $photo->getFile());
-                    }      
+                    if (in_array(false, $missingFiles)) {
+                        return $this->redirectToRoute('gallery', array('prospect_id' => $id));
+                    }    
                     
                     $em->flush();
                 } else {
@@ -115,11 +116,9 @@ class PhotoController extends Controller
 
                         if ($photos->contains($originalPhoto) === false) {
                             // Remove deleted photos
-                            $prospect->removePhoto($originalPhoto);                           
-                            // many-to-one relationship, remove also the relationship
-                            $originalPhoto->setProspect(null);    
-
-                            $em->remove($originalPhoto); // Delete the Photo entirely
+                            $prospect->removePhoto($originalPhoto);                                
+                            $originalPhoto->setProspect(null); // remove also the relationship
+                            $em->remove($originalPhoto); // Delete the Photo entirely (Doctrine)
 
                             // Upload new photos
                             foreach ($photos as $photo) {

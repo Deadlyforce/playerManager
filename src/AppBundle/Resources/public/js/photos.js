@@ -3,9 +3,6 @@ var collectionHolder;
 var addPhotoLink = $('<a href="#" class="add-photo">Add photo</a>');
 var newLiAddPhoto = $('<li class="col-md-4"></li>').append(addPhotoLink);
 
-$(document).ready(function(){
-   
-});
 
 function addPhotoForm(collectionHolder, newLiAddPhoto, imgDir)
 {
@@ -22,7 +19,7 @@ function addPhotoForm(collectionHolder, newLiAddPhoto, imgDir)
 
     // Display the form in the page in an li, before the "Add a photo" link li
     var photoFrame = "<div class='photo-frame'><img class='tall' src='"+imgDir+"prospect_no_photo.jpg' alt='No photo' /></div>";
-    var photoActions = "<div class='photo-actions'><div><div class='file-selector'>"+ newForm +"</div><div class='delete-photo pull-right'></div></div></div>";
+    var photoActions = "<div class='photo-actions'><div><div class='file-selector pull-left'>"+ newForm +"</div><div class='delete-photo pull-right'></div></div></div>";   
     
     var newFormLi = $("<li class='col-md-4 new-form'>" + photoFrame + photoActions + "</li>");
     

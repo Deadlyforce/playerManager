@@ -589,6 +589,9 @@ p.confirmed{
 .modal-content{
     border-radius: 0px;
 }
+.alert-danger{
+    border-radius: 0px;
+}
 
 /************************ JCONFIRM OVERRIDES ****************************/
 
@@ -620,6 +623,9 @@ p.confirmed{
 
 .page-nav{
     margin-bottom: 25px;
+}
+.page-nav a{
+    margin-bottom: 5px;
 }
 
 section.page-title{
@@ -1574,6 +1580,8 @@ table.record_properties th{
 /** NEW FORM PROTOTYPE **/
 .new-form .file-selector{
     display: inline-block;
+    width: 270px;
+    overflow: hidden;
 }
 .new-form .delete-photo{
     display: inline-block;
@@ -1597,6 +1605,10 @@ ul#photo-list{
 ul#photo-list .row > li{
     margin-bottom: 15px;
 }
+
+/*ul#photo-list input[type="file"]{
+    width: 80%;
+}*/
 
 a.add-photo{
     color: #999;

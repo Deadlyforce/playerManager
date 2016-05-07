@@ -41,6 +41,12 @@ services:
             - '@doctrine.orm.entity_manager'
             - '@security.token_storage'
             
+    photo_manager:
+        class: AppBundle\DependencyInjection\Managers\PhotoManager
+        arguments:            
+            - '@doctrine.orm.entity_manager'
+            - '@security.token_storage'
+            
     default_manager:
         class: AppBundle\DependencyInjection\Managers\DefaultManager
         arguments: 
