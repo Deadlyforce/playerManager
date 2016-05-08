@@ -144,7 +144,7 @@
                         var image_preview = $('#image_preview');     
                         
                         var img = image_preview.find('img');
-                        img.attr('src', window.URL.createObjectURL(file)); // Chosen photo replaces placeholder                                          
+                        img.attr('src', window.URL.createObjectURL(file)); // Update modal preview                      
                     }
                 });                
 
@@ -158,11 +158,29 @@
                 var inputFile = $("#photoFormModal").find("input");                
                 $(inputFile).appendTo($("#"+liId+" .prototype")); // Put form prototype back in place               
                 
-                var src = $('#image_preview').find('img').attr('src'); // Update page preview              
+                var src = $('#image_preview').find('img').attr('src'); // Update page preview   
+                var img = $("#"+liId+" .photo-frame img");
                 
                 if (src != "/bundles/app/images/prospect_no_photo.jpg") {                              
-                    $("#"+liId+" .photo-frame img").attr("src", src);  
+                    img.attr("src", src);  
                 }
+                
+                // Duplicate image and read width and height with callback.
+                var image = new Image();
+
+                function loadImage(callback){
+                    image.onload = function() {                     
+                        callback(this.width, this.height);
+                    };                            
+                }
+                image.src = src;
+
+                loadImage(function(imgwidth, imgheight){
+                    // Get img ratio and put right class for display
+                    var imgClass = (imgwidth/imgheight > 1) ? 'wide' : 'tall';
+                    img.removeClass().addClass(imgClass);
+                });
+                                
                 
                 // Cleanup and put the image preview template div, back in place
                 $('#photoFormModal .modal-body').empty();
