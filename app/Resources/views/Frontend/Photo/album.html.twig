@@ -13,7 +13,7 @@
         <div class="row row-album">
         {% for photo in photos %}
             <div class="col-md-2">
-                <img class="img-responsive" src="{{ photo.path | imagine_filter('thumb_prospect_index') }}" />     
+                <img class="img-responsive" src="{{ photo.path | imagine_filter('thumb_prospect_175') }}" />     
             </div>
             
             {% if loop.index % 6 == 0 %} {# Close the div row every 3rd item and open a new one #}

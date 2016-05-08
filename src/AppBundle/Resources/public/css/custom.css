@@ -898,10 +898,10 @@ table.dataTable.no-footer {
 /******************************* PROSPECTS - INDEX *********************************/
 
 .prospect-record{
-    color: #666;
-    background-color: #fff;
-    margin: 0px 0px 85px 0px;
-    position: relative;
+    /*color: #666;*/
+    /*background-color: #fff;*/
+    margin: 0px 0px 50px 0px;
+    /*position: relative;*/
     /*box-shadow: 1px 1px 5px 2px rgba(0,0,0,0.2);*/
 }
 .prospect-record .row{
@@ -917,37 +917,38 @@ table.dataTable.no-footer {
 .prospect-record-card{
     padding-left: 0px;
     padding-top: 10px;
-    height: 250px;
+    /*height: 250px;*/
 }
 p.record-firstname{
-    font-size: 2em;
+    font-size: 1.6em;
     font-family: "ralewaylight", sans-serif;
     display: inline-block;
     vertical-align: top;
 }
-p.record-date{
+/*p.record-date{
     font-family: sans-serif;
     font-size: 1.2em;
     display: inline-block;
     padding-top: 12px;
-}
-.card-separator{
+}*/
+/*.card-separator{
     border-bottom: 1px solid #fff;
     margin-bottom: 15px;
-}
-.prospect-record-card p.record-info span{
+}*/
+/*.prospect-record-card p.record-info span{
     font-weight: 600;
     display: inline-block;
     width: 100px;
-}
-.prospect-record-card p.record-info{
+}*/
+/*.prospect-record-card p.record-info{
     font-size: 1.1em;
-}
+}*/
 
 .row-actions{
-    position: absolute;
+    /*position: absolute;*/
+    position: relative;
     right: 0;
-    bottom: -50px;
+    /*bottom: -50px;*/
     z-index: 2;
     width: 100%;
 }
@@ -962,7 +963,7 @@ ul.record-actions{
     float: right;
 }
 .record-actions li{
-    float: right;
+    float: left;
     text-align: center;
 }
 .record-actions a{
@@ -993,7 +994,7 @@ ul.record-actions{
     font-family: "ralewayregular", sans-serif;
 }
 .record-actions li.separator{
-    float: right;
+    float: left;
     text-align: center;
     width: 50px;
     height: 50px;
@@ -1020,9 +1021,10 @@ ul.record-actions{
     margin-right: 10px;
 }
 .pagination span.current{ 
-    background-color: rgb(244, 115, 99);
+    background-color: #DA6759;
     padding: 10px 15px;
-    color: #202B33;
+    color: #fff;
+    font-weight: 800;
 }
 .pagination span a{    
     background-color: rgb(244, 115, 99);
@@ -1272,6 +1274,16 @@ ul.record_actions{
 
 /**************************** RELATIONSHIP EDIT *******************************/
 
+#container-relationship .page-nav{
+    margin-bottom: 35px;
+}
+#container-relationship .page-nav p{
+    font-family: "ralewayregular", sans-serif;
+    text-align: center;
+    font-size: 1.2em;
+    color: #F47363;
+}
+
 form[name="appbundle_relationship"] > div {
     margin-bottom: 20px;
 }
@@ -1284,7 +1296,6 @@ form[name="appbundle_relationship"] label{
 }
 
 input#appbundle_relationship_startDate {
-    /*background-color: #202B33;*/
     border-bottom: 1px solid rgb(137, 155, 142);
     border-top: none;
     border-left: none;
@@ -1318,24 +1329,6 @@ input#appbundle_relationship_startDate {
     transition: all 0.4s ease;
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.4);
 }
-#appbundle_relationship_meeting_button {
-    display: block;
-    width: 34px;
-    height: 20px;
-    cursor: pointer;
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    z-index: 1;
-    background: #fcfff4;
-    background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-    background: linear-gradient(to bottom, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
-    border-radius: 50px;
-    -webkit-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.3);
-}
-
 /* Input meeting */
 .row-yes-no:after {
     content: 'NO';  
@@ -1361,14 +1354,18 @@ input#appbundle_relationship_status,
 input#appbundle_relationship_meeting, 
 input#appbundle_relationship_numclosed,
 input#appbundle_relationship_kc,
-input#appbundle_relationship_fc{
+input#appbundle_relationship_fc,
+input#appbundle_relationship_flake,
+input#appbundle_relationship_distance{
     visibility: hidden;
 }
 input#appbundle_relationship_status:checked + #appbundle_relationship_status_button,
 input#appbundle_relationship_meeting:checked + #appbundle_relationship_meeting_button,
 input#appbundle_relationship_numclosed:checked + #appbundle_relationship_numclosed_button,
 input#appbundle_relationship_kc:checked + #appbundle_relationship_kc_button,
-input#appbundle_relationship_fc:checked + #appbundle_relationship_fc_button{
+input#appbundle_relationship_fc:checked + #appbundle_relationship_fc_button,
+input#appbundle_relationship_flake:checked + #appbundle_relationship_flake_button,
+input#appbundle_relationship_distance:checked + #appbundle_relationship_distance_button{
     left: 43px;
 }
 
@@ -1394,6 +1391,10 @@ input#appbundle_relationship_meetingCount::-webkit-outer-spin-button {
     width: 250px;
     display: inline-block;
     margin-left: 10px;
+}
+.ui-state-active, .ui-widget-content .ui-state-active{
+    background-color: #F47363;
+    border: 1px solid #F47363;
 }
 
 /* Input select realtionshipRank */

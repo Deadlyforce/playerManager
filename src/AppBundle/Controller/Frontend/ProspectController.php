@@ -224,7 +224,13 @@ class ProspectController extends Controller
             
             $em = $this->getDoctrine()->getManager();
             
-            $prospect->getRelationship()->setMeetingCount(0);       // Needed, not nullable
+            if ($prospect->getSource()->getId() === 2) {
+                $prospect->getRelationship()->setMeeting(true); // Needed, not nullable
+                $prospect->getRelationship()->setMeetingCount(1); // Needed, not nullable
+            } else {
+                $prospect->getRelationship()->setMeetingCount(0);
+            }
+                   
             $prospect->getRelationship()->setStartDate(new \DateTime());  // Needed, not nullable
             
             $em->persist($prospect);         

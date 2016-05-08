@@ -37,16 +37,20 @@ class CachePhotoListener
     public function preRemove(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
-        $filter = 'thumb_prospect_index';
+//        $filter = 'thumb_prospect_250';
         
-        if ($entity instanceof Photo) {
-            // Added check if the thumb exists
-            // when a previous postUpdate deleted the whole cache folder without regenerating the thumbs
-            $expectedCachePath = $this->cacheManager->getBrowserPath($entity->getPath(), $filter);            
+        $filters = array('thumb_prospect_250', 'thumb_prospect_175');
+        
+        foreach($filters as $filter){
+            if ($entity instanceof Photo) {
+                // Added check if the thumb exists
+                // when a previous postUpdate deleted the whole cache folder without regenerating the thumbs
+                $expectedCachePath = $this->cacheManager->getBrowserPath($entity->getPath(), $filter);            
 
-            if (file_exists($expectedCachePath)) {
-                $this->cacheManager->resolve($this->request, $entity->getPath(), $filter);
-                $this->cacheManager->remove($entity->getPath());
+                if (file_exists($expectedCachePath)) {
+                    $this->cacheManager->resolve($this->request, $entity->getPath(), $filter);
+                    $this->cacheManager->remove($entity->getPath());
+                }
             }
         }
     }

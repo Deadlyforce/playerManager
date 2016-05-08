@@ -5,7 +5,8 @@
         
         <div class="page-nav">
             {#                <a  class="btn-dark" href="{{ path('relationship_show', {'id': relationship.id }) }}"><i class="fa fa-caret-left"></i> Relationship</a>#}
-            <a class="btn-basic" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact">Contact page</a>
+{#            <a class="btn-basic" href="{{ path('prospect_show', {"id": relationship.prospect.id}) }}" title="Show contact">Contact page</a>#}
+            <p>Move the buttons right or left so you can read your choice.</p>
         </div>
         
         <div class="row">
@@ -28,10 +29,18 @@
                         {{ form_label(edit_form.meeting, 'Have you met ?') }}
                         <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.meeting) }}
-                            <div id="appbundle_relationship_meeting_button"></div>   
+                            <div id="appbundle_relationship_meeting_button" class="relationship_button"></div>   
                             {{ form_errors(edit_form.meeting) }}
                         </div>           
-                    </div>           
+                    </div>  
+                    <div>
+                        {{ form_label(edit_form.flake, 'Flaky person', {'label_attr': {'title': 'If a date was planned, did he/she show up ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        <div class="relationship_row row-yes-no">
+                            {{ form_widget(edit_form.flake) }}
+                                <div id="appbundle_relationship_flake_button" class="relationship_button"></div>
+                            {{ form_errors(edit_form.flake) }}
+                        </div>
+                    </div>
                     <div>
                         <div id="meeting-count-input">
                         {{ form_label(edit_form.meetingCount, 'Meeting count', {'label_attr': {'title': 'How many dates so far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}     
@@ -67,20 +76,18 @@
                         </div>           
                     </div>    
                     <div>
-                        {{ form_label(edit_form.relationshipRank, 'Relationship level', {'label_attr': {'title': 'What is the nature of the relationship so far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        {{ form_label(edit_form.relationshipRank, 'Relationship level', {'label_attr': {'title': 'Nature of the relationship so far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
                         {{ form_widget(edit_form.relationshipRank) }}
                         {{ form_errors(edit_form.relationshipRank) }}
                     </div>
                     <div>
                         {{ form_label(edit_form.distance, 'Distance problem ?', {'label_attr': {'title': 'Is he/she living too far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
-                        {{ form_widget(edit_form.distance) }}
-                        {{ form_errors(edit_form.distance) }}
-                    </div>
-                    <div>
-                        {{ form_label(edit_form.flake, 'Flake', {'label_attr': {'title': 'Did he/she show up on the first planned date ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
-                        {{ form_widget(edit_form.flake) }}
-                        {{ form_errors(edit_form.flake) }}
-                    </div>
+                        <div class="relationship_row row-yes-no">
+                            {{ form_widget(edit_form.distance) }}
+                            <div id="appbundle_relationship_distance_button" class="relationship_button"></div>
+                            {{ form_errors(edit_form.distance) }}
+                        </div>                    
+                    </div>                    
                     <div>
                         {{ form_label(edit_form.about, 'About', {'label_attr': {'title': 'Your comments', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
                         {{ form_widget(edit_form.about) }}

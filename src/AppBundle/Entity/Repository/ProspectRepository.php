@@ -81,7 +81,7 @@ class ProspectRepository extends EntityRepository
             SELECT COUNT(r.flake)
             FROM AppBundle:Relationship r LEFT JOIN r.prospect p
             WHERE p.user = :user
-            AND r.meeting = 1
+            AND r.meeting = 0
             AND r.flake = 1
         ')
          ->setParameter('user', $user);

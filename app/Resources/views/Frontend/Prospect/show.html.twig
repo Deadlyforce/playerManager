@@ -45,7 +45,11 @@
                     {% endif %}
                 </div>
                 <table class="table table-responsive" id="table-prospect-show">
-                    <tbody>                    
+                    <tbody>
+                        <tr>
+                            <th>Creation date</th> 
+                            <td>{{ prospect.creationDate|date('d-m-Y') }}</td>
+                        </tr>
                         <tr>
                             <th>Nickname</th>
                             <td>{{ prospect.nickname }}</td>
@@ -81,11 +85,7 @@
                         <tr>
                             <th>Source</th>
                             <td>{{ prospect.source }}</td>
-                        </tr>
-                        <tr>
-                            <th>Creation date</th>
-                            <td>{{ prospect.creationDate|date('d-m-Y') }}</td>
-                        </tr>
+                        </tr>                        
                     </tbody>
                 </table>                             
             </div> 
@@ -93,16 +93,17 @@
         </div>
         <div class="show-actions">
             <ul>                  
-                <li class="icon-title">
-                    <p>Ratings</p>
+                <li class="icon-title"><p>Gallery</p></li>
+                <li>
+                    <a href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Add and remove photos"><i class="icon ion-ios-albums-outline"></i></a>
                 </li>
+                <li class="icon-separator"></li>
+                <li class="icon-title"><p>Ratings</p></li>
                 <li>
                     <a href="{{ path('rating_edit', {'prospect_id': prospect.id}) }}" title="Rate this contact"><i class="icon ion-ios-star-outline"></i></a>
                 </li>
                 <li class="icon-separator"></li>
-                <li class="icon-title">
-                    <p>Relationship</p>
-                </li>                       
+                <li class="icon-title"><p>Relationship</p></li>                       
                 <li>
                     {% if prospect.relationship %}
                         <a class="" href="{{ path('relationship_show', { 'id': prospect.relationship.id }) }}" title="Show relationship">
@@ -111,17 +112,13 @@
                     {% endif %}
                 </li>
                 <li class="icon-separator"></li>
-                <li class="icon-title">
-                    <p>Encounters</p>
-                </li>
+                <li class="icon-title"><p>Encounters</p></li>
                 <li class="icon-add">
                     {# AJAX TO DO !! #}
                     <a id="new-encounter" href="#" title="Add new encounter"><i class="icon ion-ios-plus-empty"></i></a>
                 </li>
                 <li class="icon-separator"></li>  
-                <li class="icon-title">
-                    <p>Contact</p>
-                </li>
+                <li class="icon-title"><p>Contact</p></li>
                 <li>
                     <a id="edit_prospect" href="#" title="Edit contact"><i class="icon ion-ios-compose-outline"></i></a>                
                 </li>                
