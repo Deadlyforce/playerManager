@@ -7,6 +7,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection; 
+//use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Form\PhotoType;
 use AppBundle\Form\ProspectType;
@@ -20,6 +21,37 @@ use AppBundle\Form\ProspectType;
  */
 class PhotoController extends Controller
 {
+    /**
+     * Returns a crop form
+     * 
+     * @Route("/{id}/edit", name="ajax_crop_form", options={"expose"=true})
+     * @Template(":ajax.html.twig")
+     */
+//    public function ajaxCropFormAction($id)
+//    {
+//        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+//            throw $this->createAccessDeniedException('You cannot access this page!');
+//        }        
+//        $user = $this->get('security.token_storage')->getToken()->getUser();
+//        
+//        $em = $this->getDoctrine()->getManager();
+//        $photo = $em->getRepository('AppBundle:Photo')->find($id);
+//        
+//        if($photo->getProspect()->getUser() === $user){      
+//            
+//            $form = $this->createForm(PhotoType::class, $photo);            
+//            $form_view = $this->renderView(":Frontend/Photo:edit.html.twig", array(
+//                'form' => $form->createView(),
+//                'photo' => $photo
+//            ));
+//            
+//            return new Response($form_view);
+//        } else {
+//            throw $this->createAccessDeniedException('You cannot access this page!');
+//        }
+//        
+//    }
+    
     /**
      * Gallery index for a given prospect
      * 
@@ -98,9 +130,7 @@ class PhotoController extends Controller
          
                 $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
                 $photos = $prospect->getPhotos();  
-//var_dump($photos);
-//var_dump($photos->getValues());
-//die();
+
                 if ($originalPhotos->isEmpty()) {
                     $missingFiles = $manager->updateEmptyGallery($photos, $uploadableManager);
                     
@@ -122,14 +152,14 @@ class PhotoController extends Controller
 
                             // Upload new photos
                             foreach ($photos as $photo) {
-                                // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
+                                // if $photo->getFile() is null, the file hasn't changed. No need to re-upload. Else re-validate upload.
                                 if ($photo->getFile()) { 
                                     $uploadableManager->markEntityToUpload($photo, $photo->getFile());
                                 }
                             }
                         } else {
                             foreach ($photos as $photo) {
-                                // if $photo->getFile() is null, it means the file hasn't changed. No need to re-upload. Else re-validate upload.
+                                // if $photo->getFile() is null, the file hasn't changed. No need to re-upload. Else re-validate upload.
                                 if ($photo->getFile()) {                                
                                     $uploadableManager->markEntityToUpload($photo, $photo->getFile());
                                 }
@@ -149,8 +179,8 @@ class PhotoController extends Controller
     }
     
     /**
-     * Edit photo (for cropping)
-     * 
+     * Crop photo 
+     *  
      * @Route("/{id}/edit", name="photo_edit")
      * @Template(":Frontend\Photo:edit.html.twig")
      */

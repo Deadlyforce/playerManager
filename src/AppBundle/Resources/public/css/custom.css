@@ -1647,12 +1647,16 @@ form#upload-form{
     border: 1px solid rgb(204, 204, 204);
     padding: 10px;
 }
+img#crop-preview{
+    margin: 0 auto;
+}
 
 .jcrop-holder{
     margin: 30px auto;
 }
 #crop-info{
     text-align: center;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 

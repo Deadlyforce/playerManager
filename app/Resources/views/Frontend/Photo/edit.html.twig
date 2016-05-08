@@ -1,6 +1,7 @@
 {% extends '::base.html.twig' %}
+{#{% extends '::ajax_crop.html.twig' %}#}
 
-{% block title %}Edit photo{% endblock %}
+{% block title %}Crop photo{% endblock %}
 
 {% block content %}  
     <div class="container">
@@ -30,15 +31,13 @@
                 <input type="text" id="h" name="h" />
             </div>
 
-            <input class="btn btn-submit" type="submit" value="Crop image" />
+            <input class="btn-basic-rose" type="submit" value="Crop image" />
         </form>       
     </div>
     
     <script type="text/javascript">
-
-        $(document).ready(function(){        
-
-
+        $(document).ready(function(){            
+            
             $('#crop-preview').Jcrop({
                 aspectRatio: 1,
                 minSize: [128, 128], // min crop size            
@@ -49,7 +48,7 @@
                 onRelease: clearInfo
             });
         });
-
+            
         function checkCoords()
         {
             if (parseInt($('#w').val())) return true;
@@ -76,6 +75,8 @@
             if (parseInt($('#w').val())) return true;
             $('.error').html('Please select a crop region and then press Upload').show();
             return false;
-        }   
-    </script>
+        }           
+                   
+    </script>    
 {% endblock %}
+

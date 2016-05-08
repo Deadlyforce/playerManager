@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    
+<head>
+    <meta charset="UTF-8" />            
+    {% block stylesheets %}
+        {% stylesheets filter='cssrewrite' 
+            'bundles/app/packages/Jcrop/css/jquery.Jcrop.min.css'                    
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    {% block javascripts %}
+        {% javascripts
+            'bundles/app/packages/Jcrop/js/jquery.Jcrop.min.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+    {% endblock %}
+</head>
+<body>
+    {% block content %}          
+    {% endblock %}     
+</body>
+
+</html>

@@ -47,6 +47,7 @@
                                             </li>
                                              <li>
                                                 <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo"><i class="icon ion-ios-crop-strong"></i></a>
+{#                                                <a class="crop-photo" href="#" data-id="{{ photo.vars.data.id }}" title="Crop photo"><i class="icon ion-ios-crop-strong"></i></a>#}
                                             </li>
                                             <li class="delete-photo" title="Delete photo">
                                                 {# Container for the delete button #}
@@ -91,41 +92,62 @@
                 </div>
             </div>
         {{ form_end(editForm) }}
+                
+        {# Modales #}
+        {#<div class="modal fade modal-full" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg modal-dialog-scroll">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
+                        </button>
+                        <h2 class="modal-title"></h2>
+                    </div>    
+                    <div class="modal-body">#}
+                        {# Form returned by ajax #}
+                    {#</div>                       
+                </div>    
+            </div>
+        </div>#}
+
+        {# POPUP OVERLAY D'ATTENTE AJAX #}
+        {#<div class="overlay"></div>
+        <div class="loader_standard">
+            <p>Loading...</p>
+        </div>#}
     </div>   
     
         
     <script type="text/javascript">
         $(document).ready(function(){
+{#            var locale = "{{ app.request.locale }}"; #}
             
-            // Mandatory one checkbox checked
-            // and only one checkbox ticked at a time when selecting primary photo                                         
-            $("input[type='checkbox']").on("click", function(e){               
-                $("input[type='checkbox']").not(this).prop("checked", false);
+            {#$(".crop-photo").click(function(event){
+                event.preventDefault();
                 
-                // Put back original border css and add "highlight" css for selected photo
-                $("input[type='checkbox']").not(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "0");                
-                $(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");               
-            });                      
-            
-            // Highlight selected photo at doc ready
-            $("input[type='checkbox']:checked").closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");          
-          
-                        
-            
-            // Adjust photo-frame height for existing photos and "add photo" at doc ready
-            var width = $(".photo-frame").width();
-            $(".photo-frame").height(width);
-            $("a.add-photo").height(width);
-
-            // Adjust photo placement with ratio at doc ready
-            $("#photo-list .photo-frame").find("img").each(function(){
-                var imgClass = (this.width/this.height > 1) ? 'wide' : 'tall';
-                $(this).addClass(imgClass);
-            });            
+                $(".loader_standard").show();
+                
+                var id = $(this).data("id");
+                var url = Routing.generate('ajax_crop_form', {'id':id, '_locale': locale});
+                
+                $.get(url, function(response){                   
+                    $(".modal-body").html(response); 
+                    
+                    $(".loader_standard").hide(200, function(){});                                     
+                    
+                    $(".modal-title").text("Crop photo");
+                    $('.modal-full').modal('show');
+                });
+            });#}
             
            
-            // On click on "change" photo
-            // moves prototype form inside modal and diplays it ****************
+                    
+            
+                                  
+                           
+           
+            // On click on "change" photo **************************************
+            // moves prototype form inside modal and diplays it
             $("#photo-list").on("click", ".change-photo", function(e){
                 e.preventDefault();
 
@@ -189,7 +211,7 @@
             });
 
 
-            // On click on class "form-new" (new li with form prototype)********
+            // Add photo with form prototype ***********************************
             // Put preview in photo-frame
             $("#photo-list").on("change", ".new-form input[type='file']", function(){  
                 $(".alert-danger").hide().empty();
