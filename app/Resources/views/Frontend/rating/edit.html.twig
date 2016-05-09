@@ -73,7 +73,7 @@
         $(document).ready(function(){            
             
             $("form[name='appbundle_rating'] input[max=5]").each(function(index, input) {
-{#                console.log(input.value);#}
+
                 var bddValue = input.value;
                 
                 $(input).parent().prev().starRating({
@@ -85,10 +85,8 @@
                     emptyColor: '#ddd',
                     hoverColor: 'gold',
                     useFullStars: true,
-                    callback: function(currentRating, $el){                    
-                        console.log(currentRating);
-                        console.log('DOM element ', $el);
-
+                    callback: function(currentRating, $el){
+                        
                         $el.next().children().val(currentRating);    
                         
                         // Option 1 : update input for future submit

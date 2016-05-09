@@ -9,8 +9,9 @@ use AppBundle\Entity\Prospect;
 /**
  * Rating
  *
- * @ORM\Table(name="ratings")
+ * @ORM\Table(name="ratings") 
  * @ORM\Entity(repositoryClass="AppBundle\Repository\RatingRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Rating
 {
@@ -32,7 +33,7 @@ class Rating
     private $prospect;
 
     /**
-     * @var int
+     * @var smallint
      *
      * @Assert\Range(
      *      min = 0,
@@ -40,12 +41,12 @@ class Rating
      *      minMessage = "Unauthorized number",
      *      maxMessage = "Unauthorized number"
      * )
-     * @ORM\Column(name="attractiveness", type="integer", nullable=true)
+     * @ORM\Column(name="attractiveness", type="smallint", nullable=true)
      */
     private $attractiveness;
 
     /**
-     * @var int
+     * @var smallint
      *
      * @Assert\Range(
      *      min = 0,
@@ -53,12 +54,12 @@ class Rating
      *      minMessage = "Unauthorized number",
      *      maxMessage = "Unauthorized number"
      * )
-     * @ORM\Column(name="socialStatus", type="integer", nullable=true)
+     * @ORM\Column(name="socialStatus", type="smallint", nullable=true)
      */
     private $socialStatus;
 
     /**
-     * @var int
+     * @var smallint
      *
      * @Assert\Range(
      *      min = 0,
@@ -66,12 +67,12 @@ class Rating
      *      minMessage = "Unauthorized number",
      *      maxMessage = "Unauthorized number"
      * )
-     * @ORM\Column(name="senseHumor", type="integer", nullable=true)
+     * @ORM\Column(name="senseHumor", type="smallint", nullable=true)
      */
     private $senseHumor;
     
     /**
-     * @var int
+     * @var smallint
      *
      * @Assert\Range(
      *      min = 0,
@@ -79,12 +80,12 @@ class Rating
      *      minMessage = "Unauthorized number",
      *      maxMessage = "Unauthorized number"
      * )
-     * @ORM\Column(name="cooking", type="integer", nullable=true)
+     * @ORM\Column(name="cooking", type="smallint", nullable=true)
      */
     private $cooking;
 
     /**
-     * @var int
+     * @var smallint
      *
      * @Assert\Range(
      *      min = 0,
@@ -92,12 +93,12 @@ class Rating
      *      minMessage = "Unauthorized number",
      *      maxMessage = "Unauthorized number"
      * )
-     * @ORM\Column(name="kissing", type="integer", nullable=true)
+     * @ORM\Column(name="kissing", type="smallint", nullable=true)
      */
     private $kissing;
 
     /**
-     * @var int
+     * @var smallint
      *
      * @Assert\Range(
      *      min = 0,
@@ -105,11 +106,17 @@ class Rating
      *      minMessage = "Unauthorized number",
      *      maxMessage = "Unauthorized number"
      * )
-     * @ORM\Column(name="sex", type="integer", nullable=true)
+     * @ORM\Column(name="sex", type="smallint", nullable=true)
      */
     private $sex;
 
-
+    /**
+     * @var smallint 
+     * 
+     * @ORM\Column(name="average", type="smallint", nullable=true)
+     */
+    private $average;
+    
     /**
      * Get id
      *
@@ -280,11 +287,53 @@ class Rating
     /**
      * Get prospect
      *
-     * @return Prospect 
+     * @return prospect 
      */
     public function getProspect()
     {
         return $this->prospect;
+    }
+    
+    /**
+     * Set average
+     *
+     * @param smallint $average
+     * @return Rating
+     */
+    public function setAverage($average)
+    {
+        $this->average = $average;
+        
+        return $this;
+    }
+
+    /**
+     * Get average
+     *
+     * @return average 
+     */
+    public function getAverage()
+    {
+        return $this->average;
+    }
+    
+    /**
+     * @ORM\PreUpdate()
+     * @ORM\PrePersist()
+     */
+    public function saveAveragedAttributes()
+    {
+        $avg = ($this->attractiveness + $this->cooking + $this->kissing + $this->senseHumor + $this->sex + $this->socialStatus)/6;
+        $whole = floor($avg);
+        $deci = $avg - $whole;
+        
+        if ($deci >= 0.5) {
+            $roundedAvg = ceil($avg);
+        } else {
+            $roundedAvg = floor($avg);
+        }
+
+        $this->average = intval($roundedAvg);
     }
 }
 

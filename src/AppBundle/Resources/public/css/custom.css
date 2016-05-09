@@ -914,6 +914,10 @@ table.dataTable.no-footer {
     padding-left: 0px;
     padding-top: 10px;
 }
+.prospect-record-card .infos, .prospect-record-card .rating-avg{
+    display: inline-block;
+    vertical-align: middle;
+}
 .prospect-record-card img.list-flag{
     height: 25px;
     margin-right: 5px;
@@ -924,7 +928,9 @@ table.dataTable.no-footer {
     display: inline-block;
     vertical-align: middle;
 }
-
+.rating-avg{
+    
+}
 
 .row-actions{
     /*position: absolute;*/
@@ -954,12 +960,8 @@ ul.record-actions{
     font-size: 2em;
     display: table-cell;
     vertical-align: middle;
-/*    border: 1px solid white;*/
     width: 50px;
-    height: 50px;    
-    
-/*    border-left: 1px solid rgba(255,255,255,0.7);
-    border-right: 1px solid rgba(0,0,0,0.2);*/
+    height: 50px; 
     
     -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
@@ -1021,7 +1023,7 @@ ul.record-actions{
     transition: all .2s ease-in;
 }
 .pagination span a:hover{   
-    color: #fff;
+    color: #f47363;
     background-color: transparent;
     box-shadow: inset 0px 0px 0px 1px #f14833; /* Border alternative, without changing the size of element */
 }

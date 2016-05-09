@@ -111,8 +111,10 @@
                 <li class="icon-separator"></li>
                 <li class="icon-title"><p>Encounters</p></li>
                 <li class="icon-add">
-                    {# AJAX TO DO !! #}
-                    <a id="new-encounter" href="#" title="Add new encounter"><i class="icon ion-ios-plus-empty"></i></a>
+                    <a id="new-encounter" href="#" title="Add new encounter"><i class="icon ion-ios-plus-empty"></i></a>                    
+                </li>
+                <li class="icon-add">                    
+                    <a id="encounters-list" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Encounters"><i class="icon ion-ios-list-outline"></i></a>
                 </li>
 {#                <li class="icon-separator"></li>  #}
                 {#<li class="icon-title"><p>Contact</p></li>

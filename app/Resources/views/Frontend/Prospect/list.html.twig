@@ -22,21 +22,23 @@
                         {{ photoDisplayIndex.primaryPhoto(prospect.photos) }}                     
                     </div>
                     <div class="prospect-record-card col-md-10">
-                        {% if prospect.country != null %}
-                            {% set lang = prospect.country|capitalize %}
-                            <img class="list-flag" src="{{ asset('bundles/app/images/flags/' ~ lang ~ '.png') }}" />
-                        {% endif %}
-                        <div class="record-firstname">{{ prospect.firstname }} {{ prospect.lastname }}, {{ prospect.age }}</div>               
-                                           
+                        <div class="infos">
+                            {% if prospect.country != null %}
+                                {% set lang = prospect.country|capitalize %}
+                                <img class="list-flag" src="{{ asset('bundles/app/images/flags/' ~ lang ~ '.png') }}" />
+                            {% endif %}
+                            <div class="record-firstname">{{ prospect.firstname }} {{ prospect.lastname }}, {{ prospect.age }}</div>
+                        </div>
+                            <div class="rating-avg pull-right custom-tooltip" data-toggle="tooltip" data-placement="top" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div>                        
                     </div>
                 </div>                 
                 
                 <div class="row row-actions">                    
                     <ul class="record-actions"> 
-                        <li><p>Encounters</p></li>
+                        {#<li><p>Encounters</p></li>
                         <li>
                             <a class="custom-tooltip" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Add encounters"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-wineglass-outline"></i></a>
-                        </li>
+                        </li>#}
                         <li class="separator"></li>
                         <li><p>Ratings</p></li>
                         <li>
@@ -48,14 +50,14 @@
                             <a class="custom-tooltip" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Add and remove photos"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-albums-outline"></i></a>
                         </li>
                         <li class="separator"></li>
-                        <li><p>Relationship</p></li>
+                        {#<li><p>Relationship</p></li>
                         <li>
                             <a class="custom-tooltip" href="{{ path('relationship_show', {'id': prospect.relationship.id}) }}" title="Show relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-eye-outline"></i></a>
                         </li>
                         <li>
                             <a class="edit-relationship custom-tooltip" data-id="{{ prospect.relationship.id }}" href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Edit relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
-                        </li>
-                        <li class="separator"></li>
+                        </li>#}
+{#                        <li class="separator"></li>#}
                         <li><p>Contact</p></li>
                         <li>
                             <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Show all contact infos" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-search"></i></a>
@@ -98,6 +100,8 @@
         <div class="loader_standard">
             <p>Loading...</p>
         </div>
+        
+        <div class="hidden" id="locale" data-locale="{{ app.request.locale }}"></div>
     </div> 
 
     {% block javascript %}
@@ -109,13 +113,15 @@
     {% endblock %}
     
     <script type="text/javascript">
-        $(document).ready(function(){          
-            
-            var locale = "{{ app.request.locale }}";      
+        $(document).ready(function(){  
+{#            var locale = "{{ app.request.locale }}";#}
+            var locale = $("#locale").data("locale");                  
            
-            $('[data-toggle="tooltip"]').tooltip();            
+            $('[data-toggle="tooltip"]').tooltip({
+                html: true
+            });            
                    
-            // Ajax: get form new prospect
+            // Ajax: get form new prospect *************************************
             $("#add_prospect").click(function(event){
                 event.preventDefault();                
      
@@ -181,15 +187,12 @@
                 $(".modal-title").empty();
             });
             
-            
-            
-            
-            
+            // Delete confirm **************************************************
             $(".record-actions").on("click", ".delete", function(event){
                 event.preventDefault();
-                
+
                 var prospect_id = $(this).data("id");                
-                
+
                 $.confirm({
                     animation: 'zoom',
                     animationBounce: 1,
@@ -201,7 +204,7 @@
                     }
                 });
             });
-            
+
             /**
              * Deletes a prospect with ajax
              * 
@@ -218,10 +221,29 @@
 
                     var data = $.parseJSON(response);
                     var id = data.id;
-                                       
+
                     $("#"+id).remove(); // Remove contact row
                 });
             }
+                       
+            
+            $(".rating-avg").each(function(index, div) {
+                
+                avgRating = $(div).data("rating");
+                
+                
+                $(div).starRating({
+                    initialRating: avgRating,
+                    totalStars: 5,                
+                    starSize: 30,
+                    disableAfterRate: false,
+                    useGradient: false,
+                    emptyColor: '#ddd',
+                    hoverColor: '#F47363',
+                    useFullStars: true,
+                    readOnly: true
+                });                
+            });
             
         });
     </script>
