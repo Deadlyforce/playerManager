@@ -1663,8 +1663,14 @@ img#crop-preview{
 
 /******************************** CONTACT US ************************************/
 
+#container-contact-us .alert{
+    max-width: 600px;
+    margin: 15px auto;
+    border-radius: 0px;
+}
+
 form[name="appbundle_contact_us"]{
-    width: 600px;
+    max-width: 600px;
     margin: 0 auto;
 }
 form[name="appbundle_contact_us"] > div{
@@ -1672,10 +1678,10 @@ form[name="appbundle_contact_us"] > div{
 }
 
 input#appbundle_contact_us_name, input#appbundle_contact_us_email, input#appbundle_contact_us_captcha{ 
-    width: 200px;
+    max-width: 300px;
 }
 input#appbundle_contact_us_subject{
-    width: 300px;
+    width: 100%;
 }
 
 /******************************** ENCOUNTER *************************************/

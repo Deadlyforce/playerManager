@@ -45,11 +45,8 @@ class ContactUsType extends AbstractType
                     'rows' => 10
                 )
             ))
-            ->add('captcha', CaptchaType::class, array(
-
-            ))
             ->add('submit', SubmitType::class, array(
-//                'label' => 'Send message'
+
             ))
         ;
     }

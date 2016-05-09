@@ -5,32 +5,37 @@
 {% block title %}{{ 'app.nav.contactus'|trans }}{% endblock %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" id="container-contact-us">
         <section class="page-title">
             <h1>{{ 'app.contactus.title'|trans }}</h1>
             <h2>{{ 'app.contactus.subtitle'|trans }}</h2>
         </section>
         <div class="page-title-underline"></div>
         
+        {% if app.session.flashBag.has('success') %}
+            <div class="alert alert-success">
+                {% for msg in app.session.flashBag.get('success') %}
+                    {{ msg }}
+                {% endfor %}
+            </div>
+        {% endif %}
+        
         {{ form_start(form) }}
-            <div>
-                {{ form_widget(form.name, {'attr': {'placeholder': 'app.contactus.name'|trans } }) }}
+            <div class="form-group">
+                {{ form_widget(form.name, {'attr': {'placeholder': 'app.contactus.name'|trans, 'class':'form-control' } }) }}
                 {{ form_errors(form.name) }}
             </div>
-            <div>
-                {{ form_widget(form.email, {'attr': {'placeholder': 'app.contactus.email'|trans } }) }}
+            <div class="form-group">
+                {{ form_widget(form.email, {'attr': {'placeholder': 'app.contactus.email'|trans, 'class':'form-control' } }) }}
                 {{ form_errors(form.email) }}
             </div>
-            <div>
-                {{ form_widget(form.subject, {'attr': {'placeholder': 'app.contactus.subject'|trans } }) }}
+            <div class="form-group">
+                {{ form_widget(form.subject, {'attr': {'placeholder': 'app.contactus.subject'|trans, 'class':'form-control' } }) }}
                 {{ form_errors(form.subject) }}
             </div>
-            <div>
-                {{ form_widget(form.message, {'attr': {'placeholder': 'app.contactus.message'|trans } }) }}            
+            <div class="form-group">
+                {{ form_widget(form.message, {'attr': {'placeholder': 'app.contactus.message'|trans, 'class':'form-control' } }) }}            
                 {{ form_errors(form.message) }}            
-            </div>
-            <div>
-                {{ form_widget(form.captcha) }}                              
             </div>
 
             {{ form_widget(form.submit, {'label': 'app.contactus.send'|trans,'attr': {'class': 'btn-basic', 'title': 'Send message'} }) }}
