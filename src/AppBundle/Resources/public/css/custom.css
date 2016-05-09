@@ -898,11 +898,7 @@ table.dataTable.no-footer {
 /******************************* PROSPECTS - INDEX *********************************/
 
 .prospect-record{
-    /*color: #666;*/
-    /*background-color: #fff;*/
     margin: 0px 0px 40px 0px;
-    /*position: relative;*/
-    /*box-shadow: 1px 1px 5px 2px rgba(0,0,0,0.2);*/
 }
 .prospect-record .row{
     margin: 0px;
@@ -917,32 +913,18 @@ table.dataTable.no-footer {
 .prospect-record-card{
     padding-left: 0px;
     padding-top: 10px;
-    /*height: 250px;*/
 }
-p.record-firstname{
+.prospect-record-card img.list-flag{
+    height: 25px;
+    margin-right: 5px;
+}
+.record-firstname{
     font-size: 1.6em;
     font-family: "ralewaylight", sans-serif;
     display: inline-block;
-    vertical-align: top;
+    vertical-align: middle;
 }
-/*p.record-date{
-    font-family: sans-serif;
-    font-size: 1.2em;
-    display: inline-block;
-    padding-top: 12px;
-}*/
-/*.card-separator{
-    border-bottom: 1px solid #fff;
-    margin-bottom: 15px;
-}*/
-/*.prospect-record-card p.record-info span{
-    font-weight: 600;
-    display: inline-block;
-    width: 100px;
-}*/
-/*.prospect-record-card p.record-info{
-    font-size: 1.1em;
-}*/
+
 
 .row-actions{
     /*position: absolute;*/
@@ -1077,7 +1059,7 @@ ul.record-actions{
 }
 
 form[data='prospect-data']{
-    width: 390px;
+    max-width: 450px;
     margin: 0 auto;
 }
 form[data='prospect-data'] > div{
@@ -1088,7 +1070,7 @@ form[data='prospect-data'] label{
     font-weight: 200;
     font-size: 1.1em;
 }
-form[data='prospect-data'] input[type="text"]{
+form[data='prospect-data'] input[type="text"], select#appbundle_prospect_country, select#appbundle_prospect_source{
     width: 200px;
 }
 .paris-district{
@@ -1193,18 +1175,22 @@ form#form-delete-prospect button{
     padding: 10px 0px 0px 0px;
     font-family: "ralewaylight", sans-serif;
 }
-#prospect-info-basic p{
-    margin-bottom: 5px;
+#prospect-info-basic > div{
+    margin-bottom: 10px;
 }
-#prospect-info-basic p#firstname, #prospect-info-basic p#lastname{
+#prospect-info-basic img{
+    margin-right: 10px;
+}
+#prospect-info-basic #name-age{
     font-size: 2em;
+    display: inline-block;
+    vertical-align: middle; 
 }
-
-.show-right-col p.full-address, .show-right-col p.country{
+.show-right-col p.full-address{
     font-size: 1.1em;
     font-family: "ralewayregular", sans-serif;
 }
-.show-right-col p.full-address span, .show-right-col p.country span{
+.show-right-col p.full-address span{
     font-weight: 600;
     margin-right: 10px;
 }

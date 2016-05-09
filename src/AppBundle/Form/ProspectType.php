@@ -7,6 +7,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -48,8 +49,9 @@ class ProspectType extends AbstractType
             ->add('zipcode', TextType::class, array(
                 'required' => false                                
             ))
-            ->add('country', TextType::class, array(
-                'required' => false                                
+            ->add('country', CountryType::class, array(
+                'required' => false,
+                'preferred_choices' => array('en', 'fr')
             ))
             ->add('cellNumber', TextType::class, array(
                 'required' => false,

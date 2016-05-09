@@ -22,9 +22,11 @@
                         {{ photoDisplayIndex.primaryPhoto(prospect.photos) }}                     
                     </div>
                     <div class="prospect-record-card col-md-10">
-                        <p class="record-firstname">{{ prospect.firstname }} {{ prospect.lastname }}, {{ prospect.age }}</p>
-                        
-                        
+                        {% if prospect.country != null %}
+                            {% set lang = prospect.country|capitalize %}
+                            <img class="list-flag" src="{{ asset('bundles/app/images/flags/' ~ lang ~ '.png') }}" />
+                        {% endif %}
+                        <div class="record-firstname">{{ prospect.firstname }} {{ prospect.lastname }}, {{ prospect.age }}</div>               
                                            
                     </div>
                 </div>                 

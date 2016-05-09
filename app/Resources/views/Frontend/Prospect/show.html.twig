@@ -39,7 +39,7 @@
                     {{ photoDisplay.primaryPhoto(prospect.photos) }}
                     <ul>                    
                         <li> 
-                            <a id="edit_prospect" href="#" title="Edit contact">Edit infos</a>                
+                            <a id="edit_prospect" href="#" title="Edit contact">Edit contact infos</a>                
                         </li>
                     </ul>
                     <div class="prospect-show-phone">
@@ -55,20 +55,23 @@
             </div>                
             <div class="col-md-9 show-right-col">
                 <div id="prospect-info-basic">
-                    <p id="firstname">{{ prospect.firstname }} {{ prospect.lastname }}                   
-                        {% if prospect.age %}
-                            , {{ prospect.age }}
+                    <div>
+                        {% if prospect.country != null %}
+                            {% set lang = prospect.country|capitalize %}
+                            <img src="{{ asset('bundles/app/images/flags/' ~ lang ~ '.png') }}" />
                         {% endif %}
-                        {% if prospect.nickname %}
-                            ({{ prospect.nickname }})
-                        {% endif %}
-                    </p> 
+                        <div id="name-age">{{ prospect.firstname }} {{ prospect.lastname }}                   
+                            {% if prospect.age %}
+                                , {{ prospect.age }}
+                            {% endif %}
+                            {% if prospect.nickname %}
+                                ({{ prospect.nickname }})
+                            {% endif %}
+                        </div>
+                    </div>                     
                 </div>
                 <p class="full-address">                      
                     <span>Full address:</span> {{ prospect.address }} {{ prospect.zipcode }} {{ prospect.city|capitalize }}
-                </p>
-                <p class="country">
-                    <span>Country of origin: </span>{{ prospect.country|capitalize }}
                 </p>
                 <table class="table table-responsive" id="table-prospect-show">
                     <tbody>             
