@@ -35,49 +35,43 @@
         
         <div class="row" id="prospect-show-content">                
             <div class="col-md-3 show-left-col">
-                {{ photoDisplay.primaryPhoto(prospect.photos) }}                                
+                <div>
+                    {{ photoDisplay.primaryPhoto(prospect.photos) }}
+                    <ul>                    
+                        <li> 
+                            <a id="edit_prospect" href="#" title="Edit contact">Edit infos</a>                
+                        </li>
+                    </ul>
+                    <div class="prospect-show-phone">
+                        {% if prospect.cellNumber %}
+                            <p class="phone-info"><i class="icon ion-iphone"></i><span>{{ prospect.cellNumber }}</span></p>
+                        {% endif %}
+                        {% if prospect.homeNumber %}
+                            <p class="phone-info"><i class="icon ion-iphone"></i><span>{{ prospect.homeNumber }}</span></p>  
+                        {% endif %}
+                    </div>
+{#                    <div class="vertical-separator"></div>#}                    
+                </div>                
             </div>                
             <div class="col-md-9 show-right-col">
                 <div id="prospect-info-basic">
-                    <p id="firstname">{{ prospect.firstname }} {{ prospect.lastname }}</p>                    
-                    {% if prospect.age %}
-                        <p id="age">{{ prospect.age }} years old</p>
-                    {% endif %}
+                    <p id="firstname">{{ prospect.firstname }} {{ prospect.lastname }}                   
+                        {% if prospect.age %}
+                            , {{ prospect.age }}
+                        {% endif %}
+                        {% if prospect.nickname %}
+                            ({{ prospect.nickname }})
+                        {% endif %}
+                    </p> 
                 </div>
+                <p class="full-address">                      
+                    <span>Full address:</span> {{ prospect.address }} {{ prospect.zipcode }} {{ prospect.city|capitalize }}
+                </p>
+                <p class="country">
+                    <span>Country of origin: </span>{{ prospect.country|capitalize }}
+                </p>
                 <table class="table table-responsive" id="table-prospect-show">
-                    <tbody>
-                        <tr>
-                            <th>Creation date</th> 
-                            <td>{{ prospect.creationDate|date('d-m-Y') }}</td>
-                        </tr>
-                        <tr>
-                            <th>Nickname</th>
-                            <td>{{ prospect.nickname }}</td>
-                        </tr>                        
-                        <tr>
-                            <th>Address</th>
-                            <td>{{ prospect.address }}</td>
-                        </tr>
-                        <tr>
-                            <th>City</th>
-                            <td>{{ prospect.city }}</td>
-                        </tr>                        
-                        <tr>
-                            <th>Zipcode</th>
-                            <td>{{ prospect.zipcode }}</td>
-                        </tr>                        
-                        <tr>
-                            <th>Country</th>
-                            <td>{{ prospect.country }}</td>
-                        </tr>
-                        <tr>
-                            <th>Cell Number</th>
-                            <td>{{ prospect.cellNumber }}</td>
-                        </tr>
-                        <tr>
-                            <th>Home Number</th>
-                            <td>{{ prospect.homeNumber }}</td>
-                        </tr>
+                    <tbody>             
                         <tr>
                             <th>Job</th>
                             <td>{{ prospect.job }}</td>
@@ -117,11 +111,11 @@
                     {# AJAX TO DO !! #}
                     <a id="new-encounter" href="#" title="Add new encounter"><i class="icon ion-ios-plus-empty"></i></a>
                 </li>
-                <li class="icon-separator"></li>  
-                <li class="icon-title"><p>Contact</p></li>
+{#                <li class="icon-separator"></li>  #}
+                {#<li class="icon-title"><p>Contact</p></li>
                 <li>
                     <a id="edit_prospect" href="#" title="Edit contact"><i class="icon ion-ios-compose-outline"></i></a>                
-                </li>                
+                </li>#}                
 {#                <li>
                     {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete contact'}}) }}                       
                         {{ form_widget(delete_form.submit, {'label': '<i class="icon ion-ios-trash-outline"></i>'}) }}
@@ -161,7 +155,7 @@
             var id = "{{ prospect.id }}";
             
             // Ajax: get edit form prospect
-            $(".show-actions").on("click", "#edit_prospect", function(event){
+            $(".show-left-col").on("click", "#edit_prospect", function(event){
                 event.preventDefault();
    
                 $(".loader_standard").show();

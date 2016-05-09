@@ -20,7 +20,8 @@
                         </div>
                     </div>
                     {{ form_row(form.venuesList, {'label': 'Venues list'}) }}
-                    {{ form_row(form.submit, {'label': 'Save changes', 'attr': {'class': 'btn-basic-rose'} }) }}
+                    
+                    {{ form_widget(form.submit, {'label': 'Save changes', 'attr': {'class': 'btn-basic-rose'} }) }}
                 {{ form_end(form) }}               
             </div>
         </div>

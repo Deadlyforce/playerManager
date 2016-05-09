@@ -80,3 +80,13 @@
     </script>    
 {% endblock %}
 
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts        
+        'bundles/app/packages/Jcrop/js/jquery.Jcrop.min.js'
+    %}        
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts%}
+{% endblock %}
+

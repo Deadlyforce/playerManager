@@ -900,7 +900,7 @@ table.dataTable.no-footer {
 .prospect-record{
     /*color: #666;*/
     /*background-color: #fff;*/
-    margin: 0px 0px 50px 0px;
+    margin: 0px 0px 40px 0px;
     /*position: relative;*/
     /*box-shadow: 1px 1px 5px 2px rgba(0,0,0,0.2);*/
 }
@@ -1121,22 +1121,94 @@ form#form-delete-prospect button{
 .show-left-col{
     padding-left: 0px;
 }
+.show-left-col > div{
+    width: 250px;
+}
+.show-left-col ul{
+    list-style: none;
+    padding-left: 0px;
+    margin: 0;
+}
+.show-left-col li{
+
+}
+.show-left-col li a{    
+    padding: 15px 0px;
+    display: block;
+    font-family: "ralewayregular",sans-serif;
+    text-align: center;
+    font-size: 1.2em;
+    background-color: #F47363;
+    color: #fff;
+
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.show-left-col li a:hover{    
+    background-color: #fff;
+    color: #666;
+}
+/*.show-left-col li a span{
+    vertical-align: middle;
+    margin-right: 10px;
+    margin-top: 3px;
+    display: inline-block;
+}*/
+/*.show-left-col li a i.icon::before{
+    font-size: 2em;
+    vertical-align: middle;
+}*/
+.vertical-separator{
+    height: 50px;
+}
+.prospect-show-phone{
+    text-align: center;
+
+}
+.prospect-show-phone p{
+    margin: 0;
+}
+.prospect-show-phone .phone-info {
+    padding: 15px 0px;
+}
+.prospect-show-phone .phone-info span{
+    font-size: 1.1em;        
+    display: inline-block;
+    margin-left: 15px;
+    vertical-align: middle;
+    margin-top: 1px;
+}
+.prospect-show-phone i::before{
+    font-size: 1.5em;
+    vertical-align: middle;
+}
+
+
 .show-right-col{
     padding-right: 0px;
 }
 #prospect-info-basic{
-    padding: 15px 0px 0px 10px;
+    padding: 10px 0px 0px 0px;
     font-family: "ralewaylight", sans-serif;
 }
 #prospect-info-basic p{
     margin-bottom: 5px;
 }
 #prospect-info-basic p#firstname, #prospect-info-basic p#lastname{
-    font-size: 2.5em;
+    font-size: 2em;
 }
-#prospect-info-basic p#age{
-    font-size: 1.5em;
+
+.show-right-col p.full-address, .show-right-col p.country{
+    font-size: 1.1em;
+    font-family: "ralewayregular", sans-serif;
 }
+.show-right-col p.full-address span, .show-right-col p.country span{
+    font-weight: 600;
+    margin-right: 10px;
+}
+
 
 #table-prospect-show{   
     border: none;

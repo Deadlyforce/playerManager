@@ -139,7 +139,7 @@ class PhotoController extends Controller
                     }    
                     
                     $em->flush();
-                } else {
+                } else {                    
                     // Case: update a Prospect with a previous photo, with and without changes
                     // remove the relationship between the photo and the Prospect
                     foreach ($originalPhotos as $originalPhoto) {
@@ -236,9 +236,11 @@ class PhotoController extends Controller
             $src = $photo->getPath();
 
             $img_r = imagecreatefromjpeg($src);           
-            $dst_r = ImageCreateTrueColor( $targ_w, $targ_h );
-
+            $dst_r = ImageCreateTrueColor( $targ_w, $targ_h );           
+            
             imagecopyresampled($dst_r, $img_r, 0, 0, $x, $y, $targ_w, $targ_h, $width, $height);
+            
+            imagedestroy($img_r);
             // Write image ($dst_r) to destination path        
             imagejpeg($dst_r, $photo->getPath(), $jpeg_quality);
 
