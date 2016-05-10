@@ -65,6 +65,13 @@ class Prospect
      * @ORM\JoinColumn(name="source_id", referencedColumnName="id")
      */
     private $source;
+    /**
+     * @var Source
+     * 
+     * @ORM\ManyToOne(targetEntity="Zodiac")
+     * @ORM\JoinColumn(name="zodiac_id", referencedColumnName="id", nullable=true)
+     */
+    private $zodiac;
     
     /**
      * @var Rating 
@@ -332,7 +339,7 @@ class Prospect
     public function getSource()
     {
         return $this->source;
-    }
+    } 
     
     /**
      * Set source
@@ -343,6 +350,29 @@ class Prospect
     public function setSource($source)
     {
         $this->source = $source;
+        
+        return $this;
+    }
+    
+    /**
+     * Get zodiac
+     *
+     * @return string 
+     */
+    public function getZodiac()
+    {
+        return $this->zodiac;
+    } 
+    
+    /**
+     * Set zodiac
+     * 
+     * @param string $zodiac
+     * @return Prospect
+     */
+    public function setZodiac($zodiac)
+    {
+        $this->zodiac = $zodiac;
         
         return $this;
     }

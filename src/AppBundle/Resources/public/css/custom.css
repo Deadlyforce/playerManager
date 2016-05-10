@@ -20,6 +20,18 @@
 /******************************* FONTS ***********************************/
 
 @font-face {
+    font-family: 'velezodiacregular';
+    src: url('../fonts/velezodiac-webfont.eot');
+    src: url('../fonts/velezodiac-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/velezodiac-webfont.woff2') format('woff2'),
+         url('../fonts/velezodiac-webfont.woff') format('woff'),
+         url('../fonts/velezodiac-webfont.ttf') format('truetype'),
+         url('../fonts/velezodiac-webfont.svg#velezodiacregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
   font-family: 'fontello';
   src: url('../fonts/fontello/fontello.eot');
   src: url('../fonts/fontello/fontello.eot#iefix') format('embedded-opentype'),
@@ -75,6 +87,20 @@
 
 }
 
+/******************************* ZODIAC ***************************************/
+
+.zodiac{
+    font-family: "velezodiacregular";
+    font-size: 5em;
+    color: #F47363;
+    border: 3px solid #F47363;
+    border-radius: 5px;
+    width: 70px;
+    height: 70px;
+    text-align: center;
+    line-height: 1em;
+}
+
 /****************************** CONFIRM ***************************************/
 
 #confirm-panel{
@@ -106,6 +132,7 @@
 label.required:after {
     content: " *";    
     color: red;
+    font-size: 1.3em;
 }
 
 /***************************** DATEPICKER *************************************/
@@ -932,11 +959,48 @@ table.dataTable.no-footer {
 }
 .prospect-record .row-info{
     box-shadow: 0px 4px 8px 4px #ddd;
-    border: 1px solid #ddd;
+    /*border: 1px solid #ddd;*/
+    /*position: relative;*/
 }
 .prospect-record-photo{
     padding: 0px;
 }
+.prospect-record-photo img{
+    position: relative;
+}
+.prospect-record-photo:hover .photo-mask{
+    opacity: 1;
+}
+.photo-mask{
+    display: table;
+    position: absolute;
+    top: 0;    
+    left: 0;
+    width: 175px;
+    height: 175px;
+    opacity: 0;
+    background-color: rgba(0,0,0, 0.4);
+    z-index: 2;
+    
+    -moz-transition: all .3s ease-in;
+    -o-transition: all .3s ease-in;
+    -webkit-transition: all .3s ease-in;
+    transition: all .3s ease-in;
+}
+.photo-mask a{
+    width: 100%;
+    height: 100%;
+    display: block;
+    color: #fff;
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+.photo-mask a i::before{
+    font-size: 2.5em;
+}
+
+
 .prospect-record-card{
     padding-left: 0px;
     padding-top: 10px;
@@ -1098,6 +1162,7 @@ form[data='prospect-data'] label{
     width: 175px;
     font-weight: 200;
     font-size: 1.2em;
+    font-family: 'ralewayregular', sans-serif;
 }
 form[data='prospect-data'] input[type="text"], select#appbundle_prospect_country, select#appbundle_prospect_source{
     width: 200px;
@@ -1612,8 +1677,7 @@ table.record_properties th{
 }
 
 .photo-actions{
-    background-color: #FFF;
-    /*height: 55px;*/   
+    background-color: #FFF; 
     text-align: center;
     overflow: hidden;
     color: #666;    

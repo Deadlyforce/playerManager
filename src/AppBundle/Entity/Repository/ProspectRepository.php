@@ -40,8 +40,8 @@ class ProspectRepository extends EntityRepository
 //        return $pag;
         
         $query = $this->_em->createQuery('
-            SELECT p
-            FROM AppBundle:Prospect p
+            SELECT p, z
+            FROM AppBundle:Prospect p LEFT JOIN p.zodiac z
             WHERE p.user = :user
             ORDER BY p.creationDate DESC, p.id DESC
         ')

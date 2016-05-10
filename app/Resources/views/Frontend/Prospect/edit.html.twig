@@ -81,6 +81,11 @@
                 {{ form_widget(editForm.source, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.source) }}
             </div>
+            <div class="form-group">
+                {{ form_label(editForm.zodiac) }}
+                {{ form_widget(editForm.zodiac, {'attr': {'class': 'form-control'} }) }}
+                {{ form_errors(editForm.zodiac) }}
+            </div>
 
             {{ form_row(editForm.submit, {'attr': {'class': 'btn-basic-rose'} }) }}
             

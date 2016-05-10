@@ -68,6 +68,11 @@ class ProspectType extends AbstractType
             ->add('source', EntityType::class, array(
                 'class' => 'AppBundle:Source'                
             ))
+            ->add('zodiac', EntityType::class, array(
+                'class' => 'AppBundle:Zodiac',
+                'choice_label' => 'wording',
+                'required' => false
+            ))
             ->add('photos', CollectionType::class, array(
                 'label' => false,
                 'entry_type' => PhotoType::class,
