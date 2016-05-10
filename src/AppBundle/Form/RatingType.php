@@ -59,6 +59,13 @@ class RatingType extends AbstractType
                     'max' => 5
                 )
             ))
+            ->add('average', IntegerType::class, array(
+                'required' => false,
+                'attr' => array(
+                    'min' => 0,
+                    'max' => 5
+                )
+            ))
 
         ;
     }

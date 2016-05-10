@@ -17,12 +17,14 @@
     cursor: default;
 }
 
+
 .jq-star-svg {
     width: 100%;
     height: 100% ;
 }
 
-.jq-star:hover .fs-star-svg polygon {
+.jq-star:hover, .fs-star-svg polygon {
+    cursor: pointer;
 }
 
 .jq-star-svg polygon {

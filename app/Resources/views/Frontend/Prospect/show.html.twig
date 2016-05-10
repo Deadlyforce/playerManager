@@ -49,8 +49,7 @@
                         {% if prospect.homeNumber %}
                             <p class="phone-info"><i class="icon ion-iphone"></i><span>{{ prospect.homeNumber }}</span></p>  
                         {% endif %}
-                    </div>
-{#                    <div class="vertical-separator"></div>#}                    
+                    </div>                  
                 </div>                
             </div>                
             <div class="col-md-9 show-right-col">
@@ -68,6 +67,7 @@
                                 ({{ prospect.nickname }})
                             {% endif %}
                         </div>
+                        <a id="list-rating-link" data-id="{{ prospect.rating.id }}" href="#"><div class="rating-avg pull-right custom-tooltip" data-toggle="tooltip" data-placement="top" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div></a> 
                     </div>                     
                 </div>
                 <p class="full-address">                      
@@ -97,7 +97,8 @@
                 <li class="icon-separator"></li>
                 <li class="icon-title"><p>Ratings</p></li>
                 <li>
-                    <a href="{{ path('rating_edit', {'prospect_id': prospect.id}) }}" title="Rate this contact"><i class="icon ion-ios-star-outline"></i></a>
+{#                    <a href="{{ path('rating_edit', {'prospect_id': prospect.id}) }}" title="Rate this contact"><i class="icon ion-ios-star-outline"></i></a>#}
+                    <a class="edit-rating" href="#" data-id="{{ prospect.rating.id }}" title="Rate this contact"><i class="icon ion-ios-star-outline"></i></a>
                 </li>
                 <li class="icon-separator"></li>
                 <li class="icon-title"><p>Relationship</p></li>                       
@@ -132,8 +133,7 @@
         <div class="modal fade modal-full" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg modal-dialog-scroll">
                 <div class="modal-content">
-                    <div class="modal-header">                    
-{#                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>#}
+                    <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
                         </button>
@@ -147,7 +147,6 @@
         </div>                
                         
         {# POPUP OVERLAY D'ATTENTE AJAX #}
-{#        <div class="overlay"></div>#}
         <div class="loader_standard">
             <p>Loading...</p>
         </div>                
@@ -157,6 +156,10 @@
         $(document).ready(function(){
             var locale = "{{ app.request.locale }}";
             var id = "{{ prospect.id }}";
+            
+            $('[data-toggle="tooltip"]').tooltip({
+                html: true
+            });
             
             // Ajax: get edit form prospect ************************************
             $(".show-left-col").on("click", "#edit_prospect", function(event){
@@ -213,10 +216,46 @@
                 });
             });
             
+            // Ajax: get form edit ratings *************************************
+            $(".container").on("click", ".edit-rating, #list-rating-link", function(event){
+                event.preventDefault();               
+                
+                $(".loader_standard").show();
+            
+                var id = $(this).data("id");                
+                var url = Routing.generate('ajax_edit_rating_form', {'id':id, '_locale': locale});
+                
+                $.get(url, function(response){                   
+                    $(".modal-body").html(response);                    
+                    
+                    $(".loader_standard").hide(200, function(){});                                     
+                    
+                    $(".modal-title").text("Edit ratings");
+                    $('.modal-full').modal('show');
+                });
+            });
+            
             
             $('.modal-full').on('hidden.bs.modal', function (e) {
                 $(".modal-body").empty();
                 $(".modal-title").empty();
+            });
+            
+            $(".rating-avg").each(function(index, div) {
+                
+                avgRating = $(div).data("rating");                
+                
+                $(div).starRating({
+                    initialRating: avgRating,
+                    totalStars: 5,                
+                    starSize: 30,
+                    disableAfterRate: false,
+                    useGradient: false,
+                    emptyColor: '#ddd',
+                    hoverColor: '#F47363',
+                    useFullStars: true,
+                    readOnly: true
+                });                
             });
         });
     </script>

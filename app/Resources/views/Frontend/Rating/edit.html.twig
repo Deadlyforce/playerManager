@@ -1,18 +1,18 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 {% import ":Frontend/Macros/Prospect:photoDisplay250px.html.twig" as photoDisplay %}
-{% block title %}{{ 'app.rating.browser-tab'|trans }}{% endblock %}
+{#{% block title %}{{ 'app.rating.browser-tab'|trans }}{% endblock %}#}
 
 {% block content %}
     <div class="container">
-        <section class="page-title">
+        {#<section class="page-title">
             <h1>{{ 'app.rating.title'|trans }} {{ rating.prospect.firstname }}</h1> 
             <h2>{{ 'app.rating.subtitle'|trans }}</h2>
         </section>
-        <div class="page-title-underline"></div>
+        <div class="page-title-underline"></div>#}
         
-        <div class="page-nav">
-            <a class="btn-basic" href="{{ path('prospect_show', {"id": rating.prospect.id}) }}" title="{{ 'app.rating.btn-contact'|trans }}">{{ 'app.rating.btn-contact'|trans }}</a>
-        </div>
+{#        <div class="page-nav">#}
+{#            <a class="btn-basic" href="{{ path('prospect_show', {"id": rating.prospect.id}) }}" title="{{ 'app.rating.btn-contact'|trans }}">{{ 'app.rating.btn-contact'|trans }}</a>#}
+{#        </div>#}
         
         <div class="row">
             <div class="col-md-3">
@@ -20,7 +20,7 @@
             </div>
             
             <div class="col-md-9 page-content">
-                {{ form_start(edit_form) }}
+                {{ form_start(edit_form, {'method': 'PUT'} ) }}
                     <div>
                         {{ form_label(edit_form.attractiveness, 'app.rating.edit.label.attractiveness'|trans) }}     
                         <div class="rating attractiveness-rating"></div>               
@@ -72,6 +72,8 @@
     <script type="text/javascript">
         $(document).ready(function(){            
             
+            var locale = "{{ app.request.locale }}";
+            
             $("form[name='appbundle_rating'] input[max=5]").each(function(index, input) {
 
                 var bddValue = input.value;
@@ -94,6 +96,46 @@
                     }
                 });                
             });            
+            
+            $("form[name='appbundle_rating']").on("click", "input[type='submit']", function(event){
+                event.preventDefault();
+                
+                var id = "{{ rating.id }}";
+                var url = Routing.generate('ajax_edit_rating', {'_locale':locale, 'id': id});
+                var form = $("form[name='appbundle_rating']").serialize();                
+              
+                $.ajax({
+                    data: form,
+                    url: url,
+                    type: 'PUT',
+                    success: function(response){
+                        if (response === 'success') {
+                            var msg = '<p>Success! Your modifications have been saved.</p>';
+                            $("#confirm-panel").addClass(".confirm-success");
+                        } else {
+                            var msg = '<p>Oops! Something went wrong.</p>';
+                            $("#confirm-panel").addClass(".confirm-danger");
+                        }
+                        
+                        confirmPanel(msg);
+                    }
+                });    
+            });
+            
+            function confirmPanel(msg)
+            {
+                $("#confirm-panel").html(msg);
+                $("#confirm-panel").animate({
+                    "top": "0"
+                }, 200, "linear", function(){
+                    $(this).delay(3000).animate({
+                        "top": "-75"
+                    }, 200, "linear", function(){
+                        $(this).empty();
+                        $("#confirm-panel").removeClass();
+                    });
+                });                
+            }
             
         });       
         

@@ -159,11 +159,13 @@
                     url: url,
                     data: form,
                     success: function(response){
-                        console.log(response);
+
                         if (response === 'success') {
                             var msg = '<p>Success! Your modifications have been saved.</p>';
+                            $("#confirm-panel").addClass(".confirm-success");
                         } else {
                             var msg = '<p>Oops! Something went wrong.</p>';
+                            $("#confirm-panel").addClass(".confirm-danger");
                         }
                         
                         confirmPanel(msg);
@@ -177,8 +179,11 @@
                 $("#confirm-panel").animate({
                     "top": "0"
                 }, 200, "linear", function(){
-                    $(this).delay(4000).animate({
+                    $(this).delay(3000).animate({
                         "top": "-75"
+                    }, 200, "linear", function(){
+                        $(this).empty();
+                        $("#confirm-panel").removeClass();
                     });
                 });                
             }

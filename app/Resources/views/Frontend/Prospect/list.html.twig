@@ -29,7 +29,7 @@
                             {% endif %}
                             <div class="record-firstname">{{ prospect.firstname }} {{ prospect.lastname }}, {{ prospect.age }}</div>
                         </div>
-                            <div class="rating-avg pull-right custom-tooltip" data-toggle="tooltip" data-placement="top" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div>                        
+                        <a id="list-rating-link" href="{{ path('prospect_show', { 'id': prospect.id }) }}"><div class="rating-avg pull-right custom-tooltip" data-toggle="tooltip" data-placement="top" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div></a>                        
                     </div>
                 </div>                 
                 
@@ -39,12 +39,12 @@
                         <li>
                             <a class="custom-tooltip" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Add encounters"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-wineglass-outline"></i></a>
                         </li>#}
-                        <li class="separator"></li>
+                        {#<li class="separator"></li>
                         <li><p>Ratings</p></li>
                         <li>
                             <a class="custom-tooltip" href="{{ path('rating_edit', {'prospect_id': prospect.id}) }}" title="Rate this contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-star-outline"></i></a>
-                        </li>
-                        <li class="separator"></li>
+                        </li>#}
+{#                        <li class="separator"></li>#}
                         <li><p>Gallery</p></li>
                         <li>
                             <a class="custom-tooltip" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Add and remove photos"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-albums-outline"></i></a>
@@ -116,6 +116,7 @@
         $(document).ready(function(){  
 {#            var locale = "{{ app.request.locale }}";#}
             var locale = $("#locale").data("locale");                  
+           
            
             $('[data-toggle="tooltip"]').tooltip({
                 html: true
@@ -229,8 +230,7 @@
             
             $(".rating-avg").each(function(index, div) {
                 
-                avgRating = $(div).data("rating");
-                
+                avgRating = $(div).data("rating");                
                 
                 $(div).starRating({
                     initialRating: avgRating,

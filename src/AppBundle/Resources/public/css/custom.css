@@ -75,6 +75,32 @@
 
 }
 
+/****************************** CONFIRM ***************************************/
+
+#confirm-panel{
+    position: fixed;
+    top: -75px;
+    left: 0;
+    right: 0;
+    z-index: 1100;
+    height: 75px;
+    background-color: #3DCC3D;
+    text-align: center;
+    color: #fff;
+    padding: 22px 0px;
+}
+#confirm-panel p{
+    font-family: "ralewaylight",sans-serif;
+    font-size: 1.3em;
+}
+
+.confirm-success{
+    background-color: #3DCC3D;
+}
+.confirm-danger{
+    background-color: red;
+}
+
 /************************** FORMS REQUIRED ************************************/
 
 label.required:after {
@@ -897,22 +923,6 @@ table.dataTable.no-footer {
 
 /******************************* PROSPECTS - INDEX *********************************/
 
-#confirm-panel{
-    position: fixed;
-    top: -75px;
-    left: 0;
-    right: 0;
-    z-index: 1100;
-    height: 75px;
-    background-color: #3DCC3D;
-    text-align: center;
-    color: #fff;
-    padding: 22px 0px;
-}
-#confirm-panel p{
-    font-family: "ralewaylight",sans-serif;
-    font-size: 1.3em;
-}
 
 .prospect-record{
     margin: 0px 0px 30px 0px;
@@ -1196,6 +1206,7 @@ form#form-delete-prospect button{
 }
 #prospect-info-basic > div{
     margin-bottom: 10px;
+    margin-right: 10px;
 }
 #prospect-info-basic img{
     margin-right: 10px;

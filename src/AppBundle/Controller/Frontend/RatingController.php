@@ -7,8 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Rating;
-use AppBundle\Entity\Prospect;
-use AppBundle\Form\RatingType;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Rating controller.
@@ -93,6 +92,37 @@ class RatingController extends Controller
     /**
      * Displays a form to edit an existing Rating entity.
      *
+     * @Route("/{id}/ajax_edit_form", name="ajax_edit_rating_form", options={"expose"=true})
+     * @param int $id Rating id
+     * @Method({"GET"})
+     */
+    public function ajaxEditFormAction($id)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+        $rating = $em->find('AppBundle:Rating', $id);
+
+        if ($user === $rating->getProspect()->getUser()) {          
+
+            $editForm = $this->createForm('AppBundle\Form\RatingType', $rating, array(
+                'method' => 'PUT'
+            ));            
+
+            $editFormView = $this->renderView('Frontend/Rating/edit.html.twig', array(
+                'rating' => $rating,
+                'edit_form' => $editForm->createView()
+            ));
+            
+            return new Response($editFormView);
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+    }
+    
+    /**
+     * Displays a form to edit an existing Rating entity.
+     *
      * @Route("/edit/{prospect_id}", name="rating_edit")
      * @Method({"GET", "POST"})
      */
@@ -126,6 +156,40 @@ class RatingController extends Controller
                 'edit_form' => $editForm->createView(),
                 'delete_form' => $deleteForm->createView(),
             ));
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+    }
+    
+    /**
+     * Displays a form to edit an existing Rating entity.
+     *
+     * @Route("/{id}/edit", name="ajax_edit_rating", options={"expose"=true})
+     * @Method({"PUT"})
+     */
+    public function ajaxEditAction(Request $request, $id)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+        $rating = $em->getRepository('AppBundle:Rating')->find($id);
+
+        if ($user === $rating->getProspect()->getUser()) { 
+
+            $editForm = $this->createForm('AppBundle\Form\RatingType', $rating, array(
+                'method' => 'PUT' 
+            ));
+            $editForm->handleRequest($request);
+
+            if ($editForm->isSubmitted() && $editForm->isValid()) {  
+
+                $em->flush();
+ 
+                return new Response('success');
+            } else {
+                return new Response('failure');
+            }
+            
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
