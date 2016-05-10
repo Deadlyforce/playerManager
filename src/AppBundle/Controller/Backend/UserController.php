@@ -69,9 +69,7 @@ class UserController extends Controller
 
             $user->setEnabled(false);
             $em->flush();
-            
-//            $tokenManager = $this->get('security.csrf.token_manager');        
-//            $csrf_token = $tokenManager->refreshToken('');
+
 
             $response_array = array(
                 "id" => $id,

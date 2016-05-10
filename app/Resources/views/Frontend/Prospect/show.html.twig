@@ -21,7 +21,7 @@
 {% endblock %}
 
 
-{% block content %}
+{% block content %}    
     <div class="container">        
         <section class="page-title">
             <h1>Detailed view for {{ prospect.firstname }}</h1> 
@@ -101,12 +101,11 @@
                 </li>
                 <li class="icon-separator"></li>
                 <li class="icon-title"><p>Relationship</p></li>                       
+{#                <li>
+                    <a href="{{ path('relationship_show', { 'id': prospect.relationship.id }) }}" title="Show relationship"><i class="icon ion-ios-eye-outline"></i></a>
+                </li>#}
                 <li>
-                    {% if prospect.relationship %}
-                        <a class="" href="{{ path('relationship_show', { 'id': prospect.relationship.id }) }}" title="Show relationship">
-                            <i class="icon ion-ios-eye-outline"></i>
-                        </a>
-                    {% endif %}
+                    <a class="edit-relationship custom-tooltip" data-id="{{ prospect.relationship.id }}" href="#" title="Edit relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>                       
                 </li>
                 <li class="icon-separator"></li>
                 <li class="icon-title"><p>Encounters</p></li>
@@ -140,7 +139,7 @@
                         </button>
                         <h2 class="modal-title"></h2>
                     </div>    
-                    <div class="modal-body" id="modal_prospect_form_body">
+                    <div class="modal-body">
                         {# Form returned by ajax #}
                     </div>                       
                 </div>    
@@ -159,7 +158,7 @@
             var locale = "{{ app.request.locale }}";
             var id = "{{ prospect.id }}";
             
-            // Ajax: get edit form prospect
+            // Ajax: get edit form prospect ************************************
             $(".show-left-col").on("click", "#edit_prospect", function(event){
                 event.preventDefault();
    
@@ -168,7 +167,7 @@
                 var url = Routing.generate('ajax_edit_prospect_form', {'id':id, '_locale': locale});
                 
                 $.get(url, function(response){                   
-                    $("#modal_prospect_form_body").html(response); // coller la vue dans une modale  
+                    $(".modal-body").html(response); // coller la vue dans une modale  
                     
                     $(".loader_standard").hide(200, function(){});                                     
                     
@@ -177,7 +176,7 @@
                 });
             });
             
-            // Ajax: get form new encounter
+            // Ajax: get form new encounter ************************************
             $(".show-actions").on("click", "#new-encounter", function(event){
                 event.preventDefault();                
 
@@ -193,7 +192,26 @@
                     $(".modal-title").text("New encounter");
                     $('.modal-full').modal('show');
                 });
-            }); 
+            });
+            
+            // Ajax: get form edit relationship ********************************
+            $(".show-actions").on("click", ".edit-relationship", function(event){
+                event.preventDefault();               
+                
+                $(".loader_standard").show();
+            
+                var id = $(this).data("id");                
+                var url = Routing.generate('ajax_edit_relationship_form', {'id':id, '_locale': locale});
+                
+                $.get(url, function(response){                   
+                    $(".modal-body").html(response);                    
+                    
+                    $(".loader_standard").hide(200, function(){});                                     
+                    
+                    $(".modal-title").text("Edit relationship");
+                    $('.modal-full').modal('show');
+                });
+            });
             
             
             $('.modal-full').on('hidden.bs.modal', function (e) {

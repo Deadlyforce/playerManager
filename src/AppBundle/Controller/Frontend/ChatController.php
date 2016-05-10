@@ -10,7 +10,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use AppBundle\Entity\Chat;
 use AppBundle\Form\ChatType;
 
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+
 
 
 /**

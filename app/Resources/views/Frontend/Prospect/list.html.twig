@@ -4,7 +4,7 @@
 
 {% set csrfDelete = csrf_token('delete') %}
 
-{% block content %}
+{% block content %}    
     <div class="container" id="container-prospect">        
         <section class="page-title">
             <h1>Contacts</h1> 
@@ -163,8 +163,8 @@
                 $(".modal-title").empty();
             });
             
-            // Ajax: get form edit relationship
-            $(".record-actions").on("click", ".edit-relationship", function(event){
+            // Ajax: get form edit relationship ********************************
+            {#$(".record-actions").on("click", ".edit-relationship", function(event){
                 event.preventDefault();               
                 
                 $(".loader_standard").show();
@@ -180,7 +180,7 @@
                     $(".modal-title").text("Edit relationship");
                     $('.modal-full').modal('show');
                 });
-            });
+            });#}
             
             $('.modal-full').on('hidden.bs.modal', function (e) {
                 $(".modal-body").empty();

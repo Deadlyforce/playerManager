@@ -78,7 +78,7 @@
 /************************** FORMS REQUIRED ************************************/
 
 label.required:after {
-    content: " *";
+    content: " *";    
     color: red;
 }
 
@@ -897,8 +897,25 @@ table.dataTable.no-footer {
 
 /******************************* PROSPECTS - INDEX *********************************/
 
+#confirm-panel{
+    position: fixed;
+    top: -75px;
+    left: 0;
+    right: 0;
+    z-index: 1100;
+    height: 75px;
+    background-color: #3DCC3D;
+    text-align: center;
+    color: #fff;
+    padding: 22px 0px;
+}
+#confirm-panel p{
+    font-family: "ralewaylight",sans-serif;
+    font-size: 1.3em;
+}
+
 .prospect-record{
-    margin: 0px 0px 40px 0px;
+    margin: 0px 0px 30px 0px;
 }
 .prospect-record .row{
     margin: 0px;
@@ -1070,7 +1087,7 @@ form[data='prospect-data'] > div{
 form[data='prospect-data'] label{
     width: 175px;
     font-weight: 200;
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 form[data='prospect-data'] input[type="text"], select#appbundle_prospect_country, select#appbundle_prospect_source{
     width: 200px;
@@ -1307,15 +1324,17 @@ ul.record_actions{
 
 /************************** RELATIONSHIP SHOW *********************************/
 
+#container-relationship > .row{
+    padding-bottom: 50px;
+}
+#container-relationship .page-content{
+    border-left: 1px solid #ccc;    
+}
 #container-relationship h3{
     font-family: "ralewaythin",sans-serif;
     font-size: 2.5em;
     margin-top: 0px;
     color: #e2e4f3;
-}
-
-.page-content{
-    border-left: 1px solid #ccc;
 }
 
 /*#table-relationship-show tr{*/   
