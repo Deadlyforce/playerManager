@@ -56,7 +56,7 @@
                 <div id="prospect-info-basic">
                     <div>
                         {% if prospect.country != null %}
-                            {% set lang = prospect.country|capitalize %}
+                            {% set lang = prospect.country|upper %}
                             <img src="{{ asset('bundles/app/images/flags/' ~ lang ~ '.png') }}" />
                         {% endif %}
                         <div id="name-age">{{ prospect.firstname }} {{ prospect.lastname }}                   

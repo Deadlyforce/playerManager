@@ -30,7 +30,7 @@
                         <div class="card-header">
                             <div class="infos">
                                 {% if prospect.country != null %}
-                                    {% set lang = prospect.country|capitalize %}
+                                    {% set lang = prospect.country|upper %}
                                     <img class="list-flag" src="{{ asset('bundles/app/images/flags/' ~ lang ~ '.png') }}" />
                                 {% endif %}
                                 <div class="record-firstname">{{ prospect.firstname }} {{ prospect.lastname }}, {{ prospect.age }}</div>
