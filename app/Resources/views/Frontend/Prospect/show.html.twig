@@ -73,6 +73,24 @@
                 <p class="full-address">                      
                     <span>Full address:</span> {{ prospect.address }} {{ prospect.zipcode }} {{ prospect.city|capitalize }}
                 </p>
+                <div class="icons">
+                    {% if prospect.zodiac %}
+                        <div class="zodiac custom-tooltip" title="{{ prospect.zodiac.wording }}" data-toggle="tooltip" data-placement="top">
+                            {{ prospect.zodiac.letter }}
+                        </div>
+                    {% else %}
+                        <div class="icon-empty custom-tooltip" title="No zodiacal sign selected" data-toggle="tooltip" data-placement="top">
+                            <i class="icon ion-ios-help-empty"></i>
+                        </div>
+                    {% endif %}
+                    {% if prospect.relationship.fc %}
+                        <div class="icon-X custom-tooltip" title="Sex happened" data-toggle="tooltip" data-placement="top"></div>
+                    {% else %}
+                        <div class="icon-empty custom-tooltip" title="No sex" data-toggle="tooltip" data-placement="top">
+                            <i class="icon ion-ios-help-empty"></i>
+                        </div>
+                    {% endif %}
+                </div>
                 <table class="table table-responsive" id="table-prospect-show">
                     <tbody>             
                         <tr>
@@ -97,7 +115,6 @@
                 <li class="icon-separator"></li>
                 <li class="icon-title"><p>Ratings</p></li>
                 <li>
-{#                    <a href="{{ path('rating_edit', {'prospect_id': prospect.id}) }}" title="Rate this contact"><i class="icon ion-ios-star-outline"></i></a>#}
                     <a class="edit-rating" href="#" data-id="{{ prospect.rating.id }}" title="Rate this contact"><i class="icon ion-ios-star-outline"></i></a>
                 </li>
                 <li class="icon-separator"></li>

@@ -3,6 +3,8 @@
     Author     : Norman
 */
 
+@charset "UTF-8";
+
 /******************************* ERRORS ***********************************/
 
 .error-403{
@@ -87,20 +89,6 @@
 
 }
 
-/******************************* ZODIAC ***************************************/
-
-.zodiac{
-    font-family: "velezodiacregular";
-    font-size: 5em;
-    color: #F47363;
-    border: 3px solid #F47363;
-    border-radius: 5px;
-    width: 70px;
-    height: 70px;
-    text-align: center;
-    line-height: 1em;
-}
-
 /****************************** CONFIRM ***************************************/
 
 #confirm-panel{
@@ -145,7 +133,6 @@ label.required:after {
 /******************************* REGISTER  ****************************************/
 
 #register-user{
-    /*width: 55%;*/
     margin: 100px auto 0 auto;
     background-color: #fff;
     padding: 20px 50px 30px 50px;
@@ -193,9 +180,7 @@ img[title="captcha"]{
 }
 
 #login-top-bar{
-    /*height: 38px;*/
     background-color: rgba(0, 0, 0, 0.6);
-    /*border-bottom: 1px solid #222;*/
 }
 #login-body{
     margin-top: 150px;    
@@ -208,7 +193,6 @@ img[title="captcha"]{
     text-align: center;
     padding: 15px;
     position: relative;
-    /*height: 190px;*/
 }
 #login-title h1{
     font-family: 'ralewaylight', sans-serif;
@@ -222,7 +206,8 @@ img[title="captcha"]{
     font-family: "ralewaythin", sans-serif;
     position: absolute;
     top: 50px;
-    right: 380px;
+    right: 385px;
+    text-align: left;
 }
 #login-title h2{
     font-family: 'ralewaythin', sans-serif;
@@ -230,9 +215,6 @@ img[title="captcha"]{
     font-size: 2em;
     text-shadow: 1px 1px 2px #666;
     margin-bottom: 25px;
-/*    position: absolute;
-    left: 410px;
-    top: 85px;*/
 }
 
 #login-body p#link-register{
@@ -368,10 +350,8 @@ header{
     height: 90px;
     display: table-cell;
     float: none;
-    /*color: #e0e0e0;*/
 }
 .navbar{
-    /*font-family: 'open_sansregular', sans-serif;*/
     font-family: "ralewayregular", sans-serif;
     border-radius: 0;  
     margin-bottom: 0px;
@@ -459,28 +439,6 @@ a:hover, a:visited, a:focus{
     transition: all .3s ease-in;
 }
 .btn-submit-light:hover{
-    color: #f47363;
-    border: 1px solid #f47363;
-    background: transparent;
-}
-.btn-submit-dark{
-    color: #899BA9;
-    font-size: 1.2em;
-    text-decoration: none;
-    display: inline-block;
-    border: 1px solid #666;
-    border-radius: 2px;
-    padding: 10px 15px;
-    margin-bottom: 20px;
-    margin-top: 15px;
-    background-color: rgb(54, 61, 77);
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
-    transition: all .3s ease-in;
-}
-.btn-submit-dark:hover{
     color: #f47363;
     border: 1px solid #f47363;
     background: transparent;
@@ -652,26 +610,6 @@ p.confirmed{
     border-radius: 0px;
 }
 
-/***************************** ALL DATATABLES **********************************/
-
-/*.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info{
-    color: #899BA9;
-}*/
-/*.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover{
-    color: #3E5260 !important;
-}*/
-/*.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter{
-    margin-bottom: 20px;    
-}*/
-/*.dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_paginate{
-    margin-top: 30px;   
-}*/
-/*.dataTables_length select, .dataTables_filter input{
-    background-color: transparent;
-    border: 1px solid rgb(137, 155, 169);
-}*/
-
-
 /******************************* PAGES GLOBAL ***********************************/
 
 .page-nav{
@@ -742,23 +680,14 @@ td.actions a{
     display: none;  /* masqué de base */
 }
 .loader_standard{
-/*    width: 360px;
-    height: 200px;*/
     width: 100%;
     height: 100%;
     position: fixed;
-/*    top: 50%;
-    left: 50%;*/
     top: 0;
     left: 0;
-/*    margin-top: -100px;
-    margin-left: -180px;*/
     background-color: #fff;
-    /*border-radius: 2px;*/
     text-align: center;
     z-index: 11;
-    /*padding: 60px 10px 25px 10px;*/
-    /*border: 1px solid #ddd;*/
     opacity: 0.9;
     display: none;  /* masqué de base */
 }
@@ -948,8 +877,7 @@ table.dataTable.no-footer {
 }
 
 
-/******************************* PROSPECTS - INDEX *********************************/
-
+/**************************** PROSPECTS - LIST ********************************/
 
 .prospect-record{
     margin: 0px 0px 30px 0px;
@@ -959,8 +887,6 @@ table.dataTable.no-footer {
 }
 .prospect-record .row-info{
     box-shadow: 0px 4px 8px 4px #ddd;
-    /*border: 1px solid #ddd;*/
-    /*position: relative;*/
 }
 .prospect-record-photo{
     padding: 0px;
@@ -1000,10 +926,8 @@ table.dataTable.no-footer {
     font-size: 2.5em;
 }
 
-
 .prospect-record-card{
     padding-left: 0px;
-    padding-top: 10px;
 }
 .prospect-record-card .infos, .prospect-record-card .rating-avg{
     display: inline-block;
@@ -1022,12 +946,58 @@ table.dataTable.no-footer {
 .rating-avg{
     
 }
+.prospect-record-card .card-header{
+    padding: 10px 0px;
+}
+.prospect-record-card .icons{
+    
+}
+
+/************** ZODIAC **************/
+
+.zodiac{
+    font-family: "velezodiacregular";
+    font-size: 4.6em;
+    color: #FFF;
+    background-color: #F47363;
+    border-radius: 4px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 0.88em;
+    cursor: default;
+    display: inline-block;
+}
+.icon-empty{
+    font-size: 3em;
+    border-radius: 4px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 1.2em;
+    cursor: default;
+    border: 2px solid #F47363;
+    color: #F47363;
+    display: inline-block;
+    vertical-align: top;
+}
+.icon-empty i::before{
+    height: 35px;
+}
+.icon-X{
+    background: url(../images/icons/X.png) center no-repeat;
+    width: 50px;
+    height: 50px;
+    background-size: 48px;
+    background-position: 0px 2px;
+    display: inline-block;
+    vertical-align: top;
+}
+
 
 .row-actions{
-    /*position: absolute;*/
     position: relative;
     right: 0;
-    /*bottom: -50px;*/
     z-index: 2;
     width: 100%;
 }
@@ -1096,10 +1066,10 @@ ul.record-actions{
     margin-right: 10px;
 }
 .pagination span.current{ 
-    background-color: #DA6759;
+    background-color: transparent;
     padding: 10px 15px;
-    color: #fff;
-    font-weight: 800;
+    color: #F47363;
+    border: 1px solid #F47363;
 }
 .pagination span a{    
     background-color: rgb(244, 115, 99);
