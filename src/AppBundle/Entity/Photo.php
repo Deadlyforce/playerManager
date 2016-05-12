@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * 
  * @ORM\Table(name="photo")
  * @ORM\Entity
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\PhotoRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\PhotoRepository")
  * @Gedmo\Uploadable(pathMethod="userPath", filenameGenerator="SHA1", maxSize=1200000, allowOverwrite=true, allowedTypes="image/jpeg")
  */
 class Photo {

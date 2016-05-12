@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Source
  *
  * @ORM\Table(name="sources")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\SourceRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SourceRepository")
  */
 class Source
 {

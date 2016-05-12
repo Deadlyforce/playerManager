@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Categorie
  *
  * @ORM\Table(name="relationship_ranks")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\RelationshipRankRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\RelationshipRankRepository")
  */
 class RelationshipRank
 {

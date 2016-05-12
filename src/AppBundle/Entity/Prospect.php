@@ -15,7 +15,7 @@ use AppBundle\Entity\Chat;
  * Prospect
  *
  * @ORM\Table(name="prospects")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\ProspectRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProspectRepository")
  * @ORM\HasLifecycleCallbacks
  */
 class Prospect

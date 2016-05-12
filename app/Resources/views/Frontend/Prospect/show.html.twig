@@ -83,6 +83,16 @@
                             <i class="icon ion-ios-help-empty"></i>
                         </div>
                     {% endif %}
+                    <div class="icon-separator"></div>
+                    {% if prospect.relationship.meeting %}
+                        <div class="icon-basic custom-tooltip" title="You have met" data-toggle="tooltip" data-placement="top">
+                            <i class="icon ion-wineglass"></i>
+                        </div>
+                    {% else %}
+                        <div class="icon-empty custom-tooltip" title="You haven't met" data-toggle="tooltip" data-placement="top">
+                            <i class="icon ion-ios-help-empty"></i>
+                        </div>
+                    {% endif %}
                     {% if prospect.relationship.fc %}
                         <div class="icon-X custom-tooltip" title="Sex happened" data-toggle="tooltip" data-placement="top"></div>
                     {% else %}
@@ -176,7 +186,7 @@
             
             $('[data-toggle="tooltip"]').tooltip({
                 html: true
-            });
+            });           
             
             // Ajax: get edit form prospect ************************************
             $(".show-left-col").on("click", "#edit_prospect", function(event){

@@ -93,10 +93,7 @@ class ProspectController extends Controller
      * @Template(":ajax.html.twig")
      */
     public function ajax_deleteAction(Request $request, $id)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }        
+    {       
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $data = $request->request->all();
@@ -107,18 +104,13 @@ class ProspectController extends Controller
         if ($csrf->isTokenValid(new CsrfToken('delete', $token))) {
             
             $em = $this->getDoctrine()->getManager();
-            $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
-
-            if (!$prospect) {
-                throw $this->createNotFoundException('Unable to find Prospect entity.');
-            }           
+            $prospect = $em->getRepository('AppBundle:Prospect')->find($id);           
 
             if($prospect->getUser() === $user){
                 $em->remove($prospect);
                 $em->flush();
-                
-                $response_array = array("id" => $id);        
-                $response = json_encode($response_array);
+       
+                $response = json_encode(array("id" => $id));
 
                 return new Response($response);
             } else {
@@ -202,11 +194,7 @@ class ProspectController extends Controller
      * @Template(":Frontend/Prospect:new.html.twig")
      */
     public function createAction(Request $request)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }        
-        
+    {        
         $prospect = new Prospect();        
 
         $form = $this->createForm('AppBundle\Form\ProspectType', $prospect, array(
@@ -223,6 +211,11 @@ class ProspectController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {            
             
             $em = $this->getDoctrine()->getManager();
+            
+            // Depending on entered infos, pre-fill some fields in relationship entity
+            if ($prospect->getHomeNumber() != null || $prospect->getCellNumber() != null) {
+                $prospect->getRelationship()->setNumclosed(true);
+            }
             
             if ($prospect->getSource()->getId() === 2) {
                 $prospect->getRelationship()->setMeeting(true); // Needed, not nullable

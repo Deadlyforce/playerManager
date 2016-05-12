@@ -206,7 +206,7 @@ img[title="captcha"]{
     font-family: "ralewaythin", sans-serif;
     position: absolute;
     top: 50px;
-    right: 385px;
+    right: 375px;
     text-align: left;
 }
 #login-title h2{
@@ -880,19 +880,21 @@ table.dataTable.no-footer {
 /**************************** PROSPECTS - LIST ********************************/
 
 .prospect-record{
-    margin: 0px 0px 30px 0px;
+    margin: 0px 0px 40px 0px;
 }
 .prospect-record .row{
     margin: 0px;
 }
 .prospect-record .row-info{
-    box-shadow: 0px 4px 8px 4px #ddd;
+    box-shadow: 0px 2px 4px 0px #ccc;
+    background-color: #fff;
+    border-bottom: 1px solid #F47363;
 }
 .prospect-record-photo{
     padding: 0px;
 }
 .prospect-record-photo img{
-    position: relative;
+    height: 150px;
 }
 .prospect-record-photo:hover .photo-mask{
     opacity: 1;
@@ -902,10 +904,10 @@ table.dataTable.no-footer {
     position: absolute;
     top: 0;    
     left: 0;
-    width: 175px;
-    height: 175px;
+    width: 150px;
+    height: 150px;
     opacity: 0;
-    background-color: rgba(0,0,0, 0.4);
+    background-color: rgba(0,0,0, 0.2);
     z-index: 2;
     
     -moz-transition: all .3s ease-in;
@@ -928,6 +930,7 @@ table.dataTable.no-footer {
 
 .prospect-record-card{
     padding-left: 0px;
+    padding-right: 0px;
 }
 .prospect-record-card .infos, .prospect-record-card .rating-avg{
     display: inline-block;
@@ -947,10 +950,10 @@ table.dataTable.no-footer {
     
 }
 .prospect-record-card .card-header{
-    padding: 10px 0px;
+    padding: 10px 15px 15px 0px;
 }
 .prospect-record-card .icons{
-    
+    margin-top: 25px;
 }
 
 /************** ZODIAC **************/
@@ -960,7 +963,7 @@ table.dataTable.no-footer {
     font-size: 4.6em;
     color: #FFF;
     background-color: #F47363;
-    border-radius: 4px;
+    border-radius: 2px;
     width: 50px;
     height: 50px;
     text-align: center;
@@ -968,9 +971,22 @@ table.dataTable.no-footer {
     cursor: default;
     display: inline-block;
 }
+.icon-basic{
+    font-size: 3.2em;
+    color: #FFF;
+    background-color: #F47363;
+    border-radius: 2px;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    line-height: 1.2em;
+    cursor: default;
+    display: inline-block;
+    vertical-align: top;
+}
 .icon-empty{
     font-size: 3em;
-    border-radius: 4px;
+    border-radius: 2px;
     width: 50px;
     height: 50px;
     text-align: center;
@@ -993,22 +1009,25 @@ table.dataTable.no-footer {
     display: inline-block;
     vertical-align: top;
 }
-
+.icon-separator{
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    vertical-align: top;
+}
 
 .row-actions{
-    position: relative;
-    right: 0;
-    z-index: 2;
     width: 100%;
+    height: 50px;
+    margin-top: 13px;
 }
-.row-actions:hover{
+/*.row-actions:hover{
     background-color: rgba(0,0,0,0.03);
-}
-
+}*/
 ul.record-actions{
     margin: 0;
-    list-style: none;
     padding: 0;
+    list-style: none;   
     float: right;
 }
 .record-actions li{
@@ -1019,10 +1038,11 @@ ul.record-actions{
     color: #666;
     text-decoration: none;
     font-size: 2em;
-    display: table-cell;
-    vertical-align: middle;
+    display: inline-block;
+    /*vertical-align: middle;*/
     width: 50px;
     height: 50px; 
+    line-height: 1.8em;
     
     -moz-transition: all .2s ease-in;
     -o-transition: all .2s ease-in;
@@ -1043,7 +1063,10 @@ ul.record-actions{
     text-align: center;
     width: 50px;
     height: 50px;
-    /*border-left: 1px solid rgba(255,255,255,0.7);*/
+}
+
+.prospect-delete{
+    padding-right: 0px;
 }
 
 /*** CUSTOM TOOLTIP ***/

@@ -10,7 +10,7 @@ use AppBundle\Entity\Prospect;
  * Relationship
  *
  * @ORM\Table(name="relationships")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\RelationshipRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\RelationshipRepository")
  */
 class Relationship
 {

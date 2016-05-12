@@ -16,16 +16,19 @@
                 <img class="img-responsive" src="{{ photo.path | imagine_filter('thumb_prospect_175') }}" />     
             </div>
             
-            {% if loop.index % 6 == 0 %} {# Close the div row every 3rd item and open a new one #}
+            {% if loop.index % 6 == 0 %}
                 </div>
                 <div class="row row-album">
             {% endif %}
         {% endfor %}
     </div>
+
     
-    <script type="text/javascript">
+    <script type="text/javascript">       
         $(document).ready(function(){
             
         });
     </script>
 {% endblock %}
+
+

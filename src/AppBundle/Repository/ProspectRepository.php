@@ -1,10 +1,9 @@
 <?php
 
-namespace AppBundle\Entity\Repository;
+namespace AppBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use AppBundle\Entity\User;
-//use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * prospectRepository

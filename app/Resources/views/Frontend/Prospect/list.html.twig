@@ -18,15 +18,15 @@
         {% for prospect in pagination %}
             <div class="prospect-record row" id="{{ prospect.id }}">
                 <div class="row row-info">
-                    <div class="prospect-record-photo col-md-2">
+                    <div class="prospect-record-photo col-md-2">                        
                         {{ photoDisplayIndex.primaryPhoto(prospect.photos) }}
                         <div class="photo-mask">
-                            <a href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Photo gallery">
-                                <i class="icon ion-ios-compose-outline"></i>
+                            <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Edit everything related to your contact here" data-toggle="tooltip" data-placement="top">
+{#                                <i class="icon ion-ios-albums-outline"></i>#}
                             </a>
                         </div>
                     </div>
-                    <div class="prospect-record-card col-md-10">
+                    <div class="prospect-record-card col-md-9">
                         <div class="card-header">
                             <div class="infos">
                                 {% if prospect.country != null %}
@@ -48,19 +48,36 @@
                                     <i class="icon ion-ios-help-empty"></i>
                                 </div>
                             {% endif %}
+                            <div class="icon-separator"></div>
+                            {% if prospect.relationship.meeting %}
+                                <div class="icon-basic custom-tooltip" title="You have met" data-toggle="tooltip" data-placement="top">
+                                    <i class="icon ion-wineglass"></i>
+                                </div>
+                            {% else %}
+                                <div class="icon-empty custom-tooltip" title="You haven't met" data-toggle="tooltip" data-placement="top">
+                                    <i class="icon ion-ios-help-empty"></i>
+                                </div>
+                            {% endif %}
                             {% if prospect.relationship.fc %}
                                 <div class="icon-X custom-tooltip" title="Sex happened" data-toggle="tooltip" data-placement="top"></div>
                             {% else %}
                                 <div class="icon-empty custom-tooltip" title="No sex" data-toggle="tooltip" data-placement="top">
                                     <i class="icon ion-ios-help-empty"></i>
                                 </div>
-                            {% endif %}
+                            {% endif %}                           
                         </div>
                     </div>
+                    <div class="col-md-1 prospect-delete">
+                        <ul class="record-actions">     
+                            <li>
+                                <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-trash-outline"></i></a>
+                            </li>
+                        </ul>
+                    </div>                 
                 </div>                 
                 
-                <div class="row row-actions">                    
-                    <ul class="record-actions"> 
+{#                <div class="row row-actions">                    #}
+{#                    <ul class="record-actions"> #}
                         {#<li><p>Encounters</p></li>
                         <li>
                             <a class="custom-tooltip" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Add encounters"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-wineglass-outline"></i></a>
@@ -85,17 +102,14 @@
                         </li>#}
 {#                        <li class="separator"></li>#}
 {#                        <li><p>Contact</p></li>#}
-                        <li>
-                            <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Edit everything related to your contact here" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
-                        </li>
                         {#<li>
-                            <a class="edit_prospect custom-tooltip" href="#" data-id="{{ prospect.id }}" title="Modify contact" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
-                        </li>#}
+                            <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Edit everything related to your contact here" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
+                        </li>    
                         <li>
                             <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-trash-outline"></i></a>
-                        </li>
-                    </ul>                    
-                </div>               
+                        </li>#}
+{#                    </ul>                    #}
+{#                </div>               #}
             </div>
         {% endfor %}
         
@@ -141,12 +155,16 @@
     <script type="text/javascript">
         $(document).ready(function(){  
 {#            var locale = "{{ app.request.locale }}";#}
-            var locale = $("#locale").data("locale");                  
-           
+            var locale = $("#locale").data("locale");                                
            
             $('[data-toggle="tooltip"]').tooltip({
                 html: true
-            });            
+            });  
+            
+            // Stars cursor default ********************************************
+            $(".rating-avg").on("mouseover", function(){
+                $(".jq-star, .fs-star-svg polygon").css("cursor", "default");
+            });
                    
             // Ajax: get form new prospect *************************************
             $("#add_prospect").click(function(event){

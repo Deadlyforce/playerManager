@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Chat
  *
  * @ORM\Table(name="chats")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\Repository\ChatRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ChatRepository")
  */
 class Chat
 {
