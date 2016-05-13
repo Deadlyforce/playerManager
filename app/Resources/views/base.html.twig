@@ -19,6 +19,7 @@
             'bundles/app/css/custom.css'            
             'bundles/app/css/ionicons.min.css'                     
             'bundles/app/packages/star-rating-svg/css/star-rating-svg.css'                     
+            'bundles/app/packages/percircle/css/percircle.css'                     
         %}
             <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
@@ -38,6 +39,8 @@
             'bundles/app/packages/colorbox/jquery.colorbox-min.js'
             'bundles/app/js/helpers.js'                       
             'bundles/app/packages/star-rating-svg/jquery.star-rating-svg.js'
+            'bundles/app/packages/percircle/js/percircle.js'
+            'bundles/app/packages/jquery.backstretch.min.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
@@ -48,41 +51,44 @@
     
     <section id="top-bar">
         <div class="container">
-            
+            <div>
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                <a class="logout pull-right" href="{{ path('fos_user_security_logout') }}" title="{{ 'app.nav.logout'|trans }}">{{ 'app.nav.logout'|trans }}</a>           
+            {% endif %}
+            </div>
         </div>
     </section>
-    <header>
+    
         <div class="container">
-            <nav class="navbar navbar-default">
-                <div class="container-fluid header-container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header col-md-4">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="{{ path('home_index') }}" title="Mnaomai homepage">Mnaomai</a>
-                    </div>
+            <header>
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid header-container">
+                        <div class="navbar-header col-md-4">
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <a class="navbar-brand" href="{{ path('home_index') }}" title="Mnaomai homepage">Mnaomai</a>
+                        </div>
 
-                    <div class="collapse navbar-collapse col-md-8 pull-right" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav">
-                            <li><a href="{{ path('prospect_list') }}" title="Contacts">Contacts</a></li>
-                            <li><a href="{{ path('photo_album', {'user_id': app.user.id}) }}" title="{{ 'app.nav.album'|trans }}">{{ 'app.nav.album'|trans }}</a></li>
-                            <li><a href="{{ path('dashboard', {'user_id': app.user.id}) }}" title="{{ 'app.nav.dashboard'|trans }}">{{ 'app.nav.dashboard'|trans }}</a></li>
-{#                            <li><a href="{{ path('relationship') }}">{{ 'All relationships'|trans }}</a></li>                                        #}
-                            <li><a href="{{ path('fos_user_profile_show') }}" title="{{ 'app.nav.profile'|trans }}">{{ 'app.nav.profile'|trans }}</a></li>                             
-                            <li><a href="{{ path('contact_us') }}" title="{{ 'app.nav.contactus'|trans }}">{{ 'app.nav.contactus'|trans }}</a></li>  
-                            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                                <li><a href="{{ path('fos_user_security_logout') }}" title="{{ 'app.nav.logout'|trans }}">{{ 'app.nav.logout'|trans }}</a></li>           
-                            {% endif %}
-                        </ul>
+                        <div class="collapse navbar-collapse col-md-8 pull-right" id="bs-example-navbar-collapse-1">
+                            <ul class="nav navbar-nav">
+                                <li><a href="{{ path('prospect_list') }}" title="Contacts">Contacts</a></li>
+                                <li><a href="{{ path('photo_album', {'user_id': app.user.id}) }}" title="{{ 'app.nav.album'|trans }}">{{ 'app.nav.album'|trans }}</a></li>
+                                <li><a href="{{ path('dashboard', {'user_id': app.user.id}) }}" title="{{ 'app.nav.dashboard'|trans }}">{{ 'app.nav.dashboard'|trans }}</a></li>
+    {#                            <li><a href="{{ path('relationship') }}">{{ 'All relationships'|trans }}</a></li>                                        #}
+                                <li><a href="{{ path('fos_user_profile_show') }}" title="{{ 'app.nav.profile'|trans }}">{{ 'app.nav.profile'|trans }}</a></li>                             
+                                <li><a href="{{ path('contact_us') }}" title="{{ 'app.nav.contactus'|trans }}">{{ 'app.nav.contactus'|trans }}</a></li>  
+
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </nav>
+                </nav>
+            </header> 
         </div>
-    </header> 
+    
 
     {% block content %}          
     {% endblock %}
@@ -98,9 +104,15 @@
         
         
         $(document).ready(function(){
-                        
+             
+            var loginImage1 = "{{ asset('bundles/app/images/login/manager_16.jpg') }}"; 
+            var loginImage2 = "{{ asset('bundles/app/images/login/manager_17.jpg') }}"; 
+            var loginImage3 = "{{ asset('bundles/app/images/login/manager_25.jpg') }}";
+            
+            $.backstretch([loginImage1, loginImage2, loginImage3], {duration: 5000, fade: 1000});
+            
             // Menu animation
-            $(".navbar-brand").animate({
+            {#$(".navbar-brand").animate({
                 'height': '0px'
             }, 800);
             $(".navbar-nav > li > a").animate({
@@ -109,7 +121,7 @@
             
             $(".page-title-underline").animate({
                 'width': '500px'
-            }, 1000);
+            }, 1000);#}
             
             // Active link in menu *********************************************
             // Page name must match EXACTLY with menu link name !!

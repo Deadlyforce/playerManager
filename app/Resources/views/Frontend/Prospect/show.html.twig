@@ -22,16 +22,136 @@
 
 
 {% block content %}    
-    <div class="container">        
-        <section class="page-title">
-            <h1>Detailed view for {{ prospect.firstname }}</h1> 
-{#                <h2>Blablabla</h2>#}
-        </section>
-        <div class="page-title-underline"></div>            
-        
-        <div class="page-nav">            
+    <div class="container">  
+        {#<div class="page-nav">            
             <a class="btn-basic" href="{{ path('prospect_list') }}" title="Back to contacts">Back to contacts</a>
-        </div>        
+        </div>#}  
+        
+        <div id="contact-left-column">
+            {{ photoDisplay.primaryPhoto(prospect.photos) }}
+            {% if prospect.job %}
+                <p class="job">
+                    {{ prospect.job }}
+                </p>
+            {% endif %}
+            {% if prospect.cellNumber %}
+                <p class="job">
+                    {{ prospect.cellNumber }}
+                </p>
+            {% endif %}
+            {% if prospect.homeNumber %}
+                <p class="job">
+                    {{ prospect.homeNumber }}
+                </p>
+            {% endif %}
+            <div class="row-age">
+                <div id="age" class="tile">
+                    <p class="tile-value">{% if prospect.age %}{{ prospect.age }}{% else %}?{% endif %}</p>
+                    <p class="tile-title">Age</p>
+                </div><!--
+             --><div id="source" class="tile">
+                    <p class="tile-value">{% if prospect.source == 'IRL (In Real Life)' %}IRL{% else %}{{ prospect.source }}{% endif %}</p>
+                    <p class="tile-title">Source</p>
+                </div>
+            </div>
+            <div class="row-astro">
+                <div id="astro">
+                    {% if prospect.zodiac %}
+                    <p class="zodiac" title="{{ prospect.zodiac.wording }}">
+                        {{ prospect.zodiac.letter }}
+                    </p>
+                    {% else %}
+                        <p class="tile-value">?</p>
+                    {% endif %}
+                    <p class="tile-title">Astro</p>
+                </div><!--
+                {% if prospect.relationship.status == 1 %}
+                    --><div id="status-ok" class="tile">
+                        <p class="tile-value">Ok</p>
+                        <p class="tile-title">Relationship<br>status</p>
+                    </div>
+                {% else %}
+                    --><div id="status-off" class="tile">
+                        <p class="tile-value">Off</p>
+                        <p class="tile-title">Relationship<br>status</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div><!--
+     --><div id="contact-right-column">
+            <div id="basic-infos">
+                <p id="name">
+                    {{ prospect.firstname }} {{ prospect.lastname }}
+                    {% if prospect.country != null %}
+                        {% set lang = prospect.country|upper %}
+                        <img src="{{ asset('bundles/app/images/flags/' ~ lang ~ '.png') }}" />
+                    {% endif %}
+                </p>
+                <p id="adress">
+                    {{ prospect.address }} {{ prospect.zipcode }} {{ prospect.city|upper }}
+                </p>
+            </div>
+            <div class="row row-bigtiles">
+                <a id="list-rating-link" data-id="{{ prospect.rating.id }}" href="#">
+                    <div class="col-md-4 bigtile-left bigtile">
+                        <p class="bigtile-title">Average rating <div class="rating-avg" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div></p>
+                        <div id="averagecircle" data-percent="{{ prospect.rating.average * 10 }}" class="orange"></div>
+                    </div>
+                </a>
+                <div class="col-md-4 bigtile-middle bigtile">
+                    <p class="bigtile-title">Red flags</p>
+                </div>
+                <div class="col-md-4 bigtile-right bigtile">
+                    <p class="bigtile-title"></p>
+                </div>
+            </div>
+            <div class="row row-bigtiles">
+                <div class="col-md-4 bigtile-left-norightborder">
+                    <p class="bigtile-value">{{ prospect.relationship.relationshipRank }}</p>
+                    <p class="bigtile-title">Relationship type</p>
+                </div>
+                <div class="col-md-8 container-smalltiles">
+                    <div class="row row-smalltiles">
+                        <div class="col-md-3 smalltile" id="met">
+                            {% if  prospect.relationship.meeting %}
+                                <i class="icon ion-wineglass"></i>
+                            {% else %}
+                                <i class="icon ion-android-close"></i>
+                            {% endif %}
+                            <p>Met</p>
+                        </div>
+                        <div class="col-md-3  smalltile" id="kc">
+                            {% if  prospect.relationship.kc %}
+                                <i class="icon ion-fireball"></i>
+                            {% else %}
+                                <i class="icon ion-android-close"></i>
+                            {% endif %}
+                            <p>Kissed</p>
+                        </div>
+                        <div class="col-md-3 smalltile" id="fc">
+                            {% if  prospect.relationship.fc %}
+                                <i class="icon ion-android-cancel"></i>
+                            {% else %}
+                                <i class="icon ion-android-close"></i>
+                            {% endif %}
+                            <p>Sex</p>
+                        </div>
+                        <div class="col-md-3 smalltile" id="meetingcount">
+                            <p id="smalltile-text">{{ prospect.relationship.meetingCount }}</p>
+                            <p>Meeting count</p>                           
+                        </div>
+                    </div>
+                    <div class="row row-smalltiles">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+                    
+                    
+                    
+                    
+                    
         
         <div class="row" id="prospect-show-content">                
             <div class="col-md-3 show-left-col">
@@ -67,7 +187,7 @@
                                 ({{ prospect.nickname }})
                             {% endif %}
                         </div>
-                        <a id="list-rating-link" data-id="{{ prospect.rating.id }}" href="#"><div class="rating-avg pull-right custom-tooltip" data-toggle="tooltip" data-placement="top" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div></a> 
+{#                        <a id="list-rating-link" data-id="{{ prospect.rating.id }}" href="#"><div class="rating-avg pull-right custom-tooltip" data-toggle="tooltip" data-placement="top" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div></a> #}
                     </div>                     
                 </div>
                 <p class="full-address">                      
@@ -181,6 +301,15 @@
     
     <script type="text/javascript">
         $(document).ready(function(){
+            
+            {#$(function(){
+                $("[id$='orangecircle']").percircle();
+            });#}
+            
+            $("#averagecircle").percircle({
+                
+            });
+            
             var locale = "{{ app.request.locale }}";
             var id = "{{ prospect.id }}";
             
@@ -275,7 +404,7 @@
                 $(div).starRating({
                     initialRating: avgRating,
                     totalStars: 5,                
-                    starSize: 30,
+                    starSize: 15,
                     disableAfterRate: false,
                     useGradient: false,
                     emptyColor: '#ddd',
