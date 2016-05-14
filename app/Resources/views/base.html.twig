@@ -38,8 +38,7 @@
             'bundles/app/packages/slick_1.5.9/slick.min.js'            
             'bundles/app/packages/colorbox/jquery.colorbox-min.js'
             'bundles/app/js/helpers.js'                       
-            'bundles/app/packages/star-rating-svg/jquery.star-rating-svg.js'
-            'bundles/app/packages/percircle/js/percircle.js'
+            'bundles/app/packages/star-rating-svg/jquery.star-rating-svg.js'            
             'bundles/app/packages/jquery.backstretch.min.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
@@ -109,7 +108,7 @@
             var loginImage2 = "{{ asset('bundles/app/images/login/manager_17.jpg') }}"; 
             var loginImage3 = "{{ asset('bundles/app/images/login/manager_25.jpg') }}";
             
-            $.backstretch([loginImage1, loginImage2, loginImage3], {duration: 5000, fade: 1000});
+            $.backstretch([loginImage1, loginImage2, loginImage3], {duration: 5000, fade: 2000});
             
             // Menu animation
             {#$(".navbar-brand").animate({

@@ -118,6 +118,13 @@ class Rating
     private $average;
     
     /**
+     * @var float 
+     * 
+     * @ORM\Column(name="percentAverage", type="float", nullable=true)
+     */
+    private $percentAverage;
+    
+    /**
      * Get id
      *
      * @return int
@@ -318,6 +325,29 @@ class Rating
     }
     
     /**
+     * Set percentAverage
+     *
+     * @param smallint $percentAverage
+     * @return Rating
+     */
+    public function setPercentAverage($percentAverage)
+    {
+        $this->percentAverage = $percentAverage;
+        
+        return $this;
+    }
+
+    /**
+     * Get percentAverage
+     *
+     * @return percentAverage 
+     */
+    public function getPercentAverage()
+    {
+        return $this->percentAverage;
+    }
+    
+    /**
      * @ORM\PreUpdate()
      * @ORM\PrePersist()
      */
@@ -334,6 +364,18 @@ class Rating
         }
 
         $this->average = intval($roundedAvg);
+    }
+    
+    /**
+     * @ORM\PreUpdate()
+     * @ORM\PrePersist()
+     */
+    public function saveExactAveragedAttributes()
+    {
+        $avg = ($this->attractiveness + $this->cooking + $this->kissing + $this->senseHumor + $this->sex + $this->socialStatus)/6;
+        $percentAvg = round($avg, 1) * 20;
+                
+        $this->percentAverage = $percentAvg;
     }
 }
 

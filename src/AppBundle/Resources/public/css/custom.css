@@ -377,7 +377,7 @@ form[name="fos_user_security_login"] #_submit:hover{
 }
 
 header{
-    background-color: rgba(255,255,255, 0.9);    
+    background-color: rgba(255,255,255, 1);    
     padding-bottom: 150px;
 }
 .header-container{
@@ -1224,9 +1224,11 @@ form#form-delete-prospect button{
 }
 p.job{
     text-align: center;
-    color: #CBCCE4;    
+    color: #9E9EB1;    
     padding: 15px 0px;
     margin: 0;
+    font-family: "open_sanslight", sans-serif;
+    font-size: 1.5em;
 }
 .tile{
     padding-top: 15px; 
@@ -1310,45 +1312,34 @@ p#adress{
     color: #999;
     padding-left: 5px;
 }
-.row-bigtiles{
+
+
+.row-bigtiles, .row-tiles{
     margin: 0;
 }
 .bigtile{
     height: 296.667px;
-    padding: 50px 0px 0px 0px;
-}
-.bigtile-left{
-    border-left: 1px solid #ccc;
-    border-right: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
-    padding-left: 0;
-    padding-right: 0;  
-    background-color: #fff;
-    
-    transition: all .3s ease-in;
-}
-.bigtile-middle{
-    border-right: 1px solid #ccc;
+    padding: 0;
     border-bottom: 1px solid #ccc;
     padding-left: 0;
     padding-right: 0;
     background-color: #fff;
+    display: table;
+    
+    transition: all .3s ease-in;
 }
-.bigtile-right{
-    /*border-right: 1px solid #ccc;*/
-    border-bottom: 1px solid #ccc;
-    padding-left: 0;  
-    background-color: #fff;
+.bigtile-left, .bigtile-middle{
+    border-right: 1px solid #ccc;     
+}
+.tilecontent{
+    display: table-cell;
+    vertical-align: middle;
 }
 @media screen and (max-width: 1140px) {
-    .bigtile-middle{
-        border-left: 1px solid #ccc;
-    }
-    .bigtile-right{
-        border-left: 1px solid #ccc;
+    .bigtile, .bigtile-relationship, .smalltile{
+        width: 100%; /* Compensate for table behavior */
     }
 }
-
 .bigtile-title{
     font-family: "open_sansregular", sans-serif;
     color: #999;
@@ -1361,9 +1352,9 @@ p#adress{
 a#list-rating-link{
     
 }
-a#list-rating-link:hover .bigtile-left{
-    background-color: rgba(255,255,255, 0.8);
-    /*box-shadow: inset 0px 0px 8px 2px #ddd;*/
+a#list-rating-link:hover .bigtile-left, a#list-rating-link:hover .bigtile-title{
+    background-color: rgba(255,255,255, 0);
+    color: #fff;
 }
 #averagecircle{
     margin: 20px auto 0px auto;
@@ -1376,19 +1367,54 @@ a#list-rating-link:hover .bigtile-left{
     left: 5%;
     color: #999;
 }
-.bigtile-left-norightborder{    
-    padding: 75px 0px 0px 0px;
-    height: 296.667px;
-    padding-left: 0;
-    padding-right: 0;  
+
+/************** Second row *****************/
+
+a.edit-relationship{
+    
+}
+a.edit-relationship:hover .bigtile-relationship, a.edit-relationship:hover .bigtile-title{
+    background-color: rgba(255,255,255, 0);
+    color: #fff;
+    text-shadow: 1px 1px 2px #666;
+}
+
+.bigtile-relationship{    
+    padding: 0px;
+    height: 296.667px; 
+    border-bottom: 1px solid #ccc;
     background-color: #fff;
     text-align: center;
+    display: table;
+    
+    transition: all .3s ease-in;
 }
 .bigtile-value{
     font-family: "open_sanslight", sans-serif;
     font-size: 2.2em;
 }
-.container-smalltiles{
+.smalltile-container-middle{
+    height: 296.667px;
+    padding: 0;
+    border-bottom: 1px solid #ccc;
+    border-right: 1px solid #ccc;  
+    padding-left: 0;
+    padding-right: 0;
+    font-family: "open_sansregular", sans-serif;
+}
+.smalltile-container-right{
+    height: 296.667px;
+    padding: 0;
+    border-right: 1px solid #ccc;  
+    padding-left: 0;
+    padding-right: 0;
+    font-family: "open_sansregular", sans-serif;
+}
+
+
+
+.container-smalltiles-encounter{
+    background-color: rgba(255,255,255,1);
     color: #999;
     height: 296.667px;
     padding-left: 0;
@@ -1400,22 +1426,24 @@ a#list-rating-link:hover .bigtile-left{
     padding: 0;
     margin: 0;
 }
-/*.row-smalltiles:first-child{
-    border-left: none;
-}*/
 .smalltile{
-    padding: 30px 0px 0px 0px;
+    padding: 0px;
     height: 148.333px;
     background-color: #FFF;
     border-left: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+    display: table;
+    text-align: center;
 }
 .smalltile i{
     color: #666;
-    font-size: 3em;
+    font-size: 4em;
 }
-#met{
+#met, #start-date, #fc, #blank1{
     border-left: none;
+}
+#start-date, #meetingcount, #blank1, #blank2{
+    border-bottom: 1px solid #ccc;
 }
 #met i{
     color: #F72EB2;
@@ -1426,9 +1454,24 @@ a#list-rating-link:hover .bigtile-left{
 #fc i{
     color: #771656;
 }
-#meetingcount #smalltile-text{
+#distance i.ion-happy-outline{
+    color: #49D76C;
+}
+.smalltile-subtext{
    font-size: 2.5em;
-   color: #999;
+   color: #666;
+   font-family: "open_sanslight", sans-serif;
+}
+#start-date i{
+    font-size: 1em;
+    color: #999;
+    margin-right: 5px;
+}
+p#start-date-val{
+    font-size: 1.8em;
+    color: #666;
+    padding: 10px 0px 5px 0px;
+    font-family: "open_sanslight", sans-serif;
 }
 
 

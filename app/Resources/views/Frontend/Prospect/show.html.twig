@@ -46,7 +46,7 @@
             {% endif %}
             <div class="row-age">
                 <div id="age" class="tile">
-                    <p class="tile-value">{% if prospect.age %}{{ prospect.age }}{% else %}?{% endif %}</p>
+                    <p class="tile-value">{% if prospect.age %}<span>0</span>{% else %}?{% endif %}</p>
                     <p class="tile-title">Age</p>
                 </div><!--
              --><div id="source" class="tile">
@@ -91,69 +91,137 @@
                     {{ prospect.address }} {{ prospect.zipcode }} {{ prospect.city|upper }}
                 </p>
             </div>
+                
             <div class="row row-bigtiles">
                 <a id="list-rating-link" data-id="{{ prospect.rating.id }}" href="#">
-                    <div class="col-md-4 bigtile-left bigtile">
-                        <p class="bigtile-title">Average rating <div class="rating-avg" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div></p>
-                        <div id="averagecircle" data-percent="{{ prospect.rating.average * 10 }}" class="orange"></div>
+                    <div class="col-md-4 bigtile bigtile-left">
+                        <div class="tilecontent">
+                            <div class="bigtile-title">
+                                Average rating <div class="rating-avg" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div>
+                            </div>
+                            <div id="averagecircle" data-percent="{{ prospect.rating.percentAverage }}" class="orange"></div>
+                        </div>
                     </div>
                 </a>
-                <div class="col-md-4 bigtile-middle bigtile">
-                    <p class="bigtile-title">Red flags</p>
+                <div class="col-md-4 bigtile bigtile-middle">
+                    <div class="tilecontent">
+                        <p class="bigtile-title">Red flags</p>
+                    </div>
                 </div>
-                <div class="col-md-4 bigtile-right bigtile">
+                <div class="col-md-4 bigtile">
+                    <div class="tilecontent">
+                        <p class="bigtile-title"></p>
+                    </div>
+                </div>
+            </div>                   
+                    
+            <div class="row row-bigtiles">
+                <a class="edit-relationship" data-id="{{ prospect.relationship.id }}" href="#" title="Edit relationship">
+                    <div class="col-md-4 bigtile-relationship">
+                        <div class="tilecontent">
+                            <p class="bigtile-value">{{ prospect.relationship.relationshipRank }}</p>
+                            <p class="bigtile-title">Relationship type</p>
+                        </div>
+                    </div>
+                </a>
+                <div class="col-md-4 smalltile-container-middle">
+                    <div class="row row-tiles">
+                        <div class="col-md-6 smalltile" id="met">
+                            <div class="tilecontent">
+                                {% if  prospect.relationship.meeting %}
+                                    <i class="icon ion-wineglass"></i>
+                                {% else %}
+                                    <i class="icon ion-android-close"></i>
+                                {% endif %}
+                                <p>Met</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6  smalltile" id="kc">
+                            <div class="tilecontent">
+                                {% if  prospect.relationship.kc %}
+                                    <i class="icon ion-fireball"></i>
+                                {% else %}
+                                    <i class="icon ion-android-close"></i>
+                                {% endif %}
+                                <p>Kissed</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-tiles">
+                        <div class="col-md-6 smalltile" id="start-date">
+                            <div class="tilecontent">
+                                {% if  prospect.relationship.startDate %}
+                                    <p id="start-date-val">{{ prospect.relationship.startDate|date('d-m-Y') }}</p>
+                                {% else %}
+                                    <p>?</p>
+                                {% endif %}
+                                <p><i class="icon ion-calendar"></i> Start Date</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 smalltile" id="meetingcount">
+                            <div class="tilecontent">
+                                <p class="smalltile-subtext"><span>0</span></p>
+                                <p>Meeting count</p>                           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            
+                <div class="col-md-4 smalltile-container-right">
+                    <div class="row  row-tiles">
+                        <div class="col-md-6 smalltile" id="fc">
+                            <div class="tilecontent">
+                                {% if  prospect.relationship.fc %}
+                                    <i class="icon ion-android-cancel"></i>
+                                {% else %}
+                                    <i class="icon ion-android-close"></i>
+                                {% endif %}
+                                <p>Sex</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 smalltile" id="distance">
+                            <div class="tilecontent">
+                                {% if  prospect.relationship.distance %}
+                                    <i class="icon ion-sad-outline"></i>                                    
+                                {% else %}
+                                    <i class="icon ion-happy-outline"></i>
+                                {% endif %}
+                                <p>Distance</p>
+                            </div>
+                        </div>
+                    </div>            
+                    <div class="row  row-tiles">
+                        <div class="col-md-6 smalltile" id="blank1">
+{#                            <p class="smalltile-subtext"><span>0</span></p>#}
+{#                            <p>Meeting count</p>                           #}
+                        </div>
+                        <div class="col-md-6 smalltile" id="blank2">
+{#                            <p class="smalltile-subtext"><span>0</span></p>#}
+{#                            <p>Meeting count</p>                           #}
+                        </div>
+                    </div>            
+                </div>            
+            </div>                       
+                            
+            <div class="row row-bigtiles">                
+                <div class="col-md-4 bigtile-left bigtile">
+                    
+                </div>
+                <div class="col-md-4 bigtile-middle bigtile">
+
+                </div>
+                <div class="col-md-4 bigtile">
                     <p class="bigtile-title"></p>
                 </div>
             </div>
-            <div class="row row-bigtiles">
-                <div class="col-md-4 bigtile-left-norightborder">
-                    <p class="bigtile-value">{{ prospect.relationship.relationshipRank }}</p>
-                    <p class="bigtile-title">Relationship type</p>
-                </div>
-                <div class="col-md-8 container-smalltiles">
-                    <div class="row row-smalltiles">
-                        <div class="col-md-3 smalltile" id="met">
-                            {% if  prospect.relationship.meeting %}
-                                <i class="icon ion-wineglass"></i>
-                            {% else %}
-                                <i class="icon ion-android-close"></i>
-                            {% endif %}
-                            <p>Met</p>
-                        </div>
-                        <div class="col-md-3  smalltile" id="kc">
-                            {% if  prospect.relationship.kc %}
-                                <i class="icon ion-fireball"></i>
-                            {% else %}
-                                <i class="icon ion-android-close"></i>
-                            {% endif %}
-                            <p>Kissed</p>
-                        </div>
-                        <div class="col-md-3 smalltile" id="fc">
-                            {% if  prospect.relationship.fc %}
-                                <i class="icon ion-android-cancel"></i>
-                            {% else %}
-                                <i class="icon ion-android-close"></i>
-                            {% endif %}
-                            <p>Sex</p>
-                        </div>
-                        <div class="col-md-3 smalltile" id="meetingcount">
-                            <p id="smalltile-text">{{ prospect.relationship.meetingCount }}</p>
-                            <p>Meeting count</p>                           
-                        </div>
-                    </div>
-                    <div class="row row-smalltiles">
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
+      
                     
                     
                     
                     
                     
         
-        <div class="row" id="prospect-show-content">                
+        {#<div class="row" id="prospect-show-content">                
             <div class="col-md-3 show-left-col">
                 <div>
                     {{ photoDisplay.primaryPhoto(prospect.photos) }}
@@ -187,7 +255,6 @@
                                 ({{ prospect.nickname }})
                             {% endif %}
                         </div>
-{#                        <a id="list-rating-link" data-id="{{ prospect.rating.id }}" href="#"><div class="rating-avg pull-right custom-tooltip" data-toggle="tooltip" data-placement="top" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div></a> #}
                     </div>                     
                 </div>
                 <p class="full-address">                      
@@ -249,9 +316,6 @@
                 </li>
                 <li class="icon-separator"></li>
                 <li class="icon-title"><p>Relationship</p></li>                       
-{#                <li>
-                    <a href="{{ path('relationship_show', { 'id': prospect.relationship.id }) }}" title="Show relationship"><i class="icon ion-ios-eye-outline"></i></a>
-                </li>#}
                 <li>
                     <a class="edit-relationship custom-tooltip" data-id="{{ prospect.relationship.id }}" href="#" title="Edit relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>                       
                 </li>
@@ -262,19 +326,9 @@
                 </li>
                 <li class="icon-add">                    
                     <a id="encounters-list" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Encounters"><i class="icon ion-ios-list-outline"></i></a>
-                </li>
-{#                <li class="icon-separator"></li>  #}
-                {#<li class="icon-title"><p>Contact</p></li>
-                <li>
-                    <a id="edit_prospect" href="#" title="Edit contact"><i class="icon ion-ios-compose-outline"></i></a>                
-                </li>#}                
-{#                <li>
-                    {{ form_start(delete_form, {'attr': {'id':'form-delete-prospect', 'title':'Delete contact'}}) }}                       
-                        {{ form_widget(delete_form.submit, {'label': '<i class="icon ion-ios-trash-outline"></i>'}) }}
-                    {{ form_end(delete_form) }}
-                </li>#}
+                </li> 
             </ul>
-        </div>
+        </div>#}
             
         {# Modales #}
         <div class="modal fade modal-full" tabindex="-1" role="dialog">
@@ -301,6 +355,11 @@
     
     <script type="text/javascript">
         $(document).ready(function(){
+            
+            var age = "{{ prospect.age }}";
+            $("#age span").animateNumber({ number: age }, 3000);
+            var count = "{{ prospect.relationship.meetingCount }}";
+            $("#meetingcount span").animateNumber({ number: count }, 2000);
             
             {#$(function(){
                 $("[id$='orangecircle']").percircle();
@@ -354,7 +413,7 @@
             });
             
             // Ajax: get form edit relationship ********************************
-            $(".show-actions").on("click", ".edit-relationship", function(event){
+            $(".row-bigtiles").on("click", ".edit-relationship", function(event){
                 event.preventDefault();               
                 
                 $(".loader_standard").show();
@@ -415,4 +474,15 @@
             });
         });
     </script>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    {% javascripts
+        'bundles/app/packages/percircle/js/percircle.js'
+        'bundles/app/js/jquery.animateNumber.min.js'
+    %}        
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts%}
 {% endblock %}
