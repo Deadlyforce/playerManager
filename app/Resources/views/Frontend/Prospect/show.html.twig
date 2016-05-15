@@ -28,7 +28,13 @@
         </div>#}  
         
         <div id="contact-left-column">
-            {{ photoDisplay.primaryPhoto(prospect.photos) }}
+            <a href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Add and remove photos">
+                <div id="photo-contact">
+                    {{ photoDisplay.primaryPhoto(prospect.photos) }}
+                    <div id="photo-mask"><div class="tilecontent">Gallery</div></div>
+                </div>
+            </a>
+            
             {% if prospect.job %}
                 <p class="job">
                     {{ prospect.job }}
@@ -46,12 +52,16 @@
             {% endif %}
             <div class="row-age">
                 <div id="age" class="tile">
-                    <p class="tile-value">{% if prospect.age %}<span>0</span>{% else %}?{% endif %}</p>
-                    <p class="tile-title">Age</p>
-                </div><!--
-             --><div id="source" class="tile">
-                    <p class="tile-value">{% if prospect.source == 'IRL (In Real Life)' %}IRL{% else %}{{ prospect.source }}{% endif %}</p>
-                    <p class="tile-title">Source</p>
+                    <div class="tilecontent">
+                        <p class="tile-value">{% if prospect.age %}<span>0</span>{% else %}?{% endif %}</p>
+                        <p class="tile-title">Age</p>
+                    </div>
+                </div>
+                <div id="source" class="tile">
+                    <div class="tilecontent">
+                       <p class="tile-value">{% if prospect.source == 'IRL (In Real Life)' %}IRL{% else %}{{ prospect.source }}{% endif %}</p>
+                       <p class="tile-title">Source</p>
+                    </div>
                 </div>
             </div>
             <div class="row-astro">
@@ -64,46 +74,59 @@
                         <p class="tile-value">?</p>
                     {% endif %}
                     <p class="tile-title">Astro</p>
-                </div><!--
+                </div>
                 {% if prospect.relationship.status == 1 %}
-                    --><div id="status-ok" class="tile">
-                        <p class="tile-value">Ok</p>
-                        <p class="tile-title">Relationship<br>status</p>
+                    <div id="status-ok" class="tile">
+                        <div class="tilecontent">
+                            <p class="tile-value">Ok</p>
+                            <p class="tile-title">Relationship<br>status</p>
+                        </div>
                     </div>
                 {% else %}
-                    --><div id="status-off" class="tile">
-                        <p class="tile-value">Off</p>
-                        <p class="tile-title">Relationship<br>status</p>
+                    <div id="status-off" class="tile">
+                        <div class="tilecontent">
+                            <p class="tile-value">Over</p>
+                            <p class="tile-title">Relationship<br>status</p>
+                        </div>
                     </div>
                 {% endif %}
             </div>
+            <div class="row-neutral">
+            </div>
         </div><!--
      --><div id="contact-right-column">
-            <div id="basic-infos">
-                <p id="name">
-                    {{ prospect.firstname }} {{ prospect.lastname }}
-                    {% if prospect.country != null %}
-                        {% set lang = prospect.country|upper %}
-                        <img src="{{ asset('bundles/app/images/flags/' ~ lang ~ '.png') }}" />
-                    {% endif %}
-                </p>
-                <p id="adress">
-                    {{ prospect.address }} {{ prospect.zipcode }} {{ prospect.city|upper }}
-                </p>
-            </div>
-                
+            <a id="edit_prospect" href="#" title="Edit contact">
+                <div id="basic-infos-container">
+                    <div id="basic-infos">
+                        <p id="name">
+                            {{ prospect.firstname }} {{ prospect.lastname }}
+                            {% if prospect.country != null %}
+                                {% set lang = prospect.country|upper %}
+                                <img src="{{ asset('bundles/app/images/flags/' ~ lang ~ '.png') }}" />
+                            {% endif %}
+                        </p>
+                        <p id="adress">
+                            {{ prospect.address }} {{ prospect.zipcode }} {{ prospect.city|upper }}
+                        </p>
+                    </div>
+                    <div id="mask-basic-infos"><div class="tilecontent">Edit contact infos</div></div>
+                </div>                
+            </a>        
             <div class="row row-bigtiles">
-                <a id="list-rating-link" data-id="{{ prospect.rating.id }}" href="#">
-                    <div class="col-md-4 bigtile bigtile-left">
+                <a id="rating-link" data-id="{{ prospect.rating.id }}" href="#">
+                    <div class="col-md-4 bigtile-rating border-right">
                         <div class="tilecontent">
-                            <div class="bigtile-title">
-                                Average rating <div class="rating-avg" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div>
-                            </div>
-                            <div id="averagecircle" data-percent="{{ prospect.rating.percentAverage }}" class="orange"></div>
+                            <div class="rating-container">
+                                <div class="bigtile-title">
+                                    Average rating <div class="rating-avg" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div>
+                                </div>
+                                <div id="averagecircle" data-percent="{{ prospect.rating.percentAverage }}" class="orange"></div>
+                            </div>                            
                         </div>
+                        <div class="mask-rating"><div class="tilecontent">Edit ratings</div></div>
                     </div>
                 </a>
-                <div class="col-md-4 bigtile bigtile-middle">
+                <div class="col-md-4 bigtile border-right">
                     <div class="tilecontent">
                         <p class="bigtile-title">Red flags</p>
                     </div>
@@ -116,12 +139,15 @@
             </div>                   
                     
             <div class="row row-bigtiles">
-                <a class="edit-relationship" data-id="{{ prospect.relationship.id }}" href="#" title="Edit relationship">
-                    <div class="col-md-4 bigtile-relationship">
+                <a class="edit-relationship" data-id="{{ prospect.relationship.id }}" href="#" title="Edit relationship">                    
+                    <div class="col-md-4 bigtile-relationship">                        
                         <div class="tilecontent">
-                            <p class="bigtile-value">{{ prospect.relationship.relationshipRank }}</p>
-                            <p class="bigtile-title">Relationship type</p>
+                            <div class="bigtile-relationship-container">
+                                <p class="bigtile-value">{{ prospect.relationship.relationshipRank }}</p>
+                                <p class="bigtile-title">Relationship type</p>
+                            </div>
                         </div>
+                        <div class="mask-relationship"><div class="tilecontent">Edit relationship</div></div>
                     </div>
                 </a>
                 <div class="col-md-4 smalltile-container-middle">
@@ -377,7 +403,7 @@
             });           
             
             // Ajax: get edit form prospect ************************************
-            $(".show-left-col").on("click", "#edit_prospect", function(event){
+            $("#contact-right-column").on("click", "#edit_prospect", function(event){
                 event.preventDefault();
    
                 $(".loader_standard").show();
@@ -432,7 +458,7 @@
             });
             
             // Ajax: get form edit ratings *************************************
-            $(".container").on("click", ".edit-rating, #list-rating-link", function(event){
+            $(".container").on("click", ".edit-rating, #rating-link", function(event){
                 event.preventDefault();               
                 
                 $(".loader_standard").show();

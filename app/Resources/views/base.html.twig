@@ -104,11 +104,13 @@
         
         $(document).ready(function(){
              
-            var loginImage1 = "{{ asset('bundles/app/images/login/manager_16.jpg') }}"; 
-            var loginImage2 = "{{ asset('bundles/app/images/login/manager_17.jpg') }}"; 
-            var loginImage3 = "{{ asset('bundles/app/images/login/manager_25.jpg') }}";
+            var loginImage1 = "{{ asset('bundles/app/images/base/manager_11.jpg') }}"; 
+            var loginImage2 = "{{ asset('bundles/app/images/base/manager_34.jpg') }}"; 
+            var loginImage3 = "{{ asset('bundles/app/images/base/manager_26.jpg') }}";
+            var loginImage4 = "{{ asset('bundles/app/images/base/manager_14.jpg') }}";
+            var loginImage5 = "{{ asset('bundles/app/images/base/manager_36.jpg') }}";
             
-            $.backstretch([loginImage1, loginImage2, loginImage3], {duration: 5000, fade: 2000});
+            $.backstretch([loginImage1, loginImage2, loginImage3, loginImage4, loginImage5], {duration: 6000, fade: 3000});
             
             // Menu animation
             {#$(".navbar-brand").animate({
