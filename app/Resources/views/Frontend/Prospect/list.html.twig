@@ -5,109 +5,102 @@
 {% set csrfDelete = csrf_token('delete') %}
 
 {% block content %}    
-    <div class="container" id="container-prospect">      
+    <div class="container standard-container" id="container-prospect">      
 
         <div class="page-nav">
             <a class="btn-basic-ico" href="#" id="add_prospect" title ="{{ 'app.contact.list.add'|trans }}"><i class="icon ion-ios-plus-empty"></i><span>{{ 'app.contact.list.add'|trans }}</span></a>
         </div>
         
-        {% for prospect in pagination %}
-            <div class="prospect-record row" id="{{ prospect.id }}">
-                <div class="row row-info">
-                    <div class="prospect-record-photo col-md-2">                        
-                        {{ photoDisplayIndex.primaryPhoto(prospect.photos) }}
-                        <div class="photo-mask">
-                            <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Edit everything related to your contact here" data-toggle="tooltip" data-placement="top">
-{#                                <i class="icon ion-ios-albums-outline"></i>#}
-                            </a>
+        <div class="row row-contacts">
+            {% for prospect in pagination %}            
+                <div class="col-md-4 col-prospect" id="{{ prospect.id }}"> 
+                    <a class="link-contact-edit" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Edit contact">
+                        <div class="prospect-photo">                        
+                            {% if prospect.relationship.status == 0 %}
+                                <div class="desaturate">{{ photoDisplayIndex.primaryPhoto(prospect.photos) }}</div>
+                                <p class="off">Off</p>
+                            {% else %}
+                                {{ photoDisplayIndex.primaryPhoto(prospect.photos) }}
+                            {% endif %}
+                            <p class="prospect-age">{{ prospect.age }}</p>   
+                            <div class="mask"><div class="tilecontent">Edit contact</div></div>
                         </div>
-                    </div>
-                    <div class="prospect-record-card col-md-9">
-                        <div class="card-header">
-                            <div class="infos">
-                                {% if prospect.country != null %}
-                                    {% set lang = prospect.country|upper %}
-                                    <img class="list-flag" src="{{ asset('bundles/app/images/flags/' ~ lang ~ '.png') }}" />
-                                {% endif %}
-                                <div class="record-firstname">{{ prospect.firstname }} {{ prospect.lastname }}, {{ prospect.age }}</div>
+                    </a>
+                    <div class="ratings-redflags">
+                        <div class="prospect-ratings">
+                            <div class="rating-icon">
+                                <div class="tilecontent">
+                                    <i class="icon ion-ios-star"></i>
+                                </div>
                             </div>
-{#                            <a id="list-rating-link" href="{{ path('prospect_show', { 'id': prospect.id }) }}"><div class="rating-avg pull-right custom-tooltip" data-toggle="tooltip" data-placement="top" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div></a> #}
-                            <div class="rating-avg pull-right custom-tooltip" data-toggle="tooltip" data-placement="top" title="Average rating" data-rating="{{ prospect.rating.average }}"></div>
+                            <div class="rating-percentage" data-avg="{{ prospect.rating.percentAverage }}">
+                                <div class="tilecontent">
+                                    <p><span>{{ prospect.rating.percentAverage }}</span>%</p>
+                                </div>            
+                            </div>            
+                        </div> 
+                        <div class="prospect-redflags">        
+                            <div class="redflag-icon">
+                                <div class="tilecontent">
+                                    <i class="icon ion-flag"></i>
+                                </div>
+                            </div>  
+                            <div class="redflag-percentage">
+                                <div class="tilecontent">
+{#                                    <p>{{ prospect.rating.percentRedflag }}%</p>#}
+                                </div>            
+                            </div> 
                         </div>
-                        <div class="icons">
-                            {% if prospect.zodiac %}
-                                <div class="zodiac custom-tooltip" title="Zodiacal sign: {{ prospect.zodiac.wording }}" data-toggle="tooltip" data-placement="top">
-                                    {{ prospect.zodiac.letter }}
-                                </div>
-                            {% else %}
-                                <div class="icon-empty custom-tooltip" title="No zodiacal sign" data-toggle="tooltip" data-placement="top">
-                                    <i class="icon ion-ios-help-empty"></i>
-                                </div>
-                            {% endif %}
-                            <div class="icon-separator"></div>
-                            {% if prospect.relationship.meeting %}
-                                <div class="icon-basic custom-tooltip" title="You have met" data-toggle="tooltip" data-placement="top">
-                                    <i class="icon ion-wineglass"></i>
-                                </div>
-                            {% else %}
-                                <div class="icon-empty custom-tooltip" title="You haven't met" data-toggle="tooltip" data-placement="top">
-                                    <i class="icon ion-ios-help-empty"></i>
-                                </div>
-                            {% endif %}
-                            {% if prospect.relationship.fc %}
-                                <div class="icon-X custom-tooltip" title="Sex happened" data-toggle="tooltip" data-placement="top"></div>
-                            {% else %}
-                                <div class="icon-empty custom-tooltip" title="No sex" data-toggle="tooltip" data-placement="top">
-                                    <i class="icon ion-ios-help-empty"></i>
-                                </div>
-                            {% endif %}                           
-                        </div>
+                        <div class="clearfix"></div>
+                    </div>                    
+                    <div class="prospect-infos">
+                        <p class="prospect-name">{{ prospect.firstname }} {{ prospect.lastname }}</p>
+                        <p class="prospect-relationship-rank"><span>{{ prospect.relationship.relationshipRank|upper }}</span></p>
                     </div>
-                    <div class="col-md-1 prospect-delete">
-                        <ul class="record-actions">     
-                            <li>
-                                <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-trash-outline"></i></a>
-                            </li>
-                        </ul>
-                    </div>                 
-                </div>                 
-                
-{#                <div class="row row-actions">                    #}
-{#                    <ul class="record-actions"> #}
-                        {#<li><p>Encounters</p></li>
-                        <li>
-                            <a class="custom-tooltip" href="{{ path('encounter', {'prospect_id': prospect.id}) }}" title="Add encounters"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-wineglass-outline"></i></a>
-                        </li>#}
-                        {#<li class="separator"></li>
-                        <li><p>Ratings</p></li>
-                        <li>
-                            <a class="custom-tooltip" href="{{ path('rating_edit', {'prospect_id': prospect.id}) }}" title="Rate this contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-star-outline"></i></a>
-                        </li>#}
-{#                        <li class="separator"></li>#}
-                        {#<li><p>Gallery</p></li>
-                        <li>
-                            <a class="custom-tooltip" href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Add and remove photos"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-albums-outline"></i></a>
-                        </li>
-                        <li class="separator"></li>#}
-                        {#<li><p>Relationship</p></li>
-                        <li>
-                            <a class="custom-tooltip" href="{{ path('relationship_show', {'id': prospect.relationship.id}) }}" title="Show relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-eye-outline"></i></a>
-                        </li>
-                        <li>
-                            <a class="edit-relationship custom-tooltip" data-id="{{ prospect.relationship.id }}" href="{{ path('relationship_edit', {'id': prospect.relationship.id}) }}" title="Edit relationship" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
-                        </li>#}
-{#                        <li class="separator"></li>#}
-{#                        <li><p>Contact</p></li>#}
-                        {#<li>
-                            <a class="custom-tooltip" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Edit everything related to your contact here" data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-compose-outline"></i></a>
-                        </li>    
-                        <li>
-                            <a href="#" class="delete custom-tooltip" data-id="{{ prospect.id }}" title="Delete contact"  data-toggle="tooltip" data-placement="top"><i class="icon ion-ios-trash-outline"></i></a>
-                        </li>#}
-{#                    </ul>                    #}
-{#                </div>               #}
-            </div>
-        {% endfor %}
+                    <div class="prospect-relationship">
+                        <div class="preview relationship-met">
+                            <div class="tilecontent">
+                                {% if  prospect.relationship.meeting %}
+                                    <i class="icon ion-wineglass"></i>
+                                {% else %}
+                                    <i class="icon ion-ios-close-empty"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="preview relationship-kc">
+                            <div class="tilecontent">
+                                {% if  prospect.relationship.kc %}
+                                    <i class="icon ion-fireball"></i>
+                                {% else %}
+                                    <i class="icon ion-ios-close-empty"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="preview relationship-fc">
+                            <div class="tilecontent">
+                                {% if  prospect.relationship.fc %}
+                                    <i class="icon ion-android-cancel"></i>
+                                {% else %}
+                                    <i class="icon ion-ios-close-empty"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <a href="#" class="delete" data-id="{{ prospect.id }}" title="Delete contact">    
+                            <div class="preview trash">
+                                <div class="tilecontent">
+                                    <i class="icon ion-ios-trash-outline"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>  
+
+                {% if loop.index % 3 == 0 %}
+                    </div>
+                    <div class="row row-contacts">
+                {% endif %}
+            {% endfor %}
+        </div>  
         
         <div class="navigation pull-right">
             {{ knp_pagination_render(pagination) }}
@@ -151,7 +144,10 @@
     <script type="text/javascript">
         $(document).ready(function(){  
 {#            var locale = "{{ app.request.locale }}";#}
-            var locale = $("#locale").data("locale");                                
+            var locale = $("#locale").data("locale");   
+            
+            {#var ratingPercentage = "{{ prospect.rating.percentAverage }}";
+            $(".rating-percentage span").animateNumber({ number: ratingPercentage }, 3000);#}
            
             $('[data-toggle="tooltip"]').tooltip({
                 html: true
@@ -229,7 +225,7 @@
             });
             
             // Delete confirm **************************************************
-            $(".record-actions").on("click", ".delete", function(event){
+            $(".prospect-relationship").on("click", ".delete", function(event){
                 event.preventDefault();
 
                 var prospect_id = $(this).data("id");                

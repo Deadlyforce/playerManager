@@ -6,9 +6,9 @@
     {% endfor %}   
     
     {% if primaryPhoto != null %}
-        <img class="img-responsive" src="{{ primaryPhoto.path | imagine_filter('thumb_prospect_175') }}" alt="Photo" />    
+        <img src="{{ primaryPhoto.path | imagine_filter('thumb_prospect_175') }}" alt="Photo" />    
     {% else %}
-        <img class="img-responsive" src="{{ asset('bundles/app/images/prospect_no_photo.jpg') }}" alt="No photo" />
+        <img src="{{ asset('bundles/app/images/prospect_no_photo.jpg') }}" alt="No photo" />
     {% endif %}
 {% endmacro %}
 

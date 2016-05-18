@@ -378,7 +378,7 @@ form[name="fos_user_security_login"] #_submit:hover{
 
 header{
     background-color: rgba(255,255,255, 0);    
-    padding-bottom: 150px;
+    padding-bottom: 100px;
 }
 .header-container{
     padding: 0px; 
@@ -413,13 +413,11 @@ header{
     border: none;    
     box-shadow: none;
     background-image: none;
-    /*background-color: #FFF;*/
     background-color: transparent;
 }
 .navbar-default .navbar-nav > li > a{
     color: #FFF;
-    text-shadow: 1px 1px 1px #666;
-    /*color: #666;*/
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
     padding: 15px 5px 10px 5px;
     margin-left: 30px;
     border-bottom: 1px solid transparent;
@@ -445,6 +443,7 @@ header{
     /*background-color: #fff;*/
     background-color: transparent;
     box-shadow: none;
+    color: #FFF;
 }
 
 /******************************* BODY ************************************/
@@ -465,7 +464,7 @@ body{
     padding-bottom: 65px; /* Footer space */
     background-color: #fff;
     color: #666;
-    padding-bottom: 150px;
+    /*padding-bottom: 150px;*/
 }
 
 a{    
@@ -577,19 +576,15 @@ button.btn-submit:hover{
     display: inline-block;    
     vertical-align: top;
     
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
+
     transition: all .3s ease-in;
 }
 .btn-basic-ico{
-    border: 1px solid #ccc;
+    border: 1px solid #fff;
     padding: 2px 15px;
-    display: inline-block;    
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
+    display: inline-block;  
+    background-color: #fff;
+
     transition: all .3s ease-in;
 }
 .btn-basic-ico span{
@@ -935,179 +930,181 @@ table.dataTable.no-footer {
 
 /**************************** PROSPECTS - LIST ********************************/
 
-.prospect-record{
-    margin: 0px 0px 40px 0px;
+#container-prospect{
+    background-color: rgba(0,0,0,0.3);
 }
-.prospect-record .row{
-    margin: 0px;
+
+.col-prospect{
+    margin-bottom: 30px;
 }
-.prospect-record .row-info{
-    box-shadow: 0px 2px 4px 0px #ccc;
-    background-color: #fff;
-    border-bottom: 1px solid #F47363;
+.prospect-photo{
+    /*display: inline-block;*/
+    position: relative;
+    float: left;
 }
-.prospect-record-photo{
-    padding: 0px;
-}
-.prospect-record-photo img{
-    height: 150px;
-}
-.prospect-record-photo:hover .photo-mask{
+a.link-contact-edit:hover .mask{
     opacity: 1;
 }
-.photo-mask{
-    display: table;
+.mask{
+    background-color: rgba(0,0,0,0.4);
+    width: 175px;
+    height: 175px;
     position: absolute;
-    top: 0;    
+    top: 0;
     left: 0;
-    width: 150px;
-    height: 150px;
     opacity: 0;
-    background-color: rgba(0,0,0, 0.2);
-    z-index: 2;
+    color: #fff;
+    font-family: "open_sanslight", sans-serif;
+    text-align: center;
+    display: table;
+    font-size: 1.8em;
     
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
     transition: all .3s ease-in;
 }
-.photo-mask a{
-    width: 100%;
-    height: 100%;
-    display: block;
-    color: #fff;
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
+.desaturate img{
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
 }
-.photo-mask a i::before{
-    font-size: 2.5em;
-}
-
-.prospect-record-card{
-    padding-left: 0px;
-    padding-right: 0px;
-}
-.prospect-record-card .infos, .prospect-record-card .rating-avg{
-    display: inline-block;
-    vertical-align: middle;
-}
-.prospect-record-card img.list-flag{
-    height: 25px;
-    margin-right: 5px;
-}
-.record-firstname{
-    font-size: 1.6em;
-    font-family: "ralewaylight", sans-serif;
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.prospect-record-card .card-header{
-    padding: 10px 15px 15px 0px;
-}
-.prospect-record-card .icons{
-    margin-top: 25px;
-}
-
-
-.icon-basic{
-    font-size: 3.2em;
+p.off{
+    position: absolute;
+    font-family: "open_sanslight", sans-serif;
     color: #FFF;
-    background-color: #F47363;
-    border-radius: 2px;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    line-height: 1.2em;
-    cursor: default;
-    display: inline-block;
-    vertical-align: top;
-}
-.icon-empty{
-    font-size: 3em;
-    border-radius: 2px;
-    width: 50px;
-    height: 50px;
-    text-align: center;
-    line-height: 1.2em;
-    cursor: default;
-    border: 2px solid #F47363;
-    color: #F47363;
-    display: inline-block;
-    vertical-align: top;
-}
-.icon-empty i::before{
-    height: 35px;
-}
-.icon-X{
-    background: url(../images/icons/X.png) center no-repeat;
-    width: 50px;
-    height: 50px;
-    background-size: 48px;
-    background-position: 0px 2px;
-    display: inline-block;
-    vertical-align: top;
-}
-.icon-separator{
-    width: 50px;
-    height: 50px;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.row-actions{
-    width: 100%;
-    height: 50px;
-    margin-top: 13px;
-}
-/*.row-actions:hover{
-    background-color: rgba(0,0,0,0.03);
-}*/
-ul.record-actions{
+    font-size: 2.3em;
     margin: 0;
-    padding: 0;
-    list-style: none;   
-    float: right;
+    bottom: 5px;
+    left: 5px;
+    text-shadow: 1px 1px 2px #333;
 }
-.record-actions li{
+p.prospect-age{
+    position: absolute;
+    color: #FFF;
+    font-family: "open_sanslight", sans-serif;
+    bottom: 5px;
+    right: 10px;
+    font-size: 2.3em;
+    margin: 0;
+}
+.ratings-redflags{
+    /*display: inline-block;*/
+    /*vertical-align: top;*/
+    width: 175px;
+    height: 175px;
     float: left;
-    text-align: center;
 }
-.record-actions a{
-    color: #666;
-    text-decoration: none;
-    font-size: 2em;
-    display: inline-block;
-    /*vertical-align: middle;*/
-    width: 50px;
-    height: 50px; 
-    line-height: 1.8em;
+.prospect-ratings{    
     
-    -moz-transition: all .2s ease-in;
-    -o-transition: all .2s ease-in;
-    -webkit-transition: all .2s ease-in;
-    transition: all .2s ease-in;
 }
-.record-actions a:hover{
-    color: #fff;
-    background-color: #F47363;    
-}
-.record-actions p{
-    font-size: 1.2em;
-    padding: 12px 10px 0px;
-    font-family: "ralewayregular", sans-serif;
-}
-.record-actions li.separator{
+.rating-icon{
     float: left;
+    display: table;
+    width: 87.5px;
+    height: 87.5px;
     text-align: center;
-    width: 50px;
-    height: 50px;
+    background-color: #fff;
+}
+.rating-icon i{
+    font-size: 3em;
+    color: gold;
+}
+.redflag-icon{
+    float: left;
+    display: table;
+    width: 87.5px;
+    height: 87.5px;
+    text-align: center;
+    background-color: #fff;
+}
+.redflag-icon i{
+    font-size: 2.8em;
+    color: red;
+}
+.rating-percentage{
+    display: table;
+    width: 87.5px;
+    height: 87.5px;
+    text-align: center;
+    background-color: #fff;
+}
+.redflag-percentage{
+    display: table;
+    width: 87.5px;
+    height: 87.5px;
+    text-align: center;
+    background-color: #fff;
+}
+.rating-percentage p{
+    color: #999;
+    font-size: 2em;
+    margin: 0;
+    font-family: "open_sanslight", sans-serif;
+}
+.redflag-percentage p{
+    color: #999;
+    font-size: 2em;
+    margin: 0;
+    font-family: "open_sanslight", sans-serif;
+}
+.prospect-infos{
+    background-color: #fff;
+    width: 350px;
+    height: 87.5px;
+    padding: 10px 0px 0px 10px;
+    overflow: hidden;
+}
+p.prospect-name{
+    font-family: "open_sanslight", sans-serif;
+    font-size: 1.8em;
+    margin-bottom: 5px;
+    color: #F47363;
+}
+p.prospect-relationship-rank{
+    font-family: "open_sansregular", sans-serif;
+    font-size: 1.1em;
+    color: #ccc;
+}
+/*.prospect-infos:hover p.prospect-relationship-rank span{
+    display: none;
+    transition: all .3s ease-in;
+}
+.prospect-infos:hover p.prospect-relationship-rank:after{
+    content: "Relationship type";
+}*/
+
+.prospect-relationship{
+    width: 350px;
+    height: 87.5px;
+    text-align: center;
+}
+.prospect-relationship .preview{
+    background-color: #fff;
+    display: table;
+    width: 87.5px;
+    height: 100%;
+    float: left; 
+}
+.relationship-met{    
+       
+}
+.relationship-met i{
+    font-size: 3em;
+}
+.relationship-kc i{
+    font-size: 3em;
+}
+.relationship-fc i{
+    font-size: 3em;
+}
+.trash{
+    transition: all .3s ease-in;
+}
+a.delete:hover .trash{
+    background-color: rgba(0,0,0,0.3);
+    color: #FFF;
+}
+.trash i{
+    font-size: 3em;
 }
 
-.prospect-delete{
-    padding-right: 0px;
-}
 
 /*** CUSTOM TOOLTIP ***/
 .custom-tooltip + .tooltip > .tooltip-inner{
@@ -1131,19 +1128,16 @@ ul.record-actions{
 .pagination span.current{ 
     background-color: transparent;
     padding: 10px 15px;
-    color: #F47363;
-    border: 1px solid #F47363;
+    color: #FFF;
+    border: 1px solid #FFF;
 }
 .pagination span a{    
-    background-color: rgb(244, 115, 99);
+    background-color: #FFF;
     display: block;
     padding: 10px 15px;
     text-decoration: none;
-    color: #fff;
-    
-    -moz-transition: all .2s ease-in;
-    -o-transition: all .2s ease-in;
-    -webkit-transition: all .2s ease-in;
+    color: #F47363;
+
     transition: all .2s ease-in;
 }
 .pagination span a:hover{   
@@ -1617,186 +1611,6 @@ p#start-date-val{
     padding: 10px 0px 5px 0px;
     font-family: "open_sanslight", sans-serif;
 }
-
-
-
-#prospect-show-content{
-    background-color: #FFF;
-    color: #666;
-    margin: 0;
-    box-shadow: 0px 4px 8px 4px #ddd;
-    border: 1px solid #ddd;
-    /*position: relative;*/
-}
-.show-left-col{
-    padding-left: 0px;
-}
-.show-left-col > div{
-    width: 250px;
-}
-.show-left-col ul{
-    list-style: none;
-    padding-left: 0px;
-    margin: 0;
-}
-.show-left-col li{
-
-}
-.show-left-col li a{    
-    padding: 15px 0px;
-    display: block;
-    font-family: "ralewayregular",sans-serif;
-    text-align: center;
-    font-size: 1.2em;
-    background-color: #F47363;
-    color: #fff;
-
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
-    transition: all .3s ease-in;
-}
-.show-left-col li a:hover{    
-    background-color: #fff;
-    color: #666;
-}
-/*.show-left-col li a span{
-    vertical-align: middle;
-    margin-right: 10px;
-    margin-top: 3px;
-    display: inline-block;
-}*/
-/*.show-left-col li a i.icon::before{
-    font-size: 2em;
-    vertical-align: middle;
-}*/
-.vertical-separator{
-    height: 50px;
-}
-.prospect-show-phone{
-    text-align: center;
-
-}
-.prospect-show-phone p{
-    margin: 0;
-}
-.prospect-show-phone .phone-info {
-    padding: 15px 0px;
-}
-.prospect-show-phone .phone-info span{
-    font-size: 1.1em;        
-    display: inline-block;
-    margin-left: 15px;
-    vertical-align: middle;
-    margin-top: 1px;
-}
-.prospect-show-phone i::before{
-    font-size: 1.5em;
-    vertical-align: middle;
-}
-
-
-.show-right-col{
-    padding-right: 0px;
-}
-#prospect-info-basic{
-    padding: 10px 0px 0px 0px;
-    font-family: "ralewaylight", sans-serif;
-}
-#prospect-info-basic > div{
-    margin-bottom: 10px;
-    margin-right: 10px;
-}
-#prospect-info-basic img{
-    margin-right: 10px;
-}
-#prospect-info-basic #name-age{
-    font-size: 2em;
-    display: inline-block;
-    vertical-align: middle; 
-}
-.show-right-col p.full-address{
-    font-size: 1.1em;
-    font-family: "ralewayregular", sans-serif;
-}
-.show-right-col p.full-address span{
-    font-weight: 600;
-    margin-right: 10px;
-}
-
-
-#table-prospect-show{   
-    border: none;
-}
-#table-prospect-show th{
-    width: 150px;  
-    border-top: none;
-}
-#table-prospect-show td{      
-    border-top: none;
-}
-
-.show-actions{
-    height: 70px;
-}
-.show-actions ul{
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: table;
-    float: right;
-    text-align: center;
-}
-.show-actions ul li{
-    display: table-cell;
-    vertical-align: middle;
-    height: 70px;
-}
-.show-actions ul li a, .show-actions ul li button{
-    /*background-color: #DA6759;*/
-    height: 70px;
-    width: 70px;
-    color: #666;
-}
-.show-actions ul li a{        
-    display: block;
-    line-height: 2.5em;
-    font-size: 2em;
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
-    transition: all .3s ease-in;
-}
-.show-actions ul li.icon-add a{
-    font-size: 3em;
-    line-height: 1.7em;
-}
-.show-actions ul li a:hover{    
-    background-color: #F47363;
-    color: #FFF;
-}
-/*.show-actions ul li button{
-    font-size: 2em;
-    background-color: white;
-}
-.show-actions ul li button:hover{
-    color: #fff;
-    background-color: #F47363;    
-}*/
-
-.show-actions ul li.icon-title{
-    padding: 0px 15px;
-}
-.show-actions ul li.icon-title p{
-    margin-bottom: 0px;
-    font-family: "ralewayregular", sans-serif;
-    font-size: 1.1em;
-}
-.show-actions ul li.icon-separator{
-    width: 70px;
-}
-
 
 
 /************************* FORM NEW PROSPECT *****************************/
@@ -2444,16 +2258,29 @@ form[name="appbundle_rating"] > div > label {
 
 /********************************* ALBUM **************************************/
 
+.standard-container{
+    padding-top: 50px;
+    padding-bottom: 100px;
+    /*background-color: rgba(0, 0, 0, 0.3);*/
+
+}
+
 #container-album .row-album{
     margin-bottom: 20px;
 }
 #container-album img{
     width: 150px;
-    box-shadow: 0px 0px 4px 2px #ccc;
+    box-shadow: 0px 0px 2px 2px rgba(0,0,0,0.3);
     border: 1px solid #ccc;
 }
 
 /******************************* DASHBOARD ************************************/
+
+#container-dashboard{
+    padding-top: 50px;
+    padding-bottom: 100px;
+    background-color: #fff;
+}
 
 #container-dashboard h2{
     font-size: 1.3em;

@@ -2,14 +2,9 @@
 {% block title %}{{ 'app.nav.album'|trans }}{% endblock %}
 
 
-{% block content %}
-    <section class="page-title">
-        <h1>Album</h1> 
-        <h2>{{ 'app.photo.album.subtitle'|trans }}</h2>
-    </section>
-    <div class="page-title-underline"></div>
+{% block content %}   
     
-    <div class="container" id="container-album">
+    <div class="container standard-container" id="container-album">
         <div class="row row-album">
         {% for photo in photos %}
             <div class="col-md-2">
