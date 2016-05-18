@@ -2,12 +2,10 @@
 {% block title %}Home{% endblock %}
 
 {% block content %}
-    <div class="home-carousel">
+    {#<div class="home-carousel">
         <div>
             <h1>Remember your dates<br>Remember your life</h1>
-            {% if noProspect == true %}
-                <a id="btn-first-contact" href="#" title="Add your first contact">{{ 'app.home.btn-add'|trans }}</a>
-            {% endif %}
+            
             {% if app.user.gender == 1 %}
                 <img src="{{ asset('bundles/app/images/home/slider_02.jpg') }}" alt="Image_02">
             {% else %}
@@ -21,6 +19,12 @@
                 <img data-lazy="{{ asset('bundles/app/images/home/slider_04.jpg') }}" alt="Image_04">
             {% endif %}
         </div>  
+    </div>#}
+    <div class="container" id="home-start">
+        <h1>Never forget your dates</h1>
+        {% if noProspect == true %}
+            <a id="btn-first-contact" href="#" title="Add your first contact">{{ 'app.home.btn-add'|trans }}</a>
+        {% endif %}
     </div>
     <div class="container-fluid" id="features"> 
         <div class="container">

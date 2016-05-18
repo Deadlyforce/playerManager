@@ -9,17 +9,11 @@
             '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css'
             '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css'
             '%kernel.root_dir%/../vendor/components/jqueryui/themes/base/jquery-ui.min.css'
-            'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.css'
-            'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.css'
             'bundles/app/packages/DataTables-1.10.8/datatables.min.css'
             'bundles/app/packages/font-awesome-4.4.0/css/font-awesome.min.css'
-            'bundles/app/packages/Jcrop/css/jquery.Jcrop.min.css'
-            'bundles/app/packages/slick_1.5.9/slick.css'            
-            'bundles/app/packages/colorbox/colorbox.css'
+            'bundles/app/packages/slick_1.5.9/slick.css'    
             'bundles/app/css/custom.css'            
             'bundles/app/css/ionicons.min.css'                     
-            'bundles/app/packages/star-rating-svg/css/star-rating-svg.css'                     
-            'bundles/app/packages/percircle/css/percircle.css'                     
         %}
             <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
@@ -30,22 +24,16 @@
         {% javascripts
             '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
             '%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js'
-            'bundles/app/packages/moment-with-locales.js'
-            'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.js'
             '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'
-            'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.js'
-            'bundles/app/packages/DataTables-1.10.8/datatables.min.js'
-            'bundles/app/packages/slick_1.5.9/slick.min.js'            
-            'bundles/app/packages/colorbox/jquery.colorbox-min.js'
-            'bundles/app/js/helpers.js'                       
-            'bundles/app/packages/star-rating-svg/jquery.star-rating-svg.js'            
+            'bundles/app/packages/slick_1.5.9/slick.min.js'   
+            'bundles/app/js/helpers.js'               
             'bundles/app/packages/jquery.backstretch.min.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock %}
 </head>
-<body>
+<body id="body-home">
     <div id="confirm-panel"></div>
     
     <section id="top-bar">
@@ -99,29 +87,17 @@
     </footer>
 
         
-    <script type="text/javascript">       
-        
+    <script type="text/javascript">             
         
         $(document).ready(function(){
              
-{#            var loginImage1 = "{{ asset('bundles/app/images/base/manager_11b.jpg') }}"; #}
+{#            var loginImage1 = "{{ asset('bundles/app/images/base/manager_11b.jpg') }}"; 
             var loginImage2 = "{{ asset('bundles/app/images/base/manager_13.jpg') }}"; 
             var loginImage4 = "{{ asset('bundles/app/images/base/manager_14.jpg') }}";
             var loginImage5 = "{{ asset('bundles/app/images/base/manager_36b.jpg') }}";
             
-            $.backstretch([loginImage2, loginImage4, loginImage5], {duration: 6000, fade: 3000});
+            $.backstretch([loginImage1, {duration: 6000, fade: 3000});#}
             
-            // Menu animation
-            {#$(".navbar-brand").animate({
-                'height': '0px'
-            }, 800);
-            $(".navbar-nav > li > a").animate({
-                'height': '0px'
-            }, 800);
-            
-            $(".page-title-underline").animate({
-                'width': '500px'
-            }, 1000);#}
             
             // Active link in menu *********************************************
             // Page name must match EXACTLY with menu link name !!
@@ -137,18 +113,10 @@
                 var activeLi = $(".nav").find(".active");
                 $(activeLi).removeClass("active");
             });        
-            // Active link in menu *********************************************
-            
-            $(".datatable").DataTable(); // class datatable
-            
-            getDatepicker();
-            getDatetimepicker();
-           
+            // Active link in menu *********************************************          
             
         });
     </script>
-    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
-    <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
 </body>
 
 </html>
