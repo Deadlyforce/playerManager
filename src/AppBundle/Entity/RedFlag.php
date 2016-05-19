@@ -2,18 +2,17 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use AppBundle\Entity\Prospect;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Rating
+ * RedFlag
  *
- * @ORM\Table(name="ratings") 
- * @ORM\Entity(repositoryClass="AppBundle\Repository\RatingRepository")
+ * @ORM\Table(name="redflags")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\RedFlagRepository")
  * @ORM\HasLifecycleCallbacks
  */
-class Rating
+class RedFlag
 {
     /**
      * @var int
@@ -27,13 +26,13 @@ class Rating
     /**
      * @var Prospect
      * 
-     * @ORM\OneToOne(targetEntity="Prospect", mappedBy="rating", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Prospect", mappedBy="redflag", cascade={"persist"})
      * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $prospect;
 
     /**
-     * @var smallint
+     * @var int
      *
      * @Assert\Range(
      *      min = 0,
@@ -41,12 +40,12 @@ class Rating
      *      minMessage = "Unauthorized number",
      *      maxMessage = "Unauthorized number"
      * )
-     * @ORM\Column(name="attractiveness", type="smallint", nullable=true)
+     * @ORM\Column(name="unemployed", type="smallint", nullable=true)
      */
-    private $attractiveness;
+    private $unemployed;
 
     /**
-     * @var smallint
+     * @var int
      *
      * @Assert\Range(
      *      min = 0,
@@ -54,12 +53,12 @@ class Rating
      *      minMessage = "Unauthorized number",
      *      maxMessage = "Unauthorized number"
      * )
-     * @ORM\Column(name="socialStatus", type="smallint", nullable=true)
+     * @ORM\Column(name="needy", type="smallint", nullable=true)
      */
-    private $socialStatus;
+    private $needy;
 
     /**
-     * @var smallint
+     * @var int
      *
      * @Assert\Range(
      *      min = 0,
@@ -67,49 +66,101 @@ class Rating
      *      minMessage = "Unauthorized number",
      *      maxMessage = "Unauthorized number"
      * )
-     * @ORM\Column(name="senseHumor", type="smallint", nullable=true)
+     * @ORM\Column(name="children", type="smallint", nullable=true)
      */
-    private $senseHumor;
+    private $children;
+
+    /**
+     * @var int
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *      minMessage = "Unauthorized number",
+     *      maxMessage = "Unauthorized number"
+     * )
+     * @ORM\Column(name="smoker", type="smallint", nullable=true)
+     */
+    private $smoker;
+
+    /**
+     * @var int
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *      minMessage = "Unauthorized number",
+     *      maxMessage = "Unauthorized number"
+     * )
+     * @ORM\Column(name="checkphone", type="smallint", nullable=true)
+     */
+    private $checkphone;
+
+    /**
+     * @var int
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *      minMessage = "Unauthorized number",
+     *      maxMessage = "Unauthorized number"
+     * )
+     * @ORM\Column(name="boring", type="smallint", nullable=true)
+     */
+    private $boring;
+
+    /**
+     * @var int
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *      minMessage = "Unauthorized number",
+     *      maxMessage = "Unauthorized number"
+     * )
+     * @ORM\Column(name="selfAbsorbed", type="smallint", nullable=true)
+     */
+    private $selfAbsorbed;
+
+    /**
+     * @var int
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *      minMessage = "Unauthorized number",
+     *      maxMessage = "Unauthorized number"
+     * )
+     * @ORM\Column(name="cheapdate", type="smallint", nullable=true)
+     */
+    private $cheapdate;
+
+    /**
+     * @var int
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *      minMessage = "Unauthorized number",
+     *      maxMessage = "Unauthorized number"
+     * )
+     * @ORM\Column(name="snore", type="smallint", nullable=true)
+     */
+    private $snore;
+
+    /**
+     * @var int
+     *
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 5,
+     *      minMessage = "Unauthorized number",
+     *      maxMessage = "Unauthorized number"
+     * )
+     * @ORM\Column(name="hygiene", type="smallint", nullable=true)
+     */
+    private $hygiene;
     
-    /**
-     * @var smallint
-     *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="cooking", type="smallint", nullable=true)
-     */
-    private $cooking;
-
-    /**
-     * @var smallint
-     *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="kissing", type="smallint", nullable=true)
-     */
-    private $kissing;
-
-    /**
-     * @var smallint
-     *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="sex", type="smallint", nullable=true)
-     */
-    private $sex;
-
     /**
      * @var smallint 
      * 
@@ -123,7 +174,8 @@ class Rating
      * @ORM\Column(name="percentAverage", type="float", nullable=true)
      */
     private $percentAverage;
-    
+
+
     /**
      * Get id
      *
@@ -135,166 +187,261 @@ class Rating
     }
 
     /**
-     * Set attractiveness
+     * Set unemployed
      *
-     * @param integer $attractiveness
+     * @param integer $unemployed
      *
-     * @return Rating
+     * @return RedFlag
      */
-    public function setAttractiveness($attractiveness)
+    public function setUnemployed($unemployed)
     {
-        $this->attractiveness = $attractiveness;
+        $this->unemployed = $unemployed;
 
         return $this;
     }
 
     /**
-     * Get attractiveness
+     * Get unemployed
      *
      * @return int
      */
-    public function getAttractiveness()
+    public function getUnemployed()
     {
-        return $this->attractiveness;
+        return $this->unemployed;
     }
 
     /**
-     * Set socialStatus
+     * Set needy
      *
-     * @param integer $socialStatus
+     * @param integer $needy
      *
-     * @return Rating
+     * @return RedFlag
      */
-    public function setSocialStatus($socialStatus)
+    public function setNeedy($needy)
     {
-        $this->socialStatus = $socialStatus;
+        $this->needy = $needy;
 
         return $this;
     }
 
     /**
-     * Get socialStatus
+     * Get needy
      *
      * @return int
      */
-    public function getSocialStatus()
+    public function getNeedy()
     {
-        return $this->socialStatus;
+        return $this->needy;
     }
 
     /**
-     * Set senseHumor
+     * Set children
      *
-     * @param integer $senseHumor
+     * @param integer $children
      *
-     * @return Rating
+     * @return RedFlag
      */
-    public function setSenseHumor($senseHumor)
+    public function setChildren($children)
     {
-        $this->senseHumor = $senseHumor;
+        $this->children = $children;
 
         return $this;
     }
 
     /**
-     * Get cooking
+     * Get children
      *
      * @return int
      */
-    public function getCooking()
+    public function getChildren()
     {
-        return $this->cooking;
+        return $this->children;
     }
 
     /**
-     * Set cooking
+     * Set smoker
      *
-     * @param integer $cooking
-     * @return Rating
+     * @param integer $smoker
+     *
+     * @return RedFlag
      */
-    public function setCooking($cooking)
+    public function setSmoker($smoker)
     {
-        $this->cooking = $cooking;
+        $this->smoker = $smoker;
 
         return $this;
     }
 
     /**
-     * Get senseHumor
+     * Get smoker
      *
      * @return int
      */
-    public function getSenseHumor()
+    public function getSmoker()
     {
-        return $this->senseHumor;
+        return $this->smoker;
     }
 
     /**
-     * Set kissing
+     * Set checkphone
      *
-     * @param integer $kissing
+     * @param integer $checkphone
      *
-     * @return Rating
+     * @return RedFlag
      */
-    public function setKissing($kissing)
+    public function setCheckphone($checkphone)
     {
-        $this->kissing = $kissing;
+        $this->checkphone = $checkphone;
 
         return $this;
     }
 
     /**
-     * Get kissing
+     * Get checkphone
      *
      * @return int
      */
-    public function getKissing()
+    public function getCheckphone()
     {
-        return $this->kissing;
+        return $this->checkphone;
     }
 
     /**
-     * Set sex
+     * Set boring
      *
-     * @param integer $sex
+     * @param integer $boring
      *
-     * @return Rating
+     * @return RedFlag
      */
-    public function setSex($sex)
+    public function setBoring($boring)
     {
-        $this->sex = $sex;
+        $this->boring = $boring;
 
         return $this;
     }
 
     /**
-     * Get sex
+     * Get boring
      *
      * @return int
      */
-    public function getSex()
+    public function getBoring()
     {
-        return $this->sex;
+        return $this->boring;
     }
-    
-    
+
+    /**
+     * Set selfAbsorbed
+     *
+     * @param integer $selfAbsorbed
+     *
+     * @return RedFlag
+     */
+    public function setSelfAbsorbed($selfAbsorbed)
+    {
+        $this->selfAbsorbed = $selfAbsorbed;
+
+        return $this;
+    }
+
+    /**
+     * Get selfAbsorbed
+     *
+     * @return int
+     */
+    public function getSelfAbsorbed()
+    {
+        return $this->selfAbsorbed;
+    }
+
+    /**
+     * Set cheapdate
+     *
+     * @param integer $cheapdate
+     *
+     * @return RedFlag
+     */
+    public function setCheapdate($cheapdate)
+    {
+        $this->cheapdate = $cheapdate;
+
+        return $this;
+    }
+
+    /**
+     * Get cheapdate
+     *
+     * @return int
+     */
+    public function getCheapdate()
+    {
+        return $this->cheapdate;
+    }
+
+    /**
+     * Set snore
+     *
+     * @param integer $snore
+     *
+     * @return RedFlag
+     */
+    public function setSnore($snore)
+    {
+        $this->snore = $snore;
+
+        return $this;
+    }
+
+    /**
+     * Get snore
+     *
+     * @return int
+     */
+    public function getSnore()
+    {
+        return $this->snore;
+    }
+
+    /**
+     * Set hygiene
+     *
+     * @param integer $hygiene
+     * @return RedFlag
+     */
+    public function setHygiene($hygiene)
+    {
+        $this->hygiene = $hygiene;
+
+        return $this;
+    }
+
+    /**
+     * Get hygiene
+     *
+     * @return int
+     */
+    public function getHygiene()
+    {
+        return $this->hygiene;
+    }
+
     /**
      * Set prospect
      *
-     * @param Prospect $prospect
-     * @return Relationship
+     * @param integer $prospect
+     * @return RedFlag
      */
-    public function setProspect(Prospect $prospect)
+    public function setProspect($prospect)
     {
         $this->prospect = $prospect;
-        
+
         return $this;
     }
 
     /**
      * Get prospect
      *
-     * @return prospect 
+     * @return int
      */
     public function getProspect()
     {

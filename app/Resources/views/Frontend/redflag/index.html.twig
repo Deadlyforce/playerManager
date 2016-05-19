@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>RedFlag list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Unemployed</th>
+                <th>Needy</th>
+                <th>Children</th>
+                <th>Smoker</th>
+                <th>Checkphone</th>
+                <th>Boring</th>
+                <th>Selfabsorbed</th>
+                <th>Cheapdate</th>
+                <th>Snore</th>
+                <th>Hygiene</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for redFlag in redFlags %}
+            <tr>
+                <td><a href="{{ path('redflag_show', { 'id': redFlag.id }) }}">{{ redFlag.id }}</a></td>
+                <td>{{ redFlag.unemployed }}</td>
+                <td>{{ redFlag.needy }}</td>
+                <td>{{ redFlag.children }}</td>
+                <td>{{ redFlag.smoker }}</td>
+                <td>{{ redFlag.checkphone }}</td>
+                <td>{{ redFlag.boring }}</td>
+                <td>{{ redFlag.selfAbsorbed }}</td>
+                <td>{{ redFlag.cheapdate }}</td>
+                <td>{{ redFlag.snore }}</td>
+                <td>{{ redFlag.hygiene }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('redflag_show', { 'id': redFlag.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('redflag_edit', { 'id': redFlag.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('redflag_new') }}">Create a new entry</a>
+        </li>
+    </ul>
+{% endblock %}

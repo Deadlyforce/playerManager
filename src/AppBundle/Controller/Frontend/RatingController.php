@@ -118,48 +118,7 @@ class RatingController extends Controller
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
-    }
-    
-    /**
-     * Displays a form to edit an existing Rating entity.
-     *
-     * @Route("/edit/{prospect_id}", name="rating_edit")
-     * @Method({"GET", "POST"})
-     */
-//    public function editAction(Request $request, $prospect_id)
-//    {
-//        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-//            throw $this->createAccessDeniedException('You cannot access this page!');
-//        }
-//        $user = $this->get('security.token_storage')->getToken()->getUser();
-//        
-//        $em = $this->getDoctrine()->getManager();
-//        $prospect = $em->find('AppBundle:Prospect', $prospect_id);
-//
-//        if ($user === $prospect->getUser()) {  
-//            
-//            $rating = $em->getRepository('AppBundle:Rating')->findOneBy(array('prospect' => $prospect));
-//            
-//            $deleteForm = $this->createDeleteForm($rating);
-//            $editForm = $this->createForm('AppBundle\Form\RatingType', $rating);
-//            $editForm->handleRequest($request);
-//
-//            if ($editForm->isSubmitted() && $editForm->isValid()) {                
-//                $em->persist($rating);
-//                $em->flush();
-//
-//                return $this->redirectToRoute('rating_edit', array('prospect_id' => $rating->getProspect()->getId()));
-//            }
-//
-//            return $this->render('Frontend/Rating/edit.html.twig', array(
-//                'rating' => $rating,
-//                'edit_form' => $editForm->createView(),
-//                'delete_form' => $deleteForm->createView(),
-//            ));
-//        } else {
-//            throw $this->createAccessDeniedException('You cannot access this page!');
-//        }
-//    }
+    }    
     
     /**
      * Displays a form to edit an existing Rating entity.

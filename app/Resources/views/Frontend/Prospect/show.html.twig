@@ -66,26 +66,28 @@
             </div>
             <div class="row-astro">
                 <div id="astro">
-                    {% if prospect.zodiac %}
-                    <p class="zodiac" title="{{ prospect.zodiac.wording }}">
-                        {{ prospect.zodiac.letter }}
-                    </p>
-                    {% else %}
-                        <p class="tile-value">?</p>
-                    {% endif %}
-                    <p class="tile-title">Astro</p>
+                    <div class="tilecontent">
+                        {% if prospect.zodiac %}
+                        <p class="zodiac" title="{{ prospect.zodiac.wording }}">
+                            {{ prospect.zodiac.letter }}
+                        </p>
+                        {% else %}
+                            <p class="tile-value">?</p>
+                        {% endif %}
+                        <p class="tile-title">Astro</p>
+                    </div>
                 </div>
                 {% if prospect.relationship.status == 1 %}
                     <div id="status-ok" class="tile">
                         <div class="tilecontent">
-                            <p class="tile-value">Ok</p>
+                            <p class="tile-value">On</p>
                             <p class="tile-title">Relationship<br>status</p>
                         </div>
                     </div>
                 {% else %}
                     <div id="status-off" class="tile">
                         <div class="tilecontent">
-                            <p class="tile-value">Over</p>
+                            <p class="tile-value">Off</p>
                             <p class="tile-title">Relationship<br>status</p>
                         </div>
                     </div>
@@ -120,17 +122,25 @@
                                 <div class="bigtile-title">
                                     Average rating <div class="rating-avg" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div>
                                 </div>
-                                <div id="averagecircle" data-percent="{{ prospect.rating.percentAverage }}" class="orange"></div>
+                                <div id="ratingcircle" data-percent="{{ prospect.rating.percentAverage }}" class="orange"></div>
                             </div>                            
                         </div>
                         <div class="mask-rating"><div class="tilecontent">Edit ratings</div></div>
                     </div>
                 </a>
-                <div class="col-md-4 bigtile border-right">
+                <a id="redflag-link" data-id="{{ prospect.redflag.id }}" href="#">
+                <div class="col-md-4 bigtile-redflag border-right">                    
                     <div class="tilecontent">
-                        <p class="bigtile-title">Red flags</p>
+                        <div class="redflag-container">
+                            <div class="bigtile-title">
+                                Red flags <div class="rating-avg" title="Average red flags<br>for this contact" data-redflag="{{ prospect.redflag.average }}"></div>
+                            </div>
+                            <div id="redflagcircle" data-percent="{{ prospect.redflag.percentAverage }}" class="orange"></div>
+                        </div>
                     </div>
+                    <div class="mask-redflag"><div class="tilecontent">Edit red flags</div></div>                        
                 </div>
+                </a>
                 <div class="col-md-4 bigtile">
                     <div class="tilecontent">
                         <p class="bigtile-title"></p>
@@ -273,13 +283,9 @@
             var count = "{{ prospect.relationship.meetingCount }}";
             $("#meetingcount span").animateNumber({ number: count }, 2000);
             
-            {#$(function(){
-                $("[id$='orangecircle']").percircle();
-            });#}
-            
-            $("#averagecircle").percircle({
-                
-            });
+           
+            $("#ratingcircle").percircle({});
+            $("#redflagcircle").percircle({});
             
             var locale = "{{ app.request.locale }}";
             var id = "{{ prospect.id }}";
@@ -358,6 +364,25 @@
                     $(".loader_standard").hide(200, function(){});                                     
                     
                     $(".modal-title").text("Edit ratings");
+                    $('.modal-full').modal('show');
+                });
+            });
+            
+            // Ajax: get form edit redflags *************************************
+            $(".container").on("click", ".edit-redflag, #redflag-link", function(event){
+                event.preventDefault();               
+                
+                $(".loader_standard").show();
+            
+                var id = $(this).data("id");                
+                var url = Routing.generate('ajax_edit_redflag_form', {'id':id, '_locale': locale});
+                
+                $.get(url, function(response){                   
+                    $(".modal-body").html(response);                    
+                    
+                    $(".loader_standard").hide(200, function(){});                                     
+                    
+                    $(".modal-title").text("Edit red flags");
                     $('.modal-full').modal('show');
                 });
             });

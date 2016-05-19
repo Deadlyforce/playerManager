@@ -82,6 +82,14 @@ class Prospect
     private $rating;
     
     /**
+     * @var RedFlag 
+     * 
+     * @ORM\OneToOne(targetEntity="RedFlag", inversedBy="prospect", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="redflag_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $redflag;
+    
+    /**
      * @var integer
      *
      * @ORM\Column(name="id", type="integer", nullable=false)
@@ -598,6 +606,30 @@ class Prospect
     public function getRating()
     {
         return $this->rating;
+    } 
+    
+    /**
+     * Set redflag
+     *
+     * @param RedFlag $redflag
+     * @return Prospect
+     */
+    public function setRedflag(RedFlag $redflag)
+    {
+        $this->redflag = $redflag;
+        $redflag->setProspect($this);
+
+        return $this;
+    }
+
+    /**
+     * Get redflag
+     *
+     * @return RedFlag 
+     */
+    public function getRedflag()
+    {
+        return $this->redflag;
     } 
     
     /**

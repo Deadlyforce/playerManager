@@ -3,17 +3,7 @@
 {#{% block title %}{{ 'app.rating.browser-tab'|trans }}{% endblock %}#}
 
 {% block content %}
-    <div class="container">
-        {#<section class="page-title">
-            <h1>{{ 'app.rating.title'|trans }} {{ rating.prospect.firstname }}</h1> 
-            <h2>{{ 'app.rating.subtitle'|trans }}</h2>
-        </section>
-        <div class="page-title-underline"></div>#}
-        
-{#        <div class="page-nav">#}
-{#            <a class="btn-basic" href="{{ path('prospect_show', {"id": rating.prospect.id}) }}" title="{{ 'app.rating.btn-contact'|trans }}">{{ 'app.rating.btn-contact'|trans }}</a>#}
-{#        </div>#}
-        
+    <div class="container">        
         <div class="row">
             <div class="col-md-3">
                 {{ photoDisplay.primaryPhoto(rating.prospect.photos) }}
@@ -97,6 +87,7 @@
                 });                
             });            
             
+            // Ajax submit form rating *****************************************
             $("form[name='appbundle_rating']").on("click", "input[type='submit']", function(event){
                 event.preventDefault();
                 

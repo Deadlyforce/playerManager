@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>RedFlag</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ redFlag.id }}</td>
+            </tr>
+            <tr>
+                <th>Unemployed</th>
+                <td>{{ redFlag.unemployed }}</td>
+            </tr>
+            <tr>
+                <th>Needy</th>
+                <td>{{ redFlag.needy }}</td>
+            </tr>
+            <tr>
+                <th>Children</th>
+                <td>{{ redFlag.children }}</td>
+            </tr>
+            <tr>
+                <th>Smoker</th>
+                <td>{{ redFlag.smoker }}</td>
+            </tr>
+            <tr>
+                <th>Checkphone</th>
+                <td>{{ redFlag.checkphone }}</td>
+            </tr>
+            <tr>
+                <th>Boring</th>
+                <td>{{ redFlag.boring }}</td>
+            </tr>
+            <tr>
+                <th>Selfabsorbed</th>
+                <td>{{ redFlag.selfAbsorbed }}</td>
+            </tr>
+            <tr>
+                <th>Cheapdate</th>
+                <td>{{ redFlag.cheapdate }}</td>
+            </tr>
+            <tr>
+                <th>Snore</th>
+                <td>{{ redFlag.snore }}</td>
+            </tr>
+            <tr>
+                <th>Hygiene</th>
+                <td>{{ redFlag.hygiene }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('redflag_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('redflag_edit', { 'id': redFlag.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}
