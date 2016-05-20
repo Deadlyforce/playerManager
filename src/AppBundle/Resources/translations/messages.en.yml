@@ -50,3 +50,16 @@ app:
         subtitle: Here you can rate your contact!
         btn-contact: Contact page
         btn-save: Save changes
+    redflag:
+        edit:
+            label:
+                unemployed: Unemployed
+                needy: Needy
+                children: Children
+                smoker: Smoker
+                checkphone: Checks his/her phone during the date
+                boring: Boring
+                selfAbsorbed: Self-absorbed
+                cheapdate: Cheap Date
+                snore: Snores
+                hygiene: Hygiene problems

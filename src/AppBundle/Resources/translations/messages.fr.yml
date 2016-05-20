@@ -50,6 +50,19 @@ app:
         subtitle: Evaluez votre contact!
         btn-contact: Page du contact        
         btn-save: Enregistrer
+    redflag:
+        edit:
+            label:
+                unemployed: Sans emploi
+                needy: Collant(e)/Désespéré(e)
+                children: A des enfants
+                smoker: Fumeur(euse)
+                checkphone: Consulte son tel pendant le rdv
+                boring: Ennuyeux(euse)
+                selfAbsorbed: Ne parle que de lui/elle
+                cheapdate: Radin(e)
+                snore: Ronfle
+                hygiene: Problèmes d'hygiène
         
 Sign up here: Nouveau compte            
 All relationships: Toutes les relations

@@ -37,7 +37,7 @@ class RedFlagController extends Controller
                 'method' => 'PUT'
             ));            
 
-            $editFormView = $this->renderView('Frontend/RedFlag/edit.html.twig', array(
+            $editFormView = $this->renderView('Frontend/Redflag/edit.html.twig', array(
                 'redflag' => $redflag,
                 'edit_form' => $editForm->createView()
             ));
@@ -48,6 +48,39 @@ class RedFlagController extends Controller
         }
     } 
     
+    /**
+     * Edits an existing RedFlag entity.
+     *
+     * @Route("/{id}/edit", name="ajax_edit_redflag", options={"expose"=true})
+     * @Method({"PUT"})
+     */
+    public function ajaxEditAction(Request $request, $id)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+        $redflag = $em->getRepository('AppBundle:RedFlag')->find($id);
+
+        if ($user === $redflag->getProspect()->getUser()) { 
+
+            $editForm = $this->createForm('AppBundle\Form\RedFlagType', $redflag, array(
+                'method' => 'PUT' 
+            ));
+            $editForm->handleRequest($request);
+
+            if ($editForm->isSubmitted() && $editForm->isValid()) {  
+
+                $em->flush();
+ 
+                return new Response('success');
+            } else {
+                return new Response('failure');
+            }
+            
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+    }
     
     /**
      * Lists all RedFlag entities.

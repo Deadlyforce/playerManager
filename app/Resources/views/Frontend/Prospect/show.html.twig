@@ -120,7 +120,7 @@
                         <div class="tilecontent">
                             <div class="rating-container">
                                 <div class="bigtile-title">
-                                    Average rating <div class="rating-avg" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div>
+                                    Average rating <div id="rating-avg" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div>
                                 </div>
                                 <div id="ratingcircle" data-percent="{{ prospect.rating.percentAverage }}" class="orange"></div>
                             </div>                            
@@ -133,7 +133,7 @@
                     <div class="tilecontent">
                         <div class="redflag-container">
                             <div class="bigtile-title">
-                                Red flags <div class="rating-avg" title="Average red flags<br>for this contact" data-redflag="{{ prospect.redflag.average }}"></div>
+                                Red flags <div id="redflag-avg" title="Average red flags<br>for this contact" data-redflag="{{ prospect.redflag.average }}"></div>
                             </div>
                             <div id="redflagcircle" data-percent="{{ prospect.redflag.percentAverage }}" class="orange"></div>
                         </div>
@@ -393,12 +393,28 @@
                 $(".modal-title").empty();
             });
             
-            $(".rating-avg").each(function(index, div) {
+            $("#rating-avg").each(function(index, div) {
                 
                 avgRating = $(div).data("rating");                
                 
                 $(div).starRating({
                     initialRating: avgRating,
+                    totalStars: 5,                
+                    starSize: 15,
+                    disableAfterRate: false,
+                    useGradient: false,
+                    emptyColor: '#ddd',
+                    hoverColor: '#F47363',
+                    useFullStars: true,
+                    readOnly: true
+                });                
+            });
+            $("#redflag-avg").each(function(index, div) {
+                
+                avgRedflag = $(div).data("redflag");                
+                
+                $(div).starRating({
+                    initialRating: avgRedflag,
                     totalStars: 5,                
                     starSize: 15,
                     disableAfterRate: false,

@@ -121,7 +121,7 @@ class RatingController extends Controller
     }    
     
     /**
-     * Displays a form to edit an existing Rating entity.
+     * Edits an existing Rating entity.
      *
      * @Route("/{id}/edit", name="ajax_edit_rating", options={"expose"=true})
      * @Method({"PUT"})

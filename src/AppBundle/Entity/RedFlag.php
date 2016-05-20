@@ -500,15 +500,15 @@ class RedFlag
      */
     public function saveAveragedAttributes()
     {
-        $total = 6;
-        $attributes =  array($this->attractiveness, $this->cooking, $this->kissing, $this->senseHumor, $this->sex, $this->socialStatus);
+        $total = 10;
+        $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->checkphone, $this->boring, $this->selfAbsorbed, $this->cheapdate, $this->snore,  $this->hygiene);
         foreach($attributes as $attribute){
             if ($attribute === null) {
                 $total = $total - 1;
             }
         }
    
-        $avg = ($this->attractiveness + $this->cooking + $this->kissing + $this->senseHumor + $this->sex + $this->socialStatus)/$total;
+        $avg = (array_sum($attributes))/$total;
         $whole = floor($avg);
         $deci = $avg - $whole;
         
@@ -527,15 +527,15 @@ class RedFlag
      */
     public function saveExactAveragedAttributes()
     {
-        $total = 6;
-        $attributes =  array($this->attractiveness, $this->cooking, $this->kissing, $this->senseHumor, $this->sex, $this->socialStatus);
+        $total = 10;
+        $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->checkphone, $this->boring, $this->selfAbsorbed, $this->cheapdate, $this->snore,  $this->hygiene);
         foreach($attributes as $attribute){
             if ($attribute === null) {
                 $total = $total - 1;
             }
         }
         
-        $avg = ($this->attractiveness + $this->cooking + $this->kissing + $this->senseHumor + $this->sex + $this->socialStatus)/$total;
+        $avg = (array_sum($attributes))/$total;
         $percentAvg = round($avg, 1) * 20;
                 
         $this->percentAverage = $percentAvg;
