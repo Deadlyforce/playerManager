@@ -106,7 +106,8 @@ class RatingController extends Controller
         if ($user === $rating->getProspect()->getUser()) {          
 
             $editForm = $this->createForm('AppBundle\Form\RatingType', $rating, array(
-                'method' => 'PUT'
+                'method' => 'POST',
+                'action' => $this->generateUrl('rating_edit', array('id' => $id))
             ));            
 
             $editFormView = $this->renderView('Frontend/Rating/edit.html.twig', array(
@@ -126,28 +127,62 @@ class RatingController extends Controller
      * @Route("/{id}/edit", name="ajax_edit_rating", options={"expose"=true})
      * @Method({"PUT"})
      */
-    public function ajaxEditAction(Request $request, $id)
+//    public function ajaxEditAction(Request $request, $id)
+//    {
+//        $user = $this->get('security.token_storage')->getToken()->getUser();
+//        
+//        $em = $this->getDoctrine()->getManager();
+//        $rating = $em->getRepository('AppBundle:Rating')->find($id);
+//
+//        if ($user === $rating->getProspect()->getUser()) { 
+//
+//            $editForm = $this->createForm('AppBundle\Form\RatingType', $rating, array(
+//                'method' => 'PUT' 
+//            ));
+//            $editForm->handleRequest($request);
+//
+//            if ($editForm->isSubmitted() && $editForm->isValid()) {  
+//
+//                $em->flush();
+// 
+//                return new Response('success');
+//            } else {
+//                return new Response('failure');
+//            }
+//            
+//        } else {
+//            throw $this->createAccessDeniedException('You cannot access this page!');
+//        }
+//    }
+    
+    /**
+     * Displays a form to edit an existing Rating entity.
+     *
+     * @Route("/{id}/edit", name="rating_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, $id)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
         $rating = $em->getRepository('AppBundle:Rating')->find($id);
 
-        if ($user === $rating->getProspect()->getUser()) { 
+        if ($user === $rating->getProspect()->getUser()) {        
 
-            $editForm = $this->createForm('AppBundle\Form\RatingType', $rating, array(
-                'method' => 'PUT' 
-            ));
+            $editForm = $this->createForm('AppBundle\Form\RatingType', $rating);
             $editForm->handleRequest($request);
 
-            if ($editForm->isSubmitted() && $editForm->isValid()) {  
-
-                $em->flush();
- 
-                return new Response('success');
-            } else {
-                return new Response('failure');
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($rating);
+                $em->flush();               
             }
+            
+            return $this->redirectToRoute('prospect_show', array(
+                'id' => $rating->getProspect()->getId(),
+                'prospect' => $rating->getProspect()
+            ));
             
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');

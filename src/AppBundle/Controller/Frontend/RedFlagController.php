@@ -34,7 +34,8 @@ class RedFlagController extends Controller
         if ($user === $redflag->getProspect()->getUser()) {          
 
             $editForm = $this->createForm('AppBundle\Form\RedFlagType', $redflag, array(
-                'method' => 'PUT'
+                'method' => 'POST',
+                'action' => $this->generateUrl('redflag_edit', array('id' => $id))
             ));            
 
             $editFormView = $this->renderView('Frontend/Redflag/edit.html.twig', array(
@@ -47,41 +48,7 @@ class RedFlagController extends Controller
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
     } 
-    
-    /**
-     * Edits an existing RedFlag entity.
-     *
-     * @Route("/{id}/edit", name="ajax_edit_redflag", options={"expose"=true})
-     * @Method({"PUT"})
-     */
-    public function ajaxEditAction(Request $request, $id)
-    {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        
-        $em = $this->getDoctrine()->getManager();
-        $redflag = $em->getRepository('AppBundle:RedFlag')->find($id);
-
-        if ($user === $redflag->getProspect()->getUser()) { 
-
-            $editForm = $this->createForm('AppBundle\Form\RedFlagType', $redflag, array(
-                'method' => 'PUT' 
-            ));
-            $editForm->handleRequest($request);
-
-            if ($editForm->isSubmitted() && $editForm->isValid()) {  
-
-                $em->flush();
- 
-                return new Response('success');
-            } else {
-                return new Response('failure');
-            }
-            
-        } else {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-    }
-    
+       
     /**
      * Lists all RedFlag entities.
      *
@@ -147,26 +114,34 @@ class RedFlagController extends Controller
      * @Route("/{id}/edit", name="redflag_edit")
      * @Method({"GET", "POST"})
      */
-//    public function editAction(Request $request, RedFlag $redFlag)
-//    {
-//        $deleteForm = $this->createDeleteForm($redFlag);
-//        $editForm = $this->createForm('AppBundle\Form\RedFlagType', $redFlag);
-//        $editForm->handleRequest($request);
-//
-//        if ($editForm->isSubmitted() && $editForm->isValid()) {
-//            $em = $this->getDoctrine()->getManager();
-//            $em->persist($redFlag);
-//            $em->flush();
-//
-//            return $this->redirectToRoute('redflag_edit', array('id' => $redFlag->getId()));
-//        }
-//
-//        return $this->render('redflag/edit.html.twig', array(
-//            'redFlag' => $redFlag,
-//            'edit_form' => $editForm->createView(),
-//            'delete_form' => $deleteForm->createView(),
-//        ));
-//    }
+    public function editAction(Request $request, $id)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+        $redflag = $em->getRepository('AppBundle:RedFlag')->find($id);
+
+        if ($user === $redflag->getProspect()->getUser()) {
+        
+//            $deleteForm = $this->createDeleteForm($redflag);
+            $editForm = $this->createForm('AppBundle\Form\RedFlagType', $redflag);
+            $editForm->handleRequest($request);
+
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($redflag);
+                $em->flush();               
+            }
+            
+            return $this->redirectToRoute('prospect_show', array(
+                'id' => $redflag->getProspect()->getId(),
+                'prospect' => $redflag->getProspect()
+            ));
+            
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }
+    }
 
     /**
      * Deletes a RedFlag entity.

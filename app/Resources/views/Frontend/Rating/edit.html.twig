@@ -8,7 +8,7 @@
             </div>
             
             <div class="col-md-9 page-content">
-                {{ form_start(edit_form, {'method': 'PUT'} ) }}
+                {{ form_start(edit_form, {'method': 'POST'} ) }}
                     <div>
                         {{ form_label(edit_form.attractiveness, 'app.rating.edit.label.attractiveness'|trans) }}     
                         <div class="rating attractiveness-rating"></div>               
@@ -86,7 +86,7 @@
             });            
             
             // Ajax submit form rating *****************************************
-            $("form[name='appbundle_rating']").on("click", "input[type='submit']", function(event){
+            {#$("form[name='appbundle_rating']").on("click", "input[type='submit']", function(event){
                 event.preventDefault();
                 
                 var id = "{{ rating.id }}";
@@ -124,7 +124,7 @@
                         $("#confirm-panel").removeClass();
                     });
                 });                
-            }
+            }#}
             
         });       
         

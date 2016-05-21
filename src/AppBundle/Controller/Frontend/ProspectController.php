@@ -261,9 +261,7 @@ class ProspectController extends Controller
         } 
         
         if($prospect->getUser() === $user){
-//var_dump($prospect->getRating());
-//var_dump($prospect->getRedFlag());
-//die();
+
             $deleteForm = $this->createDeleteForm($id);
 
             return array(

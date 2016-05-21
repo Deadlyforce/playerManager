@@ -8,7 +8,7 @@
             </div>
             
             <div class="col-md-9 page-content">
-                {{ form_start(edit_form, {'method': 'PUT'} ) }}
+                {{ form_start(edit_form, {'method': 'POST'} ) }}
                     <div>
                         {{ form_label(edit_form.unemployed, 'app.redflag.edit.label.unemployed'|trans) }}     
                         <div class="redflag"></div>               
@@ -111,7 +111,7 @@
             });            
             
             // Ajax submit form rating *****************************************
-            $("form[name='appbundle_redflag']").on("click", "input[type='submit']", function(event){
+            {#$("form[name='appbundle_redflag']").on("click", "input[type='submit']", function(event){
                 event.preventDefault();
                 
                 var id = "{{ redflag.id }}";
@@ -123,7 +123,15 @@
                     url: url,
                     type: 'PUT',
                     success: function(response){
-                        if (response === 'success') {
+                        var data = $.parseJSON(response);
+                        
+                        if (data.msg === 'success') {
+                            
+                            var average = data.average;
+                            var percentAverage = data.percentAverage;
+                            
+                            $("#redflagcircle").attr("data-percent", percentAverage);
+                            
                             var msg = '<p>Success! Your modifications have been saved.</p>';
                             $("#confirm-panel").addClass(".confirm-success");
                         } else {
@@ -134,9 +142,9 @@
                         confirmPanel(msg);
                     }
                 });    
-            });
+            });#}
             
-            function confirmPanel(msg)
+            {#function confirmPanel(msg)
             {
                 $("#confirm-panel").html(msg);
                 $("#confirm-panel").animate({
@@ -149,7 +157,7 @@
                         $("#confirm-panel").removeClass();
                     });
                 });                
-            }
+            }#}
             
         });       
         
