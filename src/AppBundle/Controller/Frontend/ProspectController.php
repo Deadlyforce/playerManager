@@ -154,22 +154,23 @@ class ProspectController extends Controller
     /**
      * Lists Prospect entities.
      *
-     * @Route("/list/{option}", name="prospect_list")
-     * @Method("GET")
+     * @Route("/list", name="prospect_list")
+     * @Method({"GET", "POST"})
      * @Template(":Frontend/Prospect:list.html.twig")
      */
-    public function listAction(Request $request, $option)
-    {       
+    public function listAction(Request $request)
+    {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-        
+       
         $em = $this->getDoctrine()->getManager();
+                     
+        $filter = $request->request->get('appbundle_prospect_filter');        
+        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user, $filter['status'], $filter['sex'], $filter['relationshipLevel']); 
         
-        if ($option === 'normal') {
-            $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user);       
-        }
-        if ($option === 'sex') {
-            $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery_sex($user);       
-        }
+        $filterForm = $this->createForm('AppBundle\Form\ProspectFilterType', array(
+            'action' => $this->generateUrl('prospect_list'),
+            'method' => 'POST'
+        ));
         
         $paginator = $this->get('knp_paginator');
         
@@ -180,7 +181,8 @@ class ProspectController extends Controller
         );
                        
         return array(
-            'pagination' => $pagination
+            'pagination' => $pagination,
+            'filterForm' => $filterForm->createView()
         );
     }
     

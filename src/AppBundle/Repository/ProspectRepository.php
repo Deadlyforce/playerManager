@@ -17,62 +17,46 @@ class ProspectRepository extends EntityRepository
      * Get prospects (for index)
      * 
      * @param User $user
-     * @param int $firstResult
-     * @param int $maxResults
      * @return Paginator
      */
-    public function getProspectsQuery($user)
-    {
-//        $qb = $this->createQueryBuilder('p');
-//        
-//        $qb
-//            ->select('p')
-//            ->setFirstResult($firstResult)
-//            ->setMaxResults($maxResults)
-//            ->where('p.user = :user')
-//            ->orderBy('p.creationDate', 'DESC')
-//            ->setParameter('user', $user)
-//        ;
-//        
-//        $pag = new Paginator($qb);
-//        
-//        return $pag;
+    public function getProspectsQuery($user, $status, $sex, $relationshipLevel)
+    {      
+        $qb = $this->_em->createQueryBuilder();
+
+        $qb
+            ->select('p', 'z')
+            ->from('AppBundle:Prospect', 'p')
+            ->leftJoin('p.zodiac', 'z')
+            ->leftJoin('p.relationship', 'r')
+            ->leftJoin('r.relationshipRank', 'rr')
+            ->where('p.user = :user')
+            ->addOrderBy('p.creationDate', 'DESC', 'p.id DESC')
+            ->addOrderBy('p.id', 'DESC')
+            ->setParameter('user', $user)
+        ;
         
-        $query = $this->_em->createQuery('
-            SELECT p,z
-            FROM AppBundle:Prospect p LEFT JOIN p.zodiac z
-            WHERE p.user = :user
-            ORDER BY p.creationDate DESC, p.id DESC
-        ')
-        ->setParameter('user', $user);
+        if ($status != null) {
+            $qb                
+                ->andWhere('r.status = :status')
+                ->setParameter('status', $status)
+            ;
+        }
+        if ($sex != null) {
+            $qb                
+                ->andWhere('r.fc = :sex')
+                ->setParameter('sex', $sex)
+            ;
+        }
+        if ($relationshipLevel != null) {
+            $qb                
+                ->andWhere('rr.id = :relationshipLevel')
+                ->setParameter('relationshipLevel', $relationshipLevel)
+            ;
+        }
         
-        return $query;
+        return $qb->getQuery();     
+    }    
         
-    }
-    
-    /**
-     * Get prospects (for index) filtered by sex yes/no
-     * 
-     * @param User $user
-     * @param int $firstResult
-     * @param int $maxResults
-     * @return Paginator
-     */
-    public function getProspectsQuery_sex($user)
-    {       
-        $query = $this->_em->createQuery('
-            SELECT p,z
-            FROM AppBundle:Prospect p LEFT JOIN p.zodiac z LEFT JOIN p.relationship r
-            WHERE p.user = :user
-            AND r.fc = 1
-            ORDER BY p.creationDate DESC, p.id DESC
-        ')
-        ->setParameter('user', $user);
-        
-        return $query;
-        
-    }
-    
     /**
      * Returns an array of all prospect ids from the user.
      * 

@@ -944,6 +944,29 @@ table.dataTable.no-footer {
     background-color: rgba(0,0,0,0.2);
 }
 
+form[name='appbundle_prospect_filter'] > div{
+    margin-bottom: 5px;
+}
+form[name='appbundle_prospect_filter'] label{
+    color: #fff;
+    font-family: "open_sanslight", sans-serif;
+    font-weight: 200;
+    width: 150px;
+}
+form[name='appbundle_prospect_filter'] .form-control{
+    border: none;
+    box-shadow: none;
+    transition: none;
+}
+form[name='appbundle_prospect_filter'] select{
+    height: 30px;
+    background-color: #f47363;
+    color: #fff;    
+}
+form[name='appbundle_prospect_filter'] input[type='submit']{
+    padding: 5px 15px;
+}
+
 .col-prospect{
     margin-bottom: 30px;
 }

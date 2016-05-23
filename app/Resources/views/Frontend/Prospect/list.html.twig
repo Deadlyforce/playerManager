@@ -9,7 +9,26 @@
 
         <div class="page-nav">
             <a class="btn-basic-ico" href="#" id="add_prospect" title ="{{ 'app.contact.list.add'|trans }}"><i class="icon ion-ios-plus-empty"></i><span>{{ 'app.contact.list.add'|trans }}</span></a>
-            <a class="btn-basic pull-right" href="{{ path('prospect_list', {'option': 'sex'}) }}" title="Contacts with whom sex happened">Sex</a>
+            
+            {{ form_start(filterForm, {'attr': {'class': 'pull-right form-inline'} }) }}
+                <div>
+                    {{ form_label(filterForm.status, 'Relationship status') }}
+                    {{ form_widget(filterForm.status, {'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(filterForm.status) }}
+                </div>
+                <div>
+                    {{ form_label(filterForm.sex, 'Sex') }}
+                    {{ form_widget(filterForm.sex, {'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(filterForm.sex) }}
+                </div>
+                <div>
+                    {{ form_label(filterForm.relationshipLevel, 'Relationship type') }}
+                    {{ form_widget(filterForm.relationshipLevel, {'attr': {'class': 'form-control'} }) }}
+                    {{ form_errors(filterForm.relationshipLevel) }}
+                </div>
+                <input class="btn-basic" type="submit" value="Filter">
+            {{ form_end(filterForm) }}
+            <div class="clearfix"></div>
         </div>
         
         <div class="row row-contacts">
