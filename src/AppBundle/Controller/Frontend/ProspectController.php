@@ -154,21 +154,23 @@ class ProspectController extends Controller
     /**
      * Lists Prospect entities.
      *
-     * @Route("/list", name="prospect_list")
+     * @Route("/list/{option}", name="prospect_list")
      * @Method("GET")
      * @Template(":Frontend/Prospect:list.html.twig")
      */
-    public function listAction(Request $request)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
+    public function listAction(Request $request, $option)
+    {       
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
         
-        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user);            
+        if ($option === 'normal') {
+            $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user);       
+        }
+        if ($option === 'sex') {
+            $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery_sex($user);       
+        }
+        
         $paginator = $this->get('knp_paginator');
         
         $pagination = $paginator->paginate(
@@ -176,12 +178,8 @@ class ProspectController extends Controller
             $request->query->getInt('page', 1) /*page number*/,
             5 /*limit per page*/
         );
-       
-        $tokenManager = $this->get('security.csrf.token_manager');        
-        $csrf_token = $tokenManager->refreshToken('');
-                
+                       
         return array(
-            'csrf_token' => $csrf_token,
             'pagination' => $pagination
         );
     }
@@ -317,11 +315,7 @@ class ProspectController extends Controller
      * @Template(":Frontend/Prospect:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
+    {        
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();

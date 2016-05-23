@@ -7,12 +7,14 @@
   width: 60px;
   height: 8px;
   float: left;
-  background-color: #bbcefb;
+  /*background-color: #bbcefb;*/
+  background-color: #fdbab3;
   margin: 1px;
 }
 .br-theme-bars-movie .br-widget a.br-active,
 .br-theme-bars-movie .br-widget a.br-selected {
-  background-color: #4278f5;
+  /*background-color: #4278f5;*/
+  background-color: #ff1900;
 }
 .br-theme-bars-movie .br-widget .br-current-rating {
   clear: both;

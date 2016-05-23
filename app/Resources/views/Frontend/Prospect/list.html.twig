@@ -9,6 +9,7 @@
 
         <div class="page-nav">
             <a class="btn-basic-ico" href="#" id="add_prospect" title ="{{ 'app.contact.list.add'|trans }}"><i class="icon ion-ios-plus-empty"></i><span>{{ 'app.contact.list.add'|trans }}</span></a>
+            <a class="btn-basic pull-right" href="{{ path('prospect_list', {'option': 'sex'}) }}" title="Contacts with whom sex happened">Sex</a>
         </div>
         
         <div class="row row-contacts">
@@ -61,7 +62,7 @@
                         <div class="preview relationship-met">
                             <div class="tilecontent">
                                 {% if  prospect.relationship.meeting %}
-                                    <i class="icon ion-wineglass"></i>
+                                    <i class="icon ion-wineglass" title="You met"></i>
                                 {% else %}
                                     <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
@@ -71,7 +72,7 @@
                             <div class="tilecontent">
                                 {% if  prospect.relationship.kc %}
 {#                                    <i class="icon ion-fireball"></i>#}
-                                    <img src="{{ asset('bundles/app/images/lips.png') }}" alt="lips">
+                                    <img src="{{ asset('bundles/app/images/lips.png') }}" alt="lips" title="You kissed">
                                 {% else %}
                                     <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
@@ -80,7 +81,7 @@
                         <div class="preview relationship-fc">
                             <div class="tilecontent">
                                 {% if  prospect.relationship.fc %}
-                                    <i class="icon ion-android-cancel"></i>
+                                    <i class="icon ion-android-cancel" title="You had sex"></i>
                                 {% else %}
                                     <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
