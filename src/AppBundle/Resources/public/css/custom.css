@@ -875,7 +875,11 @@ ul.slick-dots > li > button:hover{
 /*************  FEATURES ****************/
 
 #features{
-    background-color: #fff;
+    background-color: rgba(255,255,255,0.8);
+    position: relative;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 .feature{
     text-align: center;
@@ -888,7 +892,7 @@ ul.slick-dots > li > button:hover{
 }
 .feature h2{
     margin-top: 0px;
-    font-family: "ralewayregular", sans-serif;
+    font-family: "open_sanslight", sans-serif;
 }
 .feature p{
     font-size: 1.1em;
