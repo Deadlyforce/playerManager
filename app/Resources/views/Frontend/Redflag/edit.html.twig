@@ -1,7 +1,11 @@
 {% import ":Frontend/Macros/Prospect:photoDisplay250px.html.twig" as photoDisplay %}
 
 {% block content %}
-    <div class="container">
+    <div class="container" id="container-redflag-edit">
+        <div class="page-nav">
+            <p>Choose the level of inconvenience</p>
+        </div>
+        
         <div class="row">
             <div class="col-md-3">
                 {{ photoDisplay.primaryPhoto(redflag.prospect.photos) }}
@@ -10,63 +14,53 @@
             <div class="col-md-9 page-content">
                 {{ form_start(edit_form, {'method': 'POST'} ) }}
                     <div>
-                        {{ form_label(edit_form.unemployed, 'app.redflag.edit.label.unemployed'|trans) }}     
-                        <div class="redflag"></div>               
-                        <div class="hidden">{{ form_widget(edit_form.unemployed) }}</div>
+                        {{ form_label(edit_form.unemployed, 'app.redflag.edit.label.unemployed'|trans) }}                                          
+                        {{ form_widget(edit_form.unemployed) }}
                         {{ form_errors(edit_form.unemployed) }}
                     </div>
                     <div>
-                        {{ form_label(edit_form.needy, 'app.redflag.edit.label.needy'|trans) }} 
-                        <div class="redflag"></div>
-                        <div class="hidden">{{ form_widget(edit_form.needy) }}</div>
+                        {{ form_label(edit_form.needy, 'app.redflag.edit.label.needy'|trans) }}
+                        {{ form_widget(edit_form.needy) }}
                         {{ form_errors(edit_form.needy) }}
                     </div>
                     <div>
                         {{ form_label(edit_form.children, 'app.redflag.edit.label.children'|trans) }} 
-                        <div class="redflag"></div>
-                        <div class="hidden">{{ form_widget(edit_form.children) }}</div>
+                        {{ form_widget(edit_form.children) }}
                         {{ form_errors(edit_form.children) }}
                     </div>
                     <div>
                         {{ form_label(edit_form.smoker, 'app.redflag.edit.label.smoker'|trans) }} 
-                        <div class="redflag"></div>
-                        <div class="hidden">{{ form_widget(edit_form.smoker) }}</div>
+                        {{ form_widget(edit_form.smoker) }}
                         {{ form_errors(edit_form.smoker) }}
                     </div>
                     <div>
                         {{ form_label(edit_form.checkphone, 'app.redflag.edit.label.checkphone'|trans) }} 
-                        <div class="redflag"></div>
-                        <div class="hidden">{{ form_widget(edit_form.checkphone) }}</div>
+                        {{ form_widget(edit_form.checkphone) }}
                         {{ form_errors(edit_form.checkphone) }}
                     </div>
                     <div>
                         {{ form_label(edit_form.boring, 'app.redflag.edit.label.boring'|trans) }} 
-                        <div class="redflag"></div>
-                        <div class="hidden">{{ form_widget(edit_form.boring) }}</div>
+                        {{ form_widget(edit_form.boring) }}
                         {{ form_errors(edit_form.boring) }}
                     </div>
                     <div>
                         {{ form_label(edit_form.selfAbsorbed, 'app.redflag.edit.label.selfAbsorbed'|trans) }} 
-                        <div class="redflag"></div>
-                        <div class="hidden">{{ form_widget(edit_form.selfAbsorbed) }}</div>
+                        {{ form_widget(edit_form.selfAbsorbed) }}
                         {{ form_errors(edit_form.selfAbsorbed) }}
                     </div>
                     <div>
                         {{ form_label(edit_form.cheapdate, 'app.redflag.edit.label.cheapdate'|trans) }} 
-                        <div class="redflag"></div>
-                        <div class="hidden">{{ form_widget(edit_form.cheapdate) }}</div>
+                        {{ form_widget(edit_form.cheapdate) }}
                         {{ form_errors(edit_form.cheapdate) }}
                     </div>
                     <div>
                         {{ form_label(edit_form.snore, 'app.redflag.edit.label.snore'|trans) }} 
-                        <div class="redflag"></div>
-                        <div class="hidden">{{ form_widget(edit_form.snore) }}</div>
+                        {{ form_widget(edit_form.snore) }}
                         {{ form_errors(edit_form.snore) }}
                     </div>
                     <div>
                         {{ form_label(edit_form.hygiene, 'app.redflag.edit.label.hygiene'|trans) }} 
-                        <div class="redflag"></div>
-                        <div class="hidden">{{ form_widget(edit_form.hygiene) }}</div>
+                        {{ form_widget(edit_form.hygiene) }}
                         {{ form_errors(edit_form.hygiene) }}
                     </div>
                     
@@ -85,81 +79,42 @@
     <script type="text/javascript">
         $(document).ready(function(){            
             
-            var locale = "{{ app.request.locale }}";
+            var locale = "{{ app.request.locale }}";                      
             
-            $("form[name='appbundle_redflag'] input[max=5]").each(function(index, input) {
-
-                var bddValue = input.value;
-                
-                $(input).parent().prev().starRating({
-                    initialRating: bddValue,
-                    totalStars: 5,                
-                    starSize: 30,
-                    disableAfterRate: false,
-                    useGradient: false,
-                    emptyColor: '#ddd',
-                    hoverColor: 'gold',
-                    useFullStars: true,
-                    callback: function(currentRating, $el){
-                        
-                        $el.next().children().val(currentRating);    
-                        
-                        // Option 1 : update input for future submit
-                        // Option 2 : immediate ajax request update
-                    }
-                });                
+            $("#appbundle_redflag_unemployed").barrating({
+                theme: 'bars-movie'
+            });
+            $("#appbundle_redflag_needy").barrating({
+                theme: 'bars-movie'
+            });
+            $("#appbundle_redflag_children").barrating({
+                theme: 'bars-movie'
+            });
+            $("#appbundle_redflag_smoker").barrating({
+                theme: 'bars-movie'
+            });
+            $("#appbundle_redflag_checkphone").barrating({
+                theme: 'bars-movie'
+            });                       
+            $("#appbundle_redflag_boring").barrating({
+                theme: 'bars-movie'
+            });
+            $("#appbundle_redflag_selfAbsorbed").barrating({
+                theme: 'bars-movie'
+            });
+            $("#appbundle_redflag_cheapdate").barrating({
+                theme: 'bars-movie'
+            });
+            $("#appbundle_redflag_snore").barrating({
+                theme: 'bars-movie'
+            });
+            $("#appbundle_redflag_hygiene").barrating({
+                theme: 'bars-movie'
             });            
-            
-            // Ajax submit form rating *****************************************
-            {#$("form[name='appbundle_redflag']").on("click", "input[type='submit']", function(event){
-                event.preventDefault();
-                
-                var id = "{{ redflag.id }}";
-                var url = Routing.generate('ajax_edit_redflag', {'_locale':locale, 'id': id});
-                var form = $("form[name='appbundle_redflag']").serialize();                
-              
-                $.ajax({
-                    data: form,
-                    url: url,
-                    type: 'PUT',
-                    success: function(response){
-                        var data = $.parseJSON(response);
-                        
-                        if (data.msg === 'success') {
-                            
-                            var average = data.average;
-                            var percentAverage = data.percentAverage;
-                            
-                            $("#redflagcircle").attr("data-percent", percentAverage);
-                            
-                            var msg = '<p>Success! Your modifications have been saved.</p>';
-                            $("#confirm-panel").addClass(".confirm-success");
-                        } else {
-                            var msg = '<p>Oops! Something went wrong.</p>';
-                            $("#confirm-panel").addClass(".confirm-danger");
-                        }
-                        
-                        confirmPanel(msg);
-                    }
-                });    
-            });#}
-            
-            {#function confirmPanel(msg)
-            {
-                $("#confirm-panel").html(msg);
-                $("#confirm-panel").animate({
-                    "top": "0"
-                }, 200, "linear", function(){
-                    $(this).delay(3000).animate({
-                        "top": "-75"
-                    }, 200, "linear", function(){
-                        $(this).empty();
-                        $("#confirm-panel").removeClass();
-                    });
-                });                
-            }#}
-            
+                                   
         });       
         
     </script>
 {% endblock %}
+
+

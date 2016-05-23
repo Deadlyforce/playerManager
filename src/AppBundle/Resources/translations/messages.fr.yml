@@ -63,6 +63,12 @@ app:
                 cheapdate: Radin(e)
                 snore: Ronfle
                 hygiene: Problèmes d'hygiène
+        form:
+            level1: 1
+            level2: 2
+            level3: 3
+            level4: 4
+            level5: 5
         
 Sign up here: Nouveau compte            
 All relationships: Toutes les relations

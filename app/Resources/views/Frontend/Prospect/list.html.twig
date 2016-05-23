@@ -45,9 +45,9 @@
                                     <i class="icon ion-flag"></i>
                                 </div>
                             </div>  
-                            <div class="redflag-percentage">
+                            <div class="redflag-percentage" data-avg="{{ prospect.redflag.percentAverage }}">
                                 <div class="tilecontent">
-{#                                    <p>{{ prospect.rating.percentRedflag }}%</p>#}
+                                    <p><span>{{ prospect.redflag.percentAverage }}</span>%</p>
                                 </div>            
                             </div> 
                         </div>
@@ -70,7 +70,8 @@
                         <div class="preview relationship-kc">
                             <div class="tilecontent">
                                 {% if  prospect.relationship.kc %}
-                                    <i class="icon ion-fireball"></i>
+{#                                    <i class="icon ion-fireball"></i>#}
+                                    <img src="{{ asset('bundles/app/images/lips.png') }}" alt="lips">
                                 {% else %}
                                     <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
@@ -145,18 +146,10 @@
         $(document).ready(function(){  
 {#            var locale = "{{ app.request.locale }}";#}
             var locale = $("#locale").data("locale");   
-            
-            {#var ratingPercentage = "{{ prospect.rating.percentAverage }}";
-            $(".rating-percentage span").animateNumber({ number: ratingPercentage }, 3000);#}
            
             $('[data-toggle="tooltip"]').tooltip({
                 html: true
-            });  
-            
-            // Stars cursor default ********************************************
-            $(".rating-avg").on("mouseover", function(){
-                $(".jq-star, .fs-star-svg polygon").css("cursor", "default");
-            });
+            });              
                    
             // Ajax: get form new prospect *************************************
             $("#add_prospect").click(function(event){
@@ -261,25 +254,7 @@
 
                     $("#"+id).remove(); // Remove contact row
                 });
-            }
-                       
-            
-            $(".rating-avg").each(function(index, div) {
-                
-                avgRating = $(div).data("rating");                
-                
-                $(div).starRating({
-                    initialRating: avgRating,
-                    totalStars: 5,                
-                    starSize: 30,
-                    disableAfterRate: false,
-                    useGradient: false,
-                    emptyColor: '#ddd',
-                    hoverColor: '#F47363',
-                    useFullStars: true,
-                    readOnly: true
-                });                
-            });
+            }            
             
         });
     </script>

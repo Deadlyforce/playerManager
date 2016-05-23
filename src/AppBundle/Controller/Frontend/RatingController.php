@@ -119,42 +119,8 @@ class RatingController extends Controller
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
-    }    
-    
-    /**
-     * Edits an existing Rating entity.
-     *
-     * @Route("/{id}/edit", name="ajax_edit_rating", options={"expose"=true})
-     * @Method({"PUT"})
-     */
-//    public function ajaxEditAction(Request $request, $id)
-//    {
-//        $user = $this->get('security.token_storage')->getToken()->getUser();
-//        
-//        $em = $this->getDoctrine()->getManager();
-//        $rating = $em->getRepository('AppBundle:Rating')->find($id);
-//
-//        if ($user === $rating->getProspect()->getUser()) { 
-//
-//            $editForm = $this->createForm('AppBundle\Form\RatingType', $rating, array(
-//                'method' => 'PUT' 
-//            ));
-//            $editForm->handleRequest($request);
-//
-//            if ($editForm->isSubmitted() && $editForm->isValid()) {  
-//
-//                $em->flush();
-// 
-//                return new Response('success');
-//            } else {
-//                return new Response('failure');
-//            }
-//            
-//        } else {
-//            throw $this->createAccessDeniedException('You cannot access this page!');
-//        }
-//    }
-    
+    }   
+   
     /**
      * Displays a form to edit an existing Rating entity.
      *

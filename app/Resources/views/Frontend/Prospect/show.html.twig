@@ -167,7 +167,7 @@
                                 {% if  prospect.relationship.meeting %}
                                     <i class="icon ion-wineglass"></i>
                                 {% else %}
-                                    <i class="icon ion-android-close"></i>
+                                    <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
                                 <p>Met</p>
                             </div>
@@ -175,9 +175,10 @@
                         <div class="col-md-6  smalltile" id="kc">
                             <div class="tilecontent">
                                 {% if  prospect.relationship.kc %}
-                                    <i class="icon ion-fireball"></i>
+{#                                    <i class="icon ion-fireball"></i>#}
+                                    <img src="{{ asset('bundles/app/images/lips.png') }}" alt="lips">
                                 {% else %}
-                                    <i class="icon ion-android-close"></i>
+                                    <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
                                 <p>Kissed</p>
                             </div>
@@ -210,7 +211,7 @@
                                 {% if  prospect.relationship.fc %}
                                     <i class="icon ion-android-cancel"></i>
                                 {% else %}
-                                    <i class="icon ion-android-close"></i>
+                                    <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
                                 <p>Sex</p>
                             </div>

@@ -19,7 +19,8 @@
             'bundles/app/css/custom.css'            
             'bundles/app/css/ionicons.min.css'                     
             'bundles/app/packages/star-rating-svg/css/star-rating-svg.css'                     
-            'bundles/app/packages/percircle/css/percircle.css'                     
+            'bundles/app/packages/percircle/css/percircle.css'        
+            'bundles/app/packages/jquery-barrating/themes/bars-movie.css'             
         %}
             <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
@@ -40,6 +41,7 @@
             'bundles/app/js/helpers.js'                       
             'bundles/app/packages/star-rating-svg/jquery.star-rating-svg.js'            
             'bundles/app/packages/jquery.backstretch.min.js'
+            'bundles/app/packages/jquery-barrating/jquery.barrating.min.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
@@ -108,8 +110,9 @@
             var loginImage2 = "{{ asset('bundles/app/images/base/manager_13.jpg') }}"; 
             var loginImage4 = "{{ asset('bundles/app/images/base/manager_14.jpg') }}";
             var loginImage5 = "{{ asset('bundles/app/images/base/manager_36b.jpg') }}";
+            var loginImage6 = "{{ asset('bundles/app/images/base/manager_42.jpg') }}";
             
-            $.backstretch([loginImage2, loginImage4, loginImage5], {duration: 6000, fade: 3000});
+            $.backstretch([loginImage2, loginImage4, loginImage5, loginImage6], {duration: 6000, fade: 3000});
             
             // Menu animation
             {#$(".navbar-brand").animate({

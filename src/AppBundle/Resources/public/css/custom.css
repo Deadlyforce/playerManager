@@ -388,8 +388,9 @@ header{
 .navbar-header .navbar-brand {
     font-family: 'sinkin_sans100_thin', sans-serif;
     color: #F47363;
-    font-size: 1.7em;
+    font-size: 1.8em;
     padding-left: 0;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 .navbar-header .navbar-brand:hover {
     color: #fff;
@@ -992,6 +993,7 @@ p.prospect-age{
     right: 10px;
     font-size: 2.3em;
     margin: 0;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
 }
 .ratings-redflags{
     /*display: inline-block;*/
@@ -1071,13 +1073,6 @@ p.prospect-relationship-rank{
     font-size: 1.1em;
     color: #ccc;
 }
-/*.prospect-infos:hover p.prospect-relationship-rank span{
-    display: none;
-    transition: all .3s ease-in;
-}
-.prospect-infos:hover p.prospect-relationship-rank:after{
-    content: "Relationship type";
-}*/
 
 .prospect-relationship{
     width: 350px;
@@ -1091,18 +1086,16 @@ p.prospect-relationship-rank{
     height: 100%;
     float: left; 
 }
-.relationship-met{    
-       
+.relationship-met i.ion-ios-close-empty, .relationship-kc i.ion-ios-close-empty, .relationship-fc i.ion-ios-close-empty{    
+    color: #CCC;
 }
-.relationship-met i{
+.relationship-met i, .relationship-kc i, .relationship-fc i{
     font-size: 3em;
 }
-.relationship-kc i{
-    font-size: 3em;
+.relationship-kc img{
+    width: 50px;
 }
-.relationship-fc i{
-    font-size: 3em;
-}
+
 .trash{
     transition: all .3s ease-in;
 }
@@ -1338,7 +1331,7 @@ p.job{
     position: relative; 
 }
 #basic-infos{
-    padding: 0px 15px 0px 15px;
+    padding: 5px 15px 0px 15px;
     height: 250px;
     border-bottom: 1px solid #ccc;
     background-color: #fff;   
@@ -1373,8 +1366,9 @@ p.job{
 }*/
 
 p#name{
-    font-size: 3.5em;
-    font-family: "open_sanslight", sans-serif;
+    font-size: 3.3em;
+    /*font-family: "open_sanslight", sans-serif;*/
+    font-family: "sinkin_sans100_thin", sans-serif;
     color: #666;
     
     transition: all .3s ease-in;
@@ -1589,11 +1583,18 @@ a.edit-relationship:hover .mask-relationship{
 #start-date, #meetingcount, #blank1, #blank2{
     border-bottom: 1px solid #ccc;
 }
-#met i{
+#met i.ion-wineglass{
     color: #F72EB2;
 }
-#kc i{
+#met i.ion-ios-close-empty, #kc i.ion-ios-close-empty, #fc i.ion-ios-close-empty{
+    color: #CCC;
+}
+/*#kc i{
     color: #F47363;
+}*/
+#kc img{
+    width: 70px;
+    margin-top: 10px;
 }
 #fc i{
     color: #771656;
@@ -2259,8 +2260,15 @@ form[name="appbundle_rating"] > div > label {
 
 /********************************* REDFLAGS **************************************/
 
+#container-redflag-edit .page-nav p{
+    text-align: center;
+    color: #F47363;
+    font-family: "open_sanslight", sans-serif;
+    font-size: 1.5em;
+}
+
 form[name="appbundle_redflag"] > div {
-    margin-bottom: 10px;
+    margin-bottom: 35px;
 }
 form[name="appbundle_redflag"] > div > label {
     width: 280px;
@@ -2271,6 +2279,15 @@ form[name="appbundle_redflag"] > div > label {
 .redflag{
     display: inline-block;
     vertical-align: middle;
+}
+
+/* BAR RATING JS PLUGIN CSS */
+.br-wrapper{
+    display: inline-block;
+    vertical-align: middle;
+}
+.br-theme-bars-movie .br-widget .br-current-rating{
+    padding: 0;
 }
 
 
@@ -2312,7 +2329,7 @@ footer{
     height: 65px;
     text-align: center;
     color: #FFF;
-    background-color: #F47363;
+    background-color: #363839;
     padding: 23px 0px;
     
     position: absolute;
