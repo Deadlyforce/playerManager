@@ -17,6 +17,12 @@
 {#                <canvas id="myChart" width="800" height="800"></canvas>#}
             </div>
         </div>
+        <div class="row" id="stats-relationship-types">
+            <h2>Your types of relationship</h2>
+            <div>
+                <canvas id="relationshipTypesChart" width="800" height="300"></canvas>
+            </div>
+        </div>
     </div>
    
     {% block javascripts %}
@@ -28,11 +34,15 @@
     
     <script type="text/javascript">
         $(document).ready(function(){
+            Chart.defaults.global.responsive = true;
+            
             var ctx1 = $("#flakeChart");
-            var ctx2 = $("#sourceChart");
+            var ctx2 = $("#sourceChart");            
+            var ctx3 = $("#relationshipTypesChart");
             
             var flakeStats = Array({{ flakeStats }});              
             var sourceStats = Array({{ sourceStats }});              
+            var relationshipTypes = Array({{ relationshipTypes }});              
             
             var flakeChart = new Chart(ctx1, {
                 type: 'doughnut',                
@@ -61,12 +71,12 @@
                         label: 'Where do you meet people',
                         data: sourceStats,
                         backgroundColor: [
-                            "#FF6384",
-                            "#36A2EB"                            
+                            "#649FB2",
+                            "#A9E9FF"                            
                         ],
                         hoverBackgroundColor: [
-                            "#FF6384",
-                            "#36A2EB"                            
+                            "#649FB2",
+                            "#A9E9FF"                            
                         ]
                     }]
                 },
@@ -75,6 +85,24 @@
                 }
             });
           
+            // RELATIONSHIP TYPES
+            var data = {
+                labels: ["Chatting", "One Night Stand", "Fuck Friend", "Dating", "Open Relationship", "Monogamous Relationship"],
+                datasets: [{
+                    label: "Relationship types",
+                    backgroundColor: "rgba(255,99,132,0.2)",
+                    borderColor: "rgba(255,99,132,1)",
+                    borderWidth: 1,
+                    hoverBackgroundColor: "rgba(255,99,132,0.4)",
+                    hoverBorderColor: "rgba(255,99,132,1)",
+                    data: relationshipTypes
+                }]
+            };
+            
+            var relationshipTypesChart = new Chart(ctx3, {
+                type: 'bar',
+                data: data
+            });
         });        
     </script>
 {% endblock %}

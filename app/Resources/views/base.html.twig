@@ -106,25 +106,14 @@
         
         $(document).ready(function(){
              
-{#            var loginImage1 = "{{ asset('bundles/app/images/base/manager_11b.jpg') }}"; #}
+            var loginImage1 = "{{ asset('bundles/app/images/base/manager_11b.jpg') }}"; 
             var loginImage2 = "{{ asset('bundles/app/images/base/manager_13.jpg') }}"; 
-            var loginImage4 = "{{ asset('bundles/app/images/base/manager_14.jpg') }}";
-            var loginImage5 = "{{ asset('bundles/app/images/base/manager_36b.jpg') }}";
-            var loginImage6 = "{{ asset('bundles/app/images/base/manager_42.jpg') }}";
+            var loginImage3 = "{{ asset('bundles/app/images/base/manager_14.jpg') }}";
+            var loginImage4 = "{{ asset('bundles/app/images/base/manager_36b.jpg') }}";
+            var loginImage5 = "{{ asset('bundles/app/images/base/manager_42.jpg') }}";
+            var loginImage6 = "{{ asset('bundles/app/images/base/manager_35.jpg') }}";
             
-            $.backstretch([loginImage2, loginImage4, loginImage5, loginImage6], {duration: 6000, fade: 3000});
-            
-            // Menu animation
-            {#$(".navbar-brand").animate({
-                'height': '0px'
-            }, 800);
-            $(".navbar-nav > li > a").animate({
-                'height': '0px'
-            }, 800);
-            
-            $(".page-title-underline").animate({
-                'width': '500px'
-            }, 1000);#}
+            $.backstretch([loginImage1, loginImage2, loginImage3, loginImage4, loginImage5, loginImage6], {duration: 6000, fade: 3000});
             
             // Active link in menu *********************************************
             // Page name must match EXACTLY with menu link name !!

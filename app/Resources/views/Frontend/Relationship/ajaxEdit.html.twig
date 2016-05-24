@@ -147,7 +147,7 @@
             $( "#appbundle_relationship_meetingCount" ).val( $( "#slider-meetingCount" ).slider( "value" ) );
             
             // Ajax : submit form **********************************************
-            $("form[name='appbundle_relationship']").on("click", "#appbundle_relationship_submit", function(event){
+            {#$("form[name='appbundle_relationship']").on("click", "#appbundle_relationship_submit", function(event){
                 event.preventDefault();
                 
                 var id = "{{ relationship.id }}";
@@ -186,7 +186,7 @@
                         $("#confirm-panel").removeClass();
                     });
                 });                
-            }
+            }#}
             
         });    
     </script>

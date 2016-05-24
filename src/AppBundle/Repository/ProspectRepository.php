@@ -94,6 +94,7 @@ class ProspectRepository extends EntityRepository
         
         return $qb->getSingleScalarResult();
     }
+    
     /**
      * Returns flakes Off for that user.
      * 
@@ -133,6 +134,7 @@ class ProspectRepository extends EntityRepository
         
         return $qb->getSingleScalarResult();
     }
+    
     /**
      * Returns sources (IRL) for that user.
      * 
@@ -153,5 +155,84 @@ class ProspectRepository extends EntityRepository
         return $qb->getSingleScalarResult();
     }
     
+    // RELATIONSHIP TYPES COUNT ************************************************
     
+    public function getUserTotalChatting($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT COUNT(p)
+            FROM AppBundle:Prospect p LEFT JOIN p.relationship r LEFT JOIN r.relationshipRank rr
+            WHERE p.user = :user
+            AND rr.id = 1
+        ')
+        ->setParameter('user', $user)
+        ;
+        
+        return $qb->getSingleScalarResult();
+    }
+    public function getUserTotalONS($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT COUNT(p)
+            FROM AppBundle:Prospect p LEFT JOIN p.relationship r LEFT JOIN r.relationshipRank rr
+            WHERE p.user = :user
+            AND rr.id = 2
+        ')
+        ->setParameter('user', $user)
+        ;
+        
+        return $qb->getSingleScalarResult();
+    }
+    public function getUserTotalFuckFriend($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT COUNT(p)
+            FROM AppBundle:Prospect p LEFT JOIN p.relationship r LEFT JOIN r.relationshipRank rr
+            WHERE p.user = :user
+            AND rr.id = 3
+        ')
+        ->setParameter('user', $user)
+        ;
+        
+        return $qb->getSingleScalarResult();
+    }
+    public function getUserTotalDating($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT COUNT(p)
+            FROM AppBundle:Prospect p LEFT JOIN p.relationship r LEFT JOIN r.relationshipRank rr
+            WHERE p.user = :user
+            AND rr.id = 4
+        ')
+        ->setParameter('user', $user)
+        ;
+        
+        return $qb->getSingleScalarResult();
+    }
+    public function getUserTotalOpenRelationship($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT COUNT(p)
+            FROM AppBundle:Prospect p LEFT JOIN p.relationship r LEFT JOIN r.relationshipRank rr
+            WHERE p.user = :user
+            AND rr.id = 5
+        ')
+        ->setParameter('user', $user)
+        ;
+        
+        return $qb->getSingleScalarResult();
+    }
+    public function getUserTotalMonogamousRelationship($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT COUNT(p)
+            FROM AppBundle:Prospect p LEFT JOIN p.relationship r LEFT JOIN r.relationshipRank rr
+            WHERE p.user = :user
+            AND rr.id = 6
+        ')
+        ->setParameter('user', $user)
+        ;
+        
+        return $qb->getSingleScalarResult();
+    }
 }

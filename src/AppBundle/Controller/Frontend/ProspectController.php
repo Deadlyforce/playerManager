@@ -412,10 +412,7 @@ class ProspectController extends Controller
      * @Template(":Frontend/Prospect:dashboard.html.twig")
      */
     public function dashboardAction($user_id)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }        
+    {        
         $loggedUser = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
@@ -433,10 +430,20 @@ class ProspectController extends Controller
             $sourcesOnline = $em->getRepository('AppBundle:Prospect')->getUserSourcesOnline($user);   
             $sourcesIRL = $em->getRepository('AppBundle:Prospect')->getUserSourcesIRL($user);   
             $sourceStats = "$sourcesOnline, $sourcesIRL";
+            
+            // RELATIONSHIP TYPES
+            $chatting = $em->getRepository('AppBundle:Prospect')->getUserTotalChatting($user);
+            $ons = $em->getRepository('AppBundle:Prospect')->getUserTotalONS($user);
+            $ff = $em->getRepository('AppBundle:Prospect')->getUserTotalFuckFriend($user);
+            $dating = $em->getRepository('AppBundle:Prospect')->getUserTotalDating($user);
+            $open = $em->getRepository('AppBundle:Prospect')->getUserTotalOpenRelationship($user);
+            $monogamous = $em->getRepository('AppBundle:Prospect')->getUserTotalMonogamousRelationship($user);
+            $relationshipTypes = "$chatting, $ons, $ff, $dating, $open, $monogamous";
 
             return array(
                 'flakeStats' => $flakeStats,
-                'sourceStats' => $sourceStats
+                'sourceStats' => $sourceStats,
+                'relationshipTypes' => $relationshipTypes
             );
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');

@@ -33,7 +33,8 @@ class RelationshipController extends Controller
         
         if ($user === $relationship->getProspect()->getUser()) {        
 
-            $edit_form = $this->createForm('AppBundle\Form\RelationshipType', $relationship, array(
+            $edit_form = $this->createForm('AppBundle\Form\RelationshipType', $relationship, array( 
+                'action' => $this->generateUrl('relationship_edit', array('id' => $id)),
                 'method' => 'PUT'
             ));
             $delete_form = $this->createDeleteForm($id);
@@ -77,36 +78,35 @@ class RelationshipController extends Controller
      * Displays a form to edit an existing Relationship entity.
      *
      * @Route("/{id}/edit", name="relationship_edit")
-     * @Method("GET")
+     * @Method({"GET","PUT"})
      * @Template(":Frontend/Relationship:edit.html.twig")
      */
-//    public function editAction($id)
-//    {        
-//        $user = $this->get('security.token_storage')->getToken()->getUser();
-//        
-//        $em = $this->getDoctrine()->getManager();
-//        $relationship = $em->getRepository('AppBundle:Relationship')->find($id);
-//
-//        if (!$relationship) {
-//            throw $this->createNotFoundException('Unable to find Relationship entity.');
-//        }        
-//                   
-//        if($relationship->getProspect()->getUser() === $user){
-//            $editForm = $this->createForm(RelationshipType::class, $relationship, array(
-//                'action' => $this->generateUrl('relationship_update', array('id' => $relationship->getId())),
-//                'method' => 'PUT'
-//            ));
-//            $deleteForm = $this->createDeleteForm($id);
-//
-//            return array(
-//                'relationship' => $relationship,
-//                'edit_form' => $editForm->createView(),
-//                'delete_form' => $deleteForm->createView(),
-//            );
-//        } else {
-//            throw $this->createAccessDeniedException('You cannot access this page!');
-//        }       
-//    }
+    public function editAction(Request $request, $id)
+    {        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $em = $this->getDoctrine()->getManager();
+        $relationship = $em->getRepository('AppBundle:Relationship')->find($id);
+
+        if (!$relationship) {
+            throw $this->createNotFoundException('Unable to find Relationship entity.');
+        }        
+                   
+        if($relationship->getProspect()->getUser() === $user){
+            $editForm = $this->createForm(RelationshipType::class, $relationship, array(                
+                'method' => 'PUT'
+            ));
+            $editForm->handleRequest($request);
+
+            if ($editForm->isSubmitted() && $editForm->isValid()) {
+                $em->flush();
+
+                return $this->redirect($this->generateUrl('prospect_show', array('id' => $relationship->getProspect()->getId())));
+            }            
+        } else {
+            throw $this->createAccessDeniedException('You cannot access this page!');
+        }       
+    }
     
     /**
      * Edits an existing Relationship entity.

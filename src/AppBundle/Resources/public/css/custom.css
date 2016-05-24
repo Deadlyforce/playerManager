@@ -760,24 +760,9 @@ td.actions a{
 #home-start h1{
     font-family: "sinkin_sans100_thin", sans-serif;
     color: #fff;
-    font-size: 4em;
+    font-size: 4.3em;
 }
 
-/*.home-carousel img{
-    width: 100%;
-}
-.home-carousel h1{
-    position: absolute;    
-    color: #f0f0f0;
-    font-family: "ralewaythin",sans-serif;
-    font-size: 5em;    
-    top: 16%;
-    left: 20%;
-    text-shadow: 1px 1px 2px rgb(85, 85, 85);
-    line-height: 1.3em;    
-    
-    width: 100%; 
-}*/
 a#btn-first-contact {
     color: #fff;
     position: absolute;
@@ -801,75 +786,6 @@ a#btn-first-contact:hover {
     border-top: 1px solid transparent;
     border-bottom: 1px solid transparent;
 }
-
-/*.slick-prev, .slick-next { 
-    position: absolute; 
-    height: 690px;  
-    font-size: 0; 
-    cursor: pointer; 
-    background: transparent;  
-    top: 0;  
-    padding: 0; 
-    border: none;
-}
-.slick-prev:hover:before, .slick-prev:focus:before, .slick-next:hover:before, .slick-next:focus:before {
-    color: rgba(255,255,255, 1);
-}
-.slick-prev:before, .slick-next:before { 
-    font-family: "fontello"; 
-    font-size: 60px;  
-    color: rgba(255,255,255, 0.7);    
-    font-style: normal;
-    display: inline-block;
-    text-decoration: none;
-    width: 1em;
-     For safety - reset parent styles, that can break glyph codes
-    font-variant: normal;
-    text-transform: none;
-    
-    -webkit-font-smoothing: antialiased; 
-    -moz-osx-font-smoothing: grayscale; 
-}
-.slick-prev{  
-    z-index: 2;
-}
-.slick-next{ 
-    right: 0px;  
-}
-.slick-prev:before{ 
-    content: "\e800";  
-}
-.slick-next:before{ 
-    content: "\e801"; 
-}*/
-
-/*************** DOTS *****************/
-/*ul.slick-dots{
-    display: block;
-    text-align: center;  
-    padding-left: 0px;
-    
-    position: absolute;
-    left: 0;
-    right: 0;    
-    z-index: 2;
-}
-ul.slick-dots > li{
-    list-style: none;
-    display: inline-block;
-    margin-right: 10px;
-}
-ul.slick-dots > li > button{
-    width: 15px;
-    height: 15px;
-    border-radius: 10px;
-    border: 2px solid #f47363;
-    font-size: 0px;
-    background-color: transparent;
-}
-ul.slick-dots > li > button:hover{
-    background-color: #f47363;
-}*/
 
 
 /*************  FEATURES ****************/
@@ -2346,8 +2262,13 @@ form[name="appbundle_redflag"] > div > label {
 
 #container-dashboard h2{
     font-size: 1.3em;
-    font-family: "ralewaylight",sans-serif;
+    font-family: "open_sanslight",sans-serif;
     text-align: center;
+}
+
+#stats-relationship-types{
+    margin-top: 50px;
+    padding: 0px 20px;
 }
 
 /************************* FOOTER *****************************/
