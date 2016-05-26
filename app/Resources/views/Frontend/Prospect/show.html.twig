@@ -195,17 +195,16 @@
                                 <p><i class="icon ion-calendar"></i> Start Date</p>
                             </div>
                         </div>
-                        <div class="col-md-6 smalltile" id="meetingcount">
+                        <div class="col-md-6 smalltile">
                             <div class="tilecontent">
-                                <p class="smalltile-subtext"><span>0</span></p>
-                                <p>Meeting count</p>                           
+                                                           
                             </div>
                         </div>
                     </div>
                 </div>
                             
                 <div class="col-md-4 smalltile-container-right">
-                    <div class="row  row-tiles">
+                    <div class="row row-tiles">
                         <div class="col-md-6 smalltile" id="fc">
                             <div class="tilecontent">
                                 {% if  prospect.relationship.fc %}
@@ -227,25 +226,55 @@
                             </div>
                         </div>
                     </div>            
-                    <div class="row  row-tiles">
+                    <div class="row row-tiles">
                         <div class="col-md-6 smalltile" id="blank1">
-{#                            <p class="smalltile-subtext"><span>0</span></p>#}
-{#                            <p>Meeting count</p>                           #}
+
                         </div>
                         <div class="col-md-6 smalltile" id="blank2">
-{#                            <p class="smalltile-subtext"><span>0</span></p>#}
-{#                            <p>Meeting count</p>                           #}
+
                         </div>
                     </div>            
                 </div>            
             </div>                       
                             
-            <div class="row row-bigtiles">                
-                <div class="col-md-4 bigtile-left bigtile">
-                    
-                </div>
-                <div class="col-md-4 bigtile-middle bigtile">
-
+            <div class="row row-bigtiles">  
+                <a id="manage-encounters" href="{{ path('encounter', {'prospect_id': prospect.id }) }}" title="Manage encounters">
+                    <div class="col-md-4" id="bigtile-encounter">
+                        <div class="tilecontent">
+                            <div id="bigtile-encounter-container">
+                                <p class="bigtile-value">Encounters</p>
+                                <p class="bigtile-title"></p>
+                            </div>
+                        </div>
+                        <div id="mask-encounter"><div class="tilecontent">Manage encounters</div></div>
+                    </div>
+                </a>
+                <div class="col-md-4 smalltile-container-middle">
+                    <div class="row row-tiles">
+                        <div class="col-md-6 smalltile">
+                            <div class="tilecontent">
+                                
+                            </div>
+                        </div>
+                        <div class="col-md-6  smalltile">
+                            <div class="tilecontent">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-tiles">
+                        <div class="col-md-6 smalltile" id="meetingcount">                            
+                            <div class="tilecontent">
+                                <p class="smalltile-subtext"><span>{{ encounterCount }}</span></p>
+                                <p>Encounters count</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 smalltile">
+                            <div class="tilecontent">
+                                                          
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-4 bigtile">
                     <p class="bigtile-title"></p>
@@ -281,8 +310,8 @@
             
             var age = "{{ prospect.age }}";
             $("#age span").animateNumber({ number: age }, 3000);
-            var count = "{{ prospect.relationship.meetingCount }}";
-            $("#meetingcount span").animateNumber({ number: count }, 2000);
+            var encounterCount = "{{ encounterCount }}";
+            $("#meetingcount span").animateNumber({ number: encounterCount }, 2000);
             
            
             $("#ratingcircle").percircle({});
@@ -314,7 +343,7 @@
             });
             
             // Ajax: get form new encounter ************************************
-            $(".show-actions").on("click", "#new-encounter", function(event){
+            {#$(".show-actions").on("click", "#new-encounter", function(event){
                 event.preventDefault();                
 
                 $(".loader_standard").show();
@@ -329,7 +358,7 @@
                     $(".modal-title").text("New encounter");
                     $('.modal-full').modal('show');
                 });
-            });
+            });#}
             
             // Ajax: get form edit relationship ********************************
             $(".row-bigtiles").on("click", ".edit-relationship", function(event){

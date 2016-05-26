@@ -39,7 +39,7 @@
                             {{ form_errors(edit_form.flake) }}
                         </div>
                     </div>
-                    <div>
+{#                    <div>
                         <div id="meeting-count-input">
                         {{ form_label(edit_form.meetingCount, 'Meeting count', {'label_attr': {'title': 'How many dates so far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}     
                         {{ form_widget(edit_form.meetingCount) }}
@@ -48,7 +48,7 @@
                             <label></label><div id="slider-meetingCount"></div>
                         </div>
                         {{ form_errors(edit_form.meetingCount) }}                        
-                    </div>
+                    </div>#}
                     <div>
                         {{ form_label(edit_form.numclosed, 'Phone number', {'label_attr': {'title': 'Did you get a phone number ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
                         <div class="relationship_row row-yes-no">
@@ -132,7 +132,7 @@
                 }
             });
             
-            $( "#slider-meetingCount" ).slider({
+{#            $( "#slider-meetingCount" ).slider({
                 range: "max",
                 orientation: "horizontal",
                 min: 0,
@@ -142,9 +142,9 @@
                 slide: function( event, ui ) {
                   $( "#appbundle_relationship_meetingCount" ).val( ui.value );
                 }
-            });
+            });#}
             
-            $( "#appbundle_relationship_meetingCount" ).val( $( "#slider-meetingCount" ).slider( "value" ) );
+{#            $( "#appbundle_relationship_meetingCount" ).val( $( "#slider-meetingCount" ).slider( "value" ) );#}
             
             // Ajax : submit form **********************************************
             {#$("form[name='appbundle_relationship']").on("click", "#appbundle_relationship_submit", function(event){

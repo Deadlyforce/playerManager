@@ -4,8 +4,7 @@
 {% block content %}    
     <div class="container">
         <section class="page-title">
-            <h1>Encounters</h1> 
-            <h2>Your last dates...add some more !</h2>
+            <h1>Encounters with {{ prospect.firstname }}</h1> 
         </section>
         <div class="page-title-underline"></div> 
 
@@ -29,14 +28,15 @@
                             {% else %}
                                 {{ encounter.date|date("Y-m-d") }} at {{ encounter.date|date("H:i") }}
                             {% endif %}
+                            <span class="pull-right" title="Duration">{{ encounter.duration }} h</span>
                         </div>
                         <div class="encounter-details">
-                            <div><span>Place: </span>{{ encounter.place }}</div>
-                            <div><span>Duration: </span>{{ encounter.duration }} h</div>
-                            <div><span>Expenses: </span>{{ encounter.expenses }}{% if app.request.locale in localesEuro %} €{% else %} ${% endif %}</div>
-                            <div><span>Changed venue: </span>{% if encounter.venueChange == 1 %}Yes{% else %}No{% endif %}</div>
+                            <div class="place">{{ encounter.place }}</div>
+                            
+                            <div><span>Expenses </span>{{ encounter.expenses }}{% if app.request.locale in localesEuro %} €{% else %} ${% endif %}</div>
+                            <div><span>Changed venue </span>{% if encounter.venueChange == 1 %}Yes{% else %}No{% endif %}</div>
                             <div>
-                                <div class="venues-list">Venues list: </div>
+                                <div class="venues-list">Venues list </div>
                                 {% if encounter.venuesList %}
                                     {{ encounter.venuesList }}
                                 {% endif %}

@@ -16,7 +16,6 @@ class Relationship
 {
     public function __construct() 
     {
-        $this->meetingCount = 0;
         $this->startDate = new \DateTime();
     }
     
@@ -65,20 +64,6 @@ class Relationship
      * @ORM\Column(name="meeting", type="boolean")
      */
     private $meeting;
-
-    /**
-     * @var integer
-     *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 50,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * 
-     * @ORM\Column(name="meeting_count", type="integer", nullable=false)
-     */
-    private $meetingCount;
 
     /**
      * @var boolean
@@ -202,29 +187,6 @@ class Relationship
         return $this->meeting;
     }
     
-    /**
-     * Set meetingCount
-     *
-     * @param integer $meetingCount
-     * @return Relationship
-     */
-    public function setMeetingCount($meetingCount)
-    {
-        $this->meetingCount = $meetingCount;
-
-        return $this;
-    }
-
-    /**
-     * Get meetingCount
-     *
-     * @return integer 
-     */
-    public function getMeetingCount()
-    {
-        return $this->meetingCount;
-    }
-
     /**
      * Set numclosed
      *

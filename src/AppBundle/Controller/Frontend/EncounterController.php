@@ -101,11 +101,7 @@ class EncounterController extends Controller
      * @Template(":Frontend/Encounter:index.html.twig")
      */
     public function indexAction($prospect_id)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
+    {        
         $em = $this->getDoctrine()->getManager();
         $prospect = $em->getRepository("AppBundle:Prospect")->find($prospect_id);
         

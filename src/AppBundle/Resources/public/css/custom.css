@@ -1351,7 +1351,7 @@ p#adress{
     vertical-align: middle;
 }
 @media screen and (max-width: 1140px) {
-    .bigtile, .bigtile-relationship, .smalltile, .bigtile-rating{
+    .bigtile, .bigtile-relationship, #bigtile-encounter, .smalltile, .bigtile-rating{
         width: 100%; /* Compensate for table behavior */
     }
 }
@@ -1422,12 +1422,6 @@ a#rating-link:hover .mask-rating, a#redflag-link:hover .mask-redflag{
 
 /************** Second row *****************/
 
-a.edit-relationship{
-    
-}
-/*a.edit-relationship:hover .bigtile-title{
-    color: #fff;
-}*/
 a.edit-relationship:hover .bigtile-relationship{
     background-color: transparent;
 }
@@ -1457,7 +1451,7 @@ a.edit-relationship:hover .mask-relationship{
     font-family: "open_sanslight", sans-serif;
     font-size: 2.2em;
 }
-.mask-relationship{
+.mask-relationship, #mask-encounter{
     background-color: rgba(0,0,0,0.2);
     position: absolute;
     text-align: center;
@@ -1561,6 +1555,29 @@ p#start-date-val{
     padding: 10px 0px 5px 0px;
     font-family: "open_sanslight", sans-serif;
 }
+
+/************** Encounter row *****************/
+
+#bigtile-encounter{    
+    padding: 0px;
+    height: 296.667px;     
+    background-color: #fff;
+    text-align: center;    
+    display: table;
+    
+    transition: all .3s ease-in;
+}
+
+a#manage-encounters:hover #bigtile-encounter{
+    background-color: transparent;
+}
+a#manage-encounters:hover #bigtile-encounter-container{
+    opacity: 0;
+}
+a#manage-encounters:hover #mask-encounter{
+    opacity: 1;
+}
+
 
 
 /************************* FORM NEW PROSPECT *****************************/
@@ -2031,22 +2048,32 @@ input#appbundle_contact_us_subject{
 /***  INDEX  ***/
 
 .encounter-box{
-    box-shadow: 0px 0px 4px 4px rgba(221, 221, 221,0.5);
-    border: 1px solid #ddd;    
+    box-shadow: 0px 0px 2px 2px rgba(0, 0, 0,0.1); 
+    background-color: #fff;
 }
-.encounter-date-details{
-    box-shadow: 0px 6px 6px 0px #ccc;
+.encounter-date-details .place{
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: "open_sanslight", sans-serif;
+    font-size: 1.3em;
 }
 .encounter-date{    
-    text-align: center;
-    padding: 15px 0px;
+    padding: 15px 10px 15px 10px;
     font-size: 1.5em;
     background-color: #F47363;
     color: #fff;
+    font-family: "open_sanslight", sans-serif;
+}
+.encounter-date span{
+    background-color: rgb(255, 255, 255);
+    color: rgb(102, 102, 102);
+    padding: 8px;
+    margin-top: -8px;
+    border-radius: 23px;
 }
 .encounter-details{
     padding: 25px 10px 30px 15px;
-    font-family: "ralewayregular", sans-serif;
+    font-family: "open_sansregular", sans-serif;
     font-size: 1.2em;
 }
 .encounter-details > div{

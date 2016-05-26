@@ -38,13 +38,6 @@ class RelationshipType extends AbstractType
             ->add('meeting', CheckboxType::class, array(                
                 'required' => false
             ))
-            ->add('meetingCount', IntegerType::class, array(
-                'required' => false,
-                'attr' => array(
-                    'min' => 0,
-                    'max' => 50
-                )
-            ))
             ->add('numclosed', CheckboxType::class, array(
                 'required' => false               
             ))

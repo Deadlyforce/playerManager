@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\Prospect;
+
 /**
  * EncounterRepository
  *
@@ -10,4 +12,23 @@ namespace AppBundle\Repository;
  */
 class EncounterRepository extends \Doctrine\ORM\EntityRepository
 {
+    /**
+     * Count all encounters with a prospect
+     * 
+     * @param Prospect $prospect
+     * @return int
+     */
+    public function getEncounterCount(Prospect $prospect)
+    {
+        $query = $this->_em->createQuery('
+            SELECT COUNT(e)
+            FROM AppBundle:Encounter e
+            WHERE e.prospect = :prospect
+        ')
+         ->setParameter('prospect', $prospect)
+        ;
+        
+        return $query->getSingleScalarResult();
+    }
+    
 }

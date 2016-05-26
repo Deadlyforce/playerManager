@@ -246,11 +246,7 @@ class ProspectController extends Controller
      * @Template(":Frontend/Prospect:show.html.twig")
      */
     public function showAction($id)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
+    {        
         $user = $this->get('security.token_storage')->getToken()->getUser();
                        
         $em = $this->getDoctrine()->getManager();
@@ -261,11 +257,12 @@ class ProspectController extends Controller
         } 
         
         if($prospect->getUser() === $user){
-
+            $encounterCount = $em->getRepository('AppBundle:Encounter')->getEncounterCount($prospect);
             $deleteForm = $this->createDeleteForm($id);
 
             return array(
                 'prospect' => $prospect,
+                'encounterCount' => $encounterCount,
                 'delete_form' => $deleteForm->createView(),
             );
         } else {
