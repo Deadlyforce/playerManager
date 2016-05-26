@@ -2031,8 +2031,9 @@ form[name="appbundle_contact_us"] > div{
     margin-bottom: 10px;
 }
 
-input#appbundle_contact_us_name, input#appbundle_contact_us_email, input#appbundle_contact_us_captcha{ 
-    max-width: 300px;
+input#appbundle_contact_us_name, input#appbundle_contact_us_email{ 
+    /*max-width: 300px;*/
+    width: 100%;
 }
 input#appbundle_contact_us_subject{
     width: 100%;
