@@ -1,7 +1,7 @@
 app:
     login:
         title: Mnaomai
-        subtitle: Remember your dates
+        subtitle: Never forget your dates
         new: New to the site?
 
     register:

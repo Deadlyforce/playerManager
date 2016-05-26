@@ -129,17 +129,17 @@
                     </div>
                 </a>
                 <a id="redflag-link" data-id="{{ prospect.redflag.id }}" href="#">
-                <div class="col-md-4 bigtile-redflag border-right">                    
-                    <div class="tilecontent">
-                        <div class="redflag-container">
-                            <div class="bigtile-title">
-                                Red flags <div id="redflag-avg" title="Average red flags<br>for this contact" data-redflag="{{ prospect.redflag.average }}"></div>
+                    <div class="col-md-4 bigtile-redflag border-right">                    
+                        <div class="tilecontent">
+                            <div class="redflag-container">
+                                <div class="bigtile-title">
+                                    Red flags <div id="redflag-avg" title="Average red flags<br>for this contact" data-redflag="{{ prospect.redflag.average }}"></div>
+                                </div>
+                                <div id="redflagcircle" data-percent="{{ prospect.redflag.percentAverage }}" class="orange"></div>
                             </div>
-                            <div id="redflagcircle" data-percent="{{ prospect.redflag.percentAverage }}" class="orange"></div>
                         </div>
+                        <div class="mask-redflag"><div class="tilecontent">Edit red flags</div></div>                        
                     </div>
-                    <div class="mask-redflag"><div class="tilecontent">Edit red flags</div></div>                        
-                </div>
                 </a>
                 <div class="col-md-4 bigtile">
                     <div class="tilecontent">
@@ -401,7 +401,7 @@
             });
             
             // Ajax: get form edit redflags *************************************
-            $(".container").on("click", ".edit-redflag, #redflag-link", function(event){
+            $(".container").on("click", "#redflag-link", function(event){
                 event.preventDefault();               
                 
                 $(".loader_standard").show();
