@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use AppBundle\Entity\Encounter;
 use AppBundle\Form\EncounterType;
+use Symfony\Component\Security\Csrf\CsrfToken;
 
 /**
  * Encounter controller.
@@ -128,10 +129,7 @@ class EncounterController extends Controller
      * @Method({"GET", "POST"})
      */
     public function newAction(Request $request, $prospect_id)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }        
+    {       
         $user = $this->get('security.token_storage')->getToken()->getUser();
 
         $em = $this->getDoctrine()->getManager();
@@ -145,10 +143,16 @@ class EncounterController extends Controller
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                $encounter->setProspect($prospect);
+                
+                $encounter->setProspect($prospect);               
                 $em->persist($encounter);
                 $em->flush();
-
+                
+                $count = $em->getRepository('AppBundle:Encounter')->getEncounterCount($prospect);
+                $prospect->setEncounterCount($count);
+                $em->persist($prospect);
+                $em->flush();
+                
                 return $this->redirectToRoute('encounter', array('prospect_id' => $prospect_id));
             }
 
@@ -324,5 +328,47 @@ class EncounterController extends Controller
             ->add('submit', SubmitType::class, array('label' => 'Delete'))
             ->getForm()
         ;
+    }
+    
+    /**
+     * Deletes ane encounter
+     * 
+     * @Route("/{id}/ajax_delete", name="ajax_delete_encounter", options={"expose"=true})
+     * @Method({"POST"})
+     * @Template(":ajax.html.twig")
+     */
+    public function ajax_deleteAction(Request $request, $id)
+    {       
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+        
+        $data = $request->request->all();
+        $token = $data['csrfDelete'];
+        
+        $csrf = $this->get('security.csrf.token_manager');
+           
+        if ($csrf->isTokenValid(new CsrfToken('delete', $token))) {
+            
+            $em = $this->getDoctrine()->getManager();
+            $encounter = $em->getRepository('AppBundle:Encounter')->find($id);           
+            $prospect = $encounter->getProspect();
+            
+            if($prospect->getUser() === $user){
+                $em->remove($encounter);
+                $em->flush();
+                
+                $count = $prospect->getEncounterCount();
+                $prospect->setEncounterCount($count-1);
+                $em->persist($prospect);
+                $em->flush();
+       
+                $response = json_encode(array("id" => $id));
+
+                return new Response($response);
+            } else {
+                throw $this->createAccessDeniedException('You cannot access this page!');
+            }
+        } else {
+            throw $this->createAccessDeniedException('CSRF token is invalid.');
+        }      
     }
 }

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="encounters")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\EncounterRepository")
+ * @ORM\HasLifecycleCallbacks
  */
 class Encounter
 {
@@ -246,5 +247,6 @@ class Encounter
     {
         return $this->prospect;
     }
+    
 }
 

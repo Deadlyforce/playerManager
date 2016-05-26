@@ -502,11 +502,6 @@ class RedFlag
     {
         $total = 10;
         $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->checkphone, $this->boring, $this->selfAbsorbed, $this->cheapdate, $this->snore,  $this->hygiene);
-//        foreach($attributes as $attribute){
-//            if ($attribute === null) {
-//                $total = $total - 1;
-//            }
-//        }
    
         $avg = (array_sum($attributes))/$total;
         $whole = floor($avg);
@@ -529,11 +524,6 @@ class RedFlag
     {
         $total = 10;
         $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->checkphone, $this->boring, $this->selfAbsorbed, $this->cheapdate, $this->snore,  $this->hygiene);
-//        foreach($attributes as $attribute){
-//            if ($attribute === null) {
-//                $total = $total - 1;
-//            }
-//        }
         
         $avg = (array_sum($attributes))/$total;
         $percentAvg = round($avg, 1) * 20;

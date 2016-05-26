@@ -193,6 +193,13 @@ class Prospect
      */
     private $photos;
     
+    /**
+     * @var integer 
+     * 
+     * @ORM\Column(name="encounter_count", type="integer", nullable=true)
+     */
+    private $encounterCount;
+    
     
     // GETTERS AND SETTERS *****************************************************
 
@@ -758,21 +765,46 @@ class Prospect
     * 
     * @return User
     */
-   public function getUser()
-   {
-        return $this->user;
-   }
+    public function getUser()
+    {
+         return $this->user;
+    }
    
-   /**
-    * Set User
-    * 
-    * @param User $user
-    * @return Prospect
-    */
-   public function setUser($user)
-   {
-        $this->user = $user;
-        
+    /**
+     * Set User
+     * 
+     * @param User $user
+     * @return Prospect
+     */
+    public function setUser($user)
+    {
+         $this->user = $user;
+
+         return $this;
+    }
+   
+    /**
+     * Set encounterCount
+     *
+     * @param integer $encounterCount
+     *
+     * @return EncounterCount
+     */
+    public function setEncounterCount($encounterCount)
+    {
+        $this->encounterCount = $encounterCount;
+
         return $this;
-   }
+    }
+
+    /**
+     * Get encounterCount
+     *
+     * @return integer
+     */
+    public function getEncounterCount()
+    {
+        return $this->encounterCount;
+    }   
+
 }

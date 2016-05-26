@@ -265,7 +265,7 @@
                     <div class="row row-tiles">
                         <div class="col-md-6 smalltile" id="meetingcount">                            
                             <div class="tilecontent">
-                                <p class="smalltile-subtext"><span>{{ encounterCount }}</span></p>
+                                <p class="smalltile-subtext"><span>0</span></p>
                                 <p>Encounters count</p>
                             </div>
                         </div>
@@ -310,9 +310,11 @@
             
             var age = "{{ prospect.age }}";
             $("#age span").animateNumber({ number: age }, 3000);
-            var encounterCount = "{{ encounterCount }}";
-            $("#meetingcount span").animateNumber({ number: encounterCount }, 2000);
             
+            if (typeof "{{ prospect.encounterCount }}" !== 'undefined') {
+                var encounterCount = "{{ prospect.encounterCount }}";
+                $("#meetingcount span").animateNumber({ number: encounterCount }, 2000);
+            }
            
             $("#ratingcircle").percircle({});
             $("#redflagcircle").percircle({});

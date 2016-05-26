@@ -218,10 +218,7 @@ class ProspectController extends Controller
             }
             
             if ($prospect->getSource()->getId() === 2) {
-                $prospect->getRelationship()->setMeeting(true); // Needed, not nullable
-                $prospect->getRelationship()->setMeetingCount(1); // Needed, not nullable
-            } else {
-                $prospect->getRelationship()->setMeetingCount(0);
+                $prospect->getRelationship()->setMeeting(true); // Needed, not nullable                
             }
                    
             $prospect->getRelationship()->setStartDate(new \DateTime());  // Needed, not nullable
@@ -257,12 +254,12 @@ class ProspectController extends Controller
         } 
         
         if($prospect->getUser() === $user){
-            $encounterCount = $em->getRepository('AppBundle:Encounter')->getEncounterCount($prospect);
+//            $encounterCount = $em->getRepository('AppBundle:Encounter')->getEncounterCount($prospect);
             $deleteForm = $this->createDeleteForm($id);
 
             return array(
                 'prospect' => $prospect,
-                'encounterCount' => $encounterCount,
+//                'encounterCount' => $encounterCount,
                 'delete_form' => $deleteForm->createView(),
             );
         } else {
@@ -351,11 +348,7 @@ class ProspectController extends Controller
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, $id)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
+    {        
         $user = $this->get('security.token_storage')->getToken()->getUser();       
         
         $form = $this->createDeleteForm($id);
@@ -377,8 +370,7 @@ class ProspectController extends Controller
             }
         }
 
-        return $this->redirectToRoute('prospect_list');
-        
+        return $this->redirectToRoute('prospect_list');        
     }
 
     /**

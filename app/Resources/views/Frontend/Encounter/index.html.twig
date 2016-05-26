@@ -1,6 +1,8 @@
 {% extends '::base.html.twig' %}
 {% block title %}Encounters{% endblock %}
 
+{% set csrfDelete = csrf_token('delete') %}
+
 {% block content %}    
     <div class="container">
         <section class="page-title">
@@ -17,104 +19,71 @@
         {% set localesEuro = 'es,fr,it,de' %}
             
         <div class="row">
-        {% for encounter in encounters %}    
-            <div class="col-md-4">
-                <div class="encounter-box">
-                    <div class="encounter-date-details">
-                        <div class="encounter-date">
-{#                            {{ encounter.date|localizeddate('short', 'short', app.request.locale) }}#}
-                            {% if app.request.locale == 'fr' %}
-                                {{ encounter.date|date("d-m-Y \à H:i") }}
-                            {% else %}
-                                {{ encounter.date|date("Y-m-d") }} at {{ encounter.date|date("H:i") }}
-                            {% endif %}
-                            <span class="pull-right" title="Duration">{{ encounter.duration }} h</span>
-                        </div>
-                        <div class="encounter-details">
-                            <div class="place">{{ encounter.place }}</div>
-                            
-                            <div><span>Expenses </span>{{ encounter.expenses }}{% if app.request.locale in localesEuro %} €{% else %} ${% endif %}</div>
-                            <div><span>Changed venue </span>{% if encounter.venueChange == 1 %}Yes{% else %}No{% endif %}</div>
-                            <div>
-                                <div class="venues-list">Venues list </div>
-                                {% if encounter.venuesList %}
-                                    {{ encounter.venuesList }}
+            {% for encounter in encounters %}    
+                <div class="col-md-4" id="{{ encounter.id }}">
+                    <div class="encounter-box">
+                        <div class="encounter-date-details">
+                            <div class="encounter-date">
+    {#                            {{ encounter.date|localizeddate('short', 'short', app.request.locale) }}#}
+                                {% if app.request.locale == 'fr' %}
+                                    {{ encounter.date|date("d-m-Y \à H:i") }}
+                                {% else %}
+                                    {{ encounter.date|date("Y-m-d") }} at {{ encounter.date|date("H:i") }}
                                 {% endif %}
+                                <span class="pull-right" title="Duration">{{ encounter.duration }} h</span>
+                            </div>
+                            <div class="encounter-details">
+                                <div class="place">{{ encounter.place }}</div>
+
+                                <div><span>Expenses </span>{{ encounter.expenses }}{% if app.request.locale in localesEuro %} €{% else %} ${% endif %}</div>
+                                <div><span>Changed venue </span>{% if encounter.venueChange == 1 %}Yes{% else %}No{% endif %}</div>
+                                <div>
+                                    <div class="venues-list">Venues list </div>
+                                    {% if encounter.venuesList %}
+                                        {{ encounter.venuesList }}
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="encounter-actions">
-                        <ul>
-                            <li><a class="edit-encounter" href="#" data-id="{{ encounter.id }}" title="Edit encounter"><i class="icon ion-ios-compose-outline"></i></a></li>
-                        </ul>
-                        <div class="clearfix"></div>
+                        <div class="encounter-actions">
+                            <ul>
+                                <li><a class="edit-encounter" href="#" data-id="{{ encounter.id }}" title="Edit encounter"><i class="icon ion-ios-compose-outline"></i></a></li>
+                                <li><a class="delete-encounter" href="#" data-id="{{ encounter.id }}" title="Delete encounter"><i class="icon ion-ios-trash-outline"></i></a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
                 </div>
-            </div>
-            
-            {% if loop.index % 3 == 0 %}
-                </div>
-                <div class="row">
-            {% endif %}  
-        {% endfor %}  
-            
-        {#<table class="table table-hover">
-            <thead>
-                <tr>                    
-                    <th>Date</th>
-                    <th>Place</th>
-                    <th>Duration</th>
-                    <th>Total expenses</th>
-                    <th>Venue Change</th>
-                    <th>Venues list</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-            {% for encounter in encounters %}
-                <tr>                    
-                    <td>{% if encounter.date %}{{ encounter.date|date('Y-m-d H:i') }}{% endif %}</td>
-                    <td>{{ encounter.place }}</td>
-                    <td>{{ encounter.duration }}</td>
-                    <td>{{ encounter.expenses }}</td>
-                    <td>{{ encounter.venueChange }}</td>
-                    <td>
-                        {% if encounter.venuesList %}
-                            {{ encounter.venuesList }}
-                        {% endif %}
-                    </td>
-                    <td>
-                        <a class="edit-encounter" href="#" data-id="{{ encounter.id }}">edit</a>                        
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>#}
-    </div>
-            
-    {# Modales #}
-    <div class="modal fade modal-full" id="modal_encounter_form" tabindex="-1" role="dialog">
-        <div class="modal-dialog modal-lg modal-dialog-scroll">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
-                    </button>
-                    <h2 class="modal-title">{# Populated with jquery #}</h2>
-                </div>    
-                <div class="modal-body" id="modal_encounter_form_body">
-                    {# Form returned by ajax #}
-                </div>                       
-            </div>    
-        </div>
-    </div>
 
-    {# POPUP OVERLAY D'ATTENTE AJAX #}
-{#    <div class="overlay"></div>#}
-    <div class="loader_standard">
-        <p>Loading...</p>        
-    </div>
+                {#{% if loop.index % 3 == 0 %}
+                    </div>
+                    <div class="row">
+                {% endif %}  #}
+            {% endfor %}           
+        </div>
             
+        {# Modales #}
+        <div class="modal fade modal-full" id="modal_encounter_form" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg modal-dialog-scroll">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
+                        </button>
+                        <h2 class="modal-title">{# Populated with jquery #}</h2>
+                    </div>    
+                    <div class="modal-body" id="modal_encounter_form_body">
+                        {# Form returned by ajax #}
+                    </div>                       
+                </div>    
+            </div>
+        </div>
+
+        {# POPUP OVERLAY D'ATTENTE AJAX #}
+        <div class="loader_standard">
+            <p>Loading...</p>        
+        </div>
+    </div>       
     <script type="text/javascript">
         $(document).ready(function(){
             var locale = "{{ app.request.locale }}";            
@@ -164,6 +133,45 @@
                 $(".modal-body").empty();
                 $(".modal-title").empty();
             });
+            
+            // Delete confirm **************************************************
+            $(".encounter-actions").on("click", ".delete-encounter", function(event){
+                event.preventDefault();
+
+                var id = $(this).data("id");                
+
+                $.confirm({
+                    animation: 'zoom',
+                    animationBounce: 1,
+                    confirm: function(){
+                        ajaxDeleteEncounter(id);
+                    },
+                    cancel: function(){
+                        console.log('the user clicked cancel');
+                    }
+                });
+            });
+
+            /**
+             * Deletes an encounter with ajax
+             * 
+             * @param {int} id
+             * @returns {undefined}
+             */
+            function ajaxDeleteEncounter(id)
+            {                
+                var url = Routing.generate('ajax_delete_encounter', {'id': id, '_locale': locale});  
+                var csrfDelete = "{{ csrfDelete }}";
+                var data = {'csrfDelete': csrfDelete};
+
+                $.post(url, data, function(response){
+
+                    var data = $.parseJSON(response);
+                    var id = data.id;
+
+                    $("#"+id).remove(); 
+                });
+            }
         });
     </script>        
 {% endblock %}
