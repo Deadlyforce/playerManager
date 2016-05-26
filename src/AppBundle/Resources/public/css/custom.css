@@ -891,17 +891,19 @@ form[name='appbundle_prospect_filter'] input[type='submit']{
     margin-bottom: 30px;
 }
 .prospect-photo{
-    /*display: inline-block;*/
     position: relative;
     float: left;
+}
+.prospect-photo img{
+    width: 176px;
 }
 a.link-contact-edit:hover .mask-photo{
     opacity: 1;
 }
 .mask-photo{
     background-color: rgba(0,0,0,0.4);
-    width: 175px;
-    height: 175px;
+    width: 176px;
+    height: 176px;
     position: absolute;
     top: 0;
     left: 0;
@@ -939,10 +941,8 @@ p.prospect-age{
     text-shadow: 1px 1px 1px rgba(0,0,0,0.4);
 }
 .ratings-redflags{
-    /*display: inline-block;*/
-    /*vertical-align: top;*/
-    width: 175px;
-    height: 175px;
+    width: 176px;
+    height: 176px;
     float: left;
 }
 .prospect-ratings{    
@@ -951,8 +951,8 @@ p.prospect-age{
 .rating-icon{
     float: left;
     display: table;
-    width: 87.5px;
-    height: 87.5px;
+    width: 88px;
+    height: 88px;
     text-align: center;
     background-color: #fff;
 }
@@ -963,8 +963,8 @@ p.prospect-age{
 .redflag-icon{
     float: left;
     display: table;
-    width: 87.5px;
-    height: 87.5px;
+    width: 88px;
+    height: 88px;
     text-align: center;
     background-color: #fff;
 }
@@ -974,15 +974,15 @@ p.prospect-age{
 }
 .rating-percentage{
     display: table;
-    width: 87.5px;
-    height: 87.5px;
+    width: 88px;
+    height: 88px;
     text-align: center;
     background-color: #fff;
 }
 .redflag-percentage{
     display: table;
-    width: 87.5px;
-    height: 87.5px;
+    width: 88px;
+    height: 88px;
     text-align: center;
     background-color: #fff;
 }
@@ -1000,8 +1000,8 @@ p.prospect-age{
 }
 .prospect-infos{
     background-color: #fff;
-    width: 350px;
-    height: 87.5px;
+    width: 352px;
+    height: 88px;
     padding: 10px 0px 0px 10px;
     overflow: hidden;
 }
@@ -1018,14 +1018,14 @@ p.prospect-relationship-rank{
 }
 
 .prospect-relationship{
-    width: 350px;
-    height: 87.5px;
+    width: 352px;
+    height: 88px;
     text-align: center;
 }
 .prospect-relationship .preview{
     background-color: #fff;
     display: table;
-    width: 87.5px;
+    width: 88px;
     height: 100%;
     float: left; 
 }
