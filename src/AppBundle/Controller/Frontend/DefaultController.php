@@ -7,8 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Symfony\Component\HttpFoundation\Request;
-
-
 use AppBundle\Form\ContactUsType;
 
 /**
@@ -87,7 +85,7 @@ class DefaultController extends Controller
 
                 $this->get('mailer')->send($message);
 
-                $request->getSession()->getFlashBag()->add('success', 'Your email has been sent! Thanks!');
+                $request->getSession()->getFlashBag()->add('success_mail', 'Your email has been sent! Thanks!');
 
                 return $this->redirect($this->generateUrl('contact_us'));
             }

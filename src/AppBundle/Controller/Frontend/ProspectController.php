@@ -222,6 +222,7 @@ class ProspectController extends Controller
             }
                    
             $prospect->getRelationship()->setStartDate(new \DateTime());  // Needed, not nullable
+            $prospect->getRelationship()->setStatus(true); // Relationship "On" by default
             
             $em->persist($prospect);         
             $em->flush();                  

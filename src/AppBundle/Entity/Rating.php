@@ -282,7 +282,7 @@ class Rating
      * Set prospect
      *
      * @param Prospect $prospect
-     * @return Relationship
+     * @return Rating
      */
     public function setProspect(Prospect $prospect)
     {
@@ -294,7 +294,7 @@ class Rating
     /**
      * Get prospect
      *
-     * @return prospect 
+     * @return Prospect 
      */
     public function getProspect()
     {
@@ -355,13 +355,18 @@ class Rating
     {
         $total = 6;
         $attributes =  array($this->attractiveness, $this->cooking, $this->kissing, $this->senseHumor, $this->sex, $this->socialStatus);
+
         foreach($attributes as $attribute){
             if ($attribute === null) {
                 $total = $total - 1;
             }
         }
-   
-        $avg = ($this->attractiveness + $this->cooking + $this->kissing + $this->senseHumor + $this->sex + $this->socialStatus)/$total;
+        if ($total != 0) {
+            $avg = ($this->attractiveness + $this->cooking + $this->kissing + $this->senseHumor + $this->sex + $this->socialStatus)/$total;
+        } else {
+            $avg = 0;
+        }
+        
         $whole = floor($avg);
         $deci = $avg - $whole;
         
@@ -382,13 +387,18 @@ class Rating
     {
         $total = 6;
         $attributes =  array($this->attractiveness, $this->cooking, $this->kissing, $this->senseHumor, $this->sex, $this->socialStatus);
+        
         foreach($attributes as $attribute){
             if ($attribute === null) {
                 $total = $total - 1;
             }
         }
+        if ($total != 0) {
+            $avg = ($this->attractiveness + $this->cooking + $this->kissing + $this->senseHumor + $this->sex + $this->socialStatus)/$total;
+        } else {
+            $avg = 0;
+        }
         
-        $avg = ($this->attractiveness + $this->cooking + $this->kissing + $this->senseHumor + $this->sex + $this->socialStatus)/$total;
         $percentAvg = round($avg, 1) * 20;
                 
         $this->percentAverage = $percentAvg;

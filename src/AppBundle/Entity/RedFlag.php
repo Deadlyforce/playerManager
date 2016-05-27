@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Prospect;
 
 /**
  * RedFlag
@@ -428,10 +429,10 @@ class RedFlag
     /**
      * Set prospect
      *
-     * @param integer $prospect
+     * @param Prospect $prospect
      * @return RedFlag
      */
-    public function setProspect($prospect)
+    public function setProspect(Prospect $prospect)
     {
         $this->prospect = $prospect;
 
@@ -441,7 +442,7 @@ class RedFlag
     /**
      * Get prospect
      *
-     * @return int
+     * @return Prospect
      */
     public function getProspect()
     {

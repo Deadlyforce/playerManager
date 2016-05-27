@@ -3,13 +3,7 @@
 {% block title %}Profile{% endblock %}
 
 {% block content %}   
-    <div class="container">
-        <section class="page-title">
-            <h1>{{ 'app.nav.profile'|trans }}</h1> 
-{#            <h2>Add up to 5 photos, replace or delete them, then validate your changes at the bottom of the page</h2>#}
-        </section>
-        <div class="page-title-underline"></div>
-        
+    <div class="container">        
         {% include "FOSUserBundle:Profile:show_content.html.twig" %}
         
         <a class="btn-basic" href="{{ path('fos_user_profile_edit') }}" title="{{ 'app.profile.edit-btn'|trans }}">{{ 'app.profile.btn-edit'|trans }}</a>

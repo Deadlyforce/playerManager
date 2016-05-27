@@ -532,10 +532,7 @@ button.btn-submit{
     margin-bottom: 20px;
     margin-top: 20px;
     background-image: none;
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
+
     transition: all .3s ease-in;
 }
 button.btn-submit:hover{
@@ -552,10 +549,8 @@ button.btn-submit:hover{
     width: 150px;
     font-size: 1.2em;
     text-align: center;
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
+    color: #FFF;
+
     transition: all .3s ease-in;
 }
 .btn-start:hover{
@@ -574,6 +569,7 @@ button.btn-submit:hover{
     display: inline-block;    
     vertical-align: top;
     background-color: #fff;
+    font-family: "open_sansregular", sans-serif;
 
     transition: all .3s ease-in;
 }
@@ -623,9 +619,10 @@ button.btn-submit:hover{
 /*************************** REGISTRATION ********************************/
 
 p.confirmed{
-    font-family: "ralewayregular",sans-serif;
+    font-family: "open_sansregular",sans-serif;
     font-size: 1.2em;
     text-align: center;
+    color: #FFF;
 }
 
 /************************ BOOTSTRAP OVERRIDES ****************************/
@@ -760,22 +757,21 @@ td.actions a{
     font-family: "sinkin_sans100_thin", sans-serif;
     color: #fff;
     font-size: 4.3em;
+    margin: 20px 0px 50px 0px;
 }
 
 a#btn-first-contact {
     color: #fff;
-    position: absolute;
-    top: 48%;
-    left: 20%;
-    font-family: "ralewaylight", sans-serif;
+    font-family: "open_sanslight", sans-serif;
     font-size: 1.5em;
     background-color: #F47363;
     border: 1px solid #F47363;
-    padding: 10px 10px;
-    
-    -moz-transition: all .3s ease-in;
-    -o-transition: all .3s ease-in;
-    -webkit-transition: all .3s ease-in;
+    padding: 15px 10px;
+    display: block;
+    width: 300px;
+    margin-bottom: 50px;
+    text-align: center;
+
     transition: all .3s ease-in;
 }
 a#btn-first-contact:hover {
@@ -876,6 +872,7 @@ form[name='appbundle_prospect_filter'] .form-control{
     border: none;
     box-shadow: none;
     transition: none;
+    width: 200px;
 }
 form[name='appbundle_prospect_filter'] select{
     height: 30px;
@@ -1257,19 +1254,19 @@ p.job{
 }
 
 /******************** RIGHT COLUMN ********************/
-#contact-right-column{
-        display: inline-block;
-        vertical-align: top;
 
-        width: 890px;
-    }
+#contact-right-column{
+    display: inline-block;
+    vertical-align: top;
+    width: 888px;
+}
 @media screen and (max-width: 1140px) {
     #contact-right-column{        
         width: 100%;
     }
 }
 #basic-infos-container{    
-    height: 250px;
+    /*height: 250px;*/
     position: relative; 
 }
 #basic-infos{
@@ -1303,13 +1300,10 @@ p.job{
 #contact-right-column a:hover #basic-infos{
     opacity: 0;   
 }
-/*#contact-right-column a:hover p#name, #contact-right-column a:hover p#adress{
-    color: #FFF;    
-}*/
+
 
 p#name{
     font-size: 3.3em;
-    /*font-family: "open_sanslight", sans-serif;*/
     font-family: "sinkin_sans100_thin", sans-serif;
     color: #666;
     
@@ -1332,7 +1326,8 @@ p#adress{
     margin: 0;
 }
 .bigtile{
-    height: 296.667px;
+    height: 296px;
+    width: 296px;
     padding: 0;
     border-bottom: 1px solid #ccc;
     padding-left: 0;
@@ -1350,7 +1345,7 @@ p#adress{
     vertical-align: middle;
 }
 @media screen and (max-width: 1140px) {
-    .bigtile, .bigtile-relationship, #bigtile-encounter, .smalltile, .bigtile-rating{
+    .bigtile, .bigtile-relationship, #bigtile-encounter, .smalltile, .bigtile-rating, .bigtile-redflag{
         width: 100%; /* Compensate for table behavior */
     }
 }
@@ -1360,7 +1355,8 @@ p#adress{
     text-align: center;    
 }
 .bigtile-rating, .bigtile-redflag{
-    height: 296.667px;
+    height: 296px;
+    /*width: 296px;*/
     padding: 0;
     border-bottom: 1px solid #ccc;
     padding-left: 0;
@@ -1397,7 +1393,8 @@ a#rating-link:hover .mask-rating, a#redflag-link:hover .mask-redflag{
     top: 0;
     left: 0;
     opacity: 0;
-    height: 296.667px;
+    height: 296px;
+    height: 296px;
     width: 100%;
     transition: all .3s ease-in;
     color: #FFF;
@@ -1438,7 +1435,8 @@ a.edit-relationship:hover .mask-relationship{
 }    
 .bigtile-relationship{    
     padding: 0px;
-    height: 296.667px; 
+    height: 296px; 
+    /*width: 296px;*/ 
     border-bottom: 1px solid #ccc;
     background-color: #fff;
     text-align: center;    
@@ -1457,7 +1455,8 @@ a.edit-relationship:hover .mask-relationship{
     top: 0;
     left: 0;
     opacity: 0;
-    height: 296.667px;
+    height: 296px;
+    width: 296px;
     width: 100%;
     transition: all .3s ease-in;
     color: #FFF;
@@ -1468,24 +1467,21 @@ a.edit-relationship:hover .mask-relationship{
     transition: all .3s ease-in;
 }
 .smalltile-container-middle{
-    height: 296.667px;
-    padding: 0;
-    border-bottom: 1px solid #ccc;
-    border-right: 1px solid #ccc;  
+    /*height: 296px;*/
+    width: 296px;
+    padding: 0;   
     padding-left: 0;
     padding-right: 0;
     font-family: "open_sansregular", sans-serif;
 }
 .smalltile-container-right{
-    height: 296.667px;
-    padding: 0;
-    border-right: 1px solid #ccc;  
+    /*height: 296px;*/
+    width: 296px;
+    padding: 0;    
     padding-left: 0;
     padding-right: 0;
     font-family: "open_sansregular", sans-serif;
 }
-
-
 
 .container-smalltiles-encounter{
     background-color: rgba(255,255,255,1);
@@ -1502,9 +1498,8 @@ a.edit-relationship:hover .mask-relationship{
 }
 .smalltile{
     padding: 0px;
-    height: 148.333px;
+    height: 148px;
     background-color: #FFF;
-    border-left: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
     display: table;
     text-align: center;
@@ -1525,9 +1520,7 @@ a.edit-relationship:hover .mask-relationship{
 #met i.ion-ios-close-empty, #kc i.ion-ios-close-empty, #fc i.ion-ios-close-empty{
     color: #CCC;
 }
-/*#kc i{
-    color: #F47363;
-}*/
+
 #kc img{
     width: 70px;
     margin-top: 10px;
@@ -1559,7 +1552,7 @@ p#start-date-val{
 
 #bigtile-encounter{    
     padding: 0px;
-    height: 296.667px;     
+    height: 296px;     
     background-color: #fff;
     text-align: center;    
     display: table;
@@ -2021,10 +2014,13 @@ img#crop-preview{
     margin: 15px auto;
     border-radius: 0px;
 }
+form[name="appbundle_contact_us"] input, form[name="appbundle_contact_us"] textarea{
+    border-radius: 3px;
+}
 
 form[name="appbundle_contact_us"]{
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0 auto 50px auto;
 }
 form[name="appbundle_contact_us"] > div{
     margin-bottom: 10px;
@@ -2299,6 +2295,23 @@ form[name="appbundle_redflag"] > div > label {
     margin-top: 50px;
     padding: 0px 20px;
 }
+
+/************************* PROFILE *****************************/
+
+.fos_user_user_show{
+    padding: 20px 0px;
+    font-size: 1.4em;
+    font-family: "open_sanslight",sans-serif;
+}
+.fos_user_user_show p{
+    color: #FFF; 
+}
+.fos_user_user_show span{
+    display: inline-block;
+    width: 175px;
+    color: #ccc;
+}
+
 
 /************************* FOOTER *****************************/
 

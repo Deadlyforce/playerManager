@@ -10,6 +10,8 @@ use AppBundle\Entity\Relationship;
 use AppBundle\Entity\Encounter;
 use AppBundle\Entity\Photo;
 use AppBundle\Entity\Chat;
+use AppBundle\Entity\Rating;
+use AppBundle\Entity\RedFlag;
 
 /**
  * Prospect
@@ -648,29 +650,7 @@ class Prospect
     {
         return $this->getFirstname();
     }
-    
-    /**
-     * Get web path to upload directory
-     * 
-     * @return string
-     *  Relative path.
-     */
-//    protected function getUploadPath()
-//    {
-//        return 'uploads/photoPrincipale/'.$this->user->getId();
-//    }
-    
-    /**
-     * Get absolute path to upload directory
-     * 
-     * @return string
-     *  Absolute path.
-     */
-//    protected function getUploadAbsolutePath()
-//    {
-//        return __DIR__ . '/../../../web/' . $this->getUploadPath();
-//    }
-    
+   
     /**
      * Get last updated photo
      *
@@ -685,24 +665,7 @@ class Prospect
             return null;
         }        
     }
-    
-    /**
-     * @ORM\PostRemove
-     */
-//    public function removePhotoUploads()
-//    {
-//        if($this->getPhotos() != null){
-//            
-//            foreach($this->getPhotos() as $photo){
-//               $file = $photo->getUploadAbsolutePath();
-//               
-//               if($file){
-//                    unlink($file);
-//                }
-//            }
-//        }           
-//    }
-    
+  
     /**
      * Set creationDate
      *

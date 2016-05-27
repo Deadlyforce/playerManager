@@ -89,9 +89,10 @@ class ProspectType extends AbstractType
             ->add('rating', RatingType::class, array(
 
             )) 
-            ->add('submit', SubmitType::class, array(
-                'label' => 'Save changes'
-            ))
+            ->add('redflag', RedFlagType::class, array(
+
+            )) 
+            ->add('submit', SubmitType::class)
         ;
     }
     

@@ -172,10 +172,9 @@
                                 <p>Met</p>
                             </div>
                         </div>
-                        <div class="col-md-6  smalltile" id="kc">
+                        <div class="col-md-6 smalltile" id="kc">
                             <div class="tilecontent">
                                 {% if  prospect.relationship.kc %}
-{#                                    <i class="icon ion-fireball"></i>#}
                                     <img src="{{ asset('bundles/app/images/lips.png') }}" alt="lips">
                                 {% else %}
                                     <i class="icon ion-ios-close-empty"></i>
@@ -228,10 +227,12 @@
                     </div>            
                     <div class="row row-tiles">
                         <div class="col-md-6 smalltile" id="blank1">
-
+                            <div class="tilecontent">                                
+                            </div>
                         </div>
                         <div class="col-md-6 smalltile" id="blank2">
-
+                            <div class="tilecontent">
+                            </div>
                         </div>
                     </div>            
                 </div>            
@@ -382,7 +383,7 @@
             });
             
             // Ajax: get form edit ratings *************************************
-            $(".container").on("click", ".edit-rating, #rating-link", function(event){
+            $(".container").on("click", "#rating-link", function(event){
                 event.preventDefault();               
                 
                 $(".loader_standard").show();
