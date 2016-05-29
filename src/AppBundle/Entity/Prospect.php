@@ -56,7 +56,7 @@ class Prospect
     /**
      * @var ArrayCollection
      * 
-     * @ORM\OneToMany(targetEntity="Encounter", mappedBy="prospect") 
+     * @ORM\OneToMany(targetEntity="Encounter", mappedBy="prospect", cascade={"remove"}) 
      */
     private $encounters;
     

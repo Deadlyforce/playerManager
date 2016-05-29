@@ -28,7 +28,7 @@ class Photo {
      * @var Prospect
      * 
      * @ORM\ManyToOne(targetEntity="Prospect", inversedBy="photos")
-     * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id") 
+     * @ORM\JoinColumn(name="prospect_id", referencedColumnName="id", onDelete="CASCADE") 
      */
     private $prospect;
     
