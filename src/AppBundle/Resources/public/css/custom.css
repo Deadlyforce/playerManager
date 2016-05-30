@@ -787,11 +787,18 @@ a#btn-first-contact:hover {
 
 #features{
     background-color: rgba(255,255,255,0.8);
-    position: relative;
+    position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 65px;
 }
+@media screen and (max-width: 1140px) {
+    #features{
+        position: relative;
+        bottom: 0;
+    }
+}
+
 .feature{
     text-align: center;
     color: #333;
@@ -807,6 +814,7 @@ a#btn-first-contact:hover {
 }
 .feature p{
     font-size: 1.1em;
+    margin-bottom: 0;
 }
 
 /*********************** DATATABLE ALL PROSPECTS INDEX ******************************/

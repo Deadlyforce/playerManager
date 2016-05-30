@@ -12,7 +12,18 @@ app:
                female: Female   
                captcha: Visual confirmation
     home:
+        title: Never forget your dates
         btn-add: Add your first contact
+        feature1:
+            title: Save your contacts Remember the details
+            text: Organize and filter your relationships
+        feature2:
+            title: Rate the people you meet
+            text: Stop wasting your precious time with the wrong people
+        feature3:
+            title: Chart your progress
+            text1: Avoid previous mistakes
+            text2: Analyze your results
     nav:
         album: Photo album
         dashboard: Dashboard
@@ -22,6 +33,11 @@ app:
     contact:
         list:
             add: Add contact
+            filter:
+                status: Relationship status
+                sex: sex
+                relationship_type: Relationship type
+                submit: Filter results
     photo:
         album:
             subtitle: All your contacts, just photos for now...

@@ -12,7 +12,18 @@ app:
             female: Une femme
             captcha: Confirmation visuelle
     home:
+        title: N'oubliez plus vos rencontres
         btn-add: Ajouter un premier contact
+        feature1:
+            title: Mémorisez vos contacts Souvenez-vous des détails
+            text: Filtrez et classez vos relations
+        feature2:
+            title: Notez les gens que vous rencontrez
+            text: Arrêtez de perdre du temps avec les mauvaises personnes
+        feature3:
+            title: Visualisez votre progression
+            text1: Ne refaites plus les mêmes erreurs
+            text2: Analysez vos résultats
     nav:
         album: Album photo
         dashboard: Tableau de bord
@@ -22,6 +33,11 @@ app:
     contact:
         list:
             add: Ajouter un contact
+            filter:
+                status: Statut de la relation
+                sex: Sexe
+                relationship_type: Type de relation
+                submit: Filtrer
     photo:
         album:
             subtitle: Tous vos contacts, uniquement des photos pour l'instant...

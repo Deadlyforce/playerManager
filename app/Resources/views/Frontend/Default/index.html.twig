@@ -3,7 +3,7 @@
 
 {% block content %}    
     <div class="container" id="home-start">
-        <h1>Never forget your dates</h1>
+        <h1>{{ 'app.home.title'|trans }}</h1>
         {% if noProspect == true %}
             <a id="btn-first-contact" href="#" title="Add your first contact">{{ 'app.home.btn-add'|trans }}</a>
         {% endif %}
@@ -13,18 +13,19 @@
             <div class="row">
                 <div class="col-md-4 feature">
                     <i class="icon ion-ios-people"></i>
-                    <h2>Save your contacts<br>Remember who and when</h2>
-                    <p>Keep track of important people in your life<br>Filter them by relationship status<br>Upload their photos</p>
+                    <h2>{{ 'app.home.feature1.title'|trans }}</h2>
+                    <p>{{ 'app.home.feature1.text'|trans }}</p>
                 </div>
                 <div class="col-md-4 feature">
                     <i class="icon ion-ios-heart"></i>
-                    <h2>Rate people<br>It's fun !</h2>
-                    <p>Stop wasting your precious time with the wrong people</p>
+                    <h2>{{ 'app.home.feature2.title'|trans }}</h2>
+                    <p>{{ 'app.home.feature2.text'|trans }}</p>
                 </div>
                 <div class="col-md-4 feature">
                     <i class="icon ion-ios-flask-outline"></i>
-                    <h2>Analyze your progress<br> with charts</h2>
-                    <p>Avoid previous mistakes<br>watch some patterns emerge</p>
+                    <h2>{{ 'app.home.feature3.title'|trans }}</h2>
+                    <p>{{ 'app.home.feature3.text1'|trans }}</p>
+                    <p>{{ 'app.home.feature3.text2'|trans }}</p>
                 </div>
             </div>
         </div>

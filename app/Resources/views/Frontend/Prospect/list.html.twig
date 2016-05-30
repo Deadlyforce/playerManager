@@ -12,21 +12,22 @@
             
             {{ form_start(filterForm, {'attr': {'class': 'pull-right form-inline'} }) }}
                 <div>
-                    {{ form_label(filterForm.status, 'Relationship status') }}
+                    {{ form_label(filterForm.status, 'app.contact.list.filter.status'|trans) }}
                     {{ form_widget(filterForm.status, {'attr': {'class': 'form-control'} }) }}
                     {{ form_errors(filterForm.status) }}
                 </div>
                 <div>
-                    {{ form_label(filterForm.sex, 'Sex') }}
+                    {{ form_label(filterForm.sex, 'app.contact.list.filter.sex'|trans) }}
                     {{ form_widget(filterForm.sex, {'attr': {'class': 'form-control'} }) }}
                     {{ form_errors(filterForm.sex) }}
                 </div>
                 <div>
-                    {{ form_label(filterForm.relationshipLevel, 'Relationship type') }}
+                    {{ form_label(filterForm.relationshipLevel, 'app.contact.list.filter.relationship_type'|trans) }}
                     {{ form_widget(filterForm.relationshipLevel, {'attr': {'class': 'form-control'} }) }}
                     {{ form_errors(filterForm.relationshipLevel) }}
                 </div>
-                <input class="btn-basic" type="submit" value="Filter">
+                {% set value = 'app.contact.list.filter.submit'|trans %}
+                <input class="btn-basic" type="submit" value="{{ value }}">
             {{ form_end(filterForm) }}
             <div class="clearfix"></div>
         </div>
