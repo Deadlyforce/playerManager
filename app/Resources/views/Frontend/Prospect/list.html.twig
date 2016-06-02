@@ -50,7 +50,10 @@
                         --></a><!--
                      --><div class="ratings-redflags">
                             <div class="prospect-ratings">
-                                <div class="rating-icon">
+                                <div class="tilecontent">
+                                    <div class="rating-avg" title="Average rating for this contact" data-rating="{{ prospect.rating.average }}"></div>
+                                </div>
+                                {#<div class="rating-icon">
                                     <div class="tilecontent">
                                         <i class="icon ion-ios-star"></i>
                                     </div>
@@ -59,7 +62,7 @@
                                     <div class="tilecontent">
                                         <p><span>{{ prospect.rating.percentAverage }}</span>%</p>
                                     </div>            
-                                </div>            
+                                </div>#}            
                             </div> 
                             <div class="prospect-redflags">        
                                 <div class="redflag-icon">
@@ -167,12 +170,28 @@
     
     <script type="text/javascript">
         $(document).ready(function(){  
-{#            var locale = "{{ app.request.locale }}";#}
             var locale = $("#locale").data("locale");   
            
             $('[data-toggle="tooltip"]').tooltip({
                 html: true
-            });              
+            });  
+            
+            $(".rating-avg").each(function(index, div) {
+                
+                avgRating = $(div).data("rating");                
+                
+                $(div).starRating({
+                    initialRating: avgRating,
+                    totalStars: 5,                
+                    starSize: 26,
+                    disableAfterRate: false,
+                    useGradient: false,
+                    emptyColor: '#ddd',
+                    hoverColor: '#F47363',
+                    useFullStars: true,
+                    readOnly: true
+                });                
+            });
                    
             // Ajax: get form new prospect *************************************
             $("#add_prospect").click(function(event){

@@ -95,20 +95,7 @@ class RedFlag
      * )
      * @ORM\Column(name="checkphone", type="smallint", nullable=true)
      */
-    private $checkphone;
-
-    /**
-     * @var int
-     *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="boring", type="smallint", nullable=true)
-     */
-    private $boring;
+    private $checkphone;    
 
     /**
      * @var int
@@ -308,30 +295,6 @@ class RedFlag
     }
 
     /**
-     * Set boring
-     *
-     * @param integer $boring
-     *
-     * @return RedFlag
-     */
-    public function setBoring($boring)
-    {
-        $this->boring = $boring;
-
-        return $this;
-    }
-
-    /**
-     * Get boring
-     *
-     * @return int
-     */
-    public function getBoring()
-    {
-        return $this->boring;
-    }
-
-    /**
      * Set selfAbsorbed
      *
      * @param integer $selfAbsorbed
@@ -502,7 +465,7 @@ class RedFlag
     public function saveAveragedAttributes()
     {
         $total = 10;
-        $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->checkphone, $this->boring, $this->selfAbsorbed, $this->cheapdate, $this->snore,  $this->hygiene);
+        $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->checkphone, $this->selfAbsorbed, $this->cheapdate, $this->snore,  $this->hygiene);
    
         $avg = (array_sum($attributes))/$total;
         $whole = floor($avg);
@@ -524,7 +487,7 @@ class RedFlag
     public function saveExactAveragedAttributes()
     {
         $total = 10;
-        $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->checkphone, $this->boring, $this->selfAbsorbed, $this->cheapdate, $this->snore,  $this->hygiene);
+        $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->checkphone, $this->selfAbsorbed, $this->cheapdate, $this->snore,  $this->hygiene);
         
         $avg = (array_sum($attributes))/$total;
         $percentAvg = round($avg, 1) * 20;

@@ -67,17 +67,7 @@ class RedFlagType extends AbstractType
                     "app.redflag.form.level4" => 4,
                     "app.redflag.form.level5" => 5
                 )
-            ))
-            ->add('boring', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "app.redflag.form.level1" => 1,
-                    "app.redflag.form.level2" => 2,
-                    "app.redflag.form.level3" => 3,
-                    "app.redflag.form.level4" => 4,
-                    "app.redflag.form.level5" => 5
-                )
-            ))
+            ))           
             ->add('selfAbsorbed', ChoiceType::class, array(
                 'required' => false,
                 'choices' => array(
