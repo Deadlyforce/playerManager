@@ -39,16 +39,6 @@
                             {{ form_errors(edit_form.flake) }}
                         </div>
                     </div>
-{#                    <div>
-                        <div id="meeting-count-input">
-                        {{ form_label(edit_form.meetingCount, 'Meeting count', {'label_attr': {'title': 'How many dates so far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}     
-                        {{ form_widget(edit_form.meetingCount) }}
-                        </div>
-                        <div>
-                            <label></label><div id="slider-meetingCount"></div>
-                        </div>
-                        {{ form_errors(edit_form.meetingCount) }}                        
-                    </div>#}
                     <div>
                         {{ form_label(edit_form.numclosed, 'Phone number', {'label_attr': {'title': 'Did you get a phone number ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
                         <div class="relationship_row row-yes-no">
@@ -74,7 +64,14 @@
                             {{ form_errors(edit_form.fc) }}
                         </div>           
                     </div>  
-                        
+                    <div>
+                        {{ form_label(edit_form.crush, 'Do you have a crush ?') }}
+                        <div class="relationship_row row-yes-no">
+                            {{ form_widget(edit_form.crush) }}
+                                <div id="appbundle_relationship_crush_button" class="relationship_button"></div>
+                            {{ form_errors(edit_form.crush) }}
+                        </div>
+                    </div>    
                     <div>
                         {{ form_label(edit_form.relationshipRank, 'Relationship level', {'label_attr': {'title': 'Nature of the relationship so far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
                         {{ form_widget(edit_form.relationshipRank) }}

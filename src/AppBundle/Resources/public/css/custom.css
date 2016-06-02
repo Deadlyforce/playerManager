@@ -1044,26 +1044,20 @@ p.prospect-relationship-rank{
     height: 100%;
     float: left; 
 }
-.relationship-met i.ion-ios-close-empty, .relationship-kc i.ion-ios-close-empty, .relationship-fc i.ion-ios-close-empty, .trash i.ion-ios-close-empty{    
+.relationship-met i.ion-ios-close-empty, .relationship-kc i.ion-ios-close-empty, .relationship-fc i.ion-ios-close-empty, #relationship-crush i.ion-ios-close-empty{    
     color: #CCC;
 }
-.relationship-met i, .relationship-kc i, .relationship-fc i{
+.relationship-met i, .relationship-kc i, .relationship-fc i, #relationship-crush i{
     font-size: 3em;
+}
+#relationship-crush i{
+    color: red;
 }
 .relationship-kc img{
     width: 50px;
 }
 
-.trash{
-    transition: all .3s ease-in;
-}
-a.delete:hover .trash{
-    background-color: rgba(0,0,0,0.3);
-    color: #FFF;
-}
-.trash i{
-    font-size: 3em;
-}
+
 
 
 /*** CUSTOM TOOLTIP ***/
@@ -1551,7 +1545,7 @@ a.edit-relationship:hover .mask-relationship{
 #met i.ion-wineglass{
     color: #F72EB2;
 }
-#met i.ion-ios-close-empty, #kc i.ion-ios-close-empty, #fc i.ion-ios-close-empty{
+#met i.ion-ios-close-empty, #kc i.ion-ios-close-empty, #fc i.ion-ios-close-empty, #crush i.ion-ios-close-empty{
     color: #CCC;
 }
 
@@ -1561,6 +1555,9 @@ a.edit-relationship:hover .mask-relationship{
 }
 #fc i{
     color: #771656;
+}
+#crush i{
+    color: red;
 }
 #distance i.ion-happy-outline{
     color: #49D76C;
@@ -1740,7 +1737,8 @@ input#appbundle_relationship_numclosed,
 input#appbundle_relationship_kc,
 input#appbundle_relationship_fc,
 input#appbundle_relationship_flake,
-input#appbundle_relationship_distance{
+input#appbundle_relationship_distance,
+input#appbundle_relationship_crush{
     visibility: hidden;
 }
 input#appbundle_relationship_status:checked + #appbundle_relationship_status_button,
@@ -1749,12 +1747,13 @@ input#appbundle_relationship_numclosed:checked + #appbundle_relationship_numclos
 input#appbundle_relationship_kc:checked + #appbundle_relationship_kc_button,
 input#appbundle_relationship_fc:checked + #appbundle_relationship_fc_button,
 input#appbundle_relationship_flake:checked + #appbundle_relationship_flake_button,
-input#appbundle_relationship_distance:checked + #appbundle_relationship_distance_button{
+input#appbundle_relationship_distance:checked + #appbundle_relationship_distance_button,
+input#appbundle_relationship_crush:checked + #appbundle_relationship_crush_button{
     left: 43px;
 }
 
 /* Input meetingCount */
-input#appbundle_relationship_meetingCount{
+/*input#appbundle_relationship_meetingCount{
     border: 1px solid #ccc;
     width: 60px;
     text-align: center;
@@ -1775,11 +1774,11 @@ input#appbundle_relationship_meetingCount::-webkit-outer-spin-button {
     width: 250px;
     display: inline-block;
     margin-left: 10px;
-}
-.ui-state-active, .ui-widget-content .ui-state-active{
+}*/
+/*.ui-state-active, .ui-widget-content .ui-state-active{
     background-color: #F47363;
     border: 1px solid #F47363;
-}
+}*/
 
 /* Input select realtionshipRank */
 select#appbundle_relationship_relationshipRank{

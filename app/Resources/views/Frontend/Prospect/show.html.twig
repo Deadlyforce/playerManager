@@ -206,11 +206,16 @@
                                 <p><i class="icon ion-calendar"></i> Start Date</p>
                             </div>
                         </div>
-                        <div class="col-md-6 smalltile">
+                        <div class="col-md-6 smalltile" id="distance">
                             <div class="tilecontent">
-                                                           
+                                {% if  prospect.relationship.distance %}
+                                    <i class="icon ion-sad-outline"></i>                                    
+                                {% else %}
+                                    <i class="icon ion-happy-outline"></i>
+                                {% endif %}
+                                <p>Distance</p>
                             </div>
-                        </div>
+                        </div>  
                     </div>
                 </div>
                             
@@ -226,14 +231,14 @@
                                 <p>Sex</p>
                             </div>
                         </div>
-                        <div class="col-md-6 smalltile" id="distance">
+                        <div class="col-md-6 smalltile" id="crush">
                             <div class="tilecontent">
-                                {% if  prospect.relationship.distance %}
-                                    <i class="icon ion-sad-outline"></i>                                    
+                                {% if  prospect.relationship.crush %}
+                                    <i class="icon ion-ios-heart"></i>                                    
                                 {% else %}
-                                    <i class="icon ion-happy-outline"></i>
+                                    <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
-                                <p>Distance</p>
+                                <p>Crush</p>
                             </div>
                         </div>
                     </div>            
@@ -264,11 +269,12 @@
                 </a>
                 <div class="col-md-4 smalltile-container-middle">
                     <div class="row row-tiles">
-                        <div class="col-md-6 smalltile">
+                        <div class="col-md-6 smalltile" id="meetingcount">                            
                             <div class="tilecontent">
-                                
+                                <p class="smalltile-subtext"><span>0</span></p>
+                                <p>Encounters count</p>
                             </div>
-                        </div>
+                        </div>                        
                         <div class="col-md-6  smalltile">
                             <div class="tilecontent">
                                 
@@ -276,10 +282,9 @@
                         </div>
                     </div>
                     <div class="row row-tiles">
-                        <div class="col-md-6 smalltile" id="meetingcount">                            
+                        <div class="col-md-6 smalltile">
                             <div class="tilecontent">
-                                <p class="smalltile-subtext"><span>0</span></p>
-                                <p>Encounters count</p>
+                                
                             </div>
                         </div>
                         <div class="col-md-6 smalltile">

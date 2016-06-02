@@ -89,6 +89,13 @@ class Relationship
     /**
      * @var integer
      *
+     * @ORM\Column(name="crush", type="boolean")
+     */
+    private $crush;
+
+    /**
+     * @var integer
+     *
      * @ORM\Column(name="distance", type="boolean")
      */
     private $distance;
@@ -251,6 +258,28 @@ class Relationship
     public function getFc()
     {
         return $this->fc;
+    }
+
+    /**
+     * Set crush
+     *
+     * @param integer $crush
+     * @return Relationship
+     */
+    public function setCrush($crush)
+    {
+        $this->crush = $crush;
+        return $this;
+    }
+
+    /**
+     * Get crush
+     *
+     * @return integer 
+     */
+    public function getCrush()
+    {
+        return $this->crush;
     }
     
     /**

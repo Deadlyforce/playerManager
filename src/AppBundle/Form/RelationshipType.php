@@ -46,7 +46,10 @@ class RelationshipType extends AbstractType
             ))
             ->add('fc', CheckboxType::class, array(
                 'required' => false
-             ))
+            ))
+            ->add('crush', CheckboxType::class, array(
+                'required' => false
+            ))
             ->add('relationshipRank', EntityType::class, array(
                 'class' => 'AppBundle:RelationshipRank'
             ))

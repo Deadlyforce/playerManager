@@ -111,14 +111,16 @@
                                     <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
                             </div>
-                        </div>
-                        <a href="#" class="delete" data-id="{{ prospect.id }}" title="Delete contact">    
-                            <div class="preview trash">
-                                <div class="tilecontent">
+                        </div>                           
+                        <div class="preview" id="relationship-crush">
+                            <div class="tilecontent">
+                                {% if  prospect.relationship.crush %}
+                                    <i class="icon ion-ios-heart" title="You have a crush"></i>
+                                {% else %}
                                     <i class="icon ion-ios-close-empty"></i>
-                                </div>
+                                {% endif %}
                             </div>
-                        </a>
+                        </div>
                     </div>
                 </div>  
 
