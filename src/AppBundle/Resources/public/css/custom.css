@@ -894,9 +894,14 @@ form[name='appbundle_prospect_filter'] input[type='submit']{
 .col-prospect{
     margin-bottom: 30px;
 }
+/*.firstrow{
+    width: 352px;
+}*/
 .prospect-photo{
     position: relative;
-    float: left;
+/*    float: left;*/
+    width: 176px;
+    display: inline-block;
 }
 .prospect-photo img{
     width: 176px;
@@ -947,7 +952,9 @@ p.prospect-age{
 .ratings-redflags{
     width: 176px;
     height: 176px;
-    float: left;
+    /*float: left;*/
+    display: inline-block;
+    vertical-align: top;
 }
 .prospect-ratings{    
     
@@ -1033,7 +1040,7 @@ p.prospect-relationship-rank{
     height: 100%;
     float: left; 
 }
-.relationship-met i.ion-ios-close-empty, .relationship-kc i.ion-ios-close-empty, .relationship-fc i.ion-ios-close-empty{    
+.relationship-met i.ion-ios-close-empty, .relationship-kc i.ion-ios-close-empty, .relationship-fc i.ion-ios-close-empty, .trash i.ion-ios-close-empty{    
     color: #CCC;
 }
 .relationship-met i, .relationship-kc i, .relationship-fc i{
@@ -1205,11 +1212,11 @@ p.job{
     height: 125px;
     float: left;
 }
-.row-age{
+.row-age, .row-astro{
     border-bottom: 1px solid rgba(158,158,177,0.3);
     height: 125px;
 }
-#age, #astro{
+#age, #astro, #prospect-delete{
     display: table;
     border-right: 1px solid rgba(158,158,177,0.3);
 }
@@ -1233,11 +1240,25 @@ p.job{
 }
 #astro{
     text-align: center;
-    display: table;
+/*    display: table;*/
     width: 125px;
     height: 125px;
     float: left;
 }
+#prospect-delete{
+    text-align: center;
+    width: 125px;
+    height: 125px;
+    float: left;
+}
+#prospect-delete a{
+    color: #CBCCE4;
+    font-size: 2.5em;
+}
+#prospect-delete a:hover{
+    color: rgba(255,255,255,1);
+}
+
 .tile-value{
     color: #FFF;
     font-size: 2.5em;
@@ -1246,6 +1267,7 @@ p.job{
 .tile-title{    
     color: #CBCCE4;
 }
+
 /************** ZODIAC **************/
 .zodiac{
     font-family: "velezodiacregular";

@@ -2,7 +2,7 @@
 {% import ":Frontend/Macros/Prospect:photoDisplay175.html.twig" as photoDisplayIndex %}
 {% block title %}Contacts{% endblock %}
 
-{% set csrfDelete = csrf_token('delete') %}
+{#{% set csrfDelete = csrf_token('delete') %}#}
 
 {% block content %}    
     <div class="container standard-container" id="container-prospect">      
@@ -35,45 +35,47 @@
         <div class="row row-contacts">
             {% for prospect in pagination %}            
                 <div class="col-md-4 col-prospect" id="{{ prospect.id }}"> 
-                    <a class="link-contact-edit" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Edit contact">
-                        <div class="prospect-photo">                        
-                            {% if prospect.relationship.status == 0 %}
-                                <div class="desaturate">{{ photoDisplayIndex.primaryPhoto(prospect.photos) }}</div>
-                                <p class="off">Off</p>
-                            {% else %}
-                                {{ photoDisplayIndex.primaryPhoto(prospect.photos) }}
-                            {% endif %}
-                            <p class="prospect-age">{{ prospect.age }}</p>   
-                            <div class="mask-photo"><div class="tilecontent">Edit contact</div></div>
-                        </div>
-                    </a>
-                    <div class="ratings-redflags">
-                        <div class="prospect-ratings">
-                            <div class="rating-icon">
-                                <div class="tilecontent">
-                                    <i class="icon ion-ios-star"></i>
+{#                    <div class="firstrow">#}
+                        <a class="link-contact-edit" href="{{ path('prospect_show', { 'id': prospect.id }) }}" title="Edit contact">
+                            <div class="prospect-photo">                        
+                                {% if prospect.relationship.status == 0 %}
+                                    <div class="desaturate">{{ photoDisplayIndex.primaryPhoto(prospect.photos) }}</div>
+                                    <p class="off">Off</p>
+                                {% else %}
+                                    {{ photoDisplayIndex.primaryPhoto(prospect.photos) }}
+                                {% endif %}
+                                <p class="prospect-age">{{ prospect.age }}</p>   
+                                <div class="mask-photo"><div class="tilecontent">Edit contact</div></div>
+                            </div><!--
+                        --></a><!--
+                     --><div class="ratings-redflags">
+                            <div class="prospect-ratings">
+                                <div class="rating-icon">
+                                    <div class="tilecontent">
+                                        <i class="icon ion-ios-star"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="rating-percentage" data-avg="{{ prospect.rating.percentAverage }}">
-                                <div class="tilecontent">
-                                    <p><span>{{ prospect.rating.percentAverage }}</span>%</p>
-                                </div>            
-                            </div>            
-                        </div> 
-                        <div class="prospect-redflags">        
-                            <div class="redflag-icon">
-                                <div class="tilecontent">
-                                    <i class="icon ion-flag"></i>
-                                </div>
-                            </div>  
-                            <div class="redflag-percentage" data-avg="{{ prospect.redflag.percentAverage }}">
-                                <div class="tilecontent">
-                                    <p><span>{{ prospect.redflag.percentAverage }}</span>%</p>
+                                <div class="rating-percentage" data-avg="{{ prospect.rating.percentAverage }}">
+                                    <div class="tilecontent">
+                                        <p><span>{{ prospect.rating.percentAverage }}</span>%</p>
+                                    </div>            
                                 </div>            
                             </div> 
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>                    
+                            <div class="prospect-redflags">        
+                                <div class="redflag-icon">
+                                    <div class="tilecontent">
+                                        <i class="icon ion-flag"></i>
+                                    </div>
+                                </div>  
+                                <div class="redflag-percentage" data-avg="{{ prospect.redflag.percentAverage }}">
+                                    <div class="tilecontent">
+                                        <p><span>{{ prospect.redflag.percentAverage }}</span>%</p>
+                                    </div>            
+                                </div> 
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>                    
+{#                    </div>                    #}
                     <div class="prospect-infos">
                         <p class="prospect-name">{{ prospect.firstname }} {{ prospect.lastname }}</p>
                         <p class="prospect-relationship-rank"><span>{{ prospect.relationship.relationshipRank|upper }}</span></p>
@@ -110,7 +112,7 @@
                         <a href="#" class="delete" data-id="{{ prospect.id }}" title="Delete contact">    
                             <div class="preview trash">
                                 <div class="tilecontent">
-                                    <i class="icon ion-ios-trash-outline"></i>
+                                    <i class="icon ion-ios-close-empty"></i>
                                 </div>
                             </div>
                         </a>
@@ -239,7 +241,7 @@
             });
             
             // Delete confirm **************************************************
-            $(".prospect-relationship").on("click", ".delete", function(event){
+            {#$(".prospect-relationship").on("click", ".delete", function(event){
                 event.preventDefault();
 
                 var prospect_id = $(this).data("id");                
@@ -254,7 +256,7 @@
                         console.log('the user clicked cancel');
                     }
                 });
-            });
+            });#}
 
             /**
              * Deletes a prospect with ajax
@@ -262,7 +264,7 @@
              * @param {int} prospect_id
              * @returns {undefined}
              */
-            function ajaxDeleteProspect(prospect_id)
+            {#function ajaxDeleteProspect(prospect_id)
             {                
                 var url = Routing.generate('ajax_delete_prospect', {'id': prospect_id, '_locale': locale});  
                 var csrfDelete = "{{ csrfDelete }}";
@@ -275,7 +277,7 @@
 
                     $("#"+id).remove(); // Remove contact row
                 });
-            }            
+            }#}            
             
         });
     </script>

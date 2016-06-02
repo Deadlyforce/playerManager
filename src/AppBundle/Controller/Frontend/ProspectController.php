@@ -104,15 +104,19 @@ class ProspectController extends Controller
         if ($csrf->isTokenValid(new CsrfToken('delete', $token))) {
             
             $em = $this->getDoctrine()->getManager();
-            $prospect = $em->getRepository('AppBundle:Prospect')->find($id);           
-
+            $prospect = $em->getRepository('AppBundle:Prospect')->find($id);  
+            
             if($prospect->getUser() === $user){
-                $em->remove($prospect);
+                $em->remove($prospect);                
                 $em->flush();
-       
-                $response = json_encode(array("id" => $id));
+                
+                $response = json_encode(array(
+                    'id' => $id,
+                    'success' => $prospect->getFirstName().' '.$prospect->getLastname().' has been deleted !'
+                ));
 
                 return new Response($response);
+
             } else {
                 throw $this->createAccessDeniedException('You cannot access this page!');
             }
@@ -154,7 +158,7 @@ class ProspectController extends Controller
     /**
      * Lists Prospect entities.
      *
-     * @Route("/list", name="prospect_list")
+     * @Route("/list", name="prospect_list", options={"expose"=true})
      * @Method({"GET", "POST"})
      * @Template(":Frontend/Prospect:list.html.twig")
      */
@@ -177,7 +181,7 @@ class ProspectController extends Controller
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1) /*page number*/,
-            5 /*limit per page*/
+            8 /*limit per page*/
         );
                        
         return array(

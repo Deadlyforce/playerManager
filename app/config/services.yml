@@ -24,7 +24,6 @@ services:
         class: AppBundle\EventListener\CachePhotoListener
         arguments: 
             - "@liip_imagine.cache.manager"
-            - "@request_stack"
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: preRemove }

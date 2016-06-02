@@ -2,6 +2,8 @@
 {% import ":Frontend/Macros/Prospect:photoDisplay250px.html.twig" as photoDisplay %}
 
 {% block title %}{{ prospect.firstname }}{% endblock %}
+{% set csrfDelete = csrf_token('delete') %}
+
 
 {% form_theme delete_form _self %}
 
@@ -92,6 +94,16 @@
                         </div>
                     </div>
                 {% endif %}
+            </div>
+            <div class="row-delete">
+                <div id="prospect-delete">
+                    <div class="tilecontent">
+                        
+                        <a href="#" data-id="{{ prospect.id }}" title="Delete prospect"><i class="icon ion-ios-trash-outline"></i></a>
+                        <p class="tile-title">Delete contact</p>
+                        
+                    </div>
+                </div>
             </div>
             <div class="row-neutral">
             </div>
@@ -310,7 +322,7 @@
         $(document).ready(function(){
             
             var age = "{{ prospect.age }}";
-            $("#age span").animateNumber({ number: age }, 3000);
+            $("#age span").animateNumber({ number: age }, 2000);
             
             if (typeof "{{ prospect.encounterCount }}" !== 'undefined') {
                 var encounterCount = "{{ prospect.encounterCount }}";
@@ -458,6 +470,66 @@
                     readOnly: true
                 });                
             });
+            
+            // Delete confirm **************************************************
+            $("#prospect-delete").on("click", "a", function(event){
+                event.preventDefault();
+
+                var prospect_id = $(this).data("id");                
+
+                $.confirm({
+                    animation: 'zoom',
+                    animationBounce: 1,
+                    confirm: function(){
+                        ajaxDeleteProspect(prospect_id);
+                    },
+                    cancel: function(){
+                        console.log('the user clicked cancel');
+                    }
+                });
+            });
+
+            /**
+             * Deletes a prospect with ajax
+             * 
+             * @param {int} prospect_id
+             * @returns {undefined}
+             */
+            function ajaxDeleteProspect(prospect_id)
+            {                
+                var url = Routing.generate('ajax_delete_prospect', {'id': prospect_id, '_locale': locale});  
+                var csrfDelete = "{{ csrfDelete }}";
+                var data = {'csrfDelete': csrfDelete};
+
+                $.post(url, data, function(response){
+
+                    var data = $.parseJSON(response);
+                    var id = data.id;
+                    var success_msg = data.success;                    
+                    
+                    $("#confirm-panel").addClass(".confirm-success");
+                    confirmPanel('<p>' + success_msg+ '</p>');
+                });
+            }
+            
+            function confirmPanel(msg)
+            {
+                $("#confirm-panel").html(msg);
+                $("#confirm-panel").animate({
+                    "top": "0"
+                }, 200, "linear", function(){
+                    $(this).delay(3000).animate({
+                        "top": "-75"
+                    }, 200, "linear", function(){
+                        $(this).empty();
+                        $("#confirm-panel").removeClass();
+                        
+                        var url = Routing.generate('prospect_list', {'_locale': locale});
+console.log(url);
+                        window.location.replace(url);
+                    });
+                });                
+            }
         });
     </script>
 {% endblock %}
