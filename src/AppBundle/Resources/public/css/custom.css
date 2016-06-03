@@ -956,13 +956,31 @@ p.prospect-age{
     display: inline-block;
     vertical-align: top;
 }
-.prospect-ratings{    
+.prospect-ratings, #prospect-redflags{    
     width: 176px;
     height: 88px;
     display: table;
     text-align: center;
     background-color: #fff;
 }
+#prospect-redflags i{
+    font-size: 2.1em;
+    color: #DDD;
+}
+#redflags-empty{
+    position: relative;
+}
+#redflags-full{
+    position: absolute;
+    top: 0;
+    left: 24px;
+    z-index: 2;
+}
+#redflags-full i{
+    font-size: 2.1em;
+    color: red;
+}
+
 .rating-icon{
     float: left;
     display: table;
@@ -1659,7 +1677,7 @@ ul.record_actions{
     margin-bottom: 35px;
 }
 #container-relationship .page-nav p{
-    font-family: "ralewayregular", sans-serif;
+    font-family: "open_sansregular", sans-serif;
     text-align: center;
     font-size: 1.2em;
     color: #F47363;
@@ -1989,10 +2007,6 @@ ul#photo-list .row > li{
     margin-bottom: 15px;
 }
 
-/*ul#photo-list input[type="file"]{
-    width: 80%;
-}*/
-
 a.add-photo{
     color: #fff;
     font-size: 2em;    
@@ -2269,7 +2283,7 @@ form[name="appbundle_rating"] > div > label {
 }
 
 form[name="appbundle_redflag"] > div {
-    margin-bottom: 35px;
+    margin-bottom: 25px;
 }
 form[name="appbundle_redflag"] > div > label {
     width: 280px;

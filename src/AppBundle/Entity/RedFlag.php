@@ -33,54 +33,30 @@ class RedFlag
     private $prospect;
 
     /**
-     * @var int
+     * @var boolean
      *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="unemployed", type="smallint", nullable=true)
+     * @ORM\Column(name="unemployed", type="boolean")
      */
     private $unemployed;
 
     /**
-     * @var int
-     *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="needy", type="smallint", nullable=true)
+     * @var boolean
+     *     
+     * @ORM\Column(name="needy", type="boolean", nullable=true)
      */
     private $needy;
 
     /**
-     * @var int
+     * @var boolean
      *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="children", type="smallint", nullable=true)
+     * @ORM\Column(name="children", type="boolean")
      */
     private $children;
 
     /**
-     * @var int
+     * @var boolean
      *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="smoker", type="smallint", nullable=true)
+     * @ORM\Column(name="smoker", type="boolean")
      */
     private $smoker;
 
@@ -95,7 +71,7 @@ class RedFlag
      * )
      * @ORM\Column(name="checkphone", type="smallint", nullable=true)
      */
-    private $checkphone;    
+//    private $checkphone;    
 
     /**
      * @var int
@@ -108,7 +84,7 @@ class RedFlag
      * )
      * @ORM\Column(name="selfAbsorbed", type="smallint", nullable=true)
      */
-    private $selfAbsorbed;
+//    private $selfAbsorbed;
 
     /**
      * @var int
@@ -121,31 +97,19 @@ class RedFlag
      * )
      * @ORM\Column(name="cheapdate", type="smallint", nullable=true)
      */
-    private $cheapdate;
+//    private $cheapdate;
 
     /**
-     * @var int
+     * @var boolean
      *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="snore", type="smallint", nullable=true)
+     * @ORM\Column(name="snore", type="boolean")
      */
     private $snore;
 
     /**
-     * @var int
+     * @var boolean
      *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="hygiene", type="smallint", nullable=true)
+     * @ORM\Column(name="hygiene", type="boolean")
      */
     private $hygiene;
     
@@ -277,22 +241,22 @@ class RedFlag
      *
      * @return RedFlag
      */
-    public function setCheckphone($checkphone)
-    {
-        $this->checkphone = $checkphone;
-
-        return $this;
-    }
+//    public function setCheckphone($checkphone)
+//    {
+//        $this->checkphone = $checkphone;
+//
+//        return $this;
+//    }
 
     /**
      * Get checkphone
      *
      * @return int
      */
-    public function getCheckphone()
-    {
-        return $this->checkphone;
-    }
+//    public function getCheckphone()
+//    {
+//        return $this->checkphone;
+//    }
 
     /**
      * Set selfAbsorbed
@@ -301,22 +265,22 @@ class RedFlag
      *
      * @return RedFlag
      */
-    public function setSelfAbsorbed($selfAbsorbed)
-    {
-        $this->selfAbsorbed = $selfAbsorbed;
-
-        return $this;
-    }
+//    public function setSelfAbsorbed($selfAbsorbed)
+//    {
+//        $this->selfAbsorbed = $selfAbsorbed;
+//
+//        return $this;
+//    }
 
     /**
      * Get selfAbsorbed
      *
      * @return int
      */
-    public function getSelfAbsorbed()
-    {
-        return $this->selfAbsorbed;
-    }
+//    public function getSelfAbsorbed()
+//    {
+//        return $this->selfAbsorbed;
+//    }
 
     /**
      * Set cheapdate
@@ -325,22 +289,22 @@ class RedFlag
      *
      * @return RedFlag
      */
-    public function setCheapdate($cheapdate)
-    {
-        $this->cheapdate = $cheapdate;
-
-        return $this;
-    }
+//    public function setCheapdate($cheapdate)
+//    {
+//        $this->cheapdate = $cheapdate;
+//
+//        return $this;
+//    }
 
     /**
      * Get cheapdate
      *
      * @return int
      */
-    public function getCheapdate()
-    {
-        return $this->cheapdate;
-    }
+//    public function getCheapdate()
+//    {
+//        return $this->cheapdate;
+//    }
 
     /**
      * Set snore
@@ -464,10 +428,17 @@ class RedFlag
      */
     public function saveAveragedAttributes()
     {
-        $total = 10;
-        $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->checkphone, $this->selfAbsorbed, $this->cheapdate, $this->snore,  $this->hygiene);
+        $attributes =  array(
+            $this->unemployed, 
+            $this->needy, 
+            $this->children, 
+            $this->smoker, 
+            $this->snore,  
+            $this->hygiene
+        );
    
-        $avg = (array_sum($attributes))/$total;
+        $avg = (array_sum($attributes)/count($attributes))*5;
+        
         $whole = floor($avg);
         $deci = $avg - $whole;
         
@@ -486,10 +457,9 @@ class RedFlag
      */
     public function saveExactAveragedAttributes()
     {
-        $total = 10;
-        $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->checkphone, $this->selfAbsorbed, $this->cheapdate, $this->snore,  $this->hygiene);
+        $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->snore,  $this->hygiene);
         
-        $avg = (array_sum($attributes))/$total;
+        $avg = ((array_sum($attributes))/count($attributes))*5;
         $percentAvg = round($avg, 1) * 20;
                 
         $this->percentAverage = $percentAvg;

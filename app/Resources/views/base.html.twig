@@ -77,7 +77,8 @@
                         <div class="collapse navbar-collapse col-md-8 pull-right" id="bs-example-navbar-collapse-1">
                             <ul class="nav navbar-nav">
                                 <li><a href="{{ path('prospect_list') }}" title="Contacts">Contacts</a></li>
-                                <li><a href="{{ path('photo_album', {'user_id': app.user.id}) }}" title="{{ 'app.nav.album'|trans }}">{{ 'app.nav.album'|trans }}</a></li>
+{#                                <li><a href="{{ path('photo_album', {'user_id': app.user.id}) }}" title="{{ 'app.nav.album'|trans }}">{{ 'app.nav.album'|trans }}</a></li>#}
+                                <li><a href="#" title="{{ 'app.nav.album'|trans }}">{{ 'app.nav.album'|trans }}</a></li>
                                 <li><a href="{{ path('dashboard', {'user_id': app.user.id}) }}" title="{{ 'app.nav.dashboard'|trans }}">{{ 'app.nav.dashboard'|trans }}</a></li>
     {#                            <li><a href="{{ path('relationship') }}">{{ 'All relationships'|trans }}</a></li>                                        #}
                                 <li><a href="{{ path('fos_user_profile_show') }}" title="{{ 'app.nav.profile'|trans }}">{{ 'app.nav.profile'|trans }}</a></li>                             

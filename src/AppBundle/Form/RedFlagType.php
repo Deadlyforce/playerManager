@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class RedFlagType extends AbstractType
@@ -18,169 +18,55 @@ class RedFlagType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('unemployed', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "app.redflag.form.level1" => 1,
-                    "app.redflag.form.level2" => 2,
-                    "app.redflag.form.level3" => 3,
-                    "app.redflag.form.level4" => 4,
-                    "app.redflag.form.level5" => 5
-                )
+            ->add('unemployed', CheckboxType::class, array(
+                'required' => false     
             ))
-            ->add('needy', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "app.redflag.form.level1" => 1,
-                    "app.redflag.form.level2" => 2,
-                    "app.redflag.form.level3" => 3,
-                    "app.redflag.form.level4" => 4,
-                    "app.redflag.form.level5" => 5
-                )
+            ->add('needy', CheckboxType::class, array(
+                'required' => false
             ))
-            ->add('children', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "app.redflag.form.level1" => 1,
-                    "app.redflag.form.level2" => 2,
-                    "app.redflag.form.level3" => 3,
-                    "app.redflag.form.level4" => 4,
-                    "app.redflag.form.level5" => 5
-                )
+            ->add('children', CheckboxType::class, array(
+                'required' => false
             ))
-            ->add('smoker', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "app.redflag.form.level1" => 1,
-                    "app.redflag.form.level2" => 2,
-                    "app.redflag.form.level3" => 3,
-                    "app.redflag.form.level4" => 4,
-                    "app.redflag.form.level5" => 5
-                )
+            ->add('smoker', CheckboxType::class, array(
+                'required' => false
             ))
-            ->add('checkphone', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "app.redflag.form.level1" => 1,
-                    "app.redflag.form.level2" => 2,
-                    "app.redflag.form.level3" => 3,
-                    "app.redflag.form.level4" => 4,
-                    "app.redflag.form.level5" => 5
-                )
-            ))           
-            ->add('selfAbsorbed', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "app.redflag.form.level1" => 1,
-                    "app.redflag.form.level2" => 2,
-                    "app.redflag.form.level3" => 3,
-                    "app.redflag.form.level4" => 4,
-                    "app.redflag.form.level5" => 5
-                )
+//            ->add('checkphone', ChoiceType::class, array(
+//                'required' => false,
+//                'choices' => array(
+//                    "app.redflag.form.level1" => 1,
+//                    "app.redflag.form.level2" => 2,
+//                    "app.redflag.form.level3" => 3,
+//                    "app.redflag.form.level4" => 4,
+//                    "app.redflag.form.level5" => 5
+//                )
+//            ))           
+//            ->add('selfAbsorbed', ChoiceType::class, array(
+//                'required' => false,
+//                'choices' => array(
+//                    "app.redflag.form.level1" => 1,
+//                    "app.redflag.form.level2" => 2,
+//                    "app.redflag.form.level3" => 3,
+//                    "app.redflag.form.level4" => 4,
+//                    "app.redflag.form.level5" => 5
+//                )
+//            ))
+//            ->add('cheapdate', ChoiceType::class, array(
+//                'required' => false,
+//                'choices' => array(
+//                    "app.redflag.form.level1" => 1,
+//                    "app.redflag.form.level2" => 2,
+//                    "app.redflag.form.level3" => 3,
+//                    "app.redflag.form.level4" => 4,
+//                    "app.redflag.form.level5" => 5
+//                )
+//            ))
+            ->add('snore', CheckboxType::class, array(
+                'required' => false
             ))
-            ->add('cheapdate', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "app.redflag.form.level1" => 1,
-                    "app.redflag.form.level2" => 2,
-                    "app.redflag.form.level3" => 3,
-                    "app.redflag.form.level4" => 4,
-                    "app.redflag.form.level5" => 5
-                )
-            ))
-            ->add('snore', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "app.redflag.form.level1" => 1,
-                    "app.redflag.form.level2" => 2,
-                    "app.redflag.form.level3" => 3,
-                    "app.redflag.form.level4" => 4,
-                    "app.redflag.form.level5" => 5
-                )
-            ))
-            ->add('hygiene', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "app.redflag.form.level1" => 1,
-                    "app.redflag.form.level2" => 2,
-                    "app.redflag.form.level3" => 3,
-                    "app.redflag.form.level4" => 4,
-                    "app.redflag.form.level5" => 5
-                )
+            ->add('hygiene', CheckboxType::class, array(
+                'required' => false
             ))            
         ;
-//        $builder
-//            ->add('unemployed', IntegerType::class, array(
-//                'required' => false,
-//                'attr' => array(
-//                    'min' => 0,
-//                    'max' => 5
-//                )
-//            ))
-//            ->add('needy', IntegerType::class, array(
-//                'required' => false,
-//                'attr' => array(
-//                    'min' => 0,
-//                    'max' => 5
-//                )
-//            ))
-//            ->add('children', IntegerType::class, array(
-//                'required' => false,
-//                'attr' => array(
-//                    'min' => 0,
-//                    'max' => 5
-//                )
-//            ))
-//            ->add('smoker', IntegerType::class, array(
-//                'required' => false,
-//                'attr' => array(
-//                    'min' => 0,
-//                    'max' => 5
-//                )
-//            ))
-//            ->add('checkphone', IntegerType::class, array(
-//                'required' => false,
-//                'attr' => array(
-//                    'min' => 0,
-//                    'max' => 5
-//                )
-//            ))
-//            ->add('boring', IntegerType::class, array(
-//                'required' => false,
-//                'attr' => array(
-//                    'min' => 0,
-//                    'max' => 5
-//                )
-//            ))
-//            ->add('selfAbsorbed', IntegerType::class, array(
-//                'required' => false,
-//                'attr' => array(
-//                    'min' => 0,
-//                    'max' => 5
-//                )
-//            ))
-//            ->add('cheapdate', IntegerType::class, array(
-//                'required' => false,
-//                'attr' => array(
-//                    'min' => 0,
-//                    'max' => 5
-//                )
-//            ))
-//            ->add('snore', IntegerType::class, array(
-//                'required' => false,
-//                'attr' => array(
-//                    'min' => 0,
-//                    'max' => 5
-//                )
-//            ))
-//            ->add('hygiene', IntegerType::class, array(
-//                'required' => false,
-//                'attr' => array(
-//                    'min' => 0,
-//                    'max' => 5
-//                )
-//            ))            
-//        ;
     }
     
     /**

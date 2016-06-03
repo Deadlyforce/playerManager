@@ -52,29 +52,33 @@
                             <div class="prospect-ratings">
                                 <div class="tilecontent">
                                     <div class="rating-avg" title="Average rating for this contact" data-rating="{{ prospect.rating.average }}"></div>
-                                </div>
-                                {#<div class="rating-icon">
-                                    <div class="tilecontent">
-                                        <i class="icon ion-ios-star"></i>
-                                    </div>
-                                </div>
-                                <div class="rating-percentage" data-avg="{{ prospect.rating.percentAverage }}">
-                                    <div class="tilecontent">
-                                        <p><span>{{ prospect.rating.percentAverage }}</span>%</p>
-                                    </div>            
-                                </div>#}            
+                                </div>                                            
                             </div> 
-                            <div class="prospect-redflags">        
-                                <div class="redflag-icon">
-                                    <div class="tilecontent">
-                                        <i class="icon ion-flag"></i>
+                            <div id="prospect-redflags">                               
+                                <div class="tilecontent">
+                                    <div id="list-redflag-avg" title="Average redflags for this contact">
+                                        <div id="redflags-empty">
+                                            <i class="icon ion-flag"></i>
+                                            <i class="icon ion-flag"></i>
+                                            <i class="icon ion-flag"></i>
+                                            <i class="icon ion-flag"></i>
+                                            <i class="icon ion-flag"></i>
+                                            <div id="redflags-full">
+                                                {% if prospect.redflag.average %}
+                                                    {% for n in 1..prospect.redflag.average %}                                                    
+                                                        <i class="icon ion-flag"></i>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
+                                        </div>                                        
                                     </div>
-                                </div>  
-                                <div class="redflag-percentage" data-avg="{{ prospect.redflag.percentAverage }}">
+                                </div>
+   
+{#                                <div class="redflag-percentage" data-avg="{{ prospect.redflag.percentAverage }}">
                                     <div class="tilecontent">
                                         <p><span>{{ prospect.redflag.percentAverage }}</span>%</p>
                                     </div>            
-                                </div> 
+                                </div>#} 
                             </div>
                             <div class="clearfix"></div>
                         </div>                    
