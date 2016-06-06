@@ -8,8 +8,10 @@ use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use AppBundle\Form\VenueType;
 
 class EncounterType extends AbstractType
 {
@@ -48,8 +50,14 @@ class EncounterType extends AbstractType
             ->add('venueChange', CheckboxType::class, array(
                 'required' => false
             ))
-            ->add('venuesList', TextType::class,  array(
-                'required' => false
+            ->add('venues', CollectionType::class, array(
+                'entry_type' => VenueType::class,
+                'entry_options' => array(
+                    'required' => false                    
+                ),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false
             ))
             ->add('submit', SubmitType::class, array(
                 

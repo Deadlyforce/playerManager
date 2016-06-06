@@ -2114,6 +2114,16 @@ input#appbundle_contact_us_subject{
     padding: 8px;
     margin-top: -8px;
     border-radius: 23px;
+    text-align: center;
+}
+.encounter-date span#no-duration{
+    background-color: rgb(255, 255, 255);
+    color: rgb(102, 102, 102);
+    padding: 8px;
+    margin-top: -8px;
+    border-radius: 23px;
+    text-align: center;
+    width: 46px;
 }
 .encounter-details{
     padding: 25px 10px 30px 15px;

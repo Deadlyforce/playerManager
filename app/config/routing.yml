@@ -1,3 +1,7 @@
+app_venue:
+    resource: "@AppBundle/Controller/VenueController.php"
+    type:     annotation
+
 #app_red_flag:
 #    resource: "@AppBundle/Controller/RedFlagController.php"
 #    type:     annotation

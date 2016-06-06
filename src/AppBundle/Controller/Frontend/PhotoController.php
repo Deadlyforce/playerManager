@@ -21,36 +21,6 @@ use AppBundle\Form\ProspectType;
  */
 class PhotoController extends Controller
 {
-    /**
-     * Returns a crop form
-     * 
-     * @Route("/{id}/edit", name="ajax_crop_form", options={"expose"=true})
-     * @Template(":ajax.html.twig")
-     */
-//    public function ajaxCropFormAction($id)
-//    {
-//        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-//            throw $this->createAccessDeniedException('You cannot access this page!');
-//        }        
-//        $user = $this->get('security.token_storage')->getToken()->getUser();
-//        
-//        $em = $this->getDoctrine()->getManager();
-//        $photo = $em->getRepository('AppBundle:Photo')->find($id);
-//        
-//        if($photo->getProspect()->getUser() === $user){      
-//            
-//            $form = $this->createForm(PhotoType::class, $photo);            
-//            $form_view = $this->renderView(":Frontend/Photo:edit.html.twig", array(
-//                'form' => $form->createView(),
-//                'photo' => $photo
-//            ));
-//            
-//            return new Response($form_view);
-//        } else {
-//            throw $this->createAccessDeniedException('You cannot access this page!');
-//        }
-//        
-//    }
     
     /**
      * Gallery index for a given prospect

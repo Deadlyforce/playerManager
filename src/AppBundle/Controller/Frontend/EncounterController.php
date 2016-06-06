@@ -46,7 +46,7 @@ class EncounterController extends Controller
                 'method' => 'POST',
                 'action' => $this->generateUrl('encounter_new', array('prospect_id' => $prospect_id))
             ));
-            
+           
             $form_view = $this->renderView(":Frontend/Encounter:new.html.twig", array(
                 'form' => $form->createView(),
                 'prospect' => $prospect

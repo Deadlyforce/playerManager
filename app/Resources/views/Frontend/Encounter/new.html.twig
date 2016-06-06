@@ -19,8 +19,13 @@
                             {{ form_errors(form.venueChange) }}
                         </div>
                     </div>
-                    {{ form_row(form.venuesList, {'label': 'Venues list'}) }}
-                    
+                    <div>    
+                        <p>Venues</p>
+                        {{ form_errors(form.venues) }}                    
+                        <ul class="venues" data-prototype="{{ form_widget(form.venues.vars.prototype)|e }}">
+                            {{ form_widget(form.venues) }}
+                        </ul>                   
+                    </div>
                     {{ form_widget(form.submit, {'label': 'Save changes', 'attr': {'class': 'btn-basic-rose'} }) }}
                 {{ form_end(form) }}               
             </div>
@@ -28,8 +33,50 @@
     </div>
                 
     <script type="text/javascript">
+        var addVenueLink = $('<a href="#" class="add_venue_link">Add a venue</a>');
+        var newLinkLi = $('<li></li>').append(addVenueLink);
+        
         $(document).ready(function(){
             getDatetimepicker();
+            
+            // Collection management *******************************************
+            var collectionHolder = $('ul.venues');
+            collectionHolder.append(newLinkLi);
+            
+            collectionHolder.data('index', collectionHolder.find(':input').length); // Count the number of inputs in coll
+            
+            addVenueLink.on('click', function(e) {                
+                e.preventDefault();
+                
+                addVenueForm(collectionHolder, newLinkLi); // add a new venue form (see code block below)
+            });
+            
+            function addVenueForm(collectionHolder, newLinkLi) {
+                
+                var prototype = collectionHolder.data('prototype');                
+                var index = collectionHolder.data('index');
+
+                // Replace '$$name$$' in the prototype's HTML to
+                // instead be a number based on how many items we have
+                var newForm = prototype.replace(/__name__/g, index);
+                
+                collectionHolder.data('index', index + 1); // increase the index with one for the next item
+                
+                var newFormLi = $('<li></li>').append(newForm); // Display the form in the page in an li, before the "Add a tag" link li                
+                newFormLi.append('<a href="#" class="remove-venue">X</a>'); // also add a remove button, just for this example
+
+                newLinkLi.before(newFormLi);
+
+                // handle the removal, just for this example
+                $('.remove-venue').click(function(e) {
+                    e.preventDefault();
+
+                    $(this).parent().remove();
+                    return false;
+                });
+            }
+            
+            // End Collection management ***************************************
             
             // Used in modale with form new
             $(".slide-button-base").on("click", ".slide-button", function(){      

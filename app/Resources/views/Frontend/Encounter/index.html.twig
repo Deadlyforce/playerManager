@@ -10,8 +10,8 @@
         </section>
         <div class="page-title-underline"></div> 
 
-        <div class="page-nav">
-            {#<a class="btn-basic-ico" href="{{ path('encounter_new', {'prospect_id': prospect.id}) }}" id="add_encounter" title ="Add encounter"><i class="icon ion-ios-plus-empty"></i><span>Add an encounter</span></a>#}
+        <div class="page-nav">            
+            <a class="btn-basic" href="{{ path('prospect_show', {'id': prospect.id}) }}" title="Back to contact">Back to contact</a>
             <a class="btn-basic-ico" href="#" id="add_encounter" title ="Add encounter"><i class="icon ion-ios-plus-empty"></i><span>Add an encounter</span></a>
         </div>
             
@@ -30,7 +30,16 @@
                                 {% else %}
                                     {{ encounter.date|date("Y-m-d") }} at {{ encounter.date|date("H:i") }}
                                 {% endif %}
-                                <span class="pull-right" title="Duration">{{ encounter.duration }} h</span>
+                                
+                                {% if encounter.duration %}
+                                    <span class="pull-right" title="Duration">
+                                        {{ encounter.duration }} h
+                                    </span>
+                                {% else %}
+                                    <span class="pull-right" id="no-duration" title="Duration">
+                                        ?
+                                    </span>
+                                {% endif %}                                
                             </div>
                             <div class="encounter-details">
                                 <div class="place">{{ encounter.place }}</div>
@@ -38,9 +47,11 @@
                                 <div><span>Expenses </span>{{ encounter.expenses }}{% if app.request.locale in localesEuro %} €{% else %} ${% endif %}</div>
                                 <div><span>Changed venue </span>{% if encounter.venueChange == 1 %}Yes{% else %}No{% endif %}</div>
                                 <div>
-                                    <div class="venues-list">Venues list </div>
-                                    {% if encounter.venuesList %}
-                                        {{ encounter.venuesList }}
+                                    <div class="venues-list">Venues</div>
+                                    {% if encounter.venues %}
+                                        {% for venue in encounter.venues %}
+                                            <p>{{ venue }}</p>
+                                        {% endfor %}                                       
                                     {% endif %}
                                 </div>
                             </div>

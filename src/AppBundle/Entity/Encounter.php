@@ -3,6 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Entity\Venue;
 
 /**
  * Encounter
@@ -13,6 +16,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Encounter
 {
+    public function __construct() 
+    {
+        $this->venues = new ArrayCollection();
+    }
+    
     /**
      * @var integer
      *
@@ -62,7 +70,18 @@ class Encounter
      *
      * @ORM\Column(name="venues_list", type="json_array", nullable=true)
      */
-    private $venuesList;
+//    private $venuesList;
+    
+    /**
+     * @var ArrayCollection
+     * 
+     * @Assert\Count(
+     *      max = "5",
+     *      maxMessage = "You cannot specify more than {{ limit }} venues"
+     * )
+     * @ORM\OneToMany(targetEntity="Venue", mappedBy="encounter", cascade={"persist", "remove"}) 
+     */
+    private $venues;
     
     /**
      * @var Prospect
@@ -71,6 +90,7 @@ class Encounter
      */
     private $prospect;
 
+    
 
     /**
      * Get id
@@ -209,21 +229,55 @@ class Encounter
      *
      * @return Rencontre
      */
-    public function setVenuesList($venuesList)
-    {
-        $this->venuesList = $venuesList;
-
-        return $this;
-    }
+//    public function setVenuesList($venuesList)
+//    {
+//        $this->venuesList = $venuesList;
+//
+//        return $this;
+//    }
 
     /**
      * Get venuesList
      *
      * @return json_array
      */
-    public function getVenuesList()
+//    public function getVenuesList()
+//    {
+//        return $this->venuesList;
+//    }
+    
+    /**
+    * Get venues
+    * 
+    * @return Array
+    */
+   public function getVenues()
+   {
+        return $this->venues;
+   }
+   
+   /**
+    * Set Venue
+    * 
+    * @param Venue $venue
+    * @return Encounter
+    */
+   public function addVenue(Venue $venue)
+   {
+        $this->venues[] = $venue;
+        $venue->setEncounter($this);
+        
+        return $this;
+   }
+   
+   /**
+     * Remove Venue
+     *
+     * @param Venue $venue
+     */
+    public function removeVenue(Venue $venue)
     {
-        return $this->venuesList;
+        $this->venues->removeElement($venue);
     }
 
     /**

@@ -11,7 +11,7 @@
         <div class="page-title-underline"></div>
         
         <div class="page-nav">
-            <a class="btn-basic" href="{{ path('prospect_list') }}" title="Back to prospects">Back to contacts</a>
+            <a class="btn-basic" href="{{ path('prospect_show', {'id': prospect.id}) }}" title="Back to contact">Back to contact</a>
             <br>
             <div class="alert alert-danger collapse"></div>
         </div>        
@@ -47,7 +47,6 @@
                                             </li>
                                              <li>
                                                 <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo"><i class="icon ion-ios-crop-strong"></i></a>
-{#                                                <a class="crop-photo" href="#" data-id="{{ photo.vars.data.id }}" title="Crop photo"><i class="icon ion-ios-crop-strong"></i></a>#}
                                             </li>
                                             <li class="delete-photo" title="Delete photo">
                                                 {# Container for the delete button #}
@@ -269,7 +268,7 @@
         
         collectionHolder = $('#photo-list');
         
-        // add a delete link to all of the existing tag form li elements
+        // add a delete link to all of the existing photo form li elements
         collectionHolder.find('li').each(function() {
             addPhotoFormDeleteLink($(this));
         });

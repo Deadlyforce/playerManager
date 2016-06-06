@@ -33,7 +33,7 @@ class ProspectType extends AbstractType
                 'label' => 'First Name'                
             ))
             ->add('lastname', TextType::class, array(
-                'required' => FALSE, 
+                'required' => false, 
                 'label' => 'Last Name'                
             ))
             ->add('age', ChoiceType::class, array(
