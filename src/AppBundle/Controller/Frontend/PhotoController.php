@@ -66,11 +66,7 @@ class PhotoController extends Controller
      * @Template(":Frontend/Prospect:edit.html.twig")
      */
     public function updateAction(Request $request, $id)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
+    {        
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
@@ -85,7 +81,7 @@ class PhotoController extends Controller
             
             $originalPhotos = new ArrayCollection();
 
-            // Create an ArrayCollection of the current Photo objects in the database
+            // Create an ArrayCollection of the current Photo objects existing in the database
             foreach ($prospect->getPhotos() as $photo) {
                 $originalPhotos->add($photo);              
             }

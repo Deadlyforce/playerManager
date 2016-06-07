@@ -30,9 +30,6 @@ class EncounterType extends AbstractType
 		'widget' => 'single_text',
 		'format' => 'dd-MM-yyyy HH:mm'
             ))
-            ->add('place', TextType::class, array(
-                'required' => false
-            ))
             ->add('duration', IntegerType::class, array(
                 'required' => false,
                 'attr' => array(
@@ -47,9 +44,9 @@ class EncounterType extends AbstractType
                     'max' => 5000
                 )         
             ))
-            ->add('venueChange', CheckboxType::class, array(
-                'required' => false
-            ))
+//            ->add('venueChange', CheckboxType::class, array(
+//                'required' => false
+//            ))
             ->add('venues', CollectionType::class, array(
                 'entry_type' => VenueType::class,
                 'entry_options' => array(

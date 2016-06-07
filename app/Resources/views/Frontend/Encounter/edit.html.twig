@@ -7,19 +7,29 @@
             </div>
             <div class="col-md-9 main-col">
                 {{ form_start(editForm) }}
-                    {{ form_row(editForm.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datetimepicker'} }) }}
-                    {{ form_row(editForm.place, {'label': 'Place'}) }}
+                    {{ form_row(editForm.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datetimepicker'} }) }}                    
                     {{ form_row(editForm.duration, {'label': 'Duration (Hours)'}) }}
                     {{ form_row(editForm.expenses, {'label': 'Total expenses (€)'}) }}
-                    <div>                        
+                    {#<div>                        
                         {{ form_label(editForm.venueChange, 'Venue change?') }}
                         <div class="slide-button-base yes-no-button">
                             {{ form_widget(editForm.venueChange) }}
                             <div id="encounter_venueChange_button" class="slide-button"></div> 
                             {{ form_errors(editForm.venueChange) }}
                         </div>
-                    </div>
-                    {{ form_row(editForm.venuesList, {'label': 'Venues list'}) }}
+                    </div>#}
+                    <div>    
+                        <p>Add or edit venues</p>                   
+                        {{ form_errors(editForm.venues) }}                    
+                        <ul class="venues" data-prototype="{{ form_widget(editForm.venues.vars.prototype)|e }}">
+                            {% for venue in editForm.venues %}
+                                <li>
+                                    {{ form_widget(venue.name) }}
+                                </li>
+                            {% endfor %}
+                        </ul>                   
+                    </div>                        
+                        
                     {{ form_row(editForm.submit, {'label': 'Save changes', 'attr': {'class': 'btn-basic-rose'} }) }}
                 {{ form_end(editForm) }}       
             </div>
@@ -27,8 +37,67 @@
     </div>
                 
     <script type="text/javascript">
+        var addVenueLink = $('<a href="#" class="add_venue_link">Add a venue</a>');
+        var newLinkLi = $('<li></li>').append(addVenueLink);
+        
         $(document).ready(function(){
             getDatetimepicker();
+            
+            // Collection management *******************************************
+            var collectionHolder = $('ul.venues');
+            
+            // add a delete link to all of the existing photo form li elements
+            {#collectionHolder.find('input').each(function() {
+                $(this).parent().wrap('<li></li>');                
+            });#}
+            collectionHolder.find('li').each(function() {                
+                addVenueFormDeleteLink($(this));
+            });
+            
+            collectionHolder.append(newLinkLi);
+            
+            collectionHolder.data('index', collectionHolder.find(':input').length); // Count the number of inputs in coll
+            
+            addVenueLink.on('click', function(e) {                
+                e.preventDefault();
+                
+                var nbr = (collectionHolder.find('input').length)+1; // count inputs
+                
+                if (nbr < 4) {                
+                    addVenueForm(collectionHolder, newLinkLi); // add a new venue form (see code block below)
+                }
+            });
+            
+            function addVenueForm(collectionHolder, newLinkLi) {
+                
+                var prototype = collectionHolder.data('prototype');                
+                var index = collectionHolder.data('index');
+
+                // Replace '$$name$$' in the prototype's HTML to
+                // instead be a number based on how many items we have
+                var newForm = prototype.replace(/__name__/g, index);
+                
+                collectionHolder.data('index', index + 1); // increase the index with one for the next item
+                
+                var newFormLi = $('<li></li>').append(newForm); // Display the form in the page in an li, before the "Add a tag" link li                
+
+                newLinkLi.before(newFormLi);
+                
+                addVenueFormDeleteLink(newFormLi);
+            }
+            
+            function addVenueFormDeleteLink(venueFormLi)
+            {
+                var removeForm =  $('<a href="#" class="remove-venue">X</a>');
+                venueFormLi.append(removeForm);
+
+                removeForm.click(function(e){
+                    e.preventDefault();        
+
+                    venueFormLi.remove();
+                });
+            }            
+            // End Collection management ***************************************
             
             // Used in modale with form new
             $(".slide-button-base").on("click", ".slide-button", function(){      

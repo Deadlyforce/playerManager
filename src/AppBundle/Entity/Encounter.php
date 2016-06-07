@@ -38,13 +38,6 @@ class Encounter
     private $date;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="place", type="string", length=255, nullable=true)
-     */
-    private $place;
-
-    /**
      * @var integer
      *
      * @ORM\Column(name="duration", type="integer", nullable=true)
@@ -64,19 +57,12 @@ class Encounter
      * @ORM\Column(name="venue_change", type="boolean", nullable=true)
      */
     private $venueChange;
-
-    /**
-     * @var json_array
-     *
-     * @ORM\Column(name="venues_list", type="json_array", nullable=true)
-     */
-//    private $venuesList;
     
     /**
      * @var ArrayCollection
      * 
      * @Assert\Count(
-     *      max = "5",
+     *      max = "3",
      *      maxMessage = "You cannot specify more than {{ limit }} venues"
      * )
      * @ORM\OneToMany(targetEntity="Venue", mappedBy="encounter", cascade={"persist", "remove"}) 
@@ -124,30 +110,6 @@ class Encounter
     public function getDate()
     {
         return $this->date;
-    }
-
-    /**
-     * Set place
-     *
-     * @param string $place
-     *
-     * @return Encounter
-     */
-    public function setPlace($place)
-    {
-        $this->place = $place;
-
-        return $this;
-    }
-
-    /**
-     * Get place
-     *
-     * @return string
-     */
-    public function getPlace()
-    {
-        return $this->place;
     }
 
     /**
@@ -221,30 +183,6 @@ class Encounter
     {
         return $this->venueChange;
     }
-
-    /**
-     * Set venuesList
-     *
-     * @param json_array $venuesList
-     *
-     * @return Rencontre
-     */
-//    public function setVenuesList($venuesList)
-//    {
-//        $this->venuesList = $venuesList;
-//
-//        return $this;
-//    }
-
-    /**
-     * Get venuesList
-     *
-     * @return json_array
-     */
-//    public function getVenuesList()
-//    {
-//        return $this->venuesList;
-//    }
     
     /**
     * Get venues
@@ -302,5 +240,19 @@ class Encounter
         return $this->prospect;
     }
     
+    
+    /**
+     * @ORM\PreFlush()
+     */
+    public function updateVenueChange()
+    {
+        $venues = $this->getVenues();
+
+        if ($venues->count() > 1) {
+            $this->venueChange = true;
+        } else {
+            $this->venueChange = false;
+        }
+    }
 }
 

@@ -198,10 +198,7 @@ class EncounterController extends Controller
      * @Template(":Frontend/Encounter:edit.html.twig")
      */
     public function editAction(Request $request, $id)
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }        
+    {        
         $user = $this->get('security.token_storage')->getToken()->getUser();
         
         $em = $this->getDoctrine()->getManager();
@@ -214,10 +211,18 @@ class EncounterController extends Controller
         if ($user === $encounter->getProspect()->getUser()) {
             $deleteForm = $this->createDeleteForm($id);
             $editForm = $this->createForm('AppBundle\Form\EncounterType', $encounter);
+            
             $editForm->handleRequest($request);        
 
-
             if ($editForm->isSubmitted() && $editForm->isValid()) {
+
+                $venues = $encounter->getVenues();
+                $delVenuesArray = $venues->getDeleteDiff();
+
+                foreach ($delVenuesArray as $venue) {
+                    $encounter->removeVenue($venue);
+                    $em->remove($venue);
+                }
 
                 $em->persist($encounter);
                 $em->flush();
@@ -233,59 +238,7 @@ class EncounterController extends Controller
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }       
-    }
-
-    /**
-    * Creates a form to edit a Encounter entity.
-    *
-    * @param Encounter $entity The entity
-    *
-    * @return \Symfony\Component\Form\Form The form
-    */
-    private function createEditForm(Encounter $entity)
-    {
-        $form = $this->createForm(EncounterType::class, $entity, array(
-            'action' => $this->generateUrl('encounter_update', array('id' => $entity->getId())),
-            'method' => 'PUT',
-        ));
-
-        $form->add('submit', SubmitType::class, array('label' => 'Update'));
-
-        return $form;
-    }
-    
-    /**
-     * Edits an existing Encounter entity.
-     *
-     * @Route("/{id}", name="encounter_update")
-     * @Method("PUT")
-     * @Template(":Frontend/Encounter:edit.html.twig")
-     */
-    public function updateAction(Request $request, $id)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $entity = $em->getRepository('AppBundle:Encounter')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Encounter entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-        $editForm = $this->createEditForm($entity);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isValid()) {
-            $em->flush();
-
-            return $this->redirect($this->generateUrl('encounter_edit', array('id' => $id)));
-        }
-
-        return array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        );
-    }
+    }  
     
     /**
      * Deletes a Encounter entity.

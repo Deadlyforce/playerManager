@@ -7,23 +7,22 @@
             </div>
             <div class="col-md-9 main-col">
                 {{ form_start(form) }}
-                    {{ form_row(form.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datetimepicker'} }) }}
-                    {{ form_row(form.place, {'label': 'Place'}) }}
+                    {{ form_row(form.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datetimepicker'} }) }}                    
                     {{ form_row(form.duration, {'label': 'Duration (Hours)'}) }}
                     {{ form_row(form.expenses, {'label': 'Total expenses (€)'}) }}
-                    <div>                        
+                    {#<div>                        
                         {{ form_label(form.venueChange, 'Venue change?') }}
                         <div class="slide-button-base yes-no-button">
                             {{ form_widget(form.venueChange) }}
                             <div id="encounter_venueChange_button" class="slide-button"></div> 
                             {{ form_errors(form.venueChange) }}
                         </div>
-                    </div>
+                    </div>#}
                     <div>    
-                        <p>Venues</p>
+                        <p>Add up to 3 venues</p>
                         {{ form_errors(form.venues) }}                    
                         <ul class="venues" data-prototype="{{ form_widget(form.venues.vars.prototype)|e }}">
-                            {{ form_widget(form.venues) }}
+                            {# Prototypes #}
                         </ul>                   
                     </div>
                     {{ form_widget(form.submit, {'label': 'Save changes', 'attr': {'class': 'btn-basic-rose'} }) }}
@@ -48,7 +47,11 @@
             addVenueLink.on('click', function(e) {                
                 e.preventDefault();
                 
-                addVenueForm(collectionHolder, newLinkLi); // add a new venue form (see code block below)
+                var nbr = (collectionHolder.find('input').length)+1; // count inputs
+                
+                if (nbr < 4) {                
+                    addVenueForm(collectionHolder, newLinkLi); // add a new venue form (see code block below)
+                }
             });
             
             function addVenueForm(collectionHolder, newLinkLi) {
@@ -63,19 +66,23 @@
                 collectionHolder.data('index', index + 1); // increase the index with one for the next item
                 
                 var newFormLi = $('<li></li>').append(newForm); // Display the form in the page in an li, before the "Add a tag" link li                
-                newFormLi.append('<a href="#" class="remove-venue">X</a>'); // also add a remove button, just for this example
 
                 newLinkLi.before(newFormLi);
-
-                // handle the removal, just for this example
-                $('.remove-venue').click(function(e) {
-                    e.preventDefault();
-
-                    $(this).parent().remove();
-                    return false;
-                });
+                
+                addVenueFormDeleteLink(newFormLi);
             }
             
+            function addVenueFormDeleteLink(venueFormLi)
+            {
+                var removeForm =  $('<a href="#" class="remove-venue">X</a>');
+                venueFormLi.append(removeForm);
+
+                removeForm.click(function(e){
+                    e.preventDefault();        
+
+                    venueFormLi.remove();
+                });
+            }            
             // End Collection management ***************************************
             
             // Used in modale with form new

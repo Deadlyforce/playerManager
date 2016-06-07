@@ -42,18 +42,17 @@
                                 {% endif %}                                
                             </div>
                             <div class="encounter-details">
-                                <div class="place">{{ encounter.place }}</div>
-
-                                <div><span>Expenses </span>{{ encounter.expenses }}{% if app.request.locale in localesEuro %} €{% else %} ${% endif %}</div>
-                                <div><span>Changed venue </span>{% if encounter.venueChange == 1 %}Yes{% else %}No{% endif %}</div>
-                                <div>
-                                    <div class="venues-list">Venues</div>
-                                    {% if encounter.venues %}
-                                        {% for venue in encounter.venues %}
-                                            <p>{{ venue }}</p>
-                                        {% endfor %}                                       
-                                    {% endif %}
+                                <div class="venues">
+                                    <ol>
+                                        {% if encounter.venues %}
+                                            {% for venue in encounter.venues %}
+                                                <li class="venue">{{ venue }}</li>
+                                            {% endfor %}                                       
+                                        {% endif %}
+                                    </ol>
                                 </div>
+                                <div><span>Total expenses </span>{{ encounter.expenses }}{% if app.request.locale in localesEuro %} €{% else %} ${% endif %}</div>
+                                <div><span>Changed venue </span>{% if encounter.venueChange == 1 %}Yes{% else %}No{% endif %}</div>                                
                             </div>
                         </div>
                         <div class="encounter-actions">

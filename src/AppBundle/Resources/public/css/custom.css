@@ -2095,9 +2095,9 @@ input#appbundle_contact_us_subject{
     background-color: #fff;
     margin-bottom: 20px;
 }
-.encounter-date-details .place{
+.encounter-date-details .venue{
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     font-family: "open_sanslight", sans-serif;
     font-size: 1.3em;
 }
@@ -2131,17 +2131,16 @@ input#appbundle_contact_us_subject{
     font-size: 1.2em;
     height: 220px;
 }
-.encounter-details > div{
-    margin-bottom: 5px;
+
+.venues{
+    margin-bottom: 25px;
 }
 .encounter-details span{
     display: inline-block;
     width: 145px;
     font-weight: 600;
 }
-.encounter-details .venues-list{
-    font-weight: 600;
-}
+
 .encounter-actions ul{
     list-style: none;
     margin: 0;
