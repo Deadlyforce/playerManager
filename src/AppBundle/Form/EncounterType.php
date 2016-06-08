@@ -44,9 +44,6 @@ class EncounterType extends AbstractType
                     'max' => 5000
                 )         
             ))
-//            ->add('venueChange', CheckboxType::class, array(
-//                'required' => false
-//            ))
             ->add('venues', CollectionType::class, array(
                 'label' => false,
                 'entry_type' => VenueType::class,

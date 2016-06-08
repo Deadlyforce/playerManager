@@ -2095,18 +2095,14 @@ input#appbundle_contact_us_subject{
     background-color: #fff;
     margin-bottom: 20px;
 }
-.encounter-date-details .venue{
-    text-align: center;
-    margin-bottom: 10px;
+.encounter-date-details{
     font-family: "open_sanslight", sans-serif;
-    font-size: 1.3em;
 }
 .encounter-date{    
     padding: 15px 10px 15px 10px;
     font-size: 1.5em;
     background-color: #F47363;
     color: #fff;
-    font-family: "open_sanslight", sans-serif;
 }
 .encounter-date span{
     background-color: rgb(255, 255, 255);
@@ -2127,9 +2123,12 @@ input#appbundle_contact_us_subject{
 }
 .encounter-details{
     padding: 25px 10px 30px 15px;
-    font-family: "open_sansregular", sans-serif;
-    font-size: 1.2em;
+    font-size: 1.5em;
     height: 220px;
+}
+.encounter-details .venue{
+    text-align: center;
+    margin-bottom: 10px;    
 }
 
 .venues{
@@ -2138,8 +2137,6 @@ input#appbundle_contact_us_subject{
 .encounter-details span{
     display: inline-block;
     width: 145px;
-    font-size: 1.2em;
-    font-family: "open_sanslight";
 }
 
 .encounter-actions ul{
