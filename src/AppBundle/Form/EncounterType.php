@@ -48,6 +48,7 @@ class EncounterType extends AbstractType
 //                'required' => false
 //            ))
             ->add('venues', CollectionType::class, array(
+                'label' => false,
                 'entry_type' => VenueType::class,
                 'entry_options' => array(
                     'required' => false                    

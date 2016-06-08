@@ -78,7 +78,7 @@ app:
                 selfAbsorbed: Self-absorbed
                 cheapdate: Cheap Date
                 snore: Snores
-                hygiene: Hygiene problems
+                hygiene: Hygiene
         form:
             level1: 1
             level2: 2

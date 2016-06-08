@@ -18,8 +18,8 @@
                             {{ form_errors(form.venueChange) }}
                         </div>
                     </div>#}
-                    <div>    
-                        <p>Add up to 3 venues</p>
+                    <div class="form-venues">    
+                        <p class="edit-venues">Add up to 3 venues</p>                                          
                         {{ form_errors(form.venues) }}                    
                         <ul class="venues" data-prototype="{{ form_widget(form.venues.vars.prototype)|e }}">
                             {# Prototypes #}
@@ -74,7 +74,7 @@
             
             function addVenueFormDeleteLink(venueFormLi)
             {
-                var removeForm =  $('<a href="#" class="remove-venue">X</a>');
+                var removeForm =  $('<a href="#" class="remove-venue"><i class="icon ion-ios-trash-outline"></i></a>');
                 venueFormLi.append(removeForm);
 
                 removeForm.click(function(e){

@@ -51,8 +51,10 @@
                                         {% endif %}
                                     </ol>
                                 </div>
-                                <div><span>Total expenses </span>{{ encounter.expenses }}{% if app.request.locale in localesEuro %} €{% else %} ${% endif %}</div>
-                                <div><span>Changed venue </span>{% if encounter.venueChange == 1 %}Yes{% else %}No{% endif %}</div>                                
+                                <div>
+                                    <span>Total expenses </span>{{ encounter.expenses }}{% if app.request.locale in localesEuro %} €{% else %} ${% endif %}
+                                </div>
+{#                                <div><span>Changed venue </span>{% if encounter.venueChange == 1 %}Yes{% else %}No{% endif %}</div>                                #}
                             </div>
                         </div>
                         <div class="encounter-actions">

@@ -2138,7 +2138,8 @@ input#appbundle_contact_us_subject{
 .encounter-details span{
     display: inline-block;
     width: 145px;
-    font-weight: 600;
+    font-size: 1.2em;
+    font-family: "open_sanslight";
 }
 
 .encounter-actions ul{
@@ -2200,16 +2201,58 @@ form[name="appbundle_encounter"]{
 form[name="appbundle_encounter"] > div{
     margin-bottom: 10px;
 }
-form[name="appbundle_encounter"] label {
+form[name="appbundle_encounter"] label{
     width: 250px;
     font-weight: 200;
+    font-size: 1.2em;
+}
+p.edit-venues{
     font-size: 1.2em;
 }
 form[name="appbundle_encounter"] input[type="text"], form[name="appbundle_encounter"] input[type="number"]{ 
     background-color: transparent;
     border: 1px solid rgb(137, 155, 142);
     border-radius: 2px;
-    height: 25px;
+    height: 30px;
+    border: 1px solid #ccc;
+}
+
+.form-venues{
+    margin: 40px 0px 10px;
+}
+ul.venues{
+    list-style: none;
+    padding: 0;
+}
+ul.venues li{
+    margin-bottom: 5px;
+}
+ul.venues > li div{
+    display: inline-block;
+    vertical-align: top;
+}
+ul.venues input{
+    width: 200px;
+    padding-left: 5px;
+    vertical-align: top;
+}
+a.remove-venue{
+
+}
+a.remove-venue i{
+    font-size: 1.8em;
+    margin-left: 8px;
+}
+a.remove-venue i::before{
+    vertical-align: top;
+    margin-top: 2px;
+}
+
+a.add_venue_link{
+    background-color: rgb(244, 115, 67);
+    color: rgb(255, 255, 255);
+    padding: 5px;
+    border-radius: 2px;
 }
 
 .slide-button-base{
