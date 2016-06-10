@@ -9,14 +9,32 @@
 
 .error-403{
     text-align: center;
-    padding: 50px 0px 0px 0px;
-    font-family: "ralewaylight", sans-serif;
+    padding: 50px 0px 0px 0px; 
+    color: #FFF;
 }
 .error-403 i{
     font-size: 6em;
 }
-.error-403 p{
-    font-size: 1.2em;
+.error-403 h1{
+    font-family: "sinkin_sans100_thin", sans-serif;
+    font-size: 3em;
+}
+
+.error-404{
+    text-align: center;
+    padding: 50px 0px 0px 0px; 
+    color: #FFF;
+}
+.error-404 i{
+    font-size: 6em;
+}
+.error-404 h1{
+    font-family: "sinkin_sans300_light", sans-serif;
+    font-size: 3em;
+}
+.error-404 h2{
+    font-family: "sinkin_sans100_thin", sans-serif;
+    font-size: 3em;
 }
 
 /******************************* FONTS ***********************************/
