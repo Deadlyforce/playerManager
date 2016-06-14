@@ -20,7 +20,7 @@ class ProspectRepository extends EntityRepository
      * @return Paginator
      */
     public function getProspectsQuery($user, $status, $sex, $relationshipLevel)
-    {      
+    {  
         $qb = $this->_em->createQueryBuilder();
 
         $qb
@@ -35,7 +35,7 @@ class ProspectRepository extends EntityRepository
             ->setParameter('user', $user)
         ;
         
-        if ($status != null) {
+        if ($status !== null) {
             $qb                
                 ->andWhere('r.status = :status')
                 ->setParameter('status', $status)
@@ -55,7 +55,7 @@ class ProspectRepository extends EntityRepository
         }
         
         return $qb->getQuery();     
-    }    
+    }       
         
     /**
      * Returns an array of all prospect ids from the user.

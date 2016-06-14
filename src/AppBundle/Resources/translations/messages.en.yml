@@ -26,6 +26,7 @@ app:
             text2: Analyze your results
     nav:
         album: Photo album
+        oldcontacts: Old contacts
         dashboard: Dashboard
         profile: Profile
         contactus: Contact us
@@ -35,7 +36,7 @@ app:
             add: Add contact
             filter:
                 status: Relationship status
-                sex: sex
+                sex: Sex
                 relationship_type: Relationship type
                 submit: Filter results
     photo:

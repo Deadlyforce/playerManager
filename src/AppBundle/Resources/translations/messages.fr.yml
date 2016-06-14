@@ -26,6 +26,7 @@ app:
             text2: Analysez vos résultats
     nav:
         album: Album photo
+        oldcontacts: Anciens contacts
         dashboard: Tableau de bord
         profile: Profil
         contactus: Nous contacter

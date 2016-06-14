@@ -1,15 +1,15 @@
 {% extends '::base.html.twig' %}
 {% import ":Frontend/Macros/Prospect:photoDisplay175.html.twig" as photoDisplayIndex %}
-{% block title %}Contacts{% endblock %}
+{% block title %}{{ 'app.nav.oldcontacts'|trans }}{% endblock %}
 
 {% block content %}    
     <div class="container standard-container" id="container-prospect">      
 
         <div class="page-nav">
-            <a class="btn-basic-ico" href="#" id="add_prospect" title ="{{ 'app.contact.list.add'|trans }}"><i class="icon ion-ios-plus-empty"></i><span>{{ 'app.contact.list.add'|trans }}</span></a>
+{#            <a class="btn-basic-ico" href="#" id="add_prospect" title ="{{ 'app.contact.list.add'|trans }}"><i class="icon ion-ios-plus-empty"></i><span>{{ 'app.contact.list.add'|trans }}</span></a>#}
             
             {{ form_start(filterForm, {'attr': {'class': 'pull-right form-inline'} }) }}
-                {#<div>
+{#                <div>
                     {{ form_label(filterForm.status, 'app.contact.list.filter.status'|trans) }}
                     {{ form_widget(filterForm.status, {'attr': {'class': 'form-control'} }) }}
                     {{ form_errors(filterForm.status) }}
@@ -72,8 +72,7 @@
                             </div>
                         </div>
                         <div class="clearfix"></div>
-                    </div>                    
-
+                    </div>   
                     <div class="prospect-infos">
                         <p class="prospect-name">{{ prospect.firstname }} {{ prospect.lastname }}</p>
                         <p class="prospect-relationship-rank"><span>{{ prospect.relationship.relationshipRank|upper }}</span></p>
@@ -224,14 +223,14 @@
             $('.modal-full').on('hidden.bs.modal', function (e) {
                 $(".modal-body").empty();
                 $(".modal-title").empty();
-            });
-            
+            });         
             
             $('.modal-full').on('hidden.bs.modal', function (e) {
                 $(".modal-body").empty();
                 $(".modal-title").empty();
-            });                                   
-            
+            });
+           
         });
     </script>
 {% endblock %}
+

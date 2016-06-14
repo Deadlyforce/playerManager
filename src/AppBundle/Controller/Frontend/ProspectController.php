@@ -169,10 +169,45 @@ class ProspectController extends Controller
         $em = $this->getDoctrine()->getManager();
                      
         $filter = $request->request->get('appbundle_prospect_filter');        
-        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user, $filter['status'], $filter['sex'], $filter['relationshipLevel']); 
+        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user, 1, $filter['sex'], $filter['relationshipLevel']); 
         
         $filterForm = $this->createForm('AppBundle\Form\ProspectFilterType', array(
             'action' => $this->generateUrl('prospect_list'),
+            'method' => 'POST'
+        ));
+        
+        $paginator = $this->get('knp_paginator');
+        
+        $pagination = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1) /*page number*/,
+            8 /*limit per page*/
+        );
+                       
+        return array(
+            'pagination' => $pagination,
+            'filterForm' => $filterForm->createView()
+        );
+    }
+    
+    /**
+     * Lists Prospect entities.
+     *
+     * @Route("/offlist", name="prospect_off", options={"expose"=true})
+     * @Method({"GET", "POST"})
+     * @Template(":Frontend/Prospect:offlist.html.twig")
+     */
+    public function offlistAction(Request $request)
+    {
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+       
+        $em = $this->getDoctrine()->getManager();
+                     
+        $filter = $request->request->get('appbundle_prospect_filter');        
+        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user, 0, $filter['sex'], $filter['relationshipLevel']); 
+        
+        $filterForm = $this->createForm('AppBundle\Form\ProspectFilterType', array(
+            'action' => $this->generateUrl('prospect_off'),
             'method' => 'POST'
         ));
         

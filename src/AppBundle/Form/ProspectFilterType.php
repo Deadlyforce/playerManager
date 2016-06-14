@@ -17,13 +17,13 @@ class ProspectFilterType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('status', ChoiceType::class, array(
-                'required' => false,
-                'choices' => array(
-                    "Active" => 1,                    
-                    "Inactive" => 0,                    
-                )
-            ))                                  
+//            ->add('status', ChoiceType::class, array(
+//                'required' => false,
+//                'choices' => array(
+//                    "Active" => 1,                    
+//                    "Inactive" => 0,                    
+//                )
+//            ))                                  
             ->add('sex', ChoiceType::class, array(
                 'required' => false,
                 'choices' => array(
