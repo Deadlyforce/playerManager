@@ -39,6 +39,21 @@ app:
                 sex: Sex
                 relationship_type: Relationship type
                 submit: Filter results
+            new:
+                title: New contact
+                nickname: Nickname
+                firstname: First name
+                lastname: Last name
+                age: Age
+                address: Address
+                city: City
+                zipcode: Zipcode
+                country: Native country
+                cellnumber: Cell number
+                homenumber: Home number
+                job: Job
+                zodiac: Zodiac
+                submit: Save new contact
     photo:
         album:
             subtitle: All your contacts, just photos for now...
@@ -86,3 +101,28 @@ app:
             level3: 3
             level4: 4
             level5: 5
+
+relationship_rank:
+    chatting: Chatting
+    one_night_stand: One Night Stand
+    sex_friend: Sex Friend
+    dating: Dating
+    open_relationship: Open Relationship
+    long_term_relationship: Long Term Relationship
+source:
+    online: Online
+    irl: IRL (In Real Life)
+zodiac:
+    aries: Aries
+    taurus: Taurus
+    gemini: Gemini
+    cancer: Cancer
+    leo: Leo
+    virgo: Virgo
+    libra: Libra
+    scorpio: Scorpio
+    sagittarius: Sagittarius
+    capricorn: Capricorn
+    aquarius: Aquarius
+    pisces: Pisces
+    

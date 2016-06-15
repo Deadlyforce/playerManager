@@ -66,12 +66,19 @@ class ProspectType extends AbstractType
                 'label' => 'Job'                
             ))
             ->add('source', EntityType::class, array(
-                'class' => 'AppBundle:Source'                
+                'class' => 'AppBundle:Source',
+                'choice_translation_domain' => true,
+                'choice_label' => function($value, $key, $index){
+                    return 'source.'.$value;
+                }               
             ))
             ->add('zodiac', EntityType::class, array(
                 'class' => 'AppBundle:Zodiac',
-                'choice_label' => 'wording',
-                'required' => false
+                'choice_translation_domain' => true,
+                'choice_label' => function($value, $key, $index){
+                    return 'zodiac.'.$value;
+                },
+                'required' => false                
             ))
             ->add('photos', CollectionType::class, array(
                 'label' => false,

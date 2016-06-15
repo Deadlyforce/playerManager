@@ -93,5 +93,10 @@ class Zodiac
     {
         return $this->wording;
     }
+    
+    public function __toString() 
+    {
+        return $this->getWording();
+    }
 }
 

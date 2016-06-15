@@ -6,7 +6,6 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -51,7 +50,11 @@ class RelationshipType extends AbstractType
                 'required' => false
             ))
             ->add('relationshipRank', EntityType::class, array(
-                'class' => 'AppBundle:RelationshipRank'
+                'class' => 'AppBundle:RelationshipRank',
+                'choice_translation_domain' => true,
+                'choice_label' => function($value, $key, $index){
+                    return 'relationship_rank.'.$value;
+                }
             ))
             ->add('distance', CheckboxType::class, array(
                 'required' => false               
@@ -60,10 +63,7 @@ class RelationshipType extends AbstractType
                 'required' => false
             ))
             ->add('about', TextareaType::class, array(
-                'required' => false,
-//                'label_attr' => array(
-//                    'class' => 'appbundle_relationship_about'
-//                )
+                'required' => false
             ))
             ->add('submit', SubmitType::class, array(
                 'label' => 'Save changes'

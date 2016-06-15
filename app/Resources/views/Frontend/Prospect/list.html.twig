@@ -2,6 +2,8 @@
 {% import ":Frontend/Macros/Prospect:photoDisplay175.html.twig" as photoDisplayIndex %}
 {% block title %}Contacts{% endblock %}
 
+{% set newcontact = 'app.contact.list.new.title'|trans %}
+
 {% block content %}    
     <div class="container standard-container" id="container-prospect">      
 
@@ -76,7 +78,7 @@
 
                     <div class="prospect-infos">
                         <p class="prospect-name">{{ prospect.firstname }} {{ prospect.lastname }}</p>
-                        <p class="prospect-relationship-rank"><span>{{ prospect.relationship.relationshipRank|upper }}</span></p>
+                        <p class="prospect-relationship-rank"><span>{{ ('relationship_rank.' ~ prospect.relationship.relationshipRank)|trans|upper }}</span></p>
                     </div>
                     <div class="prospect-relationship">
                         <div class="preview relationship-met">
@@ -163,6 +165,8 @@
         $(document).ready(function(){  
             var locale = $("#locale").data("locale");   
            
+            var newcontact = "{{ newcontact }}";
+           
             $('[data-toggle="tooltip"]').tooltip({
                 html: true
             });  
@@ -197,36 +201,11 @@
                     
                     $(".loader_standard").hide(200, function(){});                                     
                     
-                    $(".modal-title").text("New contact");
+                    $(".modal-title").text(newcontact);
                     $('.modal-full').modal('show');
                 });
-            });
-            
-            // Ajax: get form edit prospect
-            $(".record-actions").on("click", ".edit_prospect", function(event){
-                event.preventDefault();               
-                
-                $(".loader_standard").show();
-            
-                var id = $(this).data("id");                
-                var url = Routing.generate('ajax_edit_prospect_form', {'id':id, '_locale': locale});
-                
-                $.get(url, function(response){                   
-                    $(".modal-body").html(response);                    
-                    
-                    $(".loader_standard").hide(200, function(){});                                     
-                    
-                    $(".modal-title").text("Edit contact");
-                    $('.modal-full').modal('show');
-                });
-            });
-            
-            $('.modal-full').on('hidden.bs.modal', function (e) {
-                $(".modal-body").empty();
-                $(".modal-title").empty();
-            });
-            
-            
+            });            
+         
             $('.modal-full').on('hidden.bs.modal', function (e) {
                 $(".modal-body").empty();
                 $(".modal-title").empty();

@@ -39,6 +39,21 @@ app:
                 sex: Sexe
                 relationship_type: Type de relation
                 submit: Filtrer
+            new:
+                title: Nouveau contact
+                nickname: Pseudo
+                firstname: Prénom
+                lastname: Nom
+                age: Age
+                address: Adresse
+                city: Ville
+                zipcode: Code postal
+                country: Pays d'origine
+                cellnumber: Tél. portable
+                homenumber: Tél. domicile
+                job: Métier
+                zodiac: Zodiaque
+                submit: Enregistrer le contact
     photo:
         album:
             subtitle: Tous vos contacts, uniquement des photos pour l'instant...
@@ -86,7 +101,34 @@ app:
             level3: 3
             level4: 4
             level5: 5
-        
+ 
 Sign up here: Nouveau compte            
-All relationships: Toutes les relations
+All relationships: Toutes les relations            
+            
+relationship_rank:
+    chatting: Discussion
+    one_night_stand: Coup d'un soir
+    sex_friend: Sex Friend
+    dating: Dating
+    open_relationship: Realtion libre
+    long_term_relationship: Relation longue
+source:
+    online: Internet
+    irl: Soirée (ou autres)
+zodiac:
+    aries: Bélier
+    taurus: Taureau
+    gemini: Gémeaux
+    cancer: Cancer
+    leo: Lion
+    virgo: Vierge
+    libra: Balance
+    scorpio: Scorpion
+    sagittarius: Sagittaire
+    capricorn: Capricorne
+    aquarius: Verseau
+    pisces: Poissons
+    
+        
+
            

@@ -1,91 +1,75 @@
-{#{% block title %}New contact{% endblock %} #}
-
 {% block content %}  
-{#    <div class="container">#}
-        {{ form_start(form, {'attr': {'id':'form-new-prospect', 'data': 'prospect-data', 'class': 'form-inline'}}) }}   
-            <div class="form-group">
-                {{ form_label(form.nickname) }}
-                {{ form_widget(form.nickname, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.nickname) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.firstname) }}
-                {{ form_widget(form.firstname, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.firstname) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.lastname) }}
-                {{ form_widget(form.lastname, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.lastname) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.age) }}
-                {{ form_widget(form.age, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.age) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.address) }}
-                {{ form_widget(form.address, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.address) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.city) }}
-                {{ form_widget(form.city, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.city) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.zipcode) }}
-                {{ form_widget(form.zipcode, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.zipcode) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.country, 'Native country') }}
-                {{ form_widget(form.country, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.country) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.cellNumber) }}
-                {{ form_widget(form.cellNumber, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.cellNumber) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.homeNumber) }}
-                {{ form_widget(form.homeNumber, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.homeNumber) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.job) }}
-                {{ form_widget(form.job, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.job) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.source) }}
-                {{ form_widget(form.source, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.source) }}
-            </div>
-            <div class="form-group">
-                {{ form_label(form.zodiac) }}
-                {{ form_widget(form.zodiac, {'attr': {'class': 'form-control'} }) }}
-                {{ form_errors(form.zodiac) }}
-            </div>
+    {{ form_start(form, {'attr': {'id':'form-new-prospect', 'data': 'prospect-data', 'class': 'form-inline'}}) }}   
+        <div class="form-group">
+            {{ form_label(form.nickname, 'app.contact.list.new.nickname'|trans) }}
+            {{ form_widget(form.nickname, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.nickname) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.firstname, 'app.contact.list.new.firstname'|trans) }}
+            {{ form_widget(form.firstname, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.firstname) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.lastname, 'app.contact.list.new.lastname'|trans) }}
+            {{ form_widget(form.lastname, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.lastname) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.age, 'app.contact.list.new.age'|trans) }}
+            {{ form_widget(form.age, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.age) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.address, 'app.contact.list.new.address'|trans) }}
+            {{ form_widget(form.address, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.address) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.city, 'app.contact.list.new.city'|trans) }}
+            {{ form_widget(form.city, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.city) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.zipcode, 'app.contact.list.new.zipcode'|trans) }}
+            {{ form_widget(form.zipcode, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.zipcode) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.country, 'app.contact.list.new.country'|trans) }}
+            {{ form_widget(form.country, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.country) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.cellNumber, 'app.contact.list.new.cellnumber'|trans) }}
+            {{ form_widget(form.cellNumber, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.cellNumber) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.homeNumber, 'app.contact.list.new.homenumber'|trans) }}
+            {{ form_widget(form.homeNumber, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.homeNumber) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.job, 'app.contact.list.new.job'|trans) }}
+            {{ form_widget(form.job, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.job) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.source) }}
+            {{ form_widget(form.source, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.source) }}
+        </div>
+        <div class="form-group">
+            {{ form_label(form.zodiac, 'app.contact.list.new.zodiac'|trans) }}
+            {{ form_widget(form.zodiac, {'attr': {'class': 'form-control'} }) }}
+            {{ form_errors(form.zodiac) }}
+        </div>
 
-            {#{{ form_label(form.photos) }}
-            {{ form_errors(form.photos) }}
+        {{ form_row(form.submit, {'label':'app.contact.list.new.submit', 'attr': {'class': 'btn-basic-rose'}}) }}
 
-            <ul id="photo-list" data-prototype="{{ form_widget(form.photos.vars.prototype)|e }}">
-                {% for photo in form.photos %}
-                    <li>
-                        {{ form_errors(photo) }}
-                        {{ form_widget(photo) }}
-                    </li>
-                {% endfor %}
-            </ul>#}
-            
-            {{ form_row(form.submit, {'label':'Save new contact', 'attr': {'class': 'btn-basic-rose'}}) }}
-          
-            <div class="hidden">{{ form_rest(form) }}</div>
-        {{ form_end(form) }} 
-{#    </div>#}
+        <div class="hidden">{{ form_rest(form) }}</div>
+    {{ form_end(form) }} 
     
     <script type="text/javascript"> 
         $(document).ready(function(){

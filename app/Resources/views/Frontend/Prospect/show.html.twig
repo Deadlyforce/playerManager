@@ -165,7 +165,7 @@
                     <div class="col-md-4 bigtile-relationship">                        
                         <div class="tilecontent">
                             <div class="bigtile-relationship-container">
-                                <p class="bigtile-value">{{ prospect.relationship.relationshipRank }}</p>
+                                <p class="bigtile-value">{{ ('relationship_rank.' ~ prospect.relationship.relationshipRank)|trans }}</p>
                                 <p class="bigtile-title">Relationship type</p>
                             </div>
                         </div>
