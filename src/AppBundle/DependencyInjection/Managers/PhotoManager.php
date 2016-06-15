@@ -36,7 +36,7 @@ class PhotoManager
         $missingFiles = array();
         
         foreach ($photos as $photo) {
-            if ($photo->getFile() !== null) {    
+            if ($photo->getFile() !== null) {
                 $uploadableManager->markEntityToUpload($photo, $photo->getFile());
                 
                 $missingFiles[] = true;                

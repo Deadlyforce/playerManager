@@ -201,7 +201,16 @@ class PhotoController extends Controller
             
             $src = $photo->getPath();
 
-            $img_r = imagecreatefromjpeg($src);           
+            $type = $photo->getType();
+            
+            if ($type == 'image/jpg') {
+                $img_r = imagecreatefromjpeg($src);
+            }
+            if ($type == 'image/png') {
+                $img_r = imagecreatefrompng($src);
+            }
+               
+            
             $dst_r = ImageCreateTrueColor( $targ_w, $targ_h );           
             
             imagecopyresampled($dst_r, $img_r, 0, 0, $x, $y, $targ_w, $targ_h, $width, $height);

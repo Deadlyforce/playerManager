@@ -22,7 +22,7 @@ class PhotoType extends AbstractType
             ->add('file', FileType::class, array(
                 'label' => false, 
                 'attr' => array(
-                    'accept' => 'image/jpeg' 
+                    'accept' => 'image/jpeg,image/png' 
                 )
             ))
             ->add('selected', CheckboxType::class, array(                

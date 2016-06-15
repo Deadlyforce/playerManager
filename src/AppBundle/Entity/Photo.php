@@ -14,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="photo")
  * @ORM\Entity
  * @ORM\Entity(repositoryClass="AppBundle\Repository\PhotoRepository")
- * @Gedmo\Uploadable(pathMethod="userPath", filenameGenerator="SHA1", maxSize=1200000, allowOverwrite=true, allowedTypes="image/jpeg")
+ * @Gedmo\Uploadable(pathMethod="userPath", filenameGenerator="SHA1", maxSize=1200000, allowOverwrite=true, allowedTypes="image/jpeg,image/png")
  */
 class Photo {
     
@@ -56,6 +56,12 @@ class Photo {
     private $name;
     
     /**
+     * @ORM\Column(name="type", type="string", length=50, nullable=true)
+     * @Gedmo\UploadableFileMimeType 
+     */
+    private $type;
+    
+    /**
      * @ORM\Column(type="decimal")
      * @Gedmo\UploadableFileSize
      */
@@ -64,7 +70,10 @@ class Photo {
     /**
      * @var file 
      * 
-     * @Assert\NotBlank()     
+     * @Assert\NotBlank()  
+     * @Assert\File(
+     *      mimeTypes={"image/jpeg","image/png"}
+     * )   
      */
     private $file;   
     
@@ -177,6 +186,29 @@ class Photo {
     public function getName()
     {
         return $this->name;
+    }
+    
+    /**
+     * Set type
+     * 
+     * @param string $type
+     * @return \AppBundle\Entity\Photo
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+        
+        return $this;
+    }
+    
+    /**
+     * Get type
+     * 
+     * @return string type
+     */
+    public function getType()
+    {
+        return $this->type;
     }
     
     /**

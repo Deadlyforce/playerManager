@@ -91,60 +91,12 @@
                 </div>
             </div>
         {{ form_end(editForm) }}
-                
-        {# Modales #}
-        {#<div class="modal fade modal-full" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-lg modal-dialog-scroll">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true"><i class="icon ion-ios-close-empty"></i></span>
-                        </button>
-                        <h2 class="modal-title"></h2>
-                    </div>    
-                    <div class="modal-body">#}
-                        {# Form returned by ajax #}
-                    {#</div>                       
-                </div>    
-            </div>
-        </div>#}
-
-        {# POPUP OVERLAY D'ATTENTE AJAX #}
-        {#<div class="overlay"></div>
-        <div class="loader_standard">
-            <p>Loading...</p>
-        </div>#}
-    </div>   
-    
+    </div>       
         
     <script type="text/javascript">
         $(document).ready(function(){
 {#            var locale = "{{ app.request.locale }}"; #}
-            
-            {#$(".crop-photo").click(function(event){
-                event.preventDefault();
-                
-                $(".loader_standard").show();
-                
-                var id = $(this).data("id");
-                var url = Routing.generate('ajax_crop_form', {'id':id, '_locale': locale});
-                
-                $.get(url, function(response){                   
-                    $(".modal-body").html(response); 
-                    
-                    $(".loader_standard").hide(200, function(){});                                     
-                    
-                    $(".modal-title").text("Crop photo");
-                    $('.modal-full').modal('show');
-                });
-            });#}
-            
-           
-                    
-            
-                                  
-                           
-           
+  
             // On click on "change" photo **************************************
             // moves prototype form inside modal and diplays it
             $("#photo-list").on("click", ".change-photo", function(e){
