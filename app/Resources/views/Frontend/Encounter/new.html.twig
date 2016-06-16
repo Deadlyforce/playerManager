@@ -1,3 +1,4 @@
+{% set addvenue = 'app.encounter.new.venue.add'|trans %}
 
 {% block content %}
     <div class="container">        
@@ -7,32 +8,34 @@
             </div>
             <div class="col-md-9 main-col">
                 {{ form_start(form) }}
-                    {{ form_row(form.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datetimepicker'} }) }}                    
-                    {{ form_row(form.duration, {'label': 'Duration (Hours)'}) }}
-                    {{ form_row(form.expenses, {'label': 'Total expenses (€)'}) }}
-                    {#<div>                        
-                        {{ form_label(form.venueChange, 'Venue change?') }}
-                        <div class="slide-button-base yes-no-button">
-                            {{ form_widget(form.venueChange) }}
-                            <div id="encounter_venueChange_button" class="slide-button"></div> 
-                            {{ form_errors(form.venueChange) }}
-                        </div>
-                    </div>#}
+                    {{ form_row(form.date, {'label': 'Date', 'type': 'text', 'attr': {'class': 'datetimepicker'} }) }} 
+                    <div>
+                        {{ form_label(form.duration, 'app.encounter.new.duration'|trans) }}
+                        {{ form_widget(form.duration) }}
+                        {{ form_errors(form.duration) }}
+                    </div>
+                    <div>
+                        {{ form_label(form.expenses, 'app.encounter.new.expenses'|trans) }}
+                        {{ form_widget(form.expenses) }}
+                        {{ form_errors(form.expenses) }}
+                    </div>
                     <div class="form-venues">    
-                        <p class="edit-venues">Add up to 3 venues</p>                                          
+                        <p class="edit-venues">{{ 'app.encounter.new.venue.notice'|trans }}</p>                                          
                         {{ form_errors(form.venues) }}                    
                         <ul class="venues" data-prototype="{{ form_widget(form.venues.vars.prototype)|e }}">
                             {# Prototypes #}
                         </ul>                   
                     </div>
-                    {{ form_widget(form.submit, {'label': 'Save changes', 'attr': {'class': 'btn-basic-rose'} }) }}
+                    {{ form_widget(form.submit, {'label': 'app.encounter.new.submit'|trans, 'attr': {'class': 'btn-basic-rose'} }) }}
                 {{ form_end(form) }}               
             </div>
         </div>
     </div>
                 
     <script type="text/javascript">
-        var addVenueLink = $('<a href="#" class="add_venue_link">Add a venue</a>');
+        var addvenue = "{{ addvenue }}";
+        
+        var addVenueLink = $('<a href="#" class="add_venue_link">'+ addvenue +'</a>');
         var newLinkLi = $('<li></li>').append(addVenueLink);
         
         $(document).ready(function(){

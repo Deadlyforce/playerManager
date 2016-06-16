@@ -4,7 +4,7 @@
     <div class="container" id="container-relationship">                   
         
         <div class="page-nav">
-            <p>Move the buttons right or left so you can read your choice.</p>
+            <p>{{ 'app.relationship.edit.notice'|trans }}</p>
         </div>
         
         <div class="row">
@@ -13,10 +13,13 @@
             </div>
             <div class="col-md-9 page-content">                   
                 {{ form_start(edit_form) }}
-                    {{ form_row(edit_form.startDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
-                    
                     <div>
-                        {{ form_label(edit_form.status, 'Ongoing relationship ?', {'label_attr': {'title': 'Do you still see each other ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }} 
+                        {{ form_label(edit_form.startDate, 'app.relationship.edit.startdate') }}
+                        {{ form_widget(edit_form.startDate, {'attr':{'class': 'datepicker'}, 'type':'text'  }) }}
+                        {{ form_errors(edit_form.startDate) }}
+                    </div>
+                    <div>
+                        {{ form_label(edit_form.status, 'app.relationship.edit.status') }} 
                         <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.status) }}
                             <div id="appbundle_relationship_status_button" class="relationship_button"></div>   
@@ -24,7 +27,7 @@
                         </div>
                     </div>
                     <div>
-                        {{ form_label(edit_form.meeting, 'Have you met ?') }}
+                        {{ form_label(edit_form.meeting, 'app.relationship.edit.met') }}
                         <div id="relationship_meeting_row" class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.meeting) }}
                             <div id="appbundle_relationship_meeting_button" class="relationship_button"></div>   
@@ -32,7 +35,9 @@
                         </div>           
                     </div>  
                     <div>
-                        {{ form_label(edit_form.flake, 'Flaky person', {'label_attr': {'title': 'Did he/she show up on the first date?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        {{ form_label(edit_form.flake, 'app.relationship.edit.flake', 
+                            {'label_attr': {'title': 'app.relationship.edit.tooltip.flake'|trans, 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) 
+                        }}
                         <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.flake) }}
                                 <div id="appbundle_relationship_flake_button" class="relationship_button"></div>
@@ -40,7 +45,7 @@
                         </div>
                     </div>
                     <div>
-                        {{ form_label(edit_form.numclosed, 'Phone number', {'label_attr': {'title': 'Did you get a phone number ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        {{ form_label(edit_form.numclosed, 'app.relationship.edit.numclose') }}
                         <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.numclosed) }}
                             <div id="appbundle_relationship_numclosed_button" class="relationship_button"></div>   
@@ -49,7 +54,7 @@
                     </div>
                         
                     <div class="collapse meeting-option">
-                        {{ form_label(edit_form.kc, 'Have you kissed ?') }}
+                        {{ form_label(edit_form.kc, 'app.relationship.edit.kc') }}
                         <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.kc) }}
                             <div id="appbundle_relationship_kc_button" class="relationship_button"></div>   
@@ -57,7 +62,7 @@
                         </div>           
                     </div>    
                     <div class="collapse meeting-option">
-                        {{ form_label(edit_form.fc, 'Did you have sex ?') }}
+                        {{ form_label(edit_form.fc, 'app.relationship.edit.fc') }}
                         <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.fc) }}
                             <div id="appbundle_relationship_fc_button" class="relationship_button"></div>   
@@ -65,7 +70,7 @@
                         </div>           
                     </div>  
                     <div>
-                        {{ form_label(edit_form.crush, 'Do you have a crush ?') }}
+                        {{ form_label(edit_form.crush, 'app.relationship.edit.crush') }}
                         <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.crush) }}
                                 <div id="appbundle_relationship_crush_button" class="relationship_button"></div>
@@ -73,12 +78,12 @@
                         </div>
                     </div>    
                     <div>
-                        {{ form_label(edit_form.relationshipRank, 'Relationship level', {'label_attr': {'title': 'Nature of the relationship ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        {{ form_label(edit_form.relationshipRank, 'app.relationship.edit.rank') }}
                         {{ form_widget(edit_form.relationshipRank) }}
                         {{ form_errors(edit_form.relationshipRank) }}
                     </div>
                     <div>
-                        {{ form_label(edit_form.distance, 'Distance problem ?', {'label_attr': {'title': 'Is he/she living too far ?', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        {{ form_label(edit_form.distance, 'app.relationship.edit.distance') }}
                         <div class="relationship_row row-yes-no">
                             {{ form_widget(edit_form.distance) }}
                             <div id="appbundle_relationship_distance_button" class="relationship_button"></div>
@@ -86,12 +91,12 @@
                         </div>                    
                     </div>                    
                     <div>
-                        {{ form_label(edit_form.about, 'About', {'label_attr': {'title': 'Your comments', 'data-toggle': 'tooltip', 'class':'custom-tooltip'} }) }}
+                        {{ form_label(edit_form.about, 'app.relationship.edit.about') }}
                         {{ form_widget(edit_form.about) }}
                         {{ form_errors(edit_form.about) }}
                     </div>
                     
-                    {{ form_widget(edit_form.submit, {"label":"Save changes", "attr": {"class": "btn-basic-rose"}}) }}
+                    {{ form_widget(edit_form.submit, {'label':'app.relationship.edit.submit', "attr": {"class": "btn-basic-rose"}}) }}
                 {{ form_end(edit_form) }}
             </div>           
         </div>

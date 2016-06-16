@@ -1,18 +1,19 @@
 {% extends '::base.html.twig' %}
-{% block title %}Encounters{% endblock %}
+{% block title %}{{ 'app.encounter.index.tabtitle'|trans }}{% endblock %}
 
 {% set csrfDelete = csrf_token('delete') %}
+{% set newencounter = 'app.encounter.index.add-modal.title'|trans %}
 
 {% block content %}    
     <div class="container">
         <section class="page-title">
-            <h1>Encounters with {{ prospect.firstname }}</h1> 
+            <h1>{{ 'app.encounter.index.title'|trans }} {{ prospect.firstname }}</h1> 
         </section>
         <div class="page-title-underline"></div> 
 
         <div class="page-nav">            
-            <a class="btn-basic" href="{{ path('prospect_show', {'id': prospect.id}) }}" title="Back to contact">Back to contact</a>
-            <a class="btn-basic-ico" href="#" id="add_encounter" title ="Add encounter"><i class="icon ion-ios-plus-empty"></i><span>Add an encounter</span></a>
+            <a class="btn-basic" href="{{ path('prospect_show', {'id': prospect.id}) }}" title="Back to contact">{{ 'app.encounter.index.btn.contact-back'|trans }}</a>
+            <a class="btn-basic-ico" href="#" id="add_encounter" title ="Add encounter"><i class="icon ion-ios-plus-empty"></i><span>{{ 'app.encounter.index.btn.add'|trans }}</span></a>
         </div>
             
         {# Set euro currencies array #}
@@ -100,6 +101,7 @@
         $(document).ready(function(){
             var locale = "{{ app.request.locale }}";            
             
+            var newencounter = "{{ newencounter }}";
             
             // Ajax: get form new
             $("#add_encounter").click(function(event){
@@ -115,7 +117,7 @@
                     
                     $(".loader_standard").hide(200, function(){});                                     
                     
-                    $(".modal-title").text("New encounter");
+                    $(".modal-title").text(newencounter);
                     $('.modal-full').modal('show');
                 });
             });

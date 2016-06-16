@@ -30,6 +30,8 @@ app:
         dashboard: Dashboard
         profile: Profile
         contactus: Contact us
+        bo:
+            user: Users
         logout: Logout
     contact:
         list:
@@ -54,6 +56,74 @@ app:
                 job: Job
                 zodiac: Zodiac
                 submit: Save new contact
+        show:
+            edit: Edit contact infos
+            edit-contact-modal:
+                title: Edit contact
+            edit-relationship-modal:
+                title: Edit relationship
+            edit-rating-modal:
+                title: Edit ratings
+            edit-redflag-modal:
+                title: Edit red flags
+            rating:
+                title: Average rating
+                edit: Edit ratings
+            redflag:
+                title: Red flags
+                edit: Edit Red Flags
+            relationship:
+                startdate: Start date
+                status:
+                    title: Relationship<br>status
+                type:
+                    title: Relationship type
+                edit: Edit relationship
+                met: Met
+                kc: Kissed
+                fc: Sex
+                crush: Crush
+            delete:
+                title: Delete contact
+            encounter:
+                title: Encounters
+                subtext: Manage Encounters
+                count: Encounters count
+    relationship:
+        edit:
+            tooltip:
+                status: Is it over?
+                flake: Did he/she stood you up?
+                
+            notice: Move the buttons right or left so you can read your choice.
+            startdate: Start date
+            status: Ongoing relationship?
+            met: Have you met?
+            flake: Flaky person
+            numclose: Got a phone number?
+            crush: Do you have a crush?
+            kc: Have you kissed?
+            fc: Did you have sex?
+            rank: Relationship type
+            distance: Distance problem?
+            about: About
+            submit: Save changes
+    encounter:
+        index:
+            tabtitle: Encounters
+            title: Encounters with
+            btn:
+                add: Add an encounter
+                contact-back: Back to contact
+            add-modal:
+                title: New encounter
+        new:
+            duration: Duration (hours)
+            expenses: Total expenses
+            venue:
+                notice: Add up to 3 venues
+                add: Add venue
+            submit: Save changes
     photo:
         album:
             subtitle: All your contacts, just photos for now...
@@ -84,6 +154,7 @@ app:
         btn-save: Save changes
     redflag:
         edit:
+            notice: Check things that you don't like about that person
             label:
                 unemployed: Unemployed
                 needy: Needy
@@ -110,7 +181,7 @@ relationship_rank:
     open_relationship: Open Relationship
     long_term_relationship: Long Term Relationship
 source:
-    online: Online
+    online: Web
     irl: IRL (In Real Life)
 zodiac:
     aries: Aries

@@ -23,7 +23,7 @@
                 <tr id="{{ user.id }}">
                     <td>{{ user.id }}</td>
                     <td>{{ user.username }}</td>
-                    <td>
+                    <td class="centered">
                         {% if user.enabled == false %}
                             0
                         {% else %}
@@ -31,11 +31,17 @@
                         {% endif %}
                     </td>
                     <td>{{ user.email }}</td>                    
-                    <td>{{ user.gender }}</td>                    
+                    <td class="centered">
+                        {% if user.gender == 1 %}
+                            M
+                        {% else %}
+                            F
+                        {% endif %}
+                    </td>                    
                     <td>{{ user.lastLogin|date('d-m-Y H:i:s') }}</td>                    
                     <td>{{ user.createdAt|date('d-m-Y H:i:s') }}</td>                    
                     <td>{{ user.ip }}</td>                    
-                    <td>
+                    <td class="actions">
 {#                        <a class="" href="{{ path('user_show', { 'id': user.id }) }}"><i class="fa fa-eye"></i></a>                       
                         <a class="" href="{{ path('user_edit', { 'id': user.id }) }}"><i class="fa fa-pencil-square-o"></i></a> #} 
                         <a href="#" class="delete" data-id="{{ user.id }}" data-token="{{ csrf_token }}" title="Delete"><i class="fa fa-trash-o"></i></a>
@@ -53,6 +59,7 @@
 
     <script type="text/javascript">
         $(document).ready(function(){                   
+            var locale = "{{ app.request.locale }}";
             
             $.fn.dataTable.moment('DD-MM-YYYY' );
             
@@ -72,7 +79,8 @@
                         null,
                         null,
                         null,                   
-                        null,                   
+                        null,
+                        null,
                         { 
                             className: "actions",
                             "width": "120px"
@@ -109,7 +117,7 @@
              */
             function ajaxDeleteUser(user_id, csrf_token)
             {                
-                var url = Routing.generate('ajax_delete_user', {'id': user_id});                
+                var url = Routing.generate('ajax_delete_user', {'id': user_id, '_locale':locale});                
                 var data = {'csrf_token': csrf_token};
 
                 $.post(url, data, function(response){
@@ -143,7 +151,7 @@
              */
             function ajaxDisableUser(user_id, csrf_token)
             {                
-                var url = Routing.generate('ajax_disable_user', {'id': user_id});                
+                var url = Routing.generate('ajax_disable_user', {'id': user_id, '_locale':locale});                
                 var data = {'csrf_token': csrf_token};
 
                 $.post(url, data, function(response){
@@ -157,7 +165,7 @@
                     var actionEnabling = "<a href='#' class='enable' data-id='"+ user.id +"' data-token='"+ user.csrf +"' title='Enable'><i class='fa fa-toggle-off'></i></a>";
                     var actions = actionDeleting + actionEnabling;
                     
-                    table.row(tr).data([user.id, user.username, 0, user.email, user.lastLogin.date, user.createdAt.date, user.ip, actions]).draw(false); // false = conserve la pagination actuelle     
+                    table.row(tr).data([user.id, user.username, 0, user.email, user.gender, user.lastLogin.date, user.createdAt.date, user.ip, actions]).draw(false); // false = conserve la pagination actuelle     
                     
                     $("#"+ data.id + " a.disable").removeClass("disable").addClass("enable");
                     $("#"+ data.id + " .actions a").css("margin-right", "9px");
@@ -182,7 +190,7 @@
              */
             function ajaxEnableUser(user_id, csrf_token)
             {                
-                var url = Routing.generate('ajax_enable_user', {'id': user_id});                
+                var url = Routing.generate('ajax_enable_user', {'id': user_id, '_locale':locale});                
                 var data = {'csrf_token': csrf_token};
 
                 $.post(url, data, function(response){
@@ -196,7 +204,7 @@
                     var actionDisabling = "<a href='#' class='disable' data-id='"+ user.id +"' data-token='"+ user.csrf +"' title='Disable'><i class='fa fa-toggle-on'></i></a>";
                     var actions = actionDeleting + actionDisabling;
                     
-                    table.row(tr).data([user.id, user.username, 1, user.email, user.lastLogin.date, user.createdAt.date, user.ip, actions]).draw(false); // false = conserve la pagination actuelle     
+                    table.row(tr).data([user.id, user.username, 1, user.email, user.gender, user.lastLogin.date, user.createdAt.date, user.ip, actions]).draw(false); // false = conserve la pagination actuelle     
                     
                     $("#"+ data.id + " a.enable").removeClass("enable").addClass("disable");
                     $("#"+ data.id + " .actions a").css("margin-right", "9px");

@@ -81,10 +81,11 @@
 {#                                <li><a href="{{ path('photo_album', {'user_id': app.user.id}) }}" title="{{ 'app.nav.album'|trans }}">{{ 'app.nav.album'|trans }}</a></li>#}
 {#                                <li><a href="#" title="{{ 'app.nav.album'|trans }}">{{ 'app.nav.album'|trans }}</a></li>#}
                                 <li><a href="{{ path('dashboard', {'user_id': app.user.id}) }}" title="{{ 'app.nav.dashboard'|trans }}">{{ 'app.nav.dashboard'|trans }}</a></li>
-    {#                            <li><a href="{{ path('relationship') }}">{{ 'All relationships'|trans }}</a></li>                                        #}
-                                <li><a href="{{ path('fos_user_profile_show') }}" title="{{ 'app.nav.profile'|trans }}">{{ 'app.nav.profile'|trans }}</a></li>                             
+                                <li><a href="{{ path('fos_user_profile_show') }}" title="{{ 'app.nav.profile'|trans }}">{{ 'app.nav.profile'|trans }}</a></li>                  
                                 <li><a href="{{ path('contact_us') }}" title="{{ 'app.nav.contactus'|trans }}">{{ 'app.nav.contactus'|trans }}</a></li>  
-
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <li><a href="{{ path('user_index') }}" title="{{ 'app.nav.bo.user'|trans }}">{{ 'app.nav.bo.user'|trans }}</a></li>
+                                {% endif %}
                             </ul>
                         </div>
                     </div>

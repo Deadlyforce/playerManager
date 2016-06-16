@@ -4,6 +4,10 @@
 {% block title %}{{ prospect.firstname }}{% endblock %}
 {% set csrfDelete = csrf_token('delete') %}
 
+{% set editcontact = 'app.contact.show.edit-contact-modal.title'|trans %}
+{% set editrelationship = 'app.contact.show.edit-relationship-modal.title'|trans %}
+{% set editrating = 'app.contact.show.edit-rating-modal.title'|trans %}
+{% set editredflag = 'app.contact.show.edit-redflag-modal.title'|trans %}
 
 {% form_theme delete_form _self %}
 
@@ -24,11 +28,7 @@
 
 
 {% block content %}    
-    <div class="container standard-container">  
-        {#<div class="page-nav">            
-            <a class="btn-basic" href="{{ path('prospect_list') }}" title="Back to contacts">Back to contacts</a>
-        </div>#}  
-        
+    <div class="container standard-container">         
         <div id="contact-left-column">
             <a href="{{ path('gallery', {'prospect_id': prospect.id}) }}" title="Add and remove photos">
                 <div id="photo-contact">
@@ -61,7 +61,13 @@
                 </div>
                 <div id="source" class="tile">
                     <div class="tilecontent">
-                       <p class="tile-value">{% if prospect.source == 'IRL (In Real Life)' %}IRL{% else %}{{ prospect.source }}{% endif %}</p>
+                       <p class="tile-value">
+                           {% if prospect.source.id == 2 %}
+                               {{ 'source.irl'|trans }}
+                           {% else %}
+                               {{ 'source.online'|trans }}
+                           {% endif %}
+                       </p>
                        <p class="tile-title">Source</p>
                     </div>
                 </div>
@@ -70,9 +76,9 @@
                 <div id="astro">
                     <div class="tilecontent">
                         {% if prospect.zodiac %}
-                        <p class="zodiac" title="{{ prospect.zodiac.wording }}">
-                            {{ prospect.zodiac.letter }}
-                        </p>
+                            <p class="zodiac" title="{{ prospect.zodiac.wording }}">
+                                {{ prospect.zodiac.letter }}
+                            </p>
                         {% else %}
                             <p class="tile-value">?</p>
                         {% endif %}
@@ -83,25 +89,25 @@
                     <div id="status-ok" class="tile">
                         <div class="tilecontent">
                             <p class="tile-value">On</p>
-                            <p class="tile-title">Relationship<br>status</p>
+                            <p class="tile-title">{{ 'app.contact.show.relationship.status.title'|trans|raw }}</p>
                         </div>
                     </div>
                 {% else %}
                     <div id="status-off" class="tile">
                         <div class="tilecontent">
                             <p class="tile-value">Off</p>
-                            <p class="tile-title">Relationship<br>status</p>
+                            <p class="tile-title">{{ 'app.contact.show.relationship.status.title'|trans|raw }}</p>
                         </div>
                     </div>
                 {% endif %}
             </div>
             <div class="row-delete">
                 <div id="prospect-delete">
-                    <div class="tilecontent">
-                        
-                        <a href="#" data-id="{{ prospect.id }}" title="Delete prospect"><i class="icon ion-ios-trash-outline"></i></a>
-                        <p class="tile-title">Delete contact</p>
-                        
+                    <div class="tilecontent">                        
+                        <a href="#" data-id="{{ prospect.id }}" title="Delete prospect">
+                            <i class="icon ion-ios-trash-outline"></i>
+                        </a>
+                        <p class="tile-title">{{ 'app.contact.show.delete.title'|trans|raw }}</p>                        
                     </div>
                 </div>
             </div>
@@ -123,7 +129,7 @@
                             {{ prospect.address }} {{ prospect.zipcode }} {{ prospect.city|upper }}
                         </p>
                     </div>
-                    <div id="mask-basic-infos"><div class="tilecontent">Edit contact infos</div></div>
+                    <div id="mask-basic-infos"><div class="tilecontent">{{ 'app.contact.show.edit'|trans }}</div></div>
                 </div>                
             </a>        
             <div class="row row-bigtiles">
@@ -132,12 +138,13 @@
                         <div class="tilecontent">
                             <div class="rating-container">
                                 <div class="bigtile-title">
-                                    Average rating <div id="rating-avg" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div>
+                                    {{ 'app.contact.show.rating.title'|trans }} 
+                                    <div id="rating-avg" title="Average rating<br>for this contact" data-rating="{{ prospect.rating.average }}"></div>
                                 </div>
                                 <div id="ratingcircle" data-percent="{{ prospect.rating.percentAverage }}" class="orange"></div>
                             </div>                            
                         </div>
-                        <div class="mask-rating"><div class="tilecontent">Edit ratings</div></div>
+                        <div class="mask-rating"><div class="tilecontent">{{ 'app.contact.show.rating.edit'|trans }}</div></div>
                     </div>
                 </a>
                 <a id="redflag-link" data-id="{{ prospect.redflag.id }}" href="#">
@@ -145,12 +152,13 @@
                         <div class="tilecontent">
                             <div class="redflag-container">
                                 <div class="bigtile-title">
-                                    Red flags <div id="redflag-avg" title="Average red flags<br>for this contact" data-redflag="{{ prospect.redflag.average }}"></div>
+                                    {{ 'app.contact.show.redflag.title'|trans }}
+                                    <div id="redflag-avg" title="Average red flags<br>for this contact" data-redflag="{{ prospect.redflag.average }}"></div>
                                 </div>
                                 <div id="redflagcircle" data-percent="{{ prospect.redflag.percentAverage }}" class="orange"></div>
                             </div>
                         </div>
-                        <div class="mask-redflag"><div class="tilecontent">Edit red flags</div></div>                        
+                        <div class="mask-redflag"><div class="tilecontent">{{ 'app.contact.show.redflag.edit'|trans|raw }}</div></div>                        
                     </div>
                 </a>
                 <div class="col-md-4 bigtile">
@@ -166,10 +174,10 @@
                         <div class="tilecontent">
                             <div class="bigtile-relationship-container">
                                 <p class="bigtile-value">{{ ('relationship_rank.' ~ prospect.relationship.relationshipRank)|trans }}</p>
-                                <p class="bigtile-title">Relationship type</p>
+                                <p class="bigtile-title">{{ 'app.contact.show.relationship.type.title'|trans }}</p>
                             </div>
                         </div>
-                        <div class="mask-relationship"><div class="tilecontent">Edit relationship</div></div>
+                        <div class="mask-relationship"><div class="tilecontent">{{ 'app.contact.show.relationship.edit'|trans }}</div></div>
                     </div>
                 </a>
                 <div class="col-md-4 smalltile-container-middle">
@@ -181,7 +189,7 @@
                                 {% else %}
                                     <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
-                                <p>Met</p>
+                                <p>{{ 'app.contact.show.relationship.met'|trans }}</p>
                             </div>
                         </div>
                         <div class="col-md-6 smalltile" id="kc">
@@ -191,7 +199,7 @@
                                 {% else %}
                                     <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
-                                <p>Kissed</p>
+                                <p>{{ 'app.contact.show.relationship.kc'|trans }}</p>
                             </div>
                         </div>
                     </div>
@@ -203,7 +211,7 @@
                                 {% else %}
                                     <p>?</p>
                                 {% endif %}
-                                <p><i class="icon ion-calendar"></i> Start Date</p>
+                                <p><i class="icon ion-calendar"></i> {{ 'app.contact.show.relationship.startdate'|trans }}</p>
                             </div>
                         </div>
                         <div class="col-md-6 smalltile" id="distance">
@@ -228,7 +236,7 @@
                                 {% else %}
                                     <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
-                                <p>Sex</p>
+                                <p>{{ 'app.contact.show.relationship.fc'|trans }}</p>
                             </div>
                         </div>
                         <div class="col-md-6 smalltile" id="crush">
@@ -238,7 +246,7 @@
                                 {% else %}
                                     <i class="icon ion-ios-close-empty"></i>
                                 {% endif %}
-                                <p>Crush</p>
+                                <p>{{ 'app.contact.show.relationship.crush'|trans }}</p>
                             </div>
                         </div>
                     </div>            
@@ -260,11 +268,11 @@
                     <div class="col-md-4" id="bigtile-encounter">
                         <div class="tilecontent">
                             <div id="bigtile-encounter-container">
-                                <p class="bigtile-value">Encounters</p>
+                                <p class="bigtile-value">{{ 'app.contact.show.encounter.title'|trans }}</p>
                                 <p class="bigtile-title"></p>
                             </div>
                         </div>
-                        <div id="mask-encounter"><div class="tilecontent">Manage encounters</div></div>
+                        <div id="mask-encounter"><div class="tilecontent">{{ 'app.contact.show.encounter.subtext'|trans|raw }}</div></div>
                     </div>
                 </a>
                 <div class="col-md-4 smalltile-container-middle">
@@ -272,7 +280,7 @@
                         <div class="col-md-6 smalltile" id="meetingcount">                            
                             <div class="tilecontent">
                                 <p class="smalltile-subtext"><span>0</span></p>
-                                <p>Encounters count</p>
+                                <p>{{ 'app.contact.show.encounter.count'|trans|raw }}</p>
                             </div>
                         </div>                        
                         <div class="col-md-6  smalltile">
@@ -326,6 +334,11 @@
     <script type="text/javascript">
         $(document).ready(function(){
             
+            var editcontact = "{{ editcontact }}";
+            var editrelationship = "{{ editrelationship }}";
+            var editrating = "{{ editrating }}";
+            var editredflag = "{{ editredflag }}";
+            
             var age = "{{ prospect.age }}";
             $("#age span").animateNumber({ number: age }, 2000);
             
@@ -357,28 +370,10 @@
                     
                     $(".loader_standard").hide(200, function(){});                                     
                     
-                    $(".modal-title").text("Edit contact");
+                    $(".modal-title").text(editcontact);
                     $('.modal-full').modal('show');
                 });
             });
-            
-            // Ajax: get form new encounter ************************************
-            {#$(".show-actions").on("click", "#new-encounter", function(event){
-                event.preventDefault();                
-
-                $(".loader_standard").show();
-
-                var url = Routing.generate('ajax_new_encounter_form', {'prospect_id': id, '_locale': locale});
-                
-                $.get(url, function(response){                   
-                    $(".modal-body").html(response); // coller la vue dans une modale  
-                    
-                    $(".loader_standard").hide(200, function(){});                                     
-                    
-                    $(".modal-title").text("New encounter");
-                    $('.modal-full').modal('show');
-                });
-            });#}
             
             // Ajax: get form edit relationship ********************************
             $(".row-bigtiles").on("click", ".edit-relationship", function(event){
@@ -394,7 +389,7 @@
                     
                     $(".loader_standard").hide(200, function(){});                                     
                     
-                    $(".modal-title").text("Edit relationship");
+                    $(".modal-title").text(editrelationship);
                     $('.modal-full').modal('show');
                 });
             });
@@ -413,7 +408,7 @@
                     
                     $(".loader_standard").hide(200, function(){});                                     
                     
-                    $(".modal-title").text("Edit ratings");
+                    $(".modal-title").text(editrating);
                     $('.modal-full').modal('show');
                 });
             });
@@ -432,7 +427,7 @@
                     
                     $(".loader_standard").hide(200, function(){});                                     
                     
-                    $(".modal-title").text("Edit red flags");
+                    $(".modal-title").text(editredflag);
                     $('.modal-full').modal('show');
                 });
             });
@@ -530,7 +525,7 @@
                         $("#confirm-panel").removeClass();
                         
                         var url = Routing.generate('prospect_list', {'_locale': locale});
-console.log(url);
+
                         window.location.replace(url);
                     });
                 });                

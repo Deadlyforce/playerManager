@@ -1,78 +1,58 @@
-{% extends '::base_ajax.html.twig' %}
-{#{% block title %}Modifier le contact{% endblock %}#}
-
-{#{% form_theme delete_form _self %}
-
-{% block button_widget %}
-    {% set attr = attr|merge({class: (attr.class|default('btn-default') ~ ' btn')|trim}) %}
-    {%- if label is empty -%}
-        {%- if label_format is not empty -%}
-            {% set label = label_format|replace({
-                '%name%': name,
-                '%id%': id,
-            }) %}
-        {%- else -%}
-            {% set label = name|humanize %}
-        {%- endif -%}
-    {%- endif -%}
-    <button type="{{ type|default('button') }}" {{ block('button_attributes') }}>{{ label|trans({}, translation_domain)|raw }}</button>    
-{% endblock %}#}
-
 {% block content %}
     <div class="container">
         {{ form_start(editForm, {'attr': {'id':'form-edit-prospect', 'data': 'prospect-data', 'class': 'form-inline' }}) }} 
             <div class="form-group">
-                {{ form_label(editForm.nickname) }}
+                {{ form_label(editForm.nickname, 'app.contact.list.new.nickname'|trans) }}
                 {{ form_widget(editForm.nickname, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.nickname) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.firstname) }}
+                {{ form_label(editForm.firstname, 'app.contact.list.new.firstname'|trans) }}
                 {{ form_widget(editForm.firstname, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.firstname) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.lastname) }}
+                {{ form_label(editForm.lastname, 'app.contact.list.new.lastname'|trans) }}
                 {{ form_widget(editForm.lastname, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.lastname) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.age) }}
+                {{ form_label(editForm.age, 'app.contact.list.new.age'|trans) }}
                 {{ form_widget(editForm.age, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.age) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.address) }}
+                {{ form_label(editForm.address, 'app.contact.list.new.address'|trans) }}
                 {{ form_widget(editForm.address, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.address) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.city) }}
+                {{ form_label(editForm.city, 'app.contact.list.new.city'|trans) }}
                 {{ form_widget(editForm.city, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.city) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.zipcode) }}
+                {{ form_label(editForm.zipcode, 'app.contact.list.new.zipcode'|trans) }}
                 {{ form_widget(editForm.zipcode, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.zipcode) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.country, 'Native country') }}
+                {{ form_label(editForm.country, 'app.contact.list.new.country'|trans) }}
                 {{ form_widget(editForm.country, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.country) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.cellNumber) }}
+                {{ form_label(editForm.cellNumber, 'app.contact.list.new.cellnumber'|trans) }}
                 {{ form_widget(editForm.cellNumber, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.cellNumber) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.homeNumber) }}
+                {{ form_label(editForm.homeNumber, 'app.contact.list.new.homenumber'|trans) }}
                 {{ form_widget(editForm.homeNumber, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.homeNumber) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.job) }}
+                {{ form_label(editForm.job, 'app.contact.list.new.job'|trans) }}
                 {{ form_widget(editForm.job, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.job) }}
             </div>
@@ -82,12 +62,12 @@
                 {{ form_errors(editForm.source) }}
             </div>
             <div class="form-group">
-                {{ form_label(editForm.zodiac) }}
+                {{ form_label(editForm.zodiac, 'app.contact.list.new.zodiac'|trans) }}
                 {{ form_widget(editForm.zodiac, {'attr': {'class': 'form-control'} }) }}
                 {{ form_errors(editForm.zodiac) }}
             </div>
 
-            {{ form_row(editForm.submit, {'label': 'Save changes', 'attr': {'class': 'btn-basic-rose'} }) }}
+            {{ form_row(editForm.submit, {'label': 'app.contact.list.new.submit', 'attr': {'class': 'btn-basic-rose'} }) }}
             
             <div class="hidden">{{ form_rest(editForm) }}</div>
         {{ form_end(editForm) }}        

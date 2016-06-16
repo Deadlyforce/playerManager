@@ -1,6 +1,19 @@
 
 /******************************* FONTS ***********************************/
-
+@font-face {
+    font-family: 'sinkin_sans100_thin';
+    src: url('../fonts/sinkin/sinkinsans-100thin-webfont.woff2') format('woff2'),
+         url('../fonts/sinkin/sinkinsans-100thin-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'sinkin_sans300_light';
+    src: url('../fonts/sinkin/sinkinsans-300light-webfont.woff2') format('woff2'),
+         url('../fonts/sinkin/sinkinsans-300light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 @font-face {
     font-family: 'open_sansregular';
     src: url('../fonts/opensans_regular/OpenSans-Regular-webfont.eot');
@@ -8,28 +21,6 @@
          url('../fonts/opensans_regular/OpenSans-Regular-webfont.woff') format('woff'),
          url('../fonts/opensans_regular/OpenSans-Regular-webfont.ttf') format('truetype'),
          url('../fonts/opensans_regular/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'ralewaythin';
-    src: url('../fonts/raleway/raleway-thin-webfont.eot');
-    src: url('../fonts/raleway/raleway-thin-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/raleway/raleway-thin-webfont.woff2') format('woff2'),
-         url('../fonts/raleway/raleway-thin-webfont.woff') format('woff'),
-         url('../fonts/raleway/raleway-thin-webfont.ttf') format('truetype'),
-         url('../fonts/raleway/raleway-thin-webfont.svg#ralewaythin') format('svg');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'ralewaylight';
-    src: url('../fonts/raleway/raleway-light-webfont.eot');
-    src: url('../fonts/raleway/raleway-light-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../fonts/raleway/raleway-light-webfont.woff2') format('woff2'),
-         url('../fonts/raleway/raleway-light-webfont.woff') format('woff'),
-         url('../fonts/raleway/raleway-light-webfont.ttf') format('truetype'),
-         url('../fonts/raleway/raleway-light-webfont.svg#ralewaylight') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -107,11 +98,18 @@ header{
 .navbar-header{
     float: none;
 }
+.navbar-default .navbar-brand{
+    color: #f47363;
+    font-size: 1.6em;
+    font-family: 'sinkin_sans100_thin', sans-serif;
+}
 .navbar-brand{
     text-shadow: none; 
-    float: none;
-    color: #e0e0e0;
-    padding-left: 0px;
+    float: none;    
+    padding-left: 0px;    
+}
+.navbar-brand:hover{
+    color: #FFF;
 }
 .navbar{
     font-family: 'open_sansregular', sans-serif;
@@ -239,9 +237,15 @@ a.page-button:hover{
     border: 1px solid #f47363;
 }
 
+#table-users td{
+    
+}
+td.centered{
+    text-align: center;
+}
 td.actions a{
     margin-right: 5px;
-    font-size: 1.2em;
+    font-size: 1.5em;
 }
 
 .overlay{

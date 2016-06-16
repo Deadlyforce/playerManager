@@ -76,6 +76,7 @@ class UserController extends Controller
                 "username" => $user->getUsername(),
                 "enabled" => $user->isEnabled(),
                 "email" => $user->getEmail(),
+                "gender" => $user->getGender(),
                 "lastLogin" => $user->getLastLogin(),
                 "createdAt" => $user->getCreatedAt(),
                 "ip" => $user->getIp(),
@@ -115,15 +116,13 @@ class UserController extends Controller
 
             $user->setEnabled(true);
             $em->flush();
-            
-//            $tokenManager = $this->get('security.csrf.token_manager');        
-//            $csrf_token = $tokenManager->refreshToken('');
 
             $response_array = array(
                 "id" => $id,
                 "username" => $user->getUsername(),
                 "enabled" => $user->isEnabled(),
                 "email" => $user->getEmail(),
+                "gender" => $user->getGender(),
                 "lastLogin" => $user->getLastLogin(),
                 "createdAt" => $user->getCreatedAt(),
                 "ip" => $user->getIp(),

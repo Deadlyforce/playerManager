@@ -30,6 +30,8 @@ app:
         dashboard: Tableau de bord
         profile: Profil
         contactus: Nous contacter
+        bo:
+            user: Utilisateurs
         logout: Déconnexion
     contact:
         list:
@@ -54,6 +56,74 @@ app:
                 job: Métier
                 zodiac: Zodiaque
                 submit: Enregistrer le contact
+        show:
+            edit: Modifier les infos du contact
+            edit-contact-modal:
+                title: Modifier le contact
+            edit-relationship-modal:
+                title: Modifier la relation
+            edit-rating-modal:
+                title: Modifier les notes
+            edit-redflag-modal:
+                title: Modifier les points négatifs
+            rating:
+                title: Note moyenne
+                edit: Modifier les notes
+            redflag:
+                title: Points négatifs
+                edit: Modifier<br>les points négatifs
+            relationship:
+                startdate: Date de début
+                status:
+                    title: Statut de la<br>relation
+                type:
+                    title: Type de relation
+                edit: Modifier la relation
+                met: Rencontré(e)
+                kc: Embrassé(e)
+                fc: Sexe
+                crush: Coup de coeur
+            delete:
+                title: Supprimer<br>ce contact
+            encounter:
+                title: Rencontres
+                subtext: Gestion<br>des rencontres
+                count: Nombre<br>de rencontres
+    relationship:
+        edit:
+            tooltip:
+                status: Relation terminée?
+                flake: Il/elle a posé un lapin?
+                
+            notice: Déplacer les boutons à gauche ou à droite pour laisser aparaître le bon choix.
+            startdate: Date de début
+            status: Relation en cours?
+            met: Déjà rencontrés?
+            flake: Peu fiable
+            numclose: Numéro récupéré?
+            crush: Coup de coeur?
+            kc: Vous êtes vous embrassés?
+            fc: Avez vous couché ensemble?
+            rank: Type de relation
+            distance: Problème de distance?
+            about: Détails
+            submit: Enregistrer
+    encounter:
+        index:
+            tabtitle: Rencontres
+            title: Rencontres avec
+            btn:
+                add: Ajouter une rencontre
+                contact-back: Retour au contact
+            add-modal:
+                title: Nouvelle rencontre
+        new:
+            duration: Durée (heures)
+            expenses: Total de dépenses
+            venue:
+                notice: Ajoutez jusqu'à 3 endroits
+                add: Ajouter un endroit
+            submit: Enregistrer
     photo:
         album:
             subtitle: Tous vos contacts, uniquement des photos pour l'instant...
@@ -82,8 +152,9 @@ app:
         subtitle: Evaluez votre contact!
         btn-contact: Page du contact        
         btn-save: Enregistrer
-    redflag:
+    redflag:        
         edit:
+            notice: Cochez les points qui peuvent poser problème
             label:
                 unemployed: Sans emploi
                 needy: Collant(e)/Désespéré(e)
@@ -113,8 +184,8 @@ relationship_rank:
     open_relationship: Realtion libre
     long_term_relationship: Relation longue
 source:
-    online: Internet
-    irl: Soirée (ou autres)
+    online: Web
+    irl: Extérieur
 zodiac:
     aries: Bélier
     taurus: Taureau
