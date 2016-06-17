@@ -18,12 +18,11 @@ app:
             title: Mémorisez vos contacts Souvenez-vous des détails
             text: Filtrez et classez vos relations
         feature2:
-            title: Notez les gens que vous rencontrez
-            text: Arrêtez de perdre du temps avec les mauvaises personnes
+            title: Notez les gens<br>que vous rencontrez
+            text: Ne perdez plus de temps avec les mauvaises personnes
         feature3:
-            title: Visualisez votre progression
-            text1: Ne refaites plus les mêmes erreurs
-            text2: Analysez vos résultats
+            title: Visualisez<br>votre progression
+            text: Ne refaites plus les mêmes erreurs<br>Analysez vos résultats 
     nav:
         album: Album photo
         oldcontacts: Anciens contacts

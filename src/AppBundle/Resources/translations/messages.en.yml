@@ -15,15 +15,14 @@ app:
         title: Never forget your dates
         btn-add: Add your first contact
         feature1:
-            title: Save your contacts Remember the details
+            title: Save your contacts<br>Remember details
             text: Organize and filter your relationships
         feature2:
-            title: Rate the people you meet
-            text: Stop wasting your precious time with the wrong people
+            title: Rate<br>the people you meet
+            text: Stop wasting precious time with the wrong people
         feature3:
-            title: Chart your progress
-            text1: Avoid previous mistakes
-            text2: Analyze your results
+            title: Chart<br>your progress
+            text: Avoid previous mistakes<br>Analyze your results
     nav:
         album: Photo album
         oldcontacts: Old contacts
