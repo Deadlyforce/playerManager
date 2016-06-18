@@ -1,7 +1,5 @@
 var collectionHolder;
        
-var addPhotoLink = $('<a href="#" class="add-photo">Add photo</a>');
-var newLiAddPhoto = $('<li class="col-md-4"></li>').append(addPhotoLink);
 
 
 function addPhotoForm(collectionHolder, newLiAddPhoto, imgDir)
@@ -29,7 +27,7 @@ function addPhotoForm(collectionHolder, newLiAddPhoto, imgDir)
 }    
 
 function addPhotoFormDeleteLink(photoFormLi)
-{
+{    
     var removeForm =  $("<a href='#' title='Delete'><i class='icon ion-ios-trash-outline'></i></a>");
     photoFormLi.find('.photo-actions .delete-photo').append(removeForm);
 

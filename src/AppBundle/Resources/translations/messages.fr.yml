@@ -92,6 +92,27 @@ app:
                 title: Rencontres
                 subtext: Gestion<br>des rencontres
                 count: Nombre<br>de rencontres
+        gallery:
+            tabtitle: Galerie de photos
+            title: Photos
+            subtitle: Ajouter jusqu'à 5 photos, valider les changements en bas de page. jpeg/png. Taille max 1.2Mo
+            btn:
+                contact-back: Retour au contact
+                add: Ajouter une photo
+                submit: Enregistrer la galerie
+            photo:
+                primary: Principale
+                btn:
+                    delete: Supprimer la photo
+                    change: Changer de photo
+                    crop: Recadrer la photo
+                crop:
+                    tabtitle: Recadrer la photo
+                    title: Recadrer l'image
+                    subtitle: Selectionner une zone et valider la sélection
+                    btn:
+                        back: Retour à la galerie
+                        submit: Recadrer l'image
     relationship:
         edit:
             tooltip:

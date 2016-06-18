@@ -2,10 +2,8 @@
 
 namespace AppBundle\DependencyInjection\Managers;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\PersistentCollection;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-
+use Stof\DoctrineExtensionsBundle\Uploadable\UploadableManager;
 
 /**
  * Description of PhotoManager
@@ -13,14 +11,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  * @author Norman
  */
 class PhotoManager 
-{   
-    private $em;
-    private $tokenStorage;
-    
-    public function __construct(EntityManagerInterface $em, TokenStorageInterface $tokenStorage) 
-    {
-        $this->em = $em;        
-        $this->tokenStorage = $tokenStorage;
+{       
+    public function __construct() 
+    {        
+
     }    
 
     /**
@@ -29,7 +23,7 @@ class PhotoManager
      * @param PersistentCollection $photos
      * @return boolean
      */
-    public function updateEmptyGallery(PersistentCollection $photos, $uploadableManager)
+    public function updateEmptyGallery(PersistentCollection $photos, UploadableManager $uploadableManager)
     {
         $this->setFirstPhotoPrimary($photos);
                 

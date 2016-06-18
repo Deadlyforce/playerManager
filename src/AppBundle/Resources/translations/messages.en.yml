@@ -92,6 +92,27 @@ app:
                 title: Encounters
                 subtext: Manage Encounters
                 count: Encounters count
+        gallery:
+            tabtitle: Gallery
+            title: Photos Gallery
+            subtitle: Add up to 5 photos, replace or delete them, validate your changes at the bottom of the page. jpeg/png. Max size 1.2Mo
+            btn:
+                contact-back: Back to contact
+                add: Add photo
+                submit: Save gallery
+            photo:
+                primary: Primary
+                btn:
+                    delete: Delete photo
+                    change: Change photo
+                    crop: Crop photo
+                crop:
+                    tabtitle: Crop photo
+                    title: Crop image
+                    subtitle: Select an area, then validate your selection
+                    btn:
+                        back: Back to gallery
+                        submit: Crop image
     relationship:
         edit:
             tooltip:

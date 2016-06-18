@@ -72,11 +72,9 @@ class ProspectController extends Controller
                 'action' => $this->generateUrl('prospect_update', array('id' => $id)),
                 'method' => 'PUT'
             ));
-//            $delete_form = $this->createDeleteForm($id);
             
             $editForm_view = $this->renderView(":Frontend/Prospect:edit.html.twig", array(
-                'editForm' => $editForm->createView(),
-//                'delete_form' => $delete_form->createView()  
+                'editForm' => $editForm->createView()  
             ));
 
             return new Response($editForm_view);
@@ -124,36 +122,6 @@ class ProspectController extends Controller
             throw $this->createAccessDeniedException('CSRF token is invalid.');
         }      
     }    
-    
-    /**
-     * Lists all Prospect entities.
-     *
-     * @Route("/", name="prospect")
-     * @Method("GET")
-     * @Template(":Frontend/Prospect:index.html.twig")
-     */
-    public function indexAction()
-    {
-        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            throw $this->createAccessDeniedException('You cannot access this page!');
-        }
-        
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        
-        $em = $this->getDoctrine()->getManager();
-        $prospects = $em->getRepository('AppBundle:Prospect')->findBy(
-            array("user" => $user), 
-            array("creationDate" => "DESC")
-        );
-                
-        $tokenManager = $this->get('security.csrf.token_manager');        
-        $csrf_token = $tokenManager->refreshToken('');
-                
-        return array(
-            'prospects' => $prospects,
-            'csrf_token' => $csrf_token
-        );
-    }
     
     /**
      * Lists Prospect entities.
@@ -252,7 +220,7 @@ class ProspectController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             // Depending on entered infos, pre-fill some fields in relationship entity
-            if ($prospect->getHomeNumber() != null || $prospect->getCellNumber() != null) {
+            if ($prospect->getHomeNumber() !== null || $prospect->getCellNumber() !== null) {
                 $prospect->getRelationship()->setNumclosed(true);
             }
             
@@ -294,54 +262,16 @@ class ProspectController extends Controller
         } 
         
         if($prospect->getUser() === $user){
-//            $encounterCount = $em->getRepository('AppBundle:Encounter')->getEncounterCount($prospect);
             $deleteForm = $this->createDeleteForm($id);
 
             return array(
                 'prospect' => $prospect,
-//                'encounterCount' => $encounterCount,
                 'delete_form' => $deleteForm->createView(),
             );
         } else {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }       
     }
-
-    /**
-     * Displays a form to edit an existing Prospect entity.
-     *
-     * @Route("/{id}/edit", name="prospect_edit")
-     * @Method("GET")
-     * @Template(":Frontend/Prospect:edit.html.twig")
-     */
-//    public function editAction($id)
-//    {
-//        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-//            throw $this->createAccessDeniedException('You cannot access this page!');
-//        }
-//        
-//        $user = $this->get('security.token_storage')->getToken()->getUser();
-//        
-//        $em = $this->getDoctrine()->getManager();
-//        $prospect = $em->getRepository('AppBundle:Prospect')->find($id);
-//
-//        if (!$prospect) {
-//            throw $this->createNotFoundException('Unable to find Prospect entity.');
-//        } 
-//        
-//        if($prospect->getUser() === $user){
-//            $editForm = $this->createEditForm($prospect);
-//            $deleteForm = $this->createDeleteForm($id);
-//
-//            return array(
-//                'prospect' => $prospect,
-//                'edit_form' => $editForm->createView(),
-//                'delete_form' => $deleteForm->createView(),
-//            );
-//        } else {
-//            throw $this->createAccessDeniedException('You cannot access this page!');
-//        }
-//    }
    
     /**
      * Edits an existing Prospect entity.

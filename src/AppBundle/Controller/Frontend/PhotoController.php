@@ -7,7 +7,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection; 
-//use Symfony\Component\HttpFoundation\Response;
 
 use AppBundle\Form\PhotoType;
 use AppBundle\Form\ProspectType;

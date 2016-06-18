@@ -1,17 +1,20 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Gallery{% endblock %}
+{% set btn_delete_title = 'app.contact.gallery.photo.btn.delete'|trans %}
+{% set btn_add = 'app.contact.gallery.btn.add'|trans %}
+
+{% block title %}{{ 'app.contact.gallery.tabtitle'|trans }}{% endblock %}
 
 {% block content %}
     <div class="container standard-container" id="container-gallery">
         <section class="page-title">
-            <h1>{{ prospect.firstname }} {{ prospect.lastname }} Photos Gallery</h1> 
-            <h2>Add up to 5 photos, replace or delete them, validate your changes at the bottom of the page. Max size 1.2Mo</h2>
+            <h1>{{ prospect.firstname }} {{ prospect.lastname }} {{ 'app.contact.gallery.title'|trans }}</h1> 
+            <h2>{{ 'app.contact.gallery.subtitle'|trans }}</h2>
         </section>
         <div class="page-title-underline"></div>
         
         <div class="page-nav">
-            <a class="btn-basic" href="{{ path('prospect_show', {'id': prospect.id}) }}" title="Back to contact">Back to contact</a>
+            <a class="btn-basic" href="{{ path('prospect_show', {'id': prospect.id}) }}" title="{{ 'app.contact.gallery.btn.contact-back'|trans }}">{{ 'app.contact.gallery.btn.contact-back'|trans }}</a>
             <br>
             <div class="alert alert-danger collapse"></div>
         </div>        
@@ -37,18 +40,22 @@
                                     <div class="col-md-4 photo-selected">
                                         {# Make photo primary #}                                        
                                         {{ form_errors(photo.selected) }}
-                                        {{ form_label(photo.selected) }}
+                                        {{ form_label(photo.selected, 'app.contact.gallery.photo.primary') }}
                                         {{ form_widget(photo.selected) }}                                       
                                     </div>
                                     <div class="col-md-8 photo-buttons">
                                         <ul class="pull-right">                                            
                                             <li>
-                                                <a href="#" id="{{ photo.vars.data.id }}" class="change-photo" title="Change photo"><i class="icon ion-ios-reverse-camera-outline"></i></a>    
+                                                <a href="#" id="{{ photo.vars.data.id }}" class="change-photo" title="{{ 'app.contact.gallery.photo.btn.change'|trans }}">
+                                                    <i class="icon ion-ios-reverse-camera-outline"></i>
+                                                </a>    
                                             </li>
                                              <li>
-                                                <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="Crop photo"><i class="icon ion-ios-crop-strong"></i></a>
+                                                <a href="{{ path('photo_edit', {'id': photo.vars.data.id}) }}" title="{{ 'app.contact.gallery.photo.btn.crop'|trans }}">
+                                                    <i class="icon ion-ios-crop-strong"></i>
+                                                </a>
                                             </li>
-                                            <li class="delete-photo" title="Delete photo">
+                                            <li class="delete-photo">
                                                 {# Container for the delete button #}
                                             </li>
                                         </ul>                                            
@@ -70,7 +77,7 @@
             </ul>       
             <div class="clearfix"></div>
             
-            {{ form_row(editForm.submit, {'attr': {'class': 'btn-basic-rose pull-right'}}) }}
+            {{ form_row(editForm.submit, {'label':'app.contact.gallery.btn.submit', 'attr': {'class': 'btn-basic-rose pull-right'}}) }}
             
             <div class="hidden">{{ form_rest(editForm) }}</div>
             
@@ -96,7 +103,7 @@
     <script type="text/javascript">
         $(document).ready(function(){
 {#            var locale = "{{ app.request.locale }}"; #}
-  
+            
             // On click on "change" photo **************************************
             // moves prototype form inside modal and diplays it
             $("#photo-list").on("click", ".change-photo", function(e){
@@ -214,6 +221,11 @@
         
         // VAR NECESSARY TO HAVE AN ASSETIC PATH IN photos.js (without it, works in dev, not in prod) ******
         var imgDir = "{{ asset('bundles/app/images/') }}";
+        
+        var btn_add = "{{ btn_add }}";
+        var addPhotoLink = $('<a href="#" class="add-photo">'+ btn_add +'</a>');
+        var newLiAddPhoto = $('<li class="col-md-4"></li>').append(addPhotoLink);
+        
         
         // JAVASCRIPT USED AT DOC READY BY photos.js *******************************************************
         // STAYS HERE BECAUSE OF PRIORITY LOADING, NEEDS imgDir var ****************************************

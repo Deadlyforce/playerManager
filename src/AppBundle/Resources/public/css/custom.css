@@ -1987,7 +1987,7 @@ table.record_properties th{
     padding-top: 17px;
 }
 .photo-actions .photo-selected label{
-    width: 60px;
+    width: 70px;
     font-weight: 200;  
     font-family: "opensans_regular", sans-serif;
     font-size: 1.1em;
@@ -2072,6 +2072,9 @@ img#crop-preview{
     text-align: center;
     margin-top: 20px;
     margin-bottom: 20px;
+}
+#crop-info p, #crop-info label{
+    color: #FFF;
 }
 
 /******************************** CONTACT US ************************************/

@@ -1,17 +1,18 @@
 {% extends '::base.html.twig' %}
-{#{% extends '::ajax_crop.html.twig' %}#}
 
-{% block title %}Crop photo{% endblock %}
+{% block title %}{{ 'app.contact.gallery.photo.crop.tabtitle'|trans }}{% endblock %}
 
 {% block content %}  
     <div class="container">
         <section class="page-title">
-            <h1>Crop image</h1> 
-            <h2>Select an area, then validate your selection</h2>
+            <h1>{{ 'app.contact.gallery.photo.crop.title'|trans }}</h1> 
+            <h2>{{ 'app.contact.gallery.photo.crop.subtitle'|trans }}</h2>
         </section>
         <div class="page-title-underline"></div>
         
-        <a class="btn-basic" href="{{ path('gallery', {'prospect_id': photo.prospect.id}) }}" title="back to gallery">Back to gallery</a>
+        <a class="btn-basic" href="{{ path('gallery', {'prospect_id': photo.prospect.id}) }}" title="{{ 'app.contact.gallery.photo.crop.btn.back'|trans }}">
+            {{ 'app.contact.gallery.photo.crop.btn.back'|trans }}
+        </a>
         
         <form id="upload_form" enctype="multipart/form-data" method="post" action="{{ path('photo_crop', {'id': photo.id}) }}" onsubmit="return checkForm();">
             <!-- hidden crop params -->
@@ -31,7 +32,7 @@
                 <input type="text" id="h" name="h" />
             </div>
 
-            <input class="btn-basic-rose" type="submit" value="Crop image" />
+            <input class="btn-basic-rose" type="submit" value="{{ 'app.contact.gallery.photo.crop.btn.submit'|trans }}" />
         </form>       
     </div>
     

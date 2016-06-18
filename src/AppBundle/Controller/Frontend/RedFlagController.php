@@ -7,7 +7,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\RedFlag;
-use AppBundle\Form\RedFlagType;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
