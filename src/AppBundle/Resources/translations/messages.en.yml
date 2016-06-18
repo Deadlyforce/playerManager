@@ -40,6 +40,10 @@ app:
                 sex: Sex
                 relationship_type: Relationship type
                 submit: Filter results
+                choices:
+                    sex:
+                        yes: Happened
+                        no: Didn't happen
             new:
                 title: New contact
                 nickname: Nickname

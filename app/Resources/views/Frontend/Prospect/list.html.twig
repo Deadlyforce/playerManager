@@ -11,11 +11,6 @@
             <a class="btn-basic-ico" href="#" id="add_prospect" title ="{{ 'app.contact.list.add'|trans }}"><i class="icon ion-ios-plus-empty"></i><span>{{ 'app.contact.list.add'|trans }}</span></a>
             
             {{ form_start(filterForm, {'attr': {'class': 'pull-right form-inline'} }) }}
-                {#<div>
-                    {{ form_label(filterForm.status, 'app.contact.list.filter.status'|trans) }}
-                    {{ form_widget(filterForm.status, {'attr': {'class': 'form-control'} }) }}
-                    {{ form_errors(filterForm.status) }}
-                </div>#}
                 <div>
                     {{ form_label(filterForm.sex, 'app.contact.list.filter.sex'|trans) }}
                     {{ form_widget(filterForm.sex, {'attr': {'class': 'form-control'} }) }}

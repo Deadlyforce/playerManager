@@ -126,7 +126,7 @@
     font-weight: normal;
     font-style: normal;
 }
-@font-face {
+/*@font-face {
     font-family: 'ralewayregular';
     src: url('../fonts/raleway/raleway-regular-webfont.eot');
     src: url('../fonts/raleway/raleway-regular-webfont.eot?#iefix') format('embedded-opentype'),
@@ -137,7 +137,7 @@
     font-weight: normal;
     font-style: normal;
 
-}
+}*/
 
 /****************************** CONFIRM ***************************************/
 
@@ -203,7 +203,7 @@ form[name='fos_user_registration_form'] > div, #fos_user_registration_form_plain
 }
 
 form[name='fos_user_registration_form']{
-    font-family: "ralewayregular", sans-serif;     
+    font-family: "opensans_regular", sans-serif;     
 }
 form[name='fos_user_registration_form'] label{
     font-size: 1.2em; 
@@ -380,7 +380,7 @@ form[name="fos_user_security_login"] #_submit:hover{
     background-color: #F47363;
     color: #fff;
     padding: 5px 15px;
-    font-family: "ralewayregular", sans-serif;
+    font-family: "opensans_regular", sans-serif;
 
     transition: all .3s ease-in;
 }
@@ -1179,7 +1179,7 @@ form[data='prospect-data'] label{
     width: 175px;
     font-weight: 200;
     font-size: 1.2em;
-    font-family: 'ralewayregular', sans-serif;
+    font-family: 'opensans_regular', sans-serif;
 }
 form[data='prospect-data'] input[type="text"], select#appbundle_prospect_country, select#appbundle_prospect_source{
     width: 200px;
@@ -1685,7 +1685,7 @@ ul.record_actions{
     border-top: none;
     font-weight: 200;
     font-size: 1.2em;
-    font-family: "ralewayregular", sans-serif;
+    font-family: "opensans_regular", sans-serif;
 }
 #table-relationship-show td{      
     border-top: none;
@@ -1711,7 +1711,7 @@ form[name="appbundle_relationship"] label{
     width: 250px;
     font-weight: 200;
     font-size: 1.2em;
-    font-family: "ralewayregular", sans-serif;
+    font-family: "opensans_regular", sans-serif;
 }
 
 input#appbundle_relationship_startDate {
@@ -1989,7 +1989,7 @@ table.record_properties th{
 .photo-actions .photo-selected label{
     width: 60px;
     font-weight: 200;  
-    font-family: "ralewayregular", sans-serif;
+    font-family: "opensans_regular", sans-serif;
     font-size: 1.1em;
     line-height: 1em;
 }
@@ -2333,7 +2333,7 @@ form[name="appbundle_rating"] > div {
 }
 form[name="appbundle_rating"] > div > label {
     width: 170px;
-    font-family: "ralewayregular", sans-serif;
+    font-family: "opensans_regular", sans-serif;
     font-weight: 200;
     font-size: 1.3em;
 }

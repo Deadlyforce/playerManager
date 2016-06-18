@@ -3,24 +3,21 @@
     
 <head>
     <meta charset="UTF-8" />
-    <title>{% block title %}Playermanager{% endblock %}</title>        
+    <title>{% block title %}Mnaomai{% endblock %}</title>        
     {% block stylesheets %}
         {% stylesheets filter='cssrewrite' 
-            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.min.css'
-            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css'
+            'bundles/app/packages/bootstrap-3.3.6/css/bootstrap.min.css'
+            'bundles/app/packages/bootstrap-3.3.6/css/bootstrap-theme.min.css'
             '%kernel.root_dir%/../vendor/components/jqueryui/themes/base/jquery-ui.min.css'
             'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.css'
             'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.css'
-            'bundles/app/packages/DataTables-1.10.8/datatables.min.css'
             'bundles/app/packages/font-awesome-4.4.0/css/font-awesome.min.css'
-            'bundles/app/packages/Jcrop/css/jquery.Jcrop.min.css'
-            'bundles/app/packages/slick_1.5.9/slick.css'            
+            'bundles/app/packages/Jcrop/css/jquery.Jcrop.min.css'           
             'bundles/app/packages/colorbox/colorbox.css'
             'bundles/app/css/custom.css'            
             'bundles/app/css/ionicons.min.css'                     
             'bundles/app/packages/star-rating-svg/css/star-rating-svg.css'                     
-            'bundles/app/packages/percircle/css/percircle.css'        
-            'bundles/app/packages/jquery-barrating/themes/bars-movie.css'             
+            'bundles/app/packages/percircle/css/percircle.css'            
         %}
             <link rel="stylesheet" href="{{ asset_url }}"/>
         {% endstylesheets %}
@@ -33,15 +30,12 @@
             '%kernel.root_dir%/../vendor/components/jqueryui/jquery-ui.min.js'
             'bundles/app/packages/moment-with-locales.js'
             'bundles/app/packages/Timepicker-addon/jquery-ui-timepicker-addon.js'
-            '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'
-            'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.js'
-            'bundles/app/packages/DataTables-1.10.8/datatables.min.js'
-            'bundles/app/packages/slick_1.5.9/slick.min.js'            
+            'bundles/app/packages/bootstrap-3.3.6/js/bootstrap.min.js'
+            'bundles/app/packages/Craftpip-jquery-confirm-1.7.9/jquery-confirm.js'            
             'bundles/app/packages/colorbox/jquery.colorbox-min.js'
             'bundles/app/js/helpers.js'                       
             'bundles/app/packages/star-rating-svg/jquery.star-rating-svg.js'            
             'bundles/app/packages/jquery.backstretch.min.js'
-            'bundles/app/packages/jquery-barrating/jquery.barrating.min.js'
         %}
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
@@ -133,13 +127,10 @@
                 $(activeLi).removeClass("active");
             });        
             // Active link in menu *********************************************
-            
-            $(".datatable").DataTable(); // class datatable
-            
-            getDatepicker();
-            getDatetimepicker();
+   
            
-            
+            getDatepicker();
+            getDatetimepicker();           
         });
     </script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>

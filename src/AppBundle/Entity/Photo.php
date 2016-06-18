@@ -128,7 +128,7 @@ class Photo {
      */
     public function getUploadAbsolutePath()
     {
-        return __DIR__ . '/../../../web/' . $this->getPath();
+        return __DIR__ . '/../../../web/' . $this->getPath();        
     }
     
     /**

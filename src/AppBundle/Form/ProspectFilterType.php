@@ -4,7 +4,6 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
@@ -16,30 +15,23 @@ class ProspectFilterType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-//            ->add('status', ChoiceType::class, array(
-//                'required' => false,
-//                'choices' => array(
-//                    "Active" => 1,                    
-//                    "Inactive" => 0,                    
-//                )
-//            ))                                  
+        $builder                                 
             ->add('sex', ChoiceType::class, array(
                 'required' => false,
                 'choices' => array(
-                    "Happened" => 1,                    
-                    "Didn't happen" => 0                   
+                    'app.contact.list.filter.choices.sex.yes' => 1,                    
+                    'app.contact.list.filter.choices.sex.no' => 0                   
                 )
             ))                                  
             ->add('relationshipLevel', ChoiceType::class, array(
                 'required' => false,
                 'choices' => array(
-                    "Chatting" => 1,                    
-                    "One Night Stand" => 2,                    
-                    "Fuck friend" => 3,                    
-                    "Dating" => 4,                    
-                    "Open relationship" => 5,                    
-                    "Monogamous Relationship" => 6,                    
+                    'relationship_rank.chatting' => 1,                    
+                    'relationship_rank.one_night_stand' => 2,                    
+                    'relationship_rank.sex_friend' => 3,                    
+                    'relationship_rank.dating' => 4,                    
+                    'relationship_rank.open_relationship' => 5,                    
+                    'relationship_rank.long_term_relationship' => 6,                    
                 )
             ))                                  
         ;

@@ -40,6 +40,10 @@ app:
                 sex: Sexe
                 relationship_type: Type de relation
                 submit: Filtrer
+                choices:
+                    sex:
+                        yes: Oui
+                        no: Non
             new:
                 title: Nouveau contact
                 nickname: Pseudo

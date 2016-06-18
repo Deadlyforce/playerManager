@@ -5,8 +5,8 @@
         <title>{% block title %}Welcome!{% endblock %}</title>        
         {% block stylesheets %}
             {% stylesheets filter='cssrewrite' 
-                '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap.css'
-                '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/css/bootstrap-theme.css'             
+                'bundles/app/packages/bootstrap-3.3.6/css/bootstrap.min.css'
+                'bundles/app/packages/bootstrap-3.3.6/css/bootstrap-theme.min.css'             
                 'bundles/app/css/custom.css'
             %}
                 <link rel="stylesheet" href="{{ asset_url }}"/>
@@ -17,7 +17,7 @@
         {% block javascripts %}
             {% javascripts
                 '%kernel.root_dir%/../vendor/components/jquery/jquery.js'  
-                '%kernel.root_dir%/../vendor/twbs/bootstrap/dist/js/bootstrap.js'                                
+                'bundles/app/packages/bootstrap-3.3.6/js/bootstrap.min.js'                                
                 'bundles/app/packages/jquery.backstretch.min.js'
             %}
                 <script type="text/javascript" src="{{ asset_url }}"></script>
