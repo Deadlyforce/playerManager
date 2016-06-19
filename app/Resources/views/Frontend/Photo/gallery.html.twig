@@ -19,7 +19,7 @@
             <div class="alert alert-danger collapse"></div>
         </div>        
 
-        {{ form_start(editForm, {'attr': {'id':'form-edit-prospect'}}) }}          
+        {{ form_start(editForm, {'method': 'PUT', 'attr': {'id':'form-edit-prospect'}}) }}          
 
             {{ form_label(editForm.photos) }}
             {{ form_errors(editForm.photos) }}
