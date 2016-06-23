@@ -44,8 +44,9 @@
         {% block content %}   
             <div id="login-body">
                 <div id="login-title">
+                    <img src="{{ asset('bundles/app/images/logo-256.png') }}" alt="Mnaomai-logo"/>
                     <h1>{{ 'app.login.title'|trans }}</h1>
-                    <p id="beta">alpha</p>
+                    <p id="beta">beta</p>
                     <h2>{{ 'app.login.subtitle'|trans }}</h2>
                 </div>
                 <p id="link-register">{{ 'app.login.new'|trans }}<a href="{{ path('fos_user_registration_register') }}" title="Sign up here">{{ 'Sign up here'|trans }}</a></p>

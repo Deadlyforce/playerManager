@@ -160,6 +160,8 @@ app:
         subject: Sujet du message
         message: Votre message...
         send: Envoyer
+        flash:
+            success: Le message a bien été envoyé, merci!
     profile:
         btn-edit: Modifier le profil
     rating:

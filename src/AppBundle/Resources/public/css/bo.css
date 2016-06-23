@@ -98,11 +98,26 @@ header{
 .navbar-header{
     float: none;
 }
-.navbar-default .navbar-brand{
-    color: #f47363;
-    font-size: 1.6em;
-    font-family: 'sinkin_sans100_thin', sans-serif;
+.navbar-header .navbar-brand img{
+    width: 35px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 4px;
 }
+.navbar-header .navbar-brand p{
+    font-family: 'sinkin_sans100_thin', sans-serif;
+    color: #F47363;
+    font-size: 1.8em;
+    padding: 0;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+.navbar-header .navbar-brand {
+    padding: 0;
+}
+
 .navbar-brand{
     text-shadow: none; 
     float: none;    
@@ -188,6 +203,13 @@ body {
 }
 
 /******************************* PAGES GLOBAL ***********************************/
+
+.page-nav{
+    margin-bottom: 25px;
+}
+.page-nav a{
+    margin-bottom: 5px;
+}
 
 #container-user{
     padding-bottom: 150px;

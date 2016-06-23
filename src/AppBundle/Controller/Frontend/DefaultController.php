@@ -84,8 +84,8 @@ class DefaultController extends Controller
                     );
 
                 $this->get('mailer')->send($message);
-
-                $request->getSession()->getFlashBag()->add('success_mail', 'Your email has been sent! Thanks!');
+                $msg_success = $this->get('translator')->trans('app.contactus.flash.success');
+                $request->getSession()->getFlashBag()->add('success_mail', $msg_success);
 
                 return $this->redirect($this->generateUrl('contact_us'));
             }

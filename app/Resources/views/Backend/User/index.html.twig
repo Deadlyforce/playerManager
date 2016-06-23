@@ -1,9 +1,11 @@
 {% extends '::base_bo.html.twig' %}
 {% block title %}BO:Users{% endblock %}
 
-
 {% block content %}
-    <div class="container" id="container-user">                  
+    <div class="container" id="container-user">
+        <div class="page-nav">            
+            Total users: <span class="badge">{{ totalUsers }}</span>                
+        </div>
         <table id="table-users" class="table table-hover">
             <thead>
                 <tr>

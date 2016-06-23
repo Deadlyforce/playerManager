@@ -243,23 +243,31 @@ img[title="captcha"]{
     padding: 15px;
     position: relative;
 }
+#login-title img{
+    width: 70px;
+    display: inline-block;
+    margin-right: 10px;
+}
 #login-title h1{
     font-family: 'ralewaylight', sans-serif;
     color: #FFF;
     font-size: 4.5em;
     text-shadow: 1px 1px 2px #666;
+    display: inline-block;
+    vertical-align: middle;
 }
 #login-title p#beta{
     font-size: 1.5em;
     color: #f47363;
     font-family: "ralewaythin", sans-serif;
-    position: absolute;
+/*    position: absolute;
     top: 50px;
     right: 375px;
-    text-align: left;
+    text-align: left;*/
+    display: inline;
 }
 #login-title h2{
-    font-family: 'ralewaythin', sans-serif;
+    font-family: 'sinkin_sans100_thin', sans-serif;
     color: #FFF;
     font-size: 2em;
     text-shadow: 1px 1px 2px #666;
@@ -402,12 +410,24 @@ header{
 }
 
 /* Website title in nav */ 
-.navbar-header .navbar-brand {
+.navbar-header .navbar-brand img{
+    width: 35px;
+    display: inline-block;
+    margin-right: 10px;
+    margin-top: 4px;
+}
+.navbar-header .navbar-brand p{
     font-family: 'sinkin_sans100_thin', sans-serif;
     color: #F47363;
     font-size: 1.8em;
-    padding-left: 0;
+    padding: 0;
     text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
+    display: inline-block;
+    vertical-align: middle;
+    margin: 0;
+}
+.navbar-header .navbar-brand {
+    padding: 0;
 }
 .navbar-header .navbar-brand:hover {
     color: #fff;
@@ -415,9 +435,7 @@ header{
 
 .navbar-brand{
     text-shadow: none;
-    vertical-align: middle;
     height: 50px;
-    display: table-cell;
     float: none;
 }
 .navbar{
@@ -678,6 +696,7 @@ p.confirmed{
 
 .page-nav{
     margin-bottom: 25px;
+    font-family: 'open_sansregular', sans-serif;
 }
 .page-nav a{
     margin-bottom: 5px;

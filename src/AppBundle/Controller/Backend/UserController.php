@@ -29,16 +29,18 @@ class UserController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException('You cannot access this page!');
         }
-        
+                
         $em = $this->getDoctrine()->getManager();
         $users = $em->getRepository('AppBundle:User')->findAll();
+        $totalUsers = $em->getRepository('AppBundle:User')->countUsers();
         
         $tokenManager = $this->get('security.csrf.token_manager');        
         $csrf_token = $tokenManager->refreshToken('');
                 
         return array(
             'users' => $users,
-            'csrf_token' => $csrf_token
+            'csrf_token' => $csrf_token,
+            'totalUsers' => $totalUsers
         );
     }
     
