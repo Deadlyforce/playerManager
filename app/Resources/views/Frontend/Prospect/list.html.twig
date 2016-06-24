@@ -11,15 +11,24 @@
             <a class="btn-basic-ico" href="#" id="add_prospect" title ="{{ 'app.contact.list.add'|trans }}"><i class="icon ion-ios-plus-empty"></i><span>{{ 'app.contact.list.add'|trans }}</span></a>
             
             {{ form_start(filterForm, {'attr': {'class': 'pull-right form-inline'} }) }}
-                <div>
-                    {{ form_label(filterForm.sex, 'app.contact.list.filter.sex'|trans) }}
-                    {{ form_widget(filterForm.sex, {'attr': {'class': 'form-control'} }) }}
-                    {{ form_errors(filterForm.sex) }}
+                <div id="orderby">
+                    <div>
+                        {{ form_label(filterForm.orderby, 'app.contact.list.orderby.label'|trans) }}
+                        {{ form_widget(filterForm.orderby, {'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(filterForm.orderby) }}
+                    </div>                    
                 </div>
-                <div>
-                    {{ form_label(filterForm.relationshipLevel, 'app.contact.list.filter.relationship_type'|trans) }}
-                    {{ form_widget(filterForm.relationshipLevel, {'attr': {'class': 'form-control'} }) }}
-                    {{ form_errors(filterForm.relationshipLevel) }}
+                <div id="filterby">
+                    <div>
+                        {{ form_label(filterForm.sex, 'app.contact.list.filter.sex'|trans) }}
+                        {{ form_widget(filterForm.sex, {'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(filterForm.sex) }}
+                    </div>
+                    <div>
+                        {{ form_label(filterForm.relationshipLevel, 'app.contact.list.filter.relationship_type'|trans) }}
+                        {{ form_widget(filterForm.relationshipLevel, {'attr': {'class': 'form-control'} }) }}
+                        {{ form_errors(filterForm.relationshipLevel) }}
+                    </div>
                 </div>
                 {% set value = 'app.contact.list.filter.submit'|trans %}
                 <input class="btn-basic" type="submit" value="{{ value }}">

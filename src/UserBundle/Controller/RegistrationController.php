@@ -22,6 +22,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use FOS\UserBundle\Model\UserInterface;
 
+
 /**
  * Controller managing the registration
  *
@@ -42,7 +43,7 @@ class RegistrationController extends Controller
         $user = $userManager->createUser();
         $user->setEnabled(true);
 
-        // OVERRIDE NORMAN
+        // OVERRIDE NORMAN        
         $today = new \DateTime();
         $user->setCreatedAt($today);
 
@@ -72,6 +73,7 @@ class RegistrationController extends Controller
             $event = new FormEvent($form, $request);
             $dispatcher->dispatch(FOSUserEvents::REGISTRATION_SUCCESS, $event);
 
+            
             $userManager->updateUser($user);
                       
             if (null === $response = $event->getResponse()) {

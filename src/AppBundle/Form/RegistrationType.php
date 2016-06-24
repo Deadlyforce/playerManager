@@ -6,6 +6,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use FOS\UserBundle\Form\Type\RegistrationFormType as BaseType;
 use Gregwar\CaptchaBundle\Type\CaptchaType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use AppBundle\Form\OptionType;
 
 /**
  * Description of RegistrationType
@@ -27,16 +28,14 @@ class RegistrationType extends BaseType
                     'app.register.form.female' => 2
                 )                
             ))
-//            ->add('locale', ChoiceType::class, array(
-//                'required' => true,
-//                'choices' => array(
-//                    'English' => 'en',
-//                    'French' => 'fr'
-//                )
-//            ))
             ->add('captcha', CaptchaType::class, array(
                 'label' => 'app.register.form.captcha'
-            ));
+            ))
+            ->add('option', OptionType::class, array(
+                
+            ))
+        ;
+        
     }
             
     /**

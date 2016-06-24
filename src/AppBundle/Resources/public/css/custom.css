@@ -260,16 +260,19 @@ img[title="captcha"]{
     font-size: 1.5em;
     color: #f47363;
     font-family: "ralewaythin", sans-serif;
-/*    position: absolute;
-    top: 50px;
-    right: 375px;
-    text-align: left;*/
     display: inline;
 }
 #login-title h2{
     font-family: 'sinkin_sans100_thin', sans-serif;
     color: #FFF;
-    font-size: 2em;
+    font-size: 1.8em;
+    text-shadow: 1px 1px 2px #666;
+    margin-bottom: 25px;
+}
+#login-title h3{
+    font-family: 'sinkin_sans300_light', sans-serif;
+    color: #FFF;
+    font-size: 1.3em;
     text-shadow: 1px 1px 2px #666;
     margin-bottom: 25px;
 }
@@ -904,36 +907,34 @@ table.dataTable.no-footer {
     background-color: rgba(0,0,0,0.2);
 }
 
-form[name='appbundle_prospect_filter'] > div{
+form[name='appbundle_user_options'] #orderby > div, form[name='appbundle_user_options'] #filterby > div{
     margin-bottom: 5px;
 }
-form[name='appbundle_prospect_filter'] label{
+form[name='appbundle_user_options'] label{
     color: #fff;
     font-family: "open_sanslight", sans-serif;
     font-weight: 200;
     width: 150px;
 }
-form[name='appbundle_prospect_filter'] .form-control{
+form[name='appbundle_user_options'] .form-control{
     border: none;
     box-shadow: none;
     transition: none;
     width: 200px;
 }
-form[name='appbundle_prospect_filter'] select{
+form[name='appbundle_user_options'] select{
     height: 30px;
     background-color: #f47363;
     color: #fff;    
 }
-form[name='appbundle_prospect_filter'] input[type='submit']{
+form[name='appbundle_user_options'] input[type='submit']{
     padding: 5px 15px;
 }
 
 .col-prospect{
     margin-bottom: 30px;
 }
-/*.firstrow{
-    width: 352px;
-}*/
+
 .prospect-photo{
     position: relative;
 /*    float: left;*/
@@ -1164,7 +1165,6 @@ p.prospect-relationship-rank{
     width: 100%;
     height: 100%;
     margin: 0;
-    /*opacity: 0.9;*/
 }
 .modal-full .modal-dialog .modal-content{
     min-height: 100%;
@@ -1199,6 +1199,15 @@ form[data='prospect-data'] label{
     font-weight: 200;
     font-size: 1.2em;
     font-family: 'opensans_regular', sans-serif;
+}
+#contact-mandatory-inputs{
+    margin-bottom: 50px;
+}
+#contact-other-inputs p{
+    color: #F47363;
+    font-size: 1.4em;
+    font-family: "open_sanslight", sans-serif;
+    margin-bottom: 15px;
 }
 form[data='prospect-data'] input[type="text"], select#appbundle_prospect_country, select#appbundle_prospect_source{
     width: 200px;

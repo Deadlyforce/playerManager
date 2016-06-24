@@ -19,7 +19,7 @@ class ProspectRepository extends EntityRepository
      * @param User $user
      * @return Paginator
      */
-    public function getProspectsQuery($user, $status, $sex, $relationshipLevel)
+    public function getProspectsQuery($orderby, $user, $status, $sex, $relationshipLevel)
     {  
         $qb = $this->_em->createQueryBuilder();
 
@@ -29,11 +29,28 @@ class ProspectRepository extends EntityRepository
             ->leftJoin('p.zodiac', 'z')
             ->leftJoin('p.relationship', 'r')
             ->leftJoin('r.relationshipRank', 'rr')
-            ->where('p.user = :user')
-            ->addOrderBy('p.creationDate', 'DESC', 'p.id DESC')
-            ->addOrderBy('p.id', 'DESC')
+            ->leftJoin('p.rating', 'rat')
+            ->leftJoin('p.redflag', 'red')
+            ->where('p.user = :user')            
             ->setParameter('user', $user)
         ;
+        
+        switch ($orderby) {
+            case 'rating': 
+                $qb
+                    ->addOrderBy('rat.percentAverage', 'DESC')
+                    ->addOrderBy('rat.id', 'DESC');
+                break;
+            case 'redflag': 
+                $qb
+                    ->addOrderBy('red.percentAverage', 'DESC')
+                    ->addOrderBy('red.id', 'DESC');
+                break;
+            default: 
+                $qb
+                    ->addOrderBy('p.creationDate', 'DESC')
+                    ->addOrderBy('p.id', 'DESC');
+        }
         
         if ($status !== null) {
             $qb                
@@ -41,16 +58,18 @@ class ProspectRepository extends EntityRepository
                 ->setParameter('status', $status)
             ;
         }
+//var_dump($sex);
+//die();
         if ($sex != null) {
             $qb                
                 ->andWhere('r.fc = :sex')
-                ->setParameter('sex', $sex)
+                ->setParameter('sex', intval($sex))
             ;
         }
         if ($relationshipLevel != null) {
             $qb                
                 ->andWhere('rr.id = :relationshipLevel')
-                ->setParameter('relationshipLevel', $relationshipLevel)
+                ->setParameter('relationshipLevel', intval($relationshipLevel))
             ;
         }
         

@@ -2,6 +2,7 @@ app:
     login:
         title: Mnaomai
         subtitle: N'oubliez plus vos rencontres
+        subtext: Sauvegardez vos rencontres, notez et classez vos contacts !
         new: Première visite?
 
     register:
@@ -35,6 +36,10 @@ app:
     contact:
         list:
             add: Ajouter un contact
+            orderby:
+                label: Tri par
+                rating: Notes
+                redflag: Point négatifs
             filter:
                 status: Statut de la relation
                 sex: Sexe
@@ -45,6 +50,7 @@ app:
                         yes: Oui
                         no: Non
             new:
+                note: Informations supplémentaires (optionnelles)
                 title: Nouveau contact
                 nickname: Pseudo
                 firstname: Prénom

@@ -5,6 +5,7 @@ use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Option;
 
 /**
  * Description of User
@@ -55,13 +56,14 @@ class User extends BaseUser
      */
     protected $ip;
     
+    
     /**
-     *
-     * @var string
+     * @var Option 
      * 
-     * @ORM\Column(name="locale", type="string", length=2, nullable=true) 
+     * @ORM\OneToOne(targetEntity="Option", inversedBy="user", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="option_id", referencedColumnName="id", onDelete="CASCADE")
      */
-//    protected $locale;
+    private $option;    
     
     /**
      * 
@@ -124,25 +126,30 @@ class User extends BaseUser
         $this->ip = $ip;
         
         return $this;
-    }
-    
+    }    
+        
     /**
-     * 
-     * @return string
+     * Set option
+     *
+     * @param Option $option
+     * @return User
      */
-//    public function getLocale()
-//    {
-//        return $this->locale;
-//    }
-//    
-//    /**
-//     * 
-//     * @param string $locale
-//     * @return User
-//     */
-//    public function setLocale($locale)
-//    {
-//        $this->locale = $locale;
-//        return $this;
-//    }
+    public function setOption(Option $option)
+    {
+        $this->option = $option;
+        $option->setUser($this);
+
+        return $this;
+    }
+
+    /**
+     * Get option
+     *
+     * @return Option
+     */
+    public function getOption()
+    {
+        return $this->option;
+    } 
+    
 }

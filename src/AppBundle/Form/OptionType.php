@@ -4,10 +4,11 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
-class ProspectFilterType extends AbstractType
+class OptionType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,7 +16,14 @@ class ProspectFilterType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder                                 
+        $builder  
+            ->add('orderby', ChoiceType::class, array(
+                'required' => false,
+                'choices' => array(
+                    'app.contact.list.orderby.rating' => 'rating',                    
+                    'app.contact.list.orderby.redflag' => 'redflag'                   
+                )
+            ))
             ->add('sex', ChoiceType::class, array(
                 'required' => false,
                 'choices' => array(
@@ -36,12 +44,22 @@ class ProspectFilterType extends AbstractType
             ))                                  
         ;
     }    
+    
+    /**
+     * @param OptionsResolver $resolver
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            'data_class' => 'AppBundle\Entity\Option'
+        ));
+    }
    
     /**
      * @return string
      */
     public function getBlockPrefix()
     {
-        return 'appbundle_prospect_filter';
+        return 'appbundle_user_options';
     }
 }

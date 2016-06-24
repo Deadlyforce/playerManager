@@ -2,6 +2,7 @@ app:
     login:
         title: Mnaomai
         subtitle: Never forget your dates
+        subtext: Store your date experiences, rate and organize your contacts !
         new: New to the site?
 
     register:
@@ -35,6 +36,10 @@ app:
     contact:
         list:
             add: Add contact
+            orderby:
+                label: Order by
+                rating: Ratings
+                redflag: Red flags
             filter:
                 status: Relationship status
                 sex: Sex
@@ -45,6 +50,7 @@ app:
                         yes: Happened
                         no: Didn't happen
             new:
+                note: More infos (optional)
                 title: New contact
                 nickname: Nickname
                 firstname: First name

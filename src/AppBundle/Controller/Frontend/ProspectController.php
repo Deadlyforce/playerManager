@@ -2,6 +2,7 @@
 namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\Prospect;
+use AppBundle\Entity\Option;
 use AppBundle\Form\ProspectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -11,6 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Csrf\CsrfToken;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+
 
 /**
  * Prospect controller.
@@ -133,16 +135,29 @@ class ProspectController extends Controller
     public function listAction(Request $request)
     {
         $user = $this->get('security.token_storage')->getToken()->getUser();
-       
-        $em = $this->getDoctrine()->getManager();
-                     
-        $filter = $request->request->get('appbundle_prospect_filter');        
-        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user, 1, $filter['sex'], $filter['relationshipLevel']); 
+      
+        $em = $this->getDoctrine()->getManager();        
+                
+        $option = $user->getOption();        
         
-        $filterForm = $this->createForm('AppBundle\Form\ProspectFilterType', array(
+        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($option->getOrderby(), $user, 1, $option->getSex(), $option->getRelationshipLevel());
+        
+        $optionForm = $this->createForm('AppBundle\Form\OptionType', $option, array(
             'action' => $this->generateUrl('prospect_list'),
             'method' => 'POST'
         ));
+        
+        $optionForm->handleRequest($request);
+        
+        if ($optionForm->isSubmitted() && $optionForm->isValid()) {  
+
+            $user->setOption($option);
+            
+            $em->persist($user);
+            $em->flush();
+            
+            return $this->redirectToRoute('prospect_list');
+        }
         
         $paginator = $this->get('knp_paginator');
         
@@ -154,7 +169,7 @@ class ProspectController extends Controller
                        
         return array(
             'pagination' => $pagination,
-            'filterForm' => $filterForm->createView()
+            'filterForm' => $optionForm->createView()
         );
     }
     
@@ -171,10 +186,10 @@ class ProspectController extends Controller
        
         $em = $this->getDoctrine()->getManager();
                      
-        $filter = $request->request->get('appbundle_prospect_filter');        
-        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user, 0, $filter['sex'], $filter['relationshipLevel']); 
+        $options = $request->request->get('appbundle_user_options');        
+        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user, 0, $options['sex'], $options['relationshipLevel']); 
         
-        $filterForm = $this->createForm('AppBundle\Form\ProspectFilterType', array(
+        $optionForm = $this->createForm('AppBundle\Form\OptionType', array(
             'action' => $this->generateUrl('prospect_off'),
             'method' => 'POST'
         ));
@@ -189,7 +204,7 @@ class ProspectController extends Controller
                        
         return array(
             'pagination' => $pagination,
-            'filterForm' => $filterForm->createView()
+            'filterForm' => $optionForm->createView()
         );
     }
     

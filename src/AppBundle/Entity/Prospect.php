@@ -89,7 +89,7 @@ class Prospect
      * @ORM\OneToOne(targetEntity="RedFlag", inversedBy="prospect", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="redflag_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private $redflag;
+    private $redflag;    
     
     /**
      * @var integer
