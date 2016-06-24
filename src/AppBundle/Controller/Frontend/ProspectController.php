@@ -134,8 +134,7 @@ class ProspectController extends Controller
      */
     public function listAction(Request $request)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-      
+        $user = $this->get('security.token_storage')->getToken()->getUser();      
         $em = $this->getDoctrine()->getManager();        
                 
         $option = $user->getOption();        
@@ -182,14 +181,14 @@ class ProspectController extends Controller
      */
     public function offlistAction(Request $request)
     {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-       
+        $user = $this->get('security.token_storage')->getToken()->getUser();       
         $em = $this->getDoctrine()->getManager();
                      
         $options = $request->request->get('appbundle_user_options');        
-        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($user, 0, $options['sex'], $options['relationshipLevel']); 
+        $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($options['orderby'], $user, 0, $options['sex'], $options['relationshipLevel']); 
         
-        $optionForm = $this->createForm('AppBundle\Form\OptionType', array(
+        $option = new Option();
+        $optionForm = $this->createForm('AppBundle\Form\OptionType', $option, array(
             'action' => $this->generateUrl('prospect_off'),
             'method' => 'POST'
         ));

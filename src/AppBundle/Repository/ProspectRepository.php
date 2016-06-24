@@ -58,8 +58,6 @@ class ProspectRepository extends EntityRepository
                 ->setParameter('status', $status)
             ;
         }
-//var_dump($sex);
-//die();
         if ($sex != null) {
             $qb                
                 ->andWhere('r.fc = :sex')
