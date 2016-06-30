@@ -61,45 +61,6 @@ class RedFlag
     private $smoker;
 
     /**
-     * @var int
-     *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="checkphone", type="smallint", nullable=true)
-     */
-//    private $checkphone;    
-
-    /**
-     * @var int
-     *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="selfAbsorbed", type="smallint", nullable=true)
-     */
-//    private $selfAbsorbed;
-
-    /**
-     * @var int
-     *
-     * @Assert\Range(
-     *      min = 0,
-     *      max = 5,
-     *      minMessage = "Unauthorized number",
-     *      maxMessage = "Unauthorized number"
-     * )
-     * @ORM\Column(name="cheapdate", type="smallint", nullable=true)
-     */
-//    private $cheapdate;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="snore", type="boolean")
@@ -112,6 +73,13 @@ class RedFlag
      * @ORM\Column(name="hygiene", type="boolean")
      */
     private $hygiene;
+    
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="religion", type="boolean")
+     */
+    private $religion;
     
     /**
      * @var smallint 
@@ -282,6 +250,29 @@ class RedFlag
     }
 
     /**
+     * Set religion
+     *
+     * @param integer $religion
+     * @return RedFlag
+     */
+    public function setReligion($religion)
+    {
+        $this->religion = $religion;
+
+        return $this;
+    }
+
+    /**
+     * Get religion
+     *
+     * @return int
+     */
+    public function getReligion()
+    {
+        return $this->religion;
+    }
+
+    /**
      * Set prospect
      *
      * @param Prospect $prospect
@@ -362,7 +353,8 @@ class RedFlag
             $this->children, 
             $this->smoker, 
             $this->snore,  
-            $this->hygiene
+            $this->hygiene,
+            $this->religion
         );
    
         $avg = (array_sum($attributes)/count($attributes))*5;
@@ -385,7 +377,15 @@ class RedFlag
      */
     public function saveExactAveragedAttributes()
     {
-        $attributes =  array($this->unemployed, $this->needy, $this->children, $this->smoker, $this->snore,  $this->hygiene);
+        $attributes =  array(
+            $this->unemployed, 
+            $this->needy, 
+            $this->children, 
+            $this->smoker, 
+            $this->snore,  
+            $this->hygiene,
+            $this->religion
+        );
         
         $avg = ((array_sum($attributes))/count($attributes))*5;
         $percentAvg = round($avg, 1) * 20;

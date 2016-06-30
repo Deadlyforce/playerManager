@@ -198,6 +198,7 @@ app:
                 cheapdate: Cheap Date
                 snore: Snores
                 hygiene: Hygiene
+                religion: Religion
         form:
             level1: 1
             level2: 2

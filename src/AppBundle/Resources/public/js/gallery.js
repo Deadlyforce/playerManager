@@ -6,13 +6,20 @@ $(document).ready(function(){
         $(this).attr("checked", "checked");
         $(this).prop("checked", true); 
         $(this).val(1);
-        
-        $("input[type='checkbox']").not(this).prop("checked", false);               
-        $("input[type='checkbox']").not(this).removeAttr("checked");               
-        $("input[type='checkbox']").not(this).val(0);               
+     
+        var selectedInput = this;
 
-        // Put back original border css and add "highlight" css for selected photo
-        $("input[type='checkbox']").not(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "0");                
+        $(".photo-selected").each(function(key, div){            
+            if ($(div).children("input")[0] !== selectedInput) {
+                $(div).children("input").prop("checked", false);               
+                $(div).children("input").removeAttr("checked");               
+                $(div).children("input").val(0);
+                // Put back original border css
+                $(div).children("input").closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "0");    
+            }
+        });                      
+
+        // add "highlight" css for selected photo                    
         $(this).closest(".photo-actions").prev(".photo-frame").find(".primary").css("opacity", "1");               
     });
     

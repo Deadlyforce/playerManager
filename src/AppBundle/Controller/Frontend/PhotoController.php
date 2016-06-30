@@ -46,7 +46,7 @@ class PhotoController extends Controller
                 'action' => $this->generateUrl('prospect_photos_update', array('id' => $prospect->getId())),
                 'method' => 'PUT',
             ));            
-            
+
             return array(
                 'photos' => $photos,
                 'prospect' => $prospect,
@@ -89,8 +89,9 @@ class PhotoController extends Controller
                 'action' => $this->generateUrl('prospect_update', array('id' => $id)),
                 'method' => 'PUT'
             ));
+//var_dump($request->request->get('appbundle_prospect'));
             $editForm->handleRequest($request);
-         
+//var_dump($prospect->getRelationship()->getStatus());         
             if ($editForm->isSubmitted() && $editForm->isValid()) {  
          
                 $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
@@ -104,12 +105,13 @@ class PhotoController extends Controller
                     }    
                     
                     $em->flush();
-                } else {                    
+                } else {  
                     // Case: update a Prospect with a previous photo, with and without changes
                     // remove the relationship between the photo and the Prospect
                     foreach ($originalPhotos as $originalPhoto) {
 
                         if ($photos->contains($originalPhoto) === false) {
+
                             // Remove deleted photos
                             $prospect->removePhoto($originalPhoto);                                
                             $originalPhoto->setProspect(null); // remove also the relationship
@@ -125,9 +127,11 @@ class PhotoController extends Controller
                         } else {
                             foreach ($photos as $photo) {
                                 // if $photo->getFile() is null, the file hasn't changed. No need to re-upload. Else re-validate upload.
-                                if ($photo->getFile()) {                                
+                                if ($photo->getFile()) { 
                                     $uploadableManager->markEntityToUpload($photo, $photo->getFile());
                                 }
+//var_dump($prospect->getRelationship()->getStatus());
+//die();
                             }
                         }
                     }
@@ -201,8 +205,8 @@ class PhotoController extends Controller
             $src = $photo->getPath();
 
             $type = $photo->getType();
-            
-            if ($type == 'image/jpg') {
+
+            if ($type == 'image/jpg' || $type == 'image/jpeg') {
                 $img_r = imagecreatefromjpeg($src);
             }
             if ($type == 'image/png') {

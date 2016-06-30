@@ -14,7 +14,9 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use AppBundle\Form\PhotoType;
+use AppBundle\Form\RelationshipType;
 use AppBundle\Form\RatingType;
+use AppBundle\Form\RedFlagType;
 
 class ProspectType extends AbstractType
 {   
