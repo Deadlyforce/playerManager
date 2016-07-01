@@ -31,8 +31,8 @@ security:
                 check_path: fos_user_security_check  
                 
                 # Default route after successful login
-                default_target_path: home_index
-#                success_handler: redirection_after_login
+#                default_target_path: home_index
+                success_handler: redirection_after_login
 
                 # Default route after failed login ( null by default, login route)
                 failure_path: null            

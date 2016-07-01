@@ -89,9 +89,9 @@ class PhotoController extends Controller
                 'action' => $this->generateUrl('prospect_update', array('id' => $id)),
                 'method' => 'PUT'
             ));
-//var_dump($request->request->get('appbundle_prospect'));
+
             $editForm->handleRequest($request);
-//var_dump($prospect->getRelationship()->getStatus());         
+         
             if ($editForm->isSubmitted() && $editForm->isValid()) {  
          
                 $uploadableManager = $this->get('stof_doctrine_extensions.uploadable.manager');
@@ -130,8 +130,6 @@ class PhotoController extends Controller
                                 if ($photo->getFile()) { 
                                     $uploadableManager->markEntityToUpload($photo, $photo->getFile());
                                 }
-//var_dump($prospect->getRelationship()->getStatus());
-//die();
                             }
                         }
                     }
