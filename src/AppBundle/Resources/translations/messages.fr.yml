@@ -198,6 +198,7 @@ app:
                 cheapdate: Radin(e)
                 snore: Ronfle
                 hygiene: Hygiène
+                religion: Religion
         form:
             level1: 1
             level2: 2

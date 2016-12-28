@@ -252,4 +252,22 @@ class ProspectRepository extends EntityRepository
         
         return $qb->getSingleScalarResult();
     }
+    
+    /**
+     * Count all of a user's prospects
+     * 
+     * @param User $user
+     */
+    public function getProspectsCount($user)
+    {
+        $qb = $this->_em->createQuery('
+            SELECT COUNT(p)
+            FROM AppBundle:Prospect p
+            WHERE p.user = :user            
+        ')
+        ->setParameter('user', $user)
+        ;
+        
+        return $qb->getSingleScalarResult();
+    }
 }

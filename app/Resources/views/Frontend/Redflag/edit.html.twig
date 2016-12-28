@@ -33,21 +33,6 @@
                         {{ form_widget(edit_form.smoker) }}
                         {{ form_errors(edit_form.smoker) }}
                     </div>
-                    {#<div>
-                        {{ form_label(edit_form.checkphone, 'app.redflag.edit.label.checkphone'|trans) }} 
-                        {{ form_widget(edit_form.checkphone) }}
-                        {{ form_errors(edit_form.checkphone) }}
-                    </div>
-                    <div>
-                        {{ form_label(edit_form.selfAbsorbed, 'app.redflag.edit.label.selfAbsorbed'|trans) }} 
-                        {{ form_widget(edit_form.selfAbsorbed) }}
-                        {{ form_errors(edit_form.selfAbsorbed) }}
-                    </div>
-                    <div>
-                        {{ form_label(edit_form.cheapdate, 'app.redflag.edit.label.cheapdate'|trans) }} 
-                        {{ form_widget(edit_form.cheapdate) }}
-                        {{ form_errors(edit_form.cheapdate) }}
-                    </div>#}
                     <div>
                         {{ form_label(edit_form.snore, 'app.redflag.edit.label.snore'|trans) }} 
                         {{ form_widget(edit_form.snore) }}
@@ -58,7 +43,11 @@
                         {{ form_widget(edit_form.hygiene) }}
                         {{ form_errors(edit_form.hygiene) }}
                     </div>
-
+                    <div>
+                        {{ form_label(edit_form.religion, 'app.redflag.edit.label.religion'|trans) }} 
+                        {{ form_widget(edit_form.religion) }}
+                        {{ form_errors(edit_form.religion) }}
+                    </div>
 
                     <div class="hidden">
                         {{ form_rest(edit_form) }}

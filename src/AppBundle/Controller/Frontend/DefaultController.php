@@ -8,6 +8,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\ContactUsType;
+use AppBundle\Entity\ContactUs;
 
 /**
  * DefaultController
@@ -62,7 +63,11 @@ class DefaultController extends Controller
      */
     public function contactUsAction(Request $request)
     {
-        $form = $this->createForm(ContactUsType::class);        
+        $user = $this->get('security.token_storage')->getToken()->getUser();
+
+        $contactUs = new ContactUs;
+        $contactUs->setEmail($user->getEmail());
+        $form = $this->createForm(ContactUsType::class, $contactUs);        
         
         if ($request->isMethod('POST')) {
             $form->handleRequest($request);

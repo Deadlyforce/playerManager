@@ -42,8 +42,7 @@ services:
             
     photo_manager:
         class: AppBundle\DependencyInjection\Managers\PhotoManager
-        arguments:            
-            - '@doctrine.orm.entity_manager'
+        arguments:  
             - '@security.token_storage'
             
     default_manager:
@@ -52,6 +51,8 @@ services:
             - '@doctrine.orm.entity_manager'
 
     
-#    redirection_after_login:
-#        class: AppBundle\Handler\RedirectionAfterLogin
-#        arguments: ['@router']
+    redirection_after_login:
+        class: AppBundle\Handler\RedirectionAfterLogin
+        arguments: 
+            - '@router'
+            - '@doctrine.orm.entity_manager'

@@ -358,7 +358,7 @@ class Relationship
      */
     public function setAbout($about)
     {
-        $this->commentaire = $about;
+        $this->about = $about;
 
         return $this;
     }
