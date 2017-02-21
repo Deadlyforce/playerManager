@@ -157,64 +157,61 @@
         <div class="hidden" id="locale" data-locale="{{ app.request.locale }}"></div>
     </div> 
 
-    {% block javascript %}
-        {% javascripts 
-            'bundles/app/js/prospect_index.js'
-        %}
-            <script src="{{ asset_url }}"></script>
-        {% endjavascripts %}
-    {% endblock %}
-    
-    <script type="text/javascript">
-        $(document).ready(function(){  
-            var locale = $("#locale").data("locale");   
-           
-            var newcontact = "{{ newcontact }}";
-           
-            $('[data-toggle="tooltip"]').tooltip({
-                html: true
-            });  
-            
-            $(".rating-avg").each(function(index, div) {
-                
-                avgRating = $(div).data("rating");                
-                
-                $(div).starRating({
-                    initialRating: avgRating,
-                    totalStars: 5,                
-                    starSize: 26,
-                    disableAfterRate: false,
-                    useGradient: false,
-                    emptyColor: '#ddd',
-                    hoverColor: '#F47363',
-                    useFullStars: true,
-                    readOnly: true
-                });                
-            });
-                   
-            // Ajax: get form new prospect *************************************
-            $("#add_prospect").click(function(event){
-                event.preventDefault();                
-     
-                $(".loader_standard").show();
-              
-                var url = Routing.generate('ajax_new_prospect_form', {'_locale': locale});
-                
-                $.get(url, function(response){                   
-                    $(".modal-body").html(response); // coller la vue dans une modale  
-                    
-                    $(".loader_standard").hide(200, function(){});                                     
-                    
-                    $(".modal-title").text(newcontact);
-                    $('.modal-full').modal('show');
+    {% block javascripts %}
+
+        {{ parent() }}
+        
+        <script type="text/javascript">
+            $(document).ready(function(){  
+                var locale = $("#locale").data("locale");   
+
+                var newcontact = "{{ newcontact }}";
+
+                $('[data-toggle="tooltip"]').tooltip({
+                    html: true
+                });  
+
+                $(".rating-avg").each(function(index, div) {
+
+                    avgRating = $(div).data("rating");                
+
+                    $(div).starRating({
+                        initialRating: avgRating,
+                        totalStars: 5,                
+                        starSize: 26,
+                        disableAfterRate: false,
+                        useGradient: false,
+                        emptyColor: '#ddd',
+                        hoverColor: '#F47363',
+                        useFullStars: true,
+                        readOnly: true
+                    });                
                 });
-            });            
-         
-            $('.modal-full').on('hidden.bs.modal', function (e) {
-                $(".modal-body").empty();
-                $(".modal-title").empty();
-            });                                   
-            
-        });
-    </script>
+
+                // Ajax: get form new prospect *************************************
+                $("#add_prospect").click(function(event){
+                    event.preventDefault();                
+
+                    $(".loader_standard").show();
+
+                    var url = Routing.generate('ajax_new_prospect_form', {'_locale': locale});
+
+                    $.get(url, function(response){                   
+                        $(".modal-body").html(response); // coller la vue dans une modale  
+
+                        $(".loader_standard").hide(200, function(){});                                     
+
+                        $(".modal-title").text(newcontact);
+                        $('.modal-full').modal('show');
+                    });
+                });            
+
+                $('.modal-full').on('hidden.bs.modal', function (e) {
+                    $(".modal-body").empty();
+                    $(".modal-title").empty();
+                });          
+
+            });
+        </script>
+    {% endblock %}   
 {% endblock %}

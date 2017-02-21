@@ -12,8 +12,6 @@ app_venue:
 
    
 fos_user:
-#    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
     # locale: routes duplicated in my UserBundle for locale addition
     resource: "@UserBundle/Resources/config/routing/all.xml"
     prefix:   /{_locale}/

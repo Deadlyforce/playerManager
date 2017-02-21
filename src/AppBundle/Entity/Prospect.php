@@ -67,6 +67,7 @@ class Prospect
      * @ORM\JoinColumn(name="source_id", referencedColumnName="id")
      */
     private $source;
+    
     /**
      * @var Source
      * 
@@ -108,6 +109,7 @@ class Prospect
     private $nickname;
 
     /**
+     * @Assert\NotBlank()
      * @var string
      *
      * @ORM\Column(name="firstname", type="string", length=255)
@@ -122,6 +124,7 @@ class Prospect
     private $lastname;
 
     /**
+     * @Assert\NotBlank()
      * @var integer
      *
      * @ORM\Column(name="age", type="integer")
@@ -564,7 +567,7 @@ class Prospect
     /**
      * Get encounters
      *
-     * @return Encounter 
+     * @return ArrayCollection|Encounter[] 
      */
     public function getEncounters()
     {

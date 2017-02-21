@@ -3,6 +3,7 @@ namespace AppBundle\Controller\Frontend;
 
 use AppBundle\Entity\Prospect;
 use AppBundle\Entity\Option;
+use AppBundle\Form\OptionType;
 use AppBundle\Form\ProspectType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -41,7 +42,7 @@ class ProspectController extends Controller
         $datetime =  new \DateTime('', new \DateTimeZone('Europe/Paris')); // Date du jour
         $prospect->setCreationDate($datetime);        
 
-        $form = $this->createForm('AppBundle\Form\ProspectType', $prospect, array(
+        $form = $this->createForm(ProspectType::class, $prospect, array(
             'action' => $this->generateUrl('prospect_create'),
             'method' => 'POST'
         ));
@@ -70,7 +71,7 @@ class ProspectController extends Controller
         
         if ($user === $prospect->getUser()) {        
 
-            $editForm = $this->createForm('AppBundle\Form\ProspectType', $prospect, array(
+            $editForm = $this->createForm(ProspectType::class, $prospect, array(
                 'action' => $this->generateUrl('prospect_update', array('id' => $id)),
                 'method' => 'PUT'
             ));
@@ -141,7 +142,7 @@ class ProspectController extends Controller
         
         $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($option->getOrderby(), $user, 1, $option->getSex(), $option->getRelationshipLevel());
         
-        $optionForm = $this->createForm('AppBundle\Form\OptionType', $option, array(
+        $optionForm = $this->createForm(OptionType::class, $option, array(
             'action' => $this->generateUrl('prospect_list'),
             'method' => 'POST'
         ));
@@ -188,7 +189,7 @@ class ProspectController extends Controller
         $query = $em->getRepository('AppBundle:Prospect')->getProspectsQuery($options['orderby'], $user, 0, $options['sex'], $options['relationshipLevel']); 
         
         $option = new Option();
-        $optionForm = $this->createForm('AppBundle\Form\OptionType', $option, array(
+        $optionForm = $this->createForm(OptionType::class, $option, array(
             'action' => $this->generateUrl('prospect_off'),
             'method' => 'POST'
         ));
@@ -218,7 +219,7 @@ class ProspectController extends Controller
     {        
         $prospect = new Prospect();        
 
-        $form = $this->createForm('AppBundle\Form\ProspectType', $prospect, array(
+        $form = $this->createForm(ProspectType::class, $prospect, array(
             'action' => $this->generateUrl('prospect_create'),
             'method' => 'POST'
         ));
@@ -230,7 +231,7 @@ class ProspectController extends Controller
         $prospect->setUser($user);        
        
         if ($form->isSubmitted() && $form->isValid()) {            
-            
+            $form->getData();
             $em = $this->getDoctrine()->getManager();
             
             // Depending on entered infos, pre-fill some fields in relationship entity

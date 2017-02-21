@@ -1,3 +1,4 @@
+/nb_project/*
 /app/config/parameters.yml
 /build/
 /phpunit.xml
@@ -15,7 +16,6 @@
 /vendor/
 /web/bundles/
 
-/nbproject/private/
 /web/js/*
 /web/css/*
 /web/uploads/*

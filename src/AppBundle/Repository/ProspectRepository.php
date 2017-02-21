@@ -22,7 +22,7 @@ class ProspectRepository extends EntityRepository
     public function getProspectsQuery($orderby, $user, $status, $sex, $relationshipLevel)
     {  
         $qb = $this->_em->createQueryBuilder();
-
+        
         $qb
             ->select('p', 'z')
             ->from('AppBundle:Prospect', 'p')

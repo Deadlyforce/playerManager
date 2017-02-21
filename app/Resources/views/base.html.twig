@@ -23,7 +23,7 @@
         {% endstylesheets %}
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-
+    
     {% block javascripts %}
         {% javascripts
             '%kernel.root_dir%/../vendor/components/jquery/jquery.js'
@@ -40,6 +40,7 @@
             <script type="text/javascript" src="{{ asset_url }}"></script>
         {% endjavascripts %}
     {% endblock %}
+    
 </head>
 <body>
     <div id="confirm-panel"></div>
@@ -99,6 +100,7 @@
             © 2016 All Rights Reserved. Powered by Mnaomai.
         </div>
     </footer>
+    
 
         
     <script type="text/javascript">  
@@ -123,7 +125,7 @@
             
             $.backstretch([loginImage1, loginImage2, loginImage3, loginImage4, loginImage5, loginImage6], {duration: 6000, fade: 3000});
             
-            // Active link in menu *********************************************
+            // Highlight active link in menu *********************************************
             // Page name must match EXACTLY with menu link name !!
             var currentTitle = $(document).attr('title');            
 
